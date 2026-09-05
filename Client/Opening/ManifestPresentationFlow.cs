@@ -10,7 +10,7 @@ public enum ManifestResumeKind
 {
     ConfirmNew,
     ResumeTicket,
-    RevealOffer,
+    ShowOffer,
     ShowEntitlement,
     ResumeClaim,
     ResumeRelay,
@@ -173,7 +173,7 @@ public static class ManifestPresentationPolicy
         return snapshot.Phase switch
         {
             ManifestPhase.TicketPrepared => ManifestResumeKind.ResumeTicket,
-            ManifestPhase.Offer1 or ManifestPhase.Offer2 => ManifestResumeKind.RevealOffer,
+            ManifestPhase.Offer1 or ManifestPhase.Offer2 => ManifestResumeKind.ShowOffer,
             ManifestPhase.Entitlement => ManifestResumeKind.ShowEntitlement,
             ManifestPhase.ClaimPrepared or ManifestPhase.RewardOwed => ManifestResumeKind.ResumeClaim,
             ManifestPhase.RelayPrepared => ManifestResumeKind.ResumeRelay,
@@ -425,7 +425,9 @@ public static class ManifestPresentationPolicy
                 StringComparison.Ordinal);
         }
 
-        return !recovering || after.Phase is ManifestPhase.Offer1 or ManifestPhase.Offer2;
+        // An existing offer is already saved. Reopening its window must not look
+        // like a second roll. A newly committed, different lot still animates above.
+        return !recovering;
     }
 
     public static bool IsClaimRetry(

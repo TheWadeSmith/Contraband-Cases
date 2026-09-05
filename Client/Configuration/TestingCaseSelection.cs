@@ -1,10 +1,11 @@
 using ContrabandCases.Shared;
+using System.ComponentModel;
 
 namespace ContrabandCases.Client.Configuration;
 
 internal enum TestingCaseTheme { Mixed, Operations, Relics, BlackSite, CashCache }
-internal enum TestingOpeningTier { Natural, Epic, Legendary }
-internal enum TestingSelectionMode { CaseAndTier, LegacyProviderPool }
+internal enum TestingOpeningTier { [Description("Natural — real odds")] Natural, Epic, Legendary }
+internal enum TestingSelectionMode { [Description("Case and tier")] CaseAndTier, [Description("Legacy provider pool")] LegacyProviderPool }
 
 internal static class TestingCaseSelection
 {

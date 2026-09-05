@@ -20,6 +20,8 @@ public sealed class Plugin : BaseUnityPlugin
     private TestingInventoryGrantConfig? _testingGrants;
     private LibraryConfig? _library;
     private UI.BrokerLauncher? _brokerLauncher;
+    private EFT.UI.MenuScreen? _brokerMenu;
+    private RectTransform[] _brokerMenuObstacles = [];
     private readonly TestingInventoryGrantDispatcher _testingGrantDispatcher = new();
 
     private void Awake()
@@ -36,9 +38,9 @@ public sealed class Plugin : BaseUnityPlugin
             IconCacheReset.RunOnce(configRoot, Logger);
             var presentation = LoadPresentationConfig(Path.Combine(configRoot, "config.jsonc"));
             presentation.BindPlayerSettings(Config);
-            _testing = TestingModeConfig.Bind(Config);
             _testingGrants = TestingInventoryGrantConfig.Bind(Config);
-            _library = new LibraryConfig(Config);
+            _testing = TestingModeConfig.Bind(Config);
+            _library = new LibraryConfig(Config, () => _testing?.Enabled.Value == true);
             _brokerLauncher = new UI.BrokerLauncher(() => { if (_library is not null) _library.OpenDossier.Value = true; });
 
             _harmony = new Harmony(ModConstants.ModId);
@@ -69,7 +71,7 @@ public sealed class Plugin : BaseUnityPlugin
         ProcessLibrary();
         try
         {
-            _brokerLauncher?.SetVisible(_library?.ShowBrokerButton.Value == true && _controller?.CanOpenBroker == true);
+            UpdateBrokerLauncher();
         }
         catch (Exception exception)
         {
@@ -82,18 +84,70 @@ public sealed class Plugin : BaseUnityPlugin
         }
     }
 
+    private void UpdateBrokerLauncher()
+    {
+        if (_brokerLauncher is null) return;
+        if (_library?.ShowBrokerButton.Value != true)
+        {
+            _brokerLauncher.SetVisible(false);
+            return;
+        }
+        var menu = MonoBehaviourSingleton<EFT.UI.CommonUI>.Instantiated
+            ? MonoBehaviourSingleton<EFT.UI.CommonUI>.Instance.MenuScreen : null;
+        var mainMenuActive = menu != null && menu.isActiveAndEnabled &&
+            EFT.UI.Screens.EftScreenManager._instance?.CurrentBaseScreenController is
+                EFT.UI.MenuScreen.MainMenuScreenController { Closed: false } controller && controller.Screen == menu;
+        if (!UI.BrokerLauncherPlacement.ShouldShow(_library?.ShowBrokerButton.Value == true,
+                _controller?.CanOpenBroker == true, mainMenuActive))
+        {
+            _brokerLauncher?.SetVisible(false);
+            return;
+        }
+        if (_brokerMenu != menu)
+        {
+            _brokerMenu = menu;
+            // Cache the native controls, not their positions: bounds follow layout/scale changes.
+            _brokerMenuObstacles = menu!.GetComponentsInChildren<EFT.UI.ButtonFeedback>(true)
+                .Select(button => button.transform).Concat(menu.GetComponentsInChildren<UnityEngine.UI.Selectable>(true)
+                    .Select(button => button.transform)).OfType<RectTransform>().Distinct().ToArray();
+        }
+        _brokerLauncher?.SetVisible(true, menu!.transform as RectTransform,
+            menu._tradeButton != null ? menu._tradeButton.transform as RectTransform : null, _brokerMenuObstacles);
+    }
+
     private void ProcessLibrary()
     {
         var settings = _library;
-        if (settings is null || (!settings.OpenDossier.Value && !settings.OpenGallery.Value)) return;
-        var gallery = settings.OpenGallery.Value && !settings.OpenDossier.Value;
-        settings.OpenDossier.Value = false;
-        settings.OpenGallery.Value = false;
+        if (settings is null) return;
         try
         {
+            // The native shortcut checks exact modifiers and GetKeyDown, so holding it
+            // does not repeat. Do not persist/queue a hotkey as an MCM action flag.
+            var shortcut = false;
+            if (Application.isFocused && settings.OpenBrokerShortcut.Value.IsDown())
+            {
+                var current = EFT.UI.Screens.EftScreenManager._instance?.CurrentBaseScreenController;
+                var menuOrStash = current switch
+                {
+                    EFT.UI.MenuScreen.MainMenuScreenController { Closed: false } menu =>
+                        menu.Screen != null && menu.Screen.isActiveAndEnabled,
+                    EFT.UI.InventoryScreen.InventoryScreenController { Closed: false } stash =>
+                        stash.Screen != null && stash.Screen.isActiveAndEnabled,
+                    _ => false
+                };
+                var selected = UnityEngine.EventSystems.EventSystem.current?.currentSelectedGameObject;
+                var editing = selected != null && selected.GetComponent<UnityEngine.UI.InputField>()?.isFocused == true;
+                shortcut = BrokerShortcutInput.ShouldOpen(true, Application.isFocused,
+                    _controller?.CanOpenBroker == true, menuOrStash, editing || IsConfigurationMenuOpen());
+            }
+            var dossier = settings.OpenDossier.Value || shortcut;
+            if (!dossier && !settings.OpenGallery.Value) return;
+            var gallery = settings.OpenGallery.Value && !dossier;
+            settings.OpenDossier.Value = false;
+            settings.OpenGallery.Value = false;
             if (gallery && _testing?.Enabled.Value != true)
             {
-                NotificationManager.DisplayWarningNotification("Enable Testing Mode before opening the catalog gallery.");
+                NotificationManager.DisplayWarningNotification("Turn on Enable previews under Animation preview in MCM before opening the catalog preview.");
                 return;
             }
             if (_controller?.TryOpenLibrary(gallery, settings) != true)
@@ -103,6 +157,15 @@ public sealed class Plugin : BaseUnityPlugin
         {
             Logger.LogWarning($"Read-only broker records could not open: {exception}");
         }
+    }
+
+    private static bool IsConfigurationMenuOpen()
+    {
+        if (!BepInEx.Bootstrap.Chainloader.PluginInfos.TryGetValue(
+                "com.bepis.bepinex.configurationmanager", out var manager) || manager.Instance == null) return false;
+        // Optional native public contract: no hard ConfigurationManager dependency.
+        // An unrecognized manager blocks only the shortcut; the MCM action still works.
+        return manager.Instance.GetType().GetProperty("DisplayingWindow")?.GetValue(manager.Instance) is not false;
     }
 
     private void ProcessCosmeticSelfTest()
@@ -282,6 +345,8 @@ public sealed class Plugin : BaseUnityPlugin
             _controller = null;
             _testing = null;
             _testingGrants = null;
+            _brokerMenu = null;
+            _brokerMenuObstacles = [];
             try
             {
                 _harmony?.UnpatchSelf();

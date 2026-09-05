@@ -22,7 +22,7 @@ internal sealed class TestingInventoryGrantDispatcher
     {
         if (!enabled)
         {
-            message = "Enable Inventory Grant Controls before requesting testing items.";
+            message = "Turn on Enable item spawning under Spawn test items in MCM first.";
             return false;
         }
 

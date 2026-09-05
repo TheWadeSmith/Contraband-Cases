@@ -42,12 +42,22 @@ internal sealed class TestingInventoryGrantConfig
     public ConfigEntry<TestingOpeningTier> OpeningTier { get; private set; } = null!;
     public ConfigEntry<TestingSelectionMode> SelectionMode { get; private set; } = null!;
 
-    internal TestingCrateType ResolveSelection() => SelectionMode.Value switch
+    internal TestingCrateType ResolveSelection() => CaseCount.Value == 0 ? TestingCrateType.TrueRandom : SelectionMode.Value switch
     {
         TestingSelectionMode.CaseAndTier => TestingCaseSelection.Resolve(CaseTheme.Value, OpeningTier.Value),
         TestingSelectionMode.LegacyProviderPool => CrateType.Value,
         _ => throw new ArgumentException("Select CaseAndTier or LegacyProviderPool.")
     };
+
+    internal string? GrantBlockReason()
+    {
+        if (!Enabled.Value) return "Enable spawning first";
+        try { TestingInventoryGrantPolicy.Validate(CaseCount.Value, KeyCount.Value); }
+        catch (ArgumentException) { return "Choose 1–40 items total"; }
+        try { _ = ResolveSelection(); }
+        catch (ArgumentException) { return "Choose a valid case/tier (Cash: Natural)"; }
+        return null;
+    }
 
     public static TestingInventoryGrantConfig Bind(ConfigFile config)
     {
@@ -55,42 +65,49 @@ internal sealed class TestingInventoryGrantConfig
         {
             throw new ArgumentNullException(nameof(config));
         }
-        var settings = new TestingInventoryGrantConfig(
+        TestingInventoryGrantConfig? settings = null;
+        settings = new TestingInventoryGrantConfig(
             config.Bind(
                 Section,
                 "Enable Inventory Grant Controls",
                 false,
-                "Allows the one-shot grant control below. The server must also opt in with testingInventoryGrantsEnabled=true, and grants work only in the stash outside a raid."),
+                McmSettings.Option(McmSettings.Spawning, "Enable item spawning", 10,
+                    "Adds REAL items to your stash. Server config must also have testingInventoryGrantsEnabled=true. Outside raids only; does not enable animation previews.")),
             config.Bind(
                 Section,
                 "Cases to Grant",
                 5,
-                new ConfigDescription(
-                    "Number of real BR-12 Relay Cases to add to the stash.",
+                McmSettings.Option(McmSettings.Spawning, "Case quantity", 50,
+                    "0–10 cases of the selected type. Set to 0 for keys only. Cases plus keys may not exceed 40.",
                     new AcceptableValueRange<int>(0, TestingInventoryGrantPolicy.MaximumCaseCount))),
             config.Bind(
                 Section,
                 "Keys to Grant",
                 10,
-                new ConfigDescription(
-                    "Number of real BR-12 Relay Keys to add to the stash.",
+                McmSettings.Option(McmSettings.Spawning, "Key quantity", 60,
+                    "0–40 universal, single-use keys. One opens any case; Relay costs another. Cases plus keys may not exceed 40.",
                     new AcceptableValueRange<int>(0, TestingInventoryGrantPolicy.MaximumKeyCount))),
             config.Bind(
                 Section,
                 "Forced Crate Pool",
                 TestingCrateType.TrueRandom,
-                "OperationsCase, RelicsCase, BlackSiteCase and CashCache grant actual cases with normal odds. TrueRandom grants Mixed. Epic/Legendary options force that surprise tier for the named case (three saved choices; choose one). Requires enough qualifying packages. Test tags expire on server restart BEFORE opening; opened choices are permanently saved. Vault/Themed/Cards/Scrap/Mega are provider preferences, not rarity guarantees."),
-            config.Bind(
+                McmSettings.Option(McmSettings.Advanced, "Legacy spawn pool", 10,
+                    "Used only when Spawn selection is Legacy provider pool. Preserves older saved tests. Vault/Themed/Cards/Scrap/Mega select providers, not guaranteed rarities.", advanced: true)),
+            McmSettings.BindAction(config,
                 Section,
                 "Grant Items to Stash Now",
-                false,
-                "Toggle on once to request the selected real items. It resets before sending and cannot run during a case opening, cosmetic preview, or raid."));
+                McmSettings.Spawning, "Spawn selected items", 70,
+                "Request these real items once. Server permission and stash space are required. Close other case windows first. No request is replayed on game launch.",
+                () => settings?.GrantBlockReason()));
         settings.CaseTheme = config.Bind(Section, "Case Theme", TestingCaseTheme.Mixed,
-            "Actual case to spawn. Mixed, Operations, Relics, BlackSite or CashCache. Used in CaseAndTier mode.");
+            McmSettings.Option(McmSettings.Spawning, "Case type", 30,
+                "Choose Mixed, Operations, Relics, Black Site or Cash Cache. Used by Case and tier selection; ignored for keys-only grants."));
         settings.OpeningTier = config.Bind(Section, "Opening Tier", TestingOpeningTier.Natural,
-            "Natural uses real odds. Epic/Legendary force a TEST opening with three saved choices; choose ONE. CashCache supports Natural only. Does not affect purchased or existing cases.");
+            McmSettings.Option(McmSettings.Spawning, "Opening quality", 40,
+                "Natural keeps real odds. Epic/Legendary force that TEST tier (choose one of three packages). Cash Cache requires Natural. Open forced cases before a server restart; unopened test tags expire. Existing/purchased cases are unchanged."));
         settings.SelectionMode = config.Bind(Section, "Selection Mode", TestingSelectionMode.CaseAndTier,
-            "CaseAndTier uses the separate theme/tier controls. LegacyProviderPool uses the old Forced Crate Pool setting instead; its value is preserved.");
+            McmSettings.Option(McmSettings.Spawning, "Spawn selection", 20,
+                "Normally use Case and tier. Legacy provider pool ignores the two selectors below and uses Legacy spawn pool under Advanced tests (enable MCM's advanced settings)."));
         return settings;
     }
 }

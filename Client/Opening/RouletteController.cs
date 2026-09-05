@@ -268,7 +268,7 @@ internal sealed class RouletteController : IDisposable
                 catalogReady))
         {
             message = !testingMode
-                ? "Enable Testing Mode before running the cosmetic roulette self-test."
+                ? "Turn on Enable previews under Animation preview in MCM before playing a preview."
                 : _disposed
                     ? "Contraband Cases is shutting down."
                     : _active is not null || _manifest.IsBusy

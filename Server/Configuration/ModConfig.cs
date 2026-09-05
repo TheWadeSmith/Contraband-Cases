@@ -43,6 +43,12 @@ public sealed class ModConfig
     /// </summary>
     public double KeyLootWeightPercent { get; private set; } = 2d;
 
+    /// <summary>
+    /// Combined added weight for all available case types in verified raid crates, as a percentage
+    /// of each pool's non-case weight. Not a probability per crate or raid. Zero disables case drops.
+    /// </summary>
+    public double CaseLootWeightPercent { get; private set; } = 1d;
+
     public static ModConfig Parse(string json)
     {
         if (string.IsNullOrWhiteSpace(json))
@@ -115,6 +121,9 @@ public sealed class ModConfig
                         break;
                     case "keyLootWeightPercent":
                         config.KeyLootWeightPercent = ReadDouble(property);
+                        break;
+                    case "caseLootWeightPercent":
+                        config.CaseLootWeightPercent = ReadDouble(property);
                         break;
                     default:
                         throw new InvalidOperationException(
@@ -209,6 +218,11 @@ public sealed class ModConfig
         if (!double.IsFinite(KeyLootWeightPercent) || KeyLootWeightPercent <= 0d)
         {
             throw new InvalidOperationException("keyLootWeightPercent must be positive and finite.");
+        }
+
+        if (!double.IsFinite(CaseLootWeightPercent) || CaseLootWeightPercent < 0d)
+        {
+            throw new InvalidOperationException("caseLootWeightPercent must be non-negative and finite.");
         }
     }
 }

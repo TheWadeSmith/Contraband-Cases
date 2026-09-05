@@ -611,8 +611,8 @@ internal sealed partial class ManifestPresentationCoordinator : IDisposable
                     snapshot.RecoveryCaseItemId ?? throw new ManifestSnapshotException(
                         "Ticket recovery did not publish its exact case ID."));
                 break;
-            case ManifestResumeKind.RevealOffer:
-                BeginReveal(run, snapshot);
+            case ManifestResumeKind.ShowOffer:
+                ShowOffer(run, snapshot);
                 break;
             case ManifestResumeKind.ShowEntitlement:
                 ShowEntitlement(run, snapshot, claimRetry);

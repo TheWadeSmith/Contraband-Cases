@@ -42,7 +42,7 @@ catalog-report.json
 cash-catalog-report.json
 PLAYER-GUIDE-*.md
 
-# Artwork and compiled bundles await a separate redistribution audit.
+# Keep editable licensed artwork private; compiled bundles ship only with the mod release.
 /Art/
 /Crate/
 /bundles/

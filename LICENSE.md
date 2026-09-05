@@ -19,3 +19,16 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
+
+## Third-party artwork
+
+The MIT license above applies to Contraband Cases' own software and documentation,
+not third-party artwork or game/SDK components. The crate model and its textures
+were purchased from TurboSquid under its Standard/Royalty Free license. Rights
+remain with the original rights holders; this project does not claim authorship
+of that artwork or grant rights to extract or reuse it as a standalone asset.
+
+The installable mod includes the artwork only inside its compiled Unity game
+bundle. Editable models and source textures are not distributed in the source
+repository. See TurboSquid's game/mod usage terms:
+https://blog.turbosquid.com/royalty-free-license/

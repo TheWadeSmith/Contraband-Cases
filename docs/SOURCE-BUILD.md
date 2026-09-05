@@ -1,6 +1,6 @@
 # Source build and publication scope
 
-This repository contains the **0.4.6 test-candidate source** for SPT 4.1.3.
+This repository contains the **0.4.7 source** for SPT 4.1.3.
 It is not an installable mod archive or a standalone Unity game project.
 
 ## Included
@@ -18,7 +18,9 @@ game assemblies, SDK components, artwork or trademarks.
 ## Build and test the code
 
 Use Windows, the .NET 10 SDK and your own compatible SPT 4.1.3 installation
-with BepInEx. Dependencies declared in the project files restore from NuGet.
+with BepInEx and SPT's ConfigurationManager plugin. Dependencies declared in
+the project files restore from NuGet. The test project uses the same configurable
+game/BepInEx paths as the client, including the installed native MCM assembly.
 The client and tests reference installed game assemblies, which are not
 included in this repository.
 
@@ -42,8 +44,10 @@ EFT SDK, and **StandaloneWindows64**. The included `Unity/Assets/ContrabandCases
 directory is a source overlay for that environment, not a complete Unity project.
 The SDK, its third-party tools and game-derived assets are deliberately omitted.
 
-Models, textures, Blender files and compiled case/key bundles are also omitted
-pending a separate redistribution/provenance check. Existing prefab/material
+Models, textures, Blender files and compiled case/key bundles are omitted from
+this source repository. The purchased TurboSquid crate is licensed for use in
+the compiled game mod, not redistribution as editable source artwork; see
+the third-party notice in LICENSE.md. Existing prefab/material
 GUID references need the matching original assets and SDK to resolve. The
 overlay alone cannot regenerate or display the models.
 
@@ -63,23 +67,25 @@ directory contains defaults, not a copy of a live profile's configuration.
 
 ## Verification status
 
-The complete development workspace passed **1,383 automated tests**, a clean
-Release build and candidate/canonical package validation for 0.4.6. Its Unity
-2022.3.43f1 case/key bundles are unchanged from 0.4.5. Earlier 0.4.6 adversarial
-package checks passed before the final UI-only polish; packaging scripts did
-not change afterward. Native Unity fixtures exercised the compiled UI, layouts
-and cosmetic spins, not live Tarkov item previews or audible game sound.
-Those local-workspace results are not evidence that the reduced public checkout
-contains the omitted packaging assets.
+The complete development workspace passed **1,509 automated tests**, a clean
+Release build and candidate/canonical package validation for 0.4.7. The curated
+public-source checkout was independently restored, built and tested against
+compatible installed SPT 4.1.3 assemblies: **1,509 passed, zero failures or skips**.
+No game assemblies or build outputs are included in this source repository.
 
-The clean 0.4.6 public-source snapshot was independently restored, built and
-tested against compatible installed SPT 4.1.3 assemblies: **1,383 passed, zero
-failures or skips**. No game assemblies or build outputs are included in the
-upload.
+The matching 0.4.7 local install verified all 28 package files while preserving
+live settings. The installed server reached its ready state, resolved 109 lots
+for the local mod set and registered crate-only case loot on 13 maps. Four
+incompatible optional reward packs were safely skipped; their presence is not
+required for the core mod.
 
-The confirmed lobby-relaunch rejection is fixed and regression-tested. The
-original reported game shutdown has **not** been conclusively diagnosed.
-In-game verification of previews, sound, model orientation, trader quotes,
-spinner frame times and complete opening/recovery flows remains outstanding.
-Do not treat this upload as a crash-free
-release or as evidence that the user's installed mod was upgraded.
+The Unity 2022.3.43f1 case/key bundles are unchanged from 0.4.5. Sound and model
+orientation were confirmed in-game on the preceding installed build, with no
+further crashes reported. The original reported shutdown has not been
+conclusively diagnosed, and the new F5/MCM/recovery UI changes still need live
+player acceptance. Automated/server checks are not a crash-free guarantee.
+
+The install ZIP and checksum are published separately as GitHub release assets.
+Use the install ZIP, not GitHub's automatically generated source archive, to
+install the mod. The compiled case/key bundles belong only in that install
+archive; the editable purchased artwork must not be added to this repository.

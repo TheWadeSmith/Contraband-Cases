@@ -43,23 +43,26 @@ internal sealed class TestingModeConfig
                 Section,
                 "Testing Mode",
                 false,
-                "Unlocks cosmetic presentation tests only. It never contacts the server, changes odds, consumes or grants items, or edits a profile."),
-            config.Bind(
+                McmSettings.Option(McmSettings.Preview, "Enable previews", 10,
+                    "Unlock animation and catalog previews. These never spend or grant items or change real odds. Catalog previews read the server; animation previews stay local.")),
+            McmSettings.BindAction(config,
                 Section,
                 "Run Cosmetic Self-Test",
-                false,
-                "Toggle on to preview the selected opening or Relay presentation once; it resets automatically. Requires Testing Mode and never performs an economic action."),
+                McmSettings.Preview, "Play animation preview", 40,
+                "Play the selected case or Relay animation once. No case, key or reward is spent or granted.",
+                () => config[Section, "Testing Mode"].BoxedValue is true ? null : "Enable previews first"),
             config.Bind(
                 Section,
                 "Cosmetic Outcome",
                 CosmeticOutcomeSelection.CycleRewards,
-                "Chooses an opening rarity landing or a cosmetic Relay upgrade, sidegrade, or confiscation result. It cannot contact the server or force a real outcome."),
+                McmSettings.Option(McmSettings.Preview, "Preview result", 20,
+                    "Select the animation to inspect, not a real reward. To receive actual testing cases, use Spawn test items.")),
             config.Bind(
                 Section,
                 "Self-Test Animation Seconds",
                 1f,
-                new ConfigDescription(
-                    "Duration of the cosmetic preview. This does not change the normal opening animation.",
+                McmSettings.Option(McmSettings.Preview, "Preview duration (seconds)", 30,
+                    "Animation preview only. Does not change normal case openings.",
                     new AcceptableValueRange<float>(
                         (float)CosmeticSelfTestPolicy.MinimumDurationSeconds,
                         (float)CosmeticSelfTestPolicy.MaximumDurationSeconds))),
@@ -67,7 +70,8 @@ internal sealed class TestingModeConfig
                 Section,
                 "Extra Lifecycle Diagnostics",
                 false,
-                "Adds overlay creation, destruction, and scene-detach details to the BepInEx log."));
+                McmSettings.Option(McmSettings.Advanced, "Extra UI logging", 200,
+                    "Log window creation, cleanup and scene changes for troubleshooting. Normally leave off.", advanced: true)));
     }
 
 }

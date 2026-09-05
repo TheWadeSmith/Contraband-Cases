@@ -57,8 +57,8 @@ public sealed class ManifestPresentationFlowTests
 
     [Theory]
     [InlineData(ManifestPhase.TicketPrepared, ManifestResumeKind.ResumeTicket)]
-    [InlineData(ManifestPhase.Offer1, ManifestResumeKind.RevealOffer)]
-    [InlineData(ManifestPhase.Offer2, ManifestResumeKind.RevealOffer)]
+    [InlineData(ManifestPhase.Offer1, ManifestResumeKind.ShowOffer)]
+    [InlineData(ManifestPhase.Offer2, ManifestResumeKind.ShowOffer)]
     [InlineData(ManifestPhase.Entitlement, ManifestResumeKind.ShowEntitlement)]
     [InlineData(ManifestPhase.ClaimPrepared, ManifestResumeKind.ResumeClaim)]
     [InlineData(ManifestPhase.RewardOwed, ManifestResumeKind.ResumeClaim)]
@@ -192,8 +192,19 @@ public sealed class ManifestPresentationFlowTests
 
         Assert.False(ManifestPresentationPolicy.ShouldRevealAfter(offer, locked, recovering: false));
         Assert.True(ManifestPresentationPolicy.ShouldRevealAfter(locked, relayOutput, recovering: false));
-        Assert.True(ManifestPresentationPolicy.ShouldRevealAfter(null, offer, recovering: true));
+        Assert.False(ManifestPresentationPolicy.ShouldRevealAfter(null, offer, recovering: true));
         Assert.False(ManifestPresentationPolicy.ShouldRevealAfter(null, locked, recovering: true));
+    }
+
+    [Theory]
+    [InlineData(ManifestPhase.Offer1)]
+    [InlineData(ManifestPhase.Offer2)]
+    [InlineData(ManifestPhase.Entitlement)]
+    public void Reopening_a_saved_package_never_replays_the_spinner_but_fresh_results_still_animate(ManifestPhase phase)
+    {
+        var saved = Snapshot(phase);
+        Assert.False(ManifestPresentationPolicy.ShouldRevealAfter(null, saved, recovering: true));
+        Assert.True(ManifestPresentationPolicy.ShouldRevealAfter(null, saved, recovering: false));
     }
 
     [Fact]

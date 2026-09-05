@@ -26,9 +26,11 @@ internal sealed class PresentationConfig
     {
         if (config is null) throw new ArgumentNullException(nameof(config));
         _motionSetting = config.Bind("Presentation", "Reduced Motion", _reducedMotionDefault,
-            "Replaces scrolling with a brief fade and disables flashes, pulsing, shimmer and confetti. Takes full effect on the next reveal. Never changes results.");
+            McmSettings.Option(McmSettings.General, "Reduced motion", 30,
+                "Use a brief fade instead of the spinner, flashes and confetti. Applies on the next reveal; rewards never change."));
         _volumeSetting = config.Bind("Presentation", "Effects Volume", 0.7f,
-            new ConfigDescription("Volume of case ticks, tension and result tones. Set to zero to mute. Also respects the game's UI audio mixer.",
+            McmSettings.Option(McmSettings.General, "Sound volume", 40,
+                "Case ticks, tension and result sounds. Zero mutes them. Also respects the game's UI volume. Open Broker > Status to test the sound.",
                 new AcceptableValueRange<float>(0f, 1f)));
     }
 

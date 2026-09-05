@@ -3,15 +3,19 @@ using System.Collections.Concurrent;
 using ContrabandCases.Shared;
 using ContrabandCases.Server.Configuration;
 using ContrabandCases.Server.Content;
+using ContrabandCases.Server.Loot;
 using ContrabandCases.Shared.Catalog;
 using ContrabandCases.Shared.Economy;
 using SPTarkov.Common.Models.Logging;
 using SPTarkov.DI.Annotations;
 using SPTarkov.Server.Core.DI;
+using SPTarkov.Server.Core.Helpers.Profile;
 using SPTarkov.Server.Core.Helpers.Server;
 using SPTarkov.Server.Core.Models.Common;
 using SPTarkov.Server.Core.Models.Eft.Common.Tables;
 using SPTarkov.Server.Core.Models.Spt.Tables;
+using SPTarkov.Server.Core.Models.Spt.Config;
+using SPTarkov.Server.Core.Services.Ragfair;
 using IoPath = System.IO.Path;
 
 namespace ContrabandCases.Server.Catalog;
@@ -287,7 +291,8 @@ public sealed class CatalogSnapshotCoordinator
 
 /// <summary>
 /// This final load hook opens the coordinator's lazy gate, freezes the finalized
-/// catalog, and atomically publishes the resulting case and key prices.
+/// catalog, and publishes the resulting prices to the tables and native caches
+/// before SPT accepts client requests.
 /// </summary>
 [Injectable(TypePriority = int.MaxValue)]
 public sealed class CatalogStartupBarrier(
@@ -295,6 +300,11 @@ public sealed class CatalogStartupBarrier(
     ContrabandContentState contentState,
     TemplateTable templates,
     TradersTable traders,
+    HandbookHelper handbookHelper,
+    RagfairPriceService ragfairPriceService,
+    LocationTable locations,
+    BotTable bots,
+    PmcConfig pmcConfig,
     ISptLogger<CatalogStartupBarrier> logger) : IOnLoad
 {
     public Task OnLoadAsync(CancellationToken cancellationToken)
@@ -302,8 +312,13 @@ public sealed class CatalogStartupBarrier(
         cancellationToken.ThrowIfCancellationRequested();
         var config = contentState.RequireConfig();
         var mechanicAssort = ContrabandContentDefinitions.RequireMechanicAssort(traders);
+        var priceCaches = SptTraderPriceCaches.Bind(handbookHelper, ragfairPriceService);
         var prices = FinalizeStartup(coordinator, config, templates, mechanicAssort);
         ContrabandContentDefinitions.PublishThemedCases(templates, mechanicAssort, config, coordinator);
+        priceCaches.Publish(templates);
+        var lootMaps = ContrabandCaseLootInjector.Register(locations, bots, pmcConfig, coordinator, config);
+        logger.Info($"[Contraband Cases] Registered crate-only case loot on {lootMaps} map(s): " +
+            $"{config.CaseLootWeightPercent}% combined added pool weight; cases excluded from bot spawn loot.");
         foreach (var template in CaseContracts.Templates.Where(t => t != ModConstants.CaseTemplateId))
         {
             var view = coordinator.GetCaseSnapshot(template);

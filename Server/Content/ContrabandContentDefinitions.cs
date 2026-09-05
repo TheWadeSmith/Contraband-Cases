@@ -431,6 +431,23 @@ public static class ContrabandContentDefinitions
         keyHandbook.Price = exactPrice;
     }
 
+    internal static Dictionary<MongoId, double> GetRegisteredHandbookPrices(TemplateTable templates)
+    {
+        ArgumentNullException.ThrowIfNull(templates);
+        ArgumentNullException.ThrowIfNull(templates.Items);
+        var result = new Dictionary<MongoId, double>();
+        foreach (var id in CaseContracts.Templates.Append(ModConstants.KeyTemplateId))
+        {
+            var isKey = id == ModConstants.KeyTemplateId;
+            var label = isKey ? "key" : CaseContracts.Name(id);
+            _ = RequireTemplateProperties(templates, id, isKey ? KeyParentId : CaseParentId, label);
+            var entry = RequireHandbookEntry(templates, id,
+                isKey ? KeyHandbookParentId : CaseHandbookParentId, label);
+            result.Add((MongoId)id, entry.Price!.Value);
+        }
+        return result;
+    }
+
     public static void EnsureNativeRandomLootRouteUnavailable(
         IReadOnlyDictionary<MongoId, RewardDetails> randomLootContainers)
     {

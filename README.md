@@ -1,11 +1,14 @@
 # Contraband Cases
 
-Contraband Cases **0.4.6** is a client-and-server mod for **SPT 4.1.3**.
+Contraband Cases **0.4.7** is a client-and-server mod for **SPT 4.1.3**.
 
-**This is a source-only test candidate, not an installable release.** See
-[source build and publication scope](docs/SOURCE-BUILD.md) for prerequisites,
-omitted Unity/art assets and verification evidence. Live preview images, sound,
-model orientation and the original reported crash still need in-game acceptance.
+0.4.7 hides the Broker menu button by default: press **F5** in the main menu
+or stash to open it. Rebind this shortcut in MCM; the optional button is under
+Advanced. The shortcut does not open the Broker during raids, text entry or MCM.
+This update also cleans up MCM testing controls, resumes saved offers without
+replaying a misleading spin, fixes stale Therapist case quotes, and adds rare
+case finds to verified crates only. Keys remain separate finds and universal.
+The combined case loot weight defaults to 1%; it is not a per-crate drop chance.
 
 0.4.6 refreshes the frontend: case-specific overviews, readable odds with their
 probability context, three side-by-side premium cards, complete package contents,
@@ -40,9 +43,18 @@ The new **Cash Cache** is a separate one-payout contract: RUB, USD, EUR or
 physical Bitcoin. It uses the same universal key and roulette, with no
 discard decision, Relay attempt or Broker Favor change.
 
-This is a **test candidate**, not a claim of complete in-game validation.
 Automated tests, the offline catalog audit and Unity bundle checks are distinct
-from running the installed mod in Tarkov.
+from complete in-game validation. Sound and model orientation were confirmed
+in-game on the preceding build; the accepted Unity bundles are unchanged.
+
+Finalized case/key handbook values now synchronize into SPT's trader-price
+caches at the startup barrier.
+This fixes the provisional ₽1,000 value producing ₽630 Therapist quotes even
+when the case's finalized reference price was correct. Native trader rates and
+configured sell targets are unchanged; other items' cached prices are preserved.
+This version also reorganizes MCM without renaming persisted settings,
+uses one-shot action buttons, and resumes saved offers directly without replaying
+the spinner.
 
 ## Play loop
 
@@ -219,13 +231,13 @@ their historical stage-depth recovery rule.
 Cargo rarity is derived from the complete package's reference value, not authored
 as a reward-pack override:
 
-| Mark | Rarity | Reference-value band |
-| --- | --- | ---: |
-| I | Common | below ₽40,000 |
-| II | Uncommon | ₽40,000–74,999 |
-| III | Rare | ₽75,000–149,999 |
-| IV | Epic | ₽150,000–299,999 |
-| V | Legendary | ₽300,000 and above |
+| Rarity | Reference-value band |
+| --- | ---: |
+| Common | below ₽40,000 |
+| Uncommon | ₽40,000–74,999 |
+| Rare | ₽75,000–149,999 |
+| Epic | ₽150,000–299,999 |
+| Legendary | ₽300,000 and above |
 
 These are item reference values, **not cash payouts or trader resale quotes**.
 
@@ -246,9 +258,11 @@ a change requires fresh confirmation.
 Normal opening reels use complete lots from the published catalog. Card
 frequency and neighboring cards are decorative and **are not the published
 odds**. The center-line landing always matches the saved server reward.
-Recovery and Relay can use a disclosed-contents/sealed-card fallback reel.
+New Relay results can use a disclosed-contents/sealed-card fallback reel.
+Reopening an already saved offer goes straight to its decision screen, not a
+second spin. Recovery of an unfinished transaction may reveal a newly committed result.
 
-Decision screens show a hero image, rarity name and rank, contents thumbnails,
+Decision screens show a hero image, plain rarity name, contents thumbnails,
 and an optional **Contents & Details** view with the full item list and Relay
 disclosure. Artwork falls back from the main item to a real contents image,
 then to a built-in rarity seal. Missing artwork does not alter rewards.
@@ -260,10 +274,26 @@ Shipped defaults:
 - All five case prices: automatic, stock **5** per case type.
 - No fixed Mixed price or Therapist case-buyback override by default.
 - Keys: **find-only**; no default key buyback override.
+- Cases: also found in wooden, weapon, ammo, grenade and supply crates (including
+  the corresponding Labyrinth crates). No case spawn loot on bots/people,
+  static corpses, jackets, bags, drawers, safes or ground/barrel caches.
+  Only opening-enabled case types enter the crate pool, with equal shares.
+  These are ordinary cases: any rare Epic/Legendary surprise still happens at opening.
+- Case injection weight: **1% combined added pool weight**, shared by all available
+  case types, not 1% for each type. This is about **0.99% per independent item
+  selection**, not per crate or raid; empty crates, space limits and SPT/mod loot
+  settings affect actual finds. Cases and keys are separate finds, not guaranteed pairs.
+  `caseLootWeightPercent` in the server config adjusts this weight; **0 disables
+  case drops** without disabling keys. Existing configs default to 1 when omitted.
 - Key injection weight: **2% of existing pool weight** in eligible static
   containers and bot pools that already contain vanilla key items. This is
   **not a flat 2% probability per container or raid** (about 1.96% per
   independent weighted selection before downstream loot rules).
+
+The case restriction governs generated spawn loot, not inventory confiscation:
+a looting AI can still pick up a case from a crate, and players can carry cases.
+Other mods that replace loot generation or modify pools after startup can override
+these rules. Trader supply, opening costs, key rules and reward odds are unchanged.
 
 Existing live settings are not automatically reset by source changes. If
 `fixedCasePrice` is null, cargo cases use 95% of the lesser of mean and median
@@ -377,54 +407,64 @@ their original meanings.
 
 ## MCM / configuration menu
 
-In the BepInEx configuration UI / compatible MCM:
+In the BepInEx configuration UI / compatible MCM, controls are grouped as follows:
 
-- **Presentation → Effects Volume:** controls reveal and outcome effects.
-- **Presentation → Reduced Motion:** skips motion-heavy reveal effects.
-- **Broker Dossier → Open Dossier:** view current Favor and up to 50 recent
-  settled Manifest receipts through the Broker home. Choose **Resume Saved Reward**
-  to reopen an unfinished Manifest, including after using your last case/key.
-  Testing Mode is not required. The button checks authenticated saved state;
-  it cannot create a fresh opening or reroll a reward. If a transaction was
-  already prepared, its existing recovery runs with the original IDs.
-- **Broker Dossier → Show Broker Button:** shows a menu-only entry near the top
-  right. The same Broker home includes case/category reward filters, full package
-  inspection, source labels, compatible/skipped packs and **Status & Sound → Test Sound**.
-  Browse previews are public catalog examples, not upcoming saved rewards.
-- **Keyboard:** Tab/Shift+Tab or left/right cycles Broker controls and text areas.
-  Select or hover a text area, then use Page Up/Down or Home/End to scroll it.
-  Hold confirmation requires a fresh primary click or Submit press. Focus loss,
-  deselection and disabling cancel an interrupted hold.
-- **Testing (Catalog Gallery) → Open Gallery:** requires Testing Mode.
-  Browse actual resolved lots by ID and rarity; choose offer, claim-ready,
-  upgrade, replacement, confiscated, guaranteed-upgrade or secured layouts.
-- **Force Missing Artwork** and **Long Name Stress Test:** gallery-only
-  checks. They never modify items or influence real selection.
+- **General:** Open Broker, Open Broker shortcut, Reduced motion and Sound volume.
+  Broker contains reward browsing, history, Favor, Resume Saved Reward and
+  **Status & Sound → Test Sound**. It requires no testing toggle. Resume uses
+  saved server state; it cannot create a fresh opening or reroll a package.
+  Press **F5** on the main menu or in your stash to open Broker; rebind or clear
+  **Open Broker shortcut** in MCM. It does not activate in raids, during case
+  operations, while typing into a selected text field, or while MCM is open.
+  Use Broker's Close button or Escape to leave it. Open Broker in MCM remains
+  available without a shortcut. F5 had no assignments in the inspected local
+  SPT/mod settings; other installations or hardcoded mod shortcuts may differ.
+  The menu button is **hidden by default**, including upgrades from the old
+  default-on setting. With advanced settings shown, **Show Broker button** opts
+  into a button beside Trading on the normal main-menu layer, only if there is
+  safe space. Its new saved key is `Show Menu Button`; the old `Show Broker Button`
+  key is preserved but no longer controls visibility. Other preferences are unchanged.
+- **Spawn test items:** enable **Enable item spawning**, leave **Spawn selection**
+  on **Case and tier**, choose **Case type** and **Opening quality**, set the
+  case/key quantities, then click **Spawn selected items**. Cases are limited
+  to 10, keys to 40, and their combined quantity to 40. Zero cases means keys
+  only, so case/quality selections are ignored. Cash Cache requires Natural
+  quality and does not force a payout. Invalid selections disable the button
+  with an explanation; they are not silently converted into another outcome.
+- **Animation preview — no items spent:** enable **Enable previews**, choose
+  **Preview result** and duration, then **Play animation preview**. These are
+  local cosmetic tests, not real openings or item grants.
+- **Advanced tests and diagnostics** (MCM's advanced-settings filter): catalog
+  ID/rarity/screen filters, missing-picture and long-name simulations, extra UI
+  logging, and the legacy provider-pool selector. Catalog previews require
+  Enable previews and read the server catalog without economic actions. To use
+  **Legacy spawn pool**, first select **Legacy provider pool** under Spawn
+  selection; the normal case/quality controls are then ignored.
 
-Gallery buttons only navigate/close. It cannot send economic actions.
-The Dossier remains read-only until you explicitly choose to leave it and resume
-your pending Manifest. An empty ledger reports that nothing is pending.
-Opening toggles reset after one request.
-Select **CashCache** under the inventory testing grant's **Case Theme** to request
-real test caches; this does not force a particular payout. Cash gallery previews
-do not simulate Relay, confiscation or discard layouts that Cash cannot enter.
+Spawning requires the server's `testingInventoryGrantsEnabled=true` as well as
+the client's Enable item spawning. The shipped server default is **false**;
+use a test profile. **Enable previews is not required for spawning.** Grants
+remain blocked in raids, while another case window is active, or by the server.
 
-Inventory testing grants remain separate: enable both the client's Testing
-Mode and the server's `testingInventoryGrantsEnabled` on a test profile.
-The shipped server setting is **false**. Forced testing pools restrict matching
-providers within a category; categories absent from that pool still use normal
-selection. They are not guaranteed exclusive themed contracts.
+Natural preserves real opening odds. Epic/Legendary force that surprise tier
+for newly granted test cases only, with three saved packages to choose from.
+Open forced cases before restarting the server: unopened testing tags are
+process-local and bounded to 256 entries. Once opened, the tier and choices
+persist normally. An unavailable forced tier consumes neither case nor key.
+Legacy provider filters such as Vault/Mega are **not** guaranteed God cases;
+categories without a matching provider still use normal selection.
 
-In **Selection Mode = CaseAndTier**, select a **Case Theme** and an **Opening Tier**
-(Natural, Epic or Legendary), then set case/key quantities and grant once. Cash
-accepts Natural only. **LegacyProviderPool** preserves the older Forced Crate Pool
-selector, including **EpicMixed / LegendaryMixed** and Epic/Legendary variants
-for Operations, Relics and Black Site. These force the
-surprise tier for newly granted test cases; they do not affect purchased cases.
-Open them before restarting the server: unopened testing tags are process-local
-and bounded to 256 entries. After an opening is saved, its tier and choices
-persist normally. An unavailable forced tier gives a clear error and consumes
-neither case nor key. The older Vault/Mega provider filters are **not** God cases.
+Actions appear as buttons rather than on/off preferences. Old configuration
+section/key names and preference values remain compatible. Pending action
+flags are cleared when the plugin binds settings, preventing replay on launch.
+Without a compatible configuration UI, the original one-shot boolean entries
+remain available in the config file.
+
+In Broker, Tab/Shift+Tab or left/right cycles controls. Select or hover text,
+then use Page Up/Down or Home/End to scroll. Hold confirmation requires a fresh
+primary click or Submit press; focus loss cancels the hold. Catalog examples
+are not upcoming rewards. The Dossier is read-only until Resume Saved Reward
+explicitly leaves it for an existing settlement; an empty ledger opens no case.
 
 ## Recovery and save safety
 
@@ -433,6 +473,7 @@ journals, exact frozen item definitions and transaction witnesses.
 
 - Closing or skipping an animation does not reroll or undo the result.
 - Reopening a case resumes an unfinished Manifest before opening another.
+- Saved offers reopen directly at their decision screen without a second spin.
 - A full stash/sorting table leaves the whole entitlement owed; make space and
   retry Claim. No partial substitute package is granted.
 - Missing content blocks unsafe actions. Restore the exact reward pack to
@@ -465,9 +506,7 @@ SPT_Runtime/user/mods/Wade-ContrabandCases/
 Do not overwrite a customized live `config/config.jsonc` with defaults.
 Preserve custom reward packs too. Remove no other mods.
 
-Source build/test prerequisites and installation-path overrides are documented
-in [SOURCE-BUILD.md](docs/SOURCE-BUILD.md). In the fully provisioned development
-workspace, after restoring dependencies:
+Source verification:
 
 ```powershell
 dotnet test Tests/ContrabandCases.Tests.csproj -c Release --no-restore -v minimal
@@ -514,5 +553,5 @@ Before calling this candidate game-verified:
    restart rejection is regression-tested; the original game shutdown cause
    remains unresolved. Do not blame another mod from shutdown cleanup alone.
 
-See [source build and verification status](docs/SOURCE-BUILD.md). Private logs,
-development handoffs and local diagnostic reports are not included in this repo.
+See the source `plans/engagement-release.md` and `reports/` for the current
+work and validation record.

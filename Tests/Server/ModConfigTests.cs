@@ -18,6 +18,7 @@ public sealed class ModConfigTests
         Assert.False(config.TestingInventoryGrantsEnabled);
         Assert.Null(config.FixedCasePrice);
         Assert.Equal(2d, config.KeyLootWeightPercent);
+        Assert.Equal(1d, config.CaseLootWeightPercent);
     }
 
     [Fact]
@@ -34,6 +35,7 @@ public sealed class ModConfigTests
               "fixedCasePrice": 70000,
               "therapistSellPriceKey": 30000,
               "keyLootWeightPercent": 3.25,
+              "caseLootWeightPercent": 0.5,
             }
             """);
 
@@ -46,6 +48,7 @@ public sealed class ModConfigTests
         Assert.Equal(70_000, config.FixedCasePrice);
         Assert.Equal(30_000, config.TherapistSellPriceKey);
         Assert.Equal(3.25d, config.KeyLootWeightPercent);
+        Assert.Equal(0.5d, config.CaseLootWeightPercent);
     }
 
     [Fact]
@@ -64,6 +67,14 @@ public sealed class ModConfigTests
         Assert.Equal(4, config.CaseStock);
     }
 
+    [Fact]
+    public void Case_loot_can_be_disabled_without_disabling_keys()
+    {
+        var config = ModConfig.Parse("""{ "caseLootWeightPercent": 0 }""");
+        Assert.Equal(0d, config.CaseLootWeightPercent);
+        Assert.Equal(2d, config.KeyLootWeightPercent);
+    }
+
     [Theory]
     [InlineData("null")]
     [InlineData("[]")]
@@ -80,6 +91,12 @@ public sealed class ModConfigTests
     [InlineData("{ \"fixedCasePrice\": 1.5 }")]
     [InlineData("{ \"keyLootWeightPercent\": 0 }")]
     [InlineData("{ \"keyLootWeightPercent\": -1 }")]
+    [InlineData("{ \"caseLootWeightPercent\": -1 }")]
+    [InlineData("{ \"caseLootWeightPercent\": 1e999 }")]
+    [InlineData("{ \"caseLootWeightPercent\": null }")]
+    [InlineData("{ \"caseLootWeightPercent\": true }")]
+    [InlineData("{ \"caseLootWeightPercent\": \"1\" }")]
+    [InlineData("{ \"caseLootWeightPercent\": 1, \"caseLootWeightPercent\": 2 }")]
     public void Parse_rejects_unknown_duplicate_or_wrongly_typed_values(string json)
     {
         Assert.Throws<InvalidOperationException>(() => ModConfig.Parse(json));

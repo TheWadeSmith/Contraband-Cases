@@ -610,10 +610,15 @@ public static class OverlayTreeLifecycle
 
 public enum CosmeticOutcomeSelection
 {
+    [System.ComponentModel.Description("Cycle reward rarities")]
     CycleRewards,
+    [System.ComponentModel.Description("Common")]
     ScavGrade,
+    [System.ComponentModel.Description("Rare")]
     Contractor,
+    [System.ComponentModel.Description("Epic")]
     Restricted,
+    [System.ComponentModel.Description("Legendary")]
     BlackLabel,
     Uncommon,
     RelayUpgradePreview,

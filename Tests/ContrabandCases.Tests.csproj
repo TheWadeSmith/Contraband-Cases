@@ -2,6 +2,8 @@
   <PropertyGroup>
     <TargetFramework>net10.0</TargetFramework>
     <IsPackable>false</IsPackable>
+    <GameManagedPath Condition="'$(GameManagedPath)' == ''">$([System.IO.Path]::GetFullPath('$(MSBuildProjectDirectory)\..\..\..\EscapeFromTarkov_Data\Managed'))</GameManagedPath>
+    <BepInExCorePath Condition="'$(BepInExCorePath)' == ''">$([System.IO.Path]::GetFullPath('$(GameManagedPath)\..\..\BepInEx\core'))</BepInExCorePath>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.12.0" />
@@ -17,5 +19,12 @@
     <ProjectReference Include="..\Shared\ContrabandCases.Shared.csproj" />
     <ProjectReference Include="..\Server\ContrabandCases.Server.csproj" />
     <ProjectReference Include="..\Client\ContrabandCases.Client.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="BepInEx"><HintPath>$(BepInExCorePath)\BepInEx.dll</HintPath></Reference>
+    <Reference Include="ConfigurationManager"><HintPath>$(BepInExCorePath)\..\plugins\spt\ConfigurationManager\ConfigurationManager.dll</HintPath></Reference>
+    <Reference Include="UnityEngine"><HintPath>$(GameManagedPath)\UnityEngine.dll</HintPath></Reference>
+    <Reference Include="UnityEngine.CoreModule"><HintPath>$(GameManagedPath)\UnityEngine.CoreModule.dll</HintPath></Reference>
+    <Reference Include="UnityEngine.IMGUIModule"><HintPath>$(GameManagedPath)\UnityEngine.IMGUIModule.dll</HintPath></Reference>
   </ItemGroup>
 </Project>
