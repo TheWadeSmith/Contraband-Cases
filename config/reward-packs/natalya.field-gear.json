@@ -1,0 +1,61 @@
+{
+  "schemaVersion": 1,
+  "providerId": "natalya.field-gear",
+  "packVersion": "1.0.0",
+  "displayLabel": "Natalya Field Gear",
+  "providerWeight": 0.22,
+  "requiredTemplateIds": [
+    "6749758d4506d299770ddcb2",
+    "674974348af9189fcc136a7e",
+    "67e179c9ff1e5acc5f7af6db",
+    "67e179c92d755ef8ae908854",
+    "674815ec8bf2e801d82c322e",
+    "674888cc37cd20bcbef66a48"
+  ],
+  "requiredPresetIds": [],
+  "requiredBundleKeys": [],
+  "lots": [
+    {
+      "lotId": "medical-resupply",
+      "displayName": "Medical Resupply",
+      "purpose": "A matched IFAKv2 and AFAKv2 pair for sustained field treatment.",
+      "familyId": "field-supply",
+      "trackId": "natalya-field-gear",
+      "anchorTemplateId": "6749758d4506d299770ddcb2",
+      "weight": 1.0,
+      "usePath": { "kind": "raidRole", "roleId": "field-medic" },
+      "recipe": [
+        { "kind": "template", "templateId": "6749758d4506d299770ddcb2", "instanceCount": 1, "stackCountPerInstance": 1 },
+        { "kind": "template", "templateId": "674974348af9189fcc136a7e", "instanceCount": 1, "stackCountPerInstance": 1 }
+      ]
+    },
+    {
+      "lotId": "trauma-kit",
+      "displayName": "Trauma Kit",
+      "purpose": "A CALOK-B hemostatic applicator and an aluminum splint for stopping the bleed and stabilizing a fracture.",
+      "familyId": "field-supply",
+      "trackId": "natalya-field-gear",
+      "anchorTemplateId": "67e179c9ff1e5acc5f7af6db",
+      "weight": 1.0,
+      "usePath": { "kind": "raidRole", "roleId": "field-medic" },
+      "recipe": [
+        { "kind": "template", "templateId": "67e179c9ff1e5acc5f7af6db", "instanceCount": 1, "stackCountPerInstance": 1 },
+        { "kind": "template", "templateId": "67e179c92d755ef8ae908854", "instanceCount": 1, "stackCountPerInstance": 1 }
+      ]
+    },
+    {
+      "lotId": "condor-loadout",
+      "displayName": "Condor Loadout",
+      "purpose": "An LBT-69D Condor chest rig paired with a Trooper 55 sling bag for a fast-access carry setup.",
+      "familyId": "operator",
+      "trackId": "natalya-field-gear",
+      "anchorTemplateId": "674815ec8bf2e801d82c322e",
+      "weight": 0.8,
+      "usePath": { "kind": "raidRole", "roleId": "quartermaster" },
+      "recipe": [
+        { "kind": "template", "templateId": "674815ec8bf2e801d82c322e", "instanceCount": 1, "stackCountPerInstance": 1 },
+        { "kind": "template", "templateId": "674888cc37cd20bcbef66a48", "instanceCount": 1, "stackCountPerInstance": 1 }
+      ]
+    }
+  ]
+}

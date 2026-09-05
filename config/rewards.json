@@ -1,0 +1,16 @@
+{
+  "rewards": [
+    { "id": "mp-133", "displayName": "MP-133", "weaponTemplateId": "54491c4f4bdc2db1078b4568", "presetId": "584148f2245977598f1ad387", "rarity": "ScavGrade", "weight": 0.10 },
+    { "id": "toz-106", "displayName": "TOZ-106", "weaponTemplateId": "5a38e6bac4a2826c6e06d79b", "presetId": "5a3a859786f7747e2305e8bf", "rarity": "ScavGrade", "weight": 0.10 },
+    { "id": "pp-91-kedr", "displayName": "PP-91 Kedr", "weaponTemplateId": "57d14d2524597714373db789", "presetId": "584149c42459775a77263510", "rarity": "ScavGrade", "weight": 0.10 },
+    { "id": "sks", "displayName": "SKS", "weaponTemplateId": "574d967124597745970e7c94", "presetId": "58dffce486f77409f40f8162", "rarity": "ScavGrade", "weight": 0.10 },
+    { "id": "aks-74u", "displayName": "AKS-74U", "weaponTemplateId": "57dc2fa62459775949412633", "presetId": "584147732459775a2b6d9f12", "rarity": "ScavGrade", "weight": 0.10 },
+    { "id": "vpo-136", "displayName": "VPO-136", "weaponTemplateId": "59e6152586f77473dc057aa1", "presetId": "59ef24b986f77439987b8762", "rarity": "ScavGrade", "weight": 0.10 },
+    { "id": "pp-19-01", "displayName": "PP-19-01", "weaponTemplateId": "59984ab886f7743e98271174", "presetId": "59b81f7386f77421ac688a0a", "rarity": "Contractor", "weight": 0.08 },
+    { "id": "mp5", "displayName": "MP5", "weaponTemplateId": "5926bb2186f7744b1c6c6e60", "presetId": "59411aa786f7747aeb37f9a5", "rarity": "Contractor", "weight": 0.08 },
+    { "id": "ak-74n", "displayName": "AK-74N", "weaponTemplateId": "5644bd2b4bdc2d3b4c8b4572", "presetId": "5841474424597759ba49be91", "rarity": "Contractor", "weight": 0.08 },
+    { "id": "m4a1", "displayName": "M4A1", "weaponTemplateId": "5447a9cd4bdc2dbd208b4567", "presetId": "5af08cf886f774223c269184", "rarity": "Restricted", "weight": 0.06 },
+    { "id": "sr-25", "displayName": "SR-25", "weaponTemplateId": "5df8ce05b11454561e39243b", "presetId": "5e03511086f7744ccb1fb6cf", "rarity": "Restricted", "weight": 0.06 },
+    { "id": "rsass", "displayName": "RSASS", "weaponTemplateId": "5a367e5dc4a282000e49738f", "presetId": "5a3a85af86f774745637d46c", "rarity": "BlackLabel", "weight": 0.04 }
+  ]
+}

@@ -1,0 +1,233 @@
+{
+  "schemaVersion": 1,
+  "providerId": "krackasourus.pokemon-cards",
+  "packVersion": "1.1.2",
+  "displayLabel": "Krackasourus Pokemon Cards",
+  "providerWeight": 0.12,
+  "requiredTemplateIds": [
+    "669979d0c73060411f04d26a",
+    "669979d0c73060411f04d286",
+    "669979d0c73060411f04d28e",
+    "669979d0c73060411f04d2a0",
+    "669979d0c73060411f04d2a1",
+    "669979d0c73060411f04d2b2",
+    "669979d0c73060411f04d2cc",
+    "669997e1c73060411f04d301"
+  ],
+  "requiredPresetIds": [],
+  "requiredBundleKeys": [],
+  "lots": [
+    {
+      "lotId": "dragonair-rare",
+      "displayName": "Dragonair Rare",
+      "purpose": "A rare Dragonair card ready for the Pokemon binder.",
+      "familyId": "field-supply",
+      "trackId": "pokemon-cards",
+      "anchorTemplateId": "669979d0c73060411f04d2a0",
+      "weight": 1.0,
+      "usePath": {
+        "kind": "collection",
+        "containerTemplateId": "669997e1c73060411f04d301",
+        "collectionId": "pokemon-cards"
+      },
+      "recipe": [
+        {
+          "kind": "template",
+          "templateId": "669979d0c73060411f04d2a0",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        }
+      ]
+    },
+    {
+      "lotId": "ditto-rare",
+      "displayName": "Ditto Rare",
+      "purpose": "A rare Ditto card ready for the Pokemon binder.",
+      "familyId": "field-supply",
+      "trackId": "pokemon-cards",
+      "anchorTemplateId": "669979d0c73060411f04d28e",
+      "weight": 1.0,
+      "usePath": {
+        "kind": "collection",
+        "containerTemplateId": "669997e1c73060411f04d301",
+        "collectionId": "pokemon-cards"
+      },
+      "recipe": [
+        {
+          "kind": "template",
+          "templateId": "669979d0c73060411f04d28e",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        }
+      ]
+    },
+    {
+      "lotId": "dragonair-electrode-pair",
+      "displayName": "Dragonair and Electrode Pair",
+      "purpose": "A complementary Dragonair and Electrode pair for a growing collection.",
+      "familyId": "field-supply",
+      "trackId": "pokemon-cards",
+      "anchorTemplateId": "669979d0c73060411f04d2a0",
+      "weight": 0.75,
+      "usePath": {
+        "kind": "collection",
+        "containerTemplateId": "669997e1c73060411f04d301",
+        "collectionId": "pokemon-cards"
+      },
+      "recipe": [
+        {
+          "kind": "template",
+          "templateId": "669979d0c73060411f04d2a0",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "669979d0c73060411f04d26a",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        }
+      ]
+    },
+    {
+      "lotId": "ditto-electabuzz-pair",
+      "displayName": "Ditto and Electabuzz Pair",
+      "purpose": "A Ditto and Electabuzz pairing with enough value to advance the collection.",
+      "familyId": "field-supply",
+      "trackId": "pokemon-cards",
+      "anchorTemplateId": "669979d0c73060411f04d28e",
+      "weight": 0.75,
+      "usePath": {
+        "kind": "collection",
+        "containerTemplateId": "669997e1c73060411f04d301",
+        "collectionId": "pokemon-cards"
+      },
+      "recipe": [
+        {
+          "kind": "template",
+          "templateId": "669979d0c73060411f04d28e",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "669979d0c73060411f04d286",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        }
+      ]
+    },
+    {
+      "lotId": "rare-evolution-trio",
+      "displayName": "Rare Evolution Trio",
+      "purpose": "Dragonair, Electrode, and Ditto form a premium three-card binder page.",
+      "familyId": "field-supply",
+      "trackId": "pokemon-cards",
+      "anchorTemplateId": "669979d0c73060411f04d2a0",
+      "weight": 0.45,
+      "usePath": {
+        "kind": "collection",
+        "containerTemplateId": "669997e1c73060411f04d301",
+        "collectionId": "pokemon-cards"
+      },
+      "recipe": [
+        {
+          "kind": "template",
+          "templateId": "669979d0c73060411f04d2a0",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "669979d0c73060411f04d26a",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "669979d0c73060411f04d28e",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        }
+      ]
+    },
+    {
+      "lotId": "powerhouse-trio",
+      "displayName": "Powerhouse Trio",
+      "purpose": "Electabuzz, Dugtrio, and Dragonair make a combat-themed premium set.",
+      "familyId": "field-supply",
+      "trackId": "pokemon-cards",
+      "anchorTemplateId": "669979d0c73060411f04d286",
+      "weight": 0.45,
+      "usePath": {
+        "kind": "collection",
+        "containerTemplateId": "669997e1c73060411f04d301",
+        "collectionId": "pokemon-cards"
+      },
+      "recipe": [
+        {
+          "kind": "template",
+          "templateId": "669979d0c73060411f04d286",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "669979d0c73060411f04d2cc",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "669979d0c73060411f04d2a0",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        }
+      ]
+    },
+    {
+      "lotId": "venusaur-holo",
+      "displayName": "Venusaur Holo",
+      "purpose": "A high-value Venusaur holographic card for the collection's top page.",
+      "familyId": "field-supply",
+      "trackId": "pokemon-cards",
+      "anchorTemplateId": "669979d0c73060411f04d2b2",
+      "weight": 0.15,
+      "usePath": {
+        "kind": "collection",
+        "containerTemplateId": "669997e1c73060411f04d301",
+        "collectionId": "pokemon-cards"
+      },
+      "recipe": [
+        {
+          "kind": "template",
+          "templateId": "669979d0c73060411f04d2b2",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        }
+      ]
+    },
+    {
+      "lotId": "dragonite-holo",
+      "displayName": "Dragonite Holo",
+      "purpose": "A high-value Dragonite holographic card for the collection's top page.",
+      "familyId": "field-supply",
+      "trackId": "pokemon-cards",
+      "anchorTemplateId": "669979d0c73060411f04d2a1",
+      "weight": 0.15,
+      "usePath": {
+        "kind": "collection",
+        "containerTemplateId": "669997e1c73060411f04d301",
+        "collectionId": "pokemon-cards"
+      },
+      "recipe": [
+        {
+          "kind": "template",
+          "templateId": "669979d0c73060411f04d2a1",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        }
+      ]
+    }
+  ]
+}

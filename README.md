@@ -1,11 +1,29 @@
 # Contraband Cases
 
-Contraband Cases **0.4.5** is a client-and-server mod for **SPT 4.1.3**.
+Contraband Cases **0.4.6** is a client-and-server mod for **SPT 4.1.3**.
 
 **This is a source-only test candidate, not an installable release.** See
 [source build and publication scope](docs/SOURCE-BUILD.md) for prerequisites,
-omitted Unity/art assets and the remaining in-game checks. The original reported
-crash is not yet verified fixed.
+omitted Unity/art assets and verification evidence. Live preview images, sound,
+model orientation and the original reported crash still need in-game acceptance.
+
+0.4.6 refreshes the frontend: case-specific overviews, readable odds with their
+probability context, three side-by-side premium cards, complete package contents,
+consistent Save & Close, and a menu-only Broker reward browser/Dossier/status page.
+It adds clear theme/tier testing selectors, mechanical sound cues and Test Sound,
+keyboard focus/scrolling, explicit missing-art states, and interrupted-hold safety.
+Rarity labels use plain names: Common, Uncommon, Rare, Epic and Legendary.
+Premium cards show compact contents and purpose; Details retains full names,
+quantities and source. Reference values sit beside their valuation caveat.
+The browser offers direct case/category selection, item/mod search, and two rows
+of cards (four at smaller resolutions, six on larger screens). Search with Enter
+or Search; opening details preserves the selected filters, search and page.
+The reel uses small edge pointers, varied starting cards and smooth seeded
+acceleration/deceleration, plus the existing duration/landing variation. These
+are cosmetic differences, not changed odds or manufactured near misses.
+Off-screen cards no longer receive per-frame shimmer updates. Reduced motion
+and Skip still lead to the same saved result. No frame-rate settings are changed.
+Prices, key supply, jackpot chances, reward packs and settlement rules are unchanged.
 
 0.4.5 adds exceptionally rare surprise Epic and Legendary openings, with three
 saved premium packages to browse and choose from. It also corrects case/key
@@ -33,11 +51,11 @@ from running the installed mod in Tarkov.
 2. In your stash, right-click the case and choose **Unpack**. Read the server's
    current category and lot odds before confirming.
 3. A normal opening spends **one case and one key**, saves three offers, and reveals
-   the first. **Lock This Lot** keeps that package for the next decision.
+   the first. **Choose This Package** locks that package for the next decision.
    **Discard & Reveal Next** permanently gives it up.
 4. You may discard twice. The third offer is automatically locked.
-5. **Secure Reward** grants the entire locked package without another key.
-   **Risk It — 1 Key** stakes that package plus an additional key on Relay.
+5. **Claim Items** grants the entire locked package without another key.
+   **Risk on Relay — 1 Key** stakes that package plus an additional key on Relay.
    Hold the risk button to confirm.
 
 Reward packages include complete weapon presets with ammunition, hearing and
@@ -84,8 +102,8 @@ the case/key**. Cash Cache is excluded.
 | Legendary / Godly | 0.2% | Three distinct Legendary packages; browse all, choose **one** |
 
 These are rare upgrades to the opening, not separate purchasable guaranteed-win
-cases. No extra key is charged for browsing or choosing. After choosing, Secure
-Reward and eligible Relay actions work normally. **Save & Close** leaves the
+cases. No extra key is charged for browsing or choosing. After choosing, Claim
+Items and eligible Relay actions work normally. **Save & Close** leaves the
 same choices available through the Dossier. Reconnecting cannot reroll them.
 Premium packages keep the case theme, but can share a category or progression
 track. Choosing one never grants all three.
@@ -364,11 +382,19 @@ In the BepInEx configuration UI / compatible MCM:
 - **Presentation → Effects Volume:** controls reveal and outcome effects.
 - **Presentation → Reduced Motion:** skips motion-heavy reveal effects.
 - **Broker Dossier → Open Dossier:** view current Favor and up to 50 recent
-  settled Manifest receipts. Choose **Resume Pending Payout** inside the Dossier
+  settled Manifest receipts through the Broker home. Choose **Resume Saved Reward**
   to reopen an unfinished Manifest, including after using your last case/key.
   Testing Mode is not required. The button checks authenticated saved state;
   it cannot create a fresh opening or reroll a reward. If a transaction was
   already prepared, its existing recovery runs with the original IDs.
+- **Broker Dossier → Show Broker Button:** shows a menu-only entry near the top
+  right. The same Broker home includes case/category reward filters, full package
+  inspection, source labels, compatible/skipped packs and **Status & Sound → Test Sound**.
+  Browse previews are public catalog examples, not upcoming saved rewards.
+- **Keyboard:** Tab/Shift+Tab or left/right cycles Broker controls and text areas.
+  Select or hover a text area, then use Page Up/Down or Home/End to scroll it.
+  Hold confirmation requires a fresh primary click or Submit press. Focus loss,
+  deselection and disabling cancel an interrupted hold.
 - **Testing (Catalog Gallery) → Open Gallery:** requires Testing Mode.
   Browse actual resolved lots by ID and rarity; choose offer, claim-ready,
   upgrade, replacement, confiscated, guaranteed-upgrade or secured layouts.
@@ -379,7 +405,7 @@ Gallery buttons only navigate/close. It cannot send economic actions.
 The Dossier remains read-only until you explicitly choose to leave it and resume
 your pending Manifest. An empty ledger reports that nothing is pending.
 Opening toggles reset after one request.
-Select **Cash Cache** under the inventory testing grant's crate type to request
+Select **CashCache** under the inventory testing grant's **Case Theme** to request
 real test caches; this does not force a particular payout. Cash gallery previews
 do not simulate Relay, confiscation or discard layouts that Cash cannot enter.
 
@@ -389,8 +415,11 @@ The shipped server setting is **false**. Forced testing pools restrict matching
 providers within a category; categories absent from that pool still use normal
 selection. They are not guaranteed exclusive themed contracts.
 
-The crate-type selector also includes **EpicMixed / LegendaryMixed**, and Epic /
-Legendary variants for **Operations, Relics and Black Site**. These force the
+In **Selection Mode = CaseAndTier**, select a **Case Theme** and an **Opening Tier**
+(Natural, Epic or Legendary), then set case/key quantities and grant once. Cash
+accepts Natural only. **LegacyProviderPool** preserves the older Forced Crate Pool
+selector, including **EpicMixed / LegendaryMixed** and Epic/Legendary variants
+for Operations, Relics and Black Site. These force the
 surprise tier for newly granted test cases; they do not affect purchased cases.
 Open them before restarting the server: unopened testing tags are process-local
 and bounded to 256 entries. After an opening is saved, its tier and choices
@@ -436,9 +465,9 @@ SPT_Runtime/user/mods/Wade-ContrabandCases/
 Do not overwrite a customized live `config/config.jsonc` with defaults.
 Preserve custom reward packs too. Remove no other mods.
 
-Source verification in a fully provisioned development workspace (restore
-dependencies first; see [source build instructions](docs/SOURCE-BUILD.md) for
-an ordinary checkout):
+Source build/test prerequisites and installation-path overrides are documented
+in [SOURCE-BUILD.md](docs/SOURCE-BUILD.md). In the fully provisioned development
+workspace, after restoring dependencies:
 
 ```powershell
 dotnet test Tests/ContrabandCases.Tests.csproj -c Release --no-restore -v minimal
@@ -485,5 +514,5 @@ Before calling this candidate game-verified:
    restart rejection is regression-tested; the original game shutdown cause
    remains unresolved. Do not blame another mod from shutdown cleanup alone.
 
-See [source build and verification status](docs/SOURCE-BUILD.md). Private
-development plans, logs and captured profile diagnostics are not published.
+See [source build and verification status](docs/SOURCE-BUILD.md). Private logs,
+development handoffs and local diagnostic reports are not included in this repo.

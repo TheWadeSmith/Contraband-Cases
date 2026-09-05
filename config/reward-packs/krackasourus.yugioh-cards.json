@@ -1,0 +1,198 @@
+{
+  "schemaVersion": 1,
+  "providerId": "krackasourus.yugioh-cards",
+  "packVersion": "0.1.2",
+  "displayLabel": "Krackasourus Yu-Gi-Oh Cards",
+  "providerWeight": 0.12,
+  "requiredTemplateIds": [
+    "669c7c89721191eae60910d9",
+    "669c812e721191eae60910e1",
+    "669c812e721191eae60910ec",
+    "669c812e721191eae60910f4",
+    "669c812e721191eae6091102",
+    "669c812e721191eae609112d",
+    "669c812e721191eae6091133",
+    "669c812e721191eae6091145",
+    "669c812e721191eae609114a"
+  ],
+  "requiredPresetIds": [],
+  "requiredBundleKeys": [],
+  "lots": [
+    {
+      "lotId": "swords-of-revealing-light",
+      "displayName": "Swords of Revealing Light",
+      "purpose": "A classic spell card ready for the Yu-Gi-Oh binder.",
+      "familyId": "field-supply",
+      "trackId": "yugioh-cards",
+      "anchorTemplateId": "669c812e721191eae6091145",
+      "weight": 1.0,
+      "usePath": {
+        "kind": "collection",
+        "containerTemplateId": "669c7c89721191eae60910d9",
+        "collectionId": "yugioh-cards"
+      },
+      "recipe": [
+        {
+          "kind": "template",
+          "templateId": "669c812e721191eae6091145",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        }
+      ]
+    },
+    {
+      "lotId": "pot-of-greed",
+      "displayName": "Pot of Greed",
+      "purpose": "An iconic spell card ready for the Yu-Gi-Oh binder.",
+      "familyId": "field-supply",
+      "trackId": "yugioh-cards",
+      "anchorTemplateId": "669c812e721191eae609112d",
+      "weight": 1.0,
+      "usePath": {
+        "kind": "collection",
+        "containerTemplateId": "669c7c89721191eae60910d9",
+        "collectionId": "yugioh-cards"
+      },
+      "recipe": [
+        {
+          "kind": "template",
+          "templateId": "669c812e721191eae609112d",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        }
+      ]
+    },
+    {
+      "lotId": "red-eyes-black-dragon",
+      "displayName": "Red-Eyes Black Dragon",
+      "purpose": "A signature Red-Eyes monster card for an advancing collection.",
+      "familyId": "field-supply",
+      "trackId": "yugioh-cards",
+      "anchorTemplateId": "669c812e721191eae6091133",
+      "weight": 0.75,
+      "usePath": {
+        "kind": "collection",
+        "containerTemplateId": "669c7c89721191eae60910d9",
+        "collectionId": "yugioh-cards"
+      },
+      "recipe": [
+        {
+          "kind": "template",
+          "templateId": "669c812e721191eae6091133",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        }
+      ]
+    },
+    {
+      "lotId": "blue-eyes-white-dragon",
+      "displayName": "Blue-Eyes White Dragon",
+      "purpose": "A signature Blue-Eyes monster card for an advancing collection.",
+      "familyId": "field-supply",
+      "trackId": "yugioh-cards",
+      "anchorTemplateId": "669c812e721191eae60910e1",
+      "weight": 0.75,
+      "usePath": {
+        "kind": "collection",
+        "containerTemplateId": "669c7c89721191eae60910d9",
+        "collectionId": "yugioh-cards"
+      },
+      "recipe": [
+        {
+          "kind": "template",
+          "templateId": "669c812e721191eae60910e1",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        }
+      ]
+    },
+    {
+      "lotId": "dark-magician",
+      "displayName": "Dark Magician",
+      "purpose": "A premium Dark Magician card for a high-tier binder page.",
+      "familyId": "field-supply",
+      "trackId": "yugioh-cards",
+      "anchorTemplateId": "669c812e721191eae60910ec",
+      "weight": 0.45,
+      "usePath": {
+        "kind": "collection",
+        "containerTemplateId": "669c7c89721191eae60910d9",
+        "collectionId": "yugioh-cards"
+      },
+      "recipe": [
+        {
+          "kind": "template",
+          "templateId": "669c812e721191eae60910ec",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        }
+      ]
+    },
+    {
+      "lotId": "exodia",
+      "displayName": "Exodia",
+      "purpose": "A premium Exodia card for a high-tier binder page.",
+      "familyId": "field-supply",
+      "trackId": "yugioh-cards",
+      "anchorTemplateId": "669c812e721191eae60910f4",
+      "weight": 0.45,
+      "usePath": {
+        "kind": "collection",
+        "containerTemplateId": "669c7c89721191eae60910d9",
+        "collectionId": "yugioh-cards"
+      },
+      "recipe": [
+        {
+          "kind": "template",
+          "templateId": "669c812e721191eae60910f4",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        }
+      ]
+    },
+    {
+      "lotId": "gaia-dragon-champion",
+      "displayName": "Gaia the Dragon Champion",
+      "purpose": "A top-value fusion card intended as a terminal Yu-Gi-Oh prize.",
+      "familyId": "field-supply",
+      "trackId": "yugioh-cards",
+      "anchorTemplateId": "669c812e721191eae6091102",
+      "weight": 0.15,
+      "usePath": {
+        "kind": "collection",
+        "containerTemplateId": "669c7c89721191eae60910d9",
+        "collectionId": "yugioh-cards"
+      },
+      "recipe": [
+        {
+          "kind": "template",
+          "templateId": "669c812e721191eae6091102",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        }
+      ]
+    },
+    {
+      "lotId": "tri-horned-dragon",
+      "displayName": "Tri-Horned Dragon",
+      "purpose": "A top-value dragon card intended as a terminal Yu-Gi-Oh prize.",
+      "familyId": "field-supply",
+      "trackId": "yugioh-cards",
+      "anchorTemplateId": "669c812e721191eae609114a",
+      "weight": 0.15,
+      "usePath": {
+        "kind": "collection",
+        "containerTemplateId": "669c7c89721191eae60910d9",
+        "collectionId": "yugioh-cards"
+      },
+      "recipe": [
+        {
+          "kind": "template",
+          "templateId": "669c812e721191eae609114a",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        }
+      ]
+    }
+  ]
+}

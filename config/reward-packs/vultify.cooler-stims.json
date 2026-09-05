@@ -1,0 +1,282 @@
+{
+  "schemaVersion": 1,
+  "providerId": "vultify.cooler-stims",
+  "packVersion": "2.0.2",
+  "displayLabel": "Vultify CoolerStims",
+  "providerWeight": 0.25,
+  "requiredTemplateIds": [
+    "5c0a1b2c3d4e5f6789abcde1",
+    "5c0a1b2c3d4e5f6789abcde3",
+    "5c0a1b2c3d4e5f6789abcde5",
+    "5c0a1b2c3d4e5f6789abcde6",
+    "5c0a1b2c3d4e5f6789abcde8"
+  ],
+  "requiredPresetIds": [],
+  "requiredBundleKeys": [],
+  "lots": [
+    {
+      "lotId": "rapid-recon",
+      "displayName": "Rapid Recon",
+      "purpose": "APEX mobility paired with GRAFT recovery for a fast scouting run.",
+      "familyId": "field-supply",
+      "trackId": "cooler-stims",
+      "anchorTemplateId": "5c0a1b2c3d4e5f6789abcde1",
+      "weight": 1.0,
+      "usePath": {
+        "kind": "raidRole",
+        "roleId": "combat-chemistry"
+      },
+      "recipe": [
+        {
+          "kind": "template",
+          "templateId": "5c0a1b2c3d4e5f6789abcde1",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5c0a1b2c3d4e5f6789abcde8",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        }
+      ]
+    },
+    {
+      "lotId": "field-triage",
+      "displayName": "Field Triage",
+      "purpose": "AEGIS protection and GRAFT recovery for stabilizing after first contact.",
+      "familyId": "field-supply",
+      "trackId": "cooler-stims",
+      "anchorTemplateId": "5c0a1b2c3d4e5f6789abcde3",
+      "weight": 1.0,
+      "usePath": {
+        "kind": "raidRole",
+        "roleId": "combat-chemistry"
+      },
+      "recipe": [
+        {
+          "kind": "template",
+          "templateId": "5c0a1b2c3d4e5f6789abcde3",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5c0a1b2c3d4e5f6789abcde8",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        }
+      ]
+    },
+    {
+      "lotId": "search-and-recover",
+      "displayName": "Search and Recover",
+      "purpose": "ARGUS awareness and AEGIS protection for deliberate recovery work.",
+      "familyId": "field-supply",
+      "trackId": "cooler-stims",
+      "anchorTemplateId": "5c0a1b2c3d4e5f6789abcde6",
+      "weight": 0.75,
+      "usePath": {
+        "kind": "raidRole",
+        "roleId": "combat-chemistry"
+      },
+      "recipe": [
+        {
+          "kind": "template",
+          "templateId": "5c0a1b2c3d4e5f6789abcde6",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5c0a1b2c3d4e5f6789abcde3",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        }
+      ]
+    },
+    {
+      "lotId": "assault-cycle",
+      "displayName": "Assault Cycle",
+      "purpose": "APEX speed and IRON endurance for a sustained offensive route.",
+      "familyId": "field-supply",
+      "trackId": "cooler-stims",
+      "anchorTemplateId": "5c0a1b2c3d4e5f6789abcde1",
+      "weight": 0.75,
+      "usePath": {
+        "kind": "raidRole",
+        "roleId": "combat-chemistry"
+      },
+      "recipe": [
+        {
+          "kind": "template",
+          "templateId": "5c0a1b2c3d4e5f6789abcde1",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5c0a1b2c3d4e5f6789abcde5",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        }
+      ]
+    },
+    {
+      "lotId": "heavy-push",
+      "displayName": "Heavy Push",
+      "purpose": "A four-stim APEX, AEGIS, IRON, and GRAFT suite for a difficult assault.",
+      "familyId": "field-supply",
+      "trackId": "cooler-stims",
+      "anchorTemplateId": "5c0a1b2c3d4e5f6789abcde1",
+      "weight": 0.45,
+      "usePath": {
+        "kind": "raidRole",
+        "roleId": "combat-chemistry"
+      },
+      "recipe": [
+        {
+          "kind": "template",
+          "templateId": "5c0a1b2c3d4e5f6789abcde1",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5c0a1b2c3d4e5f6789abcde3",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5c0a1b2c3d4e5f6789abcde5",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5c0a1b2c3d4e5f6789abcde8",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        }
+      ]
+    },
+    {
+      "lotId": "recovery-sweep",
+      "displayName": "Recovery Sweep",
+      "purpose": "A four-stim ARGUS, AEGIS, IRON, and GRAFT suite for securing a contested area.",
+      "familyId": "field-supply",
+      "trackId": "cooler-stims",
+      "anchorTemplateId": "5c0a1b2c3d4e5f6789abcde6",
+      "weight": 0.45,
+      "usePath": {
+        "kind": "raidRole",
+        "roleId": "combat-chemistry"
+      },
+      "recipe": [
+        {
+          "kind": "template",
+          "templateId": "5c0a1b2c3d4e5f6789abcde6",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5c0a1b2c3d4e5f6789abcde3",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5c0a1b2c3d4e5f6789abcde5",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5c0a1b2c3d4e5f6789abcde8",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        }
+      ]
+    },
+    {
+      "lotId": "overrun-protocol",
+      "displayName": "Overrun Protocol",
+      "purpose": "A terminal seven-dose pharmacy for repeated mobility, protection, and endurance cycles.",
+      "familyId": "field-supply",
+      "trackId": "cooler-stims",
+      "anchorTemplateId": "5c0a1b2c3d4e5f6789abcde1",
+      "weight": 0.15,
+      "usePath": {
+        "kind": "raidRole",
+        "roleId": "combat-chemistry"
+      },
+      "recipe": [
+        {
+          "kind": "template",
+          "templateId": "5c0a1b2c3d4e5f6789abcde1",
+          "instanceCount": 2,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5c0a1b2c3d4e5f6789abcde3",
+          "instanceCount": 2,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5c0a1b2c3d4e5f6789abcde5",
+          "instanceCount": 2,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5c0a1b2c3d4e5f6789abcde8",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        }
+      ]
+    },
+    {
+      "lotId": "hunter-killer-pharmacy",
+      "displayName": "Hunter-Killer Pharmacy",
+      "purpose": "A terminal seven-dose pharmacy for repeated awareness, protection, and endurance cycles.",
+      "familyId": "field-supply",
+      "trackId": "cooler-stims",
+      "anchorTemplateId": "5c0a1b2c3d4e5f6789abcde6",
+      "weight": 0.15,
+      "usePath": {
+        "kind": "raidRole",
+        "roleId": "combat-chemistry"
+      },
+      "recipe": [
+        {
+          "kind": "template",
+          "templateId": "5c0a1b2c3d4e5f6789abcde6",
+          "instanceCount": 2,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5c0a1b2c3d4e5f6789abcde3",
+          "instanceCount": 2,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5c0a1b2c3d4e5f6789abcde5",
+          "instanceCount": 2,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5c0a1b2c3d4e5f6789abcde8",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        }
+      ]
+    }
+  ]
+}

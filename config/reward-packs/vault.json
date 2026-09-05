@@ -1,0 +1,128 @@
+{
+  "schemaVersion": 1,
+  "providerId": "vault",
+  "packVersion": "1.0.0",
+  "displayLabel": "Contraband Vault",
+  "providerWeight": 0.05,
+  "requiredTemplateIds": [
+    "5447a9cd4bdc2dbd208b4567",
+    "54491c4f4bdc2db1078b4568",
+    "5a367e5dc4a282000e49738f",
+    "560d5e524bdc2d25448b4571",
+    "56dfef82d2720bbd668b4567",
+    "59e6906286f7746c9f75e847",
+    "6768c25aa7b238f14a08d3f6"
+  ],
+  "requiredPresetIds": [
+    "584148f2245977598f1ad387",
+    "59b81f7386f77421ac688a0a",
+    "5a3a85af86f774745637d46c",
+    "5af08cf886f774223c269184"
+  ],
+  "requiredBundleKeys": [],
+  "lots": [
+    {
+      "lotId": "vault-twin-rifles",
+      "displayName": "Vault Twin Rifles",
+      "purpose": "A matched RSASS and M4 pair with a full war chest of match and armor-piercing ammunition.",
+      "familyId": "arsenal",
+      "trackId": "vault",
+      "anchorTemplateId": "5a367e5dc4a282000e49738f",
+      "weight": 1.0,
+      "usePath": {
+        "kind": "raidRole",
+        "roleId": "vault-elite"
+      },
+      "recipe": [
+        {
+          "kind": "preset",
+          "presetId": "5a3a85af86f774745637d46c"
+        },
+        {
+          "kind": "preset",
+          "presetId": "5af08cf886f774223c269184"
+        },
+        {
+          "kind": "template",
+          "templateId": "6768c25aa7b238f14a08d3f6",
+          "instanceCount": 4,
+          "stackCountPerInstance": 40
+        },
+        {
+          "kind": "template",
+          "templateId": "56dfef82d2720bbd668b4567",
+          "instanceCount": 2,
+          "stackCountPerInstance": 60
+        }
+      ]
+    },
+    {
+      "lotId": "vault-apex-loadout",
+      "displayName": "Vault Apex Loadout",
+      "purpose": "A three-weapon platform package pairing a marksman rifle, a service carbine, and a compact subgun.",
+      "familyId": "arsenal",
+      "trackId": "vault",
+      "anchorTemplateId": "5447a9cd4bdc2dbd208b4567",
+      "weight": 0.6,
+      "usePath": {
+        "kind": "raidRole",
+        "roleId": "vault-elite"
+      },
+      "recipe": [
+        {
+          "kind": "preset",
+          "presetId": "5a3a85af86f774745637d46c"
+        },
+        {
+          "kind": "preset",
+          "presetId": "5af08cf886f774223c269184"
+        },
+        {
+          "kind": "preset",
+          "presetId": "59b81f7386f77421ac688a0a"
+        },
+        {
+          "kind": "template",
+          "templateId": "59e6906286f7746c9f75e847",
+          "instanceCount": 2,
+          "stackCountPerInstance": 60
+        }
+      ]
+    },
+    {
+      "lotId": "vault-command-package",
+      "displayName": "Vault Command Package",
+      "purpose": "A marksman-and-breach pair backed by a heavy shipment of match and buckshot ammunition.",
+      "familyId": "arsenal",
+      "trackId": "vault",
+      "anchorTemplateId": "54491c4f4bdc2db1078b4568",
+      "weight": 0.4,
+      "usePath": {
+        "kind": "raidRole",
+        "roleId": "vault-elite"
+      },
+      "recipe": [
+        {
+          "kind": "preset",
+          "presetId": "5a3a85af86f774745637d46c"
+        },
+        {
+          "kind": "preset",
+          "presetId": "584148f2245977598f1ad387"
+        },
+        {
+          "kind": "template",
+          "templateId": "6768c25aa7b238f14a08d3f6",
+          "instanceCount": 4,
+          "stackCountPerInstance": 40
+        },
+        {
+          "kind": "template",
+          "templateId": "560d5e524bdc2d25448b4571",
+          "instanceCount": 2,
+          "stackCountPerInstance": 20
+        }
+      ]
+    }
+  ]
+}

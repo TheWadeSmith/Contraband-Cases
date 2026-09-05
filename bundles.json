@@ -1,0 +1,12 @@
+{
+  "manifest": [
+    {
+      "key": "contrabandcases/br12_case.bundle",
+      "dependencyKeys": []
+    },
+    {
+      "key": "contrabandcases/br12_key.bundle",
+      "dependencyKeys": []
+    }
+  ]
+}

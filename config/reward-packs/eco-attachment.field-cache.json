@@ -1,0 +1,151 @@
+{
+  "schemaVersion": 1,
+  "providerId": "eco-attachment.field-cache",
+  "packVersion": "1.0.0",
+  "displayLabel": "Eco Attachment Emporium Field Cache",
+  "providerWeight": 0.16,
+  "requiredTemplateIds": [
+    "68c48eb7c91390fb930e8d94",
+    "6912857dfb534981300b1d8f",
+    "68b4b24e27658b8b0d024399",
+    "68b4b24e27658b8b0d02439a",
+    "68bb6be346d4437fb40002e0",
+    "68bc3cd17208c642f409974f"
+  ],
+  "requiredPresetIds": [],
+  "requiredBundleKeys": [],
+  "lots": [
+    {
+      "lotId": "grip-upgrade-kit",
+      "displayName": "Grip Upgrade Kit",
+      "purpose": "A Knight's Armament KAC M-LOK Barrier Grip and a True North Zero-8 V2 K-Grip for dialing in ergonomics.",
+      "familyId": "attachments",
+      "trackId": "eco-field-cache",
+      "anchorTemplateId": "68c48eb7c91390fb930e8d94",
+      "weight": 1.0,
+      "usePath": {
+        "kind": "raidRole",
+        "roleId": "rifle-patrol"
+      },
+      "recipe": [
+        {
+          "kind": "template",
+          "templateId": "68c48eb7c91390fb930e8d94",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "6912857dfb534981300b1d8f",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        }
+      ]
+    },
+    {
+      "lotId": "iron-sight-swap",
+      "displayName": "Iron Sight Swap",
+      "purpose": "A matched RexTac TAR-21 front and rear iron sight set.",
+      "familyId": "attachments",
+      "trackId": "eco-field-cache",
+      "anchorTemplateId": "68b4b24e27658b8b0d024399",
+      "weight": 1.0,
+      "usePath": {
+        "kind": "raidRole",
+        "roleId": "rifle-patrol"
+      },
+      "recipe": [
+        {
+          "kind": "template",
+          "templateId": "68b4b24e27658b8b0d024399",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "68b4b24e27658b8b0d02439a",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        }
+      ]
+    },
+    {
+      "lotId": "offset-mount-kit",
+      "displayName": "Offset Mount Kit",
+      "purpose": "An Arisaka offset optic mount fitted with an Aimpoint Micro mount for a 45-degree backup sight.",
+      "familyId": "attachments",
+      "trackId": "eco-field-cache",
+      "anchorTemplateId": "68bb6be346d4437fb40002e0",
+      "weight": 0.8,
+      "usePath": {
+        "kind": "raidRole",
+        "roleId": "rifle-patrol"
+      },
+      "recipe": [
+        {
+          "kind": "template",
+          "templateId": "68bb6be346d4437fb40002e0",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "68bc3cd17208c642f409974f",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        }
+      ]
+    },
+    {
+      "lotId": "field-armorer-kit",
+      "displayName": "Field Armorer Kit",
+      "purpose": "An assorted armorer supply box of grips, iron sights and mounts for several compatible weapon platforms; not a complete weapon.",
+      "familyId": "attachments",
+      "trackId": "eco-field-cache",
+      "anchorTemplateId": "68bb6be346d4437fb40002e0",
+      "weight": 1.0,
+      "usePath": {
+        "kind": "raidRole",
+        "roleId": "rifle-patrol"
+      },
+      "recipe": [
+        {
+          "kind": "template",
+          "templateId": "68bb6be346d4437fb40002e0",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "68bc3cd17208c642f409974f",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "68c48eb7c91390fb930e8d94",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "6912857dfb534981300b1d8f",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "68b4b24e27658b8b0d024399",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "68b4b24e27658b8b0d02439a",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        }
+      ]
+    }
+  ]
+}

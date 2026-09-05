@@ -1,0 +1,12 @@
+* text=auto
+*.cs text eol=lf
+*.csproj text eol=lf
+*.props text eol=lf
+*.sln text eol=crlf
+*.ps1 text eol=lf
+*.md text eol=lf
+*.json text eol=lf
+*.jsonc text eol=lf
+*.prefab text eol=lf
+*.mat text eol=lf
+*.meta text eol=lf

@@ -1,0 +1,61 @@
+{
+  "schemaVersion": 1,
+  "providerId": "isb-aishi.field-armory",
+  "packVersion": "1.0.0",
+  "displayLabel": "ISB Aishi Field Armory",
+  "providerWeight": 0.18,
+  "requiredTemplateIds": [
+    "699aae8c9b6a4ab2b769c4a3",
+    "699aad8c961ebda759f9e7fe",
+    "699aab526ac4f65528f1fd63",
+    "699aab2519b875a27d6ec5d3",
+    "6a1267fd0580910d4ffbdec0",
+    "6a12643e06424c709d450e7c"
+  ],
+  "requiredPresetIds": [],
+  "requiredBundleKeys": [],
+  "lots": [
+    {
+      "lotId": "sidearm-resupply",
+      "displayName": "Sidearm Resupply",
+      "purpose": "Two 9x19mm RIP AP ammo packs and a loose stack for topping off a sidearm.",
+      "familyId": "field-supply",
+      "trackId": "isb-field-armory",
+      "anchorTemplateId": "699aae8c9b6a4ab2b769c4a3",
+      "weight": 1.0,
+      "usePath": { "kind": "raidRole", "roleId": "close-quarters" },
+      "recipe": [
+        { "kind": "template", "templateId": "699aad8c961ebda759f9e7fe", "instanceCount": 2, "stackCountPerInstance": 1 },
+        { "kind": "template", "templateId": "699aae8c9b6a4ab2b769c4a3", "instanceCount": 1, "stackCountPerInstance": 20 }
+      ]
+    },
+    {
+      "lotId": "big-bore-resupply",
+      "displayName": "Big Bore Resupply",
+      "purpose": "A .45 ACP RIP AP ammo pack and a loose stack for a heavy-hitting sidearm.",
+      "familyId": "field-supply",
+      "trackId": "isb-field-armory",
+      "anchorTemplateId": "699aab526ac4f65528f1fd63",
+      "weight": 1.0,
+      "usePath": { "kind": "raidRole", "roleId": "close-quarters" },
+      "recipe": [
+        { "kind": "template", "templateId": "699aab2519b875a27d6ec5d3", "instanceCount": 1, "stackCountPerInstance": 1 },
+        { "kind": "template", "templateId": "699aab526ac4f65528f1fd63", "instanceCount": 1, "stackCountPerInstance": 50 }
+      ]
+    },
+    {
+      "lotId": "day-pack-loadout",
+      "displayName": "Day Pack Loadout",
+      "purpose": "A sling bag and an LBT-1476A 3-day pack for a quick resupply run.",
+      "familyId": "operator",
+      "trackId": "isb-field-armory",
+      "anchorTemplateId": "6a1267fd0580910d4ffbdec0",
+      "weight": 0.8,
+      "usePath": { "kind": "raidRole", "roleId": "quartermaster" },
+      "recipe": [
+        { "kind": "template", "templateId": "6a1267fd0580910d4ffbdec0", "instanceCount": 1, "stackCountPerInstance": 1 },
+        { "kind": "template", "templateId": "6a12643e06424c709d450e7c", "instanceCount": 1, "stackCountPerInstance": 1 }
+      ]
+    }
+  ]
+}

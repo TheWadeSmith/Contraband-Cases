@@ -1,0 +1,100 @@
+{
+  "schemaVersion": 1,
+  "providerId": "sjx.combat-chemistry",
+  "packVersion": "1.0.2",
+  "displayLabel": "SJX Combat Chemistry",
+  "providerWeight": 0.35,
+  "requiredTemplateIds": [
+    "68331b17cccc72d0db1f764b",
+    "68331d7a8f97a4202729e883",
+    "68331fef74231628e6e63f25",
+    "6833237c8ac71af4b28cbe84",
+    "6833259d5bbfac390bc044cf",
+    "68336a67ce152b72dc40abf6",
+    "68336b8fb68adf25e7314cc3",
+    "68336d5f2edc79e911bb9952",
+    "68336d708e51c90780988824",
+    "68336e67abd18e611ecbf182",
+    "68336ee3b0aaa5f9f2c08975",
+    "68337a2a20c7d7d769369919",
+    "68337b7aff2eb46775159b1e"
+  ],
+  "requiredPresetIds": [],
+  "requiredBundleKeys": [],
+  "lots": [
+    {
+      "lotId": "rapid-mobility",
+      "displayName": "Rapid Mobility",
+      "purpose": "Three complementary injectors for sprint endurance, emergency acceleration, and extraction.",
+      "familyId": "field-supply",
+      "trackId": "chemistry",
+      "anchorTemplateId": "68331b17cccc72d0db1f764b",
+      "weight": 1.0,
+      "usePath": { "kind": "raidRole", "roleId": "combat-chemistry" },
+      "recipe": [
+        { "kind": "template", "templateId": "68331b17cccc72d0db1f764b", "instanceCount": 1, "stackCountPerInstance": 1 },
+        { "kind": "template", "templateId": "68337a2a20c7d7d769369919", "instanceCount": 1, "stackCountPerInstance": 1 },
+        { "kind": "template", "templateId": "68337b7aff2eb46775159b1e", "instanceCount": 1, "stackCountPerInstance": 1 }
+      ]
+    },
+    {
+      "lotId": "precision-assault",
+      "displayName": "Precision Assault",
+      "purpose": "A three-injector package for precision, aggression, and short-term resilience.",
+      "familyId": "field-supply",
+      "trackId": "chemistry",
+      "anchorTemplateId": "68331d7a8f97a4202729e883",
+      "weight": 1.0,
+      "usePath": { "kind": "raidRole", "roleId": "combat-chemistry" },
+      "recipe": [
+        { "kind": "template", "templateId": "68331d7a8f97a4202729e883", "instanceCount": 1, "stackCountPerInstance": 1 },
+        { "kind": "template", "templateId": "68331fef74231628e6e63f25", "instanceCount": 1, "stackCountPerInstance": 1 },
+        { "kind": "template", "templateId": "6833237c8ac71af4b28cbe84", "instanceCount": 1, "stackCountPerInstance": 1 }
+      ]
+    },
+    {
+      "lotId": "covert-sustainment",
+      "displayName": "Covert Sustainment",
+      "purpose": "Stealth and emergency acceleration for a long infiltration.",
+      "familyId": "field-supply",
+      "trackId": "chemistry",
+      "anchorTemplateId": "6833259d5bbfac390bc044cf",
+      "weight": 0.9,
+      "usePath": { "kind": "raidRole", "roleId": "combat-chemistry" },
+      "recipe": [
+        { "kind": "template", "templateId": "6833259d5bbfac390bc044cf", "instanceCount": 1, "stackCountPerInstance": 1 },
+        { "kind": "template", "templateId": "68337b7aff2eb46775159b1e", "instanceCount": 1, "stackCountPerInstance": 1 }
+      ]
+    },
+    {
+      "lotId": "elite-recovery",
+      "displayName": "Elite Recovery",
+      "purpose": "Three two-use recovery injectors for stabilizing a squad through repeated fights.",
+      "familyId": "field-supply",
+      "trackId": "chemistry",
+      "anchorTemplateId": "68336d708e51c90780988824",
+      "weight": 0.7,
+      "usePath": { "kind": "raidRole", "roleId": "combat-chemistry" },
+      "recipe": [
+        { "kind": "template", "templateId": "68336d708e51c90780988824", "instanceCount": 1, "stackCountPerInstance": 1 },
+        { "kind": "template", "templateId": "68336e67abd18e611ecbf182", "instanceCount": 1, "stackCountPerInstance": 1 },
+        { "kind": "template", "templateId": "68336ee3b0aaa5f9f2c08975", "instanceCount": 1, "stackCountPerInstance": 1 }
+      ]
+    },
+    {
+      "lotId": "heavy-extraction",
+      "displayName": "Heavy Extraction",
+      "purpose": "A high-end three-injector route for weight, endurance, and emergency adaptation.",
+      "familyId": "field-supply",
+      "trackId": "chemistry",
+      "anchorTemplateId": "68336b8fb68adf25e7314cc3",
+      "weight": 0.6,
+      "usePath": { "kind": "raidRole", "roleId": "combat-chemistry" },
+      "recipe": [
+        { "kind": "template", "templateId": "68336b8fb68adf25e7314cc3", "instanceCount": 1, "stackCountPerInstance": 1 },
+        { "kind": "template", "templateId": "68336d5f2edc79e911bb9952", "instanceCount": 1, "stackCountPerInstance": 1 },
+        { "kind": "template", "templateId": "68336a67ce152b72dc40abf6", "instanceCount": 1, "stackCountPerInstance": 1 }
+      ]
+    }
+  ]
+}

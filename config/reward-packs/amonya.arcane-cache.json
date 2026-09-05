@@ -1,0 +1,93 @@
+{
+  "schemaVersion": 1,
+  "providerId": "amonya.arcane-cache",
+  "packVersion": "1.0.0",
+  "displayLabel": "Amonya Arcane Cache",
+  "providerWeight": 0.05,
+  "requiredTemplateIds": [
+    "69359d725bbf2f0c2027c59c",
+    "69359d725bbf2f0c2027c59f",
+    "69359d725bbf2f0c2027c5a0",
+    "69359d725bbf2f0c2027c5a2",
+    "6a248be769dd135bbcc78755"
+  ],
+  "requiredPresetIds": [],
+  "requiredBundleKeys": [],
+  "lots": [
+    {
+      "lotId": "arcane-ammunition-cache",
+      "displayName": "Arcane Ammunition Cache",
+      "purpose": "A loose stack of Arcane Rounds paired with Mystic Rounds for an occult loadout.",
+      "familyId": "exotic-ordnance",
+      "trackId": "amonya-arcane-cache",
+      "anchorTemplateId": "69359d725bbf2f0c2027c59c",
+      "weight": 1.0,
+      "usePath": {
+        "kind": "raidRole",
+        "roleId": "close-quarters"
+      },
+      "recipe": [
+        {
+          "kind": "template",
+          "templateId": "69359d725bbf2f0c2027c59c",
+          "instanceCount": 1,
+          "stackCountPerInstance": 20
+        },
+        {
+          "kind": "template",
+          "templateId": "69359d725bbf2f0c2027c59f",
+          "instanceCount": 1,
+          "stackCountPerInstance": 20
+        }
+      ]
+    },
+    {
+      "lotId": "satchel-of-holding",
+      "displayName": "Satchel of Holding",
+      "purpose": "A Satchel Sized Mag of Holding for stowing extra ordnance in the field.",
+      "familyId": "operator",
+      "trackId": "amonya-arcane-cache",
+      "anchorTemplateId": "69359d725bbf2f0c2027c5a0",
+      "weight": 1.0,
+      "usePath": {
+        "kind": "raidRole",
+        "roleId": "quartermaster"
+      },
+      "recipe": [
+        {
+          "kind": "template",
+          "templateId": "69359d725bbf2f0c2027c5a0",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        }
+      ]
+    },
+    {
+      "lotId": "eldritch-ordinance",
+      "displayName": "Eldritch Ordinance",
+      "purpose": "Eldritch Rounds bundled with Cluster Bomb Fragments for a chaotic finishing blow.",
+      "familyId": "exotic-ordnance",
+      "trackId": "amonya-arcane-cache",
+      "anchorTemplateId": "69359d725bbf2f0c2027c5a2",
+      "weight": 0.8,
+      "usePath": {
+        "kind": "raidRole",
+        "roleId": "breaching-ordnance"
+      },
+      "recipe": [
+        {
+          "kind": "template",
+          "templateId": "69359d725bbf2f0c2027c5a2",
+          "instanceCount": 1,
+          "stackCountPerInstance": 20
+        },
+        {
+          "kind": "template",
+          "templateId": "6a248be769dd135bbcc78755",
+          "instanceCount": 1,
+          "stackCountPerInstance": 5
+        }
+      ]
+    }
+  ]
+}

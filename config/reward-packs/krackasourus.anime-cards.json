@@ -1,0 +1,237 @@
+{
+  "schemaVersion": 1,
+  "providerId": "krackasourus.anime-cards",
+  "packVersion": "1.5.2",
+  "displayLabel": "Krackasourus Anime Cards",
+  "providerWeight": 0.12,
+  "requiredTemplateIds": [
+    "6699b7fd0d1d25cf00072bf6",
+    "6699b7fd0d1d25cf00072bf8",
+    "6699b7fd0d1d25cf00072bf9",
+    "6699b7fd0d1d25cf00072bfa",
+    "6699b7fd0d1d25cf00072bfb",
+    "6699b7fd0d1d25cf00072bfc",
+    "6699b7fd0d1d25cf00072bfd",
+    "6699b7fd0d1d25cf00072bfe",
+    "6699b7fd0d1d25cf00072bff",
+    "6699b7fd0d1d25cf00072c01",
+    "6699b7fd0d1d25cf00072c02",
+    "6699b7fd0d1d25cf00072c49"
+  ],
+  "requiredPresetIds": [],
+  "requiredBundleKeys": [],
+  "lots": [
+    {
+      "lotId": "crystal-showcase",
+      "displayName": "Crystal Showcase",
+      "purpose": "A collectible Crystal card ready for the anime binder.",
+      "familyId": "field-supply",
+      "trackId": "anime-cards",
+      "anchorTemplateId": "6699b7fd0d1d25cf00072c01",
+      "weight": 1.0,
+      "usePath": {
+        "kind": "collection",
+        "containerTemplateId": "6699b7fd0d1d25cf00072c49",
+        "collectionId": "anime-cards"
+      },
+      "recipe": [
+        {
+          "kind": "template",
+          "templateId": "6699b7fd0d1d25cf00072c01",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        }
+      ]
+    },
+    {
+      "lotId": "angel-showcase",
+      "displayName": "Angel Showcase",
+      "purpose": "A collectible Angel card ready for the anime binder.",
+      "familyId": "field-supply",
+      "trackId": "anime-cards",
+      "anchorTemplateId": "6699b7fd0d1d25cf00072c02",
+      "weight": 1.0,
+      "usePath": {
+        "kind": "collection",
+        "containerTemplateId": "6699b7fd0d1d25cf00072c49",
+        "collectionId": "anime-cards"
+      },
+      "recipe": [
+        {
+          "kind": "template",
+          "templateId": "6699b7fd0d1d25cf00072c02",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        }
+      ]
+    },
+    {
+      "lotId": "nivea-rachel-duo",
+      "displayName": "Nivea and Rachel Duo",
+      "purpose": "A coordinated two-card binder drop featuring Nivea and Rachel.",
+      "familyId": "field-supply",
+      "trackId": "anime-cards",
+      "anchorTemplateId": "6699b7fd0d1d25cf00072bfc",
+      "weight": 0.75,
+      "usePath": {
+        "kind": "collection",
+        "containerTemplateId": "6699b7fd0d1d25cf00072c49",
+        "collectionId": "anime-cards"
+      },
+      "recipe": [
+        {
+          "kind": "template",
+          "templateId": "6699b7fd0d1d25cf00072bfc",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "6699b7fd0d1d25cf00072bfb",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        }
+      ]
+    },
+    {
+      "lotId": "vanity-gigi-duo",
+      "displayName": "Vanity and Gigi Duo",
+      "purpose": "A coordinated two-card binder drop featuring Vanity and Gigi.",
+      "familyId": "field-supply",
+      "trackId": "anime-cards",
+      "anchorTemplateId": "6699b7fd0d1d25cf00072bf9",
+      "weight": 0.75,
+      "usePath": {
+        "kind": "collection",
+        "containerTemplateId": "6699b7fd0d1d25cf00072c49",
+        "collectionId": "anime-cards"
+      },
+      "recipe": [
+        {
+          "kind": "template",
+          "templateId": "6699b7fd0d1d25cf00072bf9",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "6699b7fd0d1d25cf00072bfe",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        }
+      ]
+    },
+    {
+      "lotId": "crystal-vanity-angel-set",
+      "displayName": "Crystal, Vanity, and Angel Set",
+      "purpose": "A three-card showcase set built for a high-value anime binder page.",
+      "familyId": "field-supply",
+      "trackId": "anime-cards",
+      "anchorTemplateId": "6699b7fd0d1d25cf00072c01",
+      "weight": 0.45,
+      "usePath": {
+        "kind": "collection",
+        "containerTemplateId": "6699b7fd0d1d25cf00072c49",
+        "collectionId": "anime-cards"
+      },
+      "recipe": [
+        {
+          "kind": "template",
+          "templateId": "6699b7fd0d1d25cf00072c01",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "6699b7fd0d1d25cf00072bf9",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "6699b7fd0d1d25cf00072c02",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        }
+      ]
+    },
+    {
+      "lotId": "eleanor-tricia-lucia-set",
+      "displayName": "Eleanor, Tricia, and Lucia Set",
+      "purpose": "A curated three-card character set for an advanced anime collection.",
+      "familyId": "field-supply",
+      "trackId": "anime-cards",
+      "anchorTemplateId": "6699b7fd0d1d25cf00072bff",
+      "weight": 0.45,
+      "usePath": {
+        "kind": "collection",
+        "containerTemplateId": "6699b7fd0d1d25cf00072c49",
+        "collectionId": "anime-cards"
+      },
+      "recipe": [
+        {
+          "kind": "template",
+          "templateId": "6699b7fd0d1d25cf00072bff",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "6699b7fd0d1d25cf00072bfa",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "6699b7fd0d1d25cf00072bfd",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        }
+      ]
+    },
+    {
+      "lotId": "mai-ultimate",
+      "displayName": "Mai Ultimate",
+      "purpose": "A top-tier Mai collectible intended as a terminal anime-card prize.",
+      "familyId": "field-supply",
+      "trackId": "anime-cards",
+      "anchorTemplateId": "6699b7fd0d1d25cf00072bf6",
+      "weight": 0.15,
+      "usePath": {
+        "kind": "collection",
+        "containerTemplateId": "6699b7fd0d1d25cf00072c49",
+        "collectionId": "anime-cards"
+      },
+      "recipe": [
+        {
+          "kind": "template",
+          "templateId": "6699b7fd0d1d25cf00072bf6",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        }
+      ]
+    },
+    {
+      "lotId": "erica-ultimate",
+      "displayName": "Erica Ultimate",
+      "purpose": "A top-tier Erica collectible intended as a terminal anime-card prize.",
+      "familyId": "field-supply",
+      "trackId": "anime-cards",
+      "anchorTemplateId": "6699b7fd0d1d25cf00072bf8",
+      "weight": 0.15,
+      "usePath": {
+        "kind": "collection",
+        "containerTemplateId": "6699b7fd0d1d25cf00072c49",
+        "collectionId": "anime-cards"
+      },
+      "recipe": [
+        {
+          "kind": "template",
+          "templateId": "6699b7fd0d1d25cf00072bf8",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        }
+      ]
+    }
+  ]
+}

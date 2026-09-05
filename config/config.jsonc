@@ -1,0 +1,13 @@
+{
+  "caseStock": 5,
+  "animationDurationSeconds": 6.5,
+  "reducedMotionDefault": false,
+  "debugLogging": false,
+  "testingInventoryGrantsEnabled": false,
+  "fixedCasePrice": null,
+  "therapistSellPriceCase": null,
+  // Added pool weight, NOT chance per container or raid. Playtest target:
+  // about one retained key per 1.5-2 normal looting raids including zero-key raids.
+  // Keep this initial weight until real samples establish PMC/scav cadence.
+  "keyLootWeightPercent": 2.0
+}
