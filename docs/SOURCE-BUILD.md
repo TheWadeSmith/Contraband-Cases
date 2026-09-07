@@ -1,6 +1,7 @@
 # Source build and publication scope
 
-This repository contains the **0.4.7 source** for SPT 4.1.3.
+This repository contains the **0.4.10 source**, built against compatible SPT
+4.1.3 server SDK packages and offline-validated with SPT 4.1.5 game data.
 It is not an installable mod archive or a standalone Unity game project.
 
 ## Included
@@ -17,7 +18,7 @@ game assemblies, SDK components, artwork or trademarks.
 
 ## Build and test the code
 
-Use Windows, the .NET 10 SDK and your own compatible SPT 4.1.3 installation
+Use Windows, the .NET 10 SDK and your own compatible SPT 4.1.5 installation
 with BepInEx and SPT's ConfigurationManager plugin. Dependencies declared in
 the project files restore from NuGet. The test project uses the same configurable
 game/BepInEx paths as the client, including the installed native MCM assembly.
@@ -67,23 +68,20 @@ directory contains defaults, not a copy of a live profile's configuration.
 
 ## Verification status
 
-The complete development workspace passed **1,509 automated tests**, a clean
-Release build and candidate/canonical package validation for 0.4.7. The curated
-public-source checkout was independently restored, built and tested against
-compatible installed SPT 4.1.3 assemblies: **1,509 passed, zero failures or skips**.
+The complete development workspace passed **1,554 automated tests**, a clean
+Release build, native cargo/cash audits and candidate/canonical package validation
+for 0.4.10. Coverage includes original paid-reward identities, generation-separated
+Relay, actual shipment quantities and full-stash/quote-change cash claim retries.
+The curated public-source checkout was separately restored, built and tested
+against installed game assemblies: **1,554 passed, zero failed or skipped**.
+Client parsers accept the full native cargo library and captured mod-value odds.
 No game assemblies or build outputs are included in this source repository.
 
-The matching 0.4.7 local install verified all 28 package files while preserving
-live settings. The installed server reached its ready state, resolved 109 lots
-for the local mod set and registered crate-only case loot on 13 maps. Four
-incompatible optional reward packs were safely skipped; their presence is not
-required for the core mod.
-
-The Unity 2022.3.43f1 case/key bundles are unchanged from 0.4.5. Sound and model
-orientation were confirmed in-game on the preceding installed build, with no
-further crashes reported. The original reported shutdown has not been
-conclusively diagnosed, and the new F5/MCM/recovery UI changes still need live
-player acceptance. Automated/server checks are not a crash-free guarantee.
+The Unity 2022.3.43f1 case/key bundles are unchanged. Sound and model orientation
+were confirmed in-game on a preceding installed build. This rebalance still needs
+in-game acceptance; offline projections do not execute optional-mod hooks or prove
+live inventory placement. Existing optional-pack incompatibilities are not fixed
+by the economy update. Automated checks are not a crash-free guarantee.
 
 The install ZIP and checksum are published separately as GitHub release assets.
 Use the install ZIP, not GitHub's automatically generated source archive, to

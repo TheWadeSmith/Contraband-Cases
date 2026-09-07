@@ -221,7 +221,7 @@ public static class ManifestPresentationPolicy
         if (odds.CaseTemplateId == CaseContracts.CashCache)
             return $"<b>BR-12 CASH CACHE</b>\nPublished case price: ₽{odds.CasePrice?.ToString("N0", CultureInfo.InvariantCulture)} + 1 universal key.\n\n" +
                 "One spin, one committed payout. No discard, Relay or Favor.\n" +
-                "Payouts may be worth less than your case and key. USD/EUR estimates describe purchase value, not a rouble cash-out. Bitcoin estimates use standard Therapist pricing.\n\n" +
+                "Payouts may be worth less than your case and key. USD/EUR estimates describe purchase value; GP estimates describe barter reference value, not a rouble cash-out. Bitcoin estimates use standard Therapist pricing.\n\n" +
                 "Open Full Odds for every exact amount and chance. No result is drawn until you confirm.";
 
         var builder = new StringBuilder();

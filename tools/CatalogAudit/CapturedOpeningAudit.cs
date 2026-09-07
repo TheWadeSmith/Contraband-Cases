@@ -61,7 +61,7 @@ internal static class CapturedOpeningAudit
             var value = Value(definition);
             return new ResolvedCargoLot(definition, forest, fingerprint,
                 CargoLotIdentitySnapshot.Capture(definition, fingerprint),
-                new CargoLotEvaluation(value.Handbook, value.Use, 1, CargoGradeBands.Assign(value.Use)));
+                new CargoLotEvaluation(value.Handbook, value.Use, 1, ShipmentEconomy.Grade(definition.LotId, value.Use)));
         }).ToArray();
         var providers = lots.Select(l => l.Identity.ProviderId).ToHashSet(StringComparer.Ordinal);
         var snapshot = new CargoCatalogSnapshot(new string('c', 64), lots, [],

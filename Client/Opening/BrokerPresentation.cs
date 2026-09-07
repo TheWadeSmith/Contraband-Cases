@@ -18,7 +18,7 @@ internal static class BrokerPresentation
         CaseContracts.Operations => "Raid supplies • Equipment • Loadouts",
         CaseContracts.Relics => "Collectible cards • Relics • Curios",
         CaseContracts.BlackSite => "Night operations • Ordnance • Specialist gear",
-        CaseContracts.CashCache => "Roubles • Dollars • Euros • Physical Bitcoin",
+        CaseContracts.CashCache => "Roubles • Dollars • Euros • GP Coins • Bitcoin",
         _ => "Mixed cargo • All available reward packs"
     };
 

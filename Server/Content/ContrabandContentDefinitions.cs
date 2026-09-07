@@ -99,6 +99,7 @@ public static class ContrabandContentDefinitions
     {
         var properties = CommonProperties(CaseContracts.Name(template), CaseContracts.ShortName(template),
             DescribeCase(template), ModConstants.CaseBundleKey, price, 3, 2);
+        properties.Weight = 5d; // Do not inherit the native airdrop container's 15 kg.
         if (template != ModConstants.CaseTemplateId)
             properties.BackgroundColor = template switch
             {

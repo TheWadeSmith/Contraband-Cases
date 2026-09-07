@@ -95,6 +95,267 @@
           "stackCountPerInstance": 1
         }
       ]
+    },
+    {
+      "lotId": "chest-rig-loadout.shipment-v1",
+      "displayName": "Chest Rig Loadout Shipment",
+      "purpose": "6 complete Chest Rig Loadout packages. An LBT-1961A Load Bearing Chest Rig and a Stich Profi Chest Rig MK2 for fast-access carry.",
+      "familyId": "operator",
+      "trackId": "wtt-field-resupply",
+      "anchorTemplateId": "69cfc2d7a9102bdca0080070",
+      "weight": 1.0,
+      "usePath": {
+        "kind": "raidRole",
+        "roleId": "quartermaster"
+      },
+      "recipe": [
+        {
+          "kind": "template",
+          "templateId": "69cfc2d7a9102bdca0080070",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "69cfbf627eaa38bd240704ad",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "69cfc2d7a9102bdca0080070",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "69cfbf627eaa38bd240704ad",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "69cfc2d7a9102bdca0080070",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "69cfbf627eaa38bd240704ad",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "69cfc2d7a9102bdca0080070",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "69cfbf627eaa38bd240704ad",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "69cfc2d7a9102bdca0080070",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "69cfbf627eaa38bd240704ad",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "69cfc2d7a9102bdca0080070",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "69cfbf627eaa38bd240704ad",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        }
+      ]
+    },
+    {
+      "lotId": "field-medical-kit.shipment-v1",
+      "displayName": "Field Medical Kit Shipment",
+      "purpose": "6 complete Field Medical Kit packages. An Aceso Xpress biochemical analyzer paired with Nooby Shield potassium iodide tablets for field triage.",
+      "familyId": "field-supply",
+      "trackId": "wtt-field-resupply",
+      "anchorTemplateId": "69bb435ff609db77390b0e25",
+      "weight": 1.0,
+      "usePath": {
+        "kind": "raidRole",
+        "roleId": "field-medic"
+      },
+      "recipe": [
+        {
+          "kind": "template",
+          "templateId": "69bb435ff609db77390b0e25",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "69bb43df99f3fda8f1072483",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "69bb435ff609db77390b0e25",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "69bb43df99f3fda8f1072483",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "69bb435ff609db77390b0e25",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "69bb43df99f3fda8f1072483",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "69bb435ff609db77390b0e25",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "69bb43df99f3fda8f1072483",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "69bb435ff609db77390b0e25",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "69bb43df99f3fda8f1072483",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "69bb435ff609db77390b0e25",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "69bb43df99f3fda8f1072483",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        }
+      ]
+    },
+    {
+      "lotId": "recon-facegear.shipment-v1",
+      "displayName": "Recon Facegear Shipment",
+      "purpose": "6 complete Recon Facegear packages. A Galvion Caiman Hybrid Ballistic Mandible Guard and matching applique plate for scout-role face protection.",
+      "familyId": "operator",
+      "trackId": "wtt-field-resupply",
+      "anchorTemplateId": "693be056fd3a5c751e00de04",
+      "weight": 0.8,
+      "usePath": {
+        "kind": "raidRole",
+        "roleId": "recon"
+      },
+      "recipe": [
+        {
+          "kind": "template",
+          "templateId": "693be056fd3a5c751e00de04",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "693be0ee50fafa102607aebd",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "693be056fd3a5c751e00de04",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "693be0ee50fafa102607aebd",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "693be056fd3a5c751e00de04",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "693be0ee50fafa102607aebd",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "693be056fd3a5c751e00de04",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "693be0ee50fafa102607aebd",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "693be056fd3a5c751e00de04",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "693be0ee50fafa102607aebd",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "693be056fd3a5c751e00de04",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "693be0ee50fafa102607aebd",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        }
+      ]
     }
   ]
 }

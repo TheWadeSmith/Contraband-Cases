@@ -38,8 +38,13 @@ internal static class CashCurrencyQuotes
             !double.IsFinite(bitcoinBase) || bitcoinBase <= 0 || bitcoinBase > 100_000_000)
             throw new CargoCatalogValidationException("Bitcoin standard trader valuation is unavailable.");
         var bitcoinSale = decimal.Floor((decimal)bitcoinBase * (100m - (decimal)coefficient.Value) / 100m);
+        // GP is barter currency. Do not invent a Therapist cash-out or use a
+        // dynamic flea quote for its stable, explicitly labelled reference value.
+        if (!handbookPrices.TryGetValue(CashPayouts.GpCoin, out var gpReference) ||
+            !double.IsFinite(gpReference) || gpReference <= 0 || gpReference > 100_000_000)
+            throw new CargoCatalogValidationException("GP Coin handbook barter valuation is unavailable.");
         return CashPayoutCatalog.Build(Find, PurchaseRate(traders, CashPayouts.Dollars),
-            PurchaseRate(traders, CashPayouts.Euros), bitcoinSale);
+            PurchaseRate(traders, CashPayouts.Euros), bitcoinSale, (decimal)gpReference);
     }
 
     private static decimal PurchaseRate(TradersTable traders, string currency)

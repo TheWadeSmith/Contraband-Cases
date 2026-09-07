@@ -1,6 +1,36 @@
 # Contraband Cases
 
-Contraband Cases **0.4.7** is a client-and-server mod for **SPT 4.1.3**.
+Contraband Cases **0.4.10** is a client-and-server mod for **SPT 4.1.x**,
+built and offline-validated against **SPT 4.1.5**. Builds retain the compatible
+4.1.3 server SDK. Complete in-game acceptance of this rebalance is still pending.
+
+0.4.10 rebalances new openings around **one million roubles** using real larger
+shipments, not inflated native item prices. Cargo packages contain 2–6 complete
+original packages; collectible/relic shipments contain 8. Contents/quantities
+are listed before collection. Shipment rarity bands rise with the stakes, while
+rare premium openings and chase caps remain in place. Cash Cache has larger
+currency payouts, including **4 Bitcoins at 0.90%** and **10 at 0.10%**.
+All original paid packages/payouts retain their exact contents and grades;
+old and new cargo Relay generations cannot cross. Keys remain find-only and
+universal; drop rates, 5 kg case weights, Unity models and sounds are unchanged.
+Download the installable `ContrabandCases-0.4.10-SPT4.1.5.zip` and its matching
+SHA256 manifest from this repository's GitHub Releases page. GitHub's automatic
+"Source code" archives are not installable mod packages. Updating requires both
+client and server files; see **Install and build** below.
+
+### Earlier releases
+
+0.4.9 sets **all five case types to 5 kg each**, replacing the 15 kg inherited
+from the native airdrop container. Existing cases use the same templates, so no
+inventory migration is needed; restart the server and game after updating.
+Keys, reward contents, prices, drop rates, and Unity models/sounds are unchanged.
+
+0.4.8 adds **10 GP Coins at 3%** and **25 GP Coins at 1%** to Cash Cache.
+Bitcoin rewards stay at 1 coin (0.90%) and 2 coins (0.10%). The two GP entries
+take probability from existing rouble outcomes, not from Bitcoin. GP values are
+labelled handbook barter references, not guaranteed rouble cash-outs. Existing
+paid payouts remain collectible. Case/key drop rates, cargo rewards, Relay,
+Favor and Unity models/sounds are unchanged.
 
 0.4.7 hides the Broker menu button by default: press **F5** in the main menu
 or stash to open it. Rebind this shortcut in MCM; the optional button is under
@@ -39,7 +69,7 @@ your chosen package or risk it on Relay. The roulette presents an already
 saved server result; it never chooses loot. Only in-game items and roubles
 are involved. There are no real-money purchases.
 
-The new **Cash Cache** is a separate one-payout contract: RUB, USD, EUR or
+The new **Cash Cache** is a separate one-payout contract: RUB, USD, EUR, GP Coins or
 physical Bitcoin. It uses the same universal key and roulette, with no
 discard decision, Relay attempt or Broker Favor change.
 
@@ -86,7 +116,7 @@ each Relay attempt. There are no case-specific keys.
 | Operations | Practical ammunition, medical supplies, field equipment and loadouts | Green |
 | Relics | Anime, Pokemon and Yu-Gi-Oh cards, historical relics and arcane curios | Violet |
 | Black Site | Elite equipment, night operations, ordnance and experimental supplies | Red |
-| Cash Cache | One exact stack payout of RUB, USD, EUR or physical Bitcoin | Yellow |
+| Cash Cache | One exact stack payout of RUB, USD, EUR, GP Coins or physical Bitcoin | Yellow |
 
 Cases are separate physical items sold by Mechanic, with distinct names,
 descriptions, loot tables, published odds and prices. They reuse the same 3D
@@ -133,9 +163,10 @@ Extreme chase packages retain their combined 1-in-400 cap per premium draw.
 Packages are drawn without replacement, recalculating weights after each draw.
 Full odds publish both tier rates and complete first-draw premium probabilities.
 
-With the captured installed-mod catalog, base prices remain Mixed **157,000**,
-Operations **167,000**, Relics **106,000**, Black Site **180,000** RUB; Cash Cache's
-previous baseline is **128,000**. Live prices depend on resolved content/config.
+The captured installed-mod value projection gives Mixed **1,043,000**,
+Operations **1,098,000**, Relics **1,023,000**, Black Site **1,204,000** RUB.
+The base-database Cash Cache audit gives **1,018,000** RUB. These are estimates,
+not forced prices or live mod-hook validation; final values depend on content/config.
 All case templates are accepted by Therapist by default. Native resale is
 approximately 63% of the finalized handbook value before other modifiers;
 the existing explicit `therapistSellPriceCase` override remains Mixed-only.
@@ -148,46 +179,52 @@ The server commits one payout before the roulette begins. **Collect Payout**
 grants that exact amount without another key. A full stash leaves the original
 payout saved for retry. Closing, skipping or reconnecting cannot reroll it.
 
-The versioned `cash-v1` table is fixed and does not use cargo chase reweighting:
+The `cash-opening-v3-million` draw table is fixed and does not use cargo chase
+reweighting. Existing `cash-v1` payout identities are retained for paid claims;
+new `.shipment-v1` identities use these amounts with the same published chances:
 
 | Payout | Chance per opening |
 | --- | ---: |
-| ₽25,000 | 15% |
-| ₽60,000 | 16% |
-| ₽100,000 | 10% |
-| ₽150,000 | 17% |
-| ₽175,000 | 10% |
-| ₽220,000 | 10% |
-| ₽300,000 | 3% |
-| US $1,000 | 7% |
-| US $1,500 | 6% |
-| €1,000 | 4% |
-| €2,000 | 1% |
-| 1 physical Bitcoin | 0.90% |
-| 2 physical Bitcoins | 0.10% |
+| ₽200,000 | 15% |
+| ₽480,000 | 13% |
+| ₽800,000 | 10% |
+| ₽1,050,000 | 17% |
+| ₽1,400,000 | 9% |
+| ₽1,760,000 | 10% |
+| ₽2,400,000 | 3% |
+| US $8,000 | 7% |
+| US $12,000 | 6% |
+| €8,000 | 4% |
+| €16,000 | 1% |
+| 80 GP Coins | 3% |
+| 200 GP Coins | 1% |
+| 4 physical Bitcoins | 0.90% |
+| 10 physical Bitcoins | 0.10% |
 
 Bitcoins are ordinary in-game items, not a real wallet, cryptocurrency exchange
-or fractional crypto balance. Two Bitcoins are separate items when native stack
-rules require it. No other crypto or arbitrary modded currency is admitted.
+or fractional crypto balance. Bitcoins are separate items when native stack
+rules require it. GP Coins are Tarkov barter currency, not cryptocurrency.
+Their payouts follow native stack limits; no arbitrary modded currency is admitted.
 
 Price is the weighted mean of **non-Bitcoin payouts**, rounded up to ₽1,000.
-USD/EUR use published direct rouble purchase offers; Bitcoin uses an estimated
+USD/EUR use published direct rouble purchase offers; GP Coins use their finalized
+handbook barter reference value, not a promised trader cash-out. Bitcoin uses an estimated
 standard LL1 Therapist sale value from the finalized handbook and buy rules.
 Foreign-currency purchase value is **not** guaranteed rouble liquidation value;
 player-specific sale modifiers are not simulated. Price and amounts remain
 fixed for that catalog session. Cash ignores the Mixed case fixed-price override.
 
-The base-database audit gives **₽130,000 + one key** and an expected reference
-payout of about **₽138,599**, not expected cash-sale proceeds. Defining near-even
+The SPT 4.1.5 base-database audit gives **₽1,018,000 + one key** and an expected reference
+payout of about **₽1,049,676**, not expected cash-sale proceeds. Defining near-even
 as within 10% of case plus assumed key cost:
 
 | Assumed key cost | Meaningful loss | Near-even | Win |
 | --- | ---: | ---: | ---: |
-| Found key, ₽0 financial cost | 41% | 7% | 52% |
-| ₽25,000 opportunity cost | 48% | 21% | 31% |
-| ₽65,000 opportunity cost | 79% | 6% | 15% |
+| Found key, ₽0 financial cost | 41% | 24% | 35% |
+| ₽25,000 opportunity cost | 41% | 24% | 35% |
+| ₽65,000 opportunity cost | 41% | 24% | 35% |
 
-These are candidate estimates, not installed-mod or raid-cadence validation.
+These are offline estimates, not installed-mod or raid-cadence validation.
 A found key still has time and opportunity cost. Key scarcity can make this a
 poor-value opening even when its sticker price looks fair. There is no loss
 quota, personalized probability, forced win or disguised reward substitution.
@@ -228,18 +265,20 @@ Favor to zero. It still costs a key. Favor persists between cases.
 Claim and Forfeit do not change it. Older physical-weapon Relay saves retain
 their historical stage-depth recovery rule.
 
-Cargo rarity is derived from the complete package's reference value, not authored
-as a reward-pack override:
+Shipment cargo rarity is derived from the complete package's reference value,
+not authored as a reward-pack override:
 
 | Rarity | Reference-value band |
 | --- | ---: |
-| Common | below ₽40,000 |
-| Uncommon | ₽40,000–74,999 |
-| Rare | ₽75,000–149,999 |
-| Epic | ₽150,000–299,999 |
-| Legendary | ₽300,000 and above |
+| Common | below ₽240,000 |
+| Uncommon | ₽240,000–449,999 |
+| Rare | ₽450,000–899,999 |
+| Epic | ₽900,000–1,799,999 |
+| Legendary | ₽1,800,000 and above |
 
 These are item reference values, **not cash payouts or trader resale quotes**.
+Historical non-shipment lots retain their original 40k/75k/150k/300k boundaries
+so existing claims and frozen Relay candidates remain valid.
 
 ## Odds, clues and presentation
 
@@ -323,11 +362,11 @@ instance counts after normal PMC raid settlement. Carried keys and duplicate
 end events are excluded; scav/transit runs and mail/BTR deliveries are not
 counted. Testing-grant enablement is labeled. This logging never adjusts loot.
 
-### Gameplay balance candidate
+### Gameplay balance
 
 The captured-mod projection (not live sale quotes) currently gives automatic
-prices of **Mixed ₽157,000; Operations ₽167,000; Relics ₽106,000; Black Site
-₽180,000**. These move with the resolved catalog; the proposed starting prices
+prices of **Mixed ₽1,043,000; Operations ₽1,098,000; Relics ₽1,023,000; Black Site
+₽1,204,000**. These move with the resolved catalog; the projected starting prices
 are not forced overrides. The report compares optimal reference-value play,
 keeping the first offer, and keeping the first offer worth case price + ₽25,000.
 Taking the first offer has a substantially lower average return; three offers
@@ -347,9 +386,10 @@ actual usability and trader sale quotes remain part of in-game acceptance.
 
 ### Rare chase rewards
 
-Opening-only chases include Black Site Marksman, Erica Ultimate, Dragonite
+Opening-only chases include Black Site Marksman, Black Site Expedition Jackpot, Erica Ultimate, Dragonite
 Holo, Tri-Horned Dragon, Vault Twin Rifles and Precision Assault. Packages
-worth at least ₽750,000 reference value also join that pool, protecting against
+worth at least ₽4,500,000 reference value also join that pool (₽750,000 for
+historical non-shipment lots), protecting against
 modded price outliers such as Condor Loadout and Field Medical Kit.
 
 Together they receive **at most 0.25% of each selected group's package odds**
@@ -381,12 +421,14 @@ report is required to evaluate that catalog.
 
 ## Included integrations
 
-All **17 packs / 122 authored lots** ship together. Unavailable optional packs
-are skipped with a reason instead of generating invalid rewards.
+All **17 packs** ship together, with **117 current shipment lots** and **122
+historical definitions** retained for recovery (239 total cargo definitions).
+Cash Cache's 15 current and 15 historical payouts are separate. Unavailable
+optional packs are skipped with a reason instead of generating invalid rewards;
+your active catalog may therefore be smaller.
 
-- Required Core: 50 lots, including 32 progression-support packages and six
-  gameplay-balance caches.
-- Vanilla Vault: 3 high-value lots.
+- Required Core: 50 current shipments plus 50 historical definitions.
+- Vanilla Vault: 3 current shipments plus 3 historical definitions.
 - Krackasourus Anime, Pokemon and Yu-Gi-Oh Cards: collection packages.
 - SJX Combat Chemistry and Vultify CoolerStims: injector packages.
 - ISB/Aishi: field and elite armory packs.
@@ -401,9 +443,10 @@ dependency, forest, resource-state and placement validation. Optional packs
 are not promises that every item is Relay-eligible at every installed price.
 The gallery and live report show what actually resolved.
 
-The original 12 core lot definitions and `core.json` pack version **0.3.3**
-remain unchanged. New lots are append-only. Old saved rarity ladders retain
-their original meanings.
+All 122 pre-rebalance cargo definitions, including all 50 core lots and
+`core.json` pack version **0.3.3**, remain unchanged. New lots are append-only.
+Old saved rarity ladders retain their original meanings, and old Relay rewards
+cannot upgrade into the new higher-stakes generation.
 
 ## MCM / configuration menu
 
@@ -506,6 +549,12 @@ SPT_Runtime/user/mods/Wade-ContrabandCases/
 Do not overwrite a customized live `config/config.jsonc` with defaults.
 Preserve custom reward packs too. Remove no other mods.
 
+When upgrading to 0.4.10, replace the shipped reward-pack JSON files as well as
+the DLLs: the new contents are authored in those files. Back up any edits to
+shipped packs and reapply them carefully; custom fixed-price settings still
+override automatic Mixed pricing. Already-paid openings retain their original
+rewards. Unopened cases use the new table when opened after the update.
+
 Source verification:
 
 ```powershell
@@ -524,7 +573,12 @@ itself is compiled against the installed game assemblies.
 
 ## Outstanding acceptance
 
-Before calling this candidate game-verified:
+Automated release checks: **1,554 tests passed**, clean Release build, native
+cargo/cash audits, client data-contract checks and package validation. These are
+not a crash-free guarantee or a substitute for gameplay testing. No GitHub CI
+workflow is configured; these checks were run locally.
+
+Before calling 0.4.10 fully game-verified:
 
 1. Start the matched client/server build and inspect fresh logs and the live
    resolved catalog report.
@@ -542,7 +596,7 @@ Before calling this candidate game-verified:
    Verify their finalized live prices, available pools and pre-spend odds, then
    check actual trader sale quotes for rewards (including legal disassembly),
    actual retained-key cadence and the effect of spending keys on Relay.
-6. Cash Cache: verify live price/odds, RUB/USD/EUR/Bitcoin previews and amounts,
+6. Cash Cache: verify live price/odds, RUB/USD/EUR/GP Coin/Bitcoin previews and amounts,
    one-key consumption, collection/full-stash retry, unchanged Favor, and
    reconnect recovery. Confirm spin ticks and landing sounds audibly, including
    after reopening the UI and at different interface/master/effects volumes.

@@ -232,6 +232,806 @@
           "stackCountPerInstance": 1
         }
       ]
+    },
+    {
+      "lotId": "crystal-showcase.shipment-v1",
+      "displayName": "Crystal Showcase Shipment",
+      "purpose": "8 complete Crystal Showcase packages. A collectible Crystal card ready for the anime binder.",
+      "familyId": "field-supply",
+      "trackId": "anime-cards",
+      "anchorTemplateId": "6699b7fd0d1d25cf00072c01",
+      "weight": 1.0,
+      "usePath": {
+        "kind": "collection",
+        "containerTemplateId": "6699b7fd0d1d25cf00072c49",
+        "collectionId": "anime-cards"
+      },
+      "recipe": [
+        {
+          "kind": "template",
+          "templateId": "6699b7fd0d1d25cf00072c01",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "6699b7fd0d1d25cf00072c01",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "6699b7fd0d1d25cf00072c01",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "6699b7fd0d1d25cf00072c01",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "6699b7fd0d1d25cf00072c01",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "6699b7fd0d1d25cf00072c01",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "6699b7fd0d1d25cf00072c01",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "6699b7fd0d1d25cf00072c01",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        }
+      ]
+    },
+    {
+      "lotId": "angel-showcase.shipment-v1",
+      "displayName": "Angel Showcase Shipment",
+      "purpose": "8 complete Angel Showcase packages. A collectible Angel card ready for the anime binder.",
+      "familyId": "field-supply",
+      "trackId": "anime-cards",
+      "anchorTemplateId": "6699b7fd0d1d25cf00072c02",
+      "weight": 1.0,
+      "usePath": {
+        "kind": "collection",
+        "containerTemplateId": "6699b7fd0d1d25cf00072c49",
+        "collectionId": "anime-cards"
+      },
+      "recipe": [
+        {
+          "kind": "template",
+          "templateId": "6699b7fd0d1d25cf00072c02",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "6699b7fd0d1d25cf00072c02",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "6699b7fd0d1d25cf00072c02",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "6699b7fd0d1d25cf00072c02",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "6699b7fd0d1d25cf00072c02",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "6699b7fd0d1d25cf00072c02",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "6699b7fd0d1d25cf00072c02",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "6699b7fd0d1d25cf00072c02",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        }
+      ]
+    },
+    {
+      "lotId": "nivea-rachel-duo.shipment-v1",
+      "displayName": "Nivea and Rachel Duo Shipment",
+      "purpose": "8 complete Nivea and Rachel Duo packages. A coordinated two-card binder drop featuring Nivea and Rachel.",
+      "familyId": "field-supply",
+      "trackId": "anime-cards",
+      "anchorTemplateId": "6699b7fd0d1d25cf00072bfc",
+      "weight": 0.75,
+      "usePath": {
+        "kind": "collection",
+        "containerTemplateId": "6699b7fd0d1d25cf00072c49",
+        "collectionId": "anime-cards"
+      },
+      "recipe": [
+        {
+          "kind": "template",
+          "templateId": "6699b7fd0d1d25cf00072bfc",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "6699b7fd0d1d25cf00072bfb",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "6699b7fd0d1d25cf00072bfc",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "6699b7fd0d1d25cf00072bfb",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "6699b7fd0d1d25cf00072bfc",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "6699b7fd0d1d25cf00072bfb",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "6699b7fd0d1d25cf00072bfc",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "6699b7fd0d1d25cf00072bfb",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "6699b7fd0d1d25cf00072bfc",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "6699b7fd0d1d25cf00072bfb",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "6699b7fd0d1d25cf00072bfc",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "6699b7fd0d1d25cf00072bfb",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "6699b7fd0d1d25cf00072bfc",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "6699b7fd0d1d25cf00072bfb",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "6699b7fd0d1d25cf00072bfc",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "6699b7fd0d1d25cf00072bfb",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        }
+      ]
+    },
+    {
+      "lotId": "vanity-gigi-duo.shipment-v1",
+      "displayName": "Vanity and Gigi Duo Shipment",
+      "purpose": "8 complete Vanity and Gigi Duo packages. A coordinated two-card binder drop featuring Vanity and Gigi.",
+      "familyId": "field-supply",
+      "trackId": "anime-cards",
+      "anchorTemplateId": "6699b7fd0d1d25cf00072bf9",
+      "weight": 0.75,
+      "usePath": {
+        "kind": "collection",
+        "containerTemplateId": "6699b7fd0d1d25cf00072c49",
+        "collectionId": "anime-cards"
+      },
+      "recipe": [
+        {
+          "kind": "template",
+          "templateId": "6699b7fd0d1d25cf00072bf9",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "6699b7fd0d1d25cf00072bfe",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "6699b7fd0d1d25cf00072bf9",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "6699b7fd0d1d25cf00072bfe",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "6699b7fd0d1d25cf00072bf9",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "6699b7fd0d1d25cf00072bfe",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "6699b7fd0d1d25cf00072bf9",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "6699b7fd0d1d25cf00072bfe",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "6699b7fd0d1d25cf00072bf9",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "6699b7fd0d1d25cf00072bfe",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "6699b7fd0d1d25cf00072bf9",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "6699b7fd0d1d25cf00072bfe",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "6699b7fd0d1d25cf00072bf9",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "6699b7fd0d1d25cf00072bfe",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "6699b7fd0d1d25cf00072bf9",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "6699b7fd0d1d25cf00072bfe",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        }
+      ]
+    },
+    {
+      "lotId": "crystal-vanity-angel-set.shipment-v1",
+      "displayName": "Crystal, Vanity, and Angel Set Shipment",
+      "purpose": "8 complete Crystal, Vanity, and Angel Set packages. A three-card showcase set built for a high-value anime binder page.",
+      "familyId": "field-supply",
+      "trackId": "anime-cards",
+      "anchorTemplateId": "6699b7fd0d1d25cf00072c01",
+      "weight": 0.45,
+      "usePath": {
+        "kind": "collection",
+        "containerTemplateId": "6699b7fd0d1d25cf00072c49",
+        "collectionId": "anime-cards"
+      },
+      "recipe": [
+        {
+          "kind": "template",
+          "templateId": "6699b7fd0d1d25cf00072c01",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "6699b7fd0d1d25cf00072bf9",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "6699b7fd0d1d25cf00072c02",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "6699b7fd0d1d25cf00072c01",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "6699b7fd0d1d25cf00072bf9",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "6699b7fd0d1d25cf00072c02",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "6699b7fd0d1d25cf00072c01",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "6699b7fd0d1d25cf00072bf9",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "6699b7fd0d1d25cf00072c02",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "6699b7fd0d1d25cf00072c01",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "6699b7fd0d1d25cf00072bf9",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "6699b7fd0d1d25cf00072c02",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "6699b7fd0d1d25cf00072c01",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "6699b7fd0d1d25cf00072bf9",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "6699b7fd0d1d25cf00072c02",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "6699b7fd0d1d25cf00072c01",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "6699b7fd0d1d25cf00072bf9",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "6699b7fd0d1d25cf00072c02",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "6699b7fd0d1d25cf00072c01",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "6699b7fd0d1d25cf00072bf9",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "6699b7fd0d1d25cf00072c02",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "6699b7fd0d1d25cf00072c01",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "6699b7fd0d1d25cf00072bf9",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "6699b7fd0d1d25cf00072c02",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        }
+      ]
+    },
+    {
+      "lotId": "eleanor-tricia-lucia-set.shipment-v1",
+      "displayName": "Eleanor, Tricia, and Lucia Set Shipment",
+      "purpose": "8 complete Eleanor, Tricia, and Lucia Set packages. A curated three-card character set for an advanced anime collection.",
+      "familyId": "field-supply",
+      "trackId": "anime-cards",
+      "anchorTemplateId": "6699b7fd0d1d25cf00072bff",
+      "weight": 0.45,
+      "usePath": {
+        "kind": "collection",
+        "containerTemplateId": "6699b7fd0d1d25cf00072c49",
+        "collectionId": "anime-cards"
+      },
+      "recipe": [
+        {
+          "kind": "template",
+          "templateId": "6699b7fd0d1d25cf00072bff",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "6699b7fd0d1d25cf00072bfa",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "6699b7fd0d1d25cf00072bfd",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "6699b7fd0d1d25cf00072bff",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "6699b7fd0d1d25cf00072bfa",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "6699b7fd0d1d25cf00072bfd",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "6699b7fd0d1d25cf00072bff",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "6699b7fd0d1d25cf00072bfa",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "6699b7fd0d1d25cf00072bfd",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "6699b7fd0d1d25cf00072bff",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "6699b7fd0d1d25cf00072bfa",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "6699b7fd0d1d25cf00072bfd",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "6699b7fd0d1d25cf00072bff",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "6699b7fd0d1d25cf00072bfa",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "6699b7fd0d1d25cf00072bfd",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "6699b7fd0d1d25cf00072bff",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "6699b7fd0d1d25cf00072bfa",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "6699b7fd0d1d25cf00072bfd",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "6699b7fd0d1d25cf00072bff",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "6699b7fd0d1d25cf00072bfa",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "6699b7fd0d1d25cf00072bfd",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "6699b7fd0d1d25cf00072bff",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "6699b7fd0d1d25cf00072bfa",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "6699b7fd0d1d25cf00072bfd",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        }
+      ]
+    },
+    {
+      "lotId": "mai-ultimate.shipment-v1",
+      "displayName": "Mai Ultimate Shipment",
+      "purpose": "8 complete Mai Ultimate packages. A top-tier Mai collectible intended as a terminal anime-card prize.",
+      "familyId": "field-supply",
+      "trackId": "anime-cards",
+      "anchorTemplateId": "6699b7fd0d1d25cf00072bf6",
+      "weight": 0.15,
+      "usePath": {
+        "kind": "collection",
+        "containerTemplateId": "6699b7fd0d1d25cf00072c49",
+        "collectionId": "anime-cards"
+      },
+      "recipe": [
+        {
+          "kind": "template",
+          "templateId": "6699b7fd0d1d25cf00072bf6",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "6699b7fd0d1d25cf00072bf6",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "6699b7fd0d1d25cf00072bf6",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "6699b7fd0d1d25cf00072bf6",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "6699b7fd0d1d25cf00072bf6",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "6699b7fd0d1d25cf00072bf6",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "6699b7fd0d1d25cf00072bf6",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "6699b7fd0d1d25cf00072bf6",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        }
+      ]
+    },
+    {
+      "lotId": "erica-ultimate.shipment-v1",
+      "displayName": "Erica Ultimate Shipment",
+      "purpose": "8 complete Erica Ultimate packages. A top-tier Erica collectible intended as a terminal anime-card prize.",
+      "familyId": "field-supply",
+      "trackId": "anime-cards",
+      "anchorTemplateId": "6699b7fd0d1d25cf00072bf8",
+      "weight": 0.15,
+      "usePath": {
+        "kind": "collection",
+        "containerTemplateId": "6699b7fd0d1d25cf00072c49",
+        "collectionId": "anime-cards"
+      },
+      "recipe": [
+        {
+          "kind": "template",
+          "templateId": "6699b7fd0d1d25cf00072bf8",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "6699b7fd0d1d25cf00072bf8",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "6699b7fd0d1d25cf00072bf8",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "6699b7fd0d1d25cf00072bf8",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "6699b7fd0d1d25cf00072bf8",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "6699b7fd0d1d25cf00072bf8",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "6699b7fd0d1d25cf00072bf8",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "6699b7fd0d1d25cf00072bf8",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        }
+      ]
     }
   ]
 }

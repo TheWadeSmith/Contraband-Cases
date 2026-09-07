@@ -63,7 +63,7 @@ public sealed class CargoLotEvaluator
             handbookValue,
             useValue,
             footprint,
-            CargoGradeBands.Assign(useValue)));
+            ShipmentEconomy.Grade(lot.Identity.LotId, useValue)));
     }
 
     private TemplateItem ResolveTemplate(

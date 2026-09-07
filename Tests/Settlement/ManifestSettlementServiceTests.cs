@@ -150,12 +150,26 @@ public sealed class ManifestSettlementServiceTests
     private static readonly DateTimeOffset CompletionAt = DateTimeOffset.UnixEpoch.AddMinutes(10);
 
     [Theory]
-    [InlineData("unchanged")]
-    [InlineData("new-quotes")]
-    [InlineData("missing-quotes")]
-    [InlineData("bitcoin-budget")]
-    public async Task Cash_open_full_stash_claim_retry_and_replay_preserve_one_payout_and_Favor(string quoteState)
+    [InlineData("unchanged", 0, "btc-1")]
+    [InlineData("new-quotes", 0, "btc-1")]
+    [InlineData("missing-quotes", 0, "btc-1")]
+    [InlineData("bitcoin-budget", 0, "btc-1")]
+    [InlineData("unchanged", 95, "btc-2")]
+    [InlineData("new-quotes", 95, "btc-2")]
+    [InlineData("missing-quotes", 95, "btc-2")]
+    [InlineData("bitcoin-budget", 95, "btc-2")]
+    [InlineData("unchanged", 700, "gp-10")]
+    [InlineData("new-quotes", 700, "gp-10")]
+    [InlineData("missing-quotes", 700, "gp-10")]
+    [InlineData("bitcoin-budget", 700, "gp-10")]
+    [InlineData("unchanged", 950, "gp-25")]
+    [InlineData("new-quotes", 950, "gp-25")]
+    [InlineData("missing-quotes", 950, "gp-25")]
+    [InlineData("bitcoin-budget", 950, "gp-25")]
+    public async Task Cash_open_full_stash_claim_retry_and_replay_preserve_one_payout_and_Favor(
+        string quoteState, int drawBasisPoints, string expectedPayout)
     {
+        expectedPayout += ".shipment-v1";
         var cash = ContrabandCases.Tests.Server.CashCacheTests.Catalog();
         var coordinator = new CatalogSnapshotCoordinator(() => Catalog(), () => cash);
         coordinator.MarkStartupComplete();
@@ -163,12 +177,17 @@ public sealed class ManifestSettlementServiceTests
         var ticketInventory = new FreshTicketInventoryProbe { FreshCaseTemplate = CaseContracts.CashCache };
         var draws = 0;
         var service = fixture.CreateService(ticketInventory: ticketInventory, catalogCoordinator: coordinator,
-            offerSelector: new ManifestCatalogSelector(() => { draws++; return 0; }),
+            offerSelector: new ManifestCatalogSelector(() =>
+            {
+                draws++;
+                return (long)(drawBasisPoints * (decimal)CanonicalRngEvidence.UnitDenominator / 10_000);
+            }),
             materializer: new CargoLotMaterializer(ContrabandCases.Tests.Server.CashCacheTests.FindTemplate));
         await service.OpenAsync(fixture.Context, CaseId, CancellationToken.None, cash.SnapshotId);
         var active = fixture.Store.Stored.ActiveManifest!;
         Assert.Equal(ManifestPhase.Entitlement, active.FlowState.Phase);
         Assert.Single(active.Offers);
+        Assert.Equal(expectedPayout, active.Entitlement!.Identity.LotId);
         Assert.Equal(1, draws);
         Assert.Equal(1, ticketInventory.ApplyCalls);
         var fingerprint = active.Entitlement!.Fingerprint;
@@ -183,7 +202,7 @@ public sealed class ManifestSettlementServiceTests
         Assert.Equal(fingerprint, fixture.Store.Stored.ActiveManifest!.Entitlement!.Fingerprint);
         var currentCash = quoteState switch
         {
-            "new-quotes" => CashPayoutCatalog.Build(ContrabandCases.Tests.Server.CashCacheTests.FindTemplate, 160, 190, 900_000),
+            "new-quotes" => CashPayoutCatalog.Build(ContrabandCases.Tests.Server.CashCacheTests.FindTemplate, 160, 190, 900_000, 7_500),
             "missing-quotes" => CashPayoutCatalog.Disabled("Missing FX offers", ContrabandCases.Tests.Server.CashCacheTests.FindTemplate),
             "bitcoin-budget" => CatalogSnapshotCoordinator.FreezeCash(
                 () => ContrabandCases.Tests.Server.CashCacheTests.Catalog(100_000_000),
@@ -200,6 +219,11 @@ public sealed class ManifestSettlementServiceTests
         fixture.Inventory.PrepareSucceeds = true;
         await service.ClaimAsync(fixture.Context, active.ManifestId, CancellationToken.None);
         Assert.Equal(1, fixture.Inventory.ApplyCalls);
+        var expectedLot = cash.Lots.Single(lot => lot.Identity.LotId == expectedPayout);
+        Assert.Equal(expectedLot.Forest.Nodes.Sum(node => node.StackCount),
+            fixture.Inventory.PreparedMaterializedItems!.Sum(item => item.Upd!.StackObjectsCount));
+        Assert.All(fixture.Inventory.PreparedMaterializedItems!,
+            item => Assert.Equal(expectedLot.Identity.AnchorTemplateId, item.Template.ToString()));
         Assert.Equal(2, fixture.Store.Stored.BrokerFavor);
         Assert.Null(fixture.Store.Stored.ActiveManifest);
         var replay = await service.ClaimAsync(fixture.NewContextWithLostResponse(), active.ManifestId, CancellationToken.None);

@@ -6,6 +6,8 @@ using SPTarkov.Server.Core.Models.Spt.Tables;
 using SPTarkov.Server.Core.Utils.Json.Converters;
 using SPTarkov.Server.Core.Utils.Json;
 using Path = System.IO.Path;
+using ContrabandCases.Client.Opening;
+using ContrabandCases.Server.Settlement;
 
 if (args.Length == 3 && args[0] == "--cash")
 {
@@ -46,9 +48,17 @@ var catalog = new CargoCatalogSnapshotBuilder(
     new CargoLotEvaluator(FindTemplate, id => prices.GetValueOrDefault(id)),
     new CargoPackRequirementValidator(FindTemplate, FindPreset).Validate).Build(core, optional);
 Directory.CreateDirectory(Path.GetDirectoryName(output)!);
+// Exercise the real client library parser with full resolved forests, including
+// larger shipments; the captured-value mode intentionally cannot prove this.
+var library = ManifestLibraryProjection.Create(new CaseOpeningJournal(), catalog, new Dictionary<string, string>());
+var parsedLibrary = ManifestSnapshotParser.ParseLibrary(JsonSerializer.Serialize(new
+    { err = 0, errmsg = (string?)null, data = library }));
+if (parsedLibrary.Lots.Count != catalog.FreshOpeningLots.Count)
+    throw new InvalidOperationException("Native cargo library lost fresh lots in the client contract.");
 File.WriteAllText(output, JsonSerializer.Serialize(new
 {
     Scope = "Offline database only; does NOT run installed mod hooks. Live catalog-report.json is authoritative for mod integrations.",
+    ClientLibraryValidated = true,
     Report = ManifestEconomyReport.Create(catalog)
 }, new JsonSerializerOptions { WriteIndented = true }));
 Console.WriteLine($"Offline audit: {catalog.Lots.Count} resolved lots, {catalog.SkippedPacks.Count} unavailable packs. Report: {output}");

@@ -23,10 +23,23 @@
       "trackId": "natalya-field-gear",
       "anchorTemplateId": "6749758d4506d299770ddcb2",
       "weight": 1.0,
-      "usePath": { "kind": "raidRole", "roleId": "field-medic" },
+      "usePath": {
+        "kind": "raidRole",
+        "roleId": "field-medic"
+      },
       "recipe": [
-        { "kind": "template", "templateId": "6749758d4506d299770ddcb2", "instanceCount": 1, "stackCountPerInstance": 1 },
-        { "kind": "template", "templateId": "674974348af9189fcc136a7e", "instanceCount": 1, "stackCountPerInstance": 1 }
+        {
+          "kind": "template",
+          "templateId": "6749758d4506d299770ddcb2",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "674974348af9189fcc136a7e",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        }
       ]
     },
     {
@@ -37,10 +50,23 @@
       "trackId": "natalya-field-gear",
       "anchorTemplateId": "67e179c9ff1e5acc5f7af6db",
       "weight": 1.0,
-      "usePath": { "kind": "raidRole", "roleId": "field-medic" },
+      "usePath": {
+        "kind": "raidRole",
+        "roleId": "field-medic"
+      },
       "recipe": [
-        { "kind": "template", "templateId": "67e179c9ff1e5acc5f7af6db", "instanceCount": 1, "stackCountPerInstance": 1 },
-        { "kind": "template", "templateId": "67e179c92d755ef8ae908854", "instanceCount": 1, "stackCountPerInstance": 1 }
+        {
+          "kind": "template",
+          "templateId": "67e179c9ff1e5acc5f7af6db",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "67e179c92d755ef8ae908854",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        }
       ]
     },
     {
@@ -51,10 +77,284 @@
       "trackId": "natalya-field-gear",
       "anchorTemplateId": "674815ec8bf2e801d82c322e",
       "weight": 0.8,
-      "usePath": { "kind": "raidRole", "roleId": "quartermaster" },
+      "usePath": {
+        "kind": "raidRole",
+        "roleId": "quartermaster"
+      },
       "recipe": [
-        { "kind": "template", "templateId": "674815ec8bf2e801d82c322e", "instanceCount": 1, "stackCountPerInstance": 1 },
-        { "kind": "template", "templateId": "674888cc37cd20bcbef66a48", "instanceCount": 1, "stackCountPerInstance": 1 }
+        {
+          "kind": "template",
+          "templateId": "674815ec8bf2e801d82c322e",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "674888cc37cd20bcbef66a48",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        }
+      ]
+    },
+    {
+      "lotId": "medical-resupply.shipment-v1",
+      "displayName": "Medical Resupply Shipment",
+      "purpose": "6 complete Medical Resupply packages. A matched IFAKv2 and AFAKv2 pair for sustained field treatment.",
+      "familyId": "field-supply",
+      "trackId": "natalya-field-gear",
+      "anchorTemplateId": "6749758d4506d299770ddcb2",
+      "weight": 1.0,
+      "usePath": {
+        "kind": "raidRole",
+        "roleId": "field-medic"
+      },
+      "recipe": [
+        {
+          "kind": "template",
+          "templateId": "6749758d4506d299770ddcb2",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "674974348af9189fcc136a7e",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "6749758d4506d299770ddcb2",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "674974348af9189fcc136a7e",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "6749758d4506d299770ddcb2",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "674974348af9189fcc136a7e",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "6749758d4506d299770ddcb2",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "674974348af9189fcc136a7e",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "6749758d4506d299770ddcb2",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "674974348af9189fcc136a7e",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "6749758d4506d299770ddcb2",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "674974348af9189fcc136a7e",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        }
+      ]
+    },
+    {
+      "lotId": "trauma-kit.shipment-v1",
+      "displayName": "Trauma Kit Shipment",
+      "purpose": "6 complete Trauma Kit packages. A CALOK-B hemostatic applicator and an aluminum splint for stopping the bleed and stabilizing a fracture.",
+      "familyId": "field-supply",
+      "trackId": "natalya-field-gear",
+      "anchorTemplateId": "67e179c9ff1e5acc5f7af6db",
+      "weight": 1.0,
+      "usePath": {
+        "kind": "raidRole",
+        "roleId": "field-medic"
+      },
+      "recipe": [
+        {
+          "kind": "template",
+          "templateId": "67e179c9ff1e5acc5f7af6db",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "67e179c92d755ef8ae908854",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "67e179c9ff1e5acc5f7af6db",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "67e179c92d755ef8ae908854",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "67e179c9ff1e5acc5f7af6db",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "67e179c92d755ef8ae908854",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "67e179c9ff1e5acc5f7af6db",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "67e179c92d755ef8ae908854",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "67e179c9ff1e5acc5f7af6db",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "67e179c92d755ef8ae908854",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "67e179c9ff1e5acc5f7af6db",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "67e179c92d755ef8ae908854",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        }
+      ]
+    },
+    {
+      "lotId": "condor-loadout.shipment-v1",
+      "displayName": "Condor Loadout Shipment",
+      "purpose": "6 complete Condor Loadout packages. An LBT-69D Condor chest rig paired with a Trooper 55 sling bag for a fast-access carry setup.",
+      "familyId": "operator",
+      "trackId": "natalya-field-gear",
+      "anchorTemplateId": "674815ec8bf2e801d82c322e",
+      "weight": 0.8,
+      "usePath": {
+        "kind": "raidRole",
+        "roleId": "quartermaster"
+      },
+      "recipe": [
+        {
+          "kind": "template",
+          "templateId": "674815ec8bf2e801d82c322e",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "674888cc37cd20bcbef66a48",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "674815ec8bf2e801d82c322e",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "674888cc37cd20bcbef66a48",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "674815ec8bf2e801d82c322e",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "674888cc37cd20bcbef66a48",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "674815ec8bf2e801d82c322e",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "674888cc37cd20bcbef66a48",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "674815ec8bf2e801d82c322e",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "674888cc37cd20bcbef66a48",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "674815ec8bf2e801d82c322e",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "674888cc37cd20bcbef66a48",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        }
       ]
     }
   ]

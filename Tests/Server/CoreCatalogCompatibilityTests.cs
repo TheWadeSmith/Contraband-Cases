@@ -14,12 +14,12 @@ public sealed class CoreCatalogCompatibilityTests
         using var current = JsonDocument.Parse(File.ReadAllText(Path.Combine(root, "config/reward-packs/core.json")));
         var currentLots = current.RootElement.GetProperty("lots").EnumerateArray()
             .ToDictionary(lot => lot.GetProperty("lotId").GetString()!);
-        Assert.Equal(50, currentLots.Count);
+        Assert.Equal(100, currentLots.Count);
         foreach (var lot in old.RootElement.GetProperty("lots").EnumerateArray())
             Assert.True(JsonElement.DeepEquals(lot, currentLots[lot.GetProperty("lotId").GetString()!]));
         foreach (var property in old.RootElement.EnumerateObject().Where(p => p.Name != "lots"))
             Assert.True(JsonElement.DeepEquals(property.Value, current.RootElement.GetProperty(property.Name)));
-        Assert.Equal(50, new JsonRewardPackLoader().LoadFile(Path.Combine(root, "config/reward-packs/core.json")).Lots.Count);
+        Assert.Equal(100, new JsonRewardPackLoader().LoadFile(Path.Combine(root, "config/reward-packs/core.json")).Lots.Count);
     }
 
     [Fact]

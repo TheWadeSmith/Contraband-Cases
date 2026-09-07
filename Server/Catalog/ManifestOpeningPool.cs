@@ -9,13 +9,13 @@ namespace ContrabandCases.Server.Catalog;
 /// </summary>
 internal sealed record ManifestOpeningPool(IReadOnlyList<ResolvedCargoLot> Lots, ExactWeightSet Weights)
 {
-    internal const string SelectionVersion = "curated-chase-opening-v2";
+    internal const string SelectionVersion = "curated-shipment-opening-v3";
     internal const int ChaseShareDenominator = 400;
 
     // Historical lots remain resolvable, but component-only kits have been
     // replaced by complete optics/armorer packages for new offers and Relays.
     internal static bool IsFreshEligible(ResolvedCargoLot lot) =>
-        (lot.Identity.ProviderId, lot.Identity.LotId) is not
+        (lot.Identity.ProviderId, ShipmentEconomy.BaseId(lot.Identity.LotId)) is not
             (("eco-attachment.elite-optics", "micro-red-dot-mounts") or
              ("eco-attachment.elite-optics", "larue-rail-system") or
              ("eco-attachment.field-cache", "offset-mount-kit") or
@@ -24,9 +24,11 @@ internal sealed record ManifestOpeningPool(IReadOnlyList<ResolvedCargoLot> Lots,
 
     // Desirable thematic chase rewards, plus a guard against mod price outliers.
     // This does not alter pack identities, grades, contents or old commitments.
-    internal static bool IsChase(ResolvedCargoLot lot) => lot.Evaluation.UseValue >= 750_000 ||
-        (lot.Identity.ProviderId, lot.Identity.LotId) is
+    internal static bool IsChase(ResolvedCargoLot lot) =>
+        lot.Evaluation.UseValue >= (ShipmentEconomy.IsShipment(lot.Identity.LotId) ? 4_500_000 : 750_000) ||
+        (lot.Identity.ProviderId, ShipmentEconomy.BaseId(lot.Identity.LotId)) is
             ("core", "black-site-marksman") or
+            ("core", "black-site-expedition-jackpot") or
             ("krackasourus.anime-cards", "erica-ultimate") or
             ("krackasourus.pokemon-cards", "dragonite-holo") or
             ("krackasourus.yugioh-cards", "tri-horned-dragon") or
@@ -40,7 +42,7 @@ internal sealed record ManifestOpeningPool(IReadOnlyList<ResolvedCargoLot> Lots,
         {
             var cashLots = ManifestSelectionMath.CanonicalLots(familyLots);
             return new ManifestOpeningPool(cashLots,
-                ManifestSelectionMath.CreateExactWeights(cashLots, lot => lot.Identity.Weight));
+                ManifestSelectionMath.CreateExactWeights(cashLots, lot => CashPayoutCatalog.OpeningWeight(lot.Identity.LotId)));
         }
         var providers = ManifestSelectionMath.CanonicalLots(familyLots)
             .GroupBy(lot => lot.Identity.ProviderId, StringComparer.Ordinal)
