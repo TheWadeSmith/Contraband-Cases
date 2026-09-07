@@ -36,8 +36,11 @@ public static class ManifestEconomyReport
                 Grade = RewardRarities.GetInfo(lot.Evaluation.Grade).DisplayName,
                 lot.Evaluation.HandbookValue,
                 lot.Evaluation.UseValue,
+                lot.Evaluation.FootprintCells,
+                RootCount = lot.Forest.Roots.Count,
+                NodeCount = lot.Forest.Nodes.Count,
                 OpeningOnlyChase = ManifestOpeningPool.IsChase(lot),
-                AvailableForFreshOpening = ManifestOpeningPool.IsFreshEligible(lot),
+                AvailableForFreshOpening = catalog.FreshOpeningLots.Contains(lot),
                 RelayEligible = eligible,
                 Relay = Enumerable.Range(1, RelayRules.MaximumStage).SelectMany(stage =>
                     Enumerable.Range(0, 4).Select(favor =>

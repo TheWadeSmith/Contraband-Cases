@@ -10,10 +10,10 @@ namespace ContrabandCases.Server.Catalog;
 internal static class CashPayoutCatalog
 {
     internal const string Version = "cash-v1";
-    internal const string SelectionVersion = "cash-opening-v2";
+    internal const string SelectionVersion = "cash-opening-v3-million";
     internal sealed record Payout(string Id, string Template, int Amount, int Weight, RewardRarity Grade);
 
-    internal static IReadOnlyList<Payout> Payouts { get; } = Array.AsReadOnly(new[]
+    internal static IReadOnlyList<Payout> HistoricalPayouts { get; } = Array.AsReadOnly(new[]
     {
         new Payout("rub-25000", CashPayouts.Roubles, 25_000, 1500, RewardRarity.ScavGrade),
         new Payout("rub-60000", CashPayouts.Roubles, 60_000, 1600, RewardRarity.Uncommon),
@@ -32,13 +32,36 @@ internal static class CashPayoutCatalog
         new Payout("btc-2", CashPayouts.Bitcoin, 2, 10, RewardRarity.BlackLabel)
     });
 
+    // New immutable identities: originals remain recoverable at their original
+    // quantity, weight and grade. Mid-table roubles provide a real near-even band.
+    internal static IReadOnlyList<Payout> Payouts { get; } = Array.AsReadOnly(new[]
+    {
+        new Payout("rub-25000.shipment-v1", CashPayouts.Roubles, 200_000, 1500, RewardRarity.ScavGrade),
+        new Payout("rub-60000.shipment-v1", CashPayouts.Roubles, 480_000, 1300, RewardRarity.Uncommon),
+        new Payout("rub-100000.shipment-v1", CashPayouts.Roubles, 800_000, 1000, RewardRarity.Contractor),
+        new Payout("rub-150000.shipment-v1", CashPayouts.Roubles, 1_050_000, 1700, RewardRarity.Contractor),
+        new Payout("rub-175000.shipment-v1", CashPayouts.Roubles, 1_400_000, 900, RewardRarity.Restricted),
+        new Payout("rub-220000.shipment-v1", CashPayouts.Roubles, 1_760_000, 1000, RewardRarity.Restricted),
+        new Payout("rub-300000.shipment-v1", CashPayouts.Roubles, 2_400_000, 300, RewardRarity.Restricted),
+        new Payout("usd-1000.shipment-v1", CashPayouts.Dollars, 8_000, 700, RewardRarity.Contractor),
+        new Payout("usd-1500.shipment-v1", CashPayouts.Dollars, 12_000, 600, RewardRarity.Restricted),
+        new Payout("eur-1000.shipment-v1", CashPayouts.Euros, 8_000, 400, RewardRarity.Contractor),
+        new Payout("eur-2000.shipment-v1", CashPayouts.Euros, 16_000, 100, RewardRarity.Restricted),
+        new Payout("gp-10.shipment-v1", CashPayouts.GpCoin, 80, 300, RewardRarity.Uncommon),
+        new Payout("gp-25.shipment-v1", CashPayouts.GpCoin, 200, 100, RewardRarity.Restricted),
+        new Payout("btc-1.shipment-v1", CashPayouts.Bitcoin, 4, 90, RewardRarity.Restricted),
+        new Payout("btc-2.shipment-v1", CashPayouts.Bitcoin, 10, 10, RewardRarity.BlackLabel)
+    });
+
+    private static IEnumerable<Payout> AllPayouts => HistoricalPayouts.Concat(Payouts);
+
     // Original weights are part of immutable cash-v1 claim identities. Reweight
     // new draws here, shared by selection, displayed odds, pricing and reports.
     internal static int OpeningWeight(string lotId) => lotId switch
     {
         "rub-60000" => 1300,
         "rub-175000" => 900,
-        _ => Payouts.Single(payout => payout.Id == lotId).Weight
+        _ => AllPayouts.Single(payout => payout.Id == lotId).Weight
     };
 
     internal static CargoCatalogSnapshot Build(Func<string, TemplateItem?> findTemplate,
@@ -64,16 +87,16 @@ internal static class CashPayoutCatalog
         if (bitcoinContribution > ordinaryMean * 0.10m)
             throw new CargoCatalogValidationException("Bitcoin exceeds the Cash Cache jackpot budget; cash openings are disabled.");
         var price = checked((long)(decimal.Ceiling(ordinaryMean / 1000m) * 1000m));
-        if (price is < 1000 or > 1_000_000)
+        if (price is < 1000 or > 1_500_000)
             throw new CargoCatalogValidationException("Cash Cache entry price exceeds its supported economy range.");
-        var lots = Payouts.Select(payout => CreateLot(payout, findTemplate, rates[payout.Template])).ToArray();
+        var lots = AllPayouts.Select(payout => CreateLot(payout, findTemplate, rates[payout.Template])).ToArray();
         var identity = string.Join("\n", Version, SelectionVersion, price.ToString(CultureInfo.InvariantCulture),
             string.Join("\n", lots.Select(lot => $"{lot.Identity.LotId}:{lot.Fingerprint.Sha256Hex}:{lot.Evaluation.UseValue}:{OpeningWeight(lot.Identity.LotId)}")));
         return new CargoCatalogSnapshot(Hash(identity), lots, [],
             new Dictionary<string, double> { [CashPayouts.Provider] = 1 }, CaseContracts.CashCache, price);
     }
 
-    internal static RewardRarity Grade(string lotId) => Payouts.Single(p => p.Id == lotId).Grade;
+    internal static RewardRarity Grade(string lotId) => AllPayouts.Single(p => p.Id == lotId).Grade;
 
     internal static ResolvedCargoLot? ResolveSavedForest(ResolvedCargoLot current, RewardForest saved)
     {
@@ -106,7 +129,7 @@ internal static class CashPayoutCatalog
         var recoverable = new List<ResolvedCargoLot>();
         var skipped = new List<SkippedCargoLotPack> { new(CashPayouts.Provider, Version, reason) };
         if (findTemplate is not null)
-            foreach (var payout in Payouts)
+            foreach (var payout in AllPayouts)
             {
                 try { recoverable.Add(CreateLot(payout, findTemplate, null)); }
                 catch (CargoCatalogValidationException exception)
@@ -149,6 +172,7 @@ internal static class CashPayoutCatalog
                 UseValue = lot.EvaluationOrNull?.UseValue,
                 ValueBasis = CashPayouts.ValueLabel(lot.Identity.AnchorTemplateId),
                 StackCount = lot.Forest.Nodes.Count,
+                AvailableForFreshOpening = catalog.FreshOpeningLots.Contains(lot),
                 lot.Fingerprint.Sha256Hex
             }).ToArray()
         };
@@ -208,7 +232,7 @@ internal static class CashPayoutCatalog
             forest.Nodes.Select(node => node.TemplateId).Distinct(StringComparer.Ordinal).Count() != 1)
             throw new CargoCatalogValidationException("A cash payout must contain only plain stacks of one allowed currency.");
         var amount = forest.Nodes.Sum(node => (long)node.StackCount);
-        if (!Payouts.Any(p => p.Template == forest.Nodes[0].TemplateId && p.Amount == amount))
+        if (!AllPayouts.Any(p => p.Template == forest.Nodes[0].TemplateId && p.Amount == amount))
             throw new CargoCatalogValidationException("The cash payout quantity is not in the published table.");
     }
 

@@ -159,7 +159,7 @@ public sealed class CargoCatalogSnapshot
         SnapshotId = string.Concat("catalog-v2/", sha256Hex);
         Lots = new ReadOnlyCollection<ResolvedCargoLot>(lots.ToArray());
         FreshOpeningLots = new ReadOnlyCollection<ResolvedCargoLot>(
-            Lots.Where(lot => ManifestOpeningPool.IsFreshEligible(lot) &&
+            ShipmentEconomy.CurrentLots(Lots).Where(lot => ManifestOpeningPool.IsFreshEligible(lot) &&
                 (caseTemplateId != CaseContracts.CashCache || casePrice.HasValue && lot.EvaluationOrNull is not null)).ToArray());
         SkippedPacks = new ReadOnlyCollection<SkippedCargoLotPack>(skippedPacks.ToArray());
         ProviderWeights = new ReadOnlyDictionary<string, double>(

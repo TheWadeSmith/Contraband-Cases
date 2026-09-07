@@ -154,6 +154,10 @@ public sealed class ManifestSettlementServiceTests
     [InlineData("new-quotes", 0, "btc-1")]
     [InlineData("missing-quotes", 0, "btc-1")]
     [InlineData("bitcoin-budget", 0, "btc-1")]
+    [InlineData("unchanged", 95, "btc-2")]
+    [InlineData("new-quotes", 95, "btc-2")]
+    [InlineData("missing-quotes", 95, "btc-2")]
+    [InlineData("bitcoin-budget", 95, "btc-2")]
     [InlineData("unchanged", 700, "gp-10")]
     [InlineData("new-quotes", 700, "gp-10")]
     [InlineData("missing-quotes", 700, "gp-10")]
@@ -165,6 +169,7 @@ public sealed class ManifestSettlementServiceTests
     public async Task Cash_open_full_stash_claim_retry_and_replay_preserve_one_payout_and_Favor(
         string quoteState, int drawBasisPoints, string expectedPayout)
     {
+        expectedPayout += ".shipment-v1";
         var cash = ContrabandCases.Tests.Server.CashCacheTests.Catalog();
         var coordinator = new CatalogSnapshotCoordinator(() => Catalog(), () => cash);
         coordinator.MarkStartupComplete();

@@ -18,8 +18,8 @@ namespace ContrabandCases.Tests.Server;
 public sealed class CashCacheTests
 {
     [Theory]
-    [InlineData("gp-10", 10, "3.00%")]
-    [InlineData("gp-25", 25, "1.00%")]
+    [InlineData("gp-10.shipment-v1", 80, "3.00%")]
+    [InlineData("gp-25.shipment-v1", 200, "1.00%")]
     public void GP_payouts_publish_exact_coins_odds_and_barter_value(string id, int quantity, string chance)
     {
         const string gp = "5d235b4d86f7742e017bc88a";
@@ -29,7 +29,8 @@ public sealed class CashCacheTests
         Assert.Equal($"{quantity} × GP Coins", lot.Identity.DisplayName);
         Assert.Equal(quantity * 7_500, lot.Evaluation.UseValue);
         var items = new CargoLotMaterializer(FindTemplate).MaterializeCashPayout(lot.Forest, []).Items;
-        Assert.Equal(quantity, Assert.Single(items).Upd!.StackObjectsCount);
+        Assert.Equal(quantity, items.Sum(item => item.Upd!.StackObjectsCount));
+        Assert.All(items, item => Assert.InRange(item.Upd!.StackObjectsCount!.Value, 1, 100));
         var odds = Assert.Single(ManifestOpeningOdds.Create(catalog).Families).Lots;
         Assert.Equal(chance, Assert.Single(odds, row => row.LotId == id).ConditionalPercent);
         Assert.Contains("not a rouble cash-out", CashPayouts.ValueLabel(gp));
@@ -67,11 +68,11 @@ public sealed class CashCacheTests
             ["rub-300000"] = 300, ["usd-1000"] = 700, ["usd-1500"] = 600,
             ["eur-1000"] = 400, ["eur-2000"] = 100, ["gp-10"] = 300,
             ["gp-25"] = 100, ["btc-1"] = 90, ["btc-2"] = 10
-        };
+        }.ToDictionary(pair => pair.Key + ".shipment-v1", pair => pair.Value);
         var catalog = Catalog();
         var odds = Assert.Single(ManifestOpeningOdds.Create(catalog).Families).Lots;
         var start = 0;
-        foreach (var lot in catalog.Lots.OrderBy(lot => lot.Identity.LotId, StringComparer.Ordinal))
+        foreach (var lot in catalog.FreshOpeningLots.OrderBy(lot => lot.Identity.LotId, StringComparer.Ordinal))
         {
             var weight = weights[lot.Identity.LotId];
             var published = Assert.Single(odds, row => row.LotId == lot.Identity.LotId);
@@ -85,17 +86,17 @@ public sealed class CashCacheTests
             start += weight;
         }
         Assert.Equal(10_000, start);
-        var ordinary = catalog.Lots.Where(lot => lot.Identity.AnchorTemplateId != CashPayouts.Bitcoin).ToArray();
+        var ordinary = catalog.FreshOpeningLots.Where(lot => lot.Identity.AnchorTemplateId != CashPayouts.Bitcoin).ToArray();
         var expectedPrice = decimal.Ceiling(ordinary.Sum(lot => weights[lot.Identity.LotId] * (decimal)lot.Evaluation.UseValue) /
             9_900m / 1000m) * 1000m;
         Assert.Equal((long)expectedPrice, catalog.CasePrice);
         using var report = JsonDocument.Parse(JsonSerializer.Serialize(CashPayoutCatalog.Report(catalog)));
-        Assert.Equal(catalog.Lots.Sum(lot => weights[lot.Identity.LotId] * (decimal)lot.Evaluation.UseValue) / 10_000m,
+        Assert.Equal(catalog.FreshOpeningLots.Sum(lot => weights[lot.Identity.LotId] * (decimal)lot.Evaluation.UseValue) / 10_000m,
             report.RootElement.GetProperty("ExpectedReferencePayout").GetDecimal());
         foreach (var scenario in report.RootElement.GetProperty("KeyCostScenarios").EnumerateArray())
         {
             var cost = scenario.GetProperty("TotalReferenceCost").GetDecimal();
-            decimal Share(Func<ResolvedCargoLot, bool> predicate) => catalog.Lots.Where(predicate)
+            decimal Share(Func<ResolvedCargoLot, bool> predicate) => catalog.FreshOpeningLots.Where(predicate)
                 .Sum(lot => weights[lot.Identity.LotId]) / 100m;
             Assert.Equal(Share(lot => lot.Evaluation.UseValue < cost * 0.9m), scenario.GetProperty("MeaningfulLossPercent").GetDecimal());
             Assert.Equal(Share(lot => lot.Evaluation.UseValue >= cost * 0.9m && lot.Evaluation.UseValue <= cost * 1.1m),
@@ -125,7 +126,7 @@ public sealed class CashCacheTests
         var invalid = RewardForest.Create([new RewardForestNode("root", "root", CashPayouts.GpCoin, null, null, null, 26)]);
         Assert.Throws<CargoCatalogValidationException>(() => new CargoLotMaterializer(FindTemplate).ValidateCashPayout(invalid));
         var unavailable = CashPayoutCatalog.Disabled("GP missing", id => id == CashPayouts.GpCoin ? null : FindTemplate(id));
-        Assert.Equal(13, unavailable.Lots.Count);
+        Assert.Equal(26, unavailable.Lots.Count);
         Assert.Empty(unavailable.FreshOpeningLots);
         Assert.Null(unavailable.ResolveExact(saved.Evaluation.Grade, saved.Identity, saved.Forest, saved.Fingerprint));
     }
@@ -314,7 +315,7 @@ public sealed class CashCacheTests
         else
         {
             Assert.Single(warnings);
-            Assert.Equal(15, cash.Lots.Count);
+            Assert.Equal(30, cash.Lots.Count);
         }
     }
 
@@ -330,11 +331,11 @@ public sealed class CashCacheTests
         Assert.Equal("1", family.PerSlotNumerator);
         Assert.Equal("1", family.PerSlotDenominator);
         Assert.Equal(15, family.Lots.Count);
-        var bitcoin = family.Lots.Single(l => l.LotId == "btc-1");
+        var bitcoin = family.Lots.Single(l => l.LotId == "btc-1.shipment-v1");
         Assert.Equal("9", bitcoin.ConditionalNumerator);
         Assert.Equal("1000", bitcoin.ConditionalDenominator);
         Assert.Equal("0.90%", bitcoin.ConditionalPercent);
-        Assert.Equal("0.10%", family.Lots.Single(l => l.LotId == "btc-2").ConditionalPercent);
+        Assert.Equal("0.10%", family.Lots.Single(l => l.LotId == "btc-2.shipment-v1").ConditionalPercent);
         Assert.Equal(10_000, CashPayoutCatalog.Payouts.Sum(p => CashPayoutCatalog.OpeningWeight(p.Id)));
     }
 
