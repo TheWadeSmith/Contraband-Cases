@@ -193,6 +193,518 @@
           "stackCountPerInstance": 1
         }
       ]
+    },
+    {
+      "lotId": "swords-of-revealing-light.shipment-v1",
+      "displayName": "Swords of Revealing Light Shipment",
+      "purpose": "8 complete Swords of Revealing Light packages. A classic spell card ready for the Yu-Gi-Oh binder.",
+      "familyId": "field-supply",
+      "trackId": "yugioh-cards",
+      "anchorTemplateId": "669c812e721191eae6091145",
+      "weight": 1.0,
+      "usePath": {
+        "kind": "collection",
+        "containerTemplateId": "669c7c89721191eae60910d9",
+        "collectionId": "yugioh-cards"
+      },
+      "recipe": [
+        {
+          "kind": "template",
+          "templateId": "669c812e721191eae6091145",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "669c812e721191eae6091145",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "669c812e721191eae6091145",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "669c812e721191eae6091145",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "669c812e721191eae6091145",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "669c812e721191eae6091145",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "669c812e721191eae6091145",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "669c812e721191eae6091145",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        }
+      ]
+    },
+    {
+      "lotId": "pot-of-greed.shipment-v1",
+      "displayName": "Pot of Greed Shipment",
+      "purpose": "8 complete Pot of Greed packages. An iconic spell card ready for the Yu-Gi-Oh binder.",
+      "familyId": "field-supply",
+      "trackId": "yugioh-cards",
+      "anchorTemplateId": "669c812e721191eae609112d",
+      "weight": 1.0,
+      "usePath": {
+        "kind": "collection",
+        "containerTemplateId": "669c7c89721191eae60910d9",
+        "collectionId": "yugioh-cards"
+      },
+      "recipe": [
+        {
+          "kind": "template",
+          "templateId": "669c812e721191eae609112d",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "669c812e721191eae609112d",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "669c812e721191eae609112d",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "669c812e721191eae609112d",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "669c812e721191eae609112d",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "669c812e721191eae609112d",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "669c812e721191eae609112d",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "669c812e721191eae609112d",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        }
+      ]
+    },
+    {
+      "lotId": "red-eyes-black-dragon.shipment-v1",
+      "displayName": "Red-Eyes Black Dragon Shipment",
+      "purpose": "8 complete Red-Eyes Black Dragon packages. A signature Red-Eyes monster card for an advancing collection.",
+      "familyId": "field-supply",
+      "trackId": "yugioh-cards",
+      "anchorTemplateId": "669c812e721191eae6091133",
+      "weight": 0.75,
+      "usePath": {
+        "kind": "collection",
+        "containerTemplateId": "669c7c89721191eae60910d9",
+        "collectionId": "yugioh-cards"
+      },
+      "recipe": [
+        {
+          "kind": "template",
+          "templateId": "669c812e721191eae6091133",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "669c812e721191eae6091133",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "669c812e721191eae6091133",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "669c812e721191eae6091133",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "669c812e721191eae6091133",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "669c812e721191eae6091133",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "669c812e721191eae6091133",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "669c812e721191eae6091133",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        }
+      ]
+    },
+    {
+      "lotId": "blue-eyes-white-dragon.shipment-v1",
+      "displayName": "Blue-Eyes White Dragon Shipment",
+      "purpose": "8 complete Blue-Eyes White Dragon packages. A signature Blue-Eyes monster card for an advancing collection.",
+      "familyId": "field-supply",
+      "trackId": "yugioh-cards",
+      "anchorTemplateId": "669c812e721191eae60910e1",
+      "weight": 0.75,
+      "usePath": {
+        "kind": "collection",
+        "containerTemplateId": "669c7c89721191eae60910d9",
+        "collectionId": "yugioh-cards"
+      },
+      "recipe": [
+        {
+          "kind": "template",
+          "templateId": "669c812e721191eae60910e1",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "669c812e721191eae60910e1",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "669c812e721191eae60910e1",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "669c812e721191eae60910e1",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "669c812e721191eae60910e1",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "669c812e721191eae60910e1",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "669c812e721191eae60910e1",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "669c812e721191eae60910e1",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        }
+      ]
+    },
+    {
+      "lotId": "dark-magician.shipment-v1",
+      "displayName": "Dark Magician Shipment",
+      "purpose": "8 complete Dark Magician packages. A premium Dark Magician card for a high-tier binder page.",
+      "familyId": "field-supply",
+      "trackId": "yugioh-cards",
+      "anchorTemplateId": "669c812e721191eae60910ec",
+      "weight": 0.45,
+      "usePath": {
+        "kind": "collection",
+        "containerTemplateId": "669c7c89721191eae60910d9",
+        "collectionId": "yugioh-cards"
+      },
+      "recipe": [
+        {
+          "kind": "template",
+          "templateId": "669c812e721191eae60910ec",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "669c812e721191eae60910ec",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "669c812e721191eae60910ec",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "669c812e721191eae60910ec",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "669c812e721191eae60910ec",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "669c812e721191eae60910ec",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "669c812e721191eae60910ec",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "669c812e721191eae60910ec",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        }
+      ]
+    },
+    {
+      "lotId": "exodia.shipment-v1",
+      "displayName": "Exodia Shipment",
+      "purpose": "8 complete Exodia packages. A premium Exodia card for a high-tier binder page.",
+      "familyId": "field-supply",
+      "trackId": "yugioh-cards",
+      "anchorTemplateId": "669c812e721191eae60910f4",
+      "weight": 0.45,
+      "usePath": {
+        "kind": "collection",
+        "containerTemplateId": "669c7c89721191eae60910d9",
+        "collectionId": "yugioh-cards"
+      },
+      "recipe": [
+        {
+          "kind": "template",
+          "templateId": "669c812e721191eae60910f4",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "669c812e721191eae60910f4",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "669c812e721191eae60910f4",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "669c812e721191eae60910f4",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "669c812e721191eae60910f4",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "669c812e721191eae60910f4",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "669c812e721191eae60910f4",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "669c812e721191eae60910f4",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        }
+      ]
+    },
+    {
+      "lotId": "gaia-dragon-champion.shipment-v1",
+      "displayName": "Gaia the Dragon Champion Shipment",
+      "purpose": "8 complete Gaia the Dragon Champion packages. A top-value fusion card intended as a terminal Yu-Gi-Oh prize.",
+      "familyId": "field-supply",
+      "trackId": "yugioh-cards",
+      "anchorTemplateId": "669c812e721191eae6091102",
+      "weight": 0.15,
+      "usePath": {
+        "kind": "collection",
+        "containerTemplateId": "669c7c89721191eae60910d9",
+        "collectionId": "yugioh-cards"
+      },
+      "recipe": [
+        {
+          "kind": "template",
+          "templateId": "669c812e721191eae6091102",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "669c812e721191eae6091102",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "669c812e721191eae6091102",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "669c812e721191eae6091102",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "669c812e721191eae6091102",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "669c812e721191eae6091102",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "669c812e721191eae6091102",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "669c812e721191eae6091102",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        }
+      ]
+    },
+    {
+      "lotId": "tri-horned-dragon.shipment-v1",
+      "displayName": "Tri-Horned Dragon Shipment",
+      "purpose": "8 complete Tri-Horned Dragon packages. A top-value dragon card intended as a terminal Yu-Gi-Oh prize.",
+      "familyId": "field-supply",
+      "trackId": "yugioh-cards",
+      "anchorTemplateId": "669c812e721191eae609114a",
+      "weight": 0.15,
+      "usePath": {
+        "kind": "collection",
+        "containerTemplateId": "669c7c89721191eae60910d9",
+        "collectionId": "yugioh-cards"
+      },
+      "recipe": [
+        {
+          "kind": "template",
+          "templateId": "669c812e721191eae609114a",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "669c812e721191eae609114a",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "669c812e721191eae609114a",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "669c812e721191eae609114a",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "669c812e721191eae609114a",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "669c812e721191eae609114a",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "669c812e721191eae609114a",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "669c812e721191eae609114a",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        }
+      ]
     }
   ]
 }

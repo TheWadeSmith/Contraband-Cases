@@ -80,6 +80,324 @@
           "stackCountPerInstance": 1
         }
       ]
+    },
+    {
+      "lotId": "tommy-gun-relic.shipment-v1",
+      "displayName": "Tommy Gun Relic Shipment",
+      "purpose": "8 complete Tommy Gun Relic packages. A Thompson M1928A1 submachine gun with a matched 50-round drum and 30-round box magazine.",
+      "familyId": "weapon-relic",
+      "trackId": "eco-ww2-relic-cache",
+      "anchorTemplateId": "6a06febcf86e3e091872c104",
+      "weight": 1.0,
+      "usePath": {
+        "kind": "raidRole",
+        "roleId": "close-quarters"
+      },
+      "recipe": [
+        {
+          "kind": "template",
+          "templateId": "6a06febcf86e3e091872c104",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "6a06fa8af86e3e091872c100",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "6a06fad8f86e3e091872c102",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "6a06febcf86e3e091872c104",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "6a06fa8af86e3e091872c100",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "6a06fad8f86e3e091872c102",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "6a06febcf86e3e091872c104",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "6a06fa8af86e3e091872c100",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "6a06fad8f86e3e091872c102",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "6a06febcf86e3e091872c104",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "6a06fa8af86e3e091872c100",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "6a06fad8f86e3e091872c102",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "6a06febcf86e3e091872c104",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "6a06fa8af86e3e091872c100",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "6a06fad8f86e3e091872c102",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "6a06febcf86e3e091872c104",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "6a06fa8af86e3e091872c100",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "6a06fad8f86e3e091872c102",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "6a06febcf86e3e091872c104",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "6a06fa8af86e3e091872c100",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "6a06fad8f86e3e091872c102",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "6a06febcf86e3e091872c104",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "6a06fa8af86e3e091872c100",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "6a06fad8f86e3e091872c102",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        }
+      ]
+    },
+    {
+      "lotId": "k98k-sniper-relic.shipment-v1",
+      "displayName": "K98K Sniper Relic Shipment",
+      "purpose": "8 complete K98K Sniper Relic packages. A Karabiner 98 kurz bolt-action rifle fitted with a Zeiss ZF39 4x26 scope and a 20-round trench magazine.",
+      "familyId": "weapon-relic",
+      "trackId": "eco-ww2-relic-cache",
+      "anchorTemplateId": "6a0ce40499dfd9edaca1daa9",
+      "weight": 0.9,
+      "usePath": {
+        "kind": "raidRole",
+        "roleId": "precision-overwatch"
+      },
+      "recipe": [
+        {
+          "kind": "template",
+          "templateId": "6a0ce40499dfd9edaca1daa9",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "6a0df23142723bcd0581cf82",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "6a1ee17009ef9baf4bd3193b",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "6a0ce40499dfd9edaca1daa9",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "6a0df23142723bcd0581cf82",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "6a1ee17009ef9baf4bd3193b",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "6a0ce40499dfd9edaca1daa9",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "6a0df23142723bcd0581cf82",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "6a1ee17009ef9baf4bd3193b",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "6a0ce40499dfd9edaca1daa9",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "6a0df23142723bcd0581cf82",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "6a1ee17009ef9baf4bd3193b",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "6a0ce40499dfd9edaca1daa9",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "6a0df23142723bcd0581cf82",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "6a1ee17009ef9baf4bd3193b",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "6a0ce40499dfd9edaca1daa9",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "6a0df23142723bcd0581cf82",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "6a1ee17009ef9baf4bd3193b",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "6a0ce40499dfd9edaca1daa9",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "6a0df23142723bcd0581cf82",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "6a1ee17009ef9baf4bd3193b",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "6a0ce40499dfd9edaca1daa9",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "6a0df23142723bcd0581cf82",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "6a1ee17009ef9baf4bd3193b",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        }
+      ]
     }
   ]
 }

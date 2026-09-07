@@ -146,6 +146,237 @@
           "stackCountPerInstance": 1
         }
       ]
+    },
+    {
+      "lotId": "field-armorer-kit.shipment-v1",
+      "displayName": "Field Armorer Kit Shipment",
+      "purpose": "6 complete Field Armorer Kit packages. An assorted armorer supply box of grips, iron sights and mounts for several compatible weapon platforms; not a complete weapon.",
+      "familyId": "attachments",
+      "trackId": "eco-field-cache",
+      "anchorTemplateId": "68bb6be346d4437fb40002e0",
+      "weight": 1.0,
+      "usePath": {
+        "kind": "raidRole",
+        "roleId": "rifle-patrol"
+      },
+      "recipe": [
+        {
+          "kind": "template",
+          "templateId": "68bb6be346d4437fb40002e0",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "68bc3cd17208c642f409974f",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "68c48eb7c91390fb930e8d94",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "6912857dfb534981300b1d8f",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "68b4b24e27658b8b0d024399",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "68b4b24e27658b8b0d02439a",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "68bb6be346d4437fb40002e0",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "68bc3cd17208c642f409974f",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "68c48eb7c91390fb930e8d94",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "6912857dfb534981300b1d8f",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "68b4b24e27658b8b0d024399",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "68b4b24e27658b8b0d02439a",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "68bb6be346d4437fb40002e0",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "68bc3cd17208c642f409974f",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "68c48eb7c91390fb930e8d94",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "6912857dfb534981300b1d8f",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "68b4b24e27658b8b0d024399",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "68b4b24e27658b8b0d02439a",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "68bb6be346d4437fb40002e0",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "68bc3cd17208c642f409974f",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "68c48eb7c91390fb930e8d94",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "6912857dfb534981300b1d8f",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "68b4b24e27658b8b0d024399",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "68b4b24e27658b8b0d02439a",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "68bb6be346d4437fb40002e0",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "68bc3cd17208c642f409974f",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "68c48eb7c91390fb930e8d94",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "6912857dfb534981300b1d8f",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "68b4b24e27658b8b0d024399",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "68b4b24e27658b8b0d02439a",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "68bb6be346d4437fb40002e0",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "68bc3cd17208c642f409974f",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "68c48eb7c91390fb930e8d94",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "6912857dfb534981300b1d8f",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "68b4b24e27658b8b0d024399",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "68b4b24e27658b8b0d02439a",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        }
+      ]
     }
   ]
 }

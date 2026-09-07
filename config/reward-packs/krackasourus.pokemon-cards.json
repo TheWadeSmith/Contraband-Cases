@@ -228,6 +228,806 @@
           "stackCountPerInstance": 1
         }
       ]
+    },
+    {
+      "lotId": "dragonair-rare.shipment-v1",
+      "displayName": "Dragonair Rare Shipment",
+      "purpose": "8 complete Dragonair Rare packages. A rare Dragonair card ready for the Pokemon binder.",
+      "familyId": "field-supply",
+      "trackId": "pokemon-cards",
+      "anchorTemplateId": "669979d0c73060411f04d2a0",
+      "weight": 1.0,
+      "usePath": {
+        "kind": "collection",
+        "containerTemplateId": "669997e1c73060411f04d301",
+        "collectionId": "pokemon-cards"
+      },
+      "recipe": [
+        {
+          "kind": "template",
+          "templateId": "669979d0c73060411f04d2a0",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "669979d0c73060411f04d2a0",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "669979d0c73060411f04d2a0",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "669979d0c73060411f04d2a0",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "669979d0c73060411f04d2a0",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "669979d0c73060411f04d2a0",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "669979d0c73060411f04d2a0",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "669979d0c73060411f04d2a0",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        }
+      ]
+    },
+    {
+      "lotId": "ditto-rare.shipment-v1",
+      "displayName": "Ditto Rare Shipment",
+      "purpose": "8 complete Ditto Rare packages. A rare Ditto card ready for the Pokemon binder.",
+      "familyId": "field-supply",
+      "trackId": "pokemon-cards",
+      "anchorTemplateId": "669979d0c73060411f04d28e",
+      "weight": 1.0,
+      "usePath": {
+        "kind": "collection",
+        "containerTemplateId": "669997e1c73060411f04d301",
+        "collectionId": "pokemon-cards"
+      },
+      "recipe": [
+        {
+          "kind": "template",
+          "templateId": "669979d0c73060411f04d28e",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "669979d0c73060411f04d28e",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "669979d0c73060411f04d28e",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "669979d0c73060411f04d28e",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "669979d0c73060411f04d28e",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "669979d0c73060411f04d28e",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "669979d0c73060411f04d28e",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "669979d0c73060411f04d28e",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        }
+      ]
+    },
+    {
+      "lotId": "dragonair-electrode-pair.shipment-v1",
+      "displayName": "Dragonair and Electrode Pair Shipment",
+      "purpose": "8 complete Dragonair and Electrode Pair packages. A complementary Dragonair and Electrode pair for a growing collection.",
+      "familyId": "field-supply",
+      "trackId": "pokemon-cards",
+      "anchorTemplateId": "669979d0c73060411f04d2a0",
+      "weight": 0.75,
+      "usePath": {
+        "kind": "collection",
+        "containerTemplateId": "669997e1c73060411f04d301",
+        "collectionId": "pokemon-cards"
+      },
+      "recipe": [
+        {
+          "kind": "template",
+          "templateId": "669979d0c73060411f04d2a0",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "669979d0c73060411f04d26a",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "669979d0c73060411f04d2a0",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "669979d0c73060411f04d26a",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "669979d0c73060411f04d2a0",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "669979d0c73060411f04d26a",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "669979d0c73060411f04d2a0",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "669979d0c73060411f04d26a",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "669979d0c73060411f04d2a0",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "669979d0c73060411f04d26a",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "669979d0c73060411f04d2a0",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "669979d0c73060411f04d26a",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "669979d0c73060411f04d2a0",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "669979d0c73060411f04d26a",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "669979d0c73060411f04d2a0",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "669979d0c73060411f04d26a",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        }
+      ]
+    },
+    {
+      "lotId": "ditto-electabuzz-pair.shipment-v1",
+      "displayName": "Ditto and Electabuzz Pair Shipment",
+      "purpose": "8 complete Ditto and Electabuzz Pair packages. A Ditto and Electabuzz pairing with enough value to advance the collection.",
+      "familyId": "field-supply",
+      "trackId": "pokemon-cards",
+      "anchorTemplateId": "669979d0c73060411f04d28e",
+      "weight": 0.75,
+      "usePath": {
+        "kind": "collection",
+        "containerTemplateId": "669997e1c73060411f04d301",
+        "collectionId": "pokemon-cards"
+      },
+      "recipe": [
+        {
+          "kind": "template",
+          "templateId": "669979d0c73060411f04d28e",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "669979d0c73060411f04d286",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "669979d0c73060411f04d28e",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "669979d0c73060411f04d286",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "669979d0c73060411f04d28e",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "669979d0c73060411f04d286",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "669979d0c73060411f04d28e",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "669979d0c73060411f04d286",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "669979d0c73060411f04d28e",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "669979d0c73060411f04d286",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "669979d0c73060411f04d28e",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "669979d0c73060411f04d286",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "669979d0c73060411f04d28e",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "669979d0c73060411f04d286",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "669979d0c73060411f04d28e",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "669979d0c73060411f04d286",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        }
+      ]
+    },
+    {
+      "lotId": "rare-evolution-trio.shipment-v1",
+      "displayName": "Rare Evolution Trio Shipment",
+      "purpose": "8 complete Rare Evolution Trio packages. Dragonair, Electrode, and Ditto form a premium three-card binder page.",
+      "familyId": "field-supply",
+      "trackId": "pokemon-cards",
+      "anchorTemplateId": "669979d0c73060411f04d2a0",
+      "weight": 0.45,
+      "usePath": {
+        "kind": "collection",
+        "containerTemplateId": "669997e1c73060411f04d301",
+        "collectionId": "pokemon-cards"
+      },
+      "recipe": [
+        {
+          "kind": "template",
+          "templateId": "669979d0c73060411f04d2a0",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "669979d0c73060411f04d26a",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "669979d0c73060411f04d28e",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "669979d0c73060411f04d2a0",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "669979d0c73060411f04d26a",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "669979d0c73060411f04d28e",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "669979d0c73060411f04d2a0",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "669979d0c73060411f04d26a",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "669979d0c73060411f04d28e",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "669979d0c73060411f04d2a0",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "669979d0c73060411f04d26a",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "669979d0c73060411f04d28e",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "669979d0c73060411f04d2a0",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "669979d0c73060411f04d26a",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "669979d0c73060411f04d28e",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "669979d0c73060411f04d2a0",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "669979d0c73060411f04d26a",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "669979d0c73060411f04d28e",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "669979d0c73060411f04d2a0",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "669979d0c73060411f04d26a",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "669979d0c73060411f04d28e",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "669979d0c73060411f04d2a0",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "669979d0c73060411f04d26a",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "669979d0c73060411f04d28e",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        }
+      ]
+    },
+    {
+      "lotId": "powerhouse-trio.shipment-v1",
+      "displayName": "Powerhouse Trio Shipment",
+      "purpose": "8 complete Powerhouse Trio packages. Electabuzz, Dugtrio, and Dragonair make a combat-themed premium set.",
+      "familyId": "field-supply",
+      "trackId": "pokemon-cards",
+      "anchorTemplateId": "669979d0c73060411f04d286",
+      "weight": 0.45,
+      "usePath": {
+        "kind": "collection",
+        "containerTemplateId": "669997e1c73060411f04d301",
+        "collectionId": "pokemon-cards"
+      },
+      "recipe": [
+        {
+          "kind": "template",
+          "templateId": "669979d0c73060411f04d286",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "669979d0c73060411f04d2cc",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "669979d0c73060411f04d2a0",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "669979d0c73060411f04d286",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "669979d0c73060411f04d2cc",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "669979d0c73060411f04d2a0",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "669979d0c73060411f04d286",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "669979d0c73060411f04d2cc",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "669979d0c73060411f04d2a0",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "669979d0c73060411f04d286",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "669979d0c73060411f04d2cc",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "669979d0c73060411f04d2a0",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "669979d0c73060411f04d286",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "669979d0c73060411f04d2cc",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "669979d0c73060411f04d2a0",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "669979d0c73060411f04d286",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "669979d0c73060411f04d2cc",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "669979d0c73060411f04d2a0",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "669979d0c73060411f04d286",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "669979d0c73060411f04d2cc",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "669979d0c73060411f04d2a0",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "669979d0c73060411f04d286",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "669979d0c73060411f04d2cc",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "669979d0c73060411f04d2a0",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        }
+      ]
+    },
+    {
+      "lotId": "venusaur-holo.shipment-v1",
+      "displayName": "Venusaur Holo Shipment",
+      "purpose": "8 complete Venusaur Holo packages. A high-value Venusaur holographic card for the collection's top page.",
+      "familyId": "field-supply",
+      "trackId": "pokemon-cards",
+      "anchorTemplateId": "669979d0c73060411f04d2b2",
+      "weight": 0.15,
+      "usePath": {
+        "kind": "collection",
+        "containerTemplateId": "669997e1c73060411f04d301",
+        "collectionId": "pokemon-cards"
+      },
+      "recipe": [
+        {
+          "kind": "template",
+          "templateId": "669979d0c73060411f04d2b2",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "669979d0c73060411f04d2b2",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "669979d0c73060411f04d2b2",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "669979d0c73060411f04d2b2",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "669979d0c73060411f04d2b2",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "669979d0c73060411f04d2b2",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "669979d0c73060411f04d2b2",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "669979d0c73060411f04d2b2",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        }
+      ]
+    },
+    {
+      "lotId": "dragonite-holo.shipment-v1",
+      "displayName": "Dragonite Holo Shipment",
+      "purpose": "8 complete Dragonite Holo packages. A high-value Dragonite holographic card for the collection's top page.",
+      "familyId": "field-supply",
+      "trackId": "pokemon-cards",
+      "anchorTemplateId": "669979d0c73060411f04d2a1",
+      "weight": 0.15,
+      "usePath": {
+        "kind": "collection",
+        "containerTemplateId": "669997e1c73060411f04d301",
+        "collectionId": "pokemon-cards"
+      },
+      "recipe": [
+        {
+          "kind": "template",
+          "templateId": "669979d0c73060411f04d2a1",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "669979d0c73060411f04d2a1",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "669979d0c73060411f04d2a1",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "669979d0c73060411f04d2a1",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "669979d0c73060411f04d2a1",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "669979d0c73060411f04d2a1",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "669979d0c73060411f04d2a1",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "669979d0c73060411f04d2a1",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        }
+      ]
     }
   ]
 }

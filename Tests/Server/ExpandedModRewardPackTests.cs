@@ -30,12 +30,12 @@ public sealed class ExpandedModRewardPackTests
 
     public static readonly TheoryData<string, string, double, int> PackFiles = new()
     {
-        { "wtt-contentbackport.field-resupply.json", "wtt-contentbackport.field-resupply", 0.20, 3 },
-        { "wtt-contentbackport.elite-optics.json", "wtt-contentbackport.elite-optics", 0.07, 3 },
-        { "eco-attachment.field-cache.json", "eco-attachment.field-cache", 0.16, 4 },
-        { "eco-attachment.elite-optics.json", "eco-attachment.elite-optics", 0.06, 4 },
-        { "amonya.arcane-cache.json", "amonya.arcane-cache", 0.05, 3 },
-        { "eco-ww2.relic-cache.json", "eco-ww2.relic-cache", 0.05, 2 }
+        { "wtt-contentbackport.field-resupply.json", "wtt-contentbackport.field-resupply", 0.20, 6 },
+        { "wtt-contentbackport.elite-optics.json", "wtt-contentbackport.elite-optics", 0.07, 6 },
+        { "eco-attachment.field-cache.json", "eco-attachment.field-cache", 0.16, 5 },
+        { "eco-attachment.elite-optics.json", "eco-attachment.elite-optics", 0.06, 6 },
+        { "amonya.arcane-cache.json", "amonya.arcane-cache", 0.05, 6 },
+        { "eco-ww2.relic-cache.json", "eco-ww2.relic-cache", 0.05, 4 }
     };
 
     [Theory]

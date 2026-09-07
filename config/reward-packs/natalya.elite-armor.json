@@ -24,10 +24,23 @@
       "trackId": "natalya-elite-armor",
       "anchorTemplateId": "67e179c99591ffcd472a270a",
       "weight": 1.0,
-      "usePath": { "kind": "raidRole", "roleId": "elite-operator" },
+      "usePath": {
+        "kind": "raidRole",
+        "roleId": "elite-operator"
+      },
       "recipe": [
-        { "kind": "template", "templateId": "67e179c99591ffcd472a270a", "instanceCount": 1, "stackCountPerInstance": 1 },
-        { "kind": "template", "templateId": "674815eccc95c1ad849a9b75", "instanceCount": 2, "stackCountPerInstance": 1 }
+        {
+          "kind": "template",
+          "templateId": "67e179c99591ffcd472a270a",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "674815eccc95c1ad849a9b75",
+          "instanceCount": 2,
+          "stackCountPerInstance": 1
+        }
       ]
     },
     {
@@ -38,10 +51,23 @@
       "trackId": "natalya-elite-armor",
       "anchorTemplateId": "67497be97777fb29ca1f9610",
       "weight": 0.6,
-      "usePath": { "kind": "raidRole", "roleId": "elite-operator" },
+      "usePath": {
+        "kind": "raidRole",
+        "roleId": "elite-operator"
+      },
       "recipe": [
-        { "kind": "template", "templateId": "67497be97777fb29ca1f9610", "instanceCount": 1, "stackCountPerInstance": 1 },
-        { "kind": "template", "templateId": "67497be972de11201fc07de5", "instanceCount": 2, "stackCountPerInstance": 1 }
+        {
+          "kind": "template",
+          "templateId": "67497be97777fb29ca1f9610",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "67497be972de11201fc07de5",
+          "instanceCount": 2,
+          "stackCountPerInstance": 1
+        }
       ]
     },
     {
@@ -52,11 +78,326 @@
       "trackId": "natalya-elite-armor",
       "anchorTemplateId": "67e179c97ded878d55fb8d4c",
       "weight": 0.8,
-      "usePath": { "kind": "raidRole", "roleId": "elite-operator" },
+      "usePath": {
+        "kind": "raidRole",
+        "roleId": "elite-operator"
+      },
       "recipe": [
-        { "kind": "template", "templateId": "67e179c97ded878d55fb8d4c", "instanceCount": 1, "stackCountPerInstance": 1 },
-        { "kind": "template", "templateId": "674815ecb107ad4bd99235e4", "instanceCount": 1, "stackCountPerInstance": 1 },
-        { "kind": "template", "templateId": "674815ec0e1737c294820e25", "instanceCount": 1, "stackCountPerInstance": 1 }
+        {
+          "kind": "template",
+          "templateId": "67e179c97ded878d55fb8d4c",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "674815ecb107ad4bd99235e4",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "674815ec0e1737c294820e25",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        }
+      ]
+    },
+    {
+      "lotId": "gen-pro-six-plate-carrier.shipment-v1",
+      "displayName": "Gen Pro 6 Plate Carrier Shipment",
+      "purpose": "6 complete Gen Pro 6 Plate Carrier packages. A Gen Pro 6 plate carrier with a matched pair of Level 6 FB plates.",
+      "familyId": "operator",
+      "trackId": "natalya-elite-armor",
+      "anchorTemplateId": "67e179c99591ffcd472a270a",
+      "weight": 1.0,
+      "usePath": {
+        "kind": "raidRole",
+        "roleId": "elite-operator"
+      },
+      "recipe": [
+        {
+          "kind": "template",
+          "templateId": "67e179c99591ffcd472a270a",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "674815eccc95c1ad849a9b75",
+          "instanceCount": 2,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "67e179c99591ffcd472a270a",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "674815eccc95c1ad849a9b75",
+          "instanceCount": 2,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "67e179c99591ffcd472a270a",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "674815eccc95c1ad849a9b75",
+          "instanceCount": 2,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "67e179c99591ffcd472a270a",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "674815eccc95c1ad849a9b75",
+          "instanceCount": 2,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "67e179c99591ffcd472a270a",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "674815eccc95c1ad849a9b75",
+          "instanceCount": 2,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "67e179c99591ffcd472a270a",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "674815eccc95c1ad849a9b75",
+          "instanceCount": 2,
+          "stackCountPerInstance": 1
+        }
+      ]
+    },
+    {
+      "lotId": "gen-pro-seven-plate-carrier.shipment-v1",
+      "displayName": "Gen Pro 7 Plate Carrier Shipment",
+      "purpose": "6 complete Gen Pro 7 Plate Carrier packages. A top-tier Gen Pro 7 plate carrier with a matched pair of Level 7 FB plates.",
+      "familyId": "operator",
+      "trackId": "natalya-elite-armor",
+      "anchorTemplateId": "67497be97777fb29ca1f9610",
+      "weight": 0.6,
+      "usePath": {
+        "kind": "raidRole",
+        "roleId": "elite-operator"
+      },
+      "recipe": [
+        {
+          "kind": "template",
+          "templateId": "67497be97777fb29ca1f9610",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "67497be972de11201fc07de5",
+          "instanceCount": 2,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "67497be97777fb29ca1f9610",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "67497be972de11201fc07de5",
+          "instanceCount": 2,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "67497be97777fb29ca1f9610",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "67497be972de11201fc07de5",
+          "instanceCount": 2,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "67497be97777fb29ca1f9610",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "67497be972de11201fc07de5",
+          "instanceCount": 2,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "67497be97777fb29ca1f9610",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "67497be972de11201fc07de5",
+          "instanceCount": 2,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "67497be97777fb29ca1f9610",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "67497be972de11201fc07de5",
+          "instanceCount": 2,
+          "stackCountPerInstance": 1
+        }
+      ]
+    },
+    {
+      "lotId": "ops-core-mk6-package.shipment-v1",
+      "displayName": "Ops-Core Mk6 Package Shipment",
+      "purpose": "6 complete Ops-Core Mk6 Package packages. A complete Ops-Core Mk6 helmet package with matched side and face armor.",
+      "familyId": "operator",
+      "trackId": "natalya-elite-armor",
+      "anchorTemplateId": "67e179c97ded878d55fb8d4c",
+      "weight": 0.8,
+      "usePath": {
+        "kind": "raidRole",
+        "roleId": "elite-operator"
+      },
+      "recipe": [
+        {
+          "kind": "template",
+          "templateId": "67e179c97ded878d55fb8d4c",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "674815ecb107ad4bd99235e4",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "674815ec0e1737c294820e25",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "67e179c97ded878d55fb8d4c",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "674815ecb107ad4bd99235e4",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "674815ec0e1737c294820e25",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "67e179c97ded878d55fb8d4c",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "674815ecb107ad4bd99235e4",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "674815ec0e1737c294820e25",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "67e179c97ded878d55fb8d4c",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "674815ecb107ad4bd99235e4",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "674815ec0e1737c294820e25",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "67e179c97ded878d55fb8d4c",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "674815ecb107ad4bd99235e4",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "674815ec0e1737c294820e25",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "67e179c97ded878d55fb8d4c",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "674815ecb107ad4bd99235e4",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "674815ec0e1737c294820e25",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        }
       ]
     }
   ]

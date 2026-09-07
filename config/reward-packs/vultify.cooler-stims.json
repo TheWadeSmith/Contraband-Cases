@@ -277,6 +277,990 @@
           "stackCountPerInstance": 1
         }
       ]
+    },
+    {
+      "lotId": "rapid-recon.shipment-v1",
+      "displayName": "Rapid Recon Shipment",
+      "purpose": "6 complete Rapid Recon packages. APEX mobility paired with GRAFT recovery for a fast scouting run.",
+      "familyId": "field-supply",
+      "trackId": "cooler-stims",
+      "anchorTemplateId": "5c0a1b2c3d4e5f6789abcde1",
+      "weight": 1.0,
+      "usePath": {
+        "kind": "raidRole",
+        "roleId": "combat-chemistry"
+      },
+      "recipe": [
+        {
+          "kind": "template",
+          "templateId": "5c0a1b2c3d4e5f6789abcde1",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5c0a1b2c3d4e5f6789abcde8",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5c0a1b2c3d4e5f6789abcde1",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5c0a1b2c3d4e5f6789abcde8",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5c0a1b2c3d4e5f6789abcde1",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5c0a1b2c3d4e5f6789abcde8",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5c0a1b2c3d4e5f6789abcde1",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5c0a1b2c3d4e5f6789abcde8",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5c0a1b2c3d4e5f6789abcde1",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5c0a1b2c3d4e5f6789abcde8",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5c0a1b2c3d4e5f6789abcde1",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5c0a1b2c3d4e5f6789abcde8",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        }
+      ]
+    },
+    {
+      "lotId": "field-triage.shipment-v1",
+      "displayName": "Field Triage Shipment",
+      "purpose": "6 complete Field Triage packages. AEGIS protection and GRAFT recovery for stabilizing after first contact.",
+      "familyId": "field-supply",
+      "trackId": "cooler-stims",
+      "anchorTemplateId": "5c0a1b2c3d4e5f6789abcde3",
+      "weight": 1.0,
+      "usePath": {
+        "kind": "raidRole",
+        "roleId": "combat-chemistry"
+      },
+      "recipe": [
+        {
+          "kind": "template",
+          "templateId": "5c0a1b2c3d4e5f6789abcde3",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5c0a1b2c3d4e5f6789abcde8",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5c0a1b2c3d4e5f6789abcde3",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5c0a1b2c3d4e5f6789abcde8",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5c0a1b2c3d4e5f6789abcde3",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5c0a1b2c3d4e5f6789abcde8",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5c0a1b2c3d4e5f6789abcde3",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5c0a1b2c3d4e5f6789abcde8",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5c0a1b2c3d4e5f6789abcde3",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5c0a1b2c3d4e5f6789abcde8",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5c0a1b2c3d4e5f6789abcde3",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5c0a1b2c3d4e5f6789abcde8",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        }
+      ]
+    },
+    {
+      "lotId": "search-and-recover.shipment-v1",
+      "displayName": "Search and Recover Shipment",
+      "purpose": "6 complete Search and Recover packages. ARGUS awareness and AEGIS protection for deliberate recovery work.",
+      "familyId": "field-supply",
+      "trackId": "cooler-stims",
+      "anchorTemplateId": "5c0a1b2c3d4e5f6789abcde6",
+      "weight": 0.75,
+      "usePath": {
+        "kind": "raidRole",
+        "roleId": "combat-chemistry"
+      },
+      "recipe": [
+        {
+          "kind": "template",
+          "templateId": "5c0a1b2c3d4e5f6789abcde6",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5c0a1b2c3d4e5f6789abcde3",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5c0a1b2c3d4e5f6789abcde6",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5c0a1b2c3d4e5f6789abcde3",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5c0a1b2c3d4e5f6789abcde6",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5c0a1b2c3d4e5f6789abcde3",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5c0a1b2c3d4e5f6789abcde6",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5c0a1b2c3d4e5f6789abcde3",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5c0a1b2c3d4e5f6789abcde6",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5c0a1b2c3d4e5f6789abcde3",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5c0a1b2c3d4e5f6789abcde6",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5c0a1b2c3d4e5f6789abcde3",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        }
+      ]
+    },
+    {
+      "lotId": "assault-cycle.shipment-v1",
+      "displayName": "Assault Cycle Shipment",
+      "purpose": "6 complete Assault Cycle packages. APEX speed and IRON endurance for a sustained offensive route.",
+      "familyId": "field-supply",
+      "trackId": "cooler-stims",
+      "anchorTemplateId": "5c0a1b2c3d4e5f6789abcde1",
+      "weight": 0.75,
+      "usePath": {
+        "kind": "raidRole",
+        "roleId": "combat-chemistry"
+      },
+      "recipe": [
+        {
+          "kind": "template",
+          "templateId": "5c0a1b2c3d4e5f6789abcde1",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5c0a1b2c3d4e5f6789abcde5",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5c0a1b2c3d4e5f6789abcde1",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5c0a1b2c3d4e5f6789abcde5",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5c0a1b2c3d4e5f6789abcde1",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5c0a1b2c3d4e5f6789abcde5",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5c0a1b2c3d4e5f6789abcde1",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5c0a1b2c3d4e5f6789abcde5",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5c0a1b2c3d4e5f6789abcde1",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5c0a1b2c3d4e5f6789abcde5",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5c0a1b2c3d4e5f6789abcde1",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5c0a1b2c3d4e5f6789abcde5",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        }
+      ]
+    },
+    {
+      "lotId": "heavy-push.shipment-v1",
+      "displayName": "Heavy Push Shipment",
+      "purpose": "6 complete Heavy Push packages. A four-stim APEX, AEGIS, IRON, and GRAFT suite for a difficult assault.",
+      "familyId": "field-supply",
+      "trackId": "cooler-stims",
+      "anchorTemplateId": "5c0a1b2c3d4e5f6789abcde1",
+      "weight": 0.45,
+      "usePath": {
+        "kind": "raidRole",
+        "roleId": "combat-chemistry"
+      },
+      "recipe": [
+        {
+          "kind": "template",
+          "templateId": "5c0a1b2c3d4e5f6789abcde1",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5c0a1b2c3d4e5f6789abcde3",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5c0a1b2c3d4e5f6789abcde5",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5c0a1b2c3d4e5f6789abcde8",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5c0a1b2c3d4e5f6789abcde1",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5c0a1b2c3d4e5f6789abcde3",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5c0a1b2c3d4e5f6789abcde5",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5c0a1b2c3d4e5f6789abcde8",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5c0a1b2c3d4e5f6789abcde1",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5c0a1b2c3d4e5f6789abcde3",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5c0a1b2c3d4e5f6789abcde5",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5c0a1b2c3d4e5f6789abcde8",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5c0a1b2c3d4e5f6789abcde1",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5c0a1b2c3d4e5f6789abcde3",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5c0a1b2c3d4e5f6789abcde5",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5c0a1b2c3d4e5f6789abcde8",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5c0a1b2c3d4e5f6789abcde1",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5c0a1b2c3d4e5f6789abcde3",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5c0a1b2c3d4e5f6789abcde5",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5c0a1b2c3d4e5f6789abcde8",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5c0a1b2c3d4e5f6789abcde1",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5c0a1b2c3d4e5f6789abcde3",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5c0a1b2c3d4e5f6789abcde5",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5c0a1b2c3d4e5f6789abcde8",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        }
+      ]
+    },
+    {
+      "lotId": "recovery-sweep.shipment-v1",
+      "displayName": "Recovery Sweep Shipment",
+      "purpose": "6 complete Recovery Sweep packages. A four-stim ARGUS, AEGIS, IRON, and GRAFT suite for securing a contested area.",
+      "familyId": "field-supply",
+      "trackId": "cooler-stims",
+      "anchorTemplateId": "5c0a1b2c3d4e5f6789abcde6",
+      "weight": 0.45,
+      "usePath": {
+        "kind": "raidRole",
+        "roleId": "combat-chemistry"
+      },
+      "recipe": [
+        {
+          "kind": "template",
+          "templateId": "5c0a1b2c3d4e5f6789abcde6",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5c0a1b2c3d4e5f6789abcde3",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5c0a1b2c3d4e5f6789abcde5",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5c0a1b2c3d4e5f6789abcde8",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5c0a1b2c3d4e5f6789abcde6",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5c0a1b2c3d4e5f6789abcde3",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5c0a1b2c3d4e5f6789abcde5",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5c0a1b2c3d4e5f6789abcde8",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5c0a1b2c3d4e5f6789abcde6",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5c0a1b2c3d4e5f6789abcde3",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5c0a1b2c3d4e5f6789abcde5",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5c0a1b2c3d4e5f6789abcde8",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5c0a1b2c3d4e5f6789abcde6",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5c0a1b2c3d4e5f6789abcde3",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5c0a1b2c3d4e5f6789abcde5",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5c0a1b2c3d4e5f6789abcde8",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5c0a1b2c3d4e5f6789abcde6",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5c0a1b2c3d4e5f6789abcde3",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5c0a1b2c3d4e5f6789abcde5",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5c0a1b2c3d4e5f6789abcde8",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5c0a1b2c3d4e5f6789abcde6",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5c0a1b2c3d4e5f6789abcde3",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5c0a1b2c3d4e5f6789abcde5",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5c0a1b2c3d4e5f6789abcde8",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        }
+      ]
+    },
+    {
+      "lotId": "overrun-protocol.shipment-v1",
+      "displayName": "Overrun Protocol Shipment",
+      "purpose": "6 complete Overrun Protocol packages. A terminal seven-dose pharmacy for repeated mobility, protection, and endurance cycles.",
+      "familyId": "field-supply",
+      "trackId": "cooler-stims",
+      "anchorTemplateId": "5c0a1b2c3d4e5f6789abcde1",
+      "weight": 0.15,
+      "usePath": {
+        "kind": "raidRole",
+        "roleId": "combat-chemistry"
+      },
+      "recipe": [
+        {
+          "kind": "template",
+          "templateId": "5c0a1b2c3d4e5f6789abcde1",
+          "instanceCount": 2,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5c0a1b2c3d4e5f6789abcde3",
+          "instanceCount": 2,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5c0a1b2c3d4e5f6789abcde5",
+          "instanceCount": 2,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5c0a1b2c3d4e5f6789abcde8",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5c0a1b2c3d4e5f6789abcde1",
+          "instanceCount": 2,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5c0a1b2c3d4e5f6789abcde3",
+          "instanceCount": 2,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5c0a1b2c3d4e5f6789abcde5",
+          "instanceCount": 2,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5c0a1b2c3d4e5f6789abcde8",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5c0a1b2c3d4e5f6789abcde1",
+          "instanceCount": 2,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5c0a1b2c3d4e5f6789abcde3",
+          "instanceCount": 2,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5c0a1b2c3d4e5f6789abcde5",
+          "instanceCount": 2,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5c0a1b2c3d4e5f6789abcde8",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5c0a1b2c3d4e5f6789abcde1",
+          "instanceCount": 2,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5c0a1b2c3d4e5f6789abcde3",
+          "instanceCount": 2,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5c0a1b2c3d4e5f6789abcde5",
+          "instanceCount": 2,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5c0a1b2c3d4e5f6789abcde8",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5c0a1b2c3d4e5f6789abcde1",
+          "instanceCount": 2,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5c0a1b2c3d4e5f6789abcde3",
+          "instanceCount": 2,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5c0a1b2c3d4e5f6789abcde5",
+          "instanceCount": 2,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5c0a1b2c3d4e5f6789abcde8",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5c0a1b2c3d4e5f6789abcde1",
+          "instanceCount": 2,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5c0a1b2c3d4e5f6789abcde3",
+          "instanceCount": 2,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5c0a1b2c3d4e5f6789abcde5",
+          "instanceCount": 2,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5c0a1b2c3d4e5f6789abcde8",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        }
+      ]
+    },
+    {
+      "lotId": "hunter-killer-pharmacy.shipment-v1",
+      "displayName": "Hunter-Killer Pharmacy Shipment",
+      "purpose": "6 complete Hunter-Killer Pharmacy packages. A terminal seven-dose pharmacy for repeated awareness, protection, and endurance cycles.",
+      "familyId": "field-supply",
+      "trackId": "cooler-stims",
+      "anchorTemplateId": "5c0a1b2c3d4e5f6789abcde6",
+      "weight": 0.15,
+      "usePath": {
+        "kind": "raidRole",
+        "roleId": "combat-chemistry"
+      },
+      "recipe": [
+        {
+          "kind": "template",
+          "templateId": "5c0a1b2c3d4e5f6789abcde6",
+          "instanceCount": 2,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5c0a1b2c3d4e5f6789abcde3",
+          "instanceCount": 2,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5c0a1b2c3d4e5f6789abcde5",
+          "instanceCount": 2,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5c0a1b2c3d4e5f6789abcde8",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5c0a1b2c3d4e5f6789abcde6",
+          "instanceCount": 2,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5c0a1b2c3d4e5f6789abcde3",
+          "instanceCount": 2,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5c0a1b2c3d4e5f6789abcde5",
+          "instanceCount": 2,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5c0a1b2c3d4e5f6789abcde8",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5c0a1b2c3d4e5f6789abcde6",
+          "instanceCount": 2,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5c0a1b2c3d4e5f6789abcde3",
+          "instanceCount": 2,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5c0a1b2c3d4e5f6789abcde5",
+          "instanceCount": 2,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5c0a1b2c3d4e5f6789abcde8",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5c0a1b2c3d4e5f6789abcde6",
+          "instanceCount": 2,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5c0a1b2c3d4e5f6789abcde3",
+          "instanceCount": 2,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5c0a1b2c3d4e5f6789abcde5",
+          "instanceCount": 2,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5c0a1b2c3d4e5f6789abcde8",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5c0a1b2c3d4e5f6789abcde6",
+          "instanceCount": 2,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5c0a1b2c3d4e5f6789abcde3",
+          "instanceCount": 2,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5c0a1b2c3d4e5f6789abcde5",
+          "instanceCount": 2,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5c0a1b2c3d4e5f6789abcde8",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5c0a1b2c3d4e5f6789abcde6",
+          "instanceCount": 2,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5c0a1b2c3d4e5f6789abcde3",
+          "instanceCount": 2,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5c0a1b2c3d4e5f6789abcde5",
+          "instanceCount": 2,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5c0a1b2c3d4e5f6789abcde8",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        }
+      ]
     }
   ]
 }

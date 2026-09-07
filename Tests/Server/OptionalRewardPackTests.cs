@@ -24,7 +24,7 @@ public sealed class OptionalRewardPackTests
             Assert.Equal(expected.ProviderWeight, pack.ProviderWeight, 12);
             Assert.Empty(pack.RequiredPresetIds);
             Assert.Empty(pack.RequiredBundleKeys);
-            Assert.Equal(8, pack.Lots.Count);
+            Assert.Equal(16, pack.Lots.Count);
 
             var expectedRequirements = expected.UnitValues.Keys
                 .Append(expected.ContainerTemplateId)
@@ -34,9 +34,10 @@ public sealed class OptionalRewardPackTests
             Assert.Equal(expectedRequirements, pack.RequiredTemplateIds);
             Assert.Equal(
                 expected.LotValues.Keys.OrderBy(lotId => lotId, StringComparer.Ordinal),
-                pack.Lots.Select(lot => lot.LotId).OrderBy(lotId => lotId, StringComparer.Ordinal));
+                pack.Lots.Where(lot => !ShipmentEconomy.IsShipment(lot.LotId))
+                    .Select(lot => lot.LotId).OrderBy(lotId => lotId, StringComparer.Ordinal));
 
-            var evaluated = pack.Lots
+            var evaluated = pack.Lots.Where(lot => !ShipmentEconomy.IsShipment(lot.LotId))
                 .Select(lot => EvaluateLot(lot, expected, pack.RequiredTemplateIds))
                 .ToArray();
 
@@ -75,7 +76,7 @@ public sealed class OptionalRewardPackTests
         Assert.Equal("sjx.combat-chemistry", pack.ProviderId);
         Assert.Equal("1.0.2", pack.PackVersion);
         Assert.Equal(13, pack.RequiredTemplateIds.Count);
-        Assert.Equal(5, pack.Lots.Count);
+        Assert.Equal(10, pack.Lots.Count);
         Assert.DoesNotContain(AmbiguousSjxHydraTemplateId, pack.RequiredTemplateIds);
         Assert.All(pack.Lots, lot => Assert.DoesNotContain(
             lot.RecipeLines.OfType<TemplateLine>(),
@@ -112,7 +113,7 @@ public sealed class OptionalRewardPackTests
             StringComparison.OrdinalIgnoreCase));
         Assert.Equal(2, covertSustainment.RecipeLines.Count);
 
-        var evaluated = pack.Lots
+        var evaluated = pack.Lots.Where(lot => !ShipmentEconomy.IsShipment(lot.LotId))
             .Select(lot => new EvaluatedLot(
                 lot,
                 CargoGradeBands.Assign(EvaluateSjxLotValue(lot))))

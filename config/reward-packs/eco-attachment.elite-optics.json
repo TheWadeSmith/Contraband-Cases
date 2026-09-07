@@ -159,6 +159,360 @@
           "stackCountPerInstance": 1
         }
       ]
+    },
+    {
+      "lotId": "precision-riflescope.shipment-v1",
+      "displayName": "Precision Riflescope Shipment",
+      "purpose": "6 complete Precision Riflescope packages. A Vortex Viper HS 2.5-10x30mm riflescope on its matching 30mm mount.",
+      "familyId": "attachments",
+      "trackId": "eco-elite-optics",
+      "anchorTemplateId": "696395af1b7e04938307a122",
+      "weight": 1.0,
+      "usePath": {
+        "kind": "raidRole",
+        "roleId": "precision-overwatch"
+      },
+      "recipe": [
+        {
+          "kind": "template",
+          "templateId": "696395af1b7e04938307a122",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "696395af1b7e04938307a124",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "696395af1b7e04938307a122",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "696395af1b7e04938307a124",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "696395af1b7e04938307a122",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "696395af1b7e04938307a124",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "696395af1b7e04938307a122",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "696395af1b7e04938307a124",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "696395af1b7e04938307a122",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "696395af1b7e04938307a124",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "696395af1b7e04938307a122",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "696395af1b7e04938307a124",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        }
+      ]
+    },
+    {
+      "lotId": "precision-armorer-kit.shipment-v1",
+      "displayName": "Precision Armorer Kit Shipment",
+      "purpose": "6 complete Precision Armorer Kit packages. A riflescope with its matching mount, a rail and flip-sight set, plus two alternative micro-dot mounts. Compatibility depends on the host weapon.",
+      "familyId": "attachments",
+      "trackId": "eco-elite-optics",
+      "anchorTemplateId": "696395af1b7e04938307a122",
+      "weight": 0.8,
+      "usePath": {
+        "kind": "raidRole",
+        "roleId": "precision-overwatch"
+      },
+      "recipe": [
+        {
+          "kind": "template",
+          "templateId": "696395af1b7e04938307a122",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "696395af1b7e04938307a124",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "69bc81d77cbcfaf66d0f8541",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "69bc77167cbcfaf66d0f853a",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "69bc7cdc7cbcfaf66d0f853c",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "69bc60217cbcfaf66d0f8533",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "69bdb41d2e4518999108ae92",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "696395af1b7e04938307a122",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "696395af1b7e04938307a124",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "69bc81d77cbcfaf66d0f8541",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "69bc77167cbcfaf66d0f853a",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "69bc7cdc7cbcfaf66d0f853c",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "69bc60217cbcfaf66d0f8533",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "69bdb41d2e4518999108ae92",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "696395af1b7e04938307a122",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "696395af1b7e04938307a124",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "69bc81d77cbcfaf66d0f8541",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "69bc77167cbcfaf66d0f853a",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "69bc7cdc7cbcfaf66d0f853c",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "69bc60217cbcfaf66d0f8533",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "69bdb41d2e4518999108ae92",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "696395af1b7e04938307a122",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "696395af1b7e04938307a124",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "69bc81d77cbcfaf66d0f8541",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "69bc77167cbcfaf66d0f853a",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "69bc7cdc7cbcfaf66d0f853c",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "69bc60217cbcfaf66d0f8533",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "69bdb41d2e4518999108ae92",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "696395af1b7e04938307a122",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "696395af1b7e04938307a124",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "69bc81d77cbcfaf66d0f8541",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "69bc77167cbcfaf66d0f853a",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "69bc7cdc7cbcfaf66d0f853c",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "69bc60217cbcfaf66d0f8533",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "69bdb41d2e4518999108ae92",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "696395af1b7e04938307a122",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "696395af1b7e04938307a124",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "69bc81d77cbcfaf66d0f8541",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "69bc77167cbcfaf66d0f853a",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "69bc7cdc7cbcfaf66d0f853c",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "69bc60217cbcfaf66d0f8533",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "69bdb41d2e4518999108ae92",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        }
+      ]
     }
   ]
 }
