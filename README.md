@@ -1,6 +1,14 @@
 # Contraband Cases
 
-Contraband Cases **0.4.7** is a client-and-server mod for **SPT 4.1.3**.
+Contraband Cases **0.4.8** is a client-and-server mod for **SPT 4.1.x**,
+verified against **SPT 4.1.5**. Builds retain the compatible 4.1.3 server SDK.
+
+0.4.8 adds **10 GP Coins at 3%** and **25 GP Coins at 1%** to Cash Cache.
+Bitcoin rewards stay at 1 coin (0.90%) and 2 coins (0.10%). The two GP entries
+take probability from existing rouble outcomes, not from Bitcoin. GP values are
+labelled handbook barter references, not guaranteed rouble cash-outs. Existing
+paid payouts remain collectible. Case/key drop rates, cargo rewards, Relay,
+Favor and Unity models/sounds are unchanged.
 
 0.4.7 hides the Broker menu button by default: press **F5** in the main menu
 or stash to open it. Rebind this shortcut in MCM; the optional button is under
@@ -39,7 +47,7 @@ your chosen package or risk it on Relay. The roulette presents an already
 saved server result; it never chooses loot. Only in-game items and roubles
 are involved. There are no real-money purchases.
 
-The new **Cash Cache** is a separate one-payout contract: RUB, USD, EUR or
+The new **Cash Cache** is a separate one-payout contract: RUB, USD, EUR, GP Coins or
 physical Bitcoin. It uses the same universal key and roulette, with no
 discard decision, Relay attempt or Broker Favor change.
 
@@ -86,7 +94,7 @@ each Relay attempt. There are no case-specific keys.
 | Operations | Practical ammunition, medical supplies, field equipment and loadouts | Green |
 | Relics | Anime, Pokemon and Yu-Gi-Oh cards, historical relics and arcane curios | Violet |
 | Black Site | Elite equipment, night operations, ordnance and experimental supplies | Red |
-| Cash Cache | One exact stack payout of RUB, USD, EUR or physical Bitcoin | Yellow |
+| Cash Cache | One exact stack payout of RUB, USD, EUR, GP Coins or physical Bitcoin | Yellow |
 
 Cases are separate physical items sold by Mechanic, with distinct names,
 descriptions, loot tables, published odds and prices. They reuse the same 3D
@@ -148,44 +156,50 @@ The server commits one payout before the roulette begins. **Collect Payout**
 grants that exact amount without another key. A full stash leaves the original
 payout saved for retry. Closing, skipping or reconnecting cannot reroll it.
 
-The versioned `cash-v1` table is fixed and does not use cargo chase reweighting:
+The `cash-opening-v2` draw table is fixed and does not use cargo chase reweighting.
+Existing `cash-v1` payout identities are retained so already-paid claims remain
+collectible; only new openings use these updated odds:
 
 | Payout | Chance per opening |
 | --- | ---: |
 | ₽25,000 | 15% |
-| ₽60,000 | 16% |
+| ₽60,000 | 13% |
 | ₽100,000 | 10% |
 | ₽150,000 | 17% |
-| ₽175,000 | 10% |
+| ₽175,000 | 9% |
 | ₽220,000 | 10% |
 | ₽300,000 | 3% |
 | US $1,000 | 7% |
 | US $1,500 | 6% |
 | €1,000 | 4% |
 | €2,000 | 1% |
+| 10 GP Coins | 3% |
+| 25 GP Coins | 1% |
 | 1 physical Bitcoin | 0.90% |
 | 2 physical Bitcoins | 0.10% |
 
 Bitcoins are ordinary in-game items, not a real wallet, cryptocurrency exchange
 or fractional crypto balance. Two Bitcoins are separate items when native stack
-rules require it. No other crypto or arbitrary modded currency is admitted.
+rules require it. GP Coins are Tarkov barter currency, not cryptocurrency.
+Their payouts follow native stack limits; no arbitrary modded currency is admitted.
 
 Price is the weighted mean of **non-Bitcoin payouts**, rounded up to ₽1,000.
-USD/EUR use published direct rouble purchase offers; Bitcoin uses an estimated
+USD/EUR use published direct rouble purchase offers; GP Coins use their finalized
+handbook barter reference value, not a promised trader cash-out. Bitcoin uses an estimated
 standard LL1 Therapist sale value from the finalized handbook and buy rules.
 Foreign-currency purchase value is **not** guaranteed rouble liquidation value;
 player-specific sale modifiers are not simulated. Price and amounts remain
 fixed for that catalog session. Cash ignores the Mixed case fixed-price override.
 
-The base-database audit gives **₽130,000 + one key** and an expected reference
-payout of about **₽138,599**, not expected cash-sale proceeds. Defining near-even
+The SPT 4.1.5 base-database audit gives **₽131,000 + one key** and an expected reference
+payout of about **₽139,174**, not expected cash-sale proceeds. Defining near-even
 as within 10% of case plus assumed key cost:
 
 | Assumed key cost | Meaningful loss | Near-even | Win |
 | --- | ---: | ---: | ---: |
 | Found key, ₽0 financial cost | 41% | 7% | 52% |
 | ₽25,000 opportunity cost | 48% | 21% | 31% |
-| ₽65,000 opportunity cost | 79% | 6% | 15% |
+| ₽65,000 opportunity cost | 78% | 7% | 15% |
 
 These are candidate estimates, not installed-mod or raid-cadence validation.
 A found key still has time and opportunity cost. Key scarcity can make this a
@@ -542,7 +556,7 @@ Before calling this candidate game-verified:
    Verify their finalized live prices, available pools and pre-spend odds, then
    check actual trader sale quotes for rewards (including legal disassembly),
    actual retained-key cadence and the effect of spending keys on Relay.
-6. Cash Cache: verify live price/odds, RUB/USD/EUR/Bitcoin previews and amounts,
+6. Cash Cache: verify live price/odds, RUB/USD/EUR/GP Coin/Bitcoin previews and amounts,
    one-key consumption, collection/full-stash retry, unchanged Favor, and
    reconnect recovery. Confirm spin ticks and landing sounds audibly, including
    after reopening the UI and at different interface/master/effects volumes.

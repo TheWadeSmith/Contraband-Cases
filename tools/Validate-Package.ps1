@@ -10,8 +10,8 @@ $ErrorActionPreference = "Stop"
 
 $projectRoot = [IO.Path]::GetFullPath((Join-Path $PSScriptRoot ".."))
 $distRoot = [IO.Path]::GetFullPath((Join-Path $projectRoot "..\dist"))
-$packageBaseName = "ContrabandCases-0.4.7-SPT4.1.3"
-$packageTimestampUtc = [DateTime]::SpecifyKind([DateTime]"2026-09-05T22:00:00", [DateTimeKind]::Utc)
+$packageBaseName = "ContrabandCases-0.4.8-SPT4.1.5"
+$packageTimestampUtc = [DateTime]::SpecifyKind([DateTime]"2026-09-07T00:00:00", [DateTimeKind]::Utc)
 
 function Resolve-PackagePath {
     param(
@@ -468,8 +468,8 @@ function Get-AssemblyReport {
     }
 
     Assert-Condition ([string]::Equals($assemblyName.Name, $ExpectedName, [StringComparison]::Ordinal)) "'$Path' has assembly name '$($assemblyName.Name)'; expected '$ExpectedName'."
-    Assert-Condition ($assemblyName.Version.ToString() -eq "0.4.7.0") "'$ExpectedName' assembly version is '$($assemblyName.Version)'; expected '0.4.7.0'."
-    Assert-Condition ($fileVersion -eq "0.4.7.0") "'$ExpectedName' file version is '$fileVersion'; expected '0.4.7.0'."
+    Assert-Condition ($assemblyName.Version.ToString() -eq "0.4.8.0") "'$ExpectedName' assembly version is '$($assemblyName.Version)'; expected '0.4.8.0'."
+    Assert-Condition ($fileVersion -eq "0.4.8.0") "'$ExpectedName' file version is '$fileVersion'; expected '0.4.8.0'."
     Assert-Condition (Test-BinaryContainsText $Path $ExpectedTargetFramework) "'$ExpectedName' does not embed target framework '$ExpectedTargetFramework'."
 
     return [pscustomobject]@{
@@ -692,7 +692,7 @@ Assert-ExactSequence "staged directory set" $expectedDirectories $actualDirector
 foreach ($relativePath in $actualFiles) {
     $stagedPath = Join-Path $resolvedStagePath $relativePath.Replace("/", [IO.Path]::DirectorySeparatorChar)
     $actualTimestampUtc = (Get-Item -LiteralPath $stagedPath -Force).LastWriteTimeUtc
-    Assert-Condition ($actualTimestampUtc.Ticks -eq $packageTimestampUtc.Ticks) "staged file '$relativePath' has timestamp '$($actualTimestampUtc.ToString('o'))'; expected the 0.4.7 release timestamp '$($packageTimestampUtc.ToString('o'))'."
+    Assert-Condition ($actualTimestampUtc.Ticks -eq $packageTimestampUtc.Ticks) "staged file '$relativePath' has timestamp '$($actualTimestampUtc.ToString('o'))'; expected the 0.4.8 release timestamp '$($packageTimestampUtc.ToString('o'))'."
 }
 
 $releaseArtifactMappings = @(
@@ -892,9 +892,9 @@ $serverAspNetCoreHttpReference = @($serverAssembly.References | Where-Object { $
 Assert-Condition ($serverAspNetCoreHttpReference.Count -eq 1 -and $serverAspNetCoreHttpReference[0].Version.ToString() -eq "10.0.0.0") "server must reference the Microsoft.AspNetCore.Http.Abstractions 10.0.0.0 assembly supplied by the SPT 4.1.3 server runtime exactly once."
 
 $clientSharedReference = @($clientAssembly.References | Where-Object { $_.Name -eq "ContrabandCases.Shared" })
-Assert-Condition ($clientSharedReference.Count -eq 1 -and $clientSharedReference[0].Version.ToString() -eq "0.4.7.0") "client must reference ContrabandCases.Shared 0.4.7.0 exactly once."
+Assert-Condition ($clientSharedReference.Count -eq 1 -and $clientSharedReference[0].Version.ToString() -eq "0.4.8.0") "client must reference ContrabandCases.Shared 0.4.8.0 exactly once."
 $serverSharedReference = @($serverAssembly.References | Where-Object { $_.Name -eq "ContrabandCases.Shared" })
-Assert-Condition ($serverSharedReference.Count -eq 1 -and $serverSharedReference[0].Version.ToString() -eq "0.4.7.0") "server must reference ContrabandCases.Shared 0.4.7.0 exactly once."
+Assert-Condition ($serverSharedReference.Count -eq 1 -and $serverSharedReference[0].Version.ToString() -eq "0.4.8.0") "server must reference ContrabandCases.Shared 0.4.8.0 exactly once."
 foreach ($expectedSptReference in @("SPTarkov.Common", "SPTarkov.DI", "SPTarkov.Server.Core")) {
     $matches = @($serverAssembly.References | Where-Object { $_.Name -eq $expectedSptReference })
     Assert-Condition ($matches.Count -eq 1 -and $matches[0].Version.ToString() -eq "4.1.3.0") "server reference '$expectedSptReference' must be version 4.1.3.0 exactly once."
@@ -955,7 +955,7 @@ try {
                 $entryName = $entry.FullName
                 Assert-Condition (!$entryName.Contains("\")) "archive entry '$entryName' uses a backslash."
                 Assert-Condition (!$entryName.StartsWith("/", [StringComparison]::Ordinal) -and $entryName -notmatch "(^|/)\.\.(/|$)" -and $entryName -notmatch "^[A-Za-z]:") "archive entry '$entryName' is unsafe."
-                Assert-Condition ($entry.LastWriteTime.Year -eq $packageTimestampUtc.Year -and $entry.LastWriteTime.Month -eq $packageTimestampUtc.Month -and $entry.LastWriteTime.Day -eq $packageTimestampUtc.Day -and $entry.LastWriteTime.Hour -eq $packageTimestampUtc.Hour -and $entry.LastWriteTime.Minute -eq $packageTimestampUtc.Minute -and $entry.LastWriteTime.Second -eq $packageTimestampUtc.Second) "archive entry '$entryName' does not have the 0.4.7 release timestamp."
+                Assert-Condition ($entry.LastWriteTime.Year -eq $packageTimestampUtc.Year -and $entry.LastWriteTime.Month -eq $packageTimestampUtc.Month -and $entry.LastWriteTime.Day -eq $packageTimestampUtc.Day -and $entry.LastWriteTime.Hour -eq $packageTimestampUtc.Hour -and $entry.LastWriteTime.Minute -eq $packageTimestampUtc.Minute -and $entry.LastWriteTime.Second -eq $packageTimestampUtc.Second) "archive entry '$entryName' does not have the 0.4.8 release timestamp."
 
                 $outputPath = [IO.Path]::GetFullPath((Join-Path $roundTripRoot $entryName.Replace("/", [IO.Path]::DirectorySeparatorChar)))
                 $roundTripPrefix = $roundTripRoot.TrimEnd([IO.Path]::DirectorySeparatorChar) + [IO.Path]::DirectorySeparatorChar
@@ -1031,7 +1031,7 @@ if ($isSourceProject) {
     Assert-ValidationSourceStateUnchanged $validationSourceState $releaseArtifactMappings
 }
 
-Write-Host "Validated Contraband Cases 0.4.7 package:"
+Write-Host "Validated Contraband Cases 0.4.8 package:"
 Write-Host "  Stage:   $resolvedStagePath"
 Write-Host "  Archive: $resolvedArchivePath"
 Write-Host "  SHA-256: $(Get-Sha256 $resolvedArchivePath)"

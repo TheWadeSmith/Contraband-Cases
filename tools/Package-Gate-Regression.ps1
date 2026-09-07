@@ -5,7 +5,7 @@ param(
 
 Set-StrictMode -Version Latest
 $ErrorActionPreference = "Stop"
-$packageTimestampUtc = [DateTime]::SpecifyKind([DateTime]"2026-09-05T22:00:00", [DateTimeKind]::Utc)
+$packageTimestampUtc = [DateTime]::SpecifyKind([DateTime]"2026-09-07T00:00:00", [DateTimeKind]::Utc)
 $packageDosDate = [uint16]((($packageTimestampUtc.Year - 1980) -shl 9) -bor ($packageTimestampUtc.Month -shl 5) -bor $packageTimestampUtc.Day)
 $packageDosTime = [uint16](($packageTimestampUtc.Hour -shl 11) -bor ($packageTimestampUtc.Minute -shl 5) -bor ([int]($packageTimestampUtc.Second / 2)))
 
@@ -180,8 +180,8 @@ try {
     $stage = Join-Path $packageRoot "dist\stage"
     $validationScript = Join-Path $packageRoot "ContrabandCases\tools\Validate-Package.ps1"
     $stagedClientDll = Join-Path $stage "BepInEx\plugins\ContrabandCases\ContrabandCases.Client.dll"
-    $archivePath = Join-Path $packageRoot "dist\ContrabandCases-0.4.7-SPT4.1.3.zip"
-    $hashPath = Join-Path $packageRoot "dist\ContrabandCases-0.4.7-SPT4.1.3-SHA256.txt"
+    $archivePath = Join-Path $packageRoot "dist\ContrabandCases-0.4.8-SPT4.1.5.zip"
+    $hashPath = Join-Path $packageRoot "dist\ContrabandCases-0.4.8-SPT4.1.5-SHA256.txt"
 
     # The dist-scoped lock must reject a concurrent package run without touching canonical outputs.
     $lockedStageSnapshot = Get-DirectoryByteSnapshot $stage
@@ -208,12 +208,12 @@ try {
     Assert-Condition ((Get-FileHash -LiteralPath $hashPath -Algorithm SHA256).Hash -eq $lockedManifestHash) "interrupted-transaction rejection changed the canonical checksum manifest."
     Remove-Item -LiteralPath $interruptedTransactionPath -Recurse -Force
 
-    Assert-Condition ((Get-Item -LiteralPath $stagedClientDll).LastWriteTimeUtc.Ticks -eq $packageTimestampUtc.Ticks) "packaging did not stamp staged files with the 0.4.7 release timestamp."
+    Assert-Condition ((Get-Item -LiteralPath $stagedClientDll).LastWriteTimeUtc.Ticks -eq $packageTimestampUtc.Ticks) "packaging did not stamp staged files with the 0.4.8 release timestamp."
     $headerTimestamps = Get-ArchiveHeaderTimestamps $archivePath
-    Assert-Condition ($headerTimestamps.LocalDate -eq $packageDosDate -and $headerTimestamps.LocalTime -eq $packageDosTime) "local ZIP header does not contain the 0.4.7 release timestamp."
-    Assert-Condition ($headerTimestamps.CentralDate -eq $packageDosDate -and $headerTimestamps.CentralTime -eq $packageDosTime) "central ZIP header does not contain the 0.4.7 release timestamp."
+    Assert-Condition ($headerTimestamps.LocalDate -eq $packageDosDate -and $headerTimestamps.LocalTime -eq $packageDosTime) "local ZIP header does not contain the 0.4.8 release timestamp."
+    Assert-Condition ($headerTimestamps.CentralDate -eq $packageDosDate -and $headerTimestamps.CentralTime -eq $packageDosTime) "central ZIP header does not contain the 0.4.8 release timestamp."
     (Get-Item -LiteralPath $stagedClientDll).LastWriteTimeUtc = [DateTime]::SpecifyKind([DateTime]"1980-01-01T00:00:00", [DateTimeKind]::Utc)
-    Invoke-ExpectFailure $validationScript "staged release timestamp mutation" @("Package validation failed: staged file '.+ContrabandCases\.Client\.dll' has timestamp '.+'; expected the 0\.4\.7 release timestamp '.+'\.")
+    Invoke-ExpectFailure $validationScript "staged release timestamp mutation" @("Package validation failed: staged file '.+ContrabandCases\.Client\.dll' has timestamp '.+'; expected the 0\.4\.8 release timestamp '.+'\.")
     (Get-Item -LiteralPath $stagedClientDll).LastWriteTimeUtc = $packageTimestampUtc
     Assert-Condition ((Invoke-ProductionScript $validationScript) -eq 0) "restored release timestamp did not pass validation."
 
@@ -399,8 +399,8 @@ try {
 
     $publicationDist = Join-Path $publicationRoot "dist"
     $publicationStage = Join-Path $publicationDist "stage"
-    $publicationArchive = Join-Path $publicationDist "ContrabandCases-0.4.7-SPT4.1.3.zip"
-    $publicationHash = Join-Path $publicationDist "ContrabandCases-0.4.7-SPT4.1.3-SHA256.txt"
+    $publicationArchive = Join-Path $publicationDist "ContrabandCases-0.4.8-SPT4.1.5.zip"
+    $publicationHash = Join-Path $publicationDist "ContrabandCases-0.4.8-SPT4.1.5-SHA256.txt"
     $publishedStageSnapshot = Get-DirectoryByteSnapshot $publicationStage
     $publishedArchiveHash = (Get-FileHash -LiteralPath $publicationArchive -Algorithm SHA256).Hash
     $publishedManifestHash = (Get-FileHash -LiteralPath $publicationHash -Algorithm SHA256).Hash
