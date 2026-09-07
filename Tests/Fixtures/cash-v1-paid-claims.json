@@ -1,0 +1,1881 @@
+[
+  {
+    "SchemaVersion": 6,
+    "RecoveryMeter": 2,
+    "LegacySecuredStakeRoots": [],
+    "Records": [],
+    "RelayRecords": [],
+    "ActiveManifest": {
+      "ManifestId": "cash-v1-synthetic-0",
+      "CatalogSnapshotId": "catalog-v2/2dbfa295cf0255112f7bd94bfa3a92e79065ffc7298595a80f603afbd3805586",
+      "RarityLadderVersion": 1,
+      "Commitment": {
+        "Version": 1,
+        "CommitmentSha256Hex": "ec16c1d9ad8685975c64200703c6f0f8fab1a2fa7ba736bd123e64f390f27a8f",
+        "NonceHex": "9daa6305613f687c5612f2db8e565f1eecc44535d935c36bd9dbbc96857a205e"
+      },
+      "FlowState": {
+        "Phase": 3,
+        "CurrentOrdinal": 1,
+        "LockedOrdinal": 1,
+        "RelayStage": 1,
+        "RelayTerminal": false
+      },
+      "Ticket": {
+        "OpeningQuality": null,
+        "CaseTemplateId": "66d000000000000000000014",
+        "CaseId": {
+          "IsEmpty": false
+        },
+        "KeyId": {
+          "IsEmpty": false
+        },
+        "PreparedAtUtc": "1970-01-01T00:01:00+00:00",
+        "ProfileCommitStarted": true,
+        "Committed": true,
+        "CommittedAtUtc": "1970-01-01T00:02:00+00:00",
+        "CommitGeneration": 1,
+        "CommitPredecessorHash": "0000000000000000000000000000000000000000000000000000000000000000"
+      },
+      "Offers": [
+        {
+          "Ordinal": 1,
+          "Rarity": 0,
+          "Identity": {
+            "ProviderId": "cash-cache",
+            "PackVersion": "cash-v1",
+            "LotId": "rub-25000",
+            "DisplayName": "\u20BD25,000",
+            "Purpose": "Cash payout. Rouble payout",
+            "FamilyId": "cash",
+            "TrackId": "cash",
+            "AnchorTemplateId": "5449016a4bdc2d6f028b456f",
+            "Weight": 1500,
+            "UsePath": {
+              "Kind": "raidRole",
+              "RoleId": "currency",
+              "ContainerTemplateId": null,
+              "CollectionId": null,
+              "ProductionId": null,
+              "TraderId": null,
+              "AssortId": null
+            },
+            "Fingerprint": {
+              "Sha256Hex": "7de12d7949be321f2328c1fd1e4ed5c79ffe792a7a6682890cb0990bf619b9a7"
+            }
+          },
+          "Forest": {
+            "Nodes": [
+              {
+                "TreeRootPath": "cash-0",
+                "LogicalPath": "cash-0",
+                "TemplateId": "5449016a4bdc2d6f028b456f",
+                "ParentLogicalPath": null,
+                "SlotId": null,
+                "InternalLocation": null,
+                "StackCount": 25000,
+                "StableState": null
+              }
+            ]
+          },
+          "Fingerprint": {
+            "Sha256Hex": "7de12d7949be321f2328c1fd1e4ed5c79ffe792a7a6682890cb0990bf619b9a7"
+          },
+          "RngEvidence": {
+            "Purpose": 0,
+            "DrawOrdinal": 1,
+            "UnitNumerator": 0
+          }
+        }
+      ],
+      "Decisions": [],
+      "Entitlement": {
+        "Rarity": 0,
+        "Identity": {
+          "ProviderId": "cash-cache",
+          "PackVersion": "cash-v1",
+          "LotId": "rub-25000",
+          "DisplayName": "\u20BD25,000",
+          "Purpose": "Cash payout. Rouble payout",
+          "FamilyId": "cash",
+          "TrackId": "cash",
+          "AnchorTemplateId": "5449016a4bdc2d6f028b456f",
+          "Weight": 1500,
+          "UsePath": {
+            "Kind": "raidRole",
+            "RoleId": "currency",
+            "ContainerTemplateId": null,
+            "CollectionId": null,
+            "ProductionId": null,
+            "TraderId": null,
+            "AssortId": null
+          },
+          "Fingerprint": {
+            "Sha256Hex": "7de12d7949be321f2328c1fd1e4ed5c79ffe792a7a6682890cb0990bf619b9a7"
+          }
+        },
+        "Forest": {
+          "Nodes": [
+            {
+              "TreeRootPath": "cash-0",
+              "LogicalPath": "cash-0",
+              "TemplateId": "5449016a4bdc2d6f028b456f",
+              "ParentLogicalPath": null,
+              "SlotId": null,
+              "InternalLocation": null,
+              "StackCount": 25000,
+              "StableState": null
+            }
+          ]
+        },
+        "Fingerprint": {
+          "Sha256Hex": "7de12d7949be321f2328c1fd1e4ed5c79ffe792a7a6682890cb0990bf619b9a7"
+        }
+      },
+      "RelayCandidates": [],
+      "RelayHistory": [],
+      "BrokerFavor": 2,
+      "ClaimPrepared": null,
+      "RelayPrepared": null,
+      "TerminalReceipt": null
+    },
+    "ManifestReceipts": [],
+    "ManifestClaimGrants": []
+  },
+  {
+    "SchemaVersion": 6,
+    "RecoveryMeter": 2,
+    "LegacySecuredStakeRoots": [],
+    "Records": [],
+    "RelayRecords": [],
+    "ActiveManifest": {
+      "ManifestId": "cash-v1-synthetic-1",
+      "CatalogSnapshotId": "catalog-v2/2dbfa295cf0255112f7bd94bfa3a92e79065ffc7298595a80f603afbd3805586",
+      "RarityLadderVersion": 1,
+      "Commitment": {
+        "Version": 1,
+        "CommitmentSha256Hex": "7025362d8071cf066c8646a4b9635b9e4ebe4bf4d107eca5ca18db01751174a9",
+        "NonceHex": "53229d229475d41c789851151ec24918f52c2dcfcbb11dab2e0d6972c5eee3c4"
+      },
+      "FlowState": {
+        "Phase": 3,
+        "CurrentOrdinal": 1,
+        "LockedOrdinal": 1,
+        "RelayStage": 1,
+        "RelayTerminal": false
+      },
+      "Ticket": {
+        "OpeningQuality": null,
+        "CaseTemplateId": "66d000000000000000000014",
+        "CaseId": {
+          "IsEmpty": false
+        },
+        "KeyId": {
+          "IsEmpty": false
+        },
+        "PreparedAtUtc": "1970-01-01T00:01:00+00:00",
+        "ProfileCommitStarted": true,
+        "Committed": true,
+        "CommittedAtUtc": "1970-01-01T00:02:00+00:00",
+        "CommitGeneration": 1,
+        "CommitPredecessorHash": "0000000000000000000000000000000000000000000000000000000000000000"
+      },
+      "Offers": [
+        {
+          "Ordinal": 1,
+          "Rarity": 4,
+          "Identity": {
+            "ProviderId": "cash-cache",
+            "PackVersion": "cash-v1",
+            "LotId": "rub-60000",
+            "DisplayName": "\u20BD60,000",
+            "Purpose": "Cash payout. Rouble payout",
+            "FamilyId": "cash",
+            "TrackId": "cash",
+            "AnchorTemplateId": "5449016a4bdc2d6f028b456f",
+            "Weight": 1600,
+            "UsePath": {
+              "Kind": "raidRole",
+              "RoleId": "currency",
+              "ContainerTemplateId": null,
+              "CollectionId": null,
+              "ProductionId": null,
+              "TraderId": null,
+              "AssortId": null
+            },
+            "Fingerprint": {
+              "Sha256Hex": "a86f56653adad83cd7cf446f23465bbce82a3f5b5dfe7d02183531075ecc1a56"
+            }
+          },
+          "Forest": {
+            "Nodes": [
+              {
+                "TreeRootPath": "cash-0",
+                "LogicalPath": "cash-0",
+                "TemplateId": "5449016a4bdc2d6f028b456f",
+                "ParentLogicalPath": null,
+                "SlotId": null,
+                "InternalLocation": null,
+                "StackCount": 60000,
+                "StableState": null
+              }
+            ]
+          },
+          "Fingerprint": {
+            "Sha256Hex": "a86f56653adad83cd7cf446f23465bbce82a3f5b5dfe7d02183531075ecc1a56"
+          },
+          "RngEvidence": {
+            "Purpose": 0,
+            "DrawOrdinal": 1,
+            "UnitNumerator": 0
+          }
+        }
+      ],
+      "Decisions": [],
+      "Entitlement": {
+        "Rarity": 4,
+        "Identity": {
+          "ProviderId": "cash-cache",
+          "PackVersion": "cash-v1",
+          "LotId": "rub-60000",
+          "DisplayName": "\u20BD60,000",
+          "Purpose": "Cash payout. Rouble payout",
+          "FamilyId": "cash",
+          "TrackId": "cash",
+          "AnchorTemplateId": "5449016a4bdc2d6f028b456f",
+          "Weight": 1600,
+          "UsePath": {
+            "Kind": "raidRole",
+            "RoleId": "currency",
+            "ContainerTemplateId": null,
+            "CollectionId": null,
+            "ProductionId": null,
+            "TraderId": null,
+            "AssortId": null
+          },
+          "Fingerprint": {
+            "Sha256Hex": "a86f56653adad83cd7cf446f23465bbce82a3f5b5dfe7d02183531075ecc1a56"
+          }
+        },
+        "Forest": {
+          "Nodes": [
+            {
+              "TreeRootPath": "cash-0",
+              "LogicalPath": "cash-0",
+              "TemplateId": "5449016a4bdc2d6f028b456f",
+              "ParentLogicalPath": null,
+              "SlotId": null,
+              "InternalLocation": null,
+              "StackCount": 60000,
+              "StableState": null
+            }
+          ]
+        },
+        "Fingerprint": {
+          "Sha256Hex": "a86f56653adad83cd7cf446f23465bbce82a3f5b5dfe7d02183531075ecc1a56"
+        }
+      },
+      "RelayCandidates": [],
+      "RelayHistory": [],
+      "BrokerFavor": 2,
+      "ClaimPrepared": null,
+      "RelayPrepared": null,
+      "TerminalReceipt": null
+    },
+    "ManifestReceipts": [],
+    "ManifestClaimGrants": []
+  },
+  {
+    "SchemaVersion": 6,
+    "RecoveryMeter": 2,
+    "LegacySecuredStakeRoots": [],
+    "Records": [],
+    "RelayRecords": [],
+    "ActiveManifest": {
+      "ManifestId": "cash-v1-synthetic-2",
+      "CatalogSnapshotId": "catalog-v2/2dbfa295cf0255112f7bd94bfa3a92e79065ffc7298595a80f603afbd3805586",
+      "RarityLadderVersion": 1,
+      "Commitment": {
+        "Version": 1,
+        "CommitmentSha256Hex": "539c365bf49def8d9441969411c4a39a69d1b13d5edb0654c0e795940f142b03",
+        "NonceHex": "a26c27a88b51bf5ab029159c0274b47a99a28ebdc2726ef267d6d99ad75e773a"
+      },
+      "FlowState": {
+        "Phase": 3,
+        "CurrentOrdinal": 1,
+        "LockedOrdinal": 1,
+        "RelayStage": 1,
+        "RelayTerminal": false
+      },
+      "Ticket": {
+        "OpeningQuality": null,
+        "CaseTemplateId": "66d000000000000000000014",
+        "CaseId": {
+          "IsEmpty": false
+        },
+        "KeyId": {
+          "IsEmpty": false
+        },
+        "PreparedAtUtc": "1970-01-01T00:01:00+00:00",
+        "ProfileCommitStarted": true,
+        "Committed": true,
+        "CommittedAtUtc": "1970-01-01T00:02:00+00:00",
+        "CommitGeneration": 1,
+        "CommitPredecessorHash": "0000000000000000000000000000000000000000000000000000000000000000"
+      },
+      "Offers": [
+        {
+          "Ordinal": 1,
+          "Rarity": 1,
+          "Identity": {
+            "ProviderId": "cash-cache",
+            "PackVersion": "cash-v1",
+            "LotId": "rub-100000",
+            "DisplayName": "\u20BD100,000",
+            "Purpose": "Cash payout. Rouble payout",
+            "FamilyId": "cash",
+            "TrackId": "cash",
+            "AnchorTemplateId": "5449016a4bdc2d6f028b456f",
+            "Weight": 1000,
+            "UsePath": {
+              "Kind": "raidRole",
+              "RoleId": "currency",
+              "ContainerTemplateId": null,
+              "CollectionId": null,
+              "ProductionId": null,
+              "TraderId": null,
+              "AssortId": null
+            },
+            "Fingerprint": {
+              "Sha256Hex": "02f3c5652a4110528bbb60621aee5fc28f0e5cd532c43c9247cf9baed32c4a13"
+            }
+          },
+          "Forest": {
+            "Nodes": [
+              {
+                "TreeRootPath": "cash-0",
+                "LogicalPath": "cash-0",
+                "TemplateId": "5449016a4bdc2d6f028b456f",
+                "ParentLogicalPath": null,
+                "SlotId": null,
+                "InternalLocation": null,
+                "StackCount": 100000,
+                "StableState": null
+              }
+            ]
+          },
+          "Fingerprint": {
+            "Sha256Hex": "02f3c5652a4110528bbb60621aee5fc28f0e5cd532c43c9247cf9baed32c4a13"
+          },
+          "RngEvidence": {
+            "Purpose": 0,
+            "DrawOrdinal": 1,
+            "UnitNumerator": 0
+          }
+        }
+      ],
+      "Decisions": [],
+      "Entitlement": {
+        "Rarity": 1,
+        "Identity": {
+          "ProviderId": "cash-cache",
+          "PackVersion": "cash-v1",
+          "LotId": "rub-100000",
+          "DisplayName": "\u20BD100,000",
+          "Purpose": "Cash payout. Rouble payout",
+          "FamilyId": "cash",
+          "TrackId": "cash",
+          "AnchorTemplateId": "5449016a4bdc2d6f028b456f",
+          "Weight": 1000,
+          "UsePath": {
+            "Kind": "raidRole",
+            "RoleId": "currency",
+            "ContainerTemplateId": null,
+            "CollectionId": null,
+            "ProductionId": null,
+            "TraderId": null,
+            "AssortId": null
+          },
+          "Fingerprint": {
+            "Sha256Hex": "02f3c5652a4110528bbb60621aee5fc28f0e5cd532c43c9247cf9baed32c4a13"
+          }
+        },
+        "Forest": {
+          "Nodes": [
+            {
+              "TreeRootPath": "cash-0",
+              "LogicalPath": "cash-0",
+              "TemplateId": "5449016a4bdc2d6f028b456f",
+              "ParentLogicalPath": null,
+              "SlotId": null,
+              "InternalLocation": null,
+              "StackCount": 100000,
+              "StableState": null
+            }
+          ]
+        },
+        "Fingerprint": {
+          "Sha256Hex": "02f3c5652a4110528bbb60621aee5fc28f0e5cd532c43c9247cf9baed32c4a13"
+        }
+      },
+      "RelayCandidates": [],
+      "RelayHistory": [],
+      "BrokerFavor": 2,
+      "ClaimPrepared": null,
+      "RelayPrepared": null,
+      "TerminalReceipt": null
+    },
+    "ManifestReceipts": [],
+    "ManifestClaimGrants": []
+  },
+  {
+    "SchemaVersion": 6,
+    "RecoveryMeter": 2,
+    "LegacySecuredStakeRoots": [],
+    "Records": [],
+    "RelayRecords": [],
+    "ActiveManifest": {
+      "ManifestId": "cash-v1-synthetic-3",
+      "CatalogSnapshotId": "catalog-v2/2dbfa295cf0255112f7bd94bfa3a92e79065ffc7298595a80f603afbd3805586",
+      "RarityLadderVersion": 1,
+      "Commitment": {
+        "Version": 1,
+        "CommitmentSha256Hex": "b82dca298868b80509a87c4af5b5215272211a85e8cb347f61c6085d82ebfbd9",
+        "NonceHex": "f069257b9cab9cfacbeb1c8336172ac045fe7cc9708cdae7c49e606e37153f7d"
+      },
+      "FlowState": {
+        "Phase": 3,
+        "CurrentOrdinal": 1,
+        "LockedOrdinal": 1,
+        "RelayStage": 1,
+        "RelayTerminal": false
+      },
+      "Ticket": {
+        "OpeningQuality": null,
+        "CaseTemplateId": "66d000000000000000000014",
+        "CaseId": {
+          "IsEmpty": false
+        },
+        "KeyId": {
+          "IsEmpty": false
+        },
+        "PreparedAtUtc": "1970-01-01T00:01:00+00:00",
+        "ProfileCommitStarted": true,
+        "Committed": true,
+        "CommittedAtUtc": "1970-01-01T00:02:00+00:00",
+        "CommitGeneration": 1,
+        "CommitPredecessorHash": "0000000000000000000000000000000000000000000000000000000000000000"
+      },
+      "Offers": [
+        {
+          "Ordinal": 1,
+          "Rarity": 1,
+          "Identity": {
+            "ProviderId": "cash-cache",
+            "PackVersion": "cash-v1",
+            "LotId": "rub-150000",
+            "DisplayName": "\u20BD150,000",
+            "Purpose": "Cash payout. Rouble payout",
+            "FamilyId": "cash",
+            "TrackId": "cash",
+            "AnchorTemplateId": "5449016a4bdc2d6f028b456f",
+            "Weight": 1700,
+            "UsePath": {
+              "Kind": "raidRole",
+              "RoleId": "currency",
+              "ContainerTemplateId": null,
+              "CollectionId": null,
+              "ProductionId": null,
+              "TraderId": null,
+              "AssortId": null
+            },
+            "Fingerprint": {
+              "Sha256Hex": "ef8e9b562b4f0c0fec07a4f616b1ca90526214ba9c9e4cad2a12423b9ada9e21"
+            }
+          },
+          "Forest": {
+            "Nodes": [
+              {
+                "TreeRootPath": "cash-0",
+                "LogicalPath": "cash-0",
+                "TemplateId": "5449016a4bdc2d6f028b456f",
+                "ParentLogicalPath": null,
+                "SlotId": null,
+                "InternalLocation": null,
+                "StackCount": 150000,
+                "StableState": null
+              }
+            ]
+          },
+          "Fingerprint": {
+            "Sha256Hex": "ef8e9b562b4f0c0fec07a4f616b1ca90526214ba9c9e4cad2a12423b9ada9e21"
+          },
+          "RngEvidence": {
+            "Purpose": 0,
+            "DrawOrdinal": 1,
+            "UnitNumerator": 0
+          }
+        }
+      ],
+      "Decisions": [],
+      "Entitlement": {
+        "Rarity": 1,
+        "Identity": {
+          "ProviderId": "cash-cache",
+          "PackVersion": "cash-v1",
+          "LotId": "rub-150000",
+          "DisplayName": "\u20BD150,000",
+          "Purpose": "Cash payout. Rouble payout",
+          "FamilyId": "cash",
+          "TrackId": "cash",
+          "AnchorTemplateId": "5449016a4bdc2d6f028b456f",
+          "Weight": 1700,
+          "UsePath": {
+            "Kind": "raidRole",
+            "RoleId": "currency",
+            "ContainerTemplateId": null,
+            "CollectionId": null,
+            "ProductionId": null,
+            "TraderId": null,
+            "AssortId": null
+          },
+          "Fingerprint": {
+            "Sha256Hex": "ef8e9b562b4f0c0fec07a4f616b1ca90526214ba9c9e4cad2a12423b9ada9e21"
+          }
+        },
+        "Forest": {
+          "Nodes": [
+            {
+              "TreeRootPath": "cash-0",
+              "LogicalPath": "cash-0",
+              "TemplateId": "5449016a4bdc2d6f028b456f",
+              "ParentLogicalPath": null,
+              "SlotId": null,
+              "InternalLocation": null,
+              "StackCount": 150000,
+              "StableState": null
+            }
+          ]
+        },
+        "Fingerprint": {
+          "Sha256Hex": "ef8e9b562b4f0c0fec07a4f616b1ca90526214ba9c9e4cad2a12423b9ada9e21"
+        }
+      },
+      "RelayCandidates": [],
+      "RelayHistory": [],
+      "BrokerFavor": 2,
+      "ClaimPrepared": null,
+      "RelayPrepared": null,
+      "TerminalReceipt": null
+    },
+    "ManifestReceipts": [],
+    "ManifestClaimGrants": []
+  },
+  {
+    "SchemaVersion": 6,
+    "RecoveryMeter": 2,
+    "LegacySecuredStakeRoots": [],
+    "Records": [],
+    "RelayRecords": [],
+    "ActiveManifest": {
+      "ManifestId": "cash-v1-synthetic-4",
+      "CatalogSnapshotId": "catalog-v2/2dbfa295cf0255112f7bd94bfa3a92e79065ffc7298595a80f603afbd3805586",
+      "RarityLadderVersion": 1,
+      "Commitment": {
+        "Version": 1,
+        "CommitmentSha256Hex": "4bcfc5bec343146f234dc2ab1def65e3cbcfc2ff695fed40a09b206ba53393c7",
+        "NonceHex": "108cb728dade3cd8ecbffa51e88ca110ff178decdfcaf20c817f34e67bc24f9e"
+      },
+      "FlowState": {
+        "Phase": 3,
+        "CurrentOrdinal": 1,
+        "LockedOrdinal": 1,
+        "RelayStage": 1,
+        "RelayTerminal": false
+      },
+      "Ticket": {
+        "OpeningQuality": null,
+        "CaseTemplateId": "66d000000000000000000014",
+        "CaseId": {
+          "IsEmpty": false
+        },
+        "KeyId": {
+          "IsEmpty": false
+        },
+        "PreparedAtUtc": "1970-01-01T00:01:00+00:00",
+        "ProfileCommitStarted": true,
+        "Committed": true,
+        "CommittedAtUtc": "1970-01-01T00:02:00+00:00",
+        "CommitGeneration": 1,
+        "CommitPredecessorHash": "0000000000000000000000000000000000000000000000000000000000000000"
+      },
+      "Offers": [
+        {
+          "Ordinal": 1,
+          "Rarity": 2,
+          "Identity": {
+            "ProviderId": "cash-cache",
+            "PackVersion": "cash-v1",
+            "LotId": "rub-175000",
+            "DisplayName": "\u20BD175,000",
+            "Purpose": "Cash payout. Rouble payout",
+            "FamilyId": "cash",
+            "TrackId": "cash",
+            "AnchorTemplateId": "5449016a4bdc2d6f028b456f",
+            "Weight": 1000,
+            "UsePath": {
+              "Kind": "raidRole",
+              "RoleId": "currency",
+              "ContainerTemplateId": null,
+              "CollectionId": null,
+              "ProductionId": null,
+              "TraderId": null,
+              "AssortId": null
+            },
+            "Fingerprint": {
+              "Sha256Hex": "3814c9f000d0a144e39ea67e64748e128dc098595d02fa35cc5ac5a4db026ca1"
+            }
+          },
+          "Forest": {
+            "Nodes": [
+              {
+                "TreeRootPath": "cash-0",
+                "LogicalPath": "cash-0",
+                "TemplateId": "5449016a4bdc2d6f028b456f",
+                "ParentLogicalPath": null,
+                "SlotId": null,
+                "InternalLocation": null,
+                "StackCount": 175000,
+                "StableState": null
+              }
+            ]
+          },
+          "Fingerprint": {
+            "Sha256Hex": "3814c9f000d0a144e39ea67e64748e128dc098595d02fa35cc5ac5a4db026ca1"
+          },
+          "RngEvidence": {
+            "Purpose": 0,
+            "DrawOrdinal": 1,
+            "UnitNumerator": 0
+          }
+        }
+      ],
+      "Decisions": [],
+      "Entitlement": {
+        "Rarity": 2,
+        "Identity": {
+          "ProviderId": "cash-cache",
+          "PackVersion": "cash-v1",
+          "LotId": "rub-175000",
+          "DisplayName": "\u20BD175,000",
+          "Purpose": "Cash payout. Rouble payout",
+          "FamilyId": "cash",
+          "TrackId": "cash",
+          "AnchorTemplateId": "5449016a4bdc2d6f028b456f",
+          "Weight": 1000,
+          "UsePath": {
+            "Kind": "raidRole",
+            "RoleId": "currency",
+            "ContainerTemplateId": null,
+            "CollectionId": null,
+            "ProductionId": null,
+            "TraderId": null,
+            "AssortId": null
+          },
+          "Fingerprint": {
+            "Sha256Hex": "3814c9f000d0a144e39ea67e64748e128dc098595d02fa35cc5ac5a4db026ca1"
+          }
+        },
+        "Forest": {
+          "Nodes": [
+            {
+              "TreeRootPath": "cash-0",
+              "LogicalPath": "cash-0",
+              "TemplateId": "5449016a4bdc2d6f028b456f",
+              "ParentLogicalPath": null,
+              "SlotId": null,
+              "InternalLocation": null,
+              "StackCount": 175000,
+              "StableState": null
+            }
+          ]
+        },
+        "Fingerprint": {
+          "Sha256Hex": "3814c9f000d0a144e39ea67e64748e128dc098595d02fa35cc5ac5a4db026ca1"
+        }
+      },
+      "RelayCandidates": [],
+      "RelayHistory": [],
+      "BrokerFavor": 2,
+      "ClaimPrepared": null,
+      "RelayPrepared": null,
+      "TerminalReceipt": null
+    },
+    "ManifestReceipts": [],
+    "ManifestClaimGrants": []
+  },
+  {
+    "SchemaVersion": 6,
+    "RecoveryMeter": 2,
+    "LegacySecuredStakeRoots": [],
+    "Records": [],
+    "RelayRecords": [],
+    "ActiveManifest": {
+      "ManifestId": "cash-v1-synthetic-5",
+      "CatalogSnapshotId": "catalog-v2/2dbfa295cf0255112f7bd94bfa3a92e79065ffc7298595a80f603afbd3805586",
+      "RarityLadderVersion": 1,
+      "Commitment": {
+        "Version": 1,
+        "CommitmentSha256Hex": "07951c97bd735eb804070983ab0e018842bdba50c94ee0d5436b0391c7cdeef6",
+        "NonceHex": "16f5b6c7cde76cee2955e6f28b20014e53316d032a5982fd0d53fe9e500c70a1"
+      },
+      "FlowState": {
+        "Phase": 3,
+        "CurrentOrdinal": 1,
+        "LockedOrdinal": 1,
+        "RelayStage": 1,
+        "RelayTerminal": false
+      },
+      "Ticket": {
+        "OpeningQuality": null,
+        "CaseTemplateId": "66d000000000000000000014",
+        "CaseId": {
+          "IsEmpty": false
+        },
+        "KeyId": {
+          "IsEmpty": false
+        },
+        "PreparedAtUtc": "1970-01-01T00:01:00+00:00",
+        "ProfileCommitStarted": true,
+        "Committed": true,
+        "CommittedAtUtc": "1970-01-01T00:02:00+00:00",
+        "CommitGeneration": 1,
+        "CommitPredecessorHash": "0000000000000000000000000000000000000000000000000000000000000000"
+      },
+      "Offers": [
+        {
+          "Ordinal": 1,
+          "Rarity": 2,
+          "Identity": {
+            "ProviderId": "cash-cache",
+            "PackVersion": "cash-v1",
+            "LotId": "rub-220000",
+            "DisplayName": "\u20BD220,000",
+            "Purpose": "Cash payout. Rouble payout",
+            "FamilyId": "cash",
+            "TrackId": "cash",
+            "AnchorTemplateId": "5449016a4bdc2d6f028b456f",
+            "Weight": 1000,
+            "UsePath": {
+              "Kind": "raidRole",
+              "RoleId": "currency",
+              "ContainerTemplateId": null,
+              "CollectionId": null,
+              "ProductionId": null,
+              "TraderId": null,
+              "AssortId": null
+            },
+            "Fingerprint": {
+              "Sha256Hex": "4d2b9b937980b27ef237658cbad9ff7ba47f5b3381fbf6fcf102553c2fe9646a"
+            }
+          },
+          "Forest": {
+            "Nodes": [
+              {
+                "TreeRootPath": "cash-0",
+                "LogicalPath": "cash-0",
+                "TemplateId": "5449016a4bdc2d6f028b456f",
+                "ParentLogicalPath": null,
+                "SlotId": null,
+                "InternalLocation": null,
+                "StackCount": 220000,
+                "StableState": null
+              }
+            ]
+          },
+          "Fingerprint": {
+            "Sha256Hex": "4d2b9b937980b27ef237658cbad9ff7ba47f5b3381fbf6fcf102553c2fe9646a"
+          },
+          "RngEvidence": {
+            "Purpose": 0,
+            "DrawOrdinal": 1,
+            "UnitNumerator": 0
+          }
+        }
+      ],
+      "Decisions": [],
+      "Entitlement": {
+        "Rarity": 2,
+        "Identity": {
+          "ProviderId": "cash-cache",
+          "PackVersion": "cash-v1",
+          "LotId": "rub-220000",
+          "DisplayName": "\u20BD220,000",
+          "Purpose": "Cash payout. Rouble payout",
+          "FamilyId": "cash",
+          "TrackId": "cash",
+          "AnchorTemplateId": "5449016a4bdc2d6f028b456f",
+          "Weight": 1000,
+          "UsePath": {
+            "Kind": "raidRole",
+            "RoleId": "currency",
+            "ContainerTemplateId": null,
+            "CollectionId": null,
+            "ProductionId": null,
+            "TraderId": null,
+            "AssortId": null
+          },
+          "Fingerprint": {
+            "Sha256Hex": "4d2b9b937980b27ef237658cbad9ff7ba47f5b3381fbf6fcf102553c2fe9646a"
+          }
+        },
+        "Forest": {
+          "Nodes": [
+            {
+              "TreeRootPath": "cash-0",
+              "LogicalPath": "cash-0",
+              "TemplateId": "5449016a4bdc2d6f028b456f",
+              "ParentLogicalPath": null,
+              "SlotId": null,
+              "InternalLocation": null,
+              "StackCount": 220000,
+              "StableState": null
+            }
+          ]
+        },
+        "Fingerprint": {
+          "Sha256Hex": "4d2b9b937980b27ef237658cbad9ff7ba47f5b3381fbf6fcf102553c2fe9646a"
+        }
+      },
+      "RelayCandidates": [],
+      "RelayHistory": [],
+      "BrokerFavor": 2,
+      "ClaimPrepared": null,
+      "RelayPrepared": null,
+      "TerminalReceipt": null
+    },
+    "ManifestReceipts": [],
+    "ManifestClaimGrants": []
+  },
+  {
+    "SchemaVersion": 6,
+    "RecoveryMeter": 2,
+    "LegacySecuredStakeRoots": [],
+    "Records": [],
+    "RelayRecords": [],
+    "ActiveManifest": {
+      "ManifestId": "cash-v1-synthetic-6",
+      "CatalogSnapshotId": "catalog-v2/2dbfa295cf0255112f7bd94bfa3a92e79065ffc7298595a80f603afbd3805586",
+      "RarityLadderVersion": 1,
+      "Commitment": {
+        "Version": 1,
+        "CommitmentSha256Hex": "8f7c1c6fb9d90bf7d82559a898f93c00c4f9d4e3070f0721c0dd87cc368ad878",
+        "NonceHex": "df475b8477faa58837f64bb9b41ef74177a2831329308ad222d2535b5d98a7b6"
+      },
+      "FlowState": {
+        "Phase": 3,
+        "CurrentOrdinal": 1,
+        "LockedOrdinal": 1,
+        "RelayStage": 1,
+        "RelayTerminal": false
+      },
+      "Ticket": {
+        "OpeningQuality": null,
+        "CaseTemplateId": "66d000000000000000000014",
+        "CaseId": {
+          "IsEmpty": false
+        },
+        "KeyId": {
+          "IsEmpty": false
+        },
+        "PreparedAtUtc": "1970-01-01T00:01:00+00:00",
+        "ProfileCommitStarted": true,
+        "Committed": true,
+        "CommittedAtUtc": "1970-01-01T00:02:00+00:00",
+        "CommitGeneration": 1,
+        "CommitPredecessorHash": "0000000000000000000000000000000000000000000000000000000000000000"
+      },
+      "Offers": [
+        {
+          "Ordinal": 1,
+          "Rarity": 2,
+          "Identity": {
+            "ProviderId": "cash-cache",
+            "PackVersion": "cash-v1",
+            "LotId": "rub-300000",
+            "DisplayName": "\u20BD300,000",
+            "Purpose": "Cash payout. Rouble payout",
+            "FamilyId": "cash",
+            "TrackId": "cash",
+            "AnchorTemplateId": "5449016a4bdc2d6f028b456f",
+            "Weight": 300,
+            "UsePath": {
+              "Kind": "raidRole",
+              "RoleId": "currency",
+              "ContainerTemplateId": null,
+              "CollectionId": null,
+              "ProductionId": null,
+              "TraderId": null,
+              "AssortId": null
+            },
+            "Fingerprint": {
+              "Sha256Hex": "3933a5f659554c60544c5498a05110d7484120666e4acef7aabea53f94aaa23b"
+            }
+          },
+          "Forest": {
+            "Nodes": [
+              {
+                "TreeRootPath": "cash-0",
+                "LogicalPath": "cash-0",
+                "TemplateId": "5449016a4bdc2d6f028b456f",
+                "ParentLogicalPath": null,
+                "SlotId": null,
+                "InternalLocation": null,
+                "StackCount": 300000,
+                "StableState": null
+              }
+            ]
+          },
+          "Fingerprint": {
+            "Sha256Hex": "3933a5f659554c60544c5498a05110d7484120666e4acef7aabea53f94aaa23b"
+          },
+          "RngEvidence": {
+            "Purpose": 0,
+            "DrawOrdinal": 1,
+            "UnitNumerator": 0
+          }
+        }
+      ],
+      "Decisions": [],
+      "Entitlement": {
+        "Rarity": 2,
+        "Identity": {
+          "ProviderId": "cash-cache",
+          "PackVersion": "cash-v1",
+          "LotId": "rub-300000",
+          "DisplayName": "\u20BD300,000",
+          "Purpose": "Cash payout. Rouble payout",
+          "FamilyId": "cash",
+          "TrackId": "cash",
+          "AnchorTemplateId": "5449016a4bdc2d6f028b456f",
+          "Weight": 300,
+          "UsePath": {
+            "Kind": "raidRole",
+            "RoleId": "currency",
+            "ContainerTemplateId": null,
+            "CollectionId": null,
+            "ProductionId": null,
+            "TraderId": null,
+            "AssortId": null
+          },
+          "Fingerprint": {
+            "Sha256Hex": "3933a5f659554c60544c5498a05110d7484120666e4acef7aabea53f94aaa23b"
+          }
+        },
+        "Forest": {
+          "Nodes": [
+            {
+              "TreeRootPath": "cash-0",
+              "LogicalPath": "cash-0",
+              "TemplateId": "5449016a4bdc2d6f028b456f",
+              "ParentLogicalPath": null,
+              "SlotId": null,
+              "InternalLocation": null,
+              "StackCount": 300000,
+              "StableState": null
+            }
+          ]
+        },
+        "Fingerprint": {
+          "Sha256Hex": "3933a5f659554c60544c5498a05110d7484120666e4acef7aabea53f94aaa23b"
+        }
+      },
+      "RelayCandidates": [],
+      "RelayHistory": [],
+      "BrokerFavor": 2,
+      "ClaimPrepared": null,
+      "RelayPrepared": null,
+      "TerminalReceipt": null
+    },
+    "ManifestReceipts": [],
+    "ManifestClaimGrants": []
+  },
+  {
+    "SchemaVersion": 6,
+    "RecoveryMeter": 2,
+    "LegacySecuredStakeRoots": [],
+    "Records": [],
+    "RelayRecords": [],
+    "ActiveManifest": {
+      "ManifestId": "cash-v1-synthetic-7",
+      "CatalogSnapshotId": "catalog-v2/2dbfa295cf0255112f7bd94bfa3a92e79065ffc7298595a80f603afbd3805586",
+      "RarityLadderVersion": 1,
+      "Commitment": {
+        "Version": 1,
+        "CommitmentSha256Hex": "9d21934ff6ee8d1103558bec22acca56fecec73cdd9f2e57bc917138442dd46e",
+        "NonceHex": "2af075d6ee2b2935dd6be3f5d7e78bfeb260704d53a06a2f7bae29730a879112"
+      },
+      "FlowState": {
+        "Phase": 3,
+        "CurrentOrdinal": 1,
+        "LockedOrdinal": 1,
+        "RelayStage": 1,
+        "RelayTerminal": false
+      },
+      "Ticket": {
+        "OpeningQuality": null,
+        "CaseTemplateId": "66d000000000000000000014",
+        "CaseId": {
+          "IsEmpty": false
+        },
+        "KeyId": {
+          "IsEmpty": false
+        },
+        "PreparedAtUtc": "1970-01-01T00:01:00+00:00",
+        "ProfileCommitStarted": true,
+        "Committed": true,
+        "CommittedAtUtc": "1970-01-01T00:02:00+00:00",
+        "CommitGeneration": 1,
+        "CommitPredecessorHash": "0000000000000000000000000000000000000000000000000000000000000000"
+      },
+      "Offers": [
+        {
+          "Ordinal": 1,
+          "Rarity": 1,
+          "Identity": {
+            "ProviderId": "cash-cache",
+            "PackVersion": "cash-v1",
+            "LotId": "usd-1000",
+            "DisplayName": "$1,000 US dollars",
+            "Purpose": "Cash payout. Estimated purchase value \u2014 not a rouble cash-out",
+            "FamilyId": "cash",
+            "TrackId": "cash",
+            "AnchorTemplateId": "5696686a4bdc2da3298b456a",
+            "Weight": 700,
+            "UsePath": {
+              "Kind": "raidRole",
+              "RoleId": "currency",
+              "ContainerTemplateId": null,
+              "CollectionId": null,
+              "ProductionId": null,
+              "TraderId": null,
+              "AssortId": null
+            },
+            "Fingerprint": {
+              "Sha256Hex": "6326e45c4d6bebbdfc29ee62b3fe81313935ef1692417af0622efb6dfb9ef66f"
+            }
+          },
+          "Forest": {
+            "Nodes": [
+              {
+                "TreeRootPath": "cash-0",
+                "LogicalPath": "cash-0",
+                "TemplateId": "5696686a4bdc2da3298b456a",
+                "ParentLogicalPath": null,
+                "SlotId": null,
+                "InternalLocation": null,
+                "StackCount": 1000,
+                "StableState": null
+              }
+            ]
+          },
+          "Fingerprint": {
+            "Sha256Hex": "6326e45c4d6bebbdfc29ee62b3fe81313935ef1692417af0622efb6dfb9ef66f"
+          },
+          "RngEvidence": {
+            "Purpose": 0,
+            "DrawOrdinal": 1,
+            "UnitNumerator": 0
+          }
+        }
+      ],
+      "Decisions": [],
+      "Entitlement": {
+        "Rarity": 1,
+        "Identity": {
+          "ProviderId": "cash-cache",
+          "PackVersion": "cash-v1",
+          "LotId": "usd-1000",
+          "DisplayName": "$1,000 US dollars",
+          "Purpose": "Cash payout. Estimated purchase value \u2014 not a rouble cash-out",
+          "FamilyId": "cash",
+          "TrackId": "cash",
+          "AnchorTemplateId": "5696686a4bdc2da3298b456a",
+          "Weight": 700,
+          "UsePath": {
+            "Kind": "raidRole",
+            "RoleId": "currency",
+            "ContainerTemplateId": null,
+            "CollectionId": null,
+            "ProductionId": null,
+            "TraderId": null,
+            "AssortId": null
+          },
+          "Fingerprint": {
+            "Sha256Hex": "6326e45c4d6bebbdfc29ee62b3fe81313935ef1692417af0622efb6dfb9ef66f"
+          }
+        },
+        "Forest": {
+          "Nodes": [
+            {
+              "TreeRootPath": "cash-0",
+              "LogicalPath": "cash-0",
+              "TemplateId": "5696686a4bdc2da3298b456a",
+              "ParentLogicalPath": null,
+              "SlotId": null,
+              "InternalLocation": null,
+              "StackCount": 1000,
+              "StableState": null
+            }
+          ]
+        },
+        "Fingerprint": {
+          "Sha256Hex": "6326e45c4d6bebbdfc29ee62b3fe81313935ef1692417af0622efb6dfb9ef66f"
+        }
+      },
+      "RelayCandidates": [],
+      "RelayHistory": [],
+      "BrokerFavor": 2,
+      "ClaimPrepared": null,
+      "RelayPrepared": null,
+      "TerminalReceipt": null
+    },
+    "ManifestReceipts": [],
+    "ManifestClaimGrants": []
+  },
+  {
+    "SchemaVersion": 6,
+    "RecoveryMeter": 2,
+    "LegacySecuredStakeRoots": [],
+    "Records": [],
+    "RelayRecords": [],
+    "ActiveManifest": {
+      "ManifestId": "cash-v1-synthetic-8",
+      "CatalogSnapshotId": "catalog-v2/2dbfa295cf0255112f7bd94bfa3a92e79065ffc7298595a80f603afbd3805586",
+      "RarityLadderVersion": 1,
+      "Commitment": {
+        "Version": 1,
+        "CommitmentSha256Hex": "a390ae6fb63347cc747f212913ced1a34041785c8e465d5856df42d5017fb774",
+        "NonceHex": "641d52d4d40be3e7e7112cc7dbded496e8e6d67c26971ebc7336c7637c7f0dce"
+      },
+      "FlowState": {
+        "Phase": 3,
+        "CurrentOrdinal": 1,
+        "LockedOrdinal": 1,
+        "RelayStage": 1,
+        "RelayTerminal": false
+      },
+      "Ticket": {
+        "OpeningQuality": null,
+        "CaseTemplateId": "66d000000000000000000014",
+        "CaseId": {
+          "IsEmpty": false
+        },
+        "KeyId": {
+          "IsEmpty": false
+        },
+        "PreparedAtUtc": "1970-01-01T00:01:00+00:00",
+        "ProfileCommitStarted": true,
+        "Committed": true,
+        "CommittedAtUtc": "1970-01-01T00:02:00+00:00",
+        "CommitGeneration": 1,
+        "CommitPredecessorHash": "0000000000000000000000000000000000000000000000000000000000000000"
+      },
+      "Offers": [
+        {
+          "Ordinal": 1,
+          "Rarity": 2,
+          "Identity": {
+            "ProviderId": "cash-cache",
+            "PackVersion": "cash-v1",
+            "LotId": "usd-1500",
+            "DisplayName": "$1,500 US dollars",
+            "Purpose": "Cash payout. Estimated purchase value \u2014 not a rouble cash-out",
+            "FamilyId": "cash",
+            "TrackId": "cash",
+            "AnchorTemplateId": "5696686a4bdc2da3298b456a",
+            "Weight": 600,
+            "UsePath": {
+              "Kind": "raidRole",
+              "RoleId": "currency",
+              "ContainerTemplateId": null,
+              "CollectionId": null,
+              "ProductionId": null,
+              "TraderId": null,
+              "AssortId": null
+            },
+            "Fingerprint": {
+              "Sha256Hex": "421fecc81aaab4c3e9617b76bc8c73cc4182f4757b2a431f4c129b8f3a1c0b75"
+            }
+          },
+          "Forest": {
+            "Nodes": [
+              {
+                "TreeRootPath": "cash-0",
+                "LogicalPath": "cash-0",
+                "TemplateId": "5696686a4bdc2da3298b456a",
+                "ParentLogicalPath": null,
+                "SlotId": null,
+                "InternalLocation": null,
+                "StackCount": 1500,
+                "StableState": null
+              }
+            ]
+          },
+          "Fingerprint": {
+            "Sha256Hex": "421fecc81aaab4c3e9617b76bc8c73cc4182f4757b2a431f4c129b8f3a1c0b75"
+          },
+          "RngEvidence": {
+            "Purpose": 0,
+            "DrawOrdinal": 1,
+            "UnitNumerator": 0
+          }
+        }
+      ],
+      "Decisions": [],
+      "Entitlement": {
+        "Rarity": 2,
+        "Identity": {
+          "ProviderId": "cash-cache",
+          "PackVersion": "cash-v1",
+          "LotId": "usd-1500",
+          "DisplayName": "$1,500 US dollars",
+          "Purpose": "Cash payout. Estimated purchase value \u2014 not a rouble cash-out",
+          "FamilyId": "cash",
+          "TrackId": "cash",
+          "AnchorTemplateId": "5696686a4bdc2da3298b456a",
+          "Weight": 600,
+          "UsePath": {
+            "Kind": "raidRole",
+            "RoleId": "currency",
+            "ContainerTemplateId": null,
+            "CollectionId": null,
+            "ProductionId": null,
+            "TraderId": null,
+            "AssortId": null
+          },
+          "Fingerprint": {
+            "Sha256Hex": "421fecc81aaab4c3e9617b76bc8c73cc4182f4757b2a431f4c129b8f3a1c0b75"
+          }
+        },
+        "Forest": {
+          "Nodes": [
+            {
+              "TreeRootPath": "cash-0",
+              "LogicalPath": "cash-0",
+              "TemplateId": "5696686a4bdc2da3298b456a",
+              "ParentLogicalPath": null,
+              "SlotId": null,
+              "InternalLocation": null,
+              "StackCount": 1500,
+              "StableState": null
+            }
+          ]
+        },
+        "Fingerprint": {
+          "Sha256Hex": "421fecc81aaab4c3e9617b76bc8c73cc4182f4757b2a431f4c129b8f3a1c0b75"
+        }
+      },
+      "RelayCandidates": [],
+      "RelayHistory": [],
+      "BrokerFavor": 2,
+      "ClaimPrepared": null,
+      "RelayPrepared": null,
+      "TerminalReceipt": null
+    },
+    "ManifestReceipts": [],
+    "ManifestClaimGrants": []
+  },
+  {
+    "SchemaVersion": 6,
+    "RecoveryMeter": 2,
+    "LegacySecuredStakeRoots": [],
+    "Records": [],
+    "RelayRecords": [],
+    "ActiveManifest": {
+      "ManifestId": "cash-v1-synthetic-9",
+      "CatalogSnapshotId": "catalog-v2/2dbfa295cf0255112f7bd94bfa3a92e79065ffc7298595a80f603afbd3805586",
+      "RarityLadderVersion": 1,
+      "Commitment": {
+        "Version": 1,
+        "CommitmentSha256Hex": "3e377e18d14d66f268365143904565bed8b0a1f2e3333966d306225a2f3ce4b8",
+        "NonceHex": "d6f2ec78d5fdf0dc46b36cb3379ad065fc2ac096c8137d83ff6d31682f5a7d86"
+      },
+      "FlowState": {
+        "Phase": 3,
+        "CurrentOrdinal": 1,
+        "LockedOrdinal": 1,
+        "RelayStage": 1,
+        "RelayTerminal": false
+      },
+      "Ticket": {
+        "OpeningQuality": null,
+        "CaseTemplateId": "66d000000000000000000014",
+        "CaseId": {
+          "IsEmpty": false
+        },
+        "KeyId": {
+          "IsEmpty": false
+        },
+        "PreparedAtUtc": "1970-01-01T00:01:00+00:00",
+        "ProfileCommitStarted": true,
+        "Committed": true,
+        "CommittedAtUtc": "1970-01-01T00:02:00+00:00",
+        "CommitGeneration": 1,
+        "CommitPredecessorHash": "0000000000000000000000000000000000000000000000000000000000000000"
+      },
+      "Offers": [
+        {
+          "Ordinal": 1,
+          "Rarity": 1,
+          "Identity": {
+            "ProviderId": "cash-cache",
+            "PackVersion": "cash-v1",
+            "LotId": "eur-1000",
+            "DisplayName": "\u20AC1,000 euros",
+            "Purpose": "Cash payout. Estimated purchase value \u2014 not a rouble cash-out",
+            "FamilyId": "cash",
+            "TrackId": "cash",
+            "AnchorTemplateId": "569668774bdc2da2298b4568",
+            "Weight": 400,
+            "UsePath": {
+              "Kind": "raidRole",
+              "RoleId": "currency",
+              "ContainerTemplateId": null,
+              "CollectionId": null,
+              "ProductionId": null,
+              "TraderId": null,
+              "AssortId": null
+            },
+            "Fingerprint": {
+              "Sha256Hex": "90b67b99941806550d869f7ed956ba5c8f9a4758ce0201b573d34ead6b8568d3"
+            }
+          },
+          "Forest": {
+            "Nodes": [
+              {
+                "TreeRootPath": "cash-0",
+                "LogicalPath": "cash-0",
+                "TemplateId": "569668774bdc2da2298b4568",
+                "ParentLogicalPath": null,
+                "SlotId": null,
+                "InternalLocation": null,
+                "StackCount": 1000,
+                "StableState": null
+              }
+            ]
+          },
+          "Fingerprint": {
+            "Sha256Hex": "90b67b99941806550d869f7ed956ba5c8f9a4758ce0201b573d34ead6b8568d3"
+          },
+          "RngEvidence": {
+            "Purpose": 0,
+            "DrawOrdinal": 1,
+            "UnitNumerator": 0
+          }
+        }
+      ],
+      "Decisions": [],
+      "Entitlement": {
+        "Rarity": 1,
+        "Identity": {
+          "ProviderId": "cash-cache",
+          "PackVersion": "cash-v1",
+          "LotId": "eur-1000",
+          "DisplayName": "\u20AC1,000 euros",
+          "Purpose": "Cash payout. Estimated purchase value \u2014 not a rouble cash-out",
+          "FamilyId": "cash",
+          "TrackId": "cash",
+          "AnchorTemplateId": "569668774bdc2da2298b4568",
+          "Weight": 400,
+          "UsePath": {
+            "Kind": "raidRole",
+            "RoleId": "currency",
+            "ContainerTemplateId": null,
+            "CollectionId": null,
+            "ProductionId": null,
+            "TraderId": null,
+            "AssortId": null
+          },
+          "Fingerprint": {
+            "Sha256Hex": "90b67b99941806550d869f7ed956ba5c8f9a4758ce0201b573d34ead6b8568d3"
+          }
+        },
+        "Forest": {
+          "Nodes": [
+            {
+              "TreeRootPath": "cash-0",
+              "LogicalPath": "cash-0",
+              "TemplateId": "569668774bdc2da2298b4568",
+              "ParentLogicalPath": null,
+              "SlotId": null,
+              "InternalLocation": null,
+              "StackCount": 1000,
+              "StableState": null
+            }
+          ]
+        },
+        "Fingerprint": {
+          "Sha256Hex": "90b67b99941806550d869f7ed956ba5c8f9a4758ce0201b573d34ead6b8568d3"
+        }
+      },
+      "RelayCandidates": [],
+      "RelayHistory": [],
+      "BrokerFavor": 2,
+      "ClaimPrepared": null,
+      "RelayPrepared": null,
+      "TerminalReceipt": null
+    },
+    "ManifestReceipts": [],
+    "ManifestClaimGrants": []
+  },
+  {
+    "SchemaVersion": 6,
+    "RecoveryMeter": 2,
+    "LegacySecuredStakeRoots": [],
+    "Records": [],
+    "RelayRecords": [],
+    "ActiveManifest": {
+      "ManifestId": "cash-v1-synthetic-10",
+      "CatalogSnapshotId": "catalog-v2/2dbfa295cf0255112f7bd94bfa3a92e79065ffc7298595a80f603afbd3805586",
+      "RarityLadderVersion": 1,
+      "Commitment": {
+        "Version": 1,
+        "CommitmentSha256Hex": "9b1abcb48346658e706d5b22d574f48505ea24c88341d84a61b64ba280c99cf4",
+        "NonceHex": "19d7e1f60031ad5fa4f93659faf6a9db436555187fb816592317d94893c3f8ac"
+      },
+      "FlowState": {
+        "Phase": 3,
+        "CurrentOrdinal": 1,
+        "LockedOrdinal": 1,
+        "RelayStage": 1,
+        "RelayTerminal": false
+      },
+      "Ticket": {
+        "OpeningQuality": null,
+        "CaseTemplateId": "66d000000000000000000014",
+        "CaseId": {
+          "IsEmpty": false
+        },
+        "KeyId": {
+          "IsEmpty": false
+        },
+        "PreparedAtUtc": "1970-01-01T00:01:00+00:00",
+        "ProfileCommitStarted": true,
+        "Committed": true,
+        "CommittedAtUtc": "1970-01-01T00:02:00+00:00",
+        "CommitGeneration": 1,
+        "CommitPredecessorHash": "0000000000000000000000000000000000000000000000000000000000000000"
+      },
+      "Offers": [
+        {
+          "Ordinal": 1,
+          "Rarity": 2,
+          "Identity": {
+            "ProviderId": "cash-cache",
+            "PackVersion": "cash-v1",
+            "LotId": "eur-2000",
+            "DisplayName": "\u20AC2,000 euros",
+            "Purpose": "Cash payout. Estimated purchase value \u2014 not a rouble cash-out",
+            "FamilyId": "cash",
+            "TrackId": "cash",
+            "AnchorTemplateId": "569668774bdc2da2298b4568",
+            "Weight": 100,
+            "UsePath": {
+              "Kind": "raidRole",
+              "RoleId": "currency",
+              "ContainerTemplateId": null,
+              "CollectionId": null,
+              "ProductionId": null,
+              "TraderId": null,
+              "AssortId": null
+            },
+            "Fingerprint": {
+              "Sha256Hex": "92b85163a1161bd2243128a9378e469d3b72edc446b5e0cd0034e62d2a86ee3c"
+            }
+          },
+          "Forest": {
+            "Nodes": [
+              {
+                "TreeRootPath": "cash-0",
+                "LogicalPath": "cash-0",
+                "TemplateId": "569668774bdc2da2298b4568",
+                "ParentLogicalPath": null,
+                "SlotId": null,
+                "InternalLocation": null,
+                "StackCount": 2000,
+                "StableState": null
+              }
+            ]
+          },
+          "Fingerprint": {
+            "Sha256Hex": "92b85163a1161bd2243128a9378e469d3b72edc446b5e0cd0034e62d2a86ee3c"
+          },
+          "RngEvidence": {
+            "Purpose": 0,
+            "DrawOrdinal": 1,
+            "UnitNumerator": 0
+          }
+        }
+      ],
+      "Decisions": [],
+      "Entitlement": {
+        "Rarity": 2,
+        "Identity": {
+          "ProviderId": "cash-cache",
+          "PackVersion": "cash-v1",
+          "LotId": "eur-2000",
+          "DisplayName": "\u20AC2,000 euros",
+          "Purpose": "Cash payout. Estimated purchase value \u2014 not a rouble cash-out",
+          "FamilyId": "cash",
+          "TrackId": "cash",
+          "AnchorTemplateId": "569668774bdc2da2298b4568",
+          "Weight": 100,
+          "UsePath": {
+            "Kind": "raidRole",
+            "RoleId": "currency",
+            "ContainerTemplateId": null,
+            "CollectionId": null,
+            "ProductionId": null,
+            "TraderId": null,
+            "AssortId": null
+          },
+          "Fingerprint": {
+            "Sha256Hex": "92b85163a1161bd2243128a9378e469d3b72edc446b5e0cd0034e62d2a86ee3c"
+          }
+        },
+        "Forest": {
+          "Nodes": [
+            {
+              "TreeRootPath": "cash-0",
+              "LogicalPath": "cash-0",
+              "TemplateId": "569668774bdc2da2298b4568",
+              "ParentLogicalPath": null,
+              "SlotId": null,
+              "InternalLocation": null,
+              "StackCount": 2000,
+              "StableState": null
+            }
+          ]
+        },
+        "Fingerprint": {
+          "Sha256Hex": "92b85163a1161bd2243128a9378e469d3b72edc446b5e0cd0034e62d2a86ee3c"
+        }
+      },
+      "RelayCandidates": [],
+      "RelayHistory": [],
+      "BrokerFavor": 2,
+      "ClaimPrepared": null,
+      "RelayPrepared": null,
+      "TerminalReceipt": null
+    },
+    "ManifestReceipts": [],
+    "ManifestClaimGrants": []
+  },
+  {
+    "SchemaVersion": 6,
+    "RecoveryMeter": 2,
+    "LegacySecuredStakeRoots": [],
+    "Records": [],
+    "RelayRecords": [],
+    "ActiveManifest": {
+      "ManifestId": "cash-v1-synthetic-11",
+      "CatalogSnapshotId": "catalog-v2/2dbfa295cf0255112f7bd94bfa3a92e79065ffc7298595a80f603afbd3805586",
+      "RarityLadderVersion": 1,
+      "Commitment": {
+        "Version": 1,
+        "CommitmentSha256Hex": "210531dd342979dfbe2d44a552ed39e82c92db0d456614740ad0e2b2d6e63d09",
+        "NonceHex": "70ee886dfc83ab21ea61449c428c003d47a1d1e5f44ab0ffe62687eaffcccd43"
+      },
+      "FlowState": {
+        "Phase": 3,
+        "CurrentOrdinal": 1,
+        "LockedOrdinal": 1,
+        "RelayStage": 1,
+        "RelayTerminal": false
+      },
+      "Ticket": {
+        "OpeningQuality": null,
+        "CaseTemplateId": "66d000000000000000000014",
+        "CaseId": {
+          "IsEmpty": false
+        },
+        "KeyId": {
+          "IsEmpty": false
+        },
+        "PreparedAtUtc": "1970-01-01T00:01:00+00:00",
+        "ProfileCommitStarted": true,
+        "Committed": true,
+        "CommittedAtUtc": "1970-01-01T00:02:00+00:00",
+        "CommitGeneration": 1,
+        "CommitPredecessorHash": "0000000000000000000000000000000000000000000000000000000000000000"
+      },
+      "Offers": [
+        {
+          "Ordinal": 1,
+          "Rarity": 2,
+          "Identity": {
+            "ProviderId": "cash-cache",
+            "PackVersion": "cash-v1",
+            "LotId": "btc-1",
+            "DisplayName": "1 \u00D7 Physical Bitcoin",
+            "Purpose": "Cash payout. Estimated Therapist sale value at catalog startup",
+            "FamilyId": "cash",
+            "TrackId": "cash",
+            "AnchorTemplateId": "59faff1d86f7746c51718c9c",
+            "Weight": 90,
+            "UsePath": {
+              "Kind": "raidRole",
+              "RoleId": "currency",
+              "ContainerTemplateId": null,
+              "CollectionId": null,
+              "ProductionId": null,
+              "TraderId": null,
+              "AssortId": null
+            },
+            "Fingerprint": {
+              "Sha256Hex": "3e2271841c5efe193ab546b1c3fd56c296290a6d9fa5f33729e990203c576fbb"
+            }
+          },
+          "Forest": {
+            "Nodes": [
+              {
+                "TreeRootPath": "cash-0",
+                "LogicalPath": "cash-0",
+                "TemplateId": "59faff1d86f7746c51718c9c",
+                "ParentLogicalPath": null,
+                "SlotId": null,
+                "InternalLocation": null,
+                "StackCount": 1,
+                "StableState": null
+              }
+            ]
+          },
+          "Fingerprint": {
+            "Sha256Hex": "3e2271841c5efe193ab546b1c3fd56c296290a6d9fa5f33729e990203c576fbb"
+          },
+          "RngEvidence": {
+            "Purpose": 0,
+            "DrawOrdinal": 1,
+            "UnitNumerator": 0
+          }
+        }
+      ],
+      "Decisions": [],
+      "Entitlement": {
+        "Rarity": 2,
+        "Identity": {
+          "ProviderId": "cash-cache",
+          "PackVersion": "cash-v1",
+          "LotId": "btc-1",
+          "DisplayName": "1 \u00D7 Physical Bitcoin",
+          "Purpose": "Cash payout. Estimated Therapist sale value at catalog startup",
+          "FamilyId": "cash",
+          "TrackId": "cash",
+          "AnchorTemplateId": "59faff1d86f7746c51718c9c",
+          "Weight": 90,
+          "UsePath": {
+            "Kind": "raidRole",
+            "RoleId": "currency",
+            "ContainerTemplateId": null,
+            "CollectionId": null,
+            "ProductionId": null,
+            "TraderId": null,
+            "AssortId": null
+          },
+          "Fingerprint": {
+            "Sha256Hex": "3e2271841c5efe193ab546b1c3fd56c296290a6d9fa5f33729e990203c576fbb"
+          }
+        },
+        "Forest": {
+          "Nodes": [
+            {
+              "TreeRootPath": "cash-0",
+              "LogicalPath": "cash-0",
+              "TemplateId": "59faff1d86f7746c51718c9c",
+              "ParentLogicalPath": null,
+              "SlotId": null,
+              "InternalLocation": null,
+              "StackCount": 1,
+              "StableState": null
+            }
+          ]
+        },
+        "Fingerprint": {
+          "Sha256Hex": "3e2271841c5efe193ab546b1c3fd56c296290a6d9fa5f33729e990203c576fbb"
+        }
+      },
+      "RelayCandidates": [],
+      "RelayHistory": [],
+      "BrokerFavor": 2,
+      "ClaimPrepared": null,
+      "RelayPrepared": null,
+      "TerminalReceipt": null
+    },
+    "ManifestReceipts": [],
+    "ManifestClaimGrants": []
+  },
+  {
+    "SchemaVersion": 6,
+    "RecoveryMeter": 2,
+    "LegacySecuredStakeRoots": [],
+    "Records": [],
+    "RelayRecords": [],
+    "ActiveManifest": {
+      "ManifestId": "cash-v1-synthetic-12",
+      "CatalogSnapshotId": "catalog-v2/2dbfa295cf0255112f7bd94bfa3a92e79065ffc7298595a80f603afbd3805586",
+      "RarityLadderVersion": 1,
+      "Commitment": {
+        "Version": 1,
+        "CommitmentSha256Hex": "c8bdef6fb9642f40eaf63ed19a7ddaa968bda5ffd17758864c7a815def3458d1",
+        "NonceHex": "b4086fda46f2690bfa938c20ac006e3c813ea302e27ed3abc7630a3da0ad1daa"
+      },
+      "FlowState": {
+        "Phase": 3,
+        "CurrentOrdinal": 1,
+        "LockedOrdinal": 1,
+        "RelayStage": 1,
+        "RelayTerminal": false
+      },
+      "Ticket": {
+        "OpeningQuality": null,
+        "CaseTemplateId": "66d000000000000000000014",
+        "CaseId": {
+          "IsEmpty": false
+        },
+        "KeyId": {
+          "IsEmpty": false
+        },
+        "PreparedAtUtc": "1970-01-01T00:01:00+00:00",
+        "ProfileCommitStarted": true,
+        "Committed": true,
+        "CommittedAtUtc": "1970-01-01T00:02:00+00:00",
+        "CommitGeneration": 1,
+        "CommitPredecessorHash": "0000000000000000000000000000000000000000000000000000000000000000"
+      },
+      "Offers": [
+        {
+          "Ordinal": 1,
+          "Rarity": 3,
+          "Identity": {
+            "ProviderId": "cash-cache",
+            "PackVersion": "cash-v1",
+            "LotId": "btc-2",
+            "DisplayName": "2 \u00D7 Physical Bitcoin",
+            "Purpose": "Cash payout. Estimated Therapist sale value at catalog startup",
+            "FamilyId": "cash",
+            "TrackId": "cash",
+            "AnchorTemplateId": "59faff1d86f7746c51718c9c",
+            "Weight": 10,
+            "UsePath": {
+              "Kind": "raidRole",
+              "RoleId": "currency",
+              "ContainerTemplateId": null,
+              "CollectionId": null,
+              "ProductionId": null,
+              "TraderId": null,
+              "AssortId": null
+            },
+            "Fingerprint": {
+              "Sha256Hex": "43b3935d663fd9a40199aea14614f8d424fdde4826b7268eb97f3ea4953252a5"
+            }
+          },
+          "Forest": {
+            "Nodes": [
+              {
+                "TreeRootPath": "cash-0",
+                "LogicalPath": "cash-0",
+                "TemplateId": "59faff1d86f7746c51718c9c",
+                "ParentLogicalPath": null,
+                "SlotId": null,
+                "InternalLocation": null,
+                "StackCount": 1,
+                "StableState": null
+              },
+              {
+                "TreeRootPath": "cash-1",
+                "LogicalPath": "cash-1",
+                "TemplateId": "59faff1d86f7746c51718c9c",
+                "ParentLogicalPath": null,
+                "SlotId": null,
+                "InternalLocation": null,
+                "StackCount": 1,
+                "StableState": null
+              }
+            ]
+          },
+          "Fingerprint": {
+            "Sha256Hex": "43b3935d663fd9a40199aea14614f8d424fdde4826b7268eb97f3ea4953252a5"
+          },
+          "RngEvidence": {
+            "Purpose": 0,
+            "DrawOrdinal": 1,
+            "UnitNumerator": 0
+          }
+        }
+      ],
+      "Decisions": [],
+      "Entitlement": {
+        "Rarity": 3,
+        "Identity": {
+          "ProviderId": "cash-cache",
+          "PackVersion": "cash-v1",
+          "LotId": "btc-2",
+          "DisplayName": "2 \u00D7 Physical Bitcoin",
+          "Purpose": "Cash payout. Estimated Therapist sale value at catalog startup",
+          "FamilyId": "cash",
+          "TrackId": "cash",
+          "AnchorTemplateId": "59faff1d86f7746c51718c9c",
+          "Weight": 10,
+          "UsePath": {
+            "Kind": "raidRole",
+            "RoleId": "currency",
+            "ContainerTemplateId": null,
+            "CollectionId": null,
+            "ProductionId": null,
+            "TraderId": null,
+            "AssortId": null
+          },
+          "Fingerprint": {
+            "Sha256Hex": "43b3935d663fd9a40199aea14614f8d424fdde4826b7268eb97f3ea4953252a5"
+          }
+        },
+        "Forest": {
+          "Nodes": [
+            {
+              "TreeRootPath": "cash-0",
+              "LogicalPath": "cash-0",
+              "TemplateId": "59faff1d86f7746c51718c9c",
+              "ParentLogicalPath": null,
+              "SlotId": null,
+              "InternalLocation": null,
+              "StackCount": 1,
+              "StableState": null
+            },
+            {
+              "TreeRootPath": "cash-1",
+              "LogicalPath": "cash-1",
+              "TemplateId": "59faff1d86f7746c51718c9c",
+              "ParentLogicalPath": null,
+              "SlotId": null,
+              "InternalLocation": null,
+              "StackCount": 1,
+              "StableState": null
+            }
+          ]
+        },
+        "Fingerprint": {
+          "Sha256Hex": "43b3935d663fd9a40199aea14614f8d424fdde4826b7268eb97f3ea4953252a5"
+        }
+      },
+      "RelayCandidates": [],
+      "RelayHistory": [],
+      "BrokerFavor": 2,
+      "ClaimPrepared": null,
+      "RelayPrepared": null,
+      "TerminalReceipt": null
+    },
+    "ManifestReceipts": [],
+    "ManifestClaimGrants": []
+  }
+]
