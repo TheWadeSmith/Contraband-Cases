@@ -1,0 +1,4341 @@
+{
+  "amonya.arcane-cache.json": {
+    "schemaVersion": 1,
+    "providerId": "amonya.arcane-cache",
+    "packVersion": "1.0.0",
+    "displayLabel": "Amonya Arcane Cache",
+    "providerWeight": 0.05,
+    "requiredTemplateIds": [
+      "69359d725bbf2f0c2027c59c",
+      "69359d725bbf2f0c2027c59f",
+      "69359d725bbf2f0c2027c5a0",
+      "69359d725bbf2f0c2027c5a2",
+      "6a248be769dd135bbcc78755"
+    ],
+    "requiredPresetIds": [],
+    "requiredBundleKeys": [],
+    "lots": [
+      {
+        "lotId": "arcane-ammunition-cache",
+        "displayName": "Arcane Ammunition Cache",
+        "purpose": "A loose stack of Arcane Rounds paired with Mystic Rounds for an occult loadout.",
+        "familyId": "exotic-ordnance",
+        "trackId": "amonya-arcane-cache",
+        "anchorTemplateId": "69359d725bbf2f0c2027c59c",
+        "weight": 1,
+        "usePath": {
+          "kind": "raidRole",
+          "roleId": "close-quarters"
+        },
+        "recipe": [
+          {
+            "kind": "template",
+            "templateId": "69359d725bbf2f0c2027c59c",
+            "instanceCount": 1,
+            "stackCountPerInstance": 20
+          },
+          {
+            "kind": "template",
+            "templateId": "69359d725bbf2f0c2027c59f",
+            "instanceCount": 1,
+            "stackCountPerInstance": 20
+          }
+        ]
+      },
+      {
+        "lotId": "satchel-of-holding",
+        "displayName": "Satchel of Holding",
+        "purpose": "A Satchel Sized Mag of Holding for stowing extra ordnance in the field.",
+        "familyId": "operator",
+        "trackId": "amonya-arcane-cache",
+        "anchorTemplateId": "69359d725bbf2f0c2027c5a0",
+        "weight": 1,
+        "usePath": {
+          "kind": "raidRole",
+          "roleId": "quartermaster"
+        },
+        "recipe": [
+          {
+            "kind": "template",
+            "templateId": "69359d725bbf2f0c2027c5a0",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          }
+        ]
+      },
+      {
+        "lotId": "eldritch-ordinance",
+        "displayName": "Eldritch Ordinance",
+        "purpose": "Eldritch Rounds bundled with Cluster Bomb Fragments for a chaotic finishing blow.",
+        "familyId": "exotic-ordnance",
+        "trackId": "amonya-arcane-cache",
+        "anchorTemplateId": "69359d725bbf2f0c2027c5a2",
+        "weight": 0.8,
+        "usePath": {
+          "kind": "raidRole",
+          "roleId": "breaching-ordnance"
+        },
+        "recipe": [
+          {
+            "kind": "template",
+            "templateId": "69359d725bbf2f0c2027c5a2",
+            "instanceCount": 1,
+            "stackCountPerInstance": 20
+          },
+          {
+            "kind": "template",
+            "templateId": "6a248be769dd135bbcc78755",
+            "instanceCount": 1,
+            "stackCountPerInstance": 5
+          }
+        ]
+      }
+    ]
+  },
+  "core.json": {
+    "schemaVersion": 1,
+    "providerId": "core",
+    "packVersion": "0.3.3",
+    "displayLabel": "Contraband Cases Core",
+    "providerWeight": 1,
+    "requiredTemplateIds": [
+      "5447a9cd4bdc2dbd208b4567",
+      "5448be9a4bdc2dfd2f8b456a",
+      "54491c4f4bdc2db1078b4568",
+      "544fb3f34bdc2d03748b456a",
+      "544fb45d4bdc2dee738b4568",
+      "560d5e524bdc2d25448b4571",
+      "5645bcc04bdc2d363b8b4572",
+      "56d59d3ad2720bdb418b4577",
+      "56dfef82d2720bbd668b4567",
+      "5710c24ad2720bc3458b45a3",
+      "590c678286f77426c9660122",
+      "59984ab886f7743e98271174",
+      "59e6906286f7746c9f75e847",
+      "5a367e5dc4a282000e49738f",
+      "5b40e1525acfc4771e1c6611",
+      "5b432b965acfc47a8774094e",
+      "5c0e530286f7747fa1419862",
+      "5c0e531d86f7747fa23f4d42",
+      "5ca20d5986f774331e7c9602",
+      "5d02778e86f774203e7dedbe",
+      "5d02797c86f774203f38e30a",
+      "5ed51652f6c34d2cc26336a1",
+      "60098ad7c2240c0fe85c570a",
+      "618cfae774bb2d036a049e7c",
+      "628e4e576d783146b124c64d",
+      "66b5f6985891c84aab75ca76",
+      "6768c25aa7b238f14a08d3f6"
+    ],
+    "requiredPresetIds": [
+      "584148f2245977598f1ad387",
+      "59b81f7386f77421ac688a0a",
+      "5a3a85af86f774745637d46c",
+      "5af08cf886f774223c269184",
+      "657120b36fe59548840cb542"
+    ],
+    "requiredBundleKeys": [],
+    "lots": [
+      {
+        "lotId": "breach-contract",
+        "displayName": "Breach Contract",
+        "purpose": "A pump shotgun and a mission load of buckshot for close entries.",
+        "familyId": "arsenal",
+        "trackId": "cqb",
+        "anchorTemplateId": "54491c4f4bdc2db1078b4568",
+        "weight": 1,
+        "usePath": {
+          "kind": "raidRole",
+          "roleId": "close-quarters"
+        },
+        "recipe": [
+          {
+            "kind": "preset",
+            "presetId": "584148f2245977598f1ad387"
+          },
+          {
+            "kind": "template",
+            "templateId": "560d5e524bdc2d25448b4571",
+            "instanceCount": 2,
+            "stackCountPerInstance": 20
+          }
+        ]
+      },
+      {
+        "lotId": "subgun-escort",
+        "displayName": "Subgun Escort",
+        "purpose": "A compact PP-19 package with two full ammunition stacks.",
+        "familyId": "arsenal",
+        "trackId": "cqb",
+        "anchorTemplateId": "59984ab886f7743e98271174",
+        "weight": 1,
+        "usePath": {
+          "kind": "raidRole",
+          "roleId": "close-quarters"
+        },
+        "recipe": [
+          {
+            "kind": "preset",
+            "presetId": "59b81f7386f77421ac688a0a"
+          },
+          {
+            "kind": "template",
+            "templateId": "56d59d3ad2720bdb418b4577",
+            "instanceCount": 2,
+            "stackCountPerInstance": 50
+          }
+        ]
+      },
+      {
+        "lotId": "embassy-carbine",
+        "displayName": "Embassy Carbine",
+        "purpose": "A service M4 and tracer-capable ammunition for a sustained rifle patrol.",
+        "familyId": "arsenal",
+        "trackId": "rifle",
+        "anchorTemplateId": "5447a9cd4bdc2dbd208b4567",
+        "weight": 1,
+        "usePath": {
+          "kind": "raidRole",
+          "roleId": "rifle-patrol"
+        },
+        "recipe": [
+          {
+            "kind": "preset",
+            "presetId": "5af08cf886f774223c269184"
+          },
+          {
+            "kind": "template",
+            "templateId": "59e6906286f7746c9f75e847",
+            "instanceCount": 2,
+            "stackCountPerInstance": 60
+          }
+        ]
+      },
+      {
+        "lotId": "black-site-marksman",
+        "displayName": "Black-Site Marksman",
+        "purpose": "An RSASS with four complete stacks of high-grade match ammunition.",
+        "familyId": "arsenal",
+        "trackId": "marksman",
+        "anchorTemplateId": "5a367e5dc4a282000e49738f",
+        "weight": 0.5,
+        "usePath": {
+          "kind": "raidRole",
+          "roleId": "precision-overwatch"
+        },
+        "recipe": [
+          {
+            "kind": "preset",
+            "presetId": "5a3a85af86f774745637d46c"
+          },
+          {
+            "kind": "template",
+            "templateId": "6768c25aa7b238f14a08d3f6",
+            "instanceCount": 4,
+            "stackCountPerInstance": 40
+          }
+        ]
+      },
+      {
+        "lotId": "recon-load",
+        "displayName": "Recon Load",
+        "purpose": "A light headset, day pack, and compact first-aid kit for a scouting raid.",
+        "familyId": "operator",
+        "trackId": "recon",
+        "anchorTemplateId": "5ca20d5986f774331e7c9602",
+        "weight": 1,
+        "usePath": {
+          "kind": "raidRole",
+          "roleId": "recon"
+        },
+        "recipe": [
+          {
+            "kind": "template",
+            "templateId": "5b432b965acfc47a8774094e",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "5ca20d5986f774331e7c9602",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "590c678286f77426c9660122",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          }
+        ]
+      },
+      {
+        "lotId": "night-patrol",
+        "displayName": "Night Patrol",
+        "purpose": "A protected communications load with enough trauma care for a night route.",
+        "familyId": "operator",
+        "trackId": "night",
+        "anchorTemplateId": "5b40e1525acfc4771e1c6611",
+        "weight": 1,
+        "usePath": {
+          "kind": "raidRole",
+          "roleId": "night-operations"
+        },
+        "recipe": [
+          {
+            "kind": "template",
+            "templateId": "5645bcc04bdc2d363b8b4572",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "preset",
+            "presetId": "657120b36fe59548840cb542"
+          },
+          {
+            "kind": "template",
+            "templateId": "60098ad7c2240c0fe85c570a",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          }
+        ]
+      },
+      {
+        "lotId": "long-haul-medic",
+        "displayName": "Long-Haul Medic",
+        "purpose": "Premium hearing, a field pack, and surgical supplies for an extended operation.",
+        "familyId": "operator",
+        "trackId": "recon",
+        "anchorTemplateId": "628e4e576d783146b124c64d",
+        "weight": 0.8,
+        "usePath": {
+          "kind": "raidRole",
+          "roleId": "recon"
+        },
+        "recipe": [
+          {
+            "kind": "template",
+            "templateId": "628e4e576d783146b124c64d",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "618cfae774bb2d036a049e7c",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "5d02797c86f774203f38e30a",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "60098ad7c2240c0fe85c570a",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          }
+        ]
+      },
+      {
+        "lotId": "deep-raid-command",
+        "displayName": "Deep-Raid Command",
+        "purpose": "A command headset, field pack, and redundant surgery and extraction chemistry.",
+        "familyId": "operator",
+        "trackId": "recon",
+        "anchorTemplateId": "66b5f6985891c84aab75ca76",
+        "weight": 0.4,
+        "usePath": {
+          "kind": "raidRole",
+          "roleId": "recon"
+        },
+        "recipe": [
+          {
+            "kind": "template",
+            "templateId": "66b5f6985891c84aab75ca76",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "618cfae774bb2d036a049e7c",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "5d02797c86f774203f38e30a",
+            "instanceCount": 2,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "5ed51652f6c34d2cc26336a1",
+            "instanceCount": 2,
+            "stackCountPerInstance": 1
+          }
+        ]
+      },
+      {
+        "lotId": "breach-ordnance",
+        "displayName": "Breach Ordnance",
+        "purpose": "A balanced six-grenade shipment for room entry and exterior denial.",
+        "familyId": "field-supply",
+        "trackId": "ordnance",
+        "anchorTemplateId": "5448be9a4bdc2dfd2f8b456a",
+        "weight": 1,
+        "usePath": {
+          "kind": "raidRole",
+          "roleId": "breaching-ordnance"
+        },
+        "recipe": [
+          {
+            "kind": "template",
+            "templateId": "5448be9a4bdc2dfd2f8b456a",
+            "instanceCount": 4,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "5710c24ad2720bc3458b45a3",
+            "instanceCount": 2,
+            "stackCountPerInstance": 1
+          }
+        ]
+      },
+      {
+        "lotId": "trauma-shipment",
+        "displayName": "Trauma Shipment",
+        "purpose": "A complete first-response shipment for bleeding, surgery, and pain control.",
+        "familyId": "field-supply",
+        "trackId": "medical",
+        "anchorTemplateId": "544fb45d4bdc2dee738b4568",
+        "weight": 1,
+        "usePath": {
+          "kind": "raidRole",
+          "roleId": "trauma-care"
+        },
+        "recipe": [
+          {
+            "kind": "template",
+            "templateId": "544fb45d4bdc2dee738b4568",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "590c678286f77426c9660122",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "5d02778e86f774203e7dedbe",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "544fb3f34bdc2d03748b456a",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          }
+        ]
+      },
+      {
+        "lotId": "combat-chemistry",
+        "displayName": "Combat Chemistry",
+        "purpose": "A mission-sized stimulant suite for mobility, endurance, and recovery.",
+        "familyId": "field-supply",
+        "trackId": "chemistry",
+        "anchorTemplateId": "5ed51652f6c34d2cc26336a1",
+        "weight": 0.8,
+        "usePath": {
+          "kind": "raidRole",
+          "roleId": "combat-chemistry"
+        },
+        "recipe": [
+          {
+            "kind": "template",
+            "templateId": "5ed51652f6c34d2cc26336a1",
+            "instanceCount": 2,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "5c0e531d86f7747fa23f4d42",
+            "instanceCount": 3,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "5c0e530286f7747fa1419862",
+            "instanceCount": 3,
+            "stackCountPerInstance": 1
+          }
+        ]
+      },
+      {
+        "lotId": "long-range-resupply",
+        "displayName": "Long-Range Resupply",
+        "purpose": "A heavy shipment of match rifle and armor-piercing intermediate ammunition.",
+        "familyId": "field-supply",
+        "trackId": "ammo",
+        "anchorTemplateId": "6768c25aa7b238f14a08d3f6",
+        "weight": 0.6,
+        "usePath": {
+          "kind": "raidRole",
+          "roleId": "ammunition-resupply"
+        },
+        "recipe": [
+          {
+            "kind": "template",
+            "templateId": "6768c25aa7b238f14a08d3f6",
+            "instanceCount": 4,
+            "stackCountPerInstance": 40
+          },
+          {
+            "kind": "template",
+            "templateId": "56dfef82d2720bbd668b4567",
+            "instanceCount": 2,
+            "stackCountPerInstance": 60
+          }
+        ]
+      },
+      {
+        "lotId": "entry-first-aid",
+        "displayName": "Entry First Aid",
+        "purpose": "A ready shotgun, buckshot and first aid for a careful close-range raid.",
+        "familyId": "arsenal",
+        "trackId": "cqb",
+        "anchorTemplateId": "54491c4f4bdc2db1078b4568",
+        "weight": 0.9,
+        "usePath": {
+          "kind": "raidRole",
+          "roleId": "close-quarters"
+        },
+        "recipe": [
+          {
+            "kind": "preset",
+            "presetId": "584148f2245977598f1ad387"
+          },
+          {
+            "kind": "template",
+            "templateId": "590c678286f77426c9660122",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "560d5e524bdc2d25448b4571",
+            "instanceCount": 2,
+            "stackCountPerInstance": 20
+          }
+        ]
+      },
+      {
+        "lotId": "escort-medic",
+        "displayName": "Escort Medic",
+        "purpose": "A service subgun, ammunition and Salewa for a short escort.",
+        "familyId": "arsenal",
+        "trackId": "cqb",
+        "anchorTemplateId": "59984ab886f7743e98271174",
+        "weight": 0.9,
+        "usePath": {
+          "kind": "raidRole",
+          "roleId": "close-quarters"
+        },
+        "recipe": [
+          {
+            "kind": "preset",
+            "presetId": "59b81f7386f77421ac688a0a"
+          },
+          {
+            "kind": "template",
+            "templateId": "544fb45d4bdc2dee738b4568",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "56d59d3ad2720bdb418b4577",
+            "instanceCount": 2,
+            "stackCountPerInstance": 50
+          }
+        ]
+      },
+      {
+        "lotId": "entry-communications",
+        "displayName": "Entry Communications",
+        "purpose": "Shotgun, hearing protection, first aid and four grenades for a breach.",
+        "familyId": "arsenal",
+        "trackId": "cqb",
+        "anchorTemplateId": "54491c4f4bdc2db1078b4568",
+        "weight": 0.75,
+        "usePath": {
+          "kind": "raidRole",
+          "roleId": "close-quarters"
+        },
+        "recipe": [
+          {
+            "kind": "preset",
+            "presetId": "584148f2245977598f1ad387"
+          },
+          {
+            "kind": "template",
+            "templateId": "5645bcc04bdc2d363b8b4572",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "590c678286f77426c9660122",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "560d5e524bdc2d25448b4571",
+            "instanceCount": 2,
+            "stackCountPerInstance": 20
+          },
+          {
+            "kind": "template",
+            "templateId": "5448be9a4bdc2dfd2f8b456a",
+            "instanceCount": 4,
+            "stackCountPerInstance": 1
+          }
+        ]
+      },
+      {
+        "lotId": "escort-comms",
+        "displayName": "Escort Communications",
+        "purpose": "Subgun, ammunition, communications and trauma care for a sustained escort.",
+        "familyId": "arsenal",
+        "trackId": "cqb",
+        "anchorTemplateId": "59984ab886f7743e98271174",
+        "weight": 0.75,
+        "usePath": {
+          "kind": "raidRole",
+          "roleId": "close-quarters"
+        },
+        "recipe": [
+          {
+            "kind": "preset",
+            "presetId": "59b81f7386f77421ac688a0a"
+          },
+          {
+            "kind": "template",
+            "templateId": "60098ad7c2240c0fe85c570a",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "5645bcc04bdc2d363b8b4572",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "56d59d3ad2720bdb418b4577",
+            "instanceCount": 2,
+            "stackCountPerInstance": 50
+          }
+        ]
+      },
+      {
+        "lotId": "entry-specialist",
+        "displayName": "Entry Specialist",
+        "purpose": "A breacher load with premium hearing, surgery, trauma care and grenades.",
+        "familyId": "arsenal",
+        "trackId": "cqb",
+        "anchorTemplateId": "628e4e576d783146b124c64d",
+        "weight": 0.5,
+        "usePath": {
+          "kind": "raidRole",
+          "roleId": "close-quarters"
+        },
+        "recipe": [
+          {
+            "kind": "preset",
+            "presetId": "584148f2245977598f1ad387"
+          },
+          {
+            "kind": "template",
+            "templateId": "628e4e576d783146b124c64d",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "5d02778e86f774203e7dedbe",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "60098ad7c2240c0fe85c570a",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "560d5e524bdc2d25448b4571",
+            "instanceCount": 4,
+            "stackCountPerInstance": 20
+          },
+          {
+            "kind": "template",
+            "templateId": "5448be9a4bdc2dfd2f8b456a",
+            "instanceCount": 4,
+            "stackCountPerInstance": 1
+          }
+        ]
+      },
+      {
+        "lotId": "escort-specialist",
+        "displayName": "Escort Specialist",
+        "purpose": "A close-protection load with premium hearing, field surgery and ordnance.",
+        "familyId": "arsenal",
+        "trackId": "cqb",
+        "anchorTemplateId": "66b5f6985891c84aab75ca76",
+        "weight": 0.5,
+        "usePath": {
+          "kind": "raidRole",
+          "roleId": "close-quarters"
+        },
+        "recipe": [
+          {
+            "kind": "preset",
+            "presetId": "59b81f7386f77421ac688a0a"
+          },
+          {
+            "kind": "template",
+            "templateId": "66b5f6985891c84aab75ca76",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "5d02797c86f774203f38e30a",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "56d59d3ad2720bdb418b4577",
+            "instanceCount": 1,
+            "stackCountPerInstance": 50
+          },
+          {
+            "kind": "template",
+            "templateId": "5448be9a4bdc2dfd2f8b456a",
+            "instanceCount": 6,
+            "stackCountPerInstance": 1
+          }
+        ]
+      },
+      {
+        "lotId": "entry-command",
+        "displayName": "Entry Command",
+        "purpose": "A premium breacher's package with redundant first aid and extraction chemistry.",
+        "familyId": "arsenal",
+        "trackId": "cqb",
+        "anchorTemplateId": "66b5f6985891c84aab75ca76",
+        "weight": 0.2,
+        "usePath": {
+          "kind": "raidRole",
+          "roleId": "close-quarters"
+        },
+        "recipe": [
+          {
+            "kind": "preset",
+            "presetId": "584148f2245977598f1ad387"
+          },
+          {
+            "kind": "template",
+            "templateId": "66b5f6985891c84aab75ca76",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "5d02797c86f774203f38e30a",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "5ed51652f6c34d2cc26336a1",
+            "instanceCount": 2,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "590c678286f77426c9660122",
+            "instanceCount": 2,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "5448be9a4bdc2dfd2f8b456a",
+            "instanceCount": 6,
+            "stackCountPerInstance": 1
+          }
+        ]
+      },
+      {
+        "lotId": "rifle-field-medic",
+        "displayName": "Rifle Field Medic",
+        "purpose": "A ready M4, one ammunition stack and compact field surgery.",
+        "familyId": "arsenal",
+        "trackId": "rifle",
+        "anchorTemplateId": "5447a9cd4bdc2dbd208b4567",
+        "weight": 0.75,
+        "usePath": {
+          "kind": "raidRole",
+          "roleId": "rifle-patrol"
+        },
+        "recipe": [
+          {
+            "kind": "preset",
+            "presetId": "5af08cf886f774223c269184"
+          },
+          {
+            "kind": "template",
+            "templateId": "59e6906286f7746c9f75e847",
+            "instanceCount": 1,
+            "stackCountPerInstance": 60
+          },
+          {
+            "kind": "template",
+            "templateId": "5d02778e86f774203e7dedbe",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          }
+        ]
+      },
+      {
+        "lotId": "rifle-observer",
+        "displayName": "Rifle Observer",
+        "purpose": "A patrol rifle with premium hearing, ammunition and first aid.",
+        "familyId": "arsenal",
+        "trackId": "rifle",
+        "anchorTemplateId": "628e4e576d783146b124c64d",
+        "weight": 0.5,
+        "usePath": {
+          "kind": "raidRole",
+          "roleId": "rifle-patrol"
+        },
+        "recipe": [
+          {
+            "kind": "preset",
+            "presetId": "5af08cf886f774223c269184"
+          },
+          {
+            "kind": "template",
+            "templateId": "59e6906286f7746c9f75e847",
+            "instanceCount": 2,
+            "stackCountPerInstance": 60
+          },
+          {
+            "kind": "template",
+            "templateId": "628e4e576d783146b124c64d",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "544fb45d4bdc2dee738b4568",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          }
+        ]
+      },
+      {
+        "lotId": "rifle-sustainment",
+        "displayName": "Rifle Sustainment",
+        "purpose": "A ready rifle, ammunition and extended surgical and trauma supplies.",
+        "familyId": "arsenal",
+        "trackId": "rifle",
+        "anchorTemplateId": "5d02797c86f774203f38e30a",
+        "weight": 0.5,
+        "usePath": {
+          "kind": "raidRole",
+          "roleId": "rifle-patrol"
+        },
+        "recipe": [
+          {
+            "kind": "preset",
+            "presetId": "5af08cf886f774223c269184"
+          },
+          {
+            "kind": "template",
+            "templateId": "59e6906286f7746c9f75e847",
+            "instanceCount": 2,
+            "stackCountPerInstance": 60
+          },
+          {
+            "kind": "template",
+            "templateId": "5d02797c86f774203f38e30a",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "60098ad7c2240c0fe85c570a",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          }
+        ]
+      },
+      {
+        "lotId": "rifle-command",
+        "displayName": "Rifle Command",
+        "purpose": "A command rifle load with a deep ammunition reserve and field surgery.",
+        "familyId": "arsenal",
+        "trackId": "rifle",
+        "anchorTemplateId": "66b5f6985891c84aab75ca76",
+        "weight": 0.2,
+        "usePath": {
+          "kind": "raidRole",
+          "roleId": "rifle-patrol"
+        },
+        "recipe": [
+          {
+            "kind": "preset",
+            "presetId": "5af08cf886f774223c269184"
+          },
+          {
+            "kind": "template",
+            "templateId": "59e6906286f7746c9f75e847",
+            "instanceCount": 4,
+            "stackCountPerInstance": 60
+          },
+          {
+            "kind": "template",
+            "templateId": "66b5f6985891c84aab75ca76",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "5d02797c86f774203f38e30a",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          }
+        ]
+      },
+      {
+        "lotId": "recon-recovery",
+        "displayName": "Recon Recovery",
+        "purpose": "A light pack, basic hearing protection and regenerative medicine.",
+        "familyId": "operator",
+        "trackId": "recon",
+        "anchorTemplateId": "5ca20d5986f774331e7c9602",
+        "weight": 0.9,
+        "usePath": {
+          "kind": "raidRole",
+          "roleId": "recon"
+        },
+        "recipe": [
+          {
+            "kind": "template",
+            "templateId": "5ca20d5986f774331e7c9602",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "5b432b965acfc47a8774094e",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "5c0e530286f7747fa1419862",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          }
+        ]
+      },
+      {
+        "lotId": "recon-surgeon",
+        "displayName": "Recon Surgeon",
+        "purpose": "Hearing protection, a light pack and surgery for an independent scout.",
+        "familyId": "operator",
+        "trackId": "recon",
+        "anchorTemplateId": "5d02778e86f774203e7dedbe",
+        "weight": 0.75,
+        "usePath": {
+          "kind": "raidRole",
+          "roleId": "recon"
+        },
+        "recipe": [
+          {
+            "kind": "template",
+            "templateId": "5645bcc04bdc2d363b8b4572",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "5ca20d5986f774331e7c9602",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "5d02778e86f774203e7dedbe",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          }
+        ]
+      },
+      {
+        "lotId": "recon-patrol",
+        "displayName": "Recon Patrol",
+        "purpose": "A field pack, communications and trauma kit for a long patrol.",
+        "familyId": "operator",
+        "trackId": "recon",
+        "anchorTemplateId": "618cfae774bb2d036a049e7c",
+        "weight": 0.75,
+        "usePath": {
+          "kind": "raidRole",
+          "roleId": "recon"
+        },
+        "recipe": [
+          {
+            "kind": "template",
+            "templateId": "5645bcc04bdc2d363b8b4572",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "618cfae774bb2d036a049e7c",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "60098ad7c2240c0fe85c570a",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          }
+        ]
+      },
+      {
+        "lotId": "recon-rescue",
+        "displayName": "Recon Rescue",
+        "purpose": "Premium communications, a field pack and extended surgical care.",
+        "familyId": "operator",
+        "trackId": "recon",
+        "anchorTemplateId": "66b5f6985891c84aab75ca76",
+        "weight": 0.5,
+        "usePath": {
+          "kind": "raidRole",
+          "roleId": "recon"
+        },
+        "recipe": [
+          {
+            "kind": "template",
+            "templateId": "66b5f6985891c84aab75ca76",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "618cfae774bb2d036a049e7c",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "5d02797c86f774203f38e30a",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "544fb45d4bdc2dee738b4568",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          }
+        ]
+      },
+      {
+        "lotId": "night-watch",
+        "displayName": "Night Watch",
+        "purpose": "A complete helmet preset, premium hearing and recovery chemistry. Night vision is not included.",
+        "familyId": "operator",
+        "trackId": "night",
+        "anchorTemplateId": "5b40e1525acfc4771e1c6611",
+        "weight": 0.5,
+        "usePath": {
+          "kind": "raidRole",
+          "roleId": "night-operations"
+        },
+        "recipe": [
+          {
+            "kind": "preset",
+            "presetId": "657120b36fe59548840cb542"
+          },
+          {
+            "kind": "template",
+            "templateId": "628e4e576d783146b124c64d",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "5c0e530286f7747fa1419862",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          }
+        ]
+      },
+      {
+        "lotId": "night-rescue",
+        "displayName": "Night Rescue",
+        "purpose": "Protected communications, surgery, first aid and extraction chemistry. Night vision is not included.",
+        "familyId": "operator",
+        "trackId": "night",
+        "anchorTemplateId": "5b40e1525acfc4771e1c6611",
+        "weight": 0.2,
+        "usePath": {
+          "kind": "raidRole",
+          "roleId": "night-operations"
+        },
+        "recipe": [
+          {
+            "kind": "preset",
+            "presetId": "657120b36fe59548840cb542"
+          },
+          {
+            "kind": "template",
+            "templateId": "628e4e576d783146b124c64d",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "5d02797c86f774203f38e30a",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "5ed51652f6c34d2cc26336a1",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "60098ad7c2240c0fe85c570a",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          }
+        ]
+      },
+      {
+        "lotId": "entry-ordnance-aid",
+        "displayName": "Entry Ordnance Aid",
+        "purpose": "Four grenades with first aid for a single entry team.",
+        "familyId": "field-supply",
+        "trackId": "ordnance",
+        "anchorTemplateId": "5448be9a4bdc2dfd2f8b456a",
+        "weight": 0.9,
+        "usePath": {
+          "kind": "raidRole",
+          "roleId": "breaching-ordnance"
+        },
+        "recipe": [
+          {
+            "kind": "template",
+            "templateId": "5448be9a4bdc2dfd2f8b456a",
+            "instanceCount": 2,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "5710c24ad2720bc3458b45a3",
+            "instanceCount": 2,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "544fb45d4bdc2dee738b4568",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          }
+        ]
+      },
+      {
+        "lotId": "breach-support",
+        "displayName": "Breach Support",
+        "purpose": "Ten mixed grenades and surgery for several close-entry raids.",
+        "familyId": "field-supply",
+        "trackId": "ordnance",
+        "anchorTemplateId": "5d02778e86f774203e7dedbe",
+        "weight": 0.75,
+        "usePath": {
+          "kind": "raidRole",
+          "roleId": "breaching-ordnance"
+        },
+        "recipe": [
+          {
+            "kind": "template",
+            "templateId": "5448be9a4bdc2dfd2f8b456a",
+            "instanceCount": 6,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "5710c24ad2720bc3458b45a3",
+            "instanceCount": 4,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "5d02778e86f774203e7dedbe",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          }
+        ]
+      },
+      {
+        "lotId": "breach-comms",
+        "displayName": "Breach Communications",
+        "purpose": "Eight mixed grenades and hearing protection for controlled entries.",
+        "familyId": "field-supply",
+        "trackId": "ordnance",
+        "anchorTemplateId": "5645bcc04bdc2d363b8b4572",
+        "weight": 0.75,
+        "usePath": {
+          "kind": "raidRole",
+          "roleId": "breaching-ordnance"
+        },
+        "recipe": [
+          {
+            "kind": "template",
+            "templateId": "5448be9a4bdc2dfd2f8b456a",
+            "instanceCount": 4,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "5710c24ad2720bc3458b45a3",
+            "instanceCount": 4,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "5645bcc04bdc2d363b8b4572",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          }
+        ]
+      },
+      {
+        "lotId": "assault-ordnance",
+        "displayName": "Assault Ordnance",
+        "purpose": "Ten grenades, premium hearing and an advanced trauma kit.",
+        "familyId": "field-supply",
+        "trackId": "ordnance",
+        "anchorTemplateId": "628e4e576d783146b124c64d",
+        "weight": 0.5,
+        "usePath": {
+          "kind": "raidRole",
+          "roleId": "breaching-ordnance"
+        },
+        "recipe": [
+          {
+            "kind": "template",
+            "templateId": "5448be9a4bdc2dfd2f8b456a",
+            "instanceCount": 6,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "5710c24ad2720bc3458b45a3",
+            "instanceCount": 4,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "60098ad7c2240c0fe85c570a",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "628e4e576d783146b124c64d",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          }
+        ]
+      },
+      {
+        "lotId": "sapper-resupply",
+        "displayName": "Sapper Resupply",
+        "purpose": "Twelve grenades with surgery and emergency pain control.",
+        "familyId": "field-supply",
+        "trackId": "ordnance",
+        "anchorTemplateId": "5d02797c86f774203f38e30a",
+        "weight": 0.5,
+        "usePath": {
+          "kind": "raidRole",
+          "roleId": "breaching-ordnance"
+        },
+        "recipe": [
+          {
+            "kind": "template",
+            "templateId": "5448be9a4bdc2dfd2f8b456a",
+            "instanceCount": 8,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "5710c24ad2720bc3458b45a3",
+            "instanceCount": 4,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "5d02797c86f774203f38e30a",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "544fb3f34bdc2d03748b456a",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          }
+        ]
+      },
+      {
+        "lotId": "breach-command",
+        "displayName": "Breach Command",
+        "purpose": "A multi-raid breaching reserve: sixteen grenades, premium communications, surgery and extraction chemistry.",
+        "familyId": "field-supply",
+        "trackId": "ordnance",
+        "anchorTemplateId": "66b5f6985891c84aab75ca76",
+        "weight": 0.2,
+        "usePath": {
+          "kind": "raidRole",
+          "roleId": "breaching-ordnance"
+        },
+        "recipe": [
+          {
+            "kind": "template",
+            "templateId": "5448be9a4bdc2dfd2f8b456a",
+            "instanceCount": 10,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "5710c24ad2720bc3458b45a3",
+            "instanceCount": 6,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "66b5f6985891c84aab75ca76",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "5d02797c86f774203f38e30a",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "5ed51652f6c34d2cc26336a1",
+            "instanceCount": 2,
+            "stackCountPerInstance": 1
+          }
+        ]
+      },
+      {
+        "lotId": "triage-reserve",
+        "displayName": "Triage Reserve",
+        "purpose": "Three Salewas, compact surgery and regenerative medicine.",
+        "familyId": "field-supply",
+        "trackId": "medical",
+        "anchorTemplateId": "544fb45d4bdc2dee738b4568",
+        "weight": 0.75,
+        "usePath": {
+          "kind": "raidRole",
+          "roleId": "trauma-care"
+        },
+        "recipe": [
+          {
+            "kind": "template",
+            "templateId": "544fb45d4bdc2dee738b4568",
+            "instanceCount": 3,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "5d02778e86f774203e7dedbe",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "5c0e530286f7747fa1419862",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          }
+        ]
+      },
+      {
+        "lotId": "field-hospital",
+        "displayName": "Field Hospital",
+        "purpose": "Three advanced trauma kits, extended surgery and two recovery injectors.",
+        "familyId": "field-supply",
+        "trackId": "medical",
+        "anchorTemplateId": "60098ad7c2240c0fe85c570a",
+        "weight": 0.5,
+        "usePath": {
+          "kind": "raidRole",
+          "roleId": "trauma-care"
+        },
+        "recipe": [
+          {
+            "kind": "template",
+            "templateId": "60098ad7c2240c0fe85c570a",
+            "instanceCount": 3,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "5d02797c86f774203f38e30a",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "5c0e530286f7747fa1419862",
+            "instanceCount": 2,
+            "stackCountPerInstance": 1
+          }
+        ]
+      },
+      {
+        "lotId": "surgical-reserve",
+        "displayName": "Surgical Reserve",
+        "purpose": "Four Salewas, extended surgery and emergency pain control for multiple raids.",
+        "familyId": "field-supply",
+        "trackId": "medical",
+        "anchorTemplateId": "5d02797c86f774203f38e30a",
+        "weight": 0.5,
+        "usePath": {
+          "kind": "raidRole",
+          "roleId": "trauma-care"
+        },
+        "recipe": [
+          {
+            "kind": "template",
+            "templateId": "544fb45d4bdc2dee738b4568",
+            "instanceCount": 4,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "5d02797c86f774203f38e30a",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "544fb3f34bdc2d03748b456a",
+            "instanceCount": 2,
+            "stackCountPerInstance": 1
+          }
+        ]
+      },
+      {
+        "lotId": "trauma-command",
+        "displayName": "Trauma Command",
+        "purpose": "Four advanced trauma kits, two surgical kits and recovery chemistry for a campaign.",
+        "familyId": "field-supply",
+        "trackId": "medical",
+        "anchorTemplateId": "60098ad7c2240c0fe85c570a",
+        "weight": 0.2,
+        "usePath": {
+          "kind": "raidRole",
+          "roleId": "trauma-care"
+        },
+        "recipe": [
+          {
+            "kind": "template",
+            "templateId": "60098ad7c2240c0fe85c570a",
+            "instanceCount": 4,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "5d02797c86f774203f38e30a",
+            "instanceCount": 2,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "5c0e530286f7747fa1419862",
+            "instanceCount": 2,
+            "stackCountPerInstance": 1
+          }
+        ]
+      },
+      {
+        "lotId": "extraction-chemistry",
+        "displayName": "Extraction Chemistry",
+        "purpose": "A complementary extraction reserve of endurance, strength and pain-control injectors.",
+        "familyId": "field-supply",
+        "trackId": "chemistry",
+        "anchorTemplateId": "5ed51652f6c34d2cc26336a1",
+        "weight": 0.5,
+        "usePath": {
+          "kind": "raidRole",
+          "roleId": "combat-chemistry"
+        },
+        "recipe": [
+          {
+            "kind": "template",
+            "templateId": "5ed51652f6c34d2cc26336a1",
+            "instanceCount": 2,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "5c0e531d86f7747fa23f4d42",
+            "instanceCount": 2,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "544fb3f34bdc2d03748b456a",
+            "instanceCount": 4,
+            "stackCountPerInstance": 1
+          }
+        ]
+      },
+      {
+        "lotId": "expedition-chemistry",
+        "displayName": "Expedition Chemistry",
+        "purpose": "Ten injectors for several heavy-haul raids: strength, endurance and regeneration.",
+        "familyId": "field-supply",
+        "trackId": "chemistry",
+        "anchorTemplateId": "5ed51652f6c34d2cc26336a1",
+        "weight": 0.2,
+        "usePath": {
+          "kind": "raidRole",
+          "roleId": "combat-chemistry"
+        },
+        "recipe": [
+          {
+            "kind": "template",
+            "templateId": "5ed51652f6c34d2cc26336a1",
+            "instanceCount": 4,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "5c0e531d86f7747fa23f4d42",
+            "instanceCount": 3,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "5c0e530286f7747fa1419862",
+            "instanceCount": 3,
+            "stackCountPerInstance": 1
+          }
+        ]
+      },
+      {
+        "lotId": "rifle-ammunition-reserve",
+        "displayName": "Rifle Ammunition Reserve",
+        "purpose": "Mixed rifle ammunition for NATO and intermediate-caliber weapons.",
+        "familyId": "field-supply",
+        "trackId": "ammo",
+        "anchorTemplateId": "6768c25aa7b238f14a08d3f6",
+        "weight": 0.5,
+        "usePath": {
+          "kind": "raidRole",
+          "roleId": "ammunition-resupply"
+        },
+        "recipe": [
+          {
+            "kind": "template",
+            "templateId": "6768c25aa7b238f14a08d3f6",
+            "instanceCount": 2,
+            "stackCountPerInstance": 40
+          },
+          {
+            "kind": "template",
+            "templateId": "56dfef82d2720bbd668b4567",
+            "instanceCount": 2,
+            "stackCountPerInstance": 60
+          },
+          {
+            "kind": "template",
+            "templateId": "59e6906286f7746c9f75e847",
+            "instanceCount": 2,
+            "stackCountPerInstance": 60
+          }
+        ]
+      },
+      {
+        "lotId": "overwatch-ammunition",
+        "displayName": "Overwatch Ammunition",
+        "purpose": "A deep reserve of match rifle and armor-piercing intermediate ammunition.",
+        "familyId": "field-supply",
+        "trackId": "ammo",
+        "anchorTemplateId": "6768c25aa7b238f14a08d3f6",
+        "weight": 0.2,
+        "usePath": {
+          "kind": "raidRole",
+          "roleId": "ammunition-resupply"
+        },
+        "recipe": [
+          {
+            "kind": "template",
+            "templateId": "6768c25aa7b238f14a08d3f6",
+            "instanceCount": 6,
+            "stackCountPerInstance": 40
+          },
+          {
+            "kind": "template",
+            "templateId": "56dfef82d2720bbd668b4567",
+            "instanceCount": 2,
+            "stackCountPerInstance": 60
+          }
+        ]
+      },
+      {
+        "lotId": "vault-field-command",
+        "displayName": "Vault Field Command",
+        "purpose": "A ready M4, premium hearing and extended surgery for a specialist operation.",
+        "familyId": "arsenal",
+        "trackId": "vault",
+        "anchorTemplateId": "628e4e576d783146b124c64d",
+        "weight": 0.3,
+        "usePath": {
+          "kind": "raidRole",
+          "roleId": "assault"
+        },
+        "recipe": [
+          {
+            "kind": "preset",
+            "presetId": "5af08cf886f774223c269184"
+          },
+          {
+            "kind": "template",
+            "templateId": "628e4e576d783146b124c64d",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "5d02797c86f774203f38e30a",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          }
+        ]
+      },
+      {
+        "lotId": "campaign-trauma-cache",
+        "displayName": "Campaign Trauma Cache",
+        "purpose": "A multi-raid medical reserve combining advanced trauma care, field surgery and first-response supplies.",
+        "familyId": "field-supply",
+        "trackId": "medical",
+        "anchorTemplateId": "60098ad7c2240c0fe85c570a",
+        "weight": 0.12,
+        "usePath": {
+          "kind": "raidRole",
+          "roleId": "trauma-care"
+        },
+        "recipe": [
+          {
+            "kind": "template",
+            "templateId": "60098ad7c2240c0fe85c570a",
+            "instanceCount": 4,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "5d02797c86f774203f38e30a",
+            "instanceCount": 2,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "5c0e530286f7747fa1419862",
+            "instanceCount": 2,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "544fb45d4bdc2dee738b4568",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "590c678286f77426c9660122",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "5d02778e86f774203e7dedbe",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "544fb3f34bdc2d03748b456a",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          }
+        ]
+      },
+      {
+        "lotId": "quartermaster-ammunition-cache",
+        "displayName": "Quartermaster Ammunition Cache",
+        "purpose": "A multi-raid reserve of match and armor-piercing rifle ammunition, packed in usable stacks.",
+        "familyId": "field-supply",
+        "trackId": "ammo",
+        "anchorTemplateId": "6768c25aa7b238f14a08d3f6",
+        "weight": 0.12,
+        "usePath": {
+          "kind": "raidRole",
+          "roleId": "ammunition-resupply"
+        },
+        "recipe": [
+          {
+            "kind": "template",
+            "templateId": "6768c25aa7b238f14a08d3f6",
+            "instanceCount": 4,
+            "stackCountPerInstance": 40
+          },
+          {
+            "kind": "template",
+            "templateId": "56dfef82d2720bbd668b4567",
+            "instanceCount": 2,
+            "stackCountPerInstance": 60
+          },
+          {
+            "kind": "template",
+            "templateId": "6768c25aa7b238f14a08d3f6",
+            "instanceCount": 2,
+            "stackCountPerInstance": 40
+          },
+          {
+            "kind": "template",
+            "templateId": "56dfef82d2720bbd668b4567",
+            "instanceCount": 2,
+            "stackCountPerInstance": 60
+          },
+          {
+            "kind": "template",
+            "templateId": "59e6906286f7746c9f75e847",
+            "instanceCount": 2,
+            "stackCountPerInstance": 60
+          }
+        ]
+      },
+      {
+        "lotId": "night-extraction-cache",
+        "displayName": "Night Extraction Cache",
+        "purpose": "Protected communications, surgery and a complementary extraction-injector reserve. Night vision is not included.",
+        "familyId": "operator",
+        "trackId": "night",
+        "anchorTemplateId": "5b40e1525acfc4771e1c6611",
+        "weight": 0.04,
+        "usePath": {
+          "kind": "raidRole",
+          "roleId": "night-operations"
+        },
+        "recipe": [
+          {
+            "kind": "preset",
+            "presetId": "657120b36fe59548840cb542"
+          },
+          {
+            "kind": "template",
+            "templateId": "628e4e576d783146b124c64d",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "5d02797c86f774203f38e30a",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "5ed51652f6c34d2cc26336a1",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "60098ad7c2240c0fe85c570a",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "5ed51652f6c34d2cc26336a1",
+            "instanceCount": 2,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "5c0e531d86f7747fa23f4d42",
+            "instanceCount": 2,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "544fb3f34bdc2d03748b456a",
+            "instanceCount": 4,
+            "stackCountPerInstance": 1
+          }
+        ]
+      },
+      {
+        "lotId": "sapper-campaign-cache",
+        "displayName": "Sapper Campaign Cache",
+        "purpose": "A campaign-sized breaching reserve of ordnance, trauma care, surgery and communications.",
+        "familyId": "field-supply",
+        "trackId": "ordnance",
+        "anchorTemplateId": "66b5f6985891c84aab75ca76",
+        "weight": 0.08,
+        "usePath": {
+          "kind": "raidRole",
+          "roleId": "breaching-ordnance"
+        },
+        "recipe": [
+          {
+            "kind": "template",
+            "templateId": "5448be9a4bdc2dfd2f8b456a",
+            "instanceCount": 10,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "5710c24ad2720bc3458b45a3",
+            "instanceCount": 6,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "66b5f6985891c84aab75ca76",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "5d02797c86f774203f38e30a",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "5ed51652f6c34d2cc26336a1",
+            "instanceCount": 2,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "5448be9a4bdc2dfd2f8b456a",
+            "instanceCount": 6,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "5710c24ad2720bc3458b45a3",
+            "instanceCount": 4,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "60098ad7c2240c0fe85c570a",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "628e4e576d783146b124c64d",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          }
+        ]
+      },
+      {
+        "lotId": "black-site-command-cache",
+        "displayName": "Black Site Command Cache",
+        "purpose": "A complete specialist deployment: ready carbine, protected communications, surgery and combat injectors.",
+        "familyId": "arsenal",
+        "trackId": "vault",
+        "anchorTemplateId": "628e4e576d783146b124c64d",
+        "weight": 0.012,
+        "usePath": {
+          "kind": "raidRole",
+          "roleId": "assault"
+        },
+        "recipe": [
+          {
+            "kind": "preset",
+            "presetId": "5af08cf886f774223c269184"
+          },
+          {
+            "kind": "template",
+            "templateId": "628e4e576d783146b124c64d",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "5d02797c86f774203f38e30a",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "preset",
+            "presetId": "657120b36fe59548840cb542"
+          },
+          {
+            "kind": "template",
+            "templateId": "628e4e576d783146b124c64d",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "5c0e530286f7747fa1419862",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "5ed51652f6c34d2cc26336a1",
+            "instanceCount": 2,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "5c0e531d86f7747fa23f4d42",
+            "instanceCount": 3,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "5c0e530286f7747fa1419862",
+            "instanceCount": 3,
+            "stackCountPerInstance": 1
+          }
+        ]
+      },
+      {
+        "lotId": "black-site-expedition-jackpot",
+        "displayName": "Black Site Expedition Jackpot",
+        "purpose": "An exceptional expedition cache: a ready carbine, protected communications, medical reserves, combat injectors and a deep ammunition supply. Night vision is not included.",
+        "familyId": "arsenal",
+        "trackId": "vault",
+        "anchorTemplateId": "628e4e576d783146b124c64d",
+        "weight": 0.03,
+        "usePath": {
+          "kind": "raidRole",
+          "roleId": "assault"
+        },
+        "recipe": [
+          {
+            "kind": "preset",
+            "presetId": "5af08cf886f774223c269184"
+          },
+          {
+            "kind": "template",
+            "templateId": "628e4e576d783146b124c64d",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "5d02797c86f774203f38e30a",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "preset",
+            "presetId": "657120b36fe59548840cb542"
+          },
+          {
+            "kind": "template",
+            "templateId": "628e4e576d783146b124c64d",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "5c0e530286f7747fa1419862",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "5ed51652f6c34d2cc26336a1",
+            "instanceCount": 2,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "5c0e531d86f7747fa23f4d42",
+            "instanceCount": 3,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "5c0e530286f7747fa1419862",
+            "instanceCount": 3,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "6768c25aa7b238f14a08d3f6",
+            "instanceCount": 4,
+            "stackCountPerInstance": 40
+          },
+          {
+            "kind": "template",
+            "templateId": "56dfef82d2720bbd668b4567",
+            "instanceCount": 2,
+            "stackCountPerInstance": 60
+          },
+          {
+            "kind": "template",
+            "templateId": "60098ad7c2240c0fe85c570a",
+            "instanceCount": 3,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "5d02797c86f774203f38e30a",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "5c0e530286f7747fa1419862",
+            "instanceCount": 2,
+            "stackCountPerInstance": 1
+          }
+        ]
+      }
+    ]
+  },
+  "eco-attachment.elite-optics.json": {
+    "schemaVersion": 1,
+    "providerId": "eco-attachment.elite-optics",
+    "packVersion": "1.0.0",
+    "displayLabel": "Eco Attachment Emporium Elite Optics",
+    "providerWeight": 0.06,
+    "requiredTemplateIds": [
+      "696395af1b7e04938307a122",
+      "696395af1b7e04938307a124",
+      "69bc81d77cbcfaf66d0f8541",
+      "69bc77167cbcfaf66d0f853a",
+      "69bc7cdc7cbcfaf66d0f853c",
+      "69bc60217cbcfaf66d0f8533",
+      "69bdb41d2e4518999108ae92"
+    ],
+    "requiredPresetIds": [],
+    "requiredBundleKeys": [],
+    "lots": [
+      {
+        "lotId": "precision-riflescope",
+        "displayName": "Precision Riflescope",
+        "purpose": "A Vortex Viper HS 2.5-10x30mm riflescope on its matching 30mm mount.",
+        "familyId": "attachments",
+        "trackId": "eco-elite-optics",
+        "anchorTemplateId": "696395af1b7e04938307a122",
+        "weight": 1,
+        "usePath": {
+          "kind": "raidRole",
+          "roleId": "precision-overwatch"
+        },
+        "recipe": [
+          {
+            "kind": "template",
+            "templateId": "696395af1b7e04938307a122",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "696395af1b7e04938307a124",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          }
+        ]
+      },
+      {
+        "lotId": "larue-rail-system",
+        "displayName": "LaRue Rail System",
+        "purpose": "A LaRue AccARizer rail fitted with matched front and rear flip sights.",
+        "familyId": "attachments",
+        "trackId": "eco-elite-optics",
+        "anchorTemplateId": "69bc81d77cbcfaf66d0f8541",
+        "weight": 0.8,
+        "usePath": {
+          "kind": "raidRole",
+          "roleId": "precision-overwatch"
+        },
+        "recipe": [
+          {
+            "kind": "template",
+            "templateId": "69bc81d77cbcfaf66d0f8541",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "69bc77167cbcfaf66d0f853a",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "69bc7cdc7cbcfaf66d0f853c",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          }
+        ]
+      },
+      {
+        "lotId": "micro-red-dot-mounts",
+        "displayName": "Micro Red Dot Mounts",
+        "purpose": "An AMRU Designs carry-handle micro red dot mount and a LaRue Tactical C-Note offset mount.",
+        "familyId": "attachments",
+        "trackId": "eco-elite-optics",
+        "anchorTemplateId": "69bc60217cbcfaf66d0f8533",
+        "weight": 0.6,
+        "usePath": {
+          "kind": "raidRole",
+          "roleId": "elite-operator"
+        },
+        "recipe": [
+          {
+            "kind": "template",
+            "templateId": "69bc60217cbcfaf66d0f8533",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "69bdb41d2e4518999108ae92",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          }
+        ]
+      },
+      {
+        "lotId": "precision-armorer-kit",
+        "displayName": "Precision Armorer Kit",
+        "purpose": "A riflescope with its matching mount, a rail and flip-sight set, plus two alternative micro-dot mounts. Compatibility depends on the host weapon.",
+        "familyId": "attachments",
+        "trackId": "eco-elite-optics",
+        "anchorTemplateId": "696395af1b7e04938307a122",
+        "weight": 0.8,
+        "usePath": {
+          "kind": "raidRole",
+          "roleId": "precision-overwatch"
+        },
+        "recipe": [
+          {
+            "kind": "template",
+            "templateId": "696395af1b7e04938307a122",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "696395af1b7e04938307a124",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "69bc81d77cbcfaf66d0f8541",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "69bc77167cbcfaf66d0f853a",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "69bc7cdc7cbcfaf66d0f853c",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "69bc60217cbcfaf66d0f8533",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "69bdb41d2e4518999108ae92",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          }
+        ]
+      }
+    ]
+  },
+  "eco-attachment.field-cache.json": {
+    "schemaVersion": 1,
+    "providerId": "eco-attachment.field-cache",
+    "packVersion": "1.0.0",
+    "displayLabel": "Eco Attachment Emporium Field Cache",
+    "providerWeight": 0.16,
+    "requiredTemplateIds": [
+      "68c48eb7c91390fb930e8d94",
+      "6912857dfb534981300b1d8f",
+      "68b4b24e27658b8b0d024399",
+      "68b4b24e27658b8b0d02439a",
+      "68bb6be346d4437fb40002e0",
+      "68bc3cd17208c642f409974f"
+    ],
+    "requiredPresetIds": [],
+    "requiredBundleKeys": [],
+    "lots": [
+      {
+        "lotId": "grip-upgrade-kit",
+        "displayName": "Grip Upgrade Kit",
+        "purpose": "A Knight's Armament KAC M-LOK Barrier Grip and a True North Zero-8 V2 K-Grip for dialing in ergonomics.",
+        "familyId": "attachments",
+        "trackId": "eco-field-cache",
+        "anchorTemplateId": "68c48eb7c91390fb930e8d94",
+        "weight": 1,
+        "usePath": {
+          "kind": "raidRole",
+          "roleId": "rifle-patrol"
+        },
+        "recipe": [
+          {
+            "kind": "template",
+            "templateId": "68c48eb7c91390fb930e8d94",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "6912857dfb534981300b1d8f",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          }
+        ]
+      },
+      {
+        "lotId": "iron-sight-swap",
+        "displayName": "Iron Sight Swap",
+        "purpose": "A matched RexTac TAR-21 front and rear iron sight set.",
+        "familyId": "attachments",
+        "trackId": "eco-field-cache",
+        "anchorTemplateId": "68b4b24e27658b8b0d024399",
+        "weight": 1,
+        "usePath": {
+          "kind": "raidRole",
+          "roleId": "rifle-patrol"
+        },
+        "recipe": [
+          {
+            "kind": "template",
+            "templateId": "68b4b24e27658b8b0d024399",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "68b4b24e27658b8b0d02439a",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          }
+        ]
+      },
+      {
+        "lotId": "offset-mount-kit",
+        "displayName": "Offset Mount Kit",
+        "purpose": "An Arisaka offset optic mount fitted with an Aimpoint Micro mount for a 45-degree backup sight.",
+        "familyId": "attachments",
+        "trackId": "eco-field-cache",
+        "anchorTemplateId": "68bb6be346d4437fb40002e0",
+        "weight": 0.8,
+        "usePath": {
+          "kind": "raidRole",
+          "roleId": "rifle-patrol"
+        },
+        "recipe": [
+          {
+            "kind": "template",
+            "templateId": "68bb6be346d4437fb40002e0",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "68bc3cd17208c642f409974f",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          }
+        ]
+      },
+      {
+        "lotId": "field-armorer-kit",
+        "displayName": "Field Armorer Kit",
+        "purpose": "An assorted armorer supply box of grips, iron sights and mounts for several compatible weapon platforms; not a complete weapon.",
+        "familyId": "attachments",
+        "trackId": "eco-field-cache",
+        "anchorTemplateId": "68bb6be346d4437fb40002e0",
+        "weight": 1,
+        "usePath": {
+          "kind": "raidRole",
+          "roleId": "rifle-patrol"
+        },
+        "recipe": [
+          {
+            "kind": "template",
+            "templateId": "68bb6be346d4437fb40002e0",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "68bc3cd17208c642f409974f",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "68c48eb7c91390fb930e8d94",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "6912857dfb534981300b1d8f",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "68b4b24e27658b8b0d024399",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "68b4b24e27658b8b0d02439a",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          }
+        ]
+      }
+    ]
+  },
+  "eco-ww2.relic-cache.json": {
+    "schemaVersion": 1,
+    "providerId": "eco-ww2.relic-cache",
+    "packVersion": "1.0.0",
+    "displayLabel": "Eco WW2 Pack Relic Cache",
+    "providerWeight": 0.05,
+    "requiredTemplateIds": [
+      "6a06febcf86e3e091872c104",
+      "6a06fa8af86e3e091872c100",
+      "6a06fad8f86e3e091872c102",
+      "6a0ce40499dfd9edaca1daa9",
+      "6a0df23142723bcd0581cf82",
+      "6a1ee17009ef9baf4bd3193b"
+    ],
+    "requiredPresetIds": [],
+    "requiredBundleKeys": [],
+    "lots": [
+      {
+        "lotId": "tommy-gun-relic",
+        "displayName": "Tommy Gun Relic",
+        "purpose": "A Thompson M1928A1 submachine gun with a matched 50-round drum and 30-round box magazine.",
+        "familyId": "weapon-relic",
+        "trackId": "eco-ww2-relic-cache",
+        "anchorTemplateId": "6a06febcf86e3e091872c104",
+        "weight": 1,
+        "usePath": {
+          "kind": "raidRole",
+          "roleId": "close-quarters"
+        },
+        "recipe": [
+          {
+            "kind": "template",
+            "templateId": "6a06febcf86e3e091872c104",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "6a06fa8af86e3e091872c100",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "6a06fad8f86e3e091872c102",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          }
+        ]
+      },
+      {
+        "lotId": "k98k-sniper-relic",
+        "displayName": "K98K Sniper Relic",
+        "purpose": "A Karabiner 98 kurz bolt-action rifle fitted with a Zeiss ZF39 4x26 scope and a 20-round trench magazine.",
+        "familyId": "weapon-relic",
+        "trackId": "eco-ww2-relic-cache",
+        "anchorTemplateId": "6a0ce40499dfd9edaca1daa9",
+        "weight": 0.9,
+        "usePath": {
+          "kind": "raidRole",
+          "roleId": "precision-overwatch"
+        },
+        "recipe": [
+          {
+            "kind": "template",
+            "templateId": "6a0ce40499dfd9edaca1daa9",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "6a0df23142723bcd0581cf82",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "6a1ee17009ef9baf4bd3193b",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          }
+        ]
+      }
+    ]
+  },
+  "isb-aishi.elite-armory.json": {
+    "schemaVersion": 1,
+    "providerId": "isb-aishi.elite-armory",
+    "packVersion": "1.0.0",
+    "displayLabel": "ISB Aishi Elite Armory",
+    "providerWeight": 0.07,
+    "requiredTemplateIds": [
+      "6a30ed97ce95057496b93476",
+      "6a31d5c8c667d4db08650272",
+      "6931b6a2161edf5b558ee5bc",
+      "6931bca8197ad8567a64bf86",
+      "6a07e920d7a2c6d597db893c",
+      "696d81b236067d6c3ef793ca",
+      "6a12667fec1b599645cd7183",
+      "6a111c7164b1373374405287"
+    ],
+    "requiredPresetIds": [],
+    "requiredBundleKeys": [],
+    "lots": [
+      {
+        "lotId": "7n24m-marksman-cache",
+        "displayName": "7N24M Marksman Cache",
+        "purpose": "Two 5.45x39mm 7N24M ammo packs and a loose stack for a precision-chambered rifle.",
+        "familyId": "arsenal",
+        "trackId": "isb-elite-armory",
+        "anchorTemplateId": "6a30ed97ce95057496b93476",
+        "weight": 1,
+        "usePath": {
+          "kind": "raidRole",
+          "roleId": "precision-overwatch"
+        },
+        "recipe": [
+          {
+            "kind": "template",
+            "templateId": "6a31d5c8c667d4db08650272",
+            "instanceCount": 2,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "6a30ed97ce95057496b93476",
+            "instanceCount": 1,
+            "stackCountPerInstance": 30
+          }
+        ]
+      },
+      {
+        "lotId": "7n26-assault-cache",
+        "displayName": "7N26 Assault Cache",
+        "purpose": "Two 7.62x39mm 7N26 BS ammo packs for a sustained assault rifle patrol.",
+        "familyId": "arsenal",
+        "trackId": "isb-elite-armory",
+        "anchorTemplateId": "6931b6a2161edf5b558ee5bc",
+        "weight": 1,
+        "usePath": {
+          "kind": "raidRole",
+          "roleId": "rifle-patrol"
+        },
+        "recipe": [
+          {
+            "kind": "template",
+            "templateId": "6931bca8197ad8567a64bf86",
+            "instanceCount": 2,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "6931b6a2161edf5b558ee5bc",
+            "instanceCount": 1,
+            "stackCountPerInstance": 40
+          }
+        ]
+      },
+      {
+        "lotId": "korund-elite-loadout",
+        "displayName": "Korund Elite Loadout",
+        "purpose": "A Korund-VM body armor paired with an Eberlestock F4 Terminator load-bearing backpack.",
+        "familyId": "operator",
+        "trackId": "isb-elite-armory",
+        "anchorTemplateId": "6a07e920d7a2c6d597db893c",
+        "weight": 0.7,
+        "usePath": {
+          "kind": "raidRole",
+          "roleId": "elite-operator"
+        },
+        "recipe": [
+          {
+            "kind": "template",
+            "templateId": "6a07e920d7a2c6d597db893c",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "6a12667fec1b599645cd7183",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          }
+        ]
+      },
+      {
+        "lotId": "6b45-elite-loadout",
+        "displayName": "6B45 Elite Loadout",
+        "purpose": "A 6B45 body armor paired with a Tasmanian Tiger Modular Pack 45.",
+        "familyId": "operator",
+        "trackId": "isb-elite-armory",
+        "anchorTemplateId": "696d81b236067d6c3ef793ca",
+        "weight": 0.5,
+        "usePath": {
+          "kind": "raidRole",
+          "roleId": "elite-operator"
+        },
+        "recipe": [
+          {
+            "kind": "template",
+            "templateId": "696d81b236067d6c3ef793ca",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "6a111c7164b1373374405287",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          }
+        ]
+      }
+    ]
+  },
+  "isb-aishi.field-armory.json": {
+    "schemaVersion": 1,
+    "providerId": "isb-aishi.field-armory",
+    "packVersion": "1.0.0",
+    "displayLabel": "ISB Aishi Field Armory",
+    "providerWeight": 0.18,
+    "requiredTemplateIds": [
+      "699aae8c9b6a4ab2b769c4a3",
+      "699aad8c961ebda759f9e7fe",
+      "699aab526ac4f65528f1fd63",
+      "699aab2519b875a27d6ec5d3",
+      "6a1267fd0580910d4ffbdec0",
+      "6a12643e06424c709d450e7c"
+    ],
+    "requiredPresetIds": [],
+    "requiredBundleKeys": [],
+    "lots": [
+      {
+        "lotId": "sidearm-resupply",
+        "displayName": "Sidearm Resupply",
+        "purpose": "Two 9x19mm RIP AP ammo packs and a loose stack for topping off a sidearm.",
+        "familyId": "field-supply",
+        "trackId": "isb-field-armory",
+        "anchorTemplateId": "699aae8c9b6a4ab2b769c4a3",
+        "weight": 1,
+        "usePath": {
+          "kind": "raidRole",
+          "roleId": "close-quarters"
+        },
+        "recipe": [
+          {
+            "kind": "template",
+            "templateId": "699aad8c961ebda759f9e7fe",
+            "instanceCount": 2,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "699aae8c9b6a4ab2b769c4a3",
+            "instanceCount": 1,
+            "stackCountPerInstance": 20
+          }
+        ]
+      },
+      {
+        "lotId": "big-bore-resupply",
+        "displayName": "Big Bore Resupply",
+        "purpose": "A .45 ACP RIP AP ammo pack and a loose stack for a heavy-hitting sidearm.",
+        "familyId": "field-supply",
+        "trackId": "isb-field-armory",
+        "anchorTemplateId": "699aab526ac4f65528f1fd63",
+        "weight": 1,
+        "usePath": {
+          "kind": "raidRole",
+          "roleId": "close-quarters"
+        },
+        "recipe": [
+          {
+            "kind": "template",
+            "templateId": "699aab2519b875a27d6ec5d3",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "699aab526ac4f65528f1fd63",
+            "instanceCount": 1,
+            "stackCountPerInstance": 50
+          }
+        ]
+      },
+      {
+        "lotId": "day-pack-loadout",
+        "displayName": "Day Pack Loadout",
+        "purpose": "A sling bag and an LBT-1476A 3-day pack for a quick resupply run.",
+        "familyId": "operator",
+        "trackId": "isb-field-armory",
+        "anchorTemplateId": "6a1267fd0580910d4ffbdec0",
+        "weight": 0.8,
+        "usePath": {
+          "kind": "raidRole",
+          "roleId": "quartermaster"
+        },
+        "recipe": [
+          {
+            "kind": "template",
+            "templateId": "6a1267fd0580910d4ffbdec0",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "6a12643e06424c709d450e7c",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          }
+        ]
+      }
+    ]
+  },
+  "krackasourus.anime-cards.json": {
+    "schemaVersion": 1,
+    "providerId": "krackasourus.anime-cards",
+    "packVersion": "1.5.2",
+    "displayLabel": "Krackasourus Anime Cards",
+    "providerWeight": 0.12,
+    "requiredTemplateIds": [
+      "6699b7fd0d1d25cf00072bf6",
+      "6699b7fd0d1d25cf00072bf8",
+      "6699b7fd0d1d25cf00072bf9",
+      "6699b7fd0d1d25cf00072bfa",
+      "6699b7fd0d1d25cf00072bfb",
+      "6699b7fd0d1d25cf00072bfc",
+      "6699b7fd0d1d25cf00072bfd",
+      "6699b7fd0d1d25cf00072bfe",
+      "6699b7fd0d1d25cf00072bff",
+      "6699b7fd0d1d25cf00072c01",
+      "6699b7fd0d1d25cf00072c02",
+      "6699b7fd0d1d25cf00072c49"
+    ],
+    "requiredPresetIds": [],
+    "requiredBundleKeys": [],
+    "lots": [
+      {
+        "lotId": "crystal-showcase",
+        "displayName": "Crystal Showcase",
+        "purpose": "A collectible Crystal card ready for the anime binder.",
+        "familyId": "field-supply",
+        "trackId": "anime-cards",
+        "anchorTemplateId": "6699b7fd0d1d25cf00072c01",
+        "weight": 1,
+        "usePath": {
+          "kind": "collection",
+          "containerTemplateId": "6699b7fd0d1d25cf00072c49",
+          "collectionId": "anime-cards"
+        },
+        "recipe": [
+          {
+            "kind": "template",
+            "templateId": "6699b7fd0d1d25cf00072c01",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          }
+        ]
+      },
+      {
+        "lotId": "angel-showcase",
+        "displayName": "Angel Showcase",
+        "purpose": "A collectible Angel card ready for the anime binder.",
+        "familyId": "field-supply",
+        "trackId": "anime-cards",
+        "anchorTemplateId": "6699b7fd0d1d25cf00072c02",
+        "weight": 1,
+        "usePath": {
+          "kind": "collection",
+          "containerTemplateId": "6699b7fd0d1d25cf00072c49",
+          "collectionId": "anime-cards"
+        },
+        "recipe": [
+          {
+            "kind": "template",
+            "templateId": "6699b7fd0d1d25cf00072c02",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          }
+        ]
+      },
+      {
+        "lotId": "nivea-rachel-duo",
+        "displayName": "Nivea and Rachel Duo",
+        "purpose": "A coordinated two-card binder drop featuring Nivea and Rachel.",
+        "familyId": "field-supply",
+        "trackId": "anime-cards",
+        "anchorTemplateId": "6699b7fd0d1d25cf00072bfc",
+        "weight": 0.75,
+        "usePath": {
+          "kind": "collection",
+          "containerTemplateId": "6699b7fd0d1d25cf00072c49",
+          "collectionId": "anime-cards"
+        },
+        "recipe": [
+          {
+            "kind": "template",
+            "templateId": "6699b7fd0d1d25cf00072bfc",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "6699b7fd0d1d25cf00072bfb",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          }
+        ]
+      },
+      {
+        "lotId": "vanity-gigi-duo",
+        "displayName": "Vanity and Gigi Duo",
+        "purpose": "A coordinated two-card binder drop featuring Vanity and Gigi.",
+        "familyId": "field-supply",
+        "trackId": "anime-cards",
+        "anchorTemplateId": "6699b7fd0d1d25cf00072bf9",
+        "weight": 0.75,
+        "usePath": {
+          "kind": "collection",
+          "containerTemplateId": "6699b7fd0d1d25cf00072c49",
+          "collectionId": "anime-cards"
+        },
+        "recipe": [
+          {
+            "kind": "template",
+            "templateId": "6699b7fd0d1d25cf00072bf9",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "6699b7fd0d1d25cf00072bfe",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          }
+        ]
+      },
+      {
+        "lotId": "crystal-vanity-angel-set",
+        "displayName": "Crystal, Vanity, and Angel Set",
+        "purpose": "A three-card showcase set built for a high-value anime binder page.",
+        "familyId": "field-supply",
+        "trackId": "anime-cards",
+        "anchorTemplateId": "6699b7fd0d1d25cf00072c01",
+        "weight": 0.45,
+        "usePath": {
+          "kind": "collection",
+          "containerTemplateId": "6699b7fd0d1d25cf00072c49",
+          "collectionId": "anime-cards"
+        },
+        "recipe": [
+          {
+            "kind": "template",
+            "templateId": "6699b7fd0d1d25cf00072c01",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "6699b7fd0d1d25cf00072bf9",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "6699b7fd0d1d25cf00072c02",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          }
+        ]
+      },
+      {
+        "lotId": "eleanor-tricia-lucia-set",
+        "displayName": "Eleanor, Tricia, and Lucia Set",
+        "purpose": "A curated three-card character set for an advanced anime collection.",
+        "familyId": "field-supply",
+        "trackId": "anime-cards",
+        "anchorTemplateId": "6699b7fd0d1d25cf00072bff",
+        "weight": 0.45,
+        "usePath": {
+          "kind": "collection",
+          "containerTemplateId": "6699b7fd0d1d25cf00072c49",
+          "collectionId": "anime-cards"
+        },
+        "recipe": [
+          {
+            "kind": "template",
+            "templateId": "6699b7fd0d1d25cf00072bff",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "6699b7fd0d1d25cf00072bfa",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "6699b7fd0d1d25cf00072bfd",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          }
+        ]
+      },
+      {
+        "lotId": "mai-ultimate",
+        "displayName": "Mai Ultimate",
+        "purpose": "A top-tier Mai collectible intended as a terminal anime-card prize.",
+        "familyId": "field-supply",
+        "trackId": "anime-cards",
+        "anchorTemplateId": "6699b7fd0d1d25cf00072bf6",
+        "weight": 0.15,
+        "usePath": {
+          "kind": "collection",
+          "containerTemplateId": "6699b7fd0d1d25cf00072c49",
+          "collectionId": "anime-cards"
+        },
+        "recipe": [
+          {
+            "kind": "template",
+            "templateId": "6699b7fd0d1d25cf00072bf6",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          }
+        ]
+      },
+      {
+        "lotId": "erica-ultimate",
+        "displayName": "Erica Ultimate",
+        "purpose": "A top-tier Erica collectible intended as a terminal anime-card prize.",
+        "familyId": "field-supply",
+        "trackId": "anime-cards",
+        "anchorTemplateId": "6699b7fd0d1d25cf00072bf8",
+        "weight": 0.15,
+        "usePath": {
+          "kind": "collection",
+          "containerTemplateId": "6699b7fd0d1d25cf00072c49",
+          "collectionId": "anime-cards"
+        },
+        "recipe": [
+          {
+            "kind": "template",
+            "templateId": "6699b7fd0d1d25cf00072bf8",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          }
+        ]
+      }
+    ]
+  },
+  "krackasourus.pokemon-cards.json": {
+    "schemaVersion": 1,
+    "providerId": "krackasourus.pokemon-cards",
+    "packVersion": "1.1.2",
+    "displayLabel": "Krackasourus Pokemon Cards",
+    "providerWeight": 0.12,
+    "requiredTemplateIds": [
+      "669979d0c73060411f04d26a",
+      "669979d0c73060411f04d286",
+      "669979d0c73060411f04d28e",
+      "669979d0c73060411f04d2a0",
+      "669979d0c73060411f04d2a1",
+      "669979d0c73060411f04d2b2",
+      "669979d0c73060411f04d2cc",
+      "669997e1c73060411f04d301"
+    ],
+    "requiredPresetIds": [],
+    "requiredBundleKeys": [],
+    "lots": [
+      {
+        "lotId": "dragonair-rare",
+        "displayName": "Dragonair Rare",
+        "purpose": "A rare Dragonair card ready for the Pokemon binder.",
+        "familyId": "field-supply",
+        "trackId": "pokemon-cards",
+        "anchorTemplateId": "669979d0c73060411f04d2a0",
+        "weight": 1,
+        "usePath": {
+          "kind": "collection",
+          "containerTemplateId": "669997e1c73060411f04d301",
+          "collectionId": "pokemon-cards"
+        },
+        "recipe": [
+          {
+            "kind": "template",
+            "templateId": "669979d0c73060411f04d2a0",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          }
+        ]
+      },
+      {
+        "lotId": "ditto-rare",
+        "displayName": "Ditto Rare",
+        "purpose": "A rare Ditto card ready for the Pokemon binder.",
+        "familyId": "field-supply",
+        "trackId": "pokemon-cards",
+        "anchorTemplateId": "669979d0c73060411f04d28e",
+        "weight": 1,
+        "usePath": {
+          "kind": "collection",
+          "containerTemplateId": "669997e1c73060411f04d301",
+          "collectionId": "pokemon-cards"
+        },
+        "recipe": [
+          {
+            "kind": "template",
+            "templateId": "669979d0c73060411f04d28e",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          }
+        ]
+      },
+      {
+        "lotId": "dragonair-electrode-pair",
+        "displayName": "Dragonair and Electrode Pair",
+        "purpose": "A complementary Dragonair and Electrode pair for a growing collection.",
+        "familyId": "field-supply",
+        "trackId": "pokemon-cards",
+        "anchorTemplateId": "669979d0c73060411f04d2a0",
+        "weight": 0.75,
+        "usePath": {
+          "kind": "collection",
+          "containerTemplateId": "669997e1c73060411f04d301",
+          "collectionId": "pokemon-cards"
+        },
+        "recipe": [
+          {
+            "kind": "template",
+            "templateId": "669979d0c73060411f04d2a0",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "669979d0c73060411f04d26a",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          }
+        ]
+      },
+      {
+        "lotId": "ditto-electabuzz-pair",
+        "displayName": "Ditto and Electabuzz Pair",
+        "purpose": "A Ditto and Electabuzz pairing with enough value to advance the collection.",
+        "familyId": "field-supply",
+        "trackId": "pokemon-cards",
+        "anchorTemplateId": "669979d0c73060411f04d28e",
+        "weight": 0.75,
+        "usePath": {
+          "kind": "collection",
+          "containerTemplateId": "669997e1c73060411f04d301",
+          "collectionId": "pokemon-cards"
+        },
+        "recipe": [
+          {
+            "kind": "template",
+            "templateId": "669979d0c73060411f04d28e",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "669979d0c73060411f04d286",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          }
+        ]
+      },
+      {
+        "lotId": "rare-evolution-trio",
+        "displayName": "Rare Evolution Trio",
+        "purpose": "Dragonair, Electrode, and Ditto form a premium three-card binder page.",
+        "familyId": "field-supply",
+        "trackId": "pokemon-cards",
+        "anchorTemplateId": "669979d0c73060411f04d2a0",
+        "weight": 0.45,
+        "usePath": {
+          "kind": "collection",
+          "containerTemplateId": "669997e1c73060411f04d301",
+          "collectionId": "pokemon-cards"
+        },
+        "recipe": [
+          {
+            "kind": "template",
+            "templateId": "669979d0c73060411f04d2a0",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "669979d0c73060411f04d26a",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "669979d0c73060411f04d28e",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          }
+        ]
+      },
+      {
+        "lotId": "powerhouse-trio",
+        "displayName": "Powerhouse Trio",
+        "purpose": "Electabuzz, Dugtrio, and Dragonair make a combat-themed premium set.",
+        "familyId": "field-supply",
+        "trackId": "pokemon-cards",
+        "anchorTemplateId": "669979d0c73060411f04d286",
+        "weight": 0.45,
+        "usePath": {
+          "kind": "collection",
+          "containerTemplateId": "669997e1c73060411f04d301",
+          "collectionId": "pokemon-cards"
+        },
+        "recipe": [
+          {
+            "kind": "template",
+            "templateId": "669979d0c73060411f04d286",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "669979d0c73060411f04d2cc",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "669979d0c73060411f04d2a0",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          }
+        ]
+      },
+      {
+        "lotId": "venusaur-holo",
+        "displayName": "Venusaur Holo",
+        "purpose": "A high-value Venusaur holographic card for the collection's top page.",
+        "familyId": "field-supply",
+        "trackId": "pokemon-cards",
+        "anchorTemplateId": "669979d0c73060411f04d2b2",
+        "weight": 0.15,
+        "usePath": {
+          "kind": "collection",
+          "containerTemplateId": "669997e1c73060411f04d301",
+          "collectionId": "pokemon-cards"
+        },
+        "recipe": [
+          {
+            "kind": "template",
+            "templateId": "669979d0c73060411f04d2b2",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          }
+        ]
+      },
+      {
+        "lotId": "dragonite-holo",
+        "displayName": "Dragonite Holo",
+        "purpose": "A high-value Dragonite holographic card for the collection's top page.",
+        "familyId": "field-supply",
+        "trackId": "pokemon-cards",
+        "anchorTemplateId": "669979d0c73060411f04d2a1",
+        "weight": 0.15,
+        "usePath": {
+          "kind": "collection",
+          "containerTemplateId": "669997e1c73060411f04d301",
+          "collectionId": "pokemon-cards"
+        },
+        "recipe": [
+          {
+            "kind": "template",
+            "templateId": "669979d0c73060411f04d2a1",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          }
+        ]
+      }
+    ]
+  },
+  "krackasourus.yugioh-cards.json": {
+    "schemaVersion": 1,
+    "providerId": "krackasourus.yugioh-cards",
+    "packVersion": "0.1.2",
+    "displayLabel": "Krackasourus Yu-Gi-Oh Cards",
+    "providerWeight": 0.12,
+    "requiredTemplateIds": [
+      "669c7c89721191eae60910d9",
+      "669c812e721191eae60910e1",
+      "669c812e721191eae60910ec",
+      "669c812e721191eae60910f4",
+      "669c812e721191eae6091102",
+      "669c812e721191eae609112d",
+      "669c812e721191eae6091133",
+      "669c812e721191eae6091145",
+      "669c812e721191eae609114a"
+    ],
+    "requiredPresetIds": [],
+    "requiredBundleKeys": [],
+    "lots": [
+      {
+        "lotId": "swords-of-revealing-light",
+        "displayName": "Swords of Revealing Light",
+        "purpose": "A classic spell card ready for the Yu-Gi-Oh binder.",
+        "familyId": "field-supply",
+        "trackId": "yugioh-cards",
+        "anchorTemplateId": "669c812e721191eae6091145",
+        "weight": 1,
+        "usePath": {
+          "kind": "collection",
+          "containerTemplateId": "669c7c89721191eae60910d9",
+          "collectionId": "yugioh-cards"
+        },
+        "recipe": [
+          {
+            "kind": "template",
+            "templateId": "669c812e721191eae6091145",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          }
+        ]
+      },
+      {
+        "lotId": "pot-of-greed",
+        "displayName": "Pot of Greed",
+        "purpose": "An iconic spell card ready for the Yu-Gi-Oh binder.",
+        "familyId": "field-supply",
+        "trackId": "yugioh-cards",
+        "anchorTemplateId": "669c812e721191eae609112d",
+        "weight": 1,
+        "usePath": {
+          "kind": "collection",
+          "containerTemplateId": "669c7c89721191eae60910d9",
+          "collectionId": "yugioh-cards"
+        },
+        "recipe": [
+          {
+            "kind": "template",
+            "templateId": "669c812e721191eae609112d",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          }
+        ]
+      },
+      {
+        "lotId": "red-eyes-black-dragon",
+        "displayName": "Red-Eyes Black Dragon",
+        "purpose": "A signature Red-Eyes monster card for an advancing collection.",
+        "familyId": "field-supply",
+        "trackId": "yugioh-cards",
+        "anchorTemplateId": "669c812e721191eae6091133",
+        "weight": 0.75,
+        "usePath": {
+          "kind": "collection",
+          "containerTemplateId": "669c7c89721191eae60910d9",
+          "collectionId": "yugioh-cards"
+        },
+        "recipe": [
+          {
+            "kind": "template",
+            "templateId": "669c812e721191eae6091133",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          }
+        ]
+      },
+      {
+        "lotId": "blue-eyes-white-dragon",
+        "displayName": "Blue-Eyes White Dragon",
+        "purpose": "A signature Blue-Eyes monster card for an advancing collection.",
+        "familyId": "field-supply",
+        "trackId": "yugioh-cards",
+        "anchorTemplateId": "669c812e721191eae60910e1",
+        "weight": 0.75,
+        "usePath": {
+          "kind": "collection",
+          "containerTemplateId": "669c7c89721191eae60910d9",
+          "collectionId": "yugioh-cards"
+        },
+        "recipe": [
+          {
+            "kind": "template",
+            "templateId": "669c812e721191eae60910e1",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          }
+        ]
+      },
+      {
+        "lotId": "dark-magician",
+        "displayName": "Dark Magician",
+        "purpose": "A premium Dark Magician card for a high-tier binder page.",
+        "familyId": "field-supply",
+        "trackId": "yugioh-cards",
+        "anchorTemplateId": "669c812e721191eae60910ec",
+        "weight": 0.45,
+        "usePath": {
+          "kind": "collection",
+          "containerTemplateId": "669c7c89721191eae60910d9",
+          "collectionId": "yugioh-cards"
+        },
+        "recipe": [
+          {
+            "kind": "template",
+            "templateId": "669c812e721191eae60910ec",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          }
+        ]
+      },
+      {
+        "lotId": "exodia",
+        "displayName": "Exodia",
+        "purpose": "A premium Exodia card for a high-tier binder page.",
+        "familyId": "field-supply",
+        "trackId": "yugioh-cards",
+        "anchorTemplateId": "669c812e721191eae60910f4",
+        "weight": 0.45,
+        "usePath": {
+          "kind": "collection",
+          "containerTemplateId": "669c7c89721191eae60910d9",
+          "collectionId": "yugioh-cards"
+        },
+        "recipe": [
+          {
+            "kind": "template",
+            "templateId": "669c812e721191eae60910f4",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          }
+        ]
+      },
+      {
+        "lotId": "gaia-dragon-champion",
+        "displayName": "Gaia the Dragon Champion",
+        "purpose": "A top-value fusion card intended as a terminal Yu-Gi-Oh prize.",
+        "familyId": "field-supply",
+        "trackId": "yugioh-cards",
+        "anchorTemplateId": "669c812e721191eae6091102",
+        "weight": 0.15,
+        "usePath": {
+          "kind": "collection",
+          "containerTemplateId": "669c7c89721191eae60910d9",
+          "collectionId": "yugioh-cards"
+        },
+        "recipe": [
+          {
+            "kind": "template",
+            "templateId": "669c812e721191eae6091102",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          }
+        ]
+      },
+      {
+        "lotId": "tri-horned-dragon",
+        "displayName": "Tri-Horned Dragon",
+        "purpose": "A top-value dragon card intended as a terminal Yu-Gi-Oh prize.",
+        "familyId": "field-supply",
+        "trackId": "yugioh-cards",
+        "anchorTemplateId": "669c812e721191eae609114a",
+        "weight": 0.15,
+        "usePath": {
+          "kind": "collection",
+          "containerTemplateId": "669c7c89721191eae60910d9",
+          "collectionId": "yugioh-cards"
+        },
+        "recipe": [
+          {
+            "kind": "template",
+            "templateId": "669c812e721191eae609114a",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          }
+        ]
+      }
+    ]
+  },
+  "natalya.elite-armor.json": {
+    "schemaVersion": 1,
+    "providerId": "natalya.elite-armor",
+    "packVersion": "1.0.0",
+    "displayLabel": "Natalya Elite Armor",
+    "providerWeight": 0.06,
+    "requiredTemplateIds": [
+      "67e179c99591ffcd472a270a",
+      "67497be97777fb29ca1f9610",
+      "674815eccc95c1ad849a9b75",
+      "67497be972de11201fc07de5",
+      "67e179c97ded878d55fb8d4c",
+      "674815ecb107ad4bd99235e4",
+      "674815ec0e1737c294820e25"
+    ],
+    "requiredPresetIds": [],
+    "requiredBundleKeys": [],
+    "lots": [
+      {
+        "lotId": "gen-pro-six-plate-carrier",
+        "displayName": "Gen Pro 6 Plate Carrier",
+        "purpose": "A Gen Pro 6 plate carrier with a matched pair of Level 6 FB plates.",
+        "familyId": "operator",
+        "trackId": "natalya-elite-armor",
+        "anchorTemplateId": "67e179c99591ffcd472a270a",
+        "weight": 1,
+        "usePath": {
+          "kind": "raidRole",
+          "roleId": "elite-operator"
+        },
+        "recipe": [
+          {
+            "kind": "template",
+            "templateId": "67e179c99591ffcd472a270a",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "674815eccc95c1ad849a9b75",
+            "instanceCount": 2,
+            "stackCountPerInstance": 1
+          }
+        ]
+      },
+      {
+        "lotId": "gen-pro-seven-plate-carrier",
+        "displayName": "Gen Pro 7 Plate Carrier",
+        "purpose": "A top-tier Gen Pro 7 plate carrier with a matched pair of Level 7 FB plates.",
+        "familyId": "operator",
+        "trackId": "natalya-elite-armor",
+        "anchorTemplateId": "67497be97777fb29ca1f9610",
+        "weight": 0.6,
+        "usePath": {
+          "kind": "raidRole",
+          "roleId": "elite-operator"
+        },
+        "recipe": [
+          {
+            "kind": "template",
+            "templateId": "67497be97777fb29ca1f9610",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "67497be972de11201fc07de5",
+            "instanceCount": 2,
+            "stackCountPerInstance": 1
+          }
+        ]
+      },
+      {
+        "lotId": "ops-core-mk6-package",
+        "displayName": "Ops-Core Mk6 Package",
+        "purpose": "A complete Ops-Core Mk6 helmet package with matched side and face armor.",
+        "familyId": "operator",
+        "trackId": "natalya-elite-armor",
+        "anchorTemplateId": "67e179c97ded878d55fb8d4c",
+        "weight": 0.8,
+        "usePath": {
+          "kind": "raidRole",
+          "roleId": "elite-operator"
+        },
+        "recipe": [
+          {
+            "kind": "template",
+            "templateId": "67e179c97ded878d55fb8d4c",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "674815ecb107ad4bd99235e4",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "674815ec0e1737c294820e25",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          }
+        ]
+      }
+    ]
+  },
+  "natalya.field-gear.json": {
+    "schemaVersion": 1,
+    "providerId": "natalya.field-gear",
+    "packVersion": "1.0.0",
+    "displayLabel": "Natalya Field Gear",
+    "providerWeight": 0.22,
+    "requiredTemplateIds": [
+      "6749758d4506d299770ddcb2",
+      "674974348af9189fcc136a7e",
+      "67e179c9ff1e5acc5f7af6db",
+      "67e179c92d755ef8ae908854",
+      "674815ec8bf2e801d82c322e",
+      "674888cc37cd20bcbef66a48"
+    ],
+    "requiredPresetIds": [],
+    "requiredBundleKeys": [],
+    "lots": [
+      {
+        "lotId": "medical-resupply",
+        "displayName": "Medical Resupply",
+        "purpose": "A matched IFAKv2 and AFAKv2 pair for sustained field treatment.",
+        "familyId": "field-supply",
+        "trackId": "natalya-field-gear",
+        "anchorTemplateId": "6749758d4506d299770ddcb2",
+        "weight": 1,
+        "usePath": {
+          "kind": "raidRole",
+          "roleId": "field-medic"
+        },
+        "recipe": [
+          {
+            "kind": "template",
+            "templateId": "6749758d4506d299770ddcb2",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "674974348af9189fcc136a7e",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          }
+        ]
+      },
+      {
+        "lotId": "trauma-kit",
+        "displayName": "Trauma Kit",
+        "purpose": "A CALOK-B hemostatic applicator and an aluminum splint for stopping the bleed and stabilizing a fracture.",
+        "familyId": "field-supply",
+        "trackId": "natalya-field-gear",
+        "anchorTemplateId": "67e179c9ff1e5acc5f7af6db",
+        "weight": 1,
+        "usePath": {
+          "kind": "raidRole",
+          "roleId": "field-medic"
+        },
+        "recipe": [
+          {
+            "kind": "template",
+            "templateId": "67e179c9ff1e5acc5f7af6db",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "67e179c92d755ef8ae908854",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          }
+        ]
+      },
+      {
+        "lotId": "condor-loadout",
+        "displayName": "Condor Loadout",
+        "purpose": "An LBT-69D Condor chest rig paired with a Trooper 55 sling bag for a fast-access carry setup.",
+        "familyId": "operator",
+        "trackId": "natalya-field-gear",
+        "anchorTemplateId": "674815ec8bf2e801d82c322e",
+        "weight": 0.8,
+        "usePath": {
+          "kind": "raidRole",
+          "roleId": "quartermaster"
+        },
+        "recipe": [
+          {
+            "kind": "template",
+            "templateId": "674815ec8bf2e801d82c322e",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "674888cc37cd20bcbef66a48",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          }
+        ]
+      }
+    ]
+  },
+  "sjx.combat-chemistry.json": {
+    "schemaVersion": 1,
+    "providerId": "sjx.combat-chemistry",
+    "packVersion": "1.0.2",
+    "displayLabel": "SJX Combat Chemistry",
+    "providerWeight": 0.35,
+    "requiredTemplateIds": [
+      "68331b17cccc72d0db1f764b",
+      "68331d7a8f97a4202729e883",
+      "68331fef74231628e6e63f25",
+      "6833237c8ac71af4b28cbe84",
+      "6833259d5bbfac390bc044cf",
+      "68336a67ce152b72dc40abf6",
+      "68336b8fb68adf25e7314cc3",
+      "68336d5f2edc79e911bb9952",
+      "68336d708e51c90780988824",
+      "68336e67abd18e611ecbf182",
+      "68336ee3b0aaa5f9f2c08975",
+      "68337a2a20c7d7d769369919",
+      "68337b7aff2eb46775159b1e"
+    ],
+    "requiredPresetIds": [],
+    "requiredBundleKeys": [],
+    "lots": [
+      {
+        "lotId": "rapid-mobility",
+        "displayName": "Rapid Mobility",
+        "purpose": "Three complementary injectors for sprint endurance, emergency acceleration, and extraction.",
+        "familyId": "field-supply",
+        "trackId": "chemistry",
+        "anchorTemplateId": "68331b17cccc72d0db1f764b",
+        "weight": 1,
+        "usePath": {
+          "kind": "raidRole",
+          "roleId": "combat-chemistry"
+        },
+        "recipe": [
+          {
+            "kind": "template",
+            "templateId": "68331b17cccc72d0db1f764b",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "68337a2a20c7d7d769369919",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "68337b7aff2eb46775159b1e",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          }
+        ]
+      },
+      {
+        "lotId": "precision-assault",
+        "displayName": "Precision Assault",
+        "purpose": "A three-injector package for precision, aggression, and short-term resilience.",
+        "familyId": "field-supply",
+        "trackId": "chemistry",
+        "anchorTemplateId": "68331d7a8f97a4202729e883",
+        "weight": 1,
+        "usePath": {
+          "kind": "raidRole",
+          "roleId": "combat-chemistry"
+        },
+        "recipe": [
+          {
+            "kind": "template",
+            "templateId": "68331d7a8f97a4202729e883",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "68331fef74231628e6e63f25",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "6833237c8ac71af4b28cbe84",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          }
+        ]
+      },
+      {
+        "lotId": "covert-sustainment",
+        "displayName": "Covert Sustainment",
+        "purpose": "Stealth and emergency acceleration for a long infiltration.",
+        "familyId": "field-supply",
+        "trackId": "chemistry",
+        "anchorTemplateId": "6833259d5bbfac390bc044cf",
+        "weight": 0.9,
+        "usePath": {
+          "kind": "raidRole",
+          "roleId": "combat-chemistry"
+        },
+        "recipe": [
+          {
+            "kind": "template",
+            "templateId": "6833259d5bbfac390bc044cf",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "68337b7aff2eb46775159b1e",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          }
+        ]
+      },
+      {
+        "lotId": "elite-recovery",
+        "displayName": "Elite Recovery",
+        "purpose": "Three two-use recovery injectors for stabilizing a squad through repeated fights.",
+        "familyId": "field-supply",
+        "trackId": "chemistry",
+        "anchorTemplateId": "68336d708e51c90780988824",
+        "weight": 0.7,
+        "usePath": {
+          "kind": "raidRole",
+          "roleId": "combat-chemistry"
+        },
+        "recipe": [
+          {
+            "kind": "template",
+            "templateId": "68336d708e51c90780988824",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "68336e67abd18e611ecbf182",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "68336ee3b0aaa5f9f2c08975",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          }
+        ]
+      },
+      {
+        "lotId": "heavy-extraction",
+        "displayName": "Heavy Extraction",
+        "purpose": "A high-end three-injector route for weight, endurance, and emergency adaptation.",
+        "familyId": "field-supply",
+        "trackId": "chemistry",
+        "anchorTemplateId": "68336b8fb68adf25e7314cc3",
+        "weight": 0.6,
+        "usePath": {
+          "kind": "raidRole",
+          "roleId": "combat-chemistry"
+        },
+        "recipe": [
+          {
+            "kind": "template",
+            "templateId": "68336b8fb68adf25e7314cc3",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "68336d5f2edc79e911bb9952",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "68336a67ce152b72dc40abf6",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          }
+        ]
+      }
+    ]
+  },
+  "vault.json": {
+    "schemaVersion": 1,
+    "providerId": "vault",
+    "packVersion": "1.0.0",
+    "displayLabel": "Contraband Vault",
+    "providerWeight": 0.05,
+    "requiredTemplateIds": [
+      "5447a9cd4bdc2dbd208b4567",
+      "54491c4f4bdc2db1078b4568",
+      "5a367e5dc4a282000e49738f",
+      "560d5e524bdc2d25448b4571",
+      "56dfef82d2720bbd668b4567",
+      "59e6906286f7746c9f75e847",
+      "6768c25aa7b238f14a08d3f6"
+    ],
+    "requiredPresetIds": [
+      "584148f2245977598f1ad387",
+      "59b81f7386f77421ac688a0a",
+      "5a3a85af86f774745637d46c",
+      "5af08cf886f774223c269184"
+    ],
+    "requiredBundleKeys": [],
+    "lots": [
+      {
+        "lotId": "vault-twin-rifles",
+        "displayName": "Vault Twin Rifles",
+        "purpose": "A matched RSASS and M4 pair with a full war chest of match and armor-piercing ammunition.",
+        "familyId": "arsenal",
+        "trackId": "vault",
+        "anchorTemplateId": "5a367e5dc4a282000e49738f",
+        "weight": 1,
+        "usePath": {
+          "kind": "raidRole",
+          "roleId": "vault-elite"
+        },
+        "recipe": [
+          {
+            "kind": "preset",
+            "presetId": "5a3a85af86f774745637d46c"
+          },
+          {
+            "kind": "preset",
+            "presetId": "5af08cf886f774223c269184"
+          },
+          {
+            "kind": "template",
+            "templateId": "6768c25aa7b238f14a08d3f6",
+            "instanceCount": 4,
+            "stackCountPerInstance": 40
+          },
+          {
+            "kind": "template",
+            "templateId": "56dfef82d2720bbd668b4567",
+            "instanceCount": 2,
+            "stackCountPerInstance": 60
+          }
+        ]
+      },
+      {
+        "lotId": "vault-apex-loadout",
+        "displayName": "Vault Apex Loadout",
+        "purpose": "A three-weapon platform package pairing a marksman rifle, a service carbine, and a compact subgun.",
+        "familyId": "arsenal",
+        "trackId": "vault",
+        "anchorTemplateId": "5447a9cd4bdc2dbd208b4567",
+        "weight": 0.6,
+        "usePath": {
+          "kind": "raidRole",
+          "roleId": "vault-elite"
+        },
+        "recipe": [
+          {
+            "kind": "preset",
+            "presetId": "5a3a85af86f774745637d46c"
+          },
+          {
+            "kind": "preset",
+            "presetId": "5af08cf886f774223c269184"
+          },
+          {
+            "kind": "preset",
+            "presetId": "59b81f7386f77421ac688a0a"
+          },
+          {
+            "kind": "template",
+            "templateId": "59e6906286f7746c9f75e847",
+            "instanceCount": 2,
+            "stackCountPerInstance": 60
+          }
+        ]
+      },
+      {
+        "lotId": "vault-command-package",
+        "displayName": "Vault Command Package",
+        "purpose": "A marksman-and-breach pair backed by a heavy shipment of match and buckshot ammunition.",
+        "familyId": "arsenal",
+        "trackId": "vault",
+        "anchorTemplateId": "54491c4f4bdc2db1078b4568",
+        "weight": 0.4,
+        "usePath": {
+          "kind": "raidRole",
+          "roleId": "vault-elite"
+        },
+        "recipe": [
+          {
+            "kind": "preset",
+            "presetId": "5a3a85af86f774745637d46c"
+          },
+          {
+            "kind": "preset",
+            "presetId": "584148f2245977598f1ad387"
+          },
+          {
+            "kind": "template",
+            "templateId": "6768c25aa7b238f14a08d3f6",
+            "instanceCount": 4,
+            "stackCountPerInstance": 40
+          },
+          {
+            "kind": "template",
+            "templateId": "560d5e524bdc2d25448b4571",
+            "instanceCount": 2,
+            "stackCountPerInstance": 20
+          }
+        ]
+      }
+    ]
+  },
+  "vultify.cooler-stims.json": {
+    "schemaVersion": 1,
+    "providerId": "vultify.cooler-stims",
+    "packVersion": "2.0.2",
+    "displayLabel": "Vultify CoolerStims",
+    "providerWeight": 0.25,
+    "requiredTemplateIds": [
+      "5c0a1b2c3d4e5f6789abcde1",
+      "5c0a1b2c3d4e5f6789abcde3",
+      "5c0a1b2c3d4e5f6789abcde5",
+      "5c0a1b2c3d4e5f6789abcde6",
+      "5c0a1b2c3d4e5f6789abcde8"
+    ],
+    "requiredPresetIds": [],
+    "requiredBundleKeys": [],
+    "lots": [
+      {
+        "lotId": "rapid-recon",
+        "displayName": "Rapid Recon",
+        "purpose": "APEX mobility paired with GRAFT recovery for a fast scouting run.",
+        "familyId": "field-supply",
+        "trackId": "cooler-stims",
+        "anchorTemplateId": "5c0a1b2c3d4e5f6789abcde1",
+        "weight": 1,
+        "usePath": {
+          "kind": "raidRole",
+          "roleId": "combat-chemistry"
+        },
+        "recipe": [
+          {
+            "kind": "template",
+            "templateId": "5c0a1b2c3d4e5f6789abcde1",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "5c0a1b2c3d4e5f6789abcde8",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          }
+        ]
+      },
+      {
+        "lotId": "field-triage",
+        "displayName": "Field Triage",
+        "purpose": "AEGIS protection and GRAFT recovery for stabilizing after first contact.",
+        "familyId": "field-supply",
+        "trackId": "cooler-stims",
+        "anchorTemplateId": "5c0a1b2c3d4e5f6789abcde3",
+        "weight": 1,
+        "usePath": {
+          "kind": "raidRole",
+          "roleId": "combat-chemistry"
+        },
+        "recipe": [
+          {
+            "kind": "template",
+            "templateId": "5c0a1b2c3d4e5f6789abcde3",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "5c0a1b2c3d4e5f6789abcde8",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          }
+        ]
+      },
+      {
+        "lotId": "search-and-recover",
+        "displayName": "Search and Recover",
+        "purpose": "ARGUS awareness and AEGIS protection for deliberate recovery work.",
+        "familyId": "field-supply",
+        "trackId": "cooler-stims",
+        "anchorTemplateId": "5c0a1b2c3d4e5f6789abcde6",
+        "weight": 0.75,
+        "usePath": {
+          "kind": "raidRole",
+          "roleId": "combat-chemistry"
+        },
+        "recipe": [
+          {
+            "kind": "template",
+            "templateId": "5c0a1b2c3d4e5f6789abcde6",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "5c0a1b2c3d4e5f6789abcde3",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          }
+        ]
+      },
+      {
+        "lotId": "assault-cycle",
+        "displayName": "Assault Cycle",
+        "purpose": "APEX speed and IRON endurance for a sustained offensive route.",
+        "familyId": "field-supply",
+        "trackId": "cooler-stims",
+        "anchorTemplateId": "5c0a1b2c3d4e5f6789abcde1",
+        "weight": 0.75,
+        "usePath": {
+          "kind": "raidRole",
+          "roleId": "combat-chemistry"
+        },
+        "recipe": [
+          {
+            "kind": "template",
+            "templateId": "5c0a1b2c3d4e5f6789abcde1",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "5c0a1b2c3d4e5f6789abcde5",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          }
+        ]
+      },
+      {
+        "lotId": "heavy-push",
+        "displayName": "Heavy Push",
+        "purpose": "A four-stim APEX, AEGIS, IRON, and GRAFT suite for a difficult assault.",
+        "familyId": "field-supply",
+        "trackId": "cooler-stims",
+        "anchorTemplateId": "5c0a1b2c3d4e5f6789abcde1",
+        "weight": 0.45,
+        "usePath": {
+          "kind": "raidRole",
+          "roleId": "combat-chemistry"
+        },
+        "recipe": [
+          {
+            "kind": "template",
+            "templateId": "5c0a1b2c3d4e5f6789abcde1",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "5c0a1b2c3d4e5f6789abcde3",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "5c0a1b2c3d4e5f6789abcde5",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "5c0a1b2c3d4e5f6789abcde8",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          }
+        ]
+      },
+      {
+        "lotId": "recovery-sweep",
+        "displayName": "Recovery Sweep",
+        "purpose": "A four-stim ARGUS, AEGIS, IRON, and GRAFT suite for securing a contested area.",
+        "familyId": "field-supply",
+        "trackId": "cooler-stims",
+        "anchorTemplateId": "5c0a1b2c3d4e5f6789abcde6",
+        "weight": 0.45,
+        "usePath": {
+          "kind": "raidRole",
+          "roleId": "combat-chemistry"
+        },
+        "recipe": [
+          {
+            "kind": "template",
+            "templateId": "5c0a1b2c3d4e5f6789abcde6",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "5c0a1b2c3d4e5f6789abcde3",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "5c0a1b2c3d4e5f6789abcde5",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "5c0a1b2c3d4e5f6789abcde8",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          }
+        ]
+      },
+      {
+        "lotId": "overrun-protocol",
+        "displayName": "Overrun Protocol",
+        "purpose": "A terminal seven-dose pharmacy for repeated mobility, protection, and endurance cycles.",
+        "familyId": "field-supply",
+        "trackId": "cooler-stims",
+        "anchorTemplateId": "5c0a1b2c3d4e5f6789abcde1",
+        "weight": 0.15,
+        "usePath": {
+          "kind": "raidRole",
+          "roleId": "combat-chemistry"
+        },
+        "recipe": [
+          {
+            "kind": "template",
+            "templateId": "5c0a1b2c3d4e5f6789abcde1",
+            "instanceCount": 2,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "5c0a1b2c3d4e5f6789abcde3",
+            "instanceCount": 2,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "5c0a1b2c3d4e5f6789abcde5",
+            "instanceCount": 2,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "5c0a1b2c3d4e5f6789abcde8",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          }
+        ]
+      },
+      {
+        "lotId": "hunter-killer-pharmacy",
+        "displayName": "Hunter-Killer Pharmacy",
+        "purpose": "A terminal seven-dose pharmacy for repeated awareness, protection, and endurance cycles.",
+        "familyId": "field-supply",
+        "trackId": "cooler-stims",
+        "anchorTemplateId": "5c0a1b2c3d4e5f6789abcde6",
+        "weight": 0.15,
+        "usePath": {
+          "kind": "raidRole",
+          "roleId": "combat-chemistry"
+        },
+        "recipe": [
+          {
+            "kind": "template",
+            "templateId": "5c0a1b2c3d4e5f6789abcde6",
+            "instanceCount": 2,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "5c0a1b2c3d4e5f6789abcde3",
+            "instanceCount": 2,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "5c0a1b2c3d4e5f6789abcde5",
+            "instanceCount": 2,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "5c0a1b2c3d4e5f6789abcde8",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          }
+        ]
+      }
+    ]
+  },
+  "wtt-contentbackport.elite-optics.json": {
+    "schemaVersion": 1,
+    "providerId": "wtt-contentbackport.elite-optics",
+    "packVersion": "1.0.0",
+    "displayLabel": "WTT Content Backport Elite Optics",
+    "providerWeight": 0.07,
+    "requiredTemplateIds": [
+      "689b889473ebd6871805edd6",
+      "68948a95d8f2b85fb705e2a6",
+      "6943c85be2f21398e70378cc",
+      "69bb4203f94327bc0f0230cd",
+      "69bb41c03b5fb75517065960"
+    ],
+    "requiredPresetIds": [],
+    "requiredBundleKeys": [],
+    "lots": [
+      {
+        "lotId": "night-vision-overwatch",
+        "displayName": "Night Vision Overwatch",
+        "purpose": "An L3Harris PVS-31A dual-tube night vision goggle set for night operations.",
+        "familyId": "operator",
+        "trackId": "wtt-elite-optics",
+        "anchorTemplateId": "689b889473ebd6871805edd6",
+        "weight": 1,
+        "usePath": {
+          "kind": "raidRole",
+          "roleId": "night-operations"
+        },
+        "recipe": [
+          {
+            "kind": "template",
+            "templateId": "689b889473ebd6871805edd6",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          }
+        ]
+      },
+      {
+        "lotId": "heavy-plate-carrier",
+        "displayName": "Heavy Plate Carrier",
+        "purpose": "A 6B45 body armor rig fitted with a pair of Tac-Kek SAPI Level III+ ballistic plates.",
+        "familyId": "armor",
+        "trackId": "wtt-elite-optics",
+        "anchorTemplateId": "68948a95d8f2b85fb705e2a6",
+        "weight": 1,
+        "usePath": {
+          "kind": "raidRole",
+          "roleId": "elite-operator"
+        },
+        "recipe": [
+          {
+            "kind": "template",
+            "templateId": "68948a95d8f2b85fb705e2a6",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "6943c85be2f21398e70378cc",
+            "instanceCount": 2,
+            "stackCountPerInstance": 1
+          }
+        ]
+      },
+      {
+        "lotId": "encrypted-tech-cache",
+        "displayName": "Encrypted Tech Cache",
+        "purpose": "An IBX Gigachad cryptographic processor and an Ultralink satellite communication module.",
+        "familyId": "tech",
+        "trackId": "wtt-elite-optics",
+        "anchorTemplateId": "69bb4203f94327bc0f0230cd",
+        "weight": 0.6,
+        "usePath": {
+          "kind": "raidRole",
+          "roleId": "black-market-tech"
+        },
+        "recipe": [
+          {
+            "kind": "template",
+            "templateId": "69bb4203f94327bc0f0230cd",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "69bb41c03b5fb75517065960",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          }
+        ]
+      }
+    ]
+  },
+  "wtt-contentbackport.field-resupply.json": {
+    "schemaVersion": 1,
+    "providerId": "wtt-contentbackport.field-resupply",
+    "packVersion": "1.0.0",
+    "displayLabel": "WTT Content Backport Field Resupply",
+    "providerWeight": 0.2,
+    "requiredTemplateIds": [
+      "69cfc2d7a9102bdca0080070",
+      "69cfbf627eaa38bd240704ad",
+      "69bb435ff609db77390b0e25",
+      "69bb43df99f3fda8f1072483",
+      "693be056fd3a5c751e00de04",
+      "693be0ee50fafa102607aebd"
+    ],
+    "requiredPresetIds": [],
+    "requiredBundleKeys": [],
+    "lots": [
+      {
+        "lotId": "chest-rig-loadout",
+        "displayName": "Chest Rig Loadout",
+        "purpose": "An LBT-1961A Load Bearing Chest Rig and a Stich Profi Chest Rig MK2 for fast-access carry.",
+        "familyId": "operator",
+        "trackId": "wtt-field-resupply",
+        "anchorTemplateId": "69cfc2d7a9102bdca0080070",
+        "weight": 1,
+        "usePath": {
+          "kind": "raidRole",
+          "roleId": "quartermaster"
+        },
+        "recipe": [
+          {
+            "kind": "template",
+            "templateId": "69cfc2d7a9102bdca0080070",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "69cfbf627eaa38bd240704ad",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          }
+        ]
+      },
+      {
+        "lotId": "field-medical-kit",
+        "displayName": "Field Medical Kit",
+        "purpose": "An Aceso Xpress biochemical analyzer paired with Nooby Shield potassium iodide tablets for field triage.",
+        "familyId": "field-supply",
+        "trackId": "wtt-field-resupply",
+        "anchorTemplateId": "69bb435ff609db77390b0e25",
+        "weight": 1,
+        "usePath": {
+          "kind": "raidRole",
+          "roleId": "field-medic"
+        },
+        "recipe": [
+          {
+            "kind": "template",
+            "templateId": "69bb435ff609db77390b0e25",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "69bb43df99f3fda8f1072483",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          }
+        ]
+      },
+      {
+        "lotId": "recon-facegear",
+        "displayName": "Recon Facegear",
+        "purpose": "A Galvion Caiman Hybrid Ballistic Mandible Guard and matching applique plate for scout-role face protection.",
+        "familyId": "operator",
+        "trackId": "wtt-field-resupply",
+        "anchorTemplateId": "693be056fd3a5c751e00de04",
+        "weight": 0.8,
+        "usePath": {
+          "kind": "raidRole",
+          "roleId": "recon"
+        },
+        "recipe": [
+          {
+            "kind": "template",
+            "templateId": "693be056fd3a5c751e00de04",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "693be0ee50fafa102607aebd",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          }
+        ]
+      }
+    ]
+  }
+}
