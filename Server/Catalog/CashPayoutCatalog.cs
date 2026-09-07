@@ -10,6 +10,7 @@ namespace ContrabandCases.Server.Catalog;
 internal static class CashPayoutCatalog
 {
     internal const string Version = "cash-v1";
+    internal const string SelectionVersion = "cash-opening-v2";
     internal sealed record Payout(string Id, string Template, int Amount, int Weight, RewardRarity Grade);
 
     internal static IReadOnlyList<Payout> Payouts { get; } = Array.AsReadOnly(new[]
@@ -25,37 +26,49 @@ internal static class CashPayoutCatalog
         new Payout("usd-1500", CashPayouts.Dollars, 1_500, 600, RewardRarity.Restricted),
         new Payout("eur-1000", CashPayouts.Euros, 1_000, 400, RewardRarity.Contractor),
         new Payout("eur-2000", CashPayouts.Euros, 2_000, 100, RewardRarity.Restricted),
+        new Payout("gp-10", CashPayouts.GpCoin, 10, 300, RewardRarity.Uncommon),
+        new Payout("gp-25", CashPayouts.GpCoin, 25, 100, RewardRarity.Restricted),
         new Payout("btc-1", CashPayouts.Bitcoin, 1, 90, RewardRarity.Restricted),
         new Payout("btc-2", CashPayouts.Bitcoin, 2, 10, RewardRarity.BlackLabel)
     });
 
+    // Original weights are part of immutable cash-v1 claim identities. Reweight
+    // new draws here, shared by selection, displayed odds, pricing and reports.
+    internal static int OpeningWeight(string lotId) => lotId switch
+    {
+        "rub-60000" => 1300,
+        "rub-175000" => 900,
+        _ => Payouts.Single(payout => payout.Id == lotId).Weight
+    };
+
     internal static CargoCatalogSnapshot Build(Func<string, TemplateItem?> findTemplate,
-        decimal dollarPurchaseRate, decimal euroPurchaseRate, decimal bitcoinSaleValue)
+        decimal dollarPurchaseRate, decimal euroPurchaseRate, decimal bitcoinSaleValue, decimal gpReferenceValue)
     {
         var rates = new Dictionary<string, decimal>(StringComparer.Ordinal)
         {
             [CashPayouts.Roubles] = 1,
             [CashPayouts.Dollars] = dollarPurchaseRate,
             [CashPayouts.Euros] = euroPurchaseRate,
-            [CashPayouts.Bitcoin] = bitcoinSaleValue
+            [CashPayouts.Bitcoin] = bitcoinSaleValue,
+            [CashPayouts.GpCoin] = gpReferenceValue
         };
         if (rates.Values.Any(value => value <= 0 || value > 100_000_000m))
             throw new CargoCatalogValidationException("Cash Cache requires valid finalized currency and Bitcoin quotes.");
         var ordinary = Payouts.Where(p => p.Template != CashPayouts.Bitcoin).ToArray();
-        var ordinaryMean = ordinary.Sum(p => p.Weight * p.Amount * rates[p.Template]) / ordinary.Sum(p => p.Weight);
+        var ordinaryMean = ordinary.Sum(p => OpeningWeight(p.Id) * p.Amount * rates[p.Template]) / ordinary.Sum(p => OpeningWeight(p.Id));
         // Raid-earned keys buy access to a small expected premium over the cash
         // entry price, not an unlimited buy/open loop. A modded Bitcoin outlier
         // disables new cash openings instead of making ordinary entry expensive.
         var bitcoinContribution = Payouts.Where(p => p.Template == CashPayouts.Bitcoin)
-            .Sum(p => p.Weight * p.Amount * bitcoinSaleValue) / Payouts.Sum(p => p.Weight);
+            .Sum(p => OpeningWeight(p.Id) * p.Amount * bitcoinSaleValue) / Payouts.Sum(p => OpeningWeight(p.Id));
         if (bitcoinContribution > ordinaryMean * 0.10m)
             throw new CargoCatalogValidationException("Bitcoin exceeds the Cash Cache jackpot budget; cash openings are disabled.");
         var price = checked((long)(decimal.Ceiling(ordinaryMean / 1000m) * 1000m));
         if (price is < 1000 or > 1_000_000)
             throw new CargoCatalogValidationException("Cash Cache entry price exceeds its supported economy range.");
         var lots = Payouts.Select(payout => CreateLot(payout, findTemplate, rates[payout.Template])).ToArray();
-        var identity = string.Join("\n", Version, price.ToString(CultureInfo.InvariantCulture),
-            string.Join("\n", lots.Select(lot => $"{lot.Identity.LotId}:{lot.Fingerprint.Sha256Hex}:{lot.Evaluation.UseValue}")));
+        var identity = string.Join("\n", Version, SelectionVersion, price.ToString(CultureInfo.InvariantCulture),
+            string.Join("\n", lots.Select(lot => $"{lot.Identity.LotId}:{lot.Fingerprint.Sha256Hex}:{lot.Evaluation.UseValue}:{OpeningWeight(lot.Identity.LotId)}")));
         return new CargoCatalogSnapshot(Hash(identity), lots, [],
             new Dictionary<string, double> { [CashPayouts.Provider] = 1 }, CaseContracts.CashCache, price);
     }
@@ -108,22 +121,23 @@ internal static class CashPayoutCatalog
     internal static object Report(CargoCatalogSnapshot catalog)
     {
         var pricedLots = catalog.FreshOpeningLots;
-        var weight = pricedLots.Sum(lot => (decimal)lot.Identity.Weight);
+        var weight = pricedLots.Sum(lot => (decimal)OpeningWeight(lot.Identity.LotId));
         return new
         {
-            Scope = "Single-payout cash table. USD/EUR purchase estimates and standard Therapist Bitcoin sale estimates are not guaranteed player liquidation proceeds. No individual outcomes are adjusted.",
+            Scope = "Single-payout cash table. USD/EUR purchase estimates, GP handbook barter references and standard Therapist Bitcoin sale estimates are not guaranteed player liquidation proceeds. No individual outcomes are adjusted.",
+            SelectionVersion,
             catalog.SnapshotId,
             catalog.OpeningEnabled,
             catalog.OpeningDisabledReason,
             catalog.CasePrice,
-            ExpectedReferencePayout = weight == 0 ? (decimal?)null : pricedLots.Sum(lot => (decimal)lot.Identity.Weight * lot.Evaluation.UseValue) / weight,
+            ExpectedReferencePayout = weight == 0 ? (decimal?)null : pricedLots.Sum(lot => (decimal)OpeningWeight(lot.Identity.LotId) * lot.Evaluation.UseValue) / weight,
             KeyCostScenarios = (weight == 0 ? Array.Empty<int>() : new[] { 0, 25_000, 65_000 }).Select(keyCost => new
             {
                 AssumedKeyOpportunityCost = keyCost,
                 TotalReferenceCost = catalog.CasePrice + keyCost,
-                MeaningfulLossPercent = pricedLots.Where(lot => lot.Evaluation.UseValue < (catalog.CasePrice + keyCost) * 0.9m).Sum(lot => (decimal)lot.Identity.Weight) / weight * 100,
-                NearEvenPercent = pricedLots.Where(lot => lot.Evaluation.UseValue >= (catalog.CasePrice + keyCost) * 0.9m && lot.Evaluation.UseValue <= (catalog.CasePrice + keyCost) * 1.1m).Sum(lot => (decimal)lot.Identity.Weight) / weight * 100,
-                WinPercent = pricedLots.Where(lot => lot.Evaluation.UseValue > (catalog.CasePrice + keyCost) * 1.1m).Sum(lot => (decimal)lot.Identity.Weight) / weight * 100
+                MeaningfulLossPercent = pricedLots.Where(lot => lot.Evaluation.UseValue < (catalog.CasePrice + keyCost) * 0.9m).Sum(lot => (decimal)OpeningWeight(lot.Identity.LotId)) / weight * 100,
+                NearEvenPercent = pricedLots.Where(lot => lot.Evaluation.UseValue >= (catalog.CasePrice + keyCost) * 0.9m && lot.Evaluation.UseValue <= (catalog.CasePrice + keyCost) * 1.1m).Sum(lot => (decimal)OpeningWeight(lot.Identity.LotId)) / weight * 100,
+                WinPercent = pricedLots.Where(lot => lot.Evaluation.UseValue > (catalog.CasePrice + keyCost) * 1.1m).Sum(lot => (decimal)OpeningWeight(lot.Identity.LotId)) / weight * 100
             }).ToArray(),
             Odds = catalog.OpeningEnabled ? ManifestOpeningOdds.Create(catalog) : null,
             Payouts = catalog.Lots.Select(lot => new
@@ -168,6 +182,7 @@ internal static class CashPayoutCatalog
             CashPayouts.Roubles => $"₽{payout.Amount.ToString("N0", CultureInfo.InvariantCulture)}",
             CashPayouts.Dollars => $"${payout.Amount.ToString("N0", CultureInfo.InvariantCulture)} US dollars",
             CashPayouts.Euros => $"€{payout.Amount.ToString("N0", CultureInfo.InvariantCulture)} euros",
+            CashPayouts.GpCoin => $"{payout.Amount} × GP Coins",
             _ => $"{payout.Amount} × Physical Bitcoin"
         };
         var definition = new CargoLotDefinition(CashPayouts.Provider, Version, payout.Id, name,

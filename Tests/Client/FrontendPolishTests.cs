@@ -57,6 +57,7 @@ public sealed class FrontendPolishTests
     [InlineData(CashPayouts.Roubles, "Rouble payout")]
     [InlineData(CashPayouts.Dollars, "not a rouble cash-out")]
     [InlineData(CashPayouts.Bitcoin, "Therapist sale value at catalog startup")]
+    [InlineData(CashPayouts.GpCoin, "Handbook barter reference — not a rouble cash-out")]
     public void Cash_value_keeps_the_currency_specific_basis_visible(string template, string basis)
     {
         var lot = new ManifestLotSnapshot(CashPayouts.Provider, "Cash Cache", "cash", "Cash payout",

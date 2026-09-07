@@ -40,7 +40,7 @@ internal sealed record ManifestOpeningPool(IReadOnlyList<ResolvedCargoLot> Lots,
         {
             var cashLots = ManifestSelectionMath.CanonicalLots(familyLots);
             return new ManifestOpeningPool(cashLots,
-                ManifestSelectionMath.CreateExactWeights(cashLots, lot => lot.Identity.Weight));
+                ManifestSelectionMath.CreateExactWeights(cashLots, lot => CashPayoutCatalog.OpeningWeight(lot.Identity.LotId)));
         }
         var providers = ManifestSelectionMath.CanonicalLots(familyLots)
             .GroupBy(lot => lot.Identity.ProviderId, StringComparer.Ordinal)

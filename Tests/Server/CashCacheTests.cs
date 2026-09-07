@@ -17,6 +17,119 @@ namespace ContrabandCases.Tests.Server;
 
 public sealed class CashCacheTests
 {
+    [Theory]
+    [InlineData("gp-10", 10, "3.00%")]
+    [InlineData("gp-25", 25, "1.00%")]
+    public void GP_payouts_publish_exact_coins_odds_and_barter_value(string id, int quantity, string chance)
+    {
+        const string gp = "5d235b4d86f7742e017bc88a";
+        var catalog = Catalog();
+        var lot = Assert.Single(catalog.Lots, lot => lot.Identity.LotId == id);
+        Assert.Equal(gp, lot.Identity.AnchorTemplateId);
+        Assert.Equal($"{quantity} × GP Coins", lot.Identity.DisplayName);
+        Assert.Equal(quantity * 7_500, lot.Evaluation.UseValue);
+        var items = new CargoLotMaterializer(FindTemplate).MaterializeCashPayout(lot.Forest, []).Items;
+        Assert.Equal(quantity, Assert.Single(items).Upd!.StackObjectsCount);
+        var odds = Assert.Single(ManifestOpeningOdds.Create(catalog).Families).Lots;
+        Assert.Equal(chance, Assert.Single(odds, row => row.LotId == id).ConditionalPercent);
+        Assert.Contains("not a rouble cash-out", CashPayouts.ValueLabel(gp));
+    }
+
+    [Fact]
+    public void Every_pre_GP_paid_cash_claim_keeps_its_original_identity_and_remains_claimable()
+    {
+        var path = System.IO.Path.GetFullPath(System.IO.Path.Combine(AppContext.BaseDirectory,
+            "../../../Fixtures/cash-v1-paid-claims.json"));
+        var documents = JsonSerializer.Deserialize<SptCaseJournalDocument[]>(File.ReadAllText(path))!;
+        Assert.Equal(13, documents.Length);
+        foreach (var current in new[] { Catalog(), CashPayoutCatalog.Disabled("Quotes unavailable", FindTemplate) })
+            foreach (var document in documents)
+            {
+                var active = SptCaseJournal.FromDocument(document).ActiveManifest!;
+                var entitlement = active.Entitlement!;
+                var recovered = current.ResolveExact(entitlement.Rarity, entitlement.Identity,
+                    entitlement.Forest, entitlement.Fingerprint);
+                Assert.NotNull(recovered);
+                var snapshot = ManifestSnapshotProjection.FromActive(active, current, null);
+                Assert.True(snapshot.AvailableActions.CanClaim);
+                Assert.False(snapshot.MissingContentBlocked);
+                new CargoLotMaterializer(FindTemplate).MaterializeCashPayout(recovered.Forest, []);
+            }
+    }
+
+    [Fact]
+    public void Cash_draw_boundaries_price_and_report_use_the_same_published_GP_distribution()
+    {
+        var weights = new Dictionary<string, int>
+        {
+            ["rub-25000"] = 1500, ["rub-60000"] = 1300, ["rub-100000"] = 1000,
+            ["rub-150000"] = 1700, ["rub-175000"] = 900, ["rub-220000"] = 1000,
+            ["rub-300000"] = 300, ["usd-1000"] = 700, ["usd-1500"] = 600,
+            ["eur-1000"] = 400, ["eur-2000"] = 100, ["gp-10"] = 300,
+            ["gp-25"] = 100, ["btc-1"] = 90, ["btc-2"] = 10
+        };
+        var catalog = Catalog();
+        var odds = Assert.Single(ManifestOpeningOdds.Create(catalog).Families).Lots;
+        var start = 0;
+        foreach (var lot in catalog.Lots.OrderBy(lot => lot.Identity.LotId, StringComparer.Ordinal))
+        {
+            var weight = weights[lot.Identity.LotId];
+            var published = Assert.Single(odds, row => row.LotId == lot.Identity.LotId);
+            Assert.Equal(weight / 10_000m, decimal.Parse(published.ConditionalNumerator) /
+                decimal.Parse(published.ConditionalDenominator));
+            var first = (long)decimal.Ceiling(start * (decimal)CanonicalRngEvidence.UnitDenominator / 10_000);
+            var last = (long)decimal.Ceiling((start + weight) * (decimal)CanonicalRngEvidence.UnitDenominator / 10_000) - 1;
+            foreach (var draw in new[] { first, last })
+                Assert.Equal(lot.Identity.LotId, Assert.Single(new ManifestCatalogSelector(() => draw)
+                    .CreateOffers(catalog)).Identity.LotId);
+            start += weight;
+        }
+        Assert.Equal(10_000, start);
+        var ordinary = catalog.Lots.Where(lot => lot.Identity.AnchorTemplateId != CashPayouts.Bitcoin).ToArray();
+        var expectedPrice = decimal.Ceiling(ordinary.Sum(lot => weights[lot.Identity.LotId] * (decimal)lot.Evaluation.UseValue) /
+            9_900m / 1000m) * 1000m;
+        Assert.Equal((long)expectedPrice, catalog.CasePrice);
+        using var report = JsonDocument.Parse(JsonSerializer.Serialize(CashPayoutCatalog.Report(catalog)));
+        Assert.Equal(catalog.Lots.Sum(lot => weights[lot.Identity.LotId] * (decimal)lot.Evaluation.UseValue) / 10_000m,
+            report.RootElement.GetProperty("ExpectedReferencePayout").GetDecimal());
+        foreach (var scenario in report.RootElement.GetProperty("KeyCostScenarios").EnumerateArray())
+        {
+            var cost = scenario.GetProperty("TotalReferenceCost").GetDecimal();
+            decimal Share(Func<ResolvedCargoLot, bool> predicate) => catalog.Lots.Where(predicate)
+                .Sum(lot => weights[lot.Identity.LotId]) / 100m;
+            Assert.Equal(Share(lot => lot.Evaluation.UseValue < cost * 0.9m), scenario.GetProperty("MeaningfulLossPercent").GetDecimal());
+            Assert.Equal(Share(lot => lot.Evaluation.UseValue >= cost * 0.9m && lot.Evaluation.UseValue <= cost * 1.1m),
+                scenario.GetProperty("NearEvenPercent").GetDecimal());
+            Assert.Equal(Share(lot => lot.Evaluation.UseValue > cost * 1.1m), scenario.GetProperty("WinPercent").GetDecimal());
+        }
+    }
+
+    [Fact]
+    public void GP_stacks_follow_native_limits_and_saved_coins_survive_quote_or_cap_increases()
+    {
+        TemplateItem? SmallStacks(string id)
+        {
+            var template = FindTemplate(id);
+            if (id == CashPayouts.GpCoin) template!.Properties!.StackMaxSize = 7;
+            return template;
+        }
+        var small = CashPayoutCatalog.Build(SmallStacks, 130, 150, 500_000, 7_500);
+        var saved = small.Lots.Single(lot => lot.Identity.LotId == "gp-25");
+        var materialized = new CargoLotMaterializer(SmallStacks).MaterializeCashPayout(saved.Forest, []);
+        Assert.Equal(new double?[] { 7, 7, 7, 4 }, materialized.Items.Select(item => item.Upd!.StackObjectsCount));
+        var changed = CashPayoutCatalog.Build(FindTemplate, 130, 150, 500_000, 10_000);
+        Assert.NotEqual(Catalog().SnapshotId, changed.SnapshotId);
+        Assert.NotNull(changed.ResolveExact(saved.Evaluation.Grade, saved.Identity, saved.Forest, saved.Fingerprint));
+        var larger = changed.Lots.Single(lot => lot.Identity.LotId == "gp-25");
+        Assert.Null(small.ResolveExact(larger.Evaluation.Grade, larger.Identity, larger.Forest, larger.Fingerprint));
+        var invalid = RewardForest.Create([new RewardForestNode("root", "root", CashPayouts.GpCoin, null, null, null, 26)]);
+        Assert.Throws<CargoCatalogValidationException>(() => new CargoLotMaterializer(FindTemplate).ValidateCashPayout(invalid));
+        var unavailable = CashPayoutCatalog.Disabled("GP missing", id => id == CashPayouts.GpCoin ? null : FindTemplate(id));
+        Assert.Equal(13, unavailable.Lots.Count);
+        Assert.Empty(unavailable.FreshOpeningLots);
+        Assert.Null(unavailable.ResolveExact(saved.Evaluation.Grade, saved.Identity, saved.Forest, saved.Fingerprint));
+    }
+
     [Fact]
     public void Saved_cash_stacks_survive_a_cap_increase_but_not_an_unsafe_cap_decrease()
     {
@@ -26,7 +139,7 @@ public sealed class CashCacheTests
             if (id == CashPayouts.Roubles) template!.Properties!.StackMaxSize = 100_000;
             return template;
         }
-        var small = CashPayoutCatalog.Build(SmallStacks, 130, 150, 500_000);
+        var small = CashPayoutCatalog.Build(SmallStacks, 130, 150, 500_000, 7_500);
         var saved = small.Lots.Single(l => l.Identity.LotId == "rub-300000");
         Assert.Equal(3, saved.Forest.Nodes.Count);
         foreach (var current in new[] { Catalog(), CashPayoutCatalog.Disabled("FX unavailable", FindTemplate) })
@@ -54,7 +167,7 @@ public sealed class CashCacheTests
         var parsed = ManifestSnapshotEnvelope.ParseCurrent(Envelope().ToString()).OpeningOdds!;
         Assert.Equal(1, parsed.OfferCount);
         Assert.Equal(CaseContracts.CashCache, parsed.CaseTemplateId);
-        Assert.Equal(13, Assert.Single(parsed.Families).Lots.Count);
+        Assert.Equal(15, Assert.Single(parsed.Families).Lots.Count);
         foreach (var field in new[] { "offerCount", "familyCount", "selectionRule", "caseTemplateId" })
         {
             var malformed = Envelope();
@@ -106,7 +219,7 @@ public sealed class CashCacheTests
     {
         var library = ManifestLibraryProjection.Create(new CaseOpeningJournal(), null, new Dictionary<string, string>(), Catalog());
         var parsed = ManifestSnapshotParser.ParseLibrary(JsonSerializer.Serialize(new { err = 0, errmsg = (string?)null, data = library }));
-        Assert.Equal(13, parsed.Lots.Count);
+        Assert.Equal(15, parsed.Lots.Count);
         foreach (var lot in parsed.Lots)
             foreach (var state in Enum.GetValues<GalleryState>())
             {
@@ -129,7 +242,7 @@ public sealed class CashCacheTests
             if (template?.Properties is { } properties) { properties.Width = 2; properties.Height = 3; }
             return template;
         }
-        var catalog = CashPayoutCatalog.Build(Wide, 130, 150, 500_000);
+        var catalog = CashPayoutCatalog.Build(Wide, 130, 150, 500_000, 7_500);
         Assert.Equal(12, catalog.Lots.Single(l => l.Identity.LotId == "btc-2").Evaluation.FootprintCells);
     }
 
@@ -142,9 +255,15 @@ public sealed class CashCacheTests
     [InlineData("null-option")]
     [InlineData("invalid-fx")]
     [InlineData("locked-therapist")]
+    [InlineData("missing-gp-quote")]
+    [InlineData("gp-nan")]
+    [InlineData("gp-infinity")]
+    [InlineData("gp-zero")]
+    [InlineData("gp-negative")]
+    [InlineData("gp-excessive")]
     public void Quotes_require_valid_eligibility_and_isolate_bad_external_data(string scenario)
     {
-        var items = new[] { CashPayouts.Roubles, CashPayouts.Dollars, CashPayouts.Euros, CashPayouts.Bitcoin,
+        var items = new[] { CashPayouts.Roubles, CashPayouts.Dollars, CashPayouts.Euros, CashPayouts.Bitcoin, CashPayouts.GpCoin,
             "543be5dd4bdc2deb348b4569" }.ToDictionary(id => (MongoId)id, id => FindTemplate(id)!);
         var trader = new Trader
         {
@@ -166,6 +285,7 @@ public sealed class CashCacheTests
             trader.Assort.Items.Add(new Item { Id = currency, Template = currency, ParentId = "hideout", SlotId = "hideout" });
             trader.Assort.BarterScheme[(MongoId)currency] = [[new BarterScheme { Template = CashPayouts.Roubles, Count = 150 }]];
         }
+        var prices = new Dictionary<string, double> { [CashPayouts.Bitcoin] = 800_000, [CashPayouts.GpCoin] = 7_500 };
         switch (scenario)
         {
             case "prohibited": trader.Base.ItemsBuyProhibited.IdList.Add((MongoId)CashPayouts.Bitcoin); break;
@@ -175,11 +295,16 @@ public sealed class CashCacheTests
             case "null-option": trader.Assort.BarterScheme[(MongoId)CashPayouts.Euros] = [null!]; break;
             case "invalid-fx": trader.Assort.BarterScheme[(MongoId)CashPayouts.Euros][0][0].Count = double.NaN; break;
             case "locked-therapist": trader.Base.UnlockedByDefault = false; break;
+            case "missing-gp-quote": prices.Remove(CashPayouts.GpCoin); break;
+            case "gp-nan": prices[CashPayouts.GpCoin] = double.NaN; break;
+            case "gp-infinity": prices[CashPayouts.GpCoin] = double.PositiveInfinity; break;
+            case "gp-zero": prices[CashPayouts.GpCoin] = 0; break;
+            case "gp-negative": prices[CashPayouts.GpCoin] = -1; break;
+            case "gp-excessive": prices[CashPayouts.GpCoin] = 100_000_001; break;
         }
         var traders = new TradersTable { [Traders.THERAPIST] = trader };
         var warnings = new List<string>();
-        var cash = CatalogSnapshotCoordinator.FreezeCash(() => CashCurrencyQuotes.Freeze(items, traders,
-            new Dictionary<string, double> { [CashPayouts.Bitcoin] = 800_000 }), FindTemplate, warnings.Add);
+        var cash = CatalogSnapshotCoordinator.FreezeCash(() => CashCurrencyQuotes.Freeze(items, traders, prices), FindTemplate, warnings.Add);
         Assert.Equal(scenario == "valid", cash.OpeningEnabled);
         if (scenario == "valid")
         {
@@ -189,7 +314,7 @@ public sealed class CashCacheTests
         else
         {
             Assert.Single(warnings);
-            Assert.Equal(13, cash.Lots.Count);
+            Assert.Equal(15, cash.Lots.Count);
         }
     }
 
@@ -204,13 +329,13 @@ public sealed class CashCacheTests
         Assert.Equal(1, odds.OfferCount);
         Assert.Equal("1", family.PerSlotNumerator);
         Assert.Equal("1", family.PerSlotDenominator);
-        Assert.Equal(13, family.Lots.Count);
+        Assert.Equal(15, family.Lots.Count);
         var bitcoin = family.Lots.Single(l => l.LotId == "btc-1");
         Assert.Equal("9", bitcoin.ConditionalNumerator);
         Assert.Equal("1000", bitcoin.ConditionalDenominator);
         Assert.Equal("0.90%", bitcoin.ConditionalPercent);
         Assert.Equal("0.10%", family.Lots.Single(l => l.LotId == "btc-2").ConditionalPercent);
-        Assert.Equal(10_000, CashPayoutCatalog.Payouts.Sum(p => p.Weight));
+        Assert.Equal(10_000, CashPayoutCatalog.Payouts.Sum(p => CashPayoutCatalog.OpeningWeight(p.Id)));
     }
 
     [Fact]
@@ -304,7 +429,7 @@ public sealed class CashCacheTests
         Assert.Throws<ArgumentException>(() => SptCaseJournal.FromDocument(document));
     }
 
-    internal static CargoCatalogSnapshot Catalog(decimal bitcoin = 500_000) => CashPayoutCatalog.Build(FindTemplate, 130, 150, bitcoin);
+    internal static CargoCatalogSnapshot Catalog(decimal bitcoin = 500_000) => CashPayoutCatalog.Build(FindTemplate, 130, 150, bitcoin, 7_500);
 
     internal static ManifestRecord Prepare(CargoCatalogSnapshot catalog)
     {
@@ -335,7 +460,7 @@ public sealed class CashCacheTests
             Type = "Item",
             Properties = new TemplateItemProperties
             {
-                StackMaxSize = id == CashPayouts.Bitcoin ? 1 : 500_000,
+                StackMaxSize = id == CashPayouts.Bitcoin ? 1 : id == CashPayouts.GpCoin ? 100 : 500_000,
                 Width = 1,
                 Height = 1,
                 Slots = [],

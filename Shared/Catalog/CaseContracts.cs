@@ -52,7 +52,7 @@ public static class CaseContracts
         Operations => "Practical raid packages: ammunition, medical supplies, equipment and loadouts, with rare high-value jackpots. Theme does not guarantee reward rarity or value.",
         Relics => "Collectible cards, arcane curios and historical relics from installed reward packs. Normal openings offer three distinct collection or relic tracks; rare surprise openings offer three premium packages to choose from.",
         BlackSite => "Specialist raid packages from night operations, ordnance, vault equipment, optics and experimental supplies. Normal openings offer three distinct tracks with no guaranteed rarity or value; rare surprise openings offer three premium packages to choose from.",
-        CashCache => "One universal key, one cash payout: roubles, dollars, euros or rare physical Bitcoin. No discard, Relay or Favor. Read the exact payout odds before opening; foreign currency value is not a guaranteed rouble cash-out.",
+        CashCache => "One universal key, one payout: roubles, dollars, euros, GP Coins or rare physical Bitcoin. No discard, Relay or Favor. Read the exact payout odds before opening; foreign currency and GP barter values are not guaranteed rouble cash-outs.",
         _ => "Mixed packages from all available reward packs."
     };
 

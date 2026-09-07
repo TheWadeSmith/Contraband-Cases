@@ -9,14 +9,16 @@ public static class CashPayouts
     public const string Dollars = "5696686a4bdc2da3298b456a";
     public const string Euros = "569668774bdc2da2298b4568";
     public const string Bitcoin = "59faff1d86f7746c51718c9c";
+    public const string GpCoin = "5d235b4d86f7742e017bc88a";
 
-    public static bool IsAllowed(string template) => template is Roubles or Dollars or Euros or Bitcoin;
+    public static bool IsAllowed(string template) => template is Roubles or Dollars or Euros or Bitcoin or GpCoin;
 
     public static string ValueLabel(string template) => template switch
     {
         Roubles => "Rouble payout",
         Dollars or Euros => "Estimated purchase value — not a rouble cash-out",
         Bitcoin => "Estimated Therapist sale value at catalog startup",
+        GpCoin => "Handbook barter reference — not a rouble cash-out",
         _ => "Reference value — not a cash payout"
     };
 }
