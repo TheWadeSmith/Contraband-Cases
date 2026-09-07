@@ -17,6 +17,17 @@ namespace ContrabandCases.Tests.Server;
 public sealed class ContentDefinitionTests
 {
     [Fact]
+    public void Every_case_explicitly_weighs_five_kilograms_instead_of_inheriting_airdrop_weight()
+    {
+        Assert.All(CaseContracts.Templates, template =>
+        {
+            var details = ContrabandContentDefinitions.CreateCaseCloneDetails(70_000, template);
+
+            Assert.Equal(5d, details.OverrideProperties!.Weight);
+        });
+    }
+
+    [Fact]
     public void Themed_cases_publish_only_viable_pools_with_resolved_prices_and_preserve_mixed_settings()
     {
         var templates = KeyOnlyTemplates(65_000);
@@ -172,6 +183,7 @@ public sealed class ContentDefinitionTests
         Assert.Equal(1, keyDetails.OverrideProperties.Height);
         Assert.Equal(1, keyDetails.OverrideProperties.StackMaxSize);
         Assert.Equal(1, keyDetails.OverrideProperties.MaxUsages);
+        Assert.Null(keyDetails.OverrideProperties.Weight);
         // The key's registration price is now a fixed internal constant (it's find-only, no
         // longer sold, so nothing external drives its price) -- matching its long-standing
         // pre-0.3.18 effective worth so nothing about its implied value actually changed.

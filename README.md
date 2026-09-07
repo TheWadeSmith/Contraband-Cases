@@ -1,7 +1,12 @@
 # Contraband Cases
 
-Contraband Cases **0.4.8** is a client-and-server mod for **SPT 4.1.x**,
+Contraband Cases **0.4.9** is a client-and-server mod for **SPT 4.1.x**,
 verified against **SPT 4.1.5**. Builds retain the compatible 4.1.3 server SDK.
+
+0.4.9 sets **all five case types to 5 kg each**, replacing the 15 kg inherited
+from the native airdrop container. Existing cases use the same templates, so no
+inventory migration is needed; restart the server and game after updating.
+Keys, reward contents, prices, drop rates, and Unity models/sounds are unchanged.
 
 0.4.8 adds **10 GP Coins at 3%** and **25 GP Coins at 1%** to Cash Cache.
 Bitcoin rewards stay at 1 coin (0.90%) and 2 coins (0.10%). The two GP entries
