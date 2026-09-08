@@ -41,7 +41,7 @@ public sealed class CatalogSnapshotCoordinator
         ArgumentNullException.ThrowIfNull(modHelper);
         ArgumentNullException.ThrowIfNull(logger);
         _snapshot = new Lazy<CargoCatalogSnapshot>(
-            () => Freeze(templates, globals, modHelper, logger),
+            () => Freeze(templates, globals, traders, modHelper, logger),
             LazyThreadSafetyMode.ExecutionAndPublication);
         _cashSnapshot = new Lazy<CargoCatalogSnapshot>(() =>
         {
@@ -129,6 +129,7 @@ public sealed class CatalogSnapshotCoordinator
     private static CargoCatalogSnapshot Freeze(
         TemplateTable templates,
         GlobalTable globals,
+        TradersTable traders,
         ModHelper modHelper,
         ISptLogger<CatalogSnapshotCoordinator> logger)
     {
@@ -211,7 +212,9 @@ public sealed class CatalogSnapshotCoordinator
             FindPreset));
         var evaluator = new CargoLotEvaluator(
             FindTemplate,
-            id => handbookPrices.GetValueOrDefault(id));
+            id => handbookPrices.GetValueOrDefault(id),
+            new CargoTraderResale(FindTemplate, handbookPrices,
+                traders.Values.Where(trader => trader?.Base is not null).Select(trader => trader.Base)).Estimate);
         var requirements = new CargoPackRequirementValidator(
             FindTemplate,
             FindPreset);
@@ -229,6 +232,9 @@ public sealed class CatalogSnapshotCoordinator
                 $"[Contraband Cases] Skipped reward pack '{rejected.ProviderId}' " +
                 $"({rejected.PackVersion}): {rejected.Reason}");
         }
+
+        if (snapshot.UnavailableRetiredLots.Count > 0)
+            logger.Info($"[Contraband Cases] {snapshot.UnavailableRetiredLots.Count} retired reward definitions cannot currently be recovered; current packs are unaffected. Details: catalog-report.json.");
 
         // Diagnostics are generated from finalized live templates, never from
         // hand-maintained price guesses. Failure to write a report is visible

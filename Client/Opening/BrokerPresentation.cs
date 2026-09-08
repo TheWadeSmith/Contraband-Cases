@@ -76,7 +76,7 @@ internal static class BrokerPresentation
     internal static string PackageDetails(ManifestLotSnapshot lot) =>
         $"<b>{Text(lot.DisplayName)}</b>\n{Text(lot.ProviderLabel)} • {Text(CargoFamilies.Label(lot.FamilyId))}\n" +
         $"{Text(lot.Purpose)}\n" +
-        Value(lot) + "\n\n" + FullContents(lot);
+        Value(lot) + (lot.ProviderId == CashPayouts.Provider ? "" : "\n" + ResaleBasis) + "\n\n" + FullContents(lot);
 
     internal static string FullContents(ManifestLotSnapshot lot) =>
         string.Join("\n", lot.Contents.Select(item => $"{item.Quantity} × {Text(item.DisplayName)}"));
@@ -95,12 +95,17 @@ internal static class BrokerPresentation
                 : $"Hold to stake this whole package + {relay.KeyCost} key. Loss takes both.\nReplace gives a different same-rarity package and ends the chain.");
     }
 
-    internal static string Value(ManifestLotSnapshot lot)
+    internal static string Value(ManifestLotSnapshot lot, bool compact = false)
     {
         if (lot.UseValue is not long value) return "Reference value unavailable";
         var formatted = value.ToString("N0", CultureInfo.InvariantCulture);
         return lot.ProviderId == CashPayouts.Provider
             ? $"{CashPayouts.ValueLabel(lot.AnchorTemplateId)}: ₽{formatted}"
-            : $"Reference value ₽{formatted} • not cash/resale";
+            : (compact ? $"Reference ₽{formatted}\n" : $"Reference value ₽{formatted} • not cash/resale\n") +
+              (lot.TraderResaleEstimate is long resale
+                  ? $"Est. resale ₽{resale.ToString("N0", CultureInfo.InvariantCulture)}*"
+                  : "Resale estimate unavailable");
     }
+
+    internal const string ResaleBasis = "*Handbook-based estimate at catalog startup: best eligible default-unlocked RUB buyer per complete item, excluding Fence. Before profile bonuses; not a guaranteed quote or flea value.";
 }

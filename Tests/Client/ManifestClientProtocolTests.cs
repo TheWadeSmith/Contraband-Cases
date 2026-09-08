@@ -13,6 +13,20 @@ public sealed class ManifestClientProtocolTests
     private const string ManifestId = "manifest-client-protocol";
     private const string RecoveryCaseItemId = "aaaaaaaaaaaaaaaaaaaaaaaa";
 
+    [Fact]
+    public void Optional_resale_is_distinct_from_legacy_handbook_field_and_missing_is_not_zero()
+    {
+        var offer = OfferSnapshot();
+        Assert.Null(ManifestSnapshotEnvelope.Parse(Envelope(offer), ManifestId).CurrentLot!.TraderResaleEstimate);
+        offer["currentLot"]!["traderResaleEstimate"] = 27_500;
+        Assert.Equal(27_500, ManifestSnapshotEnvelope.Parse(Envelope(offer), ManifestId).CurrentLot!.TraderResaleEstimate);
+        foreach (var invalid in new JToken[] { -1, 10_000_000_001L, "12000", JValue.CreateNull(), 12.5 })
+        {
+            offer["currentLot"]!["traderResaleEstimate"] = invalid;
+            Assert.Throws<ManifestSnapshotException>(() => ManifestSnapshotEnvelope.Parse(Envelope(offer), ManifestId));
+        }
+    }
+
     [Theory]
     [InlineData(CaseContracts.Operations)]
     [InlineData(CaseContracts.Relics)]

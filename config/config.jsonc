@@ -8,9 +8,9 @@
   "therapistSellPriceCase": null,
   // Added pool weight, NOT chance per container or raid. Playtest target:
   // about one retained key per 1.5-2 normal looting raids including zero-key raids.
-  // Keep this initial weight until real samples establish PMC/scav cadence.
-  "keyLootWeightPercent": 2.0,
+  // Small supply increase: 10% more added weight than the previous 2.0 default.
+  "keyLootWeightPercent": 2.2,
   // Combined added weight shared equally by available case types, ONLY in verified crates.
   // NOT chance per crate/raid; 0 disables case drops. Does not change key loot rules.
-  "caseLootWeightPercent": 1.0
+  "caseLootWeightPercent": 1.1
 }

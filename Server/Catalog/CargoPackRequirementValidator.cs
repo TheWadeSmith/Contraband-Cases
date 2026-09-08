@@ -50,9 +50,21 @@ public sealed class CargoPackRequirementValidator
             }
         }
 
+        // Only dependencies used exclusively by explicitly retired recipes may
+        // be absent. Unreferenced requirements still apply to the active pack.
+        var active = pack.Lots.Where(lot => !pack.RetiredLotIds.Contains(lot.LotId)).ToArray();
+        var retired = pack.Lots.Where(lot => pack.RetiredLotIds.Contains(lot.LotId)).ToArray();
+        static IEnumerable<string> TemplateIds(IEnumerable<CargoLotDefinition> lots) =>
+            lots.Select(lot => lot.AnchorTemplateId).Concat(lots.SelectMany(lot => lot.RecipeLines)
+                .OfType<TemplateLine>().Select(line => line.TemplateId));
+        static IEnumerable<string> PresetIds(IEnumerable<CargoLotDefinition> lots) =>
+            lots.SelectMany(lot => lot.RecipeLines).OfType<PresetLine>().Select(line => line.PresetId);
+        var historicalTemplates = TemplateIds(retired).Except(TemplateIds(active)).ToHashSet(StringComparer.Ordinal);
+        var historicalPresets = PresetIds(retired).Except(PresetIds(active)).ToHashSet(StringComparer.Ordinal);
         foreach (var templateId in pack.RequiredTemplateIds)
         {
             ValidateMongoId(templateId, "template", pack.ProviderId);
+            if (historicalTemplates.Contains(templateId)) continue;
             TemplateItem? template;
             try
             {
@@ -72,6 +84,7 @@ public sealed class CargoPackRequirementValidator
         foreach (var presetId in pack.RequiredPresetIds)
         {
             ValidateMongoId(presetId, "preset", pack.ProviderId);
+            if (historicalPresets.Contains(presetId)) continue;
             Preset? preset;
             try
             {

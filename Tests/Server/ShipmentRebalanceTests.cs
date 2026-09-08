@@ -23,8 +23,10 @@ public sealed class ShipmentRebalanceTests
         foreach (var pack in baseline.RootElement.EnumerateObject())
         {
             using var current = JsonDocument.Parse(File.ReadAllText(Path.Combine(root, "config/reward-packs", pack.Name)));
-            foreach (var property in pack.Value.EnumerateObject().Where(p => p.Name != "lots"))
+            foreach (var property in pack.Value.EnumerateObject().Where(p => p.Name != "lots" && p.Name != "requiredPresetIds"))
                 Assert.True(JsonElement.DeepEquals(property.Value, current.RootElement.GetProperty(property.Name)), pack.Name);
+            foreach (var preset in pack.Value.GetProperty("requiredPresetIds").EnumerateArray())
+                Assert.Contains(current.RootElement.GetProperty("requiredPresetIds").EnumerateArray(), p => JsonElement.DeepEquals(p, preset));
             var lots = current.RootElement.GetProperty("lots").EnumerateArray().ToDictionary(l => l.GetProperty("lotId").GetString()!);
             foreach (var original in pack.Value.GetProperty("lots").EnumerateArray())
             {
@@ -44,7 +46,7 @@ public sealed class ShipmentRebalanceTests
         {
             var pack = new JsonRewardPackLoader().LoadFile(file);
             var lots = pack.Lots.ToDictionary(l => l.LotId);
-            foreach (var shipment in pack.Lots.Where(l => ShipmentEconomy.IsShipment(l.LotId)))
+            foreach (var shipment in pack.Lots.Where(l => ShipmentEconomy.IsShipment(l.LotId) && !l.LotId.Contains(".compatible-v1.")))
             {
                 var original = lots[ShipmentEconomy.BaseId(shipment.LotId)];
                 Assert.Equal(original.Weight, shipment.Weight);

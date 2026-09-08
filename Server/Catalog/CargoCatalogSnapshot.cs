@@ -34,7 +34,8 @@ public sealed class CargoLotPack
         IEnumerable<string> requiredTemplateIds,
         IEnumerable<string> requiredPresetIds,
         IEnumerable<string> requiredBundleKeys,
-        IEnumerable<CargoLotDefinition> lots)
+        IEnumerable<CargoLotDefinition> lots,
+        IEnumerable<string>? retiredLotIds = null)
     {
         if (string.IsNullOrWhiteSpace(providerId))
         {
@@ -82,6 +83,10 @@ public sealed class CargoLotPack
         RequiredPresetIds = presetRequirements;
         RequiredBundleKeys = bundleRequirements;
         Lots = new ReadOnlyCollection<CargoLotDefinition>(snapshot);
+        RetiredLotIds = SnapshotRequirements(retiredLotIds ?? [], "retired lot");
+        if (RetiredLotIds.Any(id => !snapshot.Any(lot => lot.LotId == id)) ||
+            snapshot.All(lot => RetiredLotIds.Contains(lot.LotId)))
+            throw new CargoCatalogValidationException("Retired lots must exist and leave at least one active lot.");
     }
 
     public string ProviderId { get; }
@@ -99,6 +104,8 @@ public sealed class CargoLotPack
     public IReadOnlyList<string> RequiredBundleKeys { get; }
 
     public IReadOnlyList<CargoLotDefinition> Lots { get; }
+
+    public IReadOnlyList<string> RetiredLotIds { get; }
 
     private static IReadOnlyList<string> SnapshotRequirements(
         IEnumerable<string> source,
@@ -151,15 +158,17 @@ public sealed class CargoCatalogSnapshot
         IEnumerable<SkippedCargoLotPack> skippedPacks,
         IReadOnlyDictionary<string, double> providerWeights,
         string caseTemplateId = ModConstants.CaseTemplateId,
-        long? casePrice = null)
+        long? casePrice = null,
+        IEnumerable<string>? unavailableRetiredLots = null)
     {
         CaseTemplateId = CaseContracts.Require(caseTemplateId);
         CasePrice = casePrice;
+        UnavailableRetiredLots = new ReadOnlyCollection<string>((unavailableRetiredLots ?? []).ToArray());
         Sha256Hex = sha256Hex;
         SnapshotId = string.Concat("catalog-v2/", sha256Hex);
         Lots = new ReadOnlyCollection<ResolvedCargoLot>(lots.ToArray());
         FreshOpeningLots = new ReadOnlyCollection<ResolvedCargoLot>(
-            ShipmentEconomy.CurrentLots(Lots).Where(lot => ManifestOpeningPool.IsFreshEligible(lot) &&
+            ShipmentEconomy.CurrentLots(Lots).Where(lot => !lot.IsRetired && ManifestOpeningPool.IsFreshEligible(lot) &&
                 (caseTemplateId != CaseContracts.CashCache || casePrice.HasValue && lot.EvaluationOrNull is not null)).ToArray());
         SkippedPacks = new ReadOnlyCollection<SkippedCargoLotPack>(skippedPacks.ToArray());
         ProviderWeights = new ReadOnlyDictionary<string, double>(
@@ -191,6 +200,8 @@ public sealed class CargoCatalogSnapshot
     public IReadOnlyList<ResolvedCargoLot> FreshOpeningLots { get; }
 
     public IReadOnlyList<SkippedCargoLotPack> SkippedPacks { get; }
+
+    public IReadOnlyList<string> UnavailableRetiredLots { get; }
 
     public IReadOnlyDictionary<string, double> ProviderWeights { get; }
 
@@ -330,7 +341,8 @@ public sealed class CargoCatalogSnapshotBuilder
         var active = new List<ResolvedCargoLot>();
         var occupied = new HashSet<string>(StringComparer.Ordinal);
         var providerWeights = new Dictionary<string, double>(StringComparer.Ordinal);
-        var coreLots = ResolvePack(corePack);
+        var unavailableRetired = new List<string>();
+        var coreLots = ResolvePack(corePack, unavailableRetired);
         AddPackAtomically(corePack, coreLots, active, occupied, providerWeights);
 
         var skipped = new List<SkippedCargoLotPack>(initialSkippedPacks ?? []);
@@ -361,7 +373,7 @@ public sealed class CargoCatalogSnapshotBuilder
         {
             try
             {
-                var resolved = ResolvePack(pack);
+                var resolved = ResolvePack(pack, unavailableRetired);
                 AddPackAtomically(pack, resolved, active, occupied, providerWeights);
             }
             catch (CargoCatalogValidationException exception)
@@ -384,10 +396,11 @@ public sealed class CargoCatalogSnapshotBuilder
             skipped
                 .OrderBy(pack => pack.ProviderId, StringComparer.Ordinal)
                 .ThenBy(pack => pack.PackVersion, StringComparer.Ordinal),
-            providerWeights);
+            providerWeights,
+            unavailableRetiredLots: unavailableRetired);
     }
 
-    private IReadOnlyList<ResolvedCargoLot> ResolvePack(CargoLotPack pack)
+    private IReadOnlyList<ResolvedCargoLot> ResolvePack(CargoLotPack pack, ICollection<string> unavailableRetired)
     {
         _validateRequirements?.Invoke(pack);
         if (pack.Lots.Any(lot =>
@@ -407,10 +420,22 @@ public sealed class CargoCatalogSnapshotBuilder
                 $"Pack '{pack.ProviderId}' contains duplicate lot '{duplicate.Key}'.");
         }
 
-        var resolved = new ResolvedCargoLot[pack.Lots.Count];
-        for (var index = 0; index < pack.Lots.Count; index++)
+        var resolved = new List<ResolvedCargoLot>();
+        foreach (var definition in pack.Lots)
         {
-            resolved[index] = _evaluator.Evaluate(_resolver.Resolve(pack.Lots[index]));
+            var retired = pack.RetiredLotIds.Contains(definition.LotId);
+            try
+            {
+                var lot = _evaluator.Evaluate(_resolver.Resolve(definition));
+                resolved.Add(retired ? lot.AsRetired() : lot);
+            }
+            catch (CargoCatalogValidationException exception) when (retired)
+            {
+                // Historical definitions are recovery-only, not current pack
+                // requirements. Invalid old forests remain blocked by ResolveExact;
+                // never repair, substitute or silently award a different paid reward.
+                unavailableRetired.Add($"{pack.ProviderId}/{definition.LotId}: {exception.Message}");
+            }
         }
         return resolved;
     }
@@ -487,6 +512,7 @@ public sealed class CargoCatalogSnapshotBuilder
                 writer.Write(lot.Evaluation.UseValue);
                 writer.Write(lot.Evaluation.FootprintCells);
                 writer.Write((int)lot.Evaluation.Grade);
+                if (lot.IsRetired) WriteString(writer, "recovery-only");
             }
         }
 

@@ -17,14 +17,17 @@ public sealed class CargoLotEvaluator
 
     private readonly Func<string, TemplateItem?> _findTemplate;
     private readonly Func<string, double?> _findHandbookPrice;
+    private readonly Func<RewardForest, long?>? _estimateResale;
 
     public CargoLotEvaluator(
         Func<string, TemplateItem?> findTemplate,
-        Func<string, double?> findHandbookPrice)
+        Func<string, double?> findHandbookPrice,
+        Func<RewardForest, long?>? estimateResale = null)
     {
         _findTemplate = findTemplate ?? throw new ArgumentNullException(nameof(findTemplate));
         _findHandbookPrice =
             findHandbookPrice ?? throw new ArgumentNullException(nameof(findHandbookPrice));
+        _estimateResale = estimateResale;
     }
 
     public ResolvedCargoLot Evaluate(ResolvedCargoLot lot)
@@ -63,7 +66,8 @@ public sealed class CargoLotEvaluator
             handbookValue,
             useValue,
             footprint,
-            ShipmentEconomy.Grade(lot.Identity.LotId, useValue)));
+            ShipmentEconomy.Grade(lot.Identity.LotId, useValue),
+            _estimateResale?.Invoke(lot.Forest)));
     }
 
     private TemplateItem ResolveTemplate(

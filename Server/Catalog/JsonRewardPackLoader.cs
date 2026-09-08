@@ -22,6 +22,7 @@ public sealed class JsonRewardPackLoader
         "requiredTemplateIds",
         "requiredPresetIds",
         "requiredBundleKeys",
+        "retiredLotIds",
         "lots"
     ];
 
@@ -145,7 +146,10 @@ public sealed class JsonRewardPackLoader
                 templateIds,
                 presetIds,
                 bundleKeys,
-                lots);
+                lots,
+                root.TryGetProperty("retiredLotIds", out _)
+                    ? RequiredStringArray(root, "retiredLotIds", sourceName, maximum: MaximumLots)
+                    : []);
         }
         catch (CargoCatalogValidationException)
         {
@@ -284,8 +288,10 @@ public sealed class JsonRewardPackLoader
 
     private static PresetLine ParsePresetLine(JsonElement element, string context)
     {
-        EnsureKnownProperties(element, ["kind", "presetId"], context);
-        return new PresetLine(RequiredString(element, "presetId", context));
+        EnsureKnownProperties(element, ["kind", "presetId", "omitRootSlots"], context);
+        return new PresetLine(RequiredString(element, "presetId", context),
+            element.TryGetProperty("omitRootSlots", out _)
+                ? RequiredStringArray(element, "omitRootSlots", context, maximum: 32) : []);
     }
 
     private static JsonElement RequireObject(JsonElement element, string context)

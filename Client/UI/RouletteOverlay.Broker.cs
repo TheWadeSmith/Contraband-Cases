@@ -194,7 +194,7 @@ internal sealed partial class RouletteOverlay
             Label("Grade", RewardRarities.GetInfo(lot.Grade).DisplayName, 24, 32, 0);
             Label("Purpose", BrokerPresentation.Text(lot.Purpose), 22, 52, -44);
             Label("Preview", BrokerPresentation.ContentsPreview(lot), 22, 104, -125);
-            Label("Value", BrokerPresentation.Value(lot), 22, 62, -213);
+            Label("Value", BrokerPresentation.Value(lot, compact: true), 18, 62, -213);
             Label("Selected", i == index ? "Selected" : $"Package {i + 1}", 22, 32, 230);
             var rarity = UiFactory.CreateImage("Rarity", card.transform, UiFactory.RarityColor(lot.Grade));
             UiFactory.Center(rarity.rectTransform, 356, 5, 0, -248);
@@ -445,7 +445,8 @@ internal sealed partial class RouletteOverlay
         UiFactory.SetCardName(purpose, BrokerPresentation.Text(lot.Purpose));
         BrokerLabel("Value", BrokerPresentation.Value(lot), 24, 700, 68, 190, 111);
         var body = BuildScrollableText("PackageContents", _brokerPanel!.transform, _font, 26, 700, 175, 190, -10, Color.white);
-        body.Text.text = BrokerPresentation.FullContents(lot);
+        body.Text.text = BrokerPresentation.FullContents(lot) +
+            (lot.ProviderId == CashPayouts.Provider ? "" : "\n\n" + BrokerPresentation.ResaleBasis);
     }
 
     private void BrokerFavor(ManifestSnapshot snapshot)

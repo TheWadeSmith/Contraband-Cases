@@ -41,13 +41,13 @@ public sealed class ModConfig
     /// own weight, rather than a single flat number, keeps the key's relative rarity roughly consistent
     /// across pools that use wildly different weight scales. Must be positive and finite.
     /// </summary>
-    public double KeyLootWeightPercent { get; private set; } = 2d;
+    public double KeyLootWeightPercent { get; private set; } = 2.2d;
 
     /// <summary>
     /// Combined added weight for all available case types in verified raid crates, as a percentage
     /// of each pool's non-case weight. Not a probability per crate or raid. Zero disables case drops.
     /// </summary>
-    public double CaseLootWeightPercent { get; private set; } = 1d;
+    public double CaseLootWeightPercent { get; private set; } = 1.1d;
 
     public static ModConfig Parse(string json)
     {

@@ -132,12 +132,19 @@ public sealed class TemplateLine : RewardRecipeLine
 
 public sealed class PresetLine : RewardRecipeLine
 {
-    public PresetLine(string presetId)
+    public PresetLine(string presetId, IEnumerable<string>? omitRootSlots = null)
     {
         PresetId = CargoDomainValidator.RequireIdentifier(presetId, nameof(presetId));
+        var omitted = (omitRootSlots ?? Array.Empty<string>()).ToArray();
+        if (omitted.Length > 32 || omitted.Any(string.IsNullOrWhiteSpace) ||
+            omitted.Distinct(StringComparer.Ordinal).Count() != omitted.Length)
+            throw new CargoCatalogValidationException("Omitted preset slots must be unique, named and bounded.");
+        OmitRootSlots = new ReadOnlyCollection<string>(omitted);
     }
 
     public string PresetId { get; }
+
+    public IReadOnlyList<string> OmitRootSlots { get; }
 }
 
 public sealed class CargoLotDefinition

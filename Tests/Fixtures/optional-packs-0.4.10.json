@@ -1,0 +1,1579 @@
+{
+  "amonya.arcane-cache": {
+    "schemaVersion": 1,
+    "providerId": "amonya.arcane-cache",
+    "packVersion": "1.0.0",
+    "displayLabel": "Amonya Arcane Cache",
+    "providerWeight": 0.05,
+    "requiredTemplateIds": [
+      "69359d725bbf2f0c2027c59c",
+      "69359d725bbf2f0c2027c59f",
+      "69359d725bbf2f0c2027c5a0",
+      "69359d725bbf2f0c2027c5a2",
+      "6a248be769dd135bbcc78755"
+    ],
+    "requiredPresetIds": [],
+    "requiredBundleKeys": [],
+    "lots": [
+      {
+        "lotId": "arcane-ammunition-cache",
+        "displayName": "Arcane Ammunition Cache",
+        "purpose": "A loose stack of Arcane Rounds paired with Mystic Rounds for an occult loadout.",
+        "familyId": "exotic-ordnance",
+        "trackId": "amonya-arcane-cache",
+        "anchorTemplateId": "69359d725bbf2f0c2027c59c",
+        "weight": 1,
+        "usePath": {
+          "kind": "raidRole",
+          "roleId": "close-quarters"
+        },
+        "recipe": [
+          {
+            "kind": "template",
+            "templateId": "69359d725bbf2f0c2027c59c",
+            "instanceCount": 1,
+            "stackCountPerInstance": 20
+          },
+          {
+            "kind": "template",
+            "templateId": "69359d725bbf2f0c2027c59f",
+            "instanceCount": 1,
+            "stackCountPerInstance": 20
+          }
+        ]
+      },
+      {
+        "lotId": "satchel-of-holding",
+        "displayName": "Satchel of Holding",
+        "purpose": "A Satchel Sized Mag of Holding for stowing extra ordnance in the field.",
+        "familyId": "operator",
+        "trackId": "amonya-arcane-cache",
+        "anchorTemplateId": "69359d725bbf2f0c2027c5a0",
+        "weight": 1,
+        "usePath": {
+          "kind": "raidRole",
+          "roleId": "quartermaster"
+        },
+        "recipe": [
+          {
+            "kind": "template",
+            "templateId": "69359d725bbf2f0c2027c5a0",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          }
+        ]
+      },
+      {
+        "lotId": "eldritch-ordinance",
+        "displayName": "Eldritch Ordinance",
+        "purpose": "Eldritch Rounds bundled with Cluster Bomb Fragments for a chaotic finishing blow.",
+        "familyId": "exotic-ordnance",
+        "trackId": "amonya-arcane-cache",
+        "anchorTemplateId": "69359d725bbf2f0c2027c5a2",
+        "weight": 0.8,
+        "usePath": {
+          "kind": "raidRole",
+          "roleId": "breaching-ordnance"
+        },
+        "recipe": [
+          {
+            "kind": "template",
+            "templateId": "69359d725bbf2f0c2027c5a2",
+            "instanceCount": 1,
+            "stackCountPerInstance": 20
+          },
+          {
+            "kind": "template",
+            "templateId": "6a248be769dd135bbcc78755",
+            "instanceCount": 1,
+            "stackCountPerInstance": 5
+          }
+        ]
+      },
+      {
+        "lotId": "arcane-ammunition-cache.shipment-v1",
+        "displayName": "Arcane Ammunition Cache Shipment",
+        "purpose": "8 complete Arcane Ammunition Cache packages. A loose stack of Arcane Rounds paired with Mystic Rounds for an occult loadout.",
+        "familyId": "exotic-ordnance",
+        "trackId": "amonya-arcane-cache",
+        "anchorTemplateId": "69359d725bbf2f0c2027c59c",
+        "weight": 1,
+        "usePath": {
+          "kind": "raidRole",
+          "roleId": "close-quarters"
+        },
+        "recipe": [
+          {
+            "kind": "template",
+            "templateId": "69359d725bbf2f0c2027c59c",
+            "instanceCount": 1,
+            "stackCountPerInstance": 20
+          },
+          {
+            "kind": "template",
+            "templateId": "69359d725bbf2f0c2027c59f",
+            "instanceCount": 1,
+            "stackCountPerInstance": 20
+          },
+          {
+            "kind": "template",
+            "templateId": "69359d725bbf2f0c2027c59c",
+            "instanceCount": 1,
+            "stackCountPerInstance": 20
+          },
+          {
+            "kind": "template",
+            "templateId": "69359d725bbf2f0c2027c59f",
+            "instanceCount": 1,
+            "stackCountPerInstance": 20
+          },
+          {
+            "kind": "template",
+            "templateId": "69359d725bbf2f0c2027c59c",
+            "instanceCount": 1,
+            "stackCountPerInstance": 20
+          },
+          {
+            "kind": "template",
+            "templateId": "69359d725bbf2f0c2027c59f",
+            "instanceCount": 1,
+            "stackCountPerInstance": 20
+          },
+          {
+            "kind": "template",
+            "templateId": "69359d725bbf2f0c2027c59c",
+            "instanceCount": 1,
+            "stackCountPerInstance": 20
+          },
+          {
+            "kind": "template",
+            "templateId": "69359d725bbf2f0c2027c59f",
+            "instanceCount": 1,
+            "stackCountPerInstance": 20
+          },
+          {
+            "kind": "template",
+            "templateId": "69359d725bbf2f0c2027c59c",
+            "instanceCount": 1,
+            "stackCountPerInstance": 20
+          },
+          {
+            "kind": "template",
+            "templateId": "69359d725bbf2f0c2027c59f",
+            "instanceCount": 1,
+            "stackCountPerInstance": 20
+          },
+          {
+            "kind": "template",
+            "templateId": "69359d725bbf2f0c2027c59c",
+            "instanceCount": 1,
+            "stackCountPerInstance": 20
+          },
+          {
+            "kind": "template",
+            "templateId": "69359d725bbf2f0c2027c59f",
+            "instanceCount": 1,
+            "stackCountPerInstance": 20
+          },
+          {
+            "kind": "template",
+            "templateId": "69359d725bbf2f0c2027c59c",
+            "instanceCount": 1,
+            "stackCountPerInstance": 20
+          },
+          {
+            "kind": "template",
+            "templateId": "69359d725bbf2f0c2027c59f",
+            "instanceCount": 1,
+            "stackCountPerInstance": 20
+          },
+          {
+            "kind": "template",
+            "templateId": "69359d725bbf2f0c2027c59c",
+            "instanceCount": 1,
+            "stackCountPerInstance": 20
+          },
+          {
+            "kind": "template",
+            "templateId": "69359d725bbf2f0c2027c59f",
+            "instanceCount": 1,
+            "stackCountPerInstance": 20
+          }
+        ]
+      },
+      {
+        "lotId": "satchel-of-holding.shipment-v1",
+        "displayName": "Satchel of Holding Shipment",
+        "purpose": "8 complete Satchel of Holding packages. A Satchel Sized Mag of Holding for stowing extra ordnance in the field.",
+        "familyId": "operator",
+        "trackId": "amonya-arcane-cache",
+        "anchorTemplateId": "69359d725bbf2f0c2027c5a0",
+        "weight": 1,
+        "usePath": {
+          "kind": "raidRole",
+          "roleId": "quartermaster"
+        },
+        "recipe": [
+          {
+            "kind": "template",
+            "templateId": "69359d725bbf2f0c2027c5a0",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "69359d725bbf2f0c2027c5a0",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "69359d725bbf2f0c2027c5a0",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "69359d725bbf2f0c2027c5a0",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "69359d725bbf2f0c2027c5a0",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "69359d725bbf2f0c2027c5a0",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "69359d725bbf2f0c2027c5a0",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "69359d725bbf2f0c2027c5a0",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          }
+        ]
+      },
+      {
+        "lotId": "eldritch-ordinance.shipment-v1",
+        "displayName": "Eldritch Ordinance Shipment",
+        "purpose": "8 complete Eldritch Ordinance packages. Eldritch Rounds bundled with Cluster Bomb Fragments for a chaotic finishing blow.",
+        "familyId": "exotic-ordnance",
+        "trackId": "amonya-arcane-cache",
+        "anchorTemplateId": "69359d725bbf2f0c2027c5a2",
+        "weight": 0.8,
+        "usePath": {
+          "kind": "raidRole",
+          "roleId": "breaching-ordnance"
+        },
+        "recipe": [
+          {
+            "kind": "template",
+            "templateId": "69359d725bbf2f0c2027c5a2",
+            "instanceCount": 1,
+            "stackCountPerInstance": 20
+          },
+          {
+            "kind": "template",
+            "templateId": "6a248be769dd135bbcc78755",
+            "instanceCount": 1,
+            "stackCountPerInstance": 5
+          },
+          {
+            "kind": "template",
+            "templateId": "69359d725bbf2f0c2027c5a2",
+            "instanceCount": 1,
+            "stackCountPerInstance": 20
+          },
+          {
+            "kind": "template",
+            "templateId": "6a248be769dd135bbcc78755",
+            "instanceCount": 1,
+            "stackCountPerInstance": 5
+          },
+          {
+            "kind": "template",
+            "templateId": "69359d725bbf2f0c2027c5a2",
+            "instanceCount": 1,
+            "stackCountPerInstance": 20
+          },
+          {
+            "kind": "template",
+            "templateId": "6a248be769dd135bbcc78755",
+            "instanceCount": 1,
+            "stackCountPerInstance": 5
+          },
+          {
+            "kind": "template",
+            "templateId": "69359d725bbf2f0c2027c5a2",
+            "instanceCount": 1,
+            "stackCountPerInstance": 20
+          },
+          {
+            "kind": "template",
+            "templateId": "6a248be769dd135bbcc78755",
+            "instanceCount": 1,
+            "stackCountPerInstance": 5
+          },
+          {
+            "kind": "template",
+            "templateId": "69359d725bbf2f0c2027c5a2",
+            "instanceCount": 1,
+            "stackCountPerInstance": 20
+          },
+          {
+            "kind": "template",
+            "templateId": "6a248be769dd135bbcc78755",
+            "instanceCount": 1,
+            "stackCountPerInstance": 5
+          },
+          {
+            "kind": "template",
+            "templateId": "69359d725bbf2f0c2027c5a2",
+            "instanceCount": 1,
+            "stackCountPerInstance": 20
+          },
+          {
+            "kind": "template",
+            "templateId": "6a248be769dd135bbcc78755",
+            "instanceCount": 1,
+            "stackCountPerInstance": 5
+          },
+          {
+            "kind": "template",
+            "templateId": "69359d725bbf2f0c2027c5a2",
+            "instanceCount": 1,
+            "stackCountPerInstance": 20
+          },
+          {
+            "kind": "template",
+            "templateId": "6a248be769dd135bbcc78755",
+            "instanceCount": 1,
+            "stackCountPerInstance": 5
+          },
+          {
+            "kind": "template",
+            "templateId": "69359d725bbf2f0c2027c5a2",
+            "instanceCount": 1,
+            "stackCountPerInstance": 20
+          },
+          {
+            "kind": "template",
+            "templateId": "6a248be769dd135bbcc78755",
+            "instanceCount": 1,
+            "stackCountPerInstance": 5
+          }
+        ]
+      }
+    ]
+  },
+  "isb-aishi.elite-armory": {
+    "schemaVersion": 1,
+    "providerId": "isb-aishi.elite-armory",
+    "packVersion": "1.0.0",
+    "displayLabel": "ISB Aishi Elite Armory",
+    "providerWeight": 0.07,
+    "requiredTemplateIds": [
+      "6a30ed97ce95057496b93476",
+      "6a31d5c8c667d4db08650272",
+      "6931b6a2161edf5b558ee5bc",
+      "6931bca8197ad8567a64bf86",
+      "6a07e920d7a2c6d597db893c",
+      "696d81b236067d6c3ef793ca",
+      "6a12667fec1b599645cd7183",
+      "6a111c7164b1373374405287"
+    ],
+    "requiredPresetIds": [],
+    "requiredBundleKeys": [],
+    "lots": [
+      {
+        "lotId": "7n24m-marksman-cache",
+        "displayName": "7N24M Marksman Cache",
+        "purpose": "Two 5.45x39mm 7N24M ammo packs and a loose stack for a precision-chambered rifle.",
+        "familyId": "arsenal",
+        "trackId": "isb-elite-armory",
+        "anchorTemplateId": "6a30ed97ce95057496b93476",
+        "weight": 1,
+        "usePath": {
+          "kind": "raidRole",
+          "roleId": "precision-overwatch"
+        },
+        "recipe": [
+          {
+            "kind": "template",
+            "templateId": "6a31d5c8c667d4db08650272",
+            "instanceCount": 2,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "6a30ed97ce95057496b93476",
+            "instanceCount": 1,
+            "stackCountPerInstance": 30
+          }
+        ]
+      },
+      {
+        "lotId": "7n26-assault-cache",
+        "displayName": "7N26 Assault Cache",
+        "purpose": "Two 7.62x39mm 7N26 BS ammo packs for a sustained assault rifle patrol.",
+        "familyId": "arsenal",
+        "trackId": "isb-elite-armory",
+        "anchorTemplateId": "6931b6a2161edf5b558ee5bc",
+        "weight": 1,
+        "usePath": {
+          "kind": "raidRole",
+          "roleId": "rifle-patrol"
+        },
+        "recipe": [
+          {
+            "kind": "template",
+            "templateId": "6931bca8197ad8567a64bf86",
+            "instanceCount": 2,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "6931b6a2161edf5b558ee5bc",
+            "instanceCount": 1,
+            "stackCountPerInstance": 40
+          }
+        ]
+      },
+      {
+        "lotId": "korund-elite-loadout",
+        "displayName": "Korund Elite Loadout",
+        "purpose": "A Korund-VM body armor paired with an Eberlestock F4 Terminator load-bearing backpack.",
+        "familyId": "operator",
+        "trackId": "isb-elite-armory",
+        "anchorTemplateId": "6a07e920d7a2c6d597db893c",
+        "weight": 0.7,
+        "usePath": {
+          "kind": "raidRole",
+          "roleId": "elite-operator"
+        },
+        "recipe": [
+          {
+            "kind": "template",
+            "templateId": "6a07e920d7a2c6d597db893c",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "6a12667fec1b599645cd7183",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          }
+        ]
+      },
+      {
+        "lotId": "6b45-elite-loadout",
+        "displayName": "6B45 Elite Loadout",
+        "purpose": "A 6B45 body armor paired with a Tasmanian Tiger Modular Pack 45.",
+        "familyId": "operator",
+        "trackId": "isb-elite-armory",
+        "anchorTemplateId": "696d81b236067d6c3ef793ca",
+        "weight": 0.5,
+        "usePath": {
+          "kind": "raidRole",
+          "roleId": "elite-operator"
+        },
+        "recipe": [
+          {
+            "kind": "template",
+            "templateId": "696d81b236067d6c3ef793ca",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "6a111c7164b1373374405287",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          }
+        ]
+      },
+      {
+        "lotId": "7n24m-marksman-cache.shipment-v1",
+        "displayName": "7N24M Marksman Cache Shipment",
+        "purpose": "6 complete 7N24M Marksman Cache packages. Two 5.45x39mm 7N24M ammo packs and a loose stack for a precision-chambered rifle.",
+        "familyId": "arsenal",
+        "trackId": "isb-elite-armory",
+        "anchorTemplateId": "6a30ed97ce95057496b93476",
+        "weight": 1,
+        "usePath": {
+          "kind": "raidRole",
+          "roleId": "precision-overwatch"
+        },
+        "recipe": [
+          {
+            "kind": "template",
+            "templateId": "6a31d5c8c667d4db08650272",
+            "instanceCount": 2,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "6a30ed97ce95057496b93476",
+            "instanceCount": 1,
+            "stackCountPerInstance": 30
+          },
+          {
+            "kind": "template",
+            "templateId": "6a31d5c8c667d4db08650272",
+            "instanceCount": 2,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "6a30ed97ce95057496b93476",
+            "instanceCount": 1,
+            "stackCountPerInstance": 30
+          },
+          {
+            "kind": "template",
+            "templateId": "6a31d5c8c667d4db08650272",
+            "instanceCount": 2,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "6a30ed97ce95057496b93476",
+            "instanceCount": 1,
+            "stackCountPerInstance": 30
+          },
+          {
+            "kind": "template",
+            "templateId": "6a31d5c8c667d4db08650272",
+            "instanceCount": 2,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "6a30ed97ce95057496b93476",
+            "instanceCount": 1,
+            "stackCountPerInstance": 30
+          },
+          {
+            "kind": "template",
+            "templateId": "6a31d5c8c667d4db08650272",
+            "instanceCount": 2,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "6a30ed97ce95057496b93476",
+            "instanceCount": 1,
+            "stackCountPerInstance": 30
+          },
+          {
+            "kind": "template",
+            "templateId": "6a31d5c8c667d4db08650272",
+            "instanceCount": 2,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "6a30ed97ce95057496b93476",
+            "instanceCount": 1,
+            "stackCountPerInstance": 30
+          }
+        ]
+      },
+      {
+        "lotId": "7n26-assault-cache.shipment-v1",
+        "displayName": "7N26 Assault Cache Shipment",
+        "purpose": "6 complete 7N26 Assault Cache packages. Two 7.62x39mm 7N26 BS ammo packs for a sustained assault rifle patrol.",
+        "familyId": "arsenal",
+        "trackId": "isb-elite-armory",
+        "anchorTemplateId": "6931b6a2161edf5b558ee5bc",
+        "weight": 1,
+        "usePath": {
+          "kind": "raidRole",
+          "roleId": "rifle-patrol"
+        },
+        "recipe": [
+          {
+            "kind": "template",
+            "templateId": "6931bca8197ad8567a64bf86",
+            "instanceCount": 2,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "6931b6a2161edf5b558ee5bc",
+            "instanceCount": 1,
+            "stackCountPerInstance": 40
+          },
+          {
+            "kind": "template",
+            "templateId": "6931bca8197ad8567a64bf86",
+            "instanceCount": 2,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "6931b6a2161edf5b558ee5bc",
+            "instanceCount": 1,
+            "stackCountPerInstance": 40
+          },
+          {
+            "kind": "template",
+            "templateId": "6931bca8197ad8567a64bf86",
+            "instanceCount": 2,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "6931b6a2161edf5b558ee5bc",
+            "instanceCount": 1,
+            "stackCountPerInstance": 40
+          },
+          {
+            "kind": "template",
+            "templateId": "6931bca8197ad8567a64bf86",
+            "instanceCount": 2,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "6931b6a2161edf5b558ee5bc",
+            "instanceCount": 1,
+            "stackCountPerInstance": 40
+          },
+          {
+            "kind": "template",
+            "templateId": "6931bca8197ad8567a64bf86",
+            "instanceCount": 2,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "6931b6a2161edf5b558ee5bc",
+            "instanceCount": 1,
+            "stackCountPerInstance": 40
+          },
+          {
+            "kind": "template",
+            "templateId": "6931bca8197ad8567a64bf86",
+            "instanceCount": 2,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "6931b6a2161edf5b558ee5bc",
+            "instanceCount": 1,
+            "stackCountPerInstance": 40
+          }
+        ]
+      },
+      {
+        "lotId": "korund-elite-loadout.shipment-v1",
+        "displayName": "Korund Elite Loadout Shipment",
+        "purpose": "6 complete Korund Elite Loadout packages. A Korund-VM body armor paired with an Eberlestock F4 Terminator load-bearing backpack.",
+        "familyId": "operator",
+        "trackId": "isb-elite-armory",
+        "anchorTemplateId": "6a07e920d7a2c6d597db893c",
+        "weight": 0.7,
+        "usePath": {
+          "kind": "raidRole",
+          "roleId": "elite-operator"
+        },
+        "recipe": [
+          {
+            "kind": "template",
+            "templateId": "6a07e920d7a2c6d597db893c",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "6a12667fec1b599645cd7183",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "6a07e920d7a2c6d597db893c",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "6a12667fec1b599645cd7183",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "6a07e920d7a2c6d597db893c",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "6a12667fec1b599645cd7183",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "6a07e920d7a2c6d597db893c",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "6a12667fec1b599645cd7183",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "6a07e920d7a2c6d597db893c",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "6a12667fec1b599645cd7183",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "6a07e920d7a2c6d597db893c",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "6a12667fec1b599645cd7183",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          }
+        ]
+      },
+      {
+        "lotId": "6b45-elite-loadout.shipment-v1",
+        "displayName": "6B45 Elite Loadout Shipment",
+        "purpose": "6 complete 6B45 Elite Loadout packages. A 6B45 body armor paired with a Tasmanian Tiger Modular Pack 45.",
+        "familyId": "operator",
+        "trackId": "isb-elite-armory",
+        "anchorTemplateId": "696d81b236067d6c3ef793ca",
+        "weight": 0.5,
+        "usePath": {
+          "kind": "raidRole",
+          "roleId": "elite-operator"
+        },
+        "recipe": [
+          {
+            "kind": "template",
+            "templateId": "696d81b236067d6c3ef793ca",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "6a111c7164b1373374405287",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "696d81b236067d6c3ef793ca",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "6a111c7164b1373374405287",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "696d81b236067d6c3ef793ca",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "6a111c7164b1373374405287",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "696d81b236067d6c3ef793ca",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "6a111c7164b1373374405287",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "696d81b236067d6c3ef793ca",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "6a111c7164b1373374405287",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "696d81b236067d6c3ef793ca",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "6a111c7164b1373374405287",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          }
+        ]
+      }
+    ]
+  },
+  "natalya.elite-armor": {
+    "schemaVersion": 1,
+    "providerId": "natalya.elite-armor",
+    "packVersion": "1.0.0",
+    "displayLabel": "Natalya Elite Armor",
+    "providerWeight": 0.06,
+    "requiredTemplateIds": [
+      "67e179c99591ffcd472a270a",
+      "67497be97777fb29ca1f9610",
+      "674815eccc95c1ad849a9b75",
+      "67497be972de11201fc07de5",
+      "67e179c97ded878d55fb8d4c",
+      "674815ecb107ad4bd99235e4",
+      "674815ec0e1737c294820e25"
+    ],
+    "requiredPresetIds": [],
+    "requiredBundleKeys": [],
+    "lots": [
+      {
+        "lotId": "gen-pro-six-plate-carrier",
+        "displayName": "Gen Pro 6 Plate Carrier",
+        "purpose": "A Gen Pro 6 plate carrier with a matched pair of Level 6 FB plates.",
+        "familyId": "operator",
+        "trackId": "natalya-elite-armor",
+        "anchorTemplateId": "67e179c99591ffcd472a270a",
+        "weight": 1,
+        "usePath": {
+          "kind": "raidRole",
+          "roleId": "elite-operator"
+        },
+        "recipe": [
+          {
+            "kind": "template",
+            "templateId": "67e179c99591ffcd472a270a",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "674815eccc95c1ad849a9b75",
+            "instanceCount": 2,
+            "stackCountPerInstance": 1
+          }
+        ]
+      },
+      {
+        "lotId": "gen-pro-seven-plate-carrier",
+        "displayName": "Gen Pro 7 Plate Carrier",
+        "purpose": "A top-tier Gen Pro 7 plate carrier with a matched pair of Level 7 FB plates.",
+        "familyId": "operator",
+        "trackId": "natalya-elite-armor",
+        "anchorTemplateId": "67497be97777fb29ca1f9610",
+        "weight": 0.6,
+        "usePath": {
+          "kind": "raidRole",
+          "roleId": "elite-operator"
+        },
+        "recipe": [
+          {
+            "kind": "template",
+            "templateId": "67497be97777fb29ca1f9610",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "67497be972de11201fc07de5",
+            "instanceCount": 2,
+            "stackCountPerInstance": 1
+          }
+        ]
+      },
+      {
+        "lotId": "ops-core-mk6-package",
+        "displayName": "Ops-Core Mk6 Package",
+        "purpose": "A complete Ops-Core Mk6 helmet package with matched side and face armor.",
+        "familyId": "operator",
+        "trackId": "natalya-elite-armor",
+        "anchorTemplateId": "67e179c97ded878d55fb8d4c",
+        "weight": 0.8,
+        "usePath": {
+          "kind": "raidRole",
+          "roleId": "elite-operator"
+        },
+        "recipe": [
+          {
+            "kind": "template",
+            "templateId": "67e179c97ded878d55fb8d4c",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "674815ecb107ad4bd99235e4",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "674815ec0e1737c294820e25",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          }
+        ]
+      },
+      {
+        "lotId": "gen-pro-six-plate-carrier.shipment-v1",
+        "displayName": "Gen Pro 6 Plate Carrier Shipment",
+        "purpose": "6 complete Gen Pro 6 Plate Carrier packages. A Gen Pro 6 plate carrier with a matched pair of Level 6 FB plates.",
+        "familyId": "operator",
+        "trackId": "natalya-elite-armor",
+        "anchorTemplateId": "67e179c99591ffcd472a270a",
+        "weight": 1,
+        "usePath": {
+          "kind": "raidRole",
+          "roleId": "elite-operator"
+        },
+        "recipe": [
+          {
+            "kind": "template",
+            "templateId": "67e179c99591ffcd472a270a",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "674815eccc95c1ad849a9b75",
+            "instanceCount": 2,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "67e179c99591ffcd472a270a",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "674815eccc95c1ad849a9b75",
+            "instanceCount": 2,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "67e179c99591ffcd472a270a",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "674815eccc95c1ad849a9b75",
+            "instanceCount": 2,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "67e179c99591ffcd472a270a",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "674815eccc95c1ad849a9b75",
+            "instanceCount": 2,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "67e179c99591ffcd472a270a",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "674815eccc95c1ad849a9b75",
+            "instanceCount": 2,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "67e179c99591ffcd472a270a",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "674815eccc95c1ad849a9b75",
+            "instanceCount": 2,
+            "stackCountPerInstance": 1
+          }
+        ]
+      },
+      {
+        "lotId": "gen-pro-seven-plate-carrier.shipment-v1",
+        "displayName": "Gen Pro 7 Plate Carrier Shipment",
+        "purpose": "6 complete Gen Pro 7 Plate Carrier packages. A top-tier Gen Pro 7 plate carrier with a matched pair of Level 7 FB plates.",
+        "familyId": "operator",
+        "trackId": "natalya-elite-armor",
+        "anchorTemplateId": "67497be97777fb29ca1f9610",
+        "weight": 0.6,
+        "usePath": {
+          "kind": "raidRole",
+          "roleId": "elite-operator"
+        },
+        "recipe": [
+          {
+            "kind": "template",
+            "templateId": "67497be97777fb29ca1f9610",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "67497be972de11201fc07de5",
+            "instanceCount": 2,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "67497be97777fb29ca1f9610",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "67497be972de11201fc07de5",
+            "instanceCount": 2,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "67497be97777fb29ca1f9610",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "67497be972de11201fc07de5",
+            "instanceCount": 2,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "67497be97777fb29ca1f9610",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "67497be972de11201fc07de5",
+            "instanceCount": 2,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "67497be97777fb29ca1f9610",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "67497be972de11201fc07de5",
+            "instanceCount": 2,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "67497be97777fb29ca1f9610",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "67497be972de11201fc07de5",
+            "instanceCount": 2,
+            "stackCountPerInstance": 1
+          }
+        ]
+      },
+      {
+        "lotId": "ops-core-mk6-package.shipment-v1",
+        "displayName": "Ops-Core Mk6 Package Shipment",
+        "purpose": "6 complete Ops-Core Mk6 Package packages. A complete Ops-Core Mk6 helmet package with matched side and face armor.",
+        "familyId": "operator",
+        "trackId": "natalya-elite-armor",
+        "anchorTemplateId": "67e179c97ded878d55fb8d4c",
+        "weight": 0.8,
+        "usePath": {
+          "kind": "raidRole",
+          "roleId": "elite-operator"
+        },
+        "recipe": [
+          {
+            "kind": "template",
+            "templateId": "67e179c97ded878d55fb8d4c",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "674815ecb107ad4bd99235e4",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "674815ec0e1737c294820e25",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "67e179c97ded878d55fb8d4c",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "674815ecb107ad4bd99235e4",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "674815ec0e1737c294820e25",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "67e179c97ded878d55fb8d4c",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "674815ecb107ad4bd99235e4",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "674815ec0e1737c294820e25",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "67e179c97ded878d55fb8d4c",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "674815ecb107ad4bd99235e4",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "674815ec0e1737c294820e25",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "67e179c97ded878d55fb8d4c",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "674815ecb107ad4bd99235e4",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "674815ec0e1737c294820e25",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "67e179c97ded878d55fb8d4c",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "674815ecb107ad4bd99235e4",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "674815ec0e1737c294820e25",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          }
+        ]
+      }
+    ]
+  },
+  "wtt-contentbackport.elite-optics": {
+    "schemaVersion": 1,
+    "providerId": "wtt-contentbackport.elite-optics",
+    "packVersion": "1.0.0",
+    "displayLabel": "WTT Content Backport Elite Optics",
+    "providerWeight": 0.07,
+    "requiredTemplateIds": [
+      "689b889473ebd6871805edd6",
+      "68948a95d8f2b85fb705e2a6",
+      "6943c85be2f21398e70378cc",
+      "69bb4203f94327bc0f0230cd",
+      "69bb41c03b5fb75517065960"
+    ],
+    "requiredPresetIds": [],
+    "requiredBundleKeys": [],
+    "lots": [
+      {
+        "lotId": "night-vision-overwatch",
+        "displayName": "Night Vision Overwatch",
+        "purpose": "An L3Harris PVS-31A dual-tube night vision goggle set for night operations.",
+        "familyId": "operator",
+        "trackId": "wtt-elite-optics",
+        "anchorTemplateId": "689b889473ebd6871805edd6",
+        "weight": 1,
+        "usePath": {
+          "kind": "raidRole",
+          "roleId": "night-operations"
+        },
+        "recipe": [
+          {
+            "kind": "template",
+            "templateId": "689b889473ebd6871805edd6",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          }
+        ]
+      },
+      {
+        "lotId": "heavy-plate-carrier",
+        "displayName": "Heavy Plate Carrier",
+        "purpose": "A 6B45 body armor rig fitted with a pair of Tac-Kek SAPI Level III+ ballistic plates.",
+        "familyId": "armor",
+        "trackId": "wtt-elite-optics",
+        "anchorTemplateId": "68948a95d8f2b85fb705e2a6",
+        "weight": 1,
+        "usePath": {
+          "kind": "raidRole",
+          "roleId": "elite-operator"
+        },
+        "recipe": [
+          {
+            "kind": "template",
+            "templateId": "68948a95d8f2b85fb705e2a6",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "6943c85be2f21398e70378cc",
+            "instanceCount": 2,
+            "stackCountPerInstance": 1
+          }
+        ]
+      },
+      {
+        "lotId": "encrypted-tech-cache",
+        "displayName": "Encrypted Tech Cache",
+        "purpose": "An IBX Gigachad cryptographic processor and an Ultralink satellite communication module.",
+        "familyId": "tech",
+        "trackId": "wtt-elite-optics",
+        "anchorTemplateId": "69bb4203f94327bc0f0230cd",
+        "weight": 0.6,
+        "usePath": {
+          "kind": "raidRole",
+          "roleId": "black-market-tech"
+        },
+        "recipe": [
+          {
+            "kind": "template",
+            "templateId": "69bb4203f94327bc0f0230cd",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "69bb41c03b5fb75517065960",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          }
+        ]
+      },
+      {
+        "lotId": "night-vision-overwatch.shipment-v1",
+        "displayName": "Night Vision Overwatch Shipment",
+        "purpose": "6 complete Night Vision Overwatch packages. An L3Harris PVS-31A dual-tube night vision goggle set for night operations.",
+        "familyId": "operator",
+        "trackId": "wtt-elite-optics",
+        "anchorTemplateId": "689b889473ebd6871805edd6",
+        "weight": 1,
+        "usePath": {
+          "kind": "raidRole",
+          "roleId": "night-operations"
+        },
+        "recipe": [
+          {
+            "kind": "template",
+            "templateId": "689b889473ebd6871805edd6",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "689b889473ebd6871805edd6",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "689b889473ebd6871805edd6",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "689b889473ebd6871805edd6",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "689b889473ebd6871805edd6",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "689b889473ebd6871805edd6",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          }
+        ]
+      },
+      {
+        "lotId": "heavy-plate-carrier.shipment-v1",
+        "displayName": "Heavy Plate Carrier Shipment",
+        "purpose": "6 complete Heavy Plate Carrier packages. A 6B45 body armor rig fitted with a pair of Tac-Kek SAPI Level III+ ballistic plates.",
+        "familyId": "armor",
+        "trackId": "wtt-elite-optics",
+        "anchorTemplateId": "68948a95d8f2b85fb705e2a6",
+        "weight": 1,
+        "usePath": {
+          "kind": "raidRole",
+          "roleId": "elite-operator"
+        },
+        "recipe": [
+          {
+            "kind": "template",
+            "templateId": "68948a95d8f2b85fb705e2a6",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "6943c85be2f21398e70378cc",
+            "instanceCount": 2,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "68948a95d8f2b85fb705e2a6",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "6943c85be2f21398e70378cc",
+            "instanceCount": 2,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "68948a95d8f2b85fb705e2a6",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "6943c85be2f21398e70378cc",
+            "instanceCount": 2,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "68948a95d8f2b85fb705e2a6",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "6943c85be2f21398e70378cc",
+            "instanceCount": 2,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "68948a95d8f2b85fb705e2a6",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "6943c85be2f21398e70378cc",
+            "instanceCount": 2,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "68948a95d8f2b85fb705e2a6",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "6943c85be2f21398e70378cc",
+            "instanceCount": 2,
+            "stackCountPerInstance": 1
+          }
+        ]
+      },
+      {
+        "lotId": "encrypted-tech-cache.shipment-v1",
+        "displayName": "Encrypted Tech Cache Shipment",
+        "purpose": "6 complete Encrypted Tech Cache packages. An IBX Gigachad cryptographic processor and an Ultralink satellite communication module.",
+        "familyId": "tech",
+        "trackId": "wtt-elite-optics",
+        "anchorTemplateId": "69bb4203f94327bc0f0230cd",
+        "weight": 0.6,
+        "usePath": {
+          "kind": "raidRole",
+          "roleId": "black-market-tech"
+        },
+        "recipe": [
+          {
+            "kind": "template",
+            "templateId": "69bb4203f94327bc0f0230cd",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "69bb41c03b5fb75517065960",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "69bb4203f94327bc0f0230cd",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "69bb41c03b5fb75517065960",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "69bb4203f94327bc0f0230cd",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "69bb41c03b5fb75517065960",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "69bb4203f94327bc0f0230cd",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "69bb41c03b5fb75517065960",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "69bb4203f94327bc0f0230cd",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "69bb41c03b5fb75517065960",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "69bb4203f94327bc0f0230cd",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          },
+          {
+            "kind": "template",
+            "templateId": "69bb41c03b5fb75517065960",
+            "instanceCount": 1,
+            "stackCountPerInstance": 1
+          }
+        ]
+      }
+    ]
+  }
+}

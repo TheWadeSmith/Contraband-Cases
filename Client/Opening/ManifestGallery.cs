@@ -17,7 +17,7 @@ internal static class ManifestGallery
         !longName ? source : new ManifestLotSnapshot(source.ProviderId, source.ProviderLabel,
             source.LotId, "Experimental expedition recovery equipment, medical supplies and classified technology collection",
             source.Purpose, source.FamilyId, source.TrackId, source.Grade, source.AnchorTemplateId, source.Fingerprint,
-            source.LiquidationValue, source.UseValue, source.FootprintCells, source.Contents);
+            source.LiquidationValue, source.UseValue, source.FootprintCells, source.Contents, source.TraderResaleEstimate);
 
     // These snapshots never cross the transport boundary or enter settlement.
     // The library coordinator blocks dispatch and supplies navigation-only callbacks.

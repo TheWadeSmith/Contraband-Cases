@@ -53,8 +53,8 @@ public sealed class ContrabandCaseLootInjectorTests
         Assert.Equal(200f, result.ItemDistribution.Single(e => e.Tpl == (MongoId)VanillaKey).RelativeProbability);
         var cases = Cases(result);
         Assert.Equal(CaseContracts.Templates.Order(), cases.Select(e => e.Tpl.ToString()).Order());
-        Assert.All(cases, entry => Assert.Equal(2f, entry.RelativeProbability));
-        Assert.Equal(10f, cases.Sum(e => e.RelativeProbability));
+        Assert.All(cases, entry => Assert.Equal(2.2f, entry.RelativeProbability));
+        Assert.Equal(11f, cases.Sum(e => e.RelativeProbability));
     }
 
     [Theory]
@@ -99,7 +99,7 @@ public sealed class ContrabandCaseLootInjectorTests
 
         var cases = Cases(fixture.Load()[Crate]);
         Assert.Equal(new[] { ModConstants.CaseTemplateId, CaseContracts.Operations }, cases.Select(e => e.Tpl.ToString()));
-        Assert.All(cases, e => Assert.Equal(5f, e.RelativeProbability));
+        Assert.All(cases, e => Assert.Equal(5.5f, e.RelativeProbability));
     }
 
     [Fact]
@@ -128,7 +128,7 @@ public sealed class ContrabandCaseLootInjectorTests
         var first = Cases(fixture.Load()[Crate]).Select(e => e.RelativeProbability).ToArray();
         fixture.Lazy.Clear();
         var second = Cases(fixture.Load()[Crate]).Select(e => e.RelativeProbability).ToArray();
-        Assert.Equal(new float?[] { 2, 2, 2, 2, 2 }, first);
+        Assert.Equal(new float?[] { 2.2f, 2.2f, 2.2f, 2.2f, 2.2f }, first);
         Assert.Equal(first, second); // Shared dictionary rebuild cannot accumulate case weight.
     }
 
@@ -212,13 +212,13 @@ public sealed class ContrabandCaseLootInjectorTests
 
         var loot = fixture.Load();
         foreach (var id in new[] { Crate, jacket })
-            Assert.Equal(20f, loot[id].ItemDistribution.Single(e => e.Tpl == (MongoId)ModConstants.KeyTemplateId).RelativeProbability);
+            Assert.Equal(22f, loot[id].ItemDistribution.Single(e => e.Tpl == (MongoId)ModConstants.KeyTemplateId).RelativeProbability);
         Assert.Empty(Cases(loot[jacket]));
         Assert.Equal(5, Cases(loot[Crate]).Length);
-        Assert.Equal(10.2f, Cases(loot[Crate]).Sum(e => e.RelativeProbability)!.Value, 4);
+        Assert.Equal(11.242f, Cases(loot[Crate]).Sum(e => e.RelativeProbability)!.Value, 4);
         Assert.Equal(5, Cases(loot[otherCrate]).Length);
         Assert.DoesNotContain(loot[otherCrate].ItemDistribution, e => e.Tpl == (MongoId)ModConstants.KeyTemplateId);
-        Assert.Equal(20d, eligibleBot.Backpack[ModConstants.KeyTemplateId]);
+        Assert.Equal(22d, eligibleBot.Backpack[ModConstants.KeyTemplateId], 10);
         Assert.Single(otherBot.Backpack);
         Assert.DoesNotContain(eligibleBot.Backpack.Keys, id => CaseContracts.IsCase(id.ToString()));
     }
@@ -235,7 +235,7 @@ public sealed class ContrabandCaseLootInjectorTests
         fixture.Register();
         var cases = Cases(fixture.Load()[Crate]);
         Assert.Equal(5, cases.Length);
-        Assert.Equal(10f, cases.Sum(e => e.RelativeProbability));
+        Assert.Equal(11f, cases.Sum(e => e.RelativeProbability));
     }
 
     [Fact]
