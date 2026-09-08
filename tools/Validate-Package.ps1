@@ -10,7 +10,7 @@ $ErrorActionPreference = "Stop"
 
 $projectRoot = [IO.Path]::GetFullPath((Join-Path $PSScriptRoot ".."))
 $distRoot = [IO.Path]::GetFullPath((Join-Path $projectRoot "..\dist"))
-$packageBaseName = "ContrabandCases-0.4.12-SPT4.1.5"
+$packageBaseName = "ContrabandCases-0.4.13-SPT4.1.5"
 $packageTimestampUtc = [DateTime]::SpecifyKind([DateTime]"2026-09-08T00:00:00", [DateTimeKind]::Utc)
 
 function Resolve-PackagePath {
@@ -478,8 +478,8 @@ function Get-AssemblyReport {
     }
 
     Assert-Condition ([string]::Equals($assemblyName.Name, $ExpectedName, [StringComparison]::Ordinal)) "'$Path' has assembly name '$($assemblyName.Name)'; expected '$ExpectedName'."
-    Assert-Condition ($assemblyName.Version.ToString() -eq "0.4.12.0") "'$ExpectedName' assembly version is '$($assemblyName.Version)'; expected '0.4.12.0'."
-    Assert-Condition ($fileVersion -eq "0.4.12.0") "'$ExpectedName' file version is '$fileVersion'; expected '0.4.12.0'."
+    Assert-Condition ($assemblyName.Version.ToString() -eq "0.4.13.0") "'$ExpectedName' assembly version is '$($assemblyName.Version)'; expected '0.4.13.0'."
+    Assert-Condition ($fileVersion -eq "0.4.13.0") "'$ExpectedName' file version is '$fileVersion'; expected '0.4.13.0'."
     Assert-Condition (Test-BinaryContainsText $Path $ExpectedTargetFramework) "'$ExpectedName' does not embed target framework '$ExpectedTargetFramework'."
 
     return [pscustomobject]@{
@@ -629,23 +629,23 @@ $resolvedArchivePath = Resolve-PackagePath $ArchivePath (Join-Path $distRoot "$p
 $resolvedHashPath = Resolve-PackagePath $HashPath (Join-Path $distRoot "$packageBaseName-SHA256.txt")
 
 $rewardPackSpecifications = @(
-    [pscustomobject]@{ FileName = "amonya.arcane-cache.json"; ProviderId = "amonya.arcane-cache"; PackVersion = "1.0.0"; DisplayLabel = "Amonya Arcane Cache"; ProviderWeight = 0.05; RequiredTemplateCount = 10; RequiredPresetCount = 0; RequiredBundleCount = 0; LotCount = 12; RetiredLotCount = 6; IsOptional = $true; Sha256 = "C06F2252468045230EE3F77773776C78C6B30A0420D480617E41554B0FCCE194" },
-    [pscustomobject]@{ FileName = "core.json"; ProviderId = "core"; PackVersion = "0.3.3"; DisplayLabel = "Contraband Cases Core"; ProviderWeight = 1.0; RequiredTemplateCount = 52; RequiredPresetCount = 15; RequiredBundleCount = 0; LotCount = 150; RetiredLotCount = 0; IsOptional = $false; Sha256 = "79B7BA39405AB192D764DAE35E8A602AEBF6ED3E459401BF74CB0A775D8A0A5F" },
-    [pscustomobject]@{ FileName = "eco-attachment.elite-optics.json"; ProviderId = "eco-attachment.elite-optics"; PackVersion = "1.0.0"; DisplayLabel = "Eco Attachment Emporium Elite Optics"; ProviderWeight = 0.06; RequiredTemplateCount = 10; RequiredPresetCount = 2; RequiredBundleCount = 0; LotCount = 10; RetiredLotCount = 0; IsOptional = $true; Sha256 = "7A729F763E85B00D0E81F36541A58BAB18D8480D893B6E2866C97BA4825A5BD8" },
-    [pscustomobject]@{ FileName = "eco-attachment.field-cache.json"; ProviderId = "eco-attachment.field-cache"; PackVersion = "1.0.0"; DisplayLabel = "Eco Attachment Emporium Field Cache"; ProviderWeight = 0.16; RequiredTemplateCount = 8; RequiredPresetCount = 1; RequiredBundleCount = 0; LotCount = 9; RetiredLotCount = 0; IsOptional = $true; Sha256 = "D4301CEC4EB13FCD4B3C7264088705962441EF3EE32FF5DBF103B1B1ED395CBC" },
-    [pscustomobject]@{ FileName = "eco-ww2.relic-cache.json"; ProviderId = "eco-ww2.relic-cache"; PackVersion = "1.0.0"; DisplayLabel = "Eco WW2 Pack Relic Cache"; ProviderWeight = 0.05; RequiredTemplateCount = 10; RequiredPresetCount = 0; RequiredBundleCount = 0; LotCount = 6; RetiredLotCount = 0; IsOptional = $true; Sha256 = "55B3ED692F4531A6DF79D190D8FAB93A607B37046590A62A93FA219A66D63B3C" },
-    [pscustomobject]@{ FileName = "isb-aishi.elite-armory.json"; ProviderId = "isb-aishi.elite-armory"; PackVersion = "1.0.0"; DisplayLabel = "ISB Aishi Elite Armory"; ProviderWeight = 0.07; RequiredTemplateCount = 9; RequiredPresetCount = 3; RequiredBundleCount = 0; LotCount = 16; RetiredLotCount = 8; IsOptional = $true; Sha256 = "518BE751745602A372E3EFB307177D021648120D3DF580738DD0F815588D49A2" },
-    [pscustomobject]@{ FileName = "isb-aishi.field-armory.json"; ProviderId = "isb-aishi.field-armory"; PackVersion = "1.0.0"; DisplayLabel = "ISB Aishi Field Armory"; ProviderWeight = 0.18; RequiredTemplateCount = 9; RequiredPresetCount = 1; RequiredBundleCount = 0; LotCount = 9; RetiredLotCount = 0; IsOptional = $true; Sha256 = "D06C612F5EE34BEDF99B57F706F39B57FB205A5E72CCE87DBD948353C94193A2" },
-    [pscustomobject]@{ FileName = "krackasourus.anime-cards.json"; ProviderId = "krackasourus.anime-cards"; PackVersion = "1.5.2"; DisplayLabel = "Krackasourus Anime Cards"; ProviderWeight = 0.12; RequiredTemplateCount = 18; RequiredPresetCount = 0; RequiredBundleCount = 0; LotCount = 24; RetiredLotCount = 0; IsOptional = $true; Sha256 = "8B0F4CD32A3B87DBFF3C0359E1A241D5DDEB878D7B6E944434311A7C3E7D9B94" },
-    [pscustomobject]@{ FileName = "krackasourus.pokemon-cards.json"; ProviderId = "krackasourus.pokemon-cards"; PackVersion = "1.1.2"; DisplayLabel = "Krackasourus Pokemon Cards"; ProviderWeight = 0.12; RequiredTemplateCount = 14; RequiredPresetCount = 0; RequiredBundleCount = 0; LotCount = 24; RetiredLotCount = 0; IsOptional = $true; Sha256 = "1CE09FD981F4D9143CC6DD6EDD6305A972A2EC2AE5537A24086C35F0016557D5" },
-    [pscustomobject]@{ FileName = "krackasourus.yugioh-cards.json"; ProviderId = "krackasourus.yugioh-cards"; PackVersion = "0.1.2"; DisplayLabel = "Krackasourus Yu-Gi-Oh Cards"; ProviderWeight = 0.12; RequiredTemplateCount = 14; RequiredPresetCount = 0; RequiredBundleCount = 0; LotCount = 24; RetiredLotCount = 0; IsOptional = $true; Sha256 = "35A6BF46952B1FF2B0527413FE986442397819E738676E0B3A1B48B26AA7B96B" },
-    [pscustomobject]@{ FileName = "natalya.elite-armor.json"; ProviderId = "natalya.elite-armor"; PackVersion = "1.0.0"; DisplayLabel = "Natalya Elite Armor"; ProviderWeight = 0.06; RequiredTemplateCount = 8; RequiredPresetCount = 3; RequiredBundleCount = 0; LotCount = 12; RetiredLotCount = 6; IsOptional = $true; Sha256 = "F4858A96989391D2DE9E3E975D4FAC4EE10A93EA43AA9BD0A5B648CD9357B310" },
-    [pscustomobject]@{ FileName = "natalya.field-gear.json"; ProviderId = "natalya.field-gear"; PackVersion = "1.0.0"; DisplayLabel = "Natalya Field Gear"; ProviderWeight = 0.22; RequiredTemplateCount = 9; RequiredPresetCount = 1; RequiredBundleCount = 0; LotCount = 9; RetiredLotCount = 0; IsOptional = $true; Sha256 = "3C8F1EC8E46A11AB079358C9BE9B1E3464256C9CFF5C86D953E9E2438D324849" },
-    [pscustomobject]@{ FileName = "sjx.combat-chemistry.json"; ProviderId = "sjx.combat-chemistry"; PackVersion = "1.0.2"; DisplayLabel = "SJX Combat Chemistry"; ProviderWeight = 0.35; RequiredTemplateCount = 20; RequiredPresetCount = 2; RequiredBundleCount = 0; LotCount = 15; RetiredLotCount = 0; IsOptional = $true; Sha256 = "2904D7FEBA8744FB4252978BF1AFFCA7AD8A60D1160E15C346A5AE700CE83B15" },
-    [pscustomobject]@{ FileName = "vault.json"; ProviderId = "vault"; PackVersion = "1.0.0"; DisplayLabel = "Contraband Vault"; ProviderWeight = 0.05; RequiredTemplateCount = 16; RequiredPresetCount = 8; RequiredBundleCount = 0; LotCount = 9; RetiredLotCount = 0; IsOptional = $true; Sha256 = "E879B995C8F050D9BB2173B755686269CF59DE709263340924164E43159B8560" },
-    [pscustomobject]@{ FileName = "vultify.cooler-stims.json"; ProviderId = "vultify.cooler-stims"; PackVersion = "2.0.2"; DisplayLabel = "Vultify CoolerStims"; ProviderWeight = 0.25; RequiredTemplateCount = 12; RequiredPresetCount = 4; RequiredBundleCount = 0; LotCount = 24; RetiredLotCount = 0; IsOptional = $true; Sha256 = "FD27DBD1807704EF313B275BBF51C532BB828FDC41856334F6DC0657732E4B3E" },
-    [pscustomobject]@{ FileName = "wtt-contentbackport.elite-optics.json"; ProviderId = "wtt-contentbackport.elite-optics"; PackVersion = "1.0.0"; DisplayLabel = "WTT Content Backport Elite Optics"; ProviderWeight = 0.07; RequiredTemplateCount = 9; RequiredPresetCount = 3; RequiredBundleCount = 0; LotCount = 12; RetiredLotCount = 6; IsOptional = $true; Sha256 = "D58A2D9C358E69795255FFE3EB3168AEC08FE9871F6ABD32842D943325BB06FF" },
-    [pscustomobject]@{ FileName = "wtt-contentbackport.field-resupply.json"; ProviderId = "wtt-contentbackport.field-resupply"; PackVersion = "1.0.0"; DisplayLabel = "WTT Content Backport Field Resupply"; ProviderWeight = 0.2; RequiredTemplateCount = 11; RequiredPresetCount = 1; RequiredBundleCount = 0; LotCount = 9; RetiredLotCount = 0; IsOptional = $true; Sha256 = "E98FA44CF280C2060D29362591C12A3F034AB11842B0EB10FDB7E59D0C0CC05E" }
+    [pscustomobject]@{ FileName = "amonya.arcane-cache.json"; ProviderId = "amonya.arcane-cache"; PackVersion = "1.0.0"; DisplayLabel = "Amonya Arcane Cache"; ProviderWeight = 0.05; RequiredTemplateCount = 12; RequiredPresetCount = 0; RequiredBundleCount = 0; LotCount = 15; RetiredLotCount = 6; IsOptional = $true; Sha256 = "5158B74132FC7FFF2BC0713488B26E6628160D64ED1CE7152229C9148C8352BF" },
+    [pscustomobject]@{ FileName = "core.json"; ProviderId = "core"; PackVersion = "0.3.3"; DisplayLabel = "Contraband Cases Core"; ProviderWeight = 1.0; RequiredTemplateCount = 60; RequiredPresetCount = 15; RequiredBundleCount = 0; LotCount = 200; RetiredLotCount = 0; IsOptional = $false; Sha256 = "51C2B4D4E6FC3F87B995860070E666A21BE35C349063C2DA1FCCFEC260AEB153" },
+    [pscustomobject]@{ FileName = "eco-attachment.elite-optics.json"; ProviderId = "eco-attachment.elite-optics"; PackVersion = "1.0.0"; DisplayLabel = "Eco Attachment Emporium Elite Optics"; ProviderWeight = 0.06; RequiredTemplateCount = 10; RequiredPresetCount = 2; RequiredBundleCount = 0; LotCount = 14; RetiredLotCount = 0; IsOptional = $true; Sha256 = "740017AB6800CA679B54216A93EC5BE1443ED743021A40416A0288082BB1CF5F" },
+    [pscustomobject]@{ FileName = "eco-attachment.field-cache.json"; ProviderId = "eco-attachment.field-cache"; PackVersion = "1.0.0"; DisplayLabel = "Eco Attachment Emporium Field Cache"; ProviderWeight = 0.16; RequiredTemplateCount = 8; RequiredPresetCount = 1; RequiredBundleCount = 0; LotCount = 13; RetiredLotCount = 0; IsOptional = $true; Sha256 = "3466D7CF8F104D5F11CB99294A75DCCE7F8B7FC48E25DC8F7D7550413A611F0E" },
+    [pscustomobject]@{ FileName = "eco-ww2.relic-cache.json"; ProviderId = "eco-ww2.relic-cache"; PackVersion = "1.0.0"; DisplayLabel = "Eco WW2 Pack Relic Cache"; ProviderWeight = 0.05; RequiredTemplateCount = 12; RequiredPresetCount = 0; RequiredBundleCount = 0; LotCount = 8; RetiredLotCount = 0; IsOptional = $true; Sha256 = "38C651D486C4AABC24A68D47666B441B42F59C7AA5B5C965818B9D1199A3F088" },
+    [pscustomobject]@{ FileName = "isb-aishi.elite-armory.json"; ProviderId = "isb-aishi.elite-armory"; PackVersion = "1.0.0"; DisplayLabel = "ISB Aishi Elite Armory"; ProviderWeight = 0.07; RequiredTemplateCount = 10; RequiredPresetCount = 3; RequiredBundleCount = 0; LotCount = 20; RetiredLotCount = 8; IsOptional = $true; Sha256 = "70DF3910A3CDFA646FF8451BB1163CF0F789F2B3C04B4CE55E5A9441122CD2C8" },
+    [pscustomobject]@{ FileName = "isb-aishi.field-armory.json"; ProviderId = "isb-aishi.field-armory"; PackVersion = "1.0.0"; DisplayLabel = "ISB Aishi Field Armory"; ProviderWeight = 0.18; RequiredTemplateCount = 13; RequiredPresetCount = 1; RequiredBundleCount = 0; LotCount = 12; RetiredLotCount = 0; IsOptional = $true; Sha256 = "70395FD8D5C21F1CBBB7201685DCA80B23F3B8B036BE8CEF50643B31FBA11150" },
+    [pscustomobject]@{ FileName = "krackasourus.anime-cards.json"; ProviderId = "krackasourus.anime-cards"; PackVersion = "1.5.2"; DisplayLabel = "Krackasourus Anime Cards"; ProviderWeight = 0.12; RequiredTemplateCount = 21; RequiredPresetCount = 0; RequiredBundleCount = 0; LotCount = 32; RetiredLotCount = 0; IsOptional = $true; Sha256 = "9CA1EA4B2E1EA723B48B1DD03B852BD731C841416BD38ADD22694713BDF691B8" },
+    [pscustomobject]@{ FileName = "krackasourus.pokemon-cards.json"; ProviderId = "krackasourus.pokemon-cards"; PackVersion = "1.1.2"; DisplayLabel = "Krackasourus Pokemon Cards"; ProviderWeight = 0.12; RequiredTemplateCount = 17; RequiredPresetCount = 0; RequiredBundleCount = 0; LotCount = 32; RetiredLotCount = 0; IsOptional = $true; Sha256 = "D4023639E92C3AFD803064FA3B3E067E3AEAD73EB82560E25B8AF545F52CAA9F" },
+    [pscustomobject]@{ FileName = "krackasourus.yugioh-cards.json"; ProviderId = "krackasourus.yugioh-cards"; PackVersion = "0.1.2"; DisplayLabel = "Krackasourus Yu-Gi-Oh Cards"; ProviderWeight = 0.12; RequiredTemplateCount = 17; RequiredPresetCount = 0; RequiredBundleCount = 0; LotCount = 32; RetiredLotCount = 0; IsOptional = $true; Sha256 = "62237A6A89087028D4E572E3A68BB5ECC20EA98EC7B037A05D656F21A50A7BCF" },
+    [pscustomobject]@{ FileName = "natalya.elite-armor.json"; ProviderId = "natalya.elite-armor"; PackVersion = "1.0.0"; DisplayLabel = "Natalya Elite Armor"; ProviderWeight = 0.06; RequiredTemplateCount = 8; RequiredPresetCount = 3; RequiredBundleCount = 0; LotCount = 15; RetiredLotCount = 6; IsOptional = $true; Sha256 = "CEBE707FA9A2973FFDB878D10B939513160BE7A18DDDA9BAFCC7CDE55DCB8636" },
+    [pscustomobject]@{ FileName = "natalya.field-gear.json"; ProviderId = "natalya.field-gear"; PackVersion = "1.0.0"; DisplayLabel = "Natalya Field Gear"; ProviderWeight = 0.22; RequiredTemplateCount = 11; RequiredPresetCount = 1; RequiredBundleCount = 0; LotCount = 12; RetiredLotCount = 0; IsOptional = $true; Sha256 = "8FD0E5450DA4A4D80C5F4668D1B1ABFA72796A486805E59FBC21401B3419DB84" },
+    [pscustomobject]@{ FileName = "sjx.combat-chemistry.json"; ProviderId = "sjx.combat-chemistry"; PackVersion = "1.0.2"; DisplayLabel = "SJX Combat Chemistry"; ProviderWeight = 0.35; RequiredTemplateCount = 24; RequiredPresetCount = 3; RequiredBundleCount = 0; LotCount = 20; RetiredLotCount = 0; IsOptional = $true; Sha256 = "DBC866D4F09F1264036E185696D34E22F0D8BF388063AA6EEA241A453811EA8D" },
+    [pscustomobject]@{ FileName = "vault.json"; ProviderId = "vault"; PackVersion = "1.0.0"; DisplayLabel = "Contraband Vault"; ProviderWeight = 0.05; RequiredTemplateCount = 19; RequiredPresetCount = 8; RequiredBundleCount = 0; LotCount = 12; RetiredLotCount = 0; IsOptional = $true; Sha256 = "6C57A8FD621DAE3C9085088A2D381A9A8279B419E9EE26057E9249F2CC940280" },
+    [pscustomobject]@{ FileName = "vultify.cooler-stims.json"; ProviderId = "vultify.cooler-stims"; PackVersion = "2.0.2"; DisplayLabel = "Vultify CoolerStims"; ProviderWeight = 0.25; RequiredTemplateCount = 21; RequiredPresetCount = 6; RequiredBundleCount = 0; LotCount = 32; RetiredLotCount = 0; IsOptional = $true; Sha256 = "111EA716AE732681C435CE43BB0C35035F3DA1FE35C53311EAE7E0AE3354C726" },
+    [pscustomobject]@{ FileName = "wtt-contentbackport.elite-optics.json"; ProviderId = "wtt-contentbackport.elite-optics"; PackVersion = "1.0.0"; DisplayLabel = "WTT Content Backport Elite Optics"; ProviderWeight = 0.07; RequiredTemplateCount = 10; RequiredPresetCount = 3; RequiredBundleCount = 0; LotCount = 15; RetiredLotCount = 6; IsOptional = $true; Sha256 = "962A29B7B873C9304DEFC10FCB4F4EED284CF99CC67E9AC565581A9D3E979CE0" },
+    [pscustomobject]@{ FileName = "wtt-contentbackport.field-resupply.json"; ProviderId = "wtt-contentbackport.field-resupply"; PackVersion = "1.0.0"; DisplayLabel = "WTT Content Backport Field Resupply"; ProviderWeight = 0.2; RequiredTemplateCount = 13; RequiredPresetCount = 1; RequiredBundleCount = 0; LotCount = 12; RetiredLotCount = 0; IsOptional = $true; Sha256 = "CD0A5B60D924E15D115F1853BF722D965AC945B8C1DC823F780A3953C239951D" }
 )
 
 $expectedFiles = @(
@@ -702,7 +702,7 @@ Assert-ExactSequence "staged directory set" $expectedDirectories $actualDirector
 foreach ($relativePath in $actualFiles) {
     $stagedPath = Join-Path $resolvedStagePath $relativePath.Replace("/", [IO.Path]::DirectorySeparatorChar)
     $actualTimestampUtc = (Get-Item -LiteralPath $stagedPath -Force).LastWriteTimeUtc
-    Assert-Condition ($actualTimestampUtc.Ticks -eq $packageTimestampUtc.Ticks) "staged file '$relativePath' has timestamp '$($actualTimestampUtc.ToString('o'))'; expected the 0.4.12 release timestamp '$($packageTimestampUtc.ToString('o'))'."
+    Assert-Condition ($actualTimestampUtc.Ticks -eq $packageTimestampUtc.Ticks) "staged file '$relativePath' has timestamp '$($actualTimestampUtc.ToString('o'))'; expected the 0.4.13 release timestamp '$($packageTimestampUtc.ToString('o'))'."
 }
 
 $releaseArtifactMappings = @(
@@ -799,11 +799,12 @@ foreach ($entry in $manifestEntries) {
 Assert-ExactSequence "bundle manifest keys" $expectedBundleKeys $actualBundleKeys
 
 $configPropertyNames = @($config.PSObject.Properties.Name)
-$expectedConfigProperties = @("animationDurationSeconds", "caseLootWeightPercent", "caseStock", "debugLogging", "fixedCasePrice", "keyLootWeightPercent", "reducedMotionDefault", "testingInventoryGrantsEnabled", "therapistSellPriceCase")
+$expectedConfigProperties = @("animationDurationSeconds", "caseLootWeightPercent", "caseStock", "debugLogging", "fixedCasePrice", "keyLootWeightPercent", "reducedMotionDefault", "testingInventoryGrantsEnabled", "therapistSellPriceCase", "therapistSellPriceKey")
 Assert-ExactSequence "config property set" $expectedConfigProperties $configPropertyNames
 Assert-Condition ($config.caseStock -eq 5) "canonical config caseStock must be 5."
 Assert-Condition ($config.keyLootWeightPercent -eq 2.2) "canonical config keyLootWeightPercent must be 2.2."
 Assert-Condition ($config.caseLootWeightPercent -eq 1.1) "canonical config caseLootWeightPercent must be 1.1."
+Assert-Condition ($config.therapistSellPriceKey -eq 75000) "canonical config therapistSellPriceKey must be 75000."
 Assert-Condition ($config.testingInventoryGrantsEnabled -eq $false) "canonical config testingInventoryGrantsEnabled must be false."
 
 $rewardEntries = @($rewards.rewards)
@@ -903,9 +904,9 @@ $serverAspNetCoreHttpReference = @($serverAssembly.References | Where-Object { $
 Assert-Condition ($serverAspNetCoreHttpReference.Count -eq 1 -and $serverAspNetCoreHttpReference[0].Version.ToString() -eq "10.0.0.0") "server must reference the Microsoft.AspNetCore.Http.Abstractions 10.0.0.0 assembly supplied by the SPT 4.1.3 server runtime exactly once."
 
 $clientSharedReference = @($clientAssembly.References | Where-Object { $_.Name -eq "ContrabandCases.Shared" })
-Assert-Condition ($clientSharedReference.Count -eq 1 -and $clientSharedReference[0].Version.ToString() -eq "0.4.12.0") "client must reference ContrabandCases.Shared 0.4.12.0 exactly once."
+Assert-Condition ($clientSharedReference.Count -eq 1 -and $clientSharedReference[0].Version.ToString() -eq "0.4.13.0") "client must reference ContrabandCases.Shared 0.4.13.0 exactly once."
 $serverSharedReference = @($serverAssembly.References | Where-Object { $_.Name -eq "ContrabandCases.Shared" })
-Assert-Condition ($serverSharedReference.Count -eq 1 -and $serverSharedReference[0].Version.ToString() -eq "0.4.12.0") "server must reference ContrabandCases.Shared 0.4.12.0 exactly once."
+Assert-Condition ($serverSharedReference.Count -eq 1 -and $serverSharedReference[0].Version.ToString() -eq "0.4.13.0") "server must reference ContrabandCases.Shared 0.4.13.0 exactly once."
 foreach ($expectedSptReference in @("SPTarkov.Common", "SPTarkov.DI", "SPTarkov.Server.Core")) {
     $matches = @($serverAssembly.References | Where-Object { $_.Name -eq $expectedSptReference })
     Assert-Condition ($matches.Count -eq 1 -and $matches[0].Version.ToString() -eq "4.1.3.0") "server reference '$expectedSptReference' must be version 4.1.3.0 exactly once."
@@ -966,7 +967,7 @@ try {
                 $entryName = $entry.FullName
                 Assert-Condition (!$entryName.Contains("\")) "archive entry '$entryName' uses a backslash."
                 Assert-Condition (!$entryName.StartsWith("/", [StringComparison]::Ordinal) -and $entryName -notmatch "(^|/)\.\.(/|$)" -and $entryName -notmatch "^[A-Za-z]:") "archive entry '$entryName' is unsafe."
-                Assert-Condition ($entry.LastWriteTime.Year -eq $packageTimestampUtc.Year -and $entry.LastWriteTime.Month -eq $packageTimestampUtc.Month -and $entry.LastWriteTime.Day -eq $packageTimestampUtc.Day -and $entry.LastWriteTime.Hour -eq $packageTimestampUtc.Hour -and $entry.LastWriteTime.Minute -eq $packageTimestampUtc.Minute -and $entry.LastWriteTime.Second -eq $packageTimestampUtc.Second) "archive entry '$entryName' does not have the 0.4.12 release timestamp."
+                Assert-Condition ($entry.LastWriteTime.Year -eq $packageTimestampUtc.Year -and $entry.LastWriteTime.Month -eq $packageTimestampUtc.Month -and $entry.LastWriteTime.Day -eq $packageTimestampUtc.Day -and $entry.LastWriteTime.Hour -eq $packageTimestampUtc.Hour -and $entry.LastWriteTime.Minute -eq $packageTimestampUtc.Minute -and $entry.LastWriteTime.Second -eq $packageTimestampUtc.Second) "archive entry '$entryName' does not have the 0.4.13 release timestamp."
 
                 $outputPath = [IO.Path]::GetFullPath((Join-Path $roundTripRoot $entryName.Replace("/", [IO.Path]::DirectorySeparatorChar)))
                 $roundTripPrefix = $roundTripRoot.TrimEnd([IO.Path]::DirectorySeparatorChar) + [IO.Path]::DirectorySeparatorChar
@@ -1042,7 +1043,7 @@ if ($isSourceProject) {
     Assert-ValidationSourceStateUnchanged $validationSourceState $releaseArtifactMappings
 }
 
-Write-Host "Validated Contraband Cases 0.4.12 package:"
+Write-Host "Validated Contraband Cases 0.4.13 package:"
 Write-Host "  Stage:   $resolvedStagePath"
 Write-Host "  Archive: $resolvedArchivePath"
 Write-Host "  SHA-256: $(Get-Sha256 $resolvedArchivePath)"

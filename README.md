@@ -1,12 +1,47 @@
 # Contraband Cases
 
-Contraband Cases **0.4.12** is a client-and-server mod for
+Contraband Cases **0.4.13** is a client-and-server mod for
 **SPT 4.1.x**, targeting **SPT 4.1.5** with the compatible 4.1.3 server SDK.
 This release has passed automated verification; full gameplay acceptance is
 still pending. Back up your saves and delivery records, and update matching
 client and server files together using the instructions below.
 
-### 0.4.12: compact prizes and Messenger delivery
+### 0.4.13: distinctive rewards and lighter previews
+
+Future openings use new, immutable compact recipes: medical stations, weapon
+reserves, specialist equipment and collector expeditions. Repeated endgame armor,
+headsets and survival tools have been reduced; ordinary losses, near-even results
+and wins remain possible. High-value draws are weighted more sparingly, and each
+cargo case retains an exceptionally rare thematic chase. No native item price
+is inflated. Cash Cache payouts and case/key loot weights are unchanged.
+
+Cargo prices now reserve a **₽75,000 key opportunity cost** and use a slightly
+lower reference-price factor. Keys remain universal and find-only; Therapist's
+default buyback target is ₽75,000 before profile bonuses. Existing explicit
+price overrides are respected. A higher key sale value is a tradeoff, not free
+value: keeping or selling a found key competes with opening a case or using Relay.
+
+Some prizes include an **empty storage case as loot**, never as a compulsory
+wrapper. All prize items are still separate Messenger attachments. Secure
+containers, map loot containers, currency and access keys remain excluded from
+cargo rewards. Cash Cache alone has its currency-specific rules.
+
+Rarity bands are recalibrated for these recipes only. Previously earned rewards,
+their contents, grades and saved Relay choices are unchanged. Relay is an optional
+wager, not a guaranteed three-step climb: available progression depends on the
+actual package and catalog. A same-rarity replacement can be worth less and ends
+the chain. Favor does not bypass chase exclusions.
+Normal and premium choices show Relay eligibility before you choose. Legendary
+prizes correctly show that there is no higher rarity. The wager screen shows the
+inventory key count; the server still checks whether a key is usable.
+
+The reel now requests only displayed artwork, prioritizing the winner and visible
+tiles, with at most two native launches per frame and four in flight. Timeouts or
+missing pictures do not block delivery. Messenger identifies each modern prize
+by name and delivery reference. Inventory and Broker consistently call the
+all-content case **BR-12 Mixed Case**.
+
+### Compact prizes and Messenger delivery
 
 New cargo rewards are curated raid kits, specialist equipment and collectible
 packages. Value comes from useful equipment and rare items, not repeated weapons
@@ -21,7 +56,7 @@ container wrapper. Larger historical prizes and currency payouts split into
 messages of at most eight separate items, preserving the complete prize.
 
 Uncollected attachments remain for ten years. Deleting a message discards its
-remaining items. Save & Close leaves an unsent prize pending; reopening it does
+remaining items. **Close — resume later** leaves an unsent prize pending; reopening it does
 not reroll it. Already-paid inventory prizes are not moved or mailed again.
 
 The economy targets roughly one million roubles per case, with different theme
@@ -82,7 +117,7 @@ currency payouts, including **4 Bitcoins at 0.90%** and **10 at 0.10%**.
 All original paid packages/payouts retain their exact contents and grades;
 old and new cargo Relay generations cannot cross. Keys remain find-only and
 universal; drop rates, 5 kg case weights, Unity models and sounds are unchanged.
-Use the installable `ContrabandCases-0.4.12-SPT4.1.5.zip` and its
+Use the installable `ContrabandCases-0.4.13-SPT4.1.5.zip` and its
 matching SHA256 manifest from the GitHub release.
 GitHub's automatic
 "Source code" archives are not installable mod packages. Updating requires both
@@ -183,7 +218,7 @@ each Relay attempt. There are no case-specific keys.
 
 | Case | Contents | Inventory color |
 | --- | --- | --- |
-| BR-12 Relay Case | Mixed catalog, including all available themed content | Existing case color |
+| BR-12 Mixed Case | Mixed catalog, including all available themed content | Existing case color |
 | Operations | Practical ammunition, medical supplies, field equipment and loadouts | Green |
 | Relics | Anime, Pokemon and Yu-Gi-Oh cards, historical relics and arcane curios | Violet |
 | Black Site | Elite equipment, night operations, ordnance and experimental supplies | Red |
@@ -216,15 +251,16 @@ the case/key**. Cash Cache is excluded.
 
 These are rare upgrades to the opening, not separate purchasable guaranteed-win
 cases. No extra key is charged for browsing or choosing. After choosing, Messenger
-delivery and eligible Relay actions work normally. **Save & Close** leaves the
+delivery and eligible Relay actions work normally. **Close — resume later** leaves the
 same choices available through the Dossier. Reconnecting cannot reroll them.
 Premium packages keep the case theme, but can share a category or progression
 track. Choosing one never grants all three.
 
 Premium eligibility also checks reference value: Epic requires at least the
-greater of 200,000 RUB or 1.15 times `(case price + 25,000)`; Legendary requires
-at least the greater of 300,000 RUB or 1.6 times that cost. The 25,000 is a key
-scarcity allowance, not a new fee or key sale price. Reference value does not
+greater of 200,000 RUB or 1.15 times `(case price + 75,000)`; Legendary requires
+at least the greater of 300,000 RUB or 1.6 times that cost. The 75,000 is the
+standard foregone key-sale allowance, not an additional charge. Custom trader
+settings can differ from that benchmark. Reference value does not
 guarantee a particular trader cash-out. At least three non-chase packages must
 qualify. If a tier is unavailable, its probability becomes Normal **before the
 roll**; the confirmation shows its zero rate. Missing saved content blocks a
@@ -327,7 +363,9 @@ always the safe choice when the server permits Claim.
 
 An upgrade advances one rarity and may allow another Relay. A replacement
 ends the chain with a different claimable package of the same rarity; it need
-not have the same value. A loss consumes the stake and key and grants no items.
+not have the same value and can be worth less. A loss consumes the stake and key and grants no items.
+Three stages is a ceiling, not a promised climb. Some packages allow fewer or no
+wagers; the UI offers only currently available Relay actions.
 Stage 3 and Legendary rewards end the chain. Incomplete target pools disable
 Relay without preventing a valid Claim.
 
@@ -337,20 +375,21 @@ Favor to zero. It still costs a key. Favor persists between cases.
 Claim and Forfeit do not change it. Older physical-weapon Relay saves retain
 their historical stage-depth recovery rule.
 
-Shipment cargo rarity is derived from the complete package's reference value,
+Current compact-v2 cargo rarity is derived from the complete package's reference value,
 not authored as a reward-pack override:
 
 | Rarity | Reference-value band |
 | --- | ---: |
-| Common | below ₽240,000 |
-| Uncommon | ₽240,000–449,999 |
-| Rare | ₽450,000–899,999 |
-| Epic | ₽900,000–1,799,999 |
-| Legendary | ₽1,800,000 and above |
+| Common | below ₽400,000 |
+| Uncommon | ₽400,000–799,999 |
+| Rare | ₽800,000–1,499,999 |
+| Epic | ₽1,500,000–2,399,999 |
+| Legendary | ₽2,400,000 and above |
 
 These are item reference values, **not cash payouts or trader resale quotes**.
 Historical non-shipment lots retain their original 40k/75k/150k/300k boundaries
-so existing claims and frozen Relay candidates remain valid.
+and shipment-v1/compact-v1 retain 240k/450k/900k/1.8m boundaries, so existing
+claims and frozen Relay candidates remain valid.
 
 ## Odds, clues and presentation
 
@@ -412,12 +451,12 @@ Default configuration:
 The case restriction governs generated spawn loot, not inventory confiscation:
 a looting AI can still pick up a case from a crate, and players can carry cases.
 Other mods that replace loot generation or modify pools after startup can override
-these rules. Trader supply, opening costs, key rules and reward odds are unchanged.
+these rules. These loot rules do not change trader stock or reward odds.
 
 Existing live settings are not automatically reset by source changes. If
-`fixedCasePrice` is null, cargo cases use 95% of the lesser of mean and median
+`fixedCasePrice` is null, cargo cases use 90% of the lesser of mean and median
 reward **reference use value** under optimal sequential keep/discard play,
-minus a **₽25,000 opening-key allowance**, rounded up to ₽1,000 with a ₽1,000
+minus a **₽75,000 opening-key allowance**, rounded up to ₽1,000 with a ₽1,000
 minimum for inexpensive custom catalogs. This reserves value for a raid-earned key and
 prevents a rare jackpot from inflating the case above normal rewards. It is
 not a cash-return target, a full valuation of your play time, or a profit promise.
@@ -426,6 +465,12 @@ separately, including every key consumed. Prices are
 calculated at startup, published before opening, and bound to the case's
 catalog identity. They are reference-value prices, not promised trader return
 or Relay-profit targets. Existing fixed-price settings remain explicit overrides.
+
+`therapistSellPriceKey` defaults to **75000**, including when omitted from an
+older config. An explicit positive override is preserved; explicit `null` keeps
+the legacy ₽65,000 handbook registration (not a ₽65,000 trader payout). The
+target uses the standard Therapist coefficient; other mods and profile bonuses
+can change the actual quote. No trader sells keys, and flea listings stay disabled.
 
 The gameplay target is one retained key per **1.5–2 normal looting raids** on
 average, including zero-key raids, leaving room for occasional Relay spending.
@@ -437,16 +482,19 @@ For illustration, 25 eligible
 independent item selections per raid with 75% of generated keys retained would
 average 0.404 keys/raid (one per 2.48 raids) at 2.2%, versus 0.368 keys/raid
 (one per 2.72 raids) at the previous 2.0%. Real looting and other mods can differ greatly.
-The server now logs `Key raid audit: PMC completed` with newly retained key
-instance counts after normal PMC raid settlement. Carried keys and duplicate
+The server logs `Supply raid audit: PMC completed` with newly retained key and
+per-case-type instance counts after normal PMC raid settlement, including zeros.
+Carried items and duplicate
 end events are excluded; scav/transit runs and mail/BTR deliveries are not
-counted. Testing-grant enablement is labeled. This logging never adjusts loot.
+counted. Testing-grant enablement is labeled; exclude those samples from balance
+measurements. Counts describe retained items, not every spawned or encountered
+item. This logging never adjusts loot and does not include profile identifiers.
 
 ### Gameplay balance
 
 Prices follow the current resolved compact catalog, not the earlier bulk-shipment
 projection. The economy report compares optimal reference-value play, keeping
-the first offer, and keeping the first offer worth case price + ₽25,000. Three
+the first offer, and keeping the first offer worth case price + ₽75,000. Three
 offers are a keep/discard decision, not three rewards or a guaranteed best-of-three.
 Native item prices are unchanged; optional mods can change the value and supply
 of equipment substantially.
@@ -457,27 +505,22 @@ a prize in its own right; it is never required as a reward wrapper. Historical
 large shipments remain recovery-only. New openings and Relay from compact rewards
 cannot select them; saved older Relay chains keep their own generation.
 
-The final offline all-pack projection gives these starting prices and outcomes.
-Loss/even/win uses a ±10% reference-value band, includes a ₽25,000 key allowance,
-and assumes optimal keep/discard choices before Relay. These are diagnostics,
-not enforced quotas, cash returns or promises about the live modded economy.
+Use the Broker case overview for your actual finalized price, packages and odds.
+Prices vary with installed content; no one installation's private catalog report
+is a universal price list. The report models loss/near-even/win with a ±10%
+reference-value band, both bought and found cases, and key opportunity costs of
+₽0, ₽25,000, ₽65,000, ₽75,000 and ₽150,000. These are diagnostics, not enforced
+quotas, cash returns or promises about the live modded economy.
 
-| Case | Projected price | Loss / near-even / win | Current first-Relay coverage* |
-| --- | ---: | ---: | ---: |
-| Mixed | ₽1,142,000 | 28.72% / 28.69% / 42.59% | 87 / 89 |
-| Operations | ₽1,247,000 | 35.62% / 18.75% / 45.63% | 34 / 34 |
-| Relics | ₽1,004,000 | 31.95% / 26.95% / 41.09% | 22 / 22 |
-| Black Site | ₽1,085,000 | 24.85% / 52.07% / 23.08% | 24 / 33 |
-
-\*Eligible current non-Legendary packages, not a probability of winning Relay.
-The remaining Black Site packages do not have a safe complete progression at
-these source values. All four priced cargo pools retain the published **1.5% Epic**
-and **0.2% Legendary** surprise rates with enough genuinely qualified choices.
-The base-game-only projection gives Mixed ₽1,041,000, Operations ₽1,080,000 and
-Black Site ₽1,038,000; Relics requires its optional content mods.
-The separate native-database Cash Cache audit gives **₽1,018,000**, with
-41% meaningful losses, 24% near-even payouts and 35% wins under the same
-₽25,000 key-cost scenario. Its amounts and odds are unchanged by this update.
+Normal openings retain losses, near-even outcomes and wins. A typical high-value
+result must not make every selection Legendary; exceptionally valuable chases
+remain rare. Repetition checks cover storage cases, surgical equipment and repair
+kits as well as endgame armor, headsets and survival tools. Not every package
+supports Relay, and no top-rarity package does. The published **1.5% Epic** and
+**0.2% Legendary** surprise rates apply only when enough qualifying packages are
+available. Relics requires its optional content mods. Cash Cache amounts, price
+formula and draw odds are unchanged; its diagnostics now include the same
+₽75,000 key benchmark used for cargo and Relay.
 
 For example, Extraction Specialist has useful protection/storage equipment and
 exactly one SJ6 and one M.U.L.E., not a bulk injector shipment. Medical Command
@@ -530,18 +573,18 @@ authority for the catalog used by an opening.
 ## Included integrations
 
 All **17 packs** ship together: **117 eligible compact rewards**, plus five
-non-opening compact definitions and **252 unchanged published definitions**
-retained for recovery (374 definitions total). The all-pack projection resolves
+non-opening current definitions and **374 unchanged published definitions**
+retained for recovery (496 definitions total). The all-pack projection resolves
 117 fresh lots: 42 Operations, 29 Relics and 46 Black Site. Its current packages
-have at most eight roots, 36 total nodes and 52 cells, below the enforced
+remain below the enforced
 8 / 128 / 64 limits. Cash Cache's 15 current and 15
 historical payouts are separate. Unavailable
 optional packs are skipped with a reason instead of generating invalid rewards;
 your active catalog may therefore be smaller.
 
 The all-pack projection has no skipped providers and validates every current
-compact prize. Historical recovery still requires its exact old content. Thirty-five of its
-117 current rewards have no comparable trader-resale estimate; the UI reports
+compact prize. Historical recovery still requires its exact old content. Some
+current rewards have no comparable trader-resale estimate; the UI reports
 that uncertainty instead of inventing a price. The projection uses declared
 source templates/presets, not an execution of every installed mod hook.
 
@@ -561,7 +604,7 @@ dependency, forest, resource-state and placement validation. Optional packs
 are not promises that every item is Relay-eligible at every installed price.
 The gallery and live report show what actually resolved.
 
-All published cargo definitions through 0.4.11, including the original 50 core
+All published cargo definitions through 0.4.12, including the original 50 core
 lots and `core.json` pack version **0.3.3**, remain unchanged. New generations
 use new lot identities; published recipes are not edited in place.
 Old saved rarity ladders retain their original meanings, and old Relay rewards
@@ -674,7 +717,7 @@ SPT_Runtime/user/mods/Wade-ContrabandCases/
 Do not overwrite a customized live `config/config.jsonc` with defaults.
 Preserve custom reward packs too. Remove no other mods.
 
-When upgrading to 0.4.12, replace the shipped reward-pack JSON files as well as
+When upgrading to 0.4.13, replace the shipped reward-pack JSON files as well as
 the DLLs: the new contents are authored in those files. Back up any edits to
 shipped packs and reapply them carefully; custom fixed-price settings still
 override automatic Mixed pricing. Already-paid openings retain their original
@@ -702,14 +745,14 @@ Automated tests, native-library checks and
 offline economy audits are not a crash-free guarantee or a substitute for
 gameplay testing. No GitHub CI workflow is configured.
 
-Release verification: **1,701 tests passed in three consecutive runs** and
-the Release solution built with zero warnings/errors. **205 focused tests** also
-passed three times using isolated copies of installed SPT 4.1.5 libraries.
-Independent code and security reviews checked delivery recovery, save-failure
-handling, legacy compatibility, scoped flea changes and the compact reward rules.
-These checks did not start the server/game or modify live profiles.
+The automated checks cover bounded artwork loading, immutable historical recipes,
+reachable Relay paths, decision-weighted rarity/repetition, exact delivery recovery,
+missing dependencies and the real client contract. Offline audits distinguish
+reference value from known/unknown resale and compare different choice strategies,
+bought cases, found-case sale opportunity cost and key values up to ₽150,000.
+These checks do not start the server/game or modify live profiles.
 
-Before calling 0.4.12 fully game-verified:
+Before calling 0.4.13 fully game-verified:
 
 1. Start the matched client/server build and inspect fresh logs and the live
    resolved catalog report.
@@ -733,7 +776,7 @@ Before calling 0.4.12 fully game-verified:
    reconnect recovery. Confirm spin ticks and landing sounds audibly, including
    after reopening the UI and at different interface/master/effects volumes.
 7. Force every Epic/Legendary MCM variant; browse all three, choose each ordinal,
-   Save & Close, reconnect and resume, then claim or Relay where eligible. Verify
+   Close — resume later, reconnect and resume, then claim or Relay where eligible. Verify
    only one selected package is granted and no selection key is consumed.
 8. Reproduce game close/relaunch and inspect fresh logs. The former Lobby-state
    restart rejection is regression-tested; the original game shutdown cause
