@@ -10,6 +10,21 @@ namespace ContrabandCases.Tests.Settlement;
 
 public sealed class MessengerSafetyTests
 {
+    [Fact]
+    public void Named_delivery_keeps_the_same_identity_and_recovery_evidence()
+    {
+        var (context, profile, delivery, prepared) = Fixture();
+        var original = Assert.Single(SptManifestRewardDelivery.CreateMessages(context.ProfileId, prepared));
+        var applied = delivery.ApplyPreparedClaim(context, prepared, "Field Medic Package");
+        var message = Assert.Single(profile.DialogueRecords![SptManifestRewardDelivery.SenderId].Messages!);
+        Assert.Contains("Field Medic Package", message.Text);
+        Assert.Contains("Deleting this message", message.Text);
+        Assert.Equal(original.Id, message.Id);
+        Assert.Equal(original.Items!.Stash, message.Items!.Stash);
+        Assert.Equal(RewardPresence.Complete, delivery.InspectClaim(context, applied));
+        Assert.Throws<InvalidOperationException>(() => delivery.ApplyPreparedClaim(context, prepared, "Another name"));
+    }
+
     [Theory]
     [InlineData("inventory")]
     [InlineData("mail-item")]

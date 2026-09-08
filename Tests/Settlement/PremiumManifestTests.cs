@@ -35,6 +35,20 @@ public sealed class PremiumManifestTests
         var active = journal.ActiveManifest!;
         var snapshot = Parse(ManifestSnapshotProjection.FromActive(active, catalog, null));
         Assert.Equal(3, snapshot.PremiumChoices.Count);
+        foreach (var choice in snapshot.PremiumChoices)
+        {
+            var saved = active.Offers.Single(o => o.Identity.LotId == choice.LotId);
+            var eligible = new ManifestCatalogSelector().CreateRelayCandidatesForStage(catalog,
+                new ManifestEntitlementSnapshot(saved.Rarity, saved.Identity, saved.Forest, saved.Fingerprint),
+                active.FlowState.RelayStage, active.RarityLadderVersion).Count > 0;
+            Assert.Equal(eligible, choice.RelayEligible);
+            if (tier == ManifestOpeningTier.Legendary)
+            {
+                Assert.False(choice.RelayEligible);
+                Assert.Contains("No Relay: Legendary", BrokerPresentation.ChoiceTerms(choice));
+                Assert.DoesNotContain("risk the package", BrokerPresentation.ChoiceTerms(choice));
+            }
+        }
         Assert.All(snapshot.FamilySeals, seal => { Assert.True(seal.Revealed); Assert.False(seal.Burned); });
         Assert.True(snapshot.AvailableActions.CanLock);
         Assert.False(snapshot.AvailableActions.CanBurn);

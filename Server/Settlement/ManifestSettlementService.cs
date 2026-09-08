@@ -922,7 +922,7 @@ public sealed class ManifestSettlementService
                 else if (witness == ManifestClaimCommitWitnessInspection.Predecessor &&
                          presence == RewardPresence.Absent)
                 {
-                    var applied = _inventory.ApplyPreparedClaim(context, prepared);
+                    var applied = _inventory.ApplyPreparedClaim(context, prepared, entitlement.Identity.DisplayName);
                     active = active.ReconcileClaim(applied);
                     journal.ReplaceActiveManifest(active);
                     await _journalStore.SaveAsync(context.ProfileId, journal, CancellationToken.None).ConfigureAwait(false);
@@ -973,7 +973,7 @@ public sealed class ManifestSettlementService
                     prepared.CommitGeneration,
                     prepared.CommitPredecessorHash,
                     prepared.Delivery);
-                var recovered = _inventory.ApplyPreparedClaim(context, recoveryInput);
+                var recovered = _inventory.ApplyPreparedClaim(context, recoveryInput, entitlement.Identity.DisplayName);
                 active = active.ReconcileClaim(recovered);
                 journal.ReplaceActiveManifest(active);
                 await _journalStore

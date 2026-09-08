@@ -213,7 +213,7 @@ public sealed class LegacyMessengerDeliveryTests
         public bool TryPrepareClaim(OpeningContext c, IReadOnlyList<Item> i, IReadOnlyList<MongoId> roots, DateTimeOffset t, out ManifestClaimPreparedPayload? p) => throw new NotSupportedException();
         public RewardPresence InspectClaim(OpeningContext c, ManifestClaimPreparedPayload p) => throw new NotSupportedException();
         public ManifestClaimPreparedPayload ReconcileAppliedClaim(OpeningContext c, ManifestClaimPreparedPayload p) => throw new NotSupportedException();
-        public ManifestClaimPreparedPayload ApplyPreparedClaim(OpeningContext c, ManifestClaimPreparedPayload p) => throw new NotSupportedException();
+        public ManifestClaimPreparedPayload ApplyPreparedClaim(OpeningContext c, ManifestClaimPreparedPayload p, string? rewardName = null) => throw new NotSupportedException();
         public void ReplayClaim(OpeningContext c, ManifestClaimPreparedPayload p) => throw new NotSupportedException();
         public RelayInventoryEvidence InspectRelay(OpeningContext c, RelaySettlementRecord r) => new(
             c.PmcData.Inventory!.Items!.Any(i => r.InputItemIds.Contains(i.Id)) ? RewardPresence.Complete : RewardPresence.Absent,

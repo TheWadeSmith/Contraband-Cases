@@ -28,7 +28,8 @@ internal static class ManifestLibraryProjection
         {
             var outcome = receipt.TerminalPhase switch
             {
-                ManifestPhase.Granted => "SECURED",
+                ManifestPhase.Granted => journal.FindManifestClaimGrant(receipt.ManifestId)?.ClaimPayload.Delivery == ClaimDeliveryKind.Messenger
+                    ? "SENT TO MESSENGER" : "DELIVERED (LEGACY INVENTORY)",
                 ManifestPhase.Confiscated => "LOST",
                 _ => "FORFEITED"
             };
@@ -83,7 +84,7 @@ internal static class ManifestLibraryProjection
             b.AppendLine($"{CaseContracts.ShortName(pair.Key)}: " + (pair.Value?.OpeningEnabled == true
                 ? $"available • published purchase price ₽{pair.Value.CasePrice:N0}"
                 : pair.Value?.OpeningDisabledReason ?? "catalog unavailable"));
-        b.AppendLine("\nKey supply: find-only; 2% eligible pool weight is NOT 2% per raid.\nPMC key-raid audits are diagnostic only; scav/transit/mail are not counted. Testing grants must be excluded from balance measurements.");
+        b.AppendLine("\nKeys are find-only; cases spawn only in verified crates. Configured loot-pool weights are NOT per-container or per-raid chances.\nPMC supply audits count newly retained keys and cases, including zero-find raids. Scav/transit/mail are excluded; testing-enabled samples must be excluded from balance measurements.");
         var text = b.ToString();
         return text.Length <= 32_768 ? text : text[..32_700] + "\nAdditional diagnostics are in the server log.";
     }

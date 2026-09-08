@@ -92,14 +92,15 @@ public sealed class SptManifestRewardDelivery : IManifestClaimInventory
         catch (InvalidOperationException) { return RewardPresence.Partial; }
     }
 
-    public ManifestClaimPreparedPayload ApplyPreparedClaim(OpeningContext context, ManifestClaimPreparedPayload prepared)
+    public ManifestClaimPreparedPayload ApplyPreparedClaim(OpeningContext context, ManifestClaimPreparedPayload prepared,
+        string? rewardName = null)
     {
         RequireCleanResponse(context);
         if (prepared.Delivery != ClaimDeliveryKind.Messenger || prepared.ProfileCommitStarted)
             throw new InvalidOperationException("Only an uncommitted Messenger delivery may be applied.");
         EnsureIdsAvailable(context, prepared);
         var profile = RequireProfile(context);
-        var messages = CreateMessages(context.ProfileId, prepared);
+        var messages = CreateMessages(context.ProfileId, prepared, rewardName);
         profile.DialogueRecords ??= [];
         if (!profile.DialogueRecords.TryGetValue(SenderId, out var dialogue))
         {
@@ -165,7 +166,8 @@ public sealed class SptManifestRewardDelivery : IManifestClaimInventory
         }
     }
 
-    internal static IReadOnlyList<Message> CreateMessages(MongoId profileId, ManifestClaimPreparedPayload prepared)
+    internal static IReadOnlyList<Message> CreateMessages(MongoId profileId, ManifestClaimPreparedPayload prepared,
+        string? rewardName = null)
     {
         var trees = SptOpeningInventory.PartitionClaimTrees(prepared.Items, prepared.RootIds);
         var batches = trees.Chunk(RootsPerMessage).ToArray();
@@ -184,7 +186,8 @@ public sealed class SptManifestRewardDelivery : IManifestClaimInventory
             {
                 Id = StableId(seed + "/message"), UserId = SenderId,
                 MessageType = MessageType.MessageWithItems, DateTime = prepared.PreparedAtUtc.ToUnixTimeSeconds(),
-                Text = $"Contraband Cases — reward delivery {index + 1}/{batches.Length}. " +
+                Text = $"Contraband Cases — {DeliveryLabel(rewardName)} {index + 1}/{batches.Length}. " +
+                    $"Delivery ref: {StableId(seed + "/message")}. " +
                     "Collect individual items as stash space allows. Remaining attachments stay here for 10 years. " +
                     "Deleting this message discards its uncollected items. This is your saved prize, not a new roll.",
                 Items = new MessageItems { Stash = stash, Data = items },
@@ -192,6 +195,14 @@ public sealed class SptManifestRewardDelivery : IManifestClaimInventory
             });
         }
         return result;
+    }
+
+    private static string DeliveryLabel(string? name)
+    {
+        // Display-only metadata never enters the deterministic identity/witness.
+        if (string.IsNullOrWhiteSpace(name)) return "reward delivery";
+        var clean = new string(name.Where(c => !char.IsControl(c) && c is not ('<' or '>')).Take(120).ToArray());
+        return string.IsNullOrWhiteSpace(clean) ? "reward delivery" : clean.Trim() + " — delivery";
     }
 
     private void EnsureIdsAvailable(OpeningContext context, ManifestClaimPreparedPayload prepared)

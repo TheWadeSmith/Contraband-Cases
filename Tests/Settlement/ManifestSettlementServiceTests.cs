@@ -2234,7 +2234,8 @@ public sealed class ManifestSettlementServiceTests
 
         public ManifestClaimPreparedPayload ApplyPreparedClaim(
             OpeningContext context,
-            ManifestClaimPreparedPayload prepared)
+            ManifestClaimPreparedPayload prepared,
+            string? rewardName = null)
         {
             Interlocked.Increment(ref _applyCalls);
             if (Presence != RewardPresence.Absent)

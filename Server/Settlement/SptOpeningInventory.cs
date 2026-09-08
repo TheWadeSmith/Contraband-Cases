@@ -602,7 +602,8 @@ public sealed class SptOpeningInventory :
 
     public ManifestClaimPreparedPayload ApplyPreparedClaim(
         OpeningContext context,
-        ManifestClaimPreparedPayload prepared)
+        ManifestClaimPreparedPayload prepared,
+        string? rewardName = null)
     {
         ArgumentNullException.ThrowIfNull(context);
         ArgumentNullException.ThrowIfNull(prepared);

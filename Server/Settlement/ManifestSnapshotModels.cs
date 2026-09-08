@@ -289,6 +289,10 @@ public sealed class ManifestFamilySealData
 
 public sealed class ManifestLotData
 {
+    [JsonPropertyName("relayEligible")]
+    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+    public bool? RelayEligible { get; init; }
+
     [JsonPropertyName("providerId")]
     public string ProviderId { get; init; } = string.Empty;
 

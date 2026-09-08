@@ -97,7 +97,9 @@ public sealed class ManifestSnapshotRouter : StaticRouter
                 : TryGetCatalog(catalogCoordinator, journal.ActiveManifest.Ticket.CaseTemplateId),
             TryGetLocale(localeService),
             request.CaseTemplateId,
-            request.CaseItemId);
+            request.CaseItemId,
+            journal.ActiveManifest is { } pending
+                ? TryReadCatalog(() => catalogCoordinator.GetCaseSnapshot(pending.Ticket.CaseTemplateId)) : null);
         return httpResponseUtil.GetBody(currentState);
     }
 
@@ -130,7 +132,8 @@ public sealed class ManifestSnapshotRouter : StaticRouter
             snapshot = ManifestSnapshotProjection.FromActive(
                 active,
                 TryGetCatalog(catalogCoordinator, active.Ticket.CaseTemplateId),
-                TryGetLocale(localeService));
+                TryGetLocale(localeService),
+                TryReadCatalog(() => catalogCoordinator.GetCaseSnapshot(active.Ticket.CaseTemplateId)));
         }
         else
         {
@@ -150,14 +153,15 @@ public sealed class ManifestSnapshotRouter : StaticRouter
         CargoCatalogSnapshot? catalog,
         IReadOnlyDictionary<string, string>? locale,
         string caseTemplateId = ModConstants.CaseTemplateId,
-        string? requestedCaseId = null)
+        string? requestedCaseId = null,
+        CargoCatalogSnapshot? relayCatalog = null)
     {
         ArgumentNullException.ThrowIfNull(journal);
         CaseContracts.Require(caseTemplateId);
         if (journal.ActiveManifest is { } active)
         {
             return ManifestCurrentStateEnvelope.FromSnapshot(
-                ManifestSnapshotProjection.FromActive(active, catalog, locale));
+                ManifestSnapshotProjection.FromActive(active, catalog, locale, relayCatalog));
         }
 
         if (FindLegacyOpening(journal, requestedCaseId) is { } legacy)

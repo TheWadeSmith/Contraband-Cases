@@ -111,7 +111,8 @@ public interface IManifestClaimInventory
     InventoryCheckpoint Capture(OpeningContext context);
     ManifestClaimPreparedPayload ApplyPreparedClaim(
         OpeningContext context,
-        ManifestClaimPreparedPayload prepared);
+        ManifestClaimPreparedPayload prepared,
+        string? rewardName = null);
     void Restore(OpeningContext context, InventoryCheckpoint checkpoint);
     void ReplayClaim(OpeningContext context, ManifestClaimPreparedPayload prepared);
 }

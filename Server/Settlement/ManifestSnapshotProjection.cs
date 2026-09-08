@@ -10,7 +10,8 @@ internal static class ManifestSnapshotProjection
     internal static ManifestSnapshotData FromActive(
         ManifestRecord manifest,
         CargoCatalogSnapshot? catalog,
-        IReadOnlyDictionary<string, string>? locale)
+        IReadOnlyDictionary<string, string>? locale,
+        CargoCatalogSnapshot? relayCatalog = null)
     {
         ArgumentNullException.ThrowIfNull(manifest);
         locale ??= new Dictionary<string, string>(StringComparer.Ordinal);
@@ -32,6 +33,10 @@ internal static class ManifestSnapshotProjection
         missingContent |= premiumChoicePhase && manifest.Offers.Any(offer => catalog?.ResolveExact(
             offer.Rarity, offer.Identity, offer.Forest, offer.Fingerprint, manifest.RarityLadderVersion) is null);
         var canLock = phase is ManifestPhase.Offer1 or ManifestPhase.Offer2 && !missingContent;
+        // Runtime callers supply the coordinator's cached case view. Keep the
+        // full catalog for exact recovery without repricing on each UI refresh.
+        var offerRelayCatalog = canLock && catalog is not null
+            ? relayCatalog ?? CaseCatalogs.ForCase(catalog, manifest.Ticket.CaseTemplateId) : null;
         var nextOffer = canLock && manifest.FlowState.CurrentOrdinal < ManifestRecord.OfferCount
             ? manifest.Offers[manifest.FlowState.CurrentOrdinal]
             : null;
@@ -60,7 +65,8 @@ internal static class ManifestSnapshotProjection
             PremiumChoices = premiumChoicePhase
                 ? manifest.Offers.Select(offer => CreateLot(offer.Rarity, offer.Identity, offer.Forest,
                     offer.Fingerprint, catalog?.ResolveExact(offer.Rarity, offer.Identity, offer.Forest,
-                        offer.Fingerprint, manifest.RarityLadderVersion), locale)).ToArray() : [],
+                        offer.Fingerprint, manifest.RarityLadderVersion), locale,
+                    RelayEligibleAfterChoosing(manifest, offer, offerRelayCatalog))).ToArray() : [],
             Phase = phase.ToString(),
             CurrentOrdinal = manifest.FlowState.CurrentOrdinal,
             LockedOrdinal = manifest.FlowState.LockedOrdinal,
@@ -90,7 +96,8 @@ internal static class ManifestSnapshotProjection
                     current.Value.Forest,
                     current.Value.Fingerprint,
                     resolved,
-                    locale),
+                    locale,
+                    canLock ? RelayEligibleAfterChoosing(manifest, manifest.Offers[manifest.FlowState.CurrentOrdinal - 1], offerRelayCatalog) : null),
             AvailableActions = new ManifestAvailableActionsData
             {
                 CanLock = canLock,
@@ -211,11 +218,13 @@ internal static class ManifestSnapshotProjection
         RewardForest forest,
         RewardForestFingerprintV2 fingerprint,
         ResolvedCargoLot? resolved,
-        IReadOnlyDictionary<string, string> locale)
+        IReadOnlyDictionary<string, string> locale,
+        bool? relayEligible = null)
     {
         var evaluation = resolved?.EvaluationOrNull;
         return new ManifestLotData
         {
+            RelayEligible = relayEligible,
             ProviderId = identity.ProviderId,
             ProviderLabel = ProviderLabel(identity.ProviderId),
             LotId = identity.LotId,
@@ -241,6 +250,18 @@ internal static class ManifestSnapshotProjection
                 })
                 .ToArray()
         };
+    }
+
+    // Read-only preview of the same bounded candidate selection frozen when a
+    // player chooses. Only revealed offers are projected; no hidden draw leaks.
+    private static bool RelayEligibleAfterChoosing(ManifestRecord manifest, ManifestOfferSnapshot offer,
+        CargoCatalogSnapshot? catalog)
+    {
+        if (catalog is null || catalog.ResolveExact(offer.Rarity, offer.Identity, offer.Forest,
+                offer.Fingerprint, manifest.RarityLadderVersion) is null) return false;
+        return new ManifestCatalogSelector().CreateRelayCandidatesForStage(catalog,
+            new ManifestEntitlementSnapshot(offer.Rarity, offer.Identity, offer.Forest, offer.Fingerprint),
+            manifest.FlowState.RelayStage, manifest.RarityLadderVersion).Count > 0;
     }
 
     private static string SealGroup(string template, CargoLotIdentitySnapshot identity,
