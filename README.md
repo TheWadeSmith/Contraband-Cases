@@ -1,8 +1,52 @@
 # Contraband Cases
 
-Contraband Cases **0.4.10** is a client-and-server mod for **SPT 4.1.x**,
-built and offline-validated against **SPT 4.1.5**. Builds retain the compatible
-4.1.3 server SDK. Complete in-game acceptance of this rebalance is still pending.
+Contraband Cases **0.4.11** is a client-and-server mod for **SPT 4.1.x**,
+built and validated against **SPT 4.1.5**. Builds retain the compatible
+4.1.3 server SDK. Install the matching client and server together.
+
+### 0.4.11: compatibility and clearer reward values
+
+Four optional integrations now have current, validated recipes alongside their
+unchanged, recovery-only historical definitions. ISB and WTT armor uses assembled
+source presets; ISB's incompatible optional Korund side plates are omitted.
+Natalya uses currently supported Level 6 equipment instead of removed Level 7
+items. Amonya uses legal two-token stacks: 32 Arcane + 32 Mystic tokens, or
+40 Eldritch tokens; these are barter tokens, not fireable rounds. Its Satchel
+shipment remains eight items. These changes restore unavailable content, so
+installed-catalog prices and package odds can change when those packs load.
+Case/key drop settings, premium-tier rates and Bitcoin odds are not changed by
+this compatibility fix.
+
+Reward details distinguish **reference value** from **estimated trader resale**.
+Resale is a handbook-based startup estimate using the best eligible default-unlocked
+RUB buyer for each complete item, excluding Fence and profile bonuses. Missing
+buyers/prices or unsupported condition/container data show "unavailable", not
+zero or a partial total. This estimate does not change reward grading or pricing.
+Cash Cache retains its currency-specific valuation labels.
+
+Old paid forests are never resized or replaced. Valid retired forests remain
+recoverable; missing or invalid historical content remains blocked, with reasons
+listed under `UnavailableRetiredLots` in `catalog-report.json`. Corrected rewards
+use a separate Relay track. Both server and client must be updated together.
+The new `retiredLotIds` pack field keeps historical recipes out of new openings;
+`omitRootSlots` on preset recipes can omit only named optional leaf slots, never
+required armor parts.
+
+The release checks pin the corrected packs, historical recipes and accepted
+Unity bundles. Existing published archives are not replaced.
+
+### Slightly more loot
+
+The defaults now add **2.2% key loot weight** and **1.1% combined
+case loot weight**: a small 10% relative increase from 2.0% and 1.0%. Cases remain
+crate-only; keys keep their existing eligible container/bot rules. Reward odds,
+prices, shipments, item weights and item actions are unchanged by this supply
+adjustment. These are added loot-table weights, **not per-container drop
+probabilities**. Explicit settings in existing installations are preserved;
+set `keyLootWeightPercent` to `2.2` and `caseLootWeightPercent` to `1.1` in your
+existing config to opt into the new defaults.
+
+### Million-rouble stakes
 
 0.4.10 rebalances new openings around **one million roubles** using real larger
 shipments, not inflated native item prices. Cargo packages contain 2–6 complete
@@ -13,7 +57,7 @@ currency payouts, including **4 Bitcoins at 0.90%** and **10 at 0.10%**.
 All original paid packages/payouts retain their exact contents and grades;
 old and new cargo Relay generations cannot cross. Keys remain find-only and
 universal; drop rates, 5 kg case weights, Unity models and sounds are unchanged.
-Download the installable `ContrabandCases-0.4.10-SPT4.1.5.zip` and its matching
+Download the installable `ContrabandCases-0.4.11-SPT4.1.5.zip` and its matching
 SHA256 manifest from this repository's GitHub Releases page. GitHub's automatic
 "Source code" archives are not installable mod packages. Updating requires both
 client and server files; see **Install and build** below.
@@ -38,7 +82,7 @@ Advanced. The shortcut does not open the Broker during raids, text entry or MCM.
 This update also cleans up MCM testing controls, resumes saved offers without
 replaying a misleading spin, fixes stale Therapist case quotes, and adds rare
 case finds to verified crates only. Keys remain separate finds and universal.
-The combined case loot weight defaults to 1%; it is not a per-crate drop chance.
+That release used 1% combined case loot weight; it is not a per-crate drop chance.
 
 0.4.6 refreshes the frontend: case-specific overviews, readable odds with their
 probability context, three side-by-side premium cards, complete package contents,
@@ -308,7 +352,7 @@ then to a built-in rarity seal. Missing artwork does not alter rewards.
 
 ## Prices and keys
 
-Shipped defaults:
+Default configuration:
 
 - All five case prices: automatic, stock **5** per case type.
 - No fixed Mixed price or Therapist case-buyback override by default.
@@ -318,15 +362,16 @@ Shipped defaults:
   static corpses, jackets, bags, drawers, safes or ground/barrel caches.
   Only opening-enabled case types enter the crate pool, with equal shares.
   These are ordinary cases: any rare Epic/Legendary surprise still happens at opening.
-- Case injection weight: **1% combined added pool weight**, shared by all available
-  case types, not 1% for each type. This is about **0.99% per independent item
+- Case injection weight: **1.1% combined added pool weight**, shared by all available
+  case types, not 1.1% for each type. This is about **1.09% per independent item
   selection**, not per crate or raid; empty crates, space limits and SPT/mod loot
   settings affect actual finds. Cases and keys are separate finds, not guaranteed pairs.
   `caseLootWeightPercent` in the server config adjusts this weight; **0 disables
-  case drops** without disabling keys. Existing configs default to 1 when omitted.
-- Key injection weight: **2% of existing pool weight** in eligible static
+  case drops** without disabling keys. Omitted settings default to 1.1; explicit
+  existing settings are not overwritten.
+- Key injection weight: **2.2% of existing pool weight** in eligible static
   containers and bot pools that already contain vanilla key items. This is
-  **not a flat 2% probability per container or raid** (about 1.96% per
+  **not a flat 2.2% probability per container or raid** (about 2.15% per
   independent weighted selection before downstream loot rules).
 
 The case restriction governs generated spawn loot, not inventory confiscation:
@@ -349,14 +394,14 @@ or Relay-profit targets. Existing fixed-price settings remain explicit overrides
 
 The gameplay target is one retained key per **1.5–2 normal looting raids** on
 average, including zero-key raids, leaving room for occasional Relay spending.
-The initial 2% weight remains unchanged pending actual supply measurements;
-it has **not** been shown to meet that target. PMC and scav supply must be
+The initial 2% weight received a modest increase to 2.2%; this still has **not**
+been shown to meet that target. PMC and scav supply must be
 evaluated separately; the current logger covers PMC only.
 
 For illustration, 25 eligible
 independent item selections per raid with 75% of generated keys retained would
-average 0.368 keys/raid (one per 2.72 raids) at 2%, versus 0.075 keys/raid
-(one per 13.39 raids) at 0.4%. Real looting and other mods can differ greatly.
+average 0.404 keys/raid (one per 2.48 raids) at 2.2%, versus 0.368 keys/raid
+(one per 2.72 raids) at the previous 2.0%. Real looting and other mods can differ greatly.
 The server now logs `Key raid audit: PMC completed` with newly retained key
 instance counts after normal PMC raid settlement. Carried keys and duplicate
 end events are excluded; scav/transit runs and mail/BTR deliveries are not
@@ -549,7 +594,7 @@ SPT_Runtime/user/mods/Wade-ContrabandCases/
 Do not overwrite a customized live `config/config.jsonc` with defaults.
 Preserve custom reward packs too. Remove no other mods.
 
-When upgrading to 0.4.10, replace the shipped reward-pack JSON files as well as
+When upgrading to 0.4.11, replace the shipped reward-pack JSON files as well as
 the DLLs: the new contents are authored in those files. Back up any edits to
 shipped packs and reapply them carefully; custom fixed-price settings still
 override automatic Mixed pricing. Already-paid openings retain their original
@@ -573,12 +618,12 @@ itself is compiled against the installed game assemblies.
 
 ## Outstanding acceptance
 
-Automated release checks: **1,554 tests passed**, clean Release build, native
+Automated release checks: **1,575 tests passed**, clean Release build, native
 cargo/cash audits, client data-contract checks and package validation. These are
 not a crash-free guarantee or a substitute for gameplay testing. No GitHub CI
 workflow is configured; these checks were run locally.
 
-Before calling 0.4.10 fully game-verified:
+Before calling 0.4.11 fully game-verified:
 
 1. Start the matched client/server build and inspect fresh logs and the live
    resolved catalog report.
@@ -588,10 +633,9 @@ Before calling 0.4.10 fully game-verified:
    and resume through the Dossier. Also test an empty ledger and a double-click.
 3. Use the gallery for every rarity/layout, missing artwork and long names;
    check mouse/keyboard, reduced motion, sound, common resolutions and cleanup.
-4. Capture full-resolution inventory-grid and inspect screenshots of the key.
-   Case/key rotations and the key's duplicate label were corrected and visually
-   checked in the SDK preview rig; verify both again in Tarkov after its icon
-   cache resets. Editor screenshots are not an in-game acceptance test.
+4. Sound and case/key orientation were confirmed in-game on the preceding
+   build; the same accepted bundles are retained. Check for regressions if
+   changing interface volume, graphics settings or the installed mod set.
 5. Operations, Relics and Black Site are implemented separate purchasable cases.
    Verify their finalized live prices, available pools and pre-spend odds, then
    check actual trader sale quotes for rewards (including legal disassembly),
@@ -607,5 +651,8 @@ Before calling 0.4.10 fully game-verified:
    restart rejection is regression-tested; the original game shutdown cause
    remains unresolved. Do not blame another mod from shutdown cleanup alone.
 
-See the source `plans/engagement-release.md` and `reports/` for the current
-work and validation record.
+Compatibility tests also exercise all 13 corrected rewards against an offline
+projection of installed template/preset definitions and the real client parser.
+This is not a substitute for executing the installed mod hooks or claiming
+rewards in-game. Compare displayed resale estimates with actual trader offers;
+profile bonuses and trader eligibility can produce differences.

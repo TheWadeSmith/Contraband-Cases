@@ -25,9 +25,9 @@ public sealed class NewRewardPackTests
     public static readonly TheoryData<string, string, double, int> PackFiles = new()
     {
         { "natalya.field-gear.json", "natalya.field-gear", 0.22, 6 },
-        { "natalya.elite-armor.json", "natalya.elite-armor", 0.06, 6 },
+        { "natalya.elite-armor.json", "natalya.elite-armor", 0.06, 9 },
         { "isb-aishi.field-armory.json", "isb-aishi.field-armory", 0.18, 6 },
-        { "isb-aishi.elite-armory.json", "isb-aishi.elite-armory", 0.07, 8 }
+        { "isb-aishi.elite-armory.json", "isb-aishi.elite-armory", 0.07, 12 }
     };
 
     [Theory]
@@ -43,7 +43,8 @@ public sealed class NewRewardPackTests
         Assert.Equal(expectedProviderId, pack.ProviderId);
         Assert.Equal(expectedProviderWeight, pack.ProviderWeight, 12);
         Assert.Equal(expectedLotCount, pack.Lots.Count);
-        Assert.Empty(pack.RequiredPresetIds);
+        Assert.Equal(pack.RequiredPresetIds.OrderBy(id => id), pack.Lots.SelectMany(lot => lot.RecipeLines)
+            .OfType<PresetLine>().Select(line => line.PresetId).Distinct().OrderBy(id => id));
         Assert.Empty(pack.RequiredBundleKeys);
         Assert.NotEmpty(pack.RequiredTemplateIds);
 
@@ -53,7 +54,7 @@ public sealed class NewRewardPackTests
         // correctly instead of silently loading a partial/corrupt pool.
         var recipeTemplateIds = pack.Lots
             .SelectMany(lot => lot.RecipeLines)
-            .Select(line => Assert.IsType<TemplateLine>(line).TemplateId)
+            .OfType<TemplateLine>().Select(line => line.TemplateId)
             .Distinct(StringComparer.Ordinal);
         Assert.Equal(
             pack.RequiredTemplateIds.OrderBy(id => id, StringComparer.Ordinal),
@@ -121,6 +122,12 @@ public sealed class NewRewardPackTests
         int expectedLotCount)
     {
         var pack = new JsonRewardPackLoader().LoadFile(RewardPackPath(fileName));
+        if (pack.RetiredLotIds.Count > 0)
+        {
+            var real = InstalledOptionalPackCompatibilityTests.ReadCatalog(expectedProviderId);
+            Assert.Equal(pack.Lots.Count - pack.RetiredLotIds.Count, real.FreshOpeningLots.Count);
+            return;
+        }
         var templates = pack.RequiredTemplateIds
             .Select(id => Template(id))
             .ToArray();

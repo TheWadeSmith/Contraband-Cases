@@ -13,7 +13,10 @@
     "674815ecb107ad4bd99235e4",
     "674815ec0e1737c294820e25"
   ],
-  "requiredPresetIds": [],
+  "requiredPresetIds": [
+    "690e0eee62373b43846feb27",
+    "690dd23f50cb1ea00ba11202"
+  ],
   "requiredBundleKeys": [],
   "lots": [
     {
@@ -23,7 +26,7 @@
       "familyId": "operator",
       "trackId": "natalya-elite-armor",
       "anchorTemplateId": "67e179c99591ffcd472a270a",
-      "weight": 1.0,
+      "weight": 1,
       "usePath": {
         "kind": "raidRole",
         "roleId": "elite-operator"
@@ -110,7 +113,7 @@
       "familyId": "operator",
       "trackId": "natalya-elite-armor",
       "anchorTemplateId": "67e179c99591ffcd472a270a",
-      "weight": 1.0,
+      "weight": 1,
       "usePath": {
         "kind": "raidRole",
         "roleId": "elite-operator"
@@ -399,6 +402,149 @@
           "stackCountPerInstance": 1
         }
       ]
+    },
+    {
+      "lotId": "gen-pro-six-plate-carrier.compatible-v1.shipment-v1",
+      "displayName": "Gen Pro 6 Plate Carrier Shipment",
+      "purpose": "6 assembled Gen Pro 6 carriers with their source mod's matched armor components and plates.",
+      "familyId": "operator",
+      "trackId": "natalya-elite-armor-compatible-v1",
+      "anchorTemplateId": "67e179c99591ffcd472a270a",
+      "weight": 1,
+      "usePath": {
+        "kind": "raidRole",
+        "roleId": "elite-operator"
+      },
+      "recipe": [
+        {
+          "kind": "preset",
+          "presetId": "690e0eee62373b43846feb27"
+        },
+        {
+          "kind": "preset",
+          "presetId": "690e0eee62373b43846feb27"
+        },
+        {
+          "kind": "preset",
+          "presetId": "690e0eee62373b43846feb27"
+        },
+        {
+          "kind": "preset",
+          "presetId": "690e0eee62373b43846feb27"
+        },
+        {
+          "kind": "preset",
+          "presetId": "690e0eee62373b43846feb27"
+        },
+        {
+          "kind": "preset",
+          "presetId": "690e0eee62373b43846feb27"
+        }
+      ]
+    },
+    {
+      "lotId": "gen-pro-six-reserve.compatible-v1.shipment-v1",
+      "displayName": "Gen Pro 6 Reserve Shipment",
+      "purpose": "6 assembled Gen Pro 6 carriers plus 12 spare Level 6 front/back plates. Uses currently supported Natalya equipment, not removed Level 7 items.",
+      "familyId": "operator",
+      "trackId": "natalya-elite-armor-compatible-v1",
+      "anchorTemplateId": "67e179c99591ffcd472a270a",
+      "weight": 0.6,
+      "usePath": {
+        "kind": "raidRole",
+        "roleId": "elite-operator"
+      },
+      "recipe": [
+        {
+          "kind": "preset",
+          "presetId": "690e0eee62373b43846feb27"
+        },
+        {
+          "kind": "preset",
+          "presetId": "690e0eee62373b43846feb27"
+        },
+        {
+          "kind": "preset",
+          "presetId": "690e0eee62373b43846feb27"
+        },
+        {
+          "kind": "preset",
+          "presetId": "690e0eee62373b43846feb27"
+        },
+        {
+          "kind": "preset",
+          "presetId": "690e0eee62373b43846feb27"
+        },
+        {
+          "kind": "preset",
+          "presetId": "690e0eee62373b43846feb27"
+        },
+        {
+          "kind": "template",
+          "templateId": "674815eccc95c1ad849a9b75",
+          "instanceCount": 12,
+          "stackCountPerInstance": 1
+        }
+      ]
+    },
+    {
+      "lotId": "ops-core-mk6-package.compatible-v1.shipment-v1",
+      "displayName": "Ops-Core Mk6 Package Shipment",
+      "purpose": "6 assembled Ops-Core Mk6 helmets plus matching side and face armor accessories.",
+      "familyId": "operator",
+      "trackId": "natalya-elite-armor-compatible-v1",
+      "anchorTemplateId": "67e179c97ded878d55fb8d4c",
+      "weight": 0.8,
+      "usePath": {
+        "kind": "raidRole",
+        "roleId": "elite-operator"
+      },
+      "recipe": [
+        {
+          "kind": "preset",
+          "presetId": "690dd23f50cb1ea00ba11202"
+        },
+        {
+          "kind": "preset",
+          "presetId": "690dd23f50cb1ea00ba11202"
+        },
+        {
+          "kind": "preset",
+          "presetId": "690dd23f50cb1ea00ba11202"
+        },
+        {
+          "kind": "preset",
+          "presetId": "690dd23f50cb1ea00ba11202"
+        },
+        {
+          "kind": "preset",
+          "presetId": "690dd23f50cb1ea00ba11202"
+        },
+        {
+          "kind": "preset",
+          "presetId": "690dd23f50cb1ea00ba11202"
+        },
+        {
+          "kind": "template",
+          "templateId": "674815ecb107ad4bd99235e4",
+          "instanceCount": 6,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "674815ec0e1737c294820e25",
+          "instanceCount": 6,
+          "stackCountPerInstance": 1
+        }
+      ]
     }
+  ],
+  "retiredLotIds": [
+    "gen-pro-six-plate-carrier",
+    "gen-pro-seven-plate-carrier",
+    "ops-core-mk6-package",
+    "gen-pro-six-plate-carrier.shipment-v1",
+    "gen-pro-seven-plate-carrier.shipment-v1",
+    "ops-core-mk6-package.shipment-v1"
   ]
 }

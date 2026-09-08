@@ -36,6 +36,7 @@ public static class ManifestEconomyReport
                 Grade = RewardRarities.GetInfo(lot.Evaluation.Grade).DisplayName,
                 lot.Evaluation.HandbookValue,
                 lot.Evaluation.UseValue,
+                lot.Evaluation.TraderResaleEstimate,
                 lot.Evaluation.FootprintCells,
                 RootCount = lot.Forest.Roots.Count,
                 NodeCount = lot.Forest.Nodes.Count,
@@ -72,6 +73,7 @@ public static class ManifestEconomyReport
         return new
         {
             catalog.SnapshotId,
+            catalog.UnavailableRetiredLots,
             SelectionCategories = CargoFamilies.SelectionVersion,
             LotCount = lots.Length,
             FreshOpeningLotCount = catalog.FreshOpeningLots.Count,

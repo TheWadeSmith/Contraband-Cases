@@ -11,7 +11,9 @@
     "69bb4203f94327bc0f0230cd",
     "69bb41c03b5fb75517065960"
   ],
-  "requiredPresetIds": [],
+  "requiredPresetIds": [
+    "68a4858f9dc8c374800a3b4a"
+  ],
   "requiredBundleKeys": [],
   "lots": [
     {
@@ -21,7 +23,7 @@
       "familyId": "operator",
       "trackId": "wtt-elite-optics",
       "anchorTemplateId": "689b889473ebd6871805edd6",
-      "weight": 1.0,
+      "weight": 1,
       "usePath": {
         "kind": "raidRole",
         "roleId": "night-operations"
@@ -42,7 +44,7 @@
       "familyId": "armor",
       "trackId": "wtt-elite-optics",
       "anchorTemplateId": "68948a95d8f2b85fb705e2a6",
-      "weight": 1.0,
+      "weight": 1,
       "usePath": {
         "kind": "raidRole",
         "roleId": "elite-operator"
@@ -96,7 +98,7 @@
       "familyId": "operator",
       "trackId": "wtt-elite-optics",
       "anchorTemplateId": "689b889473ebd6871805edd6",
-      "weight": 1.0,
+      "weight": 1,
       "usePath": {
         "kind": "raidRole",
         "roleId": "night-operations"
@@ -147,7 +149,7 @@
       "familyId": "armor",
       "trackId": "wtt-elite-optics",
       "anchorTemplateId": "68948a95d8f2b85fb705e2a6",
-      "weight": 1.0,
+      "weight": 1,
       "usePath": {
         "kind": "raidRole",
         "roleId": "elite-operator"
@@ -313,6 +315,227 @@
           "stackCountPerInstance": 1
         }
       ]
+    },
+    {
+      "lotId": "night-vision-overwatch.compatible-v1.shipment-v1",
+      "displayName": "Night Vision Overwatch Shipment",
+      "purpose": "6 complete Night Vision Overwatch packages. An L3Harris PVS-31A dual-tube night vision goggle set for night operations.",
+      "familyId": "operator",
+      "trackId": "wtt-elite-optics-compatible-v1",
+      "anchorTemplateId": "689b889473ebd6871805edd6",
+      "weight": 1,
+      "usePath": {
+        "kind": "raidRole",
+        "roleId": "night-operations"
+      },
+      "recipe": [
+        {
+          "kind": "template",
+          "templateId": "689b889473ebd6871805edd6",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "689b889473ebd6871805edd6",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "689b889473ebd6871805edd6",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "689b889473ebd6871805edd6",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "689b889473ebd6871805edd6",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "689b889473ebd6871805edd6",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        }
+      ]
+    },
+    {
+      "lotId": "heavy-plate-carrier.compatible-v1.shipment-v1",
+      "displayName": "Heavy Plate Carrier Shipment",
+      "purpose": "6 complete Heavy Plate Carrier packages. A 6B45 body armor rig fitted with a pair of Tac-Kek SAPI Level III+ ballistic plates.",
+      "familyId": "armor",
+      "trackId": "wtt-elite-optics-compatible-v1",
+      "anchorTemplateId": "68948a95d8f2b85fb705e2a6",
+      "weight": 1,
+      "usePath": {
+        "kind": "raidRole",
+        "roleId": "elite-operator"
+      },
+      "recipe": [
+        {
+          "kind": "preset",
+          "presetId": "68a4858f9dc8c374800a3b4a"
+        },
+        {
+          "kind": "template",
+          "templateId": "6943c85be2f21398e70378cc",
+          "instanceCount": 2,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "preset",
+          "presetId": "68a4858f9dc8c374800a3b4a"
+        },
+        {
+          "kind": "template",
+          "templateId": "6943c85be2f21398e70378cc",
+          "instanceCount": 2,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "preset",
+          "presetId": "68a4858f9dc8c374800a3b4a"
+        },
+        {
+          "kind": "template",
+          "templateId": "6943c85be2f21398e70378cc",
+          "instanceCount": 2,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "preset",
+          "presetId": "68a4858f9dc8c374800a3b4a"
+        },
+        {
+          "kind": "template",
+          "templateId": "6943c85be2f21398e70378cc",
+          "instanceCount": 2,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "preset",
+          "presetId": "68a4858f9dc8c374800a3b4a"
+        },
+        {
+          "kind": "template",
+          "templateId": "6943c85be2f21398e70378cc",
+          "instanceCount": 2,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "preset",
+          "presetId": "68a4858f9dc8c374800a3b4a"
+        },
+        {
+          "kind": "template",
+          "templateId": "6943c85be2f21398e70378cc",
+          "instanceCount": 2,
+          "stackCountPerInstance": 1
+        }
+      ]
+    },
+    {
+      "lotId": "encrypted-tech-cache.compatible-v1.shipment-v1",
+      "displayName": "Encrypted Tech Cache Shipment",
+      "purpose": "6 complete Encrypted Tech Cache packages. An IBX Gigachad cryptographic processor and an Ultralink satellite communication module.",
+      "familyId": "tech",
+      "trackId": "wtt-elite-optics-compatible-v1",
+      "anchorTemplateId": "69bb4203f94327bc0f0230cd",
+      "weight": 0.6,
+      "usePath": {
+        "kind": "raidRole",
+        "roleId": "black-market-tech"
+      },
+      "recipe": [
+        {
+          "kind": "template",
+          "templateId": "69bb4203f94327bc0f0230cd",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "69bb41c03b5fb75517065960",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "69bb4203f94327bc0f0230cd",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "69bb41c03b5fb75517065960",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "69bb4203f94327bc0f0230cd",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "69bb41c03b5fb75517065960",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "69bb4203f94327bc0f0230cd",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "69bb41c03b5fb75517065960",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "69bb4203f94327bc0f0230cd",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "69bb41c03b5fb75517065960",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "69bb4203f94327bc0f0230cd",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "69bb41c03b5fb75517065960",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        }
+      ]
     }
+  ],
+  "retiredLotIds": [
+    "night-vision-overwatch",
+    "heavy-plate-carrier",
+    "encrypted-tech-cache",
+    "night-vision-overwatch.shipment-v1",
+    "heavy-plate-carrier.shipment-v1",
+    "encrypted-tech-cache.shipment-v1"
   ]
 }

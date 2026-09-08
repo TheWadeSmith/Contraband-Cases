@@ -582,11 +582,8 @@ public static class ManifestPresentationPolicy
             (content.Quantity == 1
                 ? string.Empty
                 : $" ×{content.Quantity.ToString(CultureInfo.InvariantCulture)}")));
-        var values = lot.LiquidationValue is long liquidation &&
-                     lot.UseValue is long use &&
-                     lot.FootprintCells is int cells
-            ? $"Liquidation {liquidation.ToString("N0", CultureInfo.InvariantCulture)}₽  •  " +
-              $"Use value {use.ToString("N0", CultureInfo.InvariantCulture)}₽  •  {cells} cells"
+        var values = lot.UseValue is not null && lot.FootprintCells is int cells
+            ? BrokerPresentation.Value(lot) + $"  •  {cells} cells"
             : "Valuation unavailable — this lot is blocked until its content pack returns.";
         return
             $"<b>{lot.DisplayName}</b>  •  {grade}\n" +
@@ -617,12 +614,11 @@ public static class ManifestPresentationPolicy
 
     public static string LotDetails(ManifestLotSnapshot lot, string caseTemplateId, bool missingContentBlocked = false)
     {
-        var values = lot.LiquidationValue is long liquidation &&
-                     lot.UseValue is long use &&
+        var values = lot.UseValue is long use &&
                      lot.FootprintCells is int cells
             ? caseTemplateId == CaseContracts.CashCache
                 ? $"{CashPayouts.ValueLabel(lot.AnchorTemplateId)}: ₽{use.ToString("N0", CultureInfo.InvariantCulture)}  •  {cells} stash cells"
-                : $"Reference value ₽{use.ToString("N0", CultureInfo.InvariantCulture)}  •  {cells} stash cells (not a cash payout)"
+                : BrokerPresentation.Value(lot) + $"\n{cells} stash cells. " + BrokerPresentation.ResaleBasis
             : caseTemplateId == CaseContracts.CashCache && !missingContentBlocked
                 ? "Current conversion estimate unavailable. Your committed payout is unchanged."
                 : "Valuation unavailable — this lot is blocked until its content pack returns.";

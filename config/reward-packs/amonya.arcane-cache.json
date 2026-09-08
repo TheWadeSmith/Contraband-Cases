@@ -21,7 +21,7 @@
       "familyId": "exotic-ordnance",
       "trackId": "amonya-arcane-cache",
       "anchorTemplateId": "69359d725bbf2f0c2027c59c",
-      "weight": 1.0,
+      "weight": 1,
       "usePath": {
         "kind": "raidRole",
         "roleId": "close-quarters"
@@ -48,7 +48,7 @@
       "familyId": "operator",
       "trackId": "amonya-arcane-cache",
       "anchorTemplateId": "69359d725bbf2f0c2027c5a0",
-      "weight": 1.0,
+      "weight": 1,
       "usePath": {
         "kind": "raidRole",
         "roleId": "quartermaster"
@@ -96,7 +96,7 @@
       "familyId": "exotic-ordnance",
       "trackId": "amonya-arcane-cache",
       "anchorTemplateId": "69359d725bbf2f0c2027c59c",
-      "weight": 1.0,
+      "weight": 1,
       "usePath": {
         "kind": "raidRole",
         "roleId": "close-quarters"
@@ -207,7 +207,7 @@
       "familyId": "operator",
       "trackId": "amonya-arcane-cache",
       "anchorTemplateId": "69359d725bbf2f0c2027c5a0",
-      "weight": 1.0,
+      "weight": 1,
       "usePath": {
         "kind": "raidRole",
         "roleId": "quartermaster"
@@ -373,6 +373,125 @@
           "stackCountPerInstance": 5
         }
       ]
+    },
+    {
+      "lotId": "arcane-ammunition-cache.compatible-v1.shipment-v1",
+      "displayName": "Arcane Ammunition Cache Shipment",
+      "purpose": "32 Arcane Rounds and 32 Mystic Rounds in legal two-token stacks. Barter tokens for Amonya, not fireable ammunition.",
+      "familyId": "exotic-ordnance",
+      "trackId": "amonya-arcane-cache-compatible-v1",
+      "anchorTemplateId": "69359d725bbf2f0c2027c59c",
+      "weight": 1,
+      "usePath": {
+        "kind": "raidRole",
+        "roleId": "close-quarters"
+      },
+      "recipe": [
+        {
+          "kind": "template",
+          "templateId": "69359d725bbf2f0c2027c59c",
+          "instanceCount": 16,
+          "stackCountPerInstance": 2
+        },
+        {
+          "kind": "template",
+          "templateId": "69359d725bbf2f0c2027c59f",
+          "instanceCount": 16,
+          "stackCountPerInstance": 2
+        }
+      ]
+    },
+    {
+      "lotId": "satchel-of-holding.compatible-v1.shipment-v1",
+      "displayName": "Satchel of Holding Shipment",
+      "purpose": "8 complete Satchel of Holding packages. A Satchel Sized Mag of Holding for stowing extra ordnance in the field.",
+      "familyId": "operator",
+      "trackId": "amonya-arcane-cache-compatible-v1",
+      "anchorTemplateId": "69359d725bbf2f0c2027c5a0",
+      "weight": 1,
+      "usePath": {
+        "kind": "raidRole",
+        "roleId": "quartermaster"
+      },
+      "recipe": [
+        {
+          "kind": "template",
+          "templateId": "69359d725bbf2f0c2027c5a0",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "69359d725bbf2f0c2027c5a0",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "69359d725bbf2f0c2027c5a0",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "69359d725bbf2f0c2027c5a0",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "69359d725bbf2f0c2027c5a0",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "69359d725bbf2f0c2027c5a0",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "69359d725bbf2f0c2027c5a0",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "69359d725bbf2f0c2027c5a0",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        }
+      ]
+    },
+    {
+      "lotId": "eldritch-ordinance.compatible-v1.shipment-v1",
+      "displayName": "Eldritch Barter Reserve",
+      "purpose": "40 Eldritch Rounds in legal two-token stacks for Amonya barters. Not fireable ammunition.",
+      "familyId": "exotic-ordnance",
+      "trackId": "amonya-arcane-cache-compatible-v1",
+      "anchorTemplateId": "69359d725bbf2f0c2027c5a2",
+      "weight": 0.8,
+      "usePath": {
+        "kind": "raidRole",
+        "roleId": "breaching-ordnance"
+      },
+      "recipe": [
+        {
+          "kind": "template",
+          "templateId": "69359d725bbf2f0c2027c5a2",
+          "instanceCount": 20,
+          "stackCountPerInstance": 2
+        }
+      ]
     }
+  ],
+  "retiredLotIds": [
+    "arcane-ammunition-cache",
+    "satchel-of-holding",
+    "eldritch-ordinance",
+    "arcane-ammunition-cache.shipment-v1",
+    "satchel-of-holding.shipment-v1",
+    "eldritch-ordinance.shipment-v1"
   ]
 }

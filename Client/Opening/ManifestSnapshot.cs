@@ -79,7 +79,8 @@ public sealed class ManifestLotSnapshot
         long? liquidationValue,
         long? useValue,
         int? footprintCells,
-        IEnumerable<ManifestLotContentSnapshot> contents)
+        IEnumerable<ManifestLotContentSnapshot> contents,
+        long? traderResaleEstimate = null)
     {
         ProviderId = providerId;
         ProviderLabel = providerLabel;
@@ -95,6 +96,7 @@ public sealed class ManifestLotSnapshot
         UseValue = useValue;
         FootprintCells = footprintCells;
         Contents = new ReadOnlyCollection<ManifestLotContentSnapshot>(contents.ToArray());
+        TraderResaleEstimate = traderResaleEstimate;
     }
 
     public string ProviderId { get; }
@@ -120,6 +122,8 @@ public sealed class ManifestLotSnapshot
     public long? LiquidationValue { get; }
 
     public long? UseValue { get; }
+
+    public long? TraderResaleEstimate { get; }
 
     public int? FootprintCells { get; }
 

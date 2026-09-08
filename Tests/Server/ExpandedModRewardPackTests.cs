@@ -31,10 +31,10 @@ public sealed class ExpandedModRewardPackTests
     public static readonly TheoryData<string, string, double, int> PackFiles = new()
     {
         { "wtt-contentbackport.field-resupply.json", "wtt-contentbackport.field-resupply", 0.20, 6 },
-        { "wtt-contentbackport.elite-optics.json", "wtt-contentbackport.elite-optics", 0.07, 6 },
+        { "wtt-contentbackport.elite-optics.json", "wtt-contentbackport.elite-optics", 0.07, 9 },
         { "eco-attachment.field-cache.json", "eco-attachment.field-cache", 0.16, 5 },
         { "eco-attachment.elite-optics.json", "eco-attachment.elite-optics", 0.06, 6 },
-        { "amonya.arcane-cache.json", "amonya.arcane-cache", 0.05, 6 },
+        { "amonya.arcane-cache.json", "amonya.arcane-cache", 0.05, 9 },
         { "eco-ww2.relic-cache.json", "eco-ww2.relic-cache", 0.05, 4 }
     };
 
@@ -51,7 +51,8 @@ public sealed class ExpandedModRewardPackTests
         Assert.Equal(expectedProviderId, pack.ProviderId);
         Assert.Equal(expectedProviderWeight, pack.ProviderWeight, 12);
         Assert.Equal(expectedLotCount, pack.Lots.Count);
-        Assert.Empty(pack.RequiredPresetIds);
+        Assert.Equal(pack.RequiredPresetIds.OrderBy(id => id), pack.Lots.SelectMany(lot => lot.RecipeLines)
+            .OfType<PresetLine>().Select(line => line.PresetId).Distinct().OrderBy(id => id));
         Assert.Empty(pack.RequiredBundleKeys);
         Assert.NotEmpty(pack.RequiredTemplateIds);
 
@@ -61,7 +62,7 @@ public sealed class ExpandedModRewardPackTests
         // correctly instead of silently loading a partial/corrupt pool.
         var recipeTemplateIds = pack.Lots
             .SelectMany(lot => lot.RecipeLines)
-            .Select(line => Assert.IsType<TemplateLine>(line).TemplateId)
+            .OfType<TemplateLine>().Select(line => line.TemplateId)
             .Distinct(StringComparer.Ordinal);
         Assert.Equal(
             pack.RequiredTemplateIds.OrderBy(id => id, StringComparer.Ordinal),
@@ -139,6 +140,12 @@ public sealed class ExpandedModRewardPackTests
         int expectedLotCount)
     {
         var pack = new JsonRewardPackLoader().LoadFile(RewardPackPath(fileName));
+        if (pack.RetiredLotIds.Count > 0)
+        {
+            var real = InstalledOptionalPackCompatibilityTests.ReadCatalog(expectedProviderId);
+            Assert.Equal(pack.Lots.Count - pack.RetiredLotIds.Count, real.FreshOpeningLots.Count);
+            return;
+        }
         var templates = pack.RequiredTemplateIds
             .Select(id => Template(id))
             .ToArray();

@@ -10,7 +10,8 @@ public sealed class CargoLotEvaluation
         long handbookValue,
         long useValue,
         int footprintCells,
-        RewardRarity grade)
+        RewardRarity grade,
+        long? traderResaleEstimate = null)
     {
         if (handbookValue <= 0)
         {
@@ -33,6 +34,9 @@ public sealed class CargoLotEvaluation
         UseValue = useValue;
         FootprintCells = footprintCells;
         Grade = grade;
+        if (traderResaleEstimate < 0 || traderResaleEstimate > 10_000_000_000L)
+            throw new CargoCatalogValidationException("Trader resale estimate is out of bounds.");
+        TraderResaleEstimate = traderResaleEstimate;
     }
 
     public long HandbookValue { get; }
@@ -42,6 +46,8 @@ public sealed class CargoLotEvaluation
     public int FootprintCells { get; }
 
     public RewardRarity Grade { get; }
+
+    public long? TraderResaleEstimate { get; }
 }
 
 /// <summary>

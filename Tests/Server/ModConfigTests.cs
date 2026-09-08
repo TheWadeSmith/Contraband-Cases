@@ -17,6 +17,26 @@ public sealed class ModConfigTests
         Assert.False(config.DebugLogging);
         Assert.False(config.TestingInventoryGrantsEnabled);
         Assert.Null(config.FixedCasePrice);
+        Assert.Equal(2.2d, config.KeyLootWeightPercent);
+        Assert.Equal(1.1d, config.CaseLootWeightPercent);
+    }
+
+    [Fact]
+    public void Shipped_loot_weights_match_defaults_and_are_only_ten_percent_above_previous_weights()
+    {
+        var root = System.IO.Path.GetFullPath(System.IO.Path.Combine(AppContext.BaseDirectory, "../../../.."));
+        var shipped = ModConfig.Parse(File.ReadAllText(System.IO.Path.Combine(root, "config/config.jsonc")));
+        var defaults = ModConfig.Parse("{}");
+        Assert.Equal(2d * 1.1d, shipped.KeyLootWeightPercent);
+        Assert.Equal(1d * 1.1d, shipped.CaseLootWeightPercent);
+        Assert.Equal(defaults.KeyLootWeightPercent, shipped.KeyLootWeightPercent);
+        Assert.Equal(defaults.CaseLootWeightPercent, shipped.CaseLootWeightPercent);
+    }
+
+    [Fact]
+    public void Existing_explicit_loot_settings_are_preserved_instead_of_silently_migrated()
+    {
+        var config = ModConfig.Parse("""{ "keyLootWeightPercent": 2.0, "caseLootWeightPercent": 1.0 }""");
         Assert.Equal(2d, config.KeyLootWeightPercent);
         Assert.Equal(1d, config.CaseLootWeightPercent);
     }
@@ -72,7 +92,7 @@ public sealed class ModConfigTests
     {
         var config = ModConfig.Parse("""{ "caseLootWeightPercent": 0 }""");
         Assert.Equal(0d, config.CaseLootWeightPercent);
-        Assert.Equal(2d, config.KeyLootWeightPercent);
+        Assert.Equal(2.2d, config.KeyLootWeightPercent);
     }
 
     [Theory]

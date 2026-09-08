@@ -2078,9 +2078,7 @@ internal sealed partial class RouletteOverlay : IDisposable
     {
         var details = _decisionCandidates.text;
         var lot = snapshot.CurrentLot!;
-        var value = lot.UseValue is long referenceValue
-            ? $"Reference value ₽{referenceValue.ToString("N0", CultureInfo.InvariantCulture)} — not a cash payout."
-            : "Reference value unavailable.";
+        var value = BrokerPresentation.Value(lot);
         if (snapshot.CaseTemplateId == CaseContracts.CashCache && lot.UseValue is long cashValue)
             value = $"{CashPayouts.ValueLabel(lot.AnchorTemplateId)}: ₽{cashValue.ToString("N0", CultureInfo.InvariantCulture)}.";
         var summary = entitlement

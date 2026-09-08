@@ -298,6 +298,10 @@ public sealed class ManifestLotData
     [JsonIgnore(Condition = JsonIgnoreCondition.Never)]
     public long? UseValue { get; init; }
 
+    [JsonPropertyName("traderResaleEstimate")]
+    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+    public long? TraderResaleEstimate { get; init; }
+
     [JsonPropertyName("footprintCells")]
     [JsonIgnore(Condition = JsonIgnoreCondition.Never)]
     public int? FootprintCells { get; init; }

@@ -180,8 +180,8 @@ try {
     $stage = Join-Path $packageRoot "dist\stage"
     $validationScript = Join-Path $packageRoot "ContrabandCases\tools\Validate-Package.ps1"
     $stagedClientDll = Join-Path $stage "BepInEx\plugins\ContrabandCases\ContrabandCases.Client.dll"
-    $archivePath = Join-Path $packageRoot "dist\ContrabandCases-0.4.10-SPT4.1.5.zip"
-    $hashPath = Join-Path $packageRoot "dist\ContrabandCases-0.4.10-SPT4.1.5-SHA256.txt"
+    $archivePath = Join-Path $packageRoot "dist\ContrabandCases-0.4.11-SPT4.1.5.zip"
+    $hashPath = Join-Path $packageRoot "dist\ContrabandCases-0.4.11-SPT4.1.5-SHA256.txt"
 
     # The dist-scoped lock must reject a concurrent package run without touching canonical outputs.
     $lockedStageSnapshot = Get-DirectoryByteSnapshot $stage
@@ -208,12 +208,12 @@ try {
     Assert-Condition ((Get-FileHash -LiteralPath $hashPath -Algorithm SHA256).Hash -eq $lockedManifestHash) "interrupted-transaction rejection changed the canonical checksum manifest."
     Remove-Item -LiteralPath $interruptedTransactionPath -Recurse -Force
 
-    Assert-Condition ((Get-Item -LiteralPath $stagedClientDll).LastWriteTimeUtc.Ticks -eq $packageTimestampUtc.Ticks) "packaging did not stamp staged files with the 0.4.10 release timestamp."
+    Assert-Condition ((Get-Item -LiteralPath $stagedClientDll).LastWriteTimeUtc.Ticks -eq $packageTimestampUtc.Ticks) "packaging did not stamp staged files with the 0.4.11 release timestamp."
     $headerTimestamps = Get-ArchiveHeaderTimestamps $archivePath
-    Assert-Condition ($headerTimestamps.LocalDate -eq $packageDosDate -and $headerTimestamps.LocalTime -eq $packageDosTime) "local ZIP header does not contain the 0.4.10 release timestamp."
-    Assert-Condition ($headerTimestamps.CentralDate -eq $packageDosDate -and $headerTimestamps.CentralTime -eq $packageDosTime) "central ZIP header does not contain the 0.4.10 release timestamp."
+    Assert-Condition ($headerTimestamps.LocalDate -eq $packageDosDate -and $headerTimestamps.LocalTime -eq $packageDosTime) "local ZIP header does not contain the 0.4.11 release timestamp."
+    Assert-Condition ($headerTimestamps.CentralDate -eq $packageDosDate -and $headerTimestamps.CentralTime -eq $packageDosTime) "central ZIP header does not contain the 0.4.11 release timestamp."
     (Get-Item -LiteralPath $stagedClientDll).LastWriteTimeUtc = [DateTime]::SpecifyKind([DateTime]"1980-01-01T00:00:00", [DateTimeKind]::Utc)
-    Invoke-ExpectFailure $validationScript "staged release timestamp mutation" @("Package validation failed: staged file '.+ContrabandCases\.Client\.dll' has timestamp '.+'; expected the 0\.4\.9 release timestamp '.+'\.")
+    Invoke-ExpectFailure $validationScript "staged release timestamp mutation" @("Package validation failed: staged file '.+ContrabandCases\.Client\.dll' has timestamp '.+'; expected the 0\.4\.11 release timestamp '.+'\.")
     (Get-Item -LiteralPath $stagedClientDll).LastWriteTimeUtc = $packageTimestampUtc
     Assert-Condition ((Invoke-ProductionScript $validationScript) -eq 0) "restored release timestamp did not pass validation."
 
@@ -324,8 +324,8 @@ try {
 
     foreach ($stockCase in @(
         [pscustomobject]@{ Label = "case-stock"; Property = "caseStock"; Before = 5; After = 4 },
-        [pscustomobject]@{ Label = "key-loot"; Property = "keyLootWeightPercent"; Before = "2.0"; After = "2.5" },
-        [pscustomobject]@{ Label = "case-loot"; Property = "caseLootWeightPercent"; Before = "1.0"; After = "1.5" }
+        [pscustomobject]@{ Label = "key-loot"; Property = "keyLootWeightPercent"; Before = "2.2"; After = "2.5" },
+        [pscustomobject]@{ Label = "case-loot"; Property = "caseLootWeightPercent"; Before = "1.1"; After = "1.5" }
     )) {
         $stockRoot = New-TemporaryProjectClone $stockCase.Label
         $temporaryRoots += $stockRoot
@@ -377,6 +377,22 @@ try {
         Invoke-ExpectFailure (Join-Path $packProject "tools\Package.ps1") $packCase.Description @($packCase.Expected)
     }
 
+    # New retirement metadata and JSON integer weights must retain fail-closed validation.
+    foreach ($packCase in @(
+        [pscustomobject]@{ Label = "retired-unknown-id"; Before = '"retiredLotIds": ['; After = '"retiredLotIds": ["does-not-exist",'; Expected = "retiredLotIds must contain exactly 6 entries" },
+        [pscustomobject]@{ Label = "quoted-lot-weight"; Before = '"weight": 1,'; After = '"weight": "1",'; Expected = "must have a positive finite numeric weight" }
+    )) {
+        $packRoot = New-TemporaryProjectClone $packCase.Label
+        $temporaryRoots += $packRoot
+        $packProject = Join-Path $packRoot "ContrabandCases"
+        $packPath = Join-Path $packProject "config\reward-packs\amonya.arcane-cache.json"
+        $original = [IO.File]::ReadAllText($packPath)
+        $mutated = $original.Replace($packCase.Before, $packCase.After)
+        Assert-Condition ($original -cne $mutated) "$($packCase.Label) fixture did not change the pack."
+        [IO.File]::WriteAllText($packPath, $mutated, (New-Object Text.UTF8Encoding($false)))
+        Invoke-ExpectFailure (Join-Path $packProject "tools\Package.ps1") $packCase.Label @($packCase.Expected)
+    }
+
     # Same-count recipe substitutions must fail even when every shallow schema/count check still passes.
     $recipeTamperRoot = New-TemporaryProjectClone "core-recipe-tamper"
     $temporaryRoots += $recipeTamperRoot
@@ -384,11 +400,11 @@ try {
     $recipeTamperPath = Join-Path $recipeTamperProject "config\reward-packs\core.json"
     $recipeTamperText = [IO.File]::ReadAllText($recipeTamperPath)
     $mutatedRecipeTamperText = $recipeTamperText.Replace(
-        '{ "kind": "preset", "presetId": "657120b36fe59548840cb542" }',
-        '{ "kind": "preset", "presetId": "000000000000000000000000" }')
+        '"presetId": "657120b36fe59548840cb542"',
+        '"presetId": "000000000000000000000000"')
     Assert-Condition (![string]::Equals($recipeTamperText, $mutatedRecipeTamperText, [StringComparison]::Ordinal)) "core recipe-tamper fixture did not replace the night-patrol preset."
     [IO.File]::WriteAllText($recipeTamperPath, $mutatedRecipeTamperText, (New-Object Text.UTF8Encoding($false)))
-    Invoke-ExpectFailure (Join-Path $recipeTamperProject "tools\Package.ps1") "same-count core recipe tamper" @("Package validation failed: reward pack 'core' SHA-256 '[0-9A-F]{64}' does not match accepted hash '335252043DF371B802BFD595D08E4C60803E126731A8CF782093C2BDBFD2D0F8'\.")
+    Invoke-ExpectFailure (Join-Path $recipeTamperProject "tools\Package.ps1") "same-count core recipe tamper" @("Package validation failed: reward pack 'core' SHA-256 '[0-9A-F]{64}' does not match accepted hash 'B3D7EAA2E111165C5202CFB221718E9E535EA8FC77E3ED87A1022D8A2C198F7C'\.")
 
     # A canonical-revalidation failure must preserve every previously published canonical output.
     $publicationRoot = New-TemporaryProjectClone "publication-preservation"
@@ -399,8 +415,8 @@ try {
 
     $publicationDist = Join-Path $publicationRoot "dist"
     $publicationStage = Join-Path $publicationDist "stage"
-    $publicationArchive = Join-Path $publicationDist "ContrabandCases-0.4.10-SPT4.1.5.zip"
-    $publicationHash = Join-Path $publicationDist "ContrabandCases-0.4.10-SPT4.1.5-SHA256.txt"
+    $publicationArchive = Join-Path $publicationDist "ContrabandCases-0.4.11-SPT4.1.5.zip"
+    $publicationHash = Join-Path $publicationDist "ContrabandCases-0.4.11-SPT4.1.5-SHA256.txt"
     $publishedStageSnapshot = Get-DirectoryByteSnapshot $publicationStage
     $publishedArchiveHash = (Get-FileHash -LiteralPath $publicationArchive -Algorithm SHA256).Hash
     $publishedManifestHash = (Get-FileHash -LiteralPath $publicationHash -Algorithm SHA256).Hash

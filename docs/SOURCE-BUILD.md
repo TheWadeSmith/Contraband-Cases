@@ -1,6 +1,6 @@
 # Source build and publication scope
 
-This repository contains the **0.4.10 source**, built against compatible SPT
+This repository contains the **0.4.11 source**, built against compatible SPT
 4.1.3 server SDK packages and offline-validated with SPT 4.1.5 game data.
 It is not an installable mod archive or a standalone Unity game project.
 
@@ -31,10 +31,20 @@ From the repository root, set these paths to your own installation:
 $gameManaged = 'D:/Your-SPT/EscapeFromTarkov_Data/Managed'
 $bepInExCore = 'D:/Your-SPT/BepInEx/core'
 dotnet build ContrabandCases.sln -c Release "-p:GameManagedPath=$gameManaged" "-p:BepInExCorePath=$bepInExCore"
+pwsh -NoProfile -File tools/Capture-OptionalPackFixture.ps1 -RuntimeRoot 'D:/Your-SPT/SPT_Runtime' -OutputPath 'Tests/Fixtures/optional-mod-templates.json'
 dotnet test Tests/ContrabandCases.Tests.csproj -c Release "-p:GameManagedPath=$gameManaged" "-p:BepInExCorePath=$bepInExCore"
 ```
 
-These commands restore dependencies. Use `--no-restore` only after a successful
+The fixture capture additionally requires compatible Amonya, ISB-Aishi, Natalya
+and WTT-ContentBackport installations. It reads their clone/override definitions;
+it does not run mod hooks or modify the game. The generated template/preset
+capture is local-only and gitignored because it contains third-party data.
+Without those optional mods, run the base suite with
+`--filter 'FullyQualifiedName!~InstalledOptionalPackCompatibilityTests&FullyQualifiedName!~NewRewardPackTests&FullyQualifiedName!~ExpandedModRewardPackTests'`
+instead (the latter two classes also exercise this fixture).
+Do not report that filtered run as full optional-integration verification.
+
+The dotnet commands restore dependencies. Use `--no-restore` only after a successful
 restore. Build outputs stay under the ignored `bin` and `obj` directories;
 the commands do not install files into SPT.
 
@@ -68,20 +78,25 @@ directory contains defaults, not a copy of a live profile's configuration.
 
 ## Verification status
 
-The complete development workspace passed **1,554 automated tests**, a clean
+The complete development workspace passed **1,575 automated tests**, a clean
 Release build, native cargo/cash audits and candidate/canonical package validation
-for 0.4.10. Coverage includes original paid-reward identities, generation-separated
-Relay, actual shipment quantities and full-stash/quote-change cash claim retries.
-The curated public-source checkout was separately restored, built and tested
-against installed game assemblies: **1,554 passed, zero failed or skipped**.
-Client parsers accept the full native cargo library and captured mod-value odds.
-No game assemblies or build outputs are included in this source repository.
+for 0.4.11. Coverage includes original paid-reward identities, generation-separated
+Relay, actual shipment quantities, full-stash/quote-change cash claim retries,
+explicit retirement, optional armor presets and resale estimates.
+Client parsers accept the full native cargo library and all 13 corrected rewards
+in the local optional-definition fixture. No game assemblies, generated captures
+or build outputs are included in this source repository.
+
+The curated public checkout was also tested with a newly generated local
+fixture: **1,575 passed, zero failed/skipped**. The full packaging regression
+passes in the provisioned workspace. Full in-game claim/layout checks remain.
 
 The Unity 2022.3.43f1 case/key bundles are unchanged. Sound and model orientation
 were confirmed in-game on a preceding installed build. This rebalance still needs
 in-game acceptance; offline projections do not execute optional-mod hooks or prove
-live inventory placement. Existing optional-pack incompatibilities are not fixed
-by the economy update. Automated checks are not a crash-free guarantee.
+live inventory placement. Four optional integrations are corrected in this release;
+other incompatible or absent content still fails closed. Automated checks are
+not a crash-free guarantee.
 
 The install ZIP and checksum are published separately as GitHub release assets.
 Use the install ZIP, not GitHub's automatically generated source archive, to

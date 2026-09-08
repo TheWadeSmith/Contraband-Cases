@@ -227,6 +227,7 @@ internal static class ManifestSnapshotProjection
             Fingerprint = fingerprint.Sha256Hex,
             LiquidationValue = evaluation?.HandbookValue,
             UseValue = evaluation?.UseValue,
+            TraderResaleEstimate = evaluation?.TraderResaleEstimate,
             FootprintCells = evaluation?.FootprintCells,
             Contents = forest.Nodes
                 .GroupBy(node => node.TemplateId, StringComparer.Ordinal)

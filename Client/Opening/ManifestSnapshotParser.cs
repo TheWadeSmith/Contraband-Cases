@@ -715,9 +715,10 @@ internal static class ManifestSnapshotParser
         }
 
         var source = RequireObject(token, "current lot");
-        RequireExactProperties(
+        RequirePropertiesWithExtension(
             source,
             "current lot",
+            ["traderResaleEstimate"],
             "providerId",
             "providerLabel",
             "lotId",
@@ -759,7 +760,9 @@ internal static class ManifestSnapshotParser
                 "footprintCells",
                 1,
                 ManifestProtocolValidation.MaximumFootprintCells),
-            ParseContents(RequireProperty(source, "contents")));
+            ParseContents(RequireProperty(source, "contents")),
+            source.Property("traderResaleEstimate") is null ? null : ReadLongInRange(
+                source, "traderResaleEstimate", 0, 10_000_000_000L));
     }
 
     private static IReadOnlyList<ManifestLotContentSnapshot> ParseContents(JToken token)
@@ -1110,7 +1113,7 @@ internal static class ManifestSnapshotParser
             ManifestPhase.RewardOwed or ManifestPhase.RelayPrepared;
         var unpricedCashClaim = snapshot.CaseTemplateId == CaseContracts.CashCache &&
             snapshot.Phase == ManifestPhase.Entitlement;
-        if (!allValuesPresent && !allValuesMissing ||
+        if (lot.TraderResaleEstimate is not null && !allValuesPresent || !allValuesPresent && !allValuesMissing ||
             allValuesMissing && !snapshot.MissingContentBlocked && !preparedRecovery && !unpricedCashClaim)
         {
             throw new ManifestSnapshotException("The current lot has a partial or unexplained valuation.");

@@ -137,7 +137,7 @@ public sealed class ManifestCatalogSelector
             // The legacy flag permits either only when settlement has established
             // a necessary continuation for an older frozen catalog.
             .Where(lot => allowOpeningChases ||
-                (ManifestOpeningPool.IsFreshEligible(lot) && !ManifestOpeningPool.IsChase(lot)))
+                (!lot.IsRetired && ManifestOpeningPool.IsFreshEligible(lot) && !ManifestOpeningPool.IsChase(lot)))
             .ToArray();
         EnsureDistinctSemanticLots(eligible);
 

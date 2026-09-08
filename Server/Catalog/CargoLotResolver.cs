@@ -34,13 +34,15 @@ public sealed class ResolvedCargoLot
         RewardForest forest,
         RewardForestFingerprintV2 fingerprint,
         CargoLotIdentitySnapshot identity,
-        CargoLotEvaluation? evaluation = null)
+        CargoLotEvaluation? evaluation = null,
+        bool isRetired = false)
     {
         Definition = definition;
         Forest = forest;
         Fingerprint = fingerprint;
         Identity = identity;
         _evaluation = evaluation;
+        IsRetired = isRetired;
     }
 
     public CargoLotDefinition Definition { get; }
@@ -51,6 +53,8 @@ public sealed class ResolvedCargoLot
 
     public CargoLotIdentitySnapshot Identity { get; }
 
+    internal bool IsRetired { get; }
+
     public CargoLotEvaluation Evaluation =>
         _evaluation ?? throw new InvalidOperationException(
             "The cargo lot has not been evaluated against finalized SPT economy data.");
@@ -58,7 +62,9 @@ public sealed class ResolvedCargoLot
     internal CargoLotEvaluation? EvaluationOrNull => _evaluation;
 
     internal ResolvedCargoLot WithEvaluation(CargoLotEvaluation evaluation) =>
-        new(Definition, Forest, Fingerprint, Identity, evaluation);
+        new(Definition, Forest, Fingerprint, Identity, evaluation, IsRetired);
+
+    internal ResolvedCargoLot AsRetired() => new(Definition, Forest, Fingerprint, Identity, _evaluation, true);
 }
 
 /// <summary>
@@ -247,6 +253,17 @@ public sealed class CargoLotResolver
         }
 
         ValidateCompleteTree(line.PresetId, byId, root);
+        foreach (var slot in line.OmitRootSlots)
+        {
+            var matches = root.Children.Where(node => node.SlotId == slot).Take(2).ToArray();
+            if (matches.Length != 1 || matches[0].Children.Count != 0)
+                throw new CargoCatalogValidationException($"Preset '{line.PresetId}' cannot omit non-leaf or absent root slot '{slot}'.");
+            var rootTemplate = templateCache[root.TemplateId];
+            var slots = rootTemplate.Properties?.Slots?.Where(s => s.Name == slot).Take(2).ToArray();
+            if (slots is not { Length: 1 } || slots[0].Required != false)
+                throw new CargoCatalogValidationException($"Preset '{line.PresetId}' cannot omit required or unknown root slot '{slot}'.");
+            root.Children.Remove(matches[0]);
+        }
         EnsureForestCapacity(output.Count + byId.Count, rootIndex + 1);
         var rootPath = RootPath(rootIndex++);
         AppendCanonicalTree(line.PresetId, root, rootPath, rootPath, null, true, output);
