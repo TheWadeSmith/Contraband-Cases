@@ -6,6 +6,7 @@
   "providerWeight": 0.07,
   "requiredTemplateIds": [
     "591094e086f7747caa7bb2ef",
+    "5910968f86f77425cf569c32",
     "6931b6a2161edf5b558ee5bc",
     "6931bca8197ad8567a64bf86",
     "696d81b236067d6c3ef793ca",
@@ -22,6 +23,138 @@
   ],
   "requiredBundleKeys": [],
   "lots": [
+    {
+      "lotId": "7n24m-marksman-cache.compatible-v1.shipment-v1.compact-v2",
+      "displayName": "7N24M Marksman Cache Armorer Reserve",
+      "purpose": "Specialist ammunition with armor and weapon repair equipment.",
+      "familyId": "arsenal",
+      "trackId": "ammo",
+      "anchorTemplateId": "6a30ed97ce95057496b93476",
+      "weight": 1,
+      "usePath": {
+        "kind": "raidRole",
+        "roleId": "precision-overwatch"
+      },
+      "recipe": [
+        {
+          "kind": "template",
+          "templateId": "6a30ed97ce95057496b93476",
+          "instanceCount": 1,
+          "stackCountPerInstance": 30
+        },
+        {
+          "kind": "template",
+          "templateId": "6a31d5c8c667d4db08650272",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "591094e086f7747caa7bb2ef",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5910968f86f77425cf569c32",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        }
+      ]
+    },
+    {
+      "lotId": "7n26-assault-cache.compatible-v1.shipment-v1.compact-v2",
+      "displayName": "7N26 Assault Cache Armorer Reserve",
+      "purpose": "Specialist ammunition with armor and weapon repair equipment.",
+      "familyId": "arsenal",
+      "trackId": "ammo",
+      "anchorTemplateId": "6931b6a2161edf5b558ee5bc",
+      "weight": 1,
+      "usePath": {
+        "kind": "raidRole",
+        "roleId": "rifle-patrol"
+      },
+      "recipe": [
+        {
+          "kind": "template",
+          "templateId": "6931b6a2161edf5b558ee5bc",
+          "instanceCount": 1,
+          "stackCountPerInstance": 40
+        },
+        {
+          "kind": "template",
+          "templateId": "6931bca8197ad8567a64bf86",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "591094e086f7747caa7bb2ef",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5910968f86f77425cf569c32",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        }
+      ]
+    },
+    {
+      "lotId": "korund-elite-loadout.compatible-v1.shipment-v1.compact-v2",
+      "displayName": "Korund Elite Loadout Package",
+      "purpose": "One complete modded armor carrier with its distinct companion equipment. Required inserts and permitted plates are assembled; no duplicate armor.",
+      "familyId": "operator",
+      "trackId": "recon",
+      "anchorTemplateId": "6a12667fec1b599645cd7183",
+      "weight": 0.7,
+      "usePath": {
+        "kind": "raidRole",
+        "roleId": "elite-operator"
+      },
+      "recipe": [
+        {
+          "kind": "template",
+          "templateId": "6a12667fec1b599645cd7183",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "preset",
+          "presetId": "6a07f2f08e75711e0854623e",
+          "omitRootSlots": [
+            "Left_side_plate",
+            "Right_side_plate"
+          ]
+        }
+      ]
+    },
+    {
+      "lotId": "6b45-elite-loadout.compatible-v1.shipment-v1.compact-v2",
+      "displayName": "6B45 Elite Loadout Package",
+      "purpose": "One complete modded armor carrier with its distinct companion equipment. Required inserts and permitted plates are assembled; no duplicate armor.",
+      "familyId": "operator",
+      "trackId": "recon",
+      "anchorTemplateId": "6a111c7164b1373374405287",
+      "weight": 0.5,
+      "usePath": {
+        "kind": "raidRole",
+        "roleId": "elite-operator"
+      },
+      "recipe": [
+        {
+          "kind": "template",
+          "templateId": "6a111c7164b1373374405287",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "preset",
+          "presetId": "696dad187a3933a203814f40"
+        }
+      ]
+    },
     {
       "lotId": "7n24m-marksman-cache",
       "displayName": "7N24M Marksman Cache",

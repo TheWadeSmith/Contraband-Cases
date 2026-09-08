@@ -22,6 +22,91 @@
   "requiredBundleKeys": [],
   "lots": [
     {
+      "lotId": "gen-pro-six-plate-carrier.compatible-v1.shipment-v1.compact-v2",
+      "displayName": "Gen Pro 6 Plate Carrier Package",
+      "purpose": "One assembled premium modded armor or helmet, with the named distinct accessories. No duplicate armor pieces.",
+      "familyId": "operator",
+      "trackId": "recon",
+      "anchorTemplateId": "67e179c99591ffcd472a270a",
+      "weight": 0.3,
+      "usePath": {
+        "kind": "raidRole",
+        "roleId": "elite-operator"
+      },
+      "recipe": [
+        {
+          "kind": "preset",
+          "presetId": "690e0eee62373b43846feb27"
+        }
+      ]
+    },
+    {
+      "lotId": "gen-pro-six-reserve.compatible-v1.shipment-v1.compact-v2",
+      "displayName": "Gen Pro 6 Reserve Package",
+      "purpose": "One assembled premium modded armor or helmet, with the named distinct accessories. No duplicate armor pieces.",
+      "familyId": "operator",
+      "trackId": "recon",
+      "anchorTemplateId": "674815eccc95c1ad849a9b75",
+      "weight": 0.18,
+      "usePath": {
+        "kind": "raidRole",
+        "roleId": "elite-operator"
+      },
+      "recipe": [
+        {
+          "kind": "template",
+          "templateId": "674815eccc95c1ad849a9b75",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "preset",
+          "presetId": "690e0eee62373b43846feb27"
+        },
+        {
+          "kind": "template",
+          "templateId": "591094e086f7747caa7bb2ef",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        }
+      ]
+    },
+    {
+      "lotId": "ops-core-mk6-package.compatible-v1.shipment-v1.compact-v2",
+      "displayName": "Ops-Core Mk6 Package",
+      "purpose": "One assembled premium modded armor or helmet, with the named distinct accessories. No duplicate armor pieces.",
+      "familyId": "operator",
+      "trackId": "recon",
+      "anchorTemplateId": "674815ec0e1737c294820e25",
+      "weight": 0.8,
+      "usePath": {
+        "kind": "raidRole",
+        "roleId": "elite-operator"
+      },
+      "recipe": [
+        {
+          "kind": "template",
+          "templateId": "674815ec0e1737c294820e25",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "674815ecb107ad4bd99235e4",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "preset",
+          "presetId": "690dd23f50cb1ea00ba11202"
+        },
+        {
+          "kind": "preset",
+          "presetId": "657666ca303700411c0242c6"
+        }
+      ]
+    },
+    {
       "lotId": "gen-pro-six-plate-carrier",
       "displayName": "Gen Pro 6 Plate Carrier",
       "purpose": "A Gen Pro 6 plate carrier with a matched pair of Level 6 FB plates.",

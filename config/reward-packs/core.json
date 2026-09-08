@@ -23,17 +23,22 @@
     "5910968f86f77425cf569c32",
     "59984ab886f7743e98271174",
     "59e6906286f7746c9f75e847",
+    "59fafd4b86f7745ca07e1232",
+    "59fb023c86f7746d0d4b423c",
     "5a154d5cfcdbcb001a3b00da",
     "5a16b8a9fcdbcb00165aa6ca",
     "5a367e5dc4a282000e49738f",
+    "5aafbcd986f7745e590fff23",
     "5b40e1525acfc4771e1c6611",
     "5b432b965acfc47a8774094e",
+    "5b6d9ce188a4501afc1b2b25",
     "5ba26383d4351e00334c93d9",
     "5ba26586d4351e44f824b340",
     "5ba26835d4351e0035628ff5",
     "5c0126f40db834002a125382",
     "5c0530ee86f774697952d952",
     "5c0558060db834001b735271",
+    "5c0a840b86f7742ffa4f2482",
     "5c0e530286f7747fa1419862",
     "5c0e531d86f7747fa23f4d42",
     "5c11046cd174af02a012e42b",
@@ -45,6 +50,7 @@
     "5d235bb686f77443f4331278",
     "5df8ce05b11454561e39243b",
     "5df8f541c41b2312ea3335e3",
+    "5e2af55f86f7746d4159f07c",
     "5e4abb5086f77406975c9342",
     "5ed51652f6c34d2cc26336a1",
     "60098ad7c2240c0fe85c570a",
@@ -54,7 +60,9 @@
     "618cfae774bb2d036a049e7c",
     "619cbf7d23893217ec30b689",
     "628e4e576d783146b124c64d",
+    "6389c8c5dbfd5e4b95197e6b",
     "66b5f6985891c84aab75ca76",
+    "67600929bd0a0549d70993f6",
     "6768c25aa7b238f14a08d3f6",
     "679b992329acd1f2f60985a5"
   ],
@@ -10860,6 +10868,2200 @@
         {
           "kind": "template",
           "templateId": "5c0126f40db834002a125382",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        }
+      ]
+    },
+    {
+      "lotId": "breach-contract.shipment-v1.compact-v2",
+      "displayName": "Breach Team",
+      "purpose": "A shotgun, buckshot, plated carrier and helmet with first-response medicine.",
+      "familyId": "arsenal",
+      "trackId": "cqb",
+      "anchorTemplateId": "54491c4f4bdc2db1078b4568",
+      "weight": 1,
+      "usePath": {
+        "kind": "raidRole",
+        "roleId": "close-quarters"
+      },
+      "recipe": [
+        {
+          "kind": "preset",
+          "presetId": "584148f2245977598f1ad387"
+        },
+        {
+          "kind": "template",
+          "templateId": "560d5e524bdc2d25448b4571",
+          "instanceCount": 1,
+          "stackCountPerInstance": 20
+        },
+        {
+          "kind": "preset",
+          "presetId": "657664ae303700411c02428c"
+        },
+        {
+          "kind": "preset",
+          "presetId": "657120b36fe59548840cb542"
+        },
+        {
+          "kind": "template",
+          "templateId": "5d02778e86f774203e7dedbe",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "60098ad7c2240c0fe85c570a",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        }
+      ]
+    },
+    {
+      "lotId": "subgun-escort.shipment-v1.compact-v2",
+      "displayName": "Close Protection",
+      "purpose": "A suppressed MP7, spare magazine, AP ammunition, Slick and protective helmet.",
+      "familyId": "arsenal",
+      "trackId": "cqb",
+      "anchorTemplateId": "5ba26383d4351e00334c93d9",
+      "weight": 1,
+      "usePath": {
+        "kind": "raidRole",
+        "roleId": "close-quarters"
+      },
+      "recipe": [
+        {
+          "kind": "preset",
+          "presetId": "5bd05f1186f774572f181678"
+        },
+        {
+          "kind": "template",
+          "templateId": "5ba26586d4351e44f824b340",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5ba26835d4351e0035628ff5",
+          "instanceCount": 1,
+          "stackCountPerInstance": 70
+        },
+        {
+          "kind": "preset",
+          "presetId": "657666ca303700411c0242c6"
+        },
+        {
+          "kind": "preset",
+          "presetId": "657120b36fe59548840cb542"
+        }
+      ]
+    },
+    {
+      "lotId": "embassy-carbine.shipment-v1.compact-v2",
+      "displayName": "Embassy Weapons Locker",
+      "purpose": "A configured M4, fitted and spare magazines, matching ammunition, protected headgear, trauma care and compact surgery with an empty weapons case.",
+      "familyId": "arsenal",
+      "trackId": "rifle",
+      "anchorTemplateId": "5447a9cd4bdc2dbd208b4567",
+      "weight": 0.3,
+      "usePath": {
+        "kind": "raidRole",
+        "roleId": "rifle-patrol"
+      },
+      "recipe": [
+        {
+          "kind": "preset",
+          "presetId": "618aaf656bbeff39ad4acf0c"
+        },
+        {
+          "kind": "template",
+          "templateId": "55d4887d4bdc2d962f8b4570",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "59e6906286f7746c9f75e847",
+          "instanceCount": 1,
+          "stackCountPerInstance": 60
+        },
+        {
+          "kind": "preset",
+          "presetId": "657fa7c0e65c0122b70ffdb0"
+        },
+        {
+          "kind": "template",
+          "templateId": "60098ad7c2240c0fe85c570a",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "59fb023c86f7746d0d4b423c",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5d02778e86f774203e7dedbe",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        }
+      ]
+    },
+    {
+      "lotId": "black-site-marksman.shipment-v1.compact-v2",
+      "displayName": "Overwatch Expedition Jackpot",
+      "purpose": "A marksman rifle with ammunition and support equipment, Red Rebel extraction tool and a THICC weapon case.",
+      "familyId": "arsenal",
+      "trackId": "marksman",
+      "anchorTemplateId": "5df8ce05b11454561e39243b",
+      "weight": 0.025,
+      "usePath": {
+        "kind": "raidRole",
+        "roleId": "precision-overwatch"
+      },
+      "recipe": [
+        {
+          "kind": "preset",
+          "presetId": "628753bba4a8431af4739d3b"
+        },
+        {
+          "kind": "template",
+          "templateId": "5df8f541c41b2312ea3335e3",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "6768c25aa7b238f14a08d3f6",
+          "instanceCount": 1,
+          "stackCountPerInstance": 40
+        },
+        {
+          "kind": "preset",
+          "presetId": "657fa7c0e65c0122b70ffdb0"
+        },
+        {
+          "kind": "template",
+          "templateId": "61605e13ffa6e502ac5e7eef",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5c0126f40db834002a125382",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5b6d9ce188a4501afc1b2b25",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        }
+      ]
+    },
+    {
+      "lotId": "recon-load.shipment-v1.compact-v2",
+      "displayName": "Recon Document Recovery",
+      "purpose": "Plated recon gear, SICC pouch, key tool and compact recovery medicine.",
+      "familyId": "operator",
+      "trackId": "recon",
+      "anchorTemplateId": "544a5caa4bdc2d1a388b4568",
+      "weight": 0.3,
+      "usePath": {
+        "kind": "raidRole",
+        "roleId": "recon"
+      },
+      "recipe": [
+        {
+          "kind": "preset",
+          "presetId": "65719d367a553968340d88b8"
+        },
+        {
+          "kind": "preset",
+          "presetId": "657120b36fe59548840cb542"
+        },
+        {
+          "kind": "template",
+          "templateId": "5d02778e86f774203e7dedbe",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "60098ad7c2240c0fe85c570a",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "59fafd4b86f7745ca07e1232",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5d235bb686f77443f4331278",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        }
+      ]
+    },
+    {
+      "lotId": "night-patrol.shipment-v1.compact-v2",
+      "displayName": "Night Patrol",
+      "purpose": "Suppressed MP7, AP ammunition, a complete night-vision helmet and Osprey protection.",
+      "familyId": "operator",
+      "trackId": "night",
+      "anchorTemplateId": "5ba26383d4351e00334c93d9",
+      "weight": 0.3,
+      "usePath": {
+        "kind": "raidRole",
+        "roleId": "night-operations"
+      },
+      "recipe": [
+        {
+          "kind": "preset",
+          "presetId": "5bd05f1186f774572f181678"
+        },
+        {
+          "kind": "template",
+          "templateId": "5ba26835d4351e0035628ff5",
+          "instanceCount": 1,
+          "stackCountPerInstance": 70
+        },
+        {
+          "kind": "preset",
+          "presetId": "657fa7c0e65c0122b70ffdb0"
+        },
+        {
+          "kind": "template",
+          "templateId": "5c0558060db834001b735271",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "preset",
+          "presetId": "657664ae303700411c02428c"
+        }
+      ]
+    },
+    {
+      "lotId": "long-haul-medic.shipment-v1.compact-v2",
+      "displayName": "Long-Haul Medic",
+      "purpose": "LEDX specialist equipment, compact field surgery, trauma care and one endurance injector for a long-haul medic. Separate Messenger attachments.",
+      "familyId": "operator",
+      "trackId": "recon",
+      "anchorTemplateId": "60098ad7c2240c0fe85c570a",
+      "weight": 0.8,
+      "usePath": {
+        "kind": "raidRole",
+        "roleId": "recon"
+      },
+      "recipe": [
+        {
+          "kind": "template",
+          "templateId": "60098ad7c2240c0fe85c570a",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5c0e531d86f7747fa23f4d42",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5c0530ee86f774697952d952",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5d02778e86f774203e7dedbe",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        }
+      ]
+    },
+    {
+      "lotId": "deep-raid-command.shipment-v1.compact-v2",
+      "displayName": "Mountain Recon Command",
+      "purpose": "Red Rebel and SICC extraction equipment with a Slick, document storage and one recovery stim.",
+      "familyId": "operator",
+      "trackId": "recon",
+      "anchorTemplateId": "5e4abb5086f77406975c9342",
+      "weight": 0.012,
+      "usePath": {
+        "kind": "raidRole",
+        "roleId": "recon"
+      },
+      "recipe": [
+        {
+          "kind": "preset",
+          "presetId": "657666ca303700411c0242c6"
+        },
+        {
+          "kind": "template",
+          "templateId": "590c60fc86f77412b13fddcf",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5ed51652f6c34d2cc26336a1",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5c0126f40db834002a125382",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5d235bb686f77443f4331278",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        }
+      ]
+    },
+    {
+      "lotId": "breach-ordnance.shipment-v1.compact-v2",
+      "displayName": "Breach Ordnance",
+      "purpose": "A plated carrier, grenade reserve case, two different grenades and AFAK.",
+      "familyId": "field-supply",
+      "trackId": "ordnance",
+      "anchorTemplateId": "544a5caa4bdc2d1a388b4568",
+      "weight": 1,
+      "usePath": {
+        "kind": "raidRole",
+        "roleId": "breaching-ordnance"
+      },
+      "recipe": [
+        {
+          "kind": "preset",
+          "presetId": "65719d367a553968340d88b8"
+        },
+        {
+          "kind": "template",
+          "templateId": "5448be9a4bdc2dfd2f8b456a",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5710c24ad2720bc3458b45a3",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "60098ad7c2240c0fe85c570a",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5e2af55f86f7746d4159f07c",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        }
+      ]
+    },
+    {
+      "lotId": "trauma-shipment.shipment-v1.compact-v2",
+      "displayName": "Mobile Trauma Kit",
+      "purpose": "A medicine case, surgery kit and AFAK for first-response supplies.",
+      "familyId": "field-supply",
+      "trackId": "medical",
+      "anchorTemplateId": "5d02797c86f774203f38e30a",
+      "weight": 1,
+      "usePath": {
+        "kind": "raidRole",
+        "roleId": "trauma-care"
+      },
+      "recipe": [
+        {
+          "kind": "template",
+          "templateId": "5d02797c86f774203f38e30a",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "60098ad7c2240c0fe85c570a",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5aafbcd986f7745e590fff23",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        }
+      ]
+    },
+    {
+      "lotId": "combat-chemistry.shipment-v1.compact-v2",
+      "displayName": "Combat Chemistry",
+      "purpose": "An empty injector case, one endurance and one recovery injector, compact surgery and armor maintenance for a response team.",
+      "familyId": "field-supply",
+      "trackId": "chemistry",
+      "anchorTemplateId": "619cbf7d23893217ec30b689",
+      "weight": 0.8,
+      "usePath": {
+        "kind": "raidRole",
+        "roleId": "combat-chemistry"
+      },
+      "recipe": [
+        {
+          "kind": "template",
+          "templateId": "619cbf7d23893217ec30b689",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5c0e531d86f7747fa23f4d42",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5c0e530286f7747fa1419862",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "591094e086f7747caa7bb2ef",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5d02778e86f774203e7dedbe",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        }
+      ]
+    },
+    {
+      "lotId": "long-range-resupply.shipment-v1.compact-v2",
+      "displayName": "Long-Range Weapons Reserve",
+      "purpose": "A fitted SR-25, matching ammunition, spare magazine, rangefinder and a weapon case. Includes weapon repair equipment.",
+      "familyId": "field-supply",
+      "trackId": "ammo",
+      "anchorTemplateId": "5df8ce05b11454561e39243b",
+      "weight": 0.18,
+      "usePath": {
+        "kind": "raidRole",
+        "roleId": "ammunition-resupply"
+      },
+      "recipe": [
+        {
+          "kind": "preset",
+          "presetId": "628753bba4a8431af4739d3b"
+        },
+        {
+          "kind": "template",
+          "templateId": "6768c25aa7b238f14a08d3f6",
+          "instanceCount": 1,
+          "stackCountPerInstance": 40
+        },
+        {
+          "kind": "template",
+          "templateId": "5df8f541c41b2312ea3335e3",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "61605e13ffa6e502ac5e7eef",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "59fb023c86f7746d0d4b423c",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5910968f86f77425cf569c32",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        }
+      ]
+    },
+    {
+      "lotId": "entry-first-aid.shipment-v1.compact-v2",
+      "displayName": "Entry Resupply",
+      "purpose": "Shotgun, buckshot, surgical supplies and a grenade reserve case.",
+      "familyId": "arsenal",
+      "trackId": "cqb",
+      "anchorTemplateId": "54491c4f4bdc2db1078b4568",
+      "weight": 0.9,
+      "usePath": {
+        "kind": "raidRole",
+        "roleId": "close-quarters"
+      },
+      "recipe": [
+        {
+          "kind": "preset",
+          "presetId": "584148f2245977598f1ad387"
+        },
+        {
+          "kind": "template",
+          "templateId": "560d5e524bdc2d25448b4571",
+          "instanceCount": 1,
+          "stackCountPerInstance": 20
+        },
+        {
+          "kind": "template",
+          "templateId": "5d02778e86f774203e7dedbe",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "60098ad7c2240c0fe85c570a",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5e2af55f86f7746d4159f07c",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        }
+      ]
+    },
+    {
+      "lotId": "escort-medic.shipment-v1.compact-v2",
+      "displayName": "Escort Medic",
+      "purpose": "A suppressed MP7 with matching ammunition, heavy plated protection, armor maintenance and field surgery for an armed recovery team.",
+      "familyId": "arsenal",
+      "trackId": "cqb",
+      "anchorTemplateId": "5ba26383d4351e00334c93d9",
+      "weight": 0.9,
+      "usePath": {
+        "kind": "raidRole",
+        "roleId": "close-quarters"
+      },
+      "recipe": [
+        {
+          "kind": "preset",
+          "presetId": "5bd05f1186f774572f181678"
+        },
+        {
+          "kind": "template",
+          "templateId": "5ba26835d4351e0035628ff5",
+          "instanceCount": 1,
+          "stackCountPerInstance": 70
+        },
+        {
+          "kind": "template",
+          "templateId": "5d02797c86f774203f38e30a",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "preset",
+          "presetId": "65766b46303700411c0242f8"
+        },
+        {
+          "kind": "template",
+          "templateId": "591094e086f7747caa7bb2ef",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        }
+      ]
+    },
+    {
+      "lotId": "entry-communications.shipment-v1.compact-v2",
+      "displayName": "Entry Communications",
+      "purpose": "A fitted M4, M855A1 ammunition, Slick, FAST helmet and ComTac IV.",
+      "familyId": "arsenal",
+      "trackId": "cqb",
+      "anchorTemplateId": "5447a9cd4bdc2dbd208b4567",
+      "weight": 0.75,
+      "usePath": {
+        "kind": "raidRole",
+        "roleId": "close-quarters"
+      },
+      "recipe": [
+        {
+          "kind": "preset",
+          "presetId": "66b0e484c84cc7141324fd6c"
+        },
+        {
+          "kind": "template",
+          "templateId": "59e6906286f7746c9f75e847",
+          "instanceCount": 1,
+          "stackCountPerInstance": 60
+        },
+        {
+          "kind": "preset",
+          "presetId": "657666ca303700411c0242c6"
+        },
+        {
+          "kind": "preset",
+          "presetId": "657fa7c0e65c0122b70ffdb0"
+        },
+        {
+          "kind": "template",
+          "templateId": "628e4e576d783146b124c64d",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        }
+      ]
+    },
+    {
+      "lotId": "escort-comms.shipment-v1.compact-v2",
+      "displayName": "Night Escort Communications",
+      "purpose": "Suppressed MP7, AP ammunition, Slick and a complete night-vision communications helmet.",
+      "familyId": "arsenal",
+      "trackId": "cqb",
+      "anchorTemplateId": "5ba26383d4351e00334c93d9",
+      "weight": 0.75,
+      "usePath": {
+        "kind": "raidRole",
+        "roleId": "close-quarters"
+      },
+      "recipe": [
+        {
+          "kind": "preset",
+          "presetId": "5bd05f1186f774572f181678"
+        },
+        {
+          "kind": "template",
+          "templateId": "5ba26835d4351e0035628ff5",
+          "instanceCount": 1,
+          "stackCountPerInstance": 70
+        },
+        {
+          "kind": "preset",
+          "presetId": "657666ca303700411c0242c6"
+        },
+        {
+          "kind": "preset",
+          "presetId": "657fa7c0e65c0122b70ffdb0"
+        },
+        {
+          "kind": "template",
+          "templateId": "5c0558060db834001b735271",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "628e4e576d783146b124c64d",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        }
+      ]
+    },
+    {
+      "lotId": "entry-specialist.shipment-v1.compact-v2",
+      "displayName": "Entry Specialist Armory",
+      "purpose": "A fitted M4, AP ammunition and THOR protection with a weapon case.",
+      "familyId": "arsenal",
+      "trackId": "cqb",
+      "anchorTemplateId": "5447a9cd4bdc2dbd208b4567",
+      "weight": 0.15,
+      "usePath": {
+        "kind": "raidRole",
+        "roleId": "close-quarters"
+      },
+      "recipe": [
+        {
+          "kind": "preset",
+          "presetId": "66b0e484c84cc7141324fd6c"
+        },
+        {
+          "kind": "template",
+          "templateId": "59e6906286f7746c9f75e847",
+          "instanceCount": 1,
+          "stackCountPerInstance": 60
+        },
+        {
+          "kind": "preset",
+          "presetId": "65766b46303700411c0242f8"
+        },
+        {
+          "kind": "template",
+          "templateId": "59fb023c86f7746d0d4b423c",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        }
+      ]
+    },
+    {
+      "lotId": "escort-specialist.shipment-v1.compact-v2",
+      "displayName": "Close Protection Armory",
+      "purpose": "Suppressed MP7, AP ammunition and Slick with a THICC weapon case.",
+      "familyId": "arsenal",
+      "trackId": "cqb",
+      "anchorTemplateId": "5ba26383d4351e00334c93d9",
+      "weight": 0.15,
+      "usePath": {
+        "kind": "raidRole",
+        "roleId": "close-quarters"
+      },
+      "recipe": [
+        {
+          "kind": "preset",
+          "presetId": "5bd05f1186f774572f181678"
+        },
+        {
+          "kind": "template",
+          "templateId": "5ba26835d4351e0035628ff5",
+          "instanceCount": 1,
+          "stackCountPerInstance": 70
+        },
+        {
+          "kind": "preset",
+          "presetId": "657666ca303700411c0242c6"
+        },
+        {
+          "kind": "template",
+          "templateId": "5b6d9ce188a4501afc1b2b25",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        }
+      ]
+    },
+    {
+      "lotId": "entry-command.shipment-v1.compact-v2",
+      "displayName": "Assault Command Locker",
+      "purpose": "An advanced M4, matching ammunition, THOR armor and ComTac IV with a THICC weapon case.",
+      "familyId": "arsenal",
+      "trackId": "cqb",
+      "anchorTemplateId": "5447a9cd4bdc2dbd208b4567",
+      "weight": 0.012,
+      "usePath": {
+        "kind": "raidRole",
+        "roleId": "close-quarters"
+      },
+      "recipe": [
+        {
+          "kind": "preset",
+          "presetId": "5a8ae36686f774377d6ce226"
+        },
+        {
+          "kind": "template",
+          "templateId": "59e6906286f7746c9f75e847",
+          "instanceCount": 1,
+          "stackCountPerInstance": 60
+        },
+        {
+          "kind": "preset",
+          "presetId": "65766b46303700411c0242f8"
+        },
+        {
+          "kind": "template",
+          "templateId": "628e4e576d783146b124c64d",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5b6d9ce188a4501afc1b2b25",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        }
+      ]
+    },
+    {
+      "lotId": "rifle-field-medic.shipment-v1.compact-v2",
+      "displayName": "Rifle Field Medic",
+      "purpose": "Carbine, AP ammunition, AVS carrier, surgery kit and a medicine case.",
+      "familyId": "arsenal",
+      "trackId": "rifle",
+      "anchorTemplateId": "5447a9cd4bdc2dbd208b4567",
+      "weight": 0.75,
+      "usePath": {
+        "kind": "raidRole",
+        "roleId": "rifle-patrol"
+      },
+      "recipe": [
+        {
+          "kind": "preset",
+          "presetId": "618aaf656bbeff39ad4acf0c"
+        },
+        {
+          "kind": "template",
+          "templateId": "59e6906286f7746c9f75e847",
+          "instanceCount": 1,
+          "stackCountPerInstance": 60
+        },
+        {
+          "kind": "preset",
+          "presetId": "65719d367a553968340d88b8"
+        },
+        {
+          "kind": "template",
+          "templateId": "5d02778e86f774203e7dedbe",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5aafbcd986f7745e590fff23",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        }
+      ]
+    },
+    {
+      "lotId": "rifle-observer.shipment-v1.compact-v2",
+      "displayName": "Night Rifle Observer",
+      "purpose": "SR-25, ammunition and spare magazine with mounted night vision, rangefinder and documents case.",
+      "familyId": "arsenal",
+      "trackId": "rifle",
+      "anchorTemplateId": "5df8ce05b11454561e39243b",
+      "weight": 0.5,
+      "usePath": {
+        "kind": "raidRole",
+        "roleId": "rifle-patrol"
+      },
+      "recipe": [
+        {
+          "kind": "preset",
+          "presetId": "628753bba4a8431af4739d3b"
+        },
+        {
+          "kind": "template",
+          "templateId": "6768c25aa7b238f14a08d3f6",
+          "instanceCount": 1,
+          "stackCountPerInstance": 40
+        },
+        {
+          "kind": "template",
+          "templateId": "5df8f541c41b2312ea3335e3",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "preset",
+          "presetId": "657fa7c0e65c0122b70ffdb0"
+        },
+        {
+          "kind": "template",
+          "templateId": "5c0558060db834001b735271",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "61605e13ffa6e502ac5e7eef",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "590c60fc86f77412b13fddcf",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        }
+      ]
+    },
+    {
+      "lotId": "rifle-sustainment.shipment-v1.compact-v2",
+      "displayName": "Rifle Sustainment",
+      "purpose": "A configured rifle with matching ammunition, weapon maintenance, compact surgery and an empty armor-plate case. Each component is separately claimable.",
+      "familyId": "arsenal",
+      "trackId": "rifle",
+      "anchorTemplateId": "5447a9cd4bdc2dbd208b4567",
+      "weight": 0.5,
+      "usePath": {
+        "kind": "raidRole",
+        "roleId": "rifle-patrol"
+      },
+      "recipe": [
+        {
+          "kind": "preset",
+          "presetId": "66b0e484c84cc7141324fd6c"
+        },
+        {
+          "kind": "template",
+          "templateId": "59e6906286f7746c9f75e847",
+          "instanceCount": 1,
+          "stackCountPerInstance": 60
+        },
+        {
+          "kind": "template",
+          "templateId": "5910968f86f77425cf569c32",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "67600929bd0a0549d70993f6",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5d02778e86f774203e7dedbe",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        }
+      ]
+    },
+    {
+      "lotId": "rifle-command.shipment-v1.compact-v2",
+      "displayName": "Rifle Command Armory",
+      "purpose": "Advanced M4, AP ammunition, Slick, SICC and compact specialist gear with a THICC weapon case.",
+      "familyId": "arsenal",
+      "trackId": "rifle",
+      "anchorTemplateId": "5447a9cd4bdc2dbd208b4567",
+      "weight": 0.0105,
+      "usePath": {
+        "kind": "raidRole",
+        "roleId": "rifle-patrol"
+      },
+      "recipe": [
+        {
+          "kind": "preset",
+          "presetId": "5a8ae36686f774377d6ce226"
+        },
+        {
+          "kind": "template",
+          "templateId": "59e6906286f7746c9f75e847",
+          "instanceCount": 1,
+          "stackCountPerInstance": 60
+        },
+        {
+          "kind": "preset",
+          "presetId": "657666ca303700411c0242c6"
+        },
+        {
+          "kind": "template",
+          "templateId": "5d235bb686f77443f4331278",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "66b5f6985891c84aab75ca76",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5b6d9ce188a4501afc1b2b25",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        }
+      ]
+    },
+    {
+      "lotId": "recon-recovery.shipment-v1.compact-v2",
+      "displayName": "Recon Recovery Station",
+      "purpose": "Heavy plated protection, weapon and armor maintenance, a document case and one endurance injector for a field recovery team.",
+      "familyId": "operator",
+      "trackId": "recon",
+      "anchorTemplateId": "590c60fc86f77412b13fddcf",
+      "weight": 0.9,
+      "usePath": {
+        "kind": "raidRole",
+        "roleId": "recon"
+      },
+      "recipe": [
+        {
+          "kind": "template",
+          "templateId": "590c60fc86f77412b13fddcf",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5c0e531d86f7747fa23f4d42",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "591094e086f7747caa7bb2ef",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5910968f86f77425cf569c32",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "preset",
+          "presetId": "65766b46303700411c0242f8"
+        }
+      ]
+    },
+    {
+      "lotId": "recon-surgeon.shipment-v1.compact-v2",
+      "displayName": "Recon Surgical Station",
+      "purpose": "LEDX, medicine and injector cases, surgery kit and AFAK.",
+      "familyId": "operator",
+      "trackId": "recon",
+      "anchorTemplateId": "619cbf7d23893217ec30b689",
+      "weight": 0.225,
+      "usePath": {
+        "kind": "raidRole",
+        "roleId": "recon"
+      },
+      "recipe": [
+        {
+          "kind": "template",
+          "templateId": "619cbf7d23893217ec30b689",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5d02797c86f774203f38e30a",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "60098ad7c2240c0fe85c570a",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5aafbcd986f7745e590fff23",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5c0530ee86f774697952d952",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        }
+      ]
+    },
+    {
+      "lotId": "recon-patrol.shipment-v1.compact-v2",
+      "displayName": "Deep Recon Patrol",
+      "purpose": "Slick, FAST helmet and SICC equipment with one recovery stim.",
+      "familyId": "operator",
+      "trackId": "recon",
+      "anchorTemplateId": "5e4abb5086f77406975c9342",
+      "weight": 0.75,
+      "usePath": {
+        "kind": "raidRole",
+        "roleId": "recon"
+      },
+      "recipe": [
+        {
+          "kind": "preset",
+          "presetId": "657666ca303700411c0242c6"
+        },
+        {
+          "kind": "template",
+          "templateId": "5d235bb686f77443f4331278",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "preset",
+          "presetId": "657fa7c0e65c0122b70ffdb0"
+        },
+        {
+          "kind": "template",
+          "templateId": "5ed51652f6c34d2cc26336a1",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        }
+      ]
+    },
+    {
+      "lotId": "recon-rescue.shipment-v1.compact-v2",
+      "displayName": "Expedition Rescue Station",
+      "purpose": "Taiga survival tool, LEDX, armor repair equipment and compact casualty-recovery medicine.",
+      "familyId": "operator",
+      "trackId": "recon",
+      "anchorTemplateId": "601948682627df266209af05",
+      "weight": 0.015,
+      "usePath": {
+        "kind": "raidRole",
+        "roleId": "recon"
+      },
+      "recipe": [
+        {
+          "kind": "template",
+          "templateId": "601948682627df266209af05",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5d02797c86f774203f38e30a",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5c0e531d86f7747fa23f4d42",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "60098ad7c2240c0fe85c570a",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5c0530ee86f774697952d952",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "591094e086f7747caa7bb2ef",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        }
+      ]
+    },
+    {
+      "lotId": "night-watch.shipment-v1.compact-v2",
+      "displayName": "Night Overwatch Armory",
+      "purpose": "A fitted SR-25 and ammunition with a complete night-vision helmet and THOR protection. Includes a THICC weapon case.",
+      "familyId": "operator",
+      "trackId": "night",
+      "anchorTemplateId": "5df8ce05b11454561e39243b",
+      "weight": 0.15,
+      "usePath": {
+        "kind": "raidRole",
+        "roleId": "night-operations"
+      },
+      "recipe": [
+        {
+          "kind": "preset",
+          "presetId": "628753bba4a8431af4739d3b"
+        },
+        {
+          "kind": "template",
+          "templateId": "6768c25aa7b238f14a08d3f6",
+          "instanceCount": 1,
+          "stackCountPerInstance": 40
+        },
+        {
+          "kind": "preset",
+          "presetId": "657fa7c0e65c0122b70ffdb0"
+        },
+        {
+          "kind": "template",
+          "templateId": "5c0558060db834001b735271",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "preset",
+          "presetId": "65766b46303700411c0242f8"
+        },
+        {
+          "kind": "template",
+          "templateId": "5b6d9ce188a4501afc1b2b25",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        }
+      ]
+    },
+    {
+      "lotId": "night-rescue.shipment-v1.compact-v2",
+      "displayName": "Night Rescue Station",
+      "purpose": "A FAST helmet with compatible GPNVG goggles, armor maintenance, LEDX equipment and field surgery with an empty medicine case. Fit the supplied goggles to the helmet.",
+      "familyId": "operator",
+      "trackId": "night",
+      "anchorTemplateId": "5a154d5cfcdbcb001a3b00da",
+      "weight": 0.06,
+      "usePath": {
+        "kind": "raidRole",
+        "roleId": "night-operations"
+      },
+      "recipe": [
+        {
+          "kind": "preset",
+          "presetId": "657fa7c0e65c0122b70ffdb0"
+        },
+        {
+          "kind": "template",
+          "templateId": "5c0558060db834001b735271",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "591094e086f7747caa7bb2ef",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5c0530ee86f774697952d952",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5d02797c86f774203f38e30a",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5aafbcd986f7745e590fff23",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        }
+      ]
+    },
+    {
+      "lotId": "entry-ordnance-aid.shipment-v1.compact-v2",
+      "displayName": "Sapper First Response",
+      "purpose": "A plated AVS carrier, compact surgery, trauma care and two complementary grenades with an empty grenade case.",
+      "familyId": "field-supply",
+      "trackId": "ordnance",
+      "anchorTemplateId": "544a5caa4bdc2d1a388b4568",
+      "weight": 0.9,
+      "usePath": {
+        "kind": "raidRole",
+        "roleId": "breaching-ordnance"
+      },
+      "recipe": [
+        {
+          "kind": "preset",
+          "presetId": "65719d367a553968340d88b8"
+        },
+        {
+          "kind": "template",
+          "templateId": "5448be9a4bdc2dfd2f8b456a",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5710c24ad2720bc3458b45a3",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "60098ad7c2240c0fe85c570a",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5e2af55f86f7746d4159f07c",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5d02778e86f774203e7dedbe",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        }
+      ]
+    },
+    {
+      "lotId": "breach-support.shipment-v1.compact-v2",
+      "displayName": "Armored Breach Support",
+      "purpose": "A fitted M4, AP ammunition and THOR protection with a grenade reserve and AFAK.",
+      "familyId": "field-supply",
+      "trackId": "ordnance",
+      "anchorTemplateId": "5447a9cd4bdc2dbd208b4567",
+      "weight": 0.75,
+      "usePath": {
+        "kind": "raidRole",
+        "roleId": "breaching-ordnance"
+      },
+      "recipe": [
+        {
+          "kind": "preset",
+          "presetId": "66b0e484c84cc7141324fd6c"
+        },
+        {
+          "kind": "template",
+          "templateId": "59e6906286f7746c9f75e847",
+          "instanceCount": 1,
+          "stackCountPerInstance": 60
+        },
+        {
+          "kind": "template",
+          "templateId": "60098ad7c2240c0fe85c570a",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "preset",
+          "presetId": "65766b46303700411c0242f8"
+        },
+        {
+          "kind": "template",
+          "templateId": "5e2af55f86f7746d4159f07c",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        }
+      ]
+    },
+    {
+      "lotId": "breach-comms.shipment-v1.compact-v2",
+      "displayName": "Sapper Communications",
+      "purpose": "THOR armor, body armor repair kit, ComTac IV and two different grenades.",
+      "familyId": "field-supply",
+      "trackId": "ordnance",
+      "anchorTemplateId": "60a283193cb70855c43a381d",
+      "weight": 0.75,
+      "usePath": {
+        "kind": "raidRole",
+        "roleId": "breaching-ordnance"
+      },
+      "recipe": [
+        {
+          "kind": "preset",
+          "presetId": "65766b46303700411c0242f8"
+        },
+        {
+          "kind": "template",
+          "templateId": "591094e086f7747caa7bb2ef",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "628e4e576d783146b124c64d",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5448be9a4bdc2dfd2f8b456a",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5710c24ad2720bc3458b45a3",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        }
+      ]
+    },
+    {
+      "lotId": "assault-ordnance.shipment-v1.compact-v2",
+      "displayName": "Assault Ordnance Locker",
+      "purpose": "Advanced M4, AP ammunition, THOR armor and a grenade with a weapon case.",
+      "familyId": "field-supply",
+      "trackId": "ordnance",
+      "anchorTemplateId": "5447a9cd4bdc2dbd208b4567",
+      "weight": 0.15,
+      "usePath": {
+        "kind": "raidRole",
+        "roleId": "breaching-ordnance"
+      },
+      "recipe": [
+        {
+          "kind": "preset",
+          "presetId": "5a8ae36686f774377d6ce226"
+        },
+        {
+          "kind": "template",
+          "templateId": "59e6906286f7746c9f75e847",
+          "instanceCount": 1,
+          "stackCountPerInstance": 60
+        },
+        {
+          "kind": "preset",
+          "presetId": "65766b46303700411c0242f8"
+        },
+        {
+          "kind": "template",
+          "templateId": "5448be9a4bdc2dfd2f8b456a",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "59fb023c86f7746d0d4b423c",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        }
+      ]
+    },
+    {
+      "lotId": "sapper-resupply.shipment-v1.compact-v2",
+      "displayName": "Sapper Workshop",
+      "purpose": "Armor and weapon repair kits, ballistic plate storage and AFAK. Includes grenade storage.",
+      "familyId": "field-supply",
+      "trackId": "ordnance",
+      "anchorTemplateId": "591094e086f7747caa7bb2ef",
+      "weight": 0.15,
+      "usePath": {
+        "kind": "raidRole",
+        "roleId": "breaching-ordnance"
+      },
+      "recipe": [
+        {
+          "kind": "template",
+          "templateId": "591094e086f7747caa7bb2ef",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5910968f86f77425cf569c32",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "60098ad7c2240c0fe85c570a",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "67600929bd0a0549d70993f6",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5e2af55f86f7746d4159f07c",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        }
+      ]
+    },
+    {
+      "lotId": "breach-command.shipment-v1.compact-v2",
+      "displayName": "Breach Command Armory",
+      "purpose": "Advanced M4, AP ammunition, THOR protection and armor repair supplies with a THICC weapon case.",
+      "familyId": "field-supply",
+      "trackId": "ordnance",
+      "anchorTemplateId": "5447a9cd4bdc2dbd208b4567",
+      "weight": 0.0105,
+      "usePath": {
+        "kind": "raidRole",
+        "roleId": "breaching-ordnance"
+      },
+      "recipe": [
+        {
+          "kind": "preset",
+          "presetId": "5a8ae36686f774377d6ce226"
+        },
+        {
+          "kind": "template",
+          "templateId": "59e6906286f7746c9f75e847",
+          "instanceCount": 1,
+          "stackCountPerInstance": 60
+        },
+        {
+          "kind": "preset",
+          "presetId": "65766b46303700411c0242f8"
+        },
+        {
+          "kind": "template",
+          "templateId": "591094e086f7747caa7bb2ef",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5b6d9ce188a4501afc1b2b25",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        }
+      ]
+    },
+    {
+      "lotId": "triage-reserve.shipment-v1.compact-v2",
+      "displayName": "Triage Reserve",
+      "purpose": "LEDX specialist equipment, a plated AVS carrier, compact surgery and trauma care for a triage station.",
+      "familyId": "field-supply",
+      "trackId": "medical",
+      "anchorTemplateId": "5d02778e86f774203e7dedbe",
+      "weight": 0.75,
+      "usePath": {
+        "kind": "raidRole",
+        "roleId": "trauma-care"
+      },
+      "recipe": [
+        {
+          "kind": "template",
+          "templateId": "5d02778e86f774203e7dedbe",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "60098ad7c2240c0fe85c570a",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "preset",
+          "presetId": "65719d367a553968340d88b8"
+        },
+        {
+          "kind": "template",
+          "templateId": "5c0530ee86f774697952d952",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        }
+      ]
+    },
+    {
+      "lotId": "field-hospital.shipment-v1.compact-v2",
+      "displayName": "Field Hospital",
+      "purpose": "LEDX, injector case, medicine case and a compact surgical kit.",
+      "familyId": "field-supply",
+      "trackId": "medical",
+      "anchorTemplateId": "5c0530ee86f774697952d952",
+      "weight": 0.15,
+      "usePath": {
+        "kind": "raidRole",
+        "roleId": "trauma-care"
+      },
+      "recipe": [
+        {
+          "kind": "template",
+          "templateId": "5c0530ee86f774697952d952",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "619cbf7d23893217ec30b689",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5d02797c86f774203f38e30a",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "60098ad7c2240c0fe85c570a",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5aafbcd986f7745e590fff23",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "544fb3f34bdc2d03748b456a",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        }
+      ]
+    },
+    {
+      "lotId": "surgical-reserve.shipment-v1.compact-v2",
+      "displayName": "Surgical Reserve",
+      "purpose": "LEDX specialist equipment, plated protection, compact surgery, trauma care and one recovery injector for a protected field surgeon.",
+      "familyId": "field-supply",
+      "trackId": "medical",
+      "anchorTemplateId": "5c0530ee86f774697952d952",
+      "weight": 0.325,
+      "usePath": {
+        "kind": "raidRole",
+        "roleId": "trauma-care"
+      },
+      "recipe": [
+        {
+          "kind": "template",
+          "templateId": "5c0530ee86f774697952d952",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "60098ad7c2240c0fe85c570a",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5c0e530286f7747fa1419862",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "preset",
+          "presetId": "657664ae303700411c02428c"
+        },
+        {
+          "kind": "template",
+          "templateId": "5d02778e86f774203e7dedbe",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        }
+      ]
+    },
+    {
+      "lotId": "trauma-command.shipment-v1.compact-v2",
+      "displayName": "Critical Care Station",
+      "purpose": "Two LEDX units for medical progression, an injector case and a medicine case.",
+      "familyId": "field-supply",
+      "trackId": "medical",
+      "anchorTemplateId": "5c0530ee86f774697952d952",
+      "weight": 0.012,
+      "usePath": {
+        "kind": "raidRole",
+        "roleId": "trauma-care"
+      },
+      "recipe": [
+        {
+          "kind": "template",
+          "templateId": "619cbf7d23893217ec30b689",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5c0530ee86f774697952d952",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5aafbcd986f7745e590fff23",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5c0530ee86f774697952d952",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        }
+      ]
+    },
+    {
+      "lotId": "extraction-chemistry.shipment-v1.compact-v2",
+      "displayName": "Extraction Chemistry",
+      "purpose": "Two extraction stims, surgical support, medical storage and a SICC pouch for long raids.",
+      "familyId": "field-supply",
+      "trackId": "chemistry",
+      "anchorTemplateId": "619cbf7d23893217ec30b689",
+      "weight": 0.15,
+      "usePath": {
+        "kind": "raidRole",
+        "roleId": "combat-chemistry"
+      },
+      "recipe": [
+        {
+          "kind": "template",
+          "templateId": "619cbf7d23893217ec30b689",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5d02797c86f774203f38e30a",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5c0e531d86f7747fa23f4d42",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5ed51652f6c34d2cc26336a1",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5aafbcd986f7745e590fff23",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5d235bb686f77443f4331278",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        }
+      ]
+    },
+    {
+      "lotId": "expedition-chemistry.shipment-v1.compact-v2",
+      "displayName": "Expedition Medical Command",
+      "purpose": "Red Rebel extraction tool, LEDX and specialist recovery equipment with two distinct stims.",
+      "familyId": "field-supply",
+      "trackId": "chemistry",
+      "anchorTemplateId": "619cbf7d23893217ec30b689",
+      "weight": 0.009,
+      "usePath": {
+        "kind": "raidRole",
+        "roleId": "combat-chemistry"
+      },
+      "recipe": [
+        {
+          "kind": "template",
+          "templateId": "619cbf7d23893217ec30b689",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5d02797c86f774203f38e30a",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5c0e531d86f7747fa23f4d42",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5ed51652f6c34d2cc26336a1",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "66b5f6985891c84aab75ca76",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5c0126f40db834002a125382",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5c0530ee86f774697952d952",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        }
+      ]
+    },
+    {
+      "lotId": "rifle-ammunition-reserve.shipment-v1.compact-v2",
+      "displayName": "Precision Ammunition Locker",
+      "purpose": "SR-25, matching ammunition, spare magazine and weapon repair kit with a THICC weapon case.",
+      "familyId": "field-supply",
+      "trackId": "ammo",
+      "anchorTemplateId": "5df8ce05b11454561e39243b",
+      "weight": 0.15,
+      "usePath": {
+        "kind": "raidRole",
+        "roleId": "ammunition-resupply"
+      },
+      "recipe": [
+        {
+          "kind": "preset",
+          "presetId": "628753bba4a8431af4739d3b"
+        },
+        {
+          "kind": "template",
+          "templateId": "6768c25aa7b238f14a08d3f6",
+          "instanceCount": 1,
+          "stackCountPerInstance": 40
+        },
+        {
+          "kind": "template",
+          "templateId": "5df8f541c41b2312ea3335e3",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5910968f86f77425cf569c32",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5b6d9ce188a4501afc1b2b25",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        }
+      ]
+    },
+    {
+      "lotId": "overwatch-ammunition.shipment-v1.compact-v2",
+      "displayName": "Overwatch Expedition Locker",
+      "purpose": "Advanced M4 and AP ammunition with SICC equipment and a weapon case.",
+      "familyId": "field-supply",
+      "trackId": "ammo",
+      "anchorTemplateId": "5447a9cd4bdc2dbd208b4567",
+      "weight": 0.012,
+      "usePath": {
+        "kind": "raidRole",
+        "roleId": "ammunition-resupply"
+      },
+      "recipe": [
+        {
+          "kind": "preset",
+          "presetId": "5a8ae36686f774377d6ce226"
+        },
+        {
+          "kind": "template",
+          "templateId": "59e6906286f7746c9f75e847",
+          "instanceCount": 1,
+          "stackCountPerInstance": 60
+        },
+        {
+          "kind": "template",
+          "templateId": "5d235bb686f77443f4331278",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "59fb023c86f7746d0d4b423c",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        }
+      ]
+    },
+    {
+      "lotId": "vault-field-command.shipment-v1.compact-v2",
+      "displayName": "Black Site Intelligence",
+      "purpose": "A fitted M4, AP ammunition, documents case and TerraGroup Blue Folders.",
+      "familyId": "arsenal",
+      "trackId": "vault",
+      "anchorTemplateId": "5447a9cd4bdc2dbd208b4567",
+      "weight": 0.3,
+      "usePath": {
+        "kind": "raidRole",
+        "roleId": "assault"
+      },
+      "recipe": [
+        {
+          "kind": "preset",
+          "presetId": "618aaf656bbeff39ad4acf0c"
+        },
+        {
+          "kind": "template",
+          "templateId": "59e6906286f7746c9f75e847",
+          "instanceCount": 1,
+          "stackCountPerInstance": 60
+        },
+        {
+          "kind": "template",
+          "templateId": "590c60fc86f77412b13fddcf",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "6389c8c5dbfd5e4b95197e6b",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        }
+      ]
+    },
+    {
+      "lotId": "campaign-trauma-cache.shipment-v1.compact-v2",
+      "displayName": "Medical Logistics Jackpot",
+      "purpose": "A THICC item case, LEDX, injector case and surgical supplies.",
+      "familyId": "field-supply",
+      "trackId": "medical",
+      "anchorTemplateId": "5c0530ee86f774697952d952",
+      "weight": 0.012,
+      "usePath": {
+        "kind": "raidRole",
+        "roleId": "trauma-care"
+      },
+      "recipe": [
+        {
+          "kind": "template",
+          "templateId": "5c0530ee86f774697952d952",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "619cbf7d23893217ec30b689",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5d02797c86f774203f38e30a",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5c0a840b86f7742ffa4f2482",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        }
+      ]
+    },
+    {
+      "lotId": "quartermaster-ammunition-cache.shipment-v1.compact-v2",
+      "displayName": "Quartermaster Armory",
+      "purpose": "A fitted M4 and AP ammunition, armor repair equipment, THICC weapon case and weapon case.",
+      "familyId": "field-supply",
+      "trackId": "ammo",
+      "anchorTemplateId": "5447a9cd4bdc2dbd208b4567",
+      "weight": 0.00675,
+      "usePath": {
+        "kind": "raidRole",
+        "roleId": "ammunition-resupply"
+      },
+      "recipe": [
+        {
+          "kind": "preset",
+          "presetId": "66b0e484c84cc7141324fd6c"
+        },
+        {
+          "kind": "template",
+          "templateId": "59e6906286f7746c9f75e847",
+          "instanceCount": 1,
+          "stackCountPerInstance": 60
+        },
+        {
+          "kind": "template",
+          "templateId": "591094e086f7747caa7bb2ef",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5b6d9ce188a4501afc1b2b25",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "59fb023c86f7746d0d4b423c",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        }
+      ]
+    },
+    {
+      "lotId": "night-extraction-cache.shipment-v1.compact-v2",
+      "displayName": "Thermal Recovery Jackpot",
+      "purpose": "A complete T-7 helmet chain, Red Rebel and THICC item case.",
+      "familyId": "operator",
+      "trackId": "night",
+      "anchorTemplateId": "5c110624d174af029e69734c",
+      "weight": 0.012,
+      "usePath": {
+        "kind": "raidRole",
+        "roleId": "night-operations"
+      },
+      "recipe": [
+        {
+          "kind": "template",
+          "templateId": "5c110624d174af029e69734c",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5c11046cd174af02a012e42b",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5a16b8a9fcdbcb00165aa6ca",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "preset",
+          "presetId": "657fa7c0e65c0122b70ffdb0"
+        },
+        {
+          "kind": "template",
+          "templateId": "5c0126f40db834002a125382",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5c0a840b86f7742ffa4f2482",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        }
+      ]
+    },
+    {
+      "lotId": "sapper-campaign-cache.shipment-v1.compact-v2",
+      "displayName": "Sapper Campaign Reserve",
+      "purpose": "Advanced M4, AP ammunition, THOR armor and repair gear with grenade and plate storage.",
+      "familyId": "field-supply",
+      "trackId": "ordnance",
+      "anchorTemplateId": "5447a9cd4bdc2dbd208b4567",
+      "weight": 0.009,
+      "usePath": {
+        "kind": "raidRole",
+        "roleId": "breaching-ordnance"
+      },
+      "recipe": [
+        {
+          "kind": "preset",
+          "presetId": "5a8ae36686f774377d6ce226"
+        },
+        {
+          "kind": "template",
+          "templateId": "59e6906286f7746c9f75e847",
+          "instanceCount": 1,
+          "stackCountPerInstance": 60
+        },
+        {
+          "kind": "preset",
+          "presetId": "65766b46303700411c0242f8"
+        },
+        {
+          "kind": "template",
+          "templateId": "591094e086f7747caa7bb2ef",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5e2af55f86f7746d4159f07c",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "67600929bd0a0549d70993f6",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        }
+      ]
+    },
+    {
+      "lotId": "black-site-command-cache.shipment-v1.compact-v2",
+      "displayName": "Black Site Extraction Command",
+      "purpose": "Advanced M4, AP ammunition, Red Rebel, ballistic plate case and Blue Folders.",
+      "familyId": "arsenal",
+      "trackId": "vault",
+      "anchorTemplateId": "5447a9cd4bdc2dbd208b4567",
+      "weight": 0.0018,
+      "usePath": {
+        "kind": "raidRole",
+        "roleId": "assault"
+      },
+      "recipe": [
+        {
+          "kind": "preset",
+          "presetId": "5a8ae36686f774377d6ce226"
+        },
+        {
+          "kind": "template",
+          "templateId": "59e6906286f7746c9f75e847",
+          "instanceCount": 1,
+          "stackCountPerInstance": 60
+        },
+        {
+          "kind": "template",
+          "templateId": "5c0126f40db834002a125382",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "67600929bd0a0549d70993f6",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "6389c8c5dbfd5e4b95197e6b",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        }
+      ]
+    },
+    {
+      "lotId": "black-site-expedition-jackpot.shipment-v1.compact-v2",
+      "displayName": "Black Site Expedition Jackpot",
+      "purpose": "Complete T-7 helmet chain, advanced M4 and AP ammunition, Red Rebel and THICC item case.",
+      "familyId": "arsenal",
+      "trackId": "vault",
+      "anchorTemplateId": "5c110624d174af029e69734c",
+      "weight": 0.01,
+      "usePath": {
+        "kind": "raidRole",
+        "roleId": "assault"
+      },
+      "recipe": [
+        {
+          "kind": "template",
+          "templateId": "5c110624d174af029e69734c",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5c11046cd174af02a012e42b",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5a16b8a9fcdbcb00165aa6ca",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "preset",
+          "presetId": "657fa7c0e65c0122b70ffdb0"
+        },
+        {
+          "kind": "preset",
+          "presetId": "5a8ae36686f774377d6ce226"
+        },
+        {
+          "kind": "template",
+          "templateId": "59e6906286f7746c9f75e847",
+          "instanceCount": 1,
+          "stackCountPerInstance": 60
+        },
+        {
+          "kind": "template",
+          "templateId": "5c0126f40db834002a125382",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5c0a840b86f7742ffa4f2482",
           "instanceCount": 1,
           "stackCountPerInstance": 1
         }

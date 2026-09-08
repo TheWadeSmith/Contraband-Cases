@@ -5,7 +5,9 @@
   "displayLabel": "WTT Content Backport Field Resupply",
   "providerWeight": 0.2,
   "requiredTemplateIds": [
+    "590c60fc86f77412b13fddcf",
     "591094e086f7747caa7bb2ef",
+    "5aafbcd986f7745e590fff23",
     "5d02797c86f774203f38e30a",
     "5d235bb686f77443f4331278",
     "619cbf7d23893217ec30b689",
@@ -474,6 +476,105 @@
         {
           "kind": "template",
           "templateId": "5d235bb686f77443f4331278",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        }
+      ]
+    },
+    {
+      "lotId": "chest-rig-loadout.shipment-v1.compact-v2",
+      "displayName": "WTT Field Armorer",
+      "purpose": "WTT chest rig and field equipment with an armor repair kit.",
+      "familyId": "operator",
+      "trackId": "recon",
+      "anchorTemplateId": "69cfbf627eaa38bd240704ad",
+      "weight": 1,
+      "usePath": {
+        "kind": "raidRole",
+        "roleId": "quartermaster"
+      },
+      "recipe": [
+        {
+          "kind": "template",
+          "templateId": "69cfbf627eaa38bd240704ad",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "69cfc2d7a9102bdca0080070",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "591094e086f7747caa7bb2ef",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        }
+      ]
+    },
+    {
+      "lotId": "field-medical-kit.shipment-v1.compact-v2",
+      "displayName": "WTT Specialist Medical Station",
+      "purpose": "WTT's high-value specialist medical equipment, a medicine case and surgical kit.",
+      "familyId": "field-supply",
+      "trackId": "medical",
+      "anchorTemplateId": "69bb435ff609db77390b0e25",
+      "weight": 0.3,
+      "usePath": {
+        "kind": "raidRole",
+        "roleId": "field-medic"
+      },
+      "recipe": [
+        {
+          "kind": "template",
+          "templateId": "69bb435ff609db77390b0e25",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5aafbcd986f7745e590fff23",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5d02797c86f774203f38e30a",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        }
+      ]
+    },
+    {
+      "lotId": "recon-facegear.shipment-v1.compact-v2",
+      "displayName": "WTT Recon Documents",
+      "purpose": "WTT recon facegear, SICC equipment and a documents case.",
+      "familyId": "operator",
+      "trackId": "recon",
+      "anchorTemplateId": "693be056fd3a5c751e00de04",
+      "weight": 0.8,
+      "usePath": {
+        "kind": "raidRole",
+        "roleId": "recon"
+      },
+      "recipe": [
+        {
+          "kind": "template",
+          "templateId": "693be056fd3a5c751e00de04",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5d235bb686f77443f4331278",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "590c60fc86f77412b13fddcf",
           "instanceCount": 1,
           "stackCountPerInstance": 1
         }

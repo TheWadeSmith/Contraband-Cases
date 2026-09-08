@@ -5,9 +5,13 @@
   "displayLabel": "SJX Combat Chemistry",
   "providerWeight": 0.35,
   "requiredTemplateIds": [
+    "590c60fc86f77412b13fddcf",
     "591094e086f7747caa7bb2ef",
+    "5910968f86f77425cf569c32",
     "59e6906286f7746c9f75e847",
+    "5aafbcd986f7745e590fff23",
     "5c0126f40db834002a125382",
+    "5c0530ee86f774697952d952",
     "5d02797c86f774203f38e30a",
     "5d235bb686f77443f4331278",
     "619cbf7d23893217ec30b689",
@@ -28,7 +32,8 @@
   ],
   "requiredPresetIds": [
     "5a8ae36686f774377d6ce226",
-    "657666ca303700411c0242c6"
+    "657666ca303700411c0242c6",
+    "65766b46303700411c0242f8"
   ],
   "requiredBundleKeys": [],
   "lots": [
@@ -986,6 +991,213 @@
         {
           "kind": "template",
           "templateId": "5d02797c86f774203f38e30a",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        }
+      ]
+    },
+    {
+      "lotId": "rapid-mobility.shipment-v1.compact-v2",
+      "displayName": "Rapid Mobility Medical Kit",
+      "purpose": "Two distinct mobility injectors, plated protection and an empty injector case for an extraction runner.",
+      "familyId": "field-supply",
+      "trackId": "chemistry",
+      "anchorTemplateId": "68331b17cccc72d0db1f764b",
+      "weight": 1,
+      "usePath": {
+        "kind": "raidRole",
+        "roleId": "combat-chemistry"
+      },
+      "recipe": [
+        {
+          "kind": "template",
+          "templateId": "68331b17cccc72d0db1f764b",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "68337a2a20c7d7d769369919",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "619cbf7d23893217ec30b689",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "preset",
+          "presetId": "657666ca303700411c0242c6"
+        }
+      ]
+    },
+    {
+      "lotId": "precision-assault.shipment-v1.compact-v2",
+      "displayName": "SJX Precision Extraction Jackpot",
+      "purpose": "Two elite SJX stims, advanced M4 with AP ammunition, and a Red Rebel for extraction.",
+      "familyId": "field-supply",
+      "trackId": "chemistry",
+      "anchorTemplateId": "68331d7a8f97a4202729e883",
+      "weight": 1,
+      "usePath": {
+        "kind": "raidRole",
+        "roleId": "combat-chemistry"
+      },
+      "recipe": [
+        {
+          "kind": "template",
+          "templateId": "68331d7a8f97a4202729e883",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "68331fef74231628e6e63f25",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "preset",
+          "presetId": "5a8ae36686f774377d6ce226"
+        },
+        {
+          "kind": "template",
+          "templateId": "59e6906286f7746c9f75e847",
+          "instanceCount": 1,
+          "stackCountPerInstance": 60
+        },
+        {
+          "kind": "template",
+          "templateId": "5c0126f40db834002a125382",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        }
+      ]
+    },
+    {
+      "lotId": "covert-sustainment.shipment-v1.compact-v2",
+      "displayName": "Covert Sustainment Medical Kit",
+      "purpose": "Two distinct sustainment supplies, heavy plated protection, weapon maintenance and document storage for a covert support team.",
+      "familyId": "field-supply",
+      "trackId": "chemistry",
+      "anchorTemplateId": "6833259d5bbfac390bc044cf",
+      "weight": 0.9,
+      "usePath": {
+        "kind": "raidRole",
+        "roleId": "combat-chemistry"
+      },
+      "recipe": [
+        {
+          "kind": "template",
+          "templateId": "6833259d5bbfac390bc044cf",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "68337b7aff2eb46775159b1e",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "preset",
+          "presetId": "65766b46303700411c0242f8"
+        },
+        {
+          "kind": "template",
+          "templateId": "5910968f86f77425cf569c32",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "590c60fc86f77412b13fddcf",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        }
+      ]
+    },
+    {
+      "lotId": "elite-recovery.shipment-v1.compact-v2",
+      "displayName": "Elite Recovery Clinic",
+      "purpose": "Two distinct recovery stims with an LEDX and a medicine case.",
+      "familyId": "field-supply",
+      "trackId": "chemistry",
+      "anchorTemplateId": "68336d708e51c90780988824",
+      "weight": 0.21,
+      "usePath": {
+        "kind": "raidRole",
+        "roleId": "combat-chemistry"
+      },
+      "recipe": [
+        {
+          "kind": "template",
+          "templateId": "68336d708e51c90780988824",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "68336e67abd18e611ecbf182",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5c0530ee86f774697952d952",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5aafbcd986f7745e590fff23",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "590c60fc86f77412b13fddcf",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        }
+      ]
+    },
+    {
+      "lotId": "heavy-extraction.shipment-v1.compact-v2",
+      "displayName": "SJX Heavy Extraction",
+      "purpose": "Two heavy-extraction stims, Red Rebel and SICC equipment.",
+      "familyId": "field-supply",
+      "trackId": "chemistry",
+      "anchorTemplateId": "68336a67ce152b72dc40abf6",
+      "weight": 0.09,
+      "usePath": {
+        "kind": "raidRole",
+        "roleId": "combat-chemistry"
+      },
+      "recipe": [
+        {
+          "kind": "template",
+          "templateId": "68336a67ce152b72dc40abf6",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "68336b8fb68adf25e7314cc3",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5c0126f40db834002a125382",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5d235bb686f77443f4331278",
           "instanceCount": 1,
           "stackCountPerInstance": 1
         }

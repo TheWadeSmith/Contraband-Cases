@@ -517,6 +517,142 @@
           "stackCountPerInstance": 1
         }
       ]
+    },
+    {
+      "lotId": "grip-upgrade-kit.compact-v2",
+      "displayName": "Grip Upgrade Kit",
+      "purpose": "A compact selection of distinct specialist items, individually claimable from Mechanic. ",
+      "familyId": "attachments",
+      "trackId": "rifle",
+      "anchorTemplateId": "68c48eb7c91390fb930e8d94",
+      "weight": 1,
+      "usePath": {
+        "kind": "raidRole",
+        "roleId": "rifle-patrol"
+      },
+      "recipe": [
+        {
+          "kind": "template",
+          "templateId": "68c48eb7c91390fb930e8d94",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "6912857dfb534981300b1d8f",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        }
+      ]
+    },
+    {
+      "lotId": "iron-sight-swap.compact-v2",
+      "displayName": "Iron Sight Swap",
+      "purpose": "A compact selection of distinct specialist items, individually claimable from Mechanic. ",
+      "familyId": "attachments",
+      "trackId": "rifle",
+      "anchorTemplateId": "68b4b24e27658b8b0d024399",
+      "weight": 1,
+      "usePath": {
+        "kind": "raidRole",
+        "roleId": "rifle-patrol"
+      },
+      "recipe": [
+        {
+          "kind": "template",
+          "templateId": "68b4b24e27658b8b0d024399",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "68b4b24e27658b8b0d02439a",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        }
+      ]
+    },
+    {
+      "lotId": "offset-mount-kit.compact-v2",
+      "displayName": "Offset Mount Kit",
+      "purpose": "A compact selection of distinct specialist items, individually claimable from Mechanic. ",
+      "familyId": "attachments",
+      "trackId": "rifle",
+      "anchorTemplateId": "68bb6be346d4437fb40002e0",
+      "weight": 0.8,
+      "usePath": {
+        "kind": "raidRole",
+        "roleId": "rifle-patrol"
+      },
+      "recipe": [
+        {
+          "kind": "template",
+          "templateId": "68bb6be346d4437fb40002e0",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "68bc3cd17208c642f409974f",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        }
+      ]
+    },
+    {
+      "lotId": "field-armorer-kit.shipment-v1.compact-v2",
+      "displayName": "Field Armorer Kit Package",
+      "purpose": "Distinct armorer upgrade parts, a configured M4 with matching ammunition and an armor maintenance kit. Components are individually claimable.",
+      "familyId": "attachments",
+      "trackId": "rifle",
+      "anchorTemplateId": "68b4b24e27658b8b0d024399",
+      "weight": 1,
+      "usePath": {
+        "kind": "raidRole",
+        "roleId": "rifle-patrol"
+      },
+      "recipe": [
+        {
+          "kind": "template",
+          "templateId": "68b4b24e27658b8b0d024399",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "68b4b24e27658b8b0d02439a",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "68bb6be346d4437fb40002e0",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "68bc3cd17208c642f409974f",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "preset",
+          "presetId": "618aaf656bbeff39ad4acf0c"
+        },
+        {
+          "kind": "template",
+          "templateId": "59e6906286f7746c9f75e847",
+          "instanceCount": 1,
+          "stackCountPerInstance": 60
+        },
+        {
+          "kind": "template",
+          "templateId": "591094e086f7747caa7bb2ef",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        }
+      ]
     }
   ]
 }

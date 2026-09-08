@@ -5,12 +5,13 @@
   "displayLabel": "WTT Content Backport Elite Optics",
   "providerWeight": 0.07,
   "requiredTemplateIds": [
-    "689dbded6c7e684817080c29",
     "590c60fc86f77412b13fddcf",
     "591094e086f7747caa7bb2ef",
+    "59fb023c86f7746d0d4b423c",
     "628e4e576d783146b124c64d",
     "68948a95d8f2b85fb705e2a6",
     "689b889473ebd6871805edd6",
+    "689dbded6c7e684817080c29",
     "6943c85be2f21398e70378cc",
     "69bb41c03b5fb75517065960",
     "69bb4203f94327bc0f0230cd"
@@ -22,6 +23,113 @@
   ],
   "requiredBundleKeys": [],
   "lots": [
+    {
+      "lotId": "night-vision-overwatch.compatible-v1.shipment-v1.compact-v2",
+      "displayName": "WTT Night Operations Locker",
+      "purpose": "A complete WTT night-vision helmet chain and a weapon case.",
+      "familyId": "operator",
+      "trackId": "night",
+      "anchorTemplateId": "689b889473ebd6871805edd6",
+      "weight": 0.65,
+      "usePath": {
+        "kind": "raidRole",
+        "roleId": "night-operations"
+      },
+      "recipe": [
+        {
+          "kind": "template",
+          "templateId": "689b889473ebd6871805edd6",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "preset",
+          "presetId": "69cfd277ce0df53f230f2976"
+        },
+        {
+          "kind": "template",
+          "templateId": "689dbded6c7e684817080c29",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "59fb023c86f7746d0d4b423c",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        }
+      ]
+    },
+    {
+      "lotId": "heavy-plate-carrier.compatible-v1.shipment-v1.compact-v2",
+      "displayName": "Heavy Plate Carrier Package",
+      "purpose": "One assembled WTT plate carrier, its distinct spare equipment, an armor repair kit and communications.",
+      "familyId": "armor",
+      "trackId": "ordnance",
+      "anchorTemplateId": "6943c85be2f21398e70378cc",
+      "weight": 1,
+      "usePath": {
+        "kind": "raidRole",
+        "roleId": "elite-operator"
+      },
+      "recipe": [
+        {
+          "kind": "template",
+          "templateId": "6943c85be2f21398e70378cc",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "preset",
+          "presetId": "68a4858f9dc8c374800a3b4a"
+        },
+        {
+          "kind": "template",
+          "templateId": "591094e086f7747caa7bb2ef",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "628e4e576d783146b124c64d",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        }
+      ]
+    },
+    {
+      "lotId": "encrypted-tech-cache.compatible-v1.shipment-v1.compact-v2",
+      "displayName": "Encrypted Tech Cache Package",
+      "purpose": "Two different encrypted technology items and a document case. Valuable individual equipment replaces repeated technology stacks.",
+      "familyId": "tech",
+      "trackId": "vault",
+      "anchorTemplateId": "69bb41c03b5fb75517065960",
+      "weight": 0.6,
+      "usePath": {
+        "kind": "raidRole",
+        "roleId": "black-market-tech"
+      },
+      "recipe": [
+        {
+          "kind": "template",
+          "templateId": "69bb41c03b5fb75517065960",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "69bb4203f94327bc0f0230cd",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "590c60fc86f77412b13fddcf",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        }
+      ]
+    },
     {
       "lotId": "night-vision-overwatch",
       "displayName": "Night Vision Overwatch",

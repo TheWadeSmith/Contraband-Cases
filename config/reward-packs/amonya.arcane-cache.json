@@ -6,8 +6,10 @@
   "providerWeight": 0.05,
   "requiredTemplateIds": [
     "590c60fc86f77412b13fddcf",
+    "59fb042886f7746c5005a7b2",
     "5d235bb686f77443f4331278",
     "601948682627df266209af05",
+    "6389c8c5dbfd5e4b95197e6b",
     "6389c8fb46b54c634724d847",
     "679b992329acd1f2f60985a5",
     "69359d725bbf2f0c2027c59c",
@@ -21,6 +23,117 @@
   ],
   "requiredBundleKeys": [],
   "lots": [
+    {
+      "lotId": "arcane-ammunition-cache.compatible-v1.shipment-v1.compact-v2",
+      "displayName": "Arcane Research Cache",
+      "purpose": "Arcane ammunition and a curio with a research textbook and document storage.",
+      "familyId": "exotic-ordnance",
+      "trackId": "relic-expedition",
+      "anchorTemplateId": "69359d725bbf2f0c2027c59c",
+      "weight": 1,
+      "usePath": {
+        "kind": "raidRole",
+        "roleId": "close-quarters"
+      },
+      "recipe": [
+        {
+          "kind": "template",
+          "templateId": "69359d725bbf2f0c2027c59c",
+          "instanceCount": 1,
+          "stackCountPerInstance": 2
+        },
+        {
+          "kind": "template",
+          "templateId": "69359d725bbf2f0c2027c59f",
+          "instanceCount": 1,
+          "stackCountPerInstance": 2
+        },
+        {
+          "kind": "template",
+          "templateId": "6389c8fb46b54c634724d847",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "590c60fc86f77412b13fddcf",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        }
+      ]
+    },
+    {
+      "lotId": "satchel-of-holding.compatible-v1.shipment-v1.compact-v2",
+      "displayName": "Arcane Expedition Satchel",
+      "purpose": "Satchel of Holding with an item case and documents case.",
+      "familyId": "operator",
+      "trackId": "relic-expedition",
+      "anchorTemplateId": "69359d725bbf2f0c2027c5a0",
+      "weight": 0.3,
+      "usePath": {
+        "kind": "raidRole",
+        "roleId": "quartermaster"
+      },
+      "recipe": [
+        {
+          "kind": "template",
+          "templateId": "69359d725bbf2f0c2027c5a0",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "59fb042886f7746c5005a7b2",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "590c60fc86f77412b13fddcf",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        }
+      ]
+    },
+    {
+      "lotId": "eldritch-ordinance.compatible-v1.shipment-v1.compact-v2",
+      "displayName": "Eldritch Research Archive",
+      "purpose": "Arcane ordnance, Labrys notes, Blue Folders and a research textbook.",
+      "familyId": "exotic-ordnance",
+      "trackId": "relic-expedition",
+      "anchorTemplateId": "69359d725bbf2f0c2027c5a2",
+      "weight": 0.24,
+      "usePath": {
+        "kind": "raidRole",
+        "roleId": "breaching-ordnance"
+      },
+      "recipe": [
+        {
+          "kind": "template",
+          "templateId": "69359d725bbf2f0c2027c5a2",
+          "instanceCount": 1,
+          "stackCountPerInstance": 2
+        },
+        {
+          "kind": "template",
+          "templateId": "679b992329acd1f2f60985a5",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "6389c8c5dbfd5e4b95197e6b",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "6389c8fb46b54c634724d847",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        }
+      ]
+    },
     {
       "lotId": "arcane-ammunition-cache",
       "displayName": "Arcane Ammunition Cache",

@@ -5,23 +5,34 @@
   "displayLabel": "Vultify CoolerStims",
   "providerWeight": 0.25,
   "requiredTemplateIds": [
+    "590c60fc86f77412b13fddcf",
     "591094e086f7747caa7bb2ef",
+    "5910968f86f77425cf569c32",
     "59e6906286f7746c9f75e847",
+    "59fb023c86f7746d0d4b423c",
+    "5aafbcd986f7745e590fff23",
+    "5b6d9ce188a4501afc1b2b25",
     "5c0126f40db834002a125382",
+    "5c0530ee86f774697952d952",
+    "5c0558060db834001b735271",
     "5c0a1b2c3d4e5f6789abcde1",
     "5c0a1b2c3d4e5f6789abcde3",
     "5c0a1b2c3d4e5f6789abcde5",
     "5c0a1b2c3d4e5f6789abcde6",
     "5c0a1b2c3d4e5f6789abcde8",
+    "5d02778e86f774203e7dedbe",
     "5d02797c86f774203f38e30a",
     "5d235bb686f77443f4331278",
+    "60098ad7c2240c0fe85c570a",
     "619cbf7d23893217ec30b689",
     "628e4e576d783146b124c64d"
   ],
   "requiredPresetIds": [
     "5a8ae36686f774377d6ce226",
+    "657664ae303700411c02428c",
     "657666ca303700411c0242c6",
     "65766b46303700411c0242f8",
+    "657fa7c0e65c0122b70ffdb0",
     "66b0e484c84cc7141324fd6c"
   ],
   "requiredBundleKeys": [],
@@ -1623,6 +1634,354 @@
         {
           "kind": "template",
           "templateId": "5d235bb686f77443f4331278",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        }
+      ]
+    },
+    {
+      "lotId": "rapid-recon.shipment-v1.compact-v2",
+      "displayName": "Rapid Recon Medical Kit",
+      "purpose": "Two distinct recon injectors, a FAST helmet with compatible GPNVG goggles, plated protection, document storage and weapon maintenance. Fit the supplied goggles to the helmet.",
+      "familyId": "field-supply",
+      "trackId": "cooler-stims",
+      "anchorTemplateId": "5c0a1b2c3d4e5f6789abcde1",
+      "weight": 1,
+      "usePath": {
+        "kind": "raidRole",
+        "roleId": "combat-chemistry"
+      },
+      "recipe": [
+        {
+          "kind": "template",
+          "templateId": "5c0a1b2c3d4e5f6789abcde1",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5c0a1b2c3d4e5f6789abcde8",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "preset",
+          "presetId": "657fa7c0e65c0122b70ffdb0"
+        },
+        {
+          "kind": "template",
+          "templateId": "5c0558060db834001b735271",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "590c60fc86f77412b13fddcf",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5910968f86f77425cf569c32",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "preset",
+          "presetId": "657666ca303700411c0242c6"
+        }
+      ]
+    },
+    {
+      "lotId": "field-triage.shipment-v1.compact-v2",
+      "displayName": "Field Triage Medical Kit",
+      "purpose": "Two distinct medical injectors, a plated Osprey carrier, compact surgery and trauma care with an empty medicine case.",
+      "familyId": "field-supply",
+      "trackId": "cooler-stims",
+      "anchorTemplateId": "5c0a1b2c3d4e5f6789abcde3",
+      "weight": 1,
+      "usePath": {
+        "kind": "raidRole",
+        "roleId": "combat-chemistry"
+      },
+      "recipe": [
+        {
+          "kind": "template",
+          "templateId": "5c0a1b2c3d4e5f6789abcde3",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5c0a1b2c3d4e5f6789abcde8",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5aafbcd986f7745e590fff23",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "preset",
+          "presetId": "657664ae303700411c02428c"
+        },
+        {
+          "kind": "template",
+          "templateId": "5d02778e86f774203e7dedbe",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "60098ad7c2240c0fe85c570a",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        }
+      ]
+    },
+    {
+      "lotId": "search-and-recover.shipment-v1.compact-v2",
+      "displayName": "Search and Recover Medical Kit",
+      "purpose": "Two distinct recovery injectors, armor maintenance and document storage for a search-and-recovery team.",
+      "familyId": "field-supply",
+      "trackId": "cooler-stims",
+      "anchorTemplateId": "5c0a1b2c3d4e5f6789abcde3",
+      "weight": 0.75,
+      "usePath": {
+        "kind": "raidRole",
+        "roleId": "combat-chemistry"
+      },
+      "recipe": [
+        {
+          "kind": "template",
+          "templateId": "5c0a1b2c3d4e5f6789abcde3",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5c0a1b2c3d4e5f6789abcde6",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "591094e086f7747caa7bb2ef",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "590c60fc86f77412b13fddcf",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        }
+      ]
+    },
+    {
+      "lotId": "assault-cycle.shipment-v1.compact-v2",
+      "displayName": "CoolerStims Assault Reserve",
+      "purpose": "Two distinct assault stims, fitted M4, AP ammunition and a weapon case.",
+      "familyId": "field-supply",
+      "trackId": "cooler-stims",
+      "anchorTemplateId": "5c0a1b2c3d4e5f6789abcde1",
+      "weight": 0.225,
+      "usePath": {
+        "kind": "raidRole",
+        "roleId": "combat-chemistry"
+      },
+      "recipe": [
+        {
+          "kind": "template",
+          "templateId": "5c0a1b2c3d4e5f6789abcde1",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5c0a1b2c3d4e5f6789abcde5",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "preset",
+          "presetId": "66b0e484c84cc7141324fd6c"
+        },
+        {
+          "kind": "template",
+          "templateId": "59e6906286f7746c9f75e847",
+          "instanceCount": 1,
+          "stackCountPerInstance": 60
+        },
+        {
+          "kind": "template",
+          "templateId": "59fb023c86f7746d0d4b423c",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        }
+      ]
+    },
+    {
+      "lotId": "heavy-push.shipment-v1.compact-v2",
+      "displayName": "CoolerStims Armored Push",
+      "purpose": "Two distinct combat stims, THOR armor and an armor repair kit.",
+      "familyId": "field-supply",
+      "trackId": "cooler-stims",
+      "anchorTemplateId": "5c0a1b2c3d4e5f6789abcde1",
+      "weight": 0.45,
+      "usePath": {
+        "kind": "raidRole",
+        "roleId": "combat-chemistry"
+      },
+      "recipe": [
+        {
+          "kind": "template",
+          "templateId": "5c0a1b2c3d4e5f6789abcde1",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5c0a1b2c3d4e5f6789abcde3",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "preset",
+          "presetId": "65766b46303700411c0242f8"
+        },
+        {
+          "kind": "template",
+          "templateId": "591094e086f7747caa7bb2ef",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        }
+      ]
+    },
+    {
+      "lotId": "recovery-sweep.shipment-v1.compact-v2",
+      "displayName": "Recovery Sweep Clinic",
+      "purpose": "Two distinct recovery stims with an LEDX and a medicine case.",
+      "familyId": "field-supply",
+      "trackId": "cooler-stims",
+      "anchorTemplateId": "5c0a1b2c3d4e5f6789abcde3",
+      "weight": 0.2925,
+      "usePath": {
+        "kind": "raidRole",
+        "roleId": "combat-chemistry"
+      },
+      "recipe": [
+        {
+          "kind": "template",
+          "templateId": "5c0a1b2c3d4e5f6789abcde3",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5c0a1b2c3d4e5f6789abcde5",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5c0530ee86f774697952d952",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5aafbcd986f7745e590fff23",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        }
+      ]
+    },
+    {
+      "lotId": "overrun-protocol.shipment-v1.compact-v2",
+      "displayName": "CoolerStims Overrun Recovery",
+      "purpose": "Two distinct recovery stims, Red Rebel, injector storage and an LEDX.",
+      "familyId": "field-supply",
+      "trackId": "cooler-stims",
+      "anchorTemplateId": "5c0a1b2c3d4e5f6789abcde1",
+      "weight": 0.0225,
+      "usePath": {
+        "kind": "raidRole",
+        "roleId": "combat-chemistry"
+      },
+      "recipe": [
+        {
+          "kind": "template",
+          "templateId": "5c0a1b2c3d4e5f6789abcde1",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5c0a1b2c3d4e5f6789abcde3",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5c0126f40db834002a125382",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "619cbf7d23893217ec30b689",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5c0530ee86f774697952d952",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        }
+      ]
+    },
+    {
+      "lotId": "hunter-killer-pharmacy.shipment-v1.compact-v2",
+      "displayName": "CoolerStims Hunter Armory",
+      "purpose": "Two distinct specialist stims, advanced M4 and AP ammunition with a THICC weapon case.",
+      "familyId": "field-supply",
+      "trackId": "cooler-stims",
+      "anchorTemplateId": "5c0a1b2c3d4e5f6789abcde3",
+      "weight": 0.045,
+      "usePath": {
+        "kind": "raidRole",
+        "roleId": "combat-chemistry"
+      },
+      "recipe": [
+        {
+          "kind": "template",
+          "templateId": "5c0a1b2c3d4e5f6789abcde3",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5c0a1b2c3d4e5f6789abcde5",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "preset",
+          "presetId": "5a8ae36686f774377d6ce226"
+        },
+        {
+          "kind": "template",
+          "templateId": "59e6906286f7746c9f75e847",
+          "instanceCount": 1,
+          "stackCountPerInstance": 60
+        },
+        {
+          "kind": "template",
+          "templateId": "5b6d9ce188a4501afc1b2b25",
           "instanceCount": 1,
           "stackCountPerInstance": 1
         }
