@@ -535,9 +535,10 @@ internal sealed partial class RouletteOverlay : IDisposable
         bool claimRetry,
         Action claim,
         Action relay,
-        Action? close = null)
+        Action? close = null,
+        int? keyCount = null)
     {
-        if (close is not null) return ShowBrokerEntitlement(snapshot, claimRetry, claim, relay, close);
+        if (close is not null) return ShowBrokerEntitlement(snapshot, claimRetry, claim, relay, close, keyCount);
         if (!Activate(allowRebuild: false))
         {
             return false;
@@ -2193,11 +2194,10 @@ internal sealed partial class RouletteOverlay : IDisposable
         if (snapshot.CaseTemplateId == CaseContracts.CashCache)
             return "Collect the exact payout shown. No Relay or Favor applies to Cash Cache.";
         var relay = snapshot.Relay;
-        if (relay is null)
+        if (relay is null || !snapshot.AvailableActions.CanRelay)
         {
-            return snapshot.LatestReceipt?.Outcome == ManifestRelayResult.Sidegrade
-                ? "Sidegrade settled this chain. The displayed lot remains fully claimable."
-                : "The displayed lot is terminal and remains fully claimable.";
+            return (relay?.TerminalReason is string reason ? BrokerPresentation.Text(reason) :
+                "Relay is unavailable for this reward.") + " Send your saved prize to Messenger.";
         }
 
         var grade = relay.UpgradeGrade is RewardRarity next
@@ -2208,7 +2208,8 @@ internal sealed partial class RouletteOverlay : IDisposable
             : "No complete candidate range is available.";
         return
             $"<b>RELAY STAGE {relay.Stage} → {grade.ToUpperInvariant()}</b>  •  Costs {relay.KeyCost} key\n" +
-            "Sidegrade: a different reward at the same rarity; this ends the chain.\n" +
+            "Replace: a different same-rarity reward; it can be worth less and ends the chain.\n" +
+            "Further wagers depend on available upgrades; three is the maximum, not a promised climb.\n" +
             (relay.GuaranteeActive
                 ? "Favor guarantee: upgrade is certain; Favor resets to 0/3."
                 : $"Loss: reward and key are lost. Favor {relay.FavorBefore}/3 → {relay.FavorAfterOnLoss}/3.") +

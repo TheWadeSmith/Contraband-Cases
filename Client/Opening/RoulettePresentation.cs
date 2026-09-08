@@ -444,7 +444,8 @@ public sealed class RouletteRevealPlan
         double startX,
         double accelerationTimeShare,
         double decelerationPower,
-        RouletteMotionMode motionMode)
+        RouletteMotionMode motionMode,
+        IReadOnlyList<string> initiallyVisibleTiles)
     {
         Strip = strip;
         CommittedWinnerId = committedWinnerId;
@@ -455,9 +456,11 @@ public sealed class RouletteRevealPlan
         AccelerationTimeShare = accelerationTimeShare;
         DecelerationPower = decelerationPower;
         MotionMode = motionMode;
+        InitiallyVisibleTiles = initiallyVisibleTiles;
     }
 
     public IReadOnlyList<string> Strip { get; }
+    public IReadOnlyList<string> InitiallyVisibleTiles { get; }
 
     public string CommittedWinnerId { get; }
 
@@ -538,7 +541,10 @@ public sealed class RouletteRevealPlan
             startX,
             accelerationShare,
             decelerationPower,
-            reducedMotion ? RouletteMotionMode.Fade : RouletteMotionMode.Scroll);
+            reducedMotion ? RouletteMotionMode.Fade : RouletteMotionMode.Scroll,
+            Array.AsReadOnly(strip.Skip(Math.Max(0, (int)Math.Floor(-(reducedMotion ? landingX : startX) /
+                    (tileWidth + tileSpacing))))
+                .Take((int)Math.Ceiling(viewportWidth / (tileWidth + tileSpacing)) + 1).ToArray()));
     }
 }
 

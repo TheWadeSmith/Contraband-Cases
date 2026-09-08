@@ -10,8 +10,7 @@ internal static class BrokerPresentation
 {
     internal static string Text(string value) => ManifestPresentationPolicy.PlainText(value);
 
-    internal static string CaseName(string template) => template == ModConstants.CaseTemplateId
-        ? "BR-12 Mixed Case" : CaseContracts.Name(template);
+    internal static string CaseName(string template) => CaseContracts.Name(template);
 
     internal static string Theme(string template) => template switch
     {
@@ -86,6 +85,23 @@ internal static class BrokerPresentation
         string.Join("\n", lot.Contents.Take(2).Select(item => $"{item.Quantity} × {Text(item.DisplayName)}")) +
         (lot.Contents.Count > 2 ? $"\n+{lot.Contents.Count - 2} more item type{(lot.Contents.Count == 3 ? "" : "s")}" : "");
 
+    internal const string ResumeLaterLabel = "Close — resume later";
+    internal const string PendingDelivery = "Opening saved • Nothing sent yet. Close to resume later.";
+
+    internal static string RelayEligibility(ManifestLotSnapshot lot) => lot.Grade == RewardRarity.BlackLabel
+        ? "No Relay: Legendary is the top rarity."
+        : lot.RelayEligible == true ? "Relay eligible after choosing • Costs another key."
+        : lot.RelayEligible == false ? "No Relay: this package has no complete upgrade/replacement pool."
+        : "Relay eligibility has not been published by this server.";
+
+    internal static string ChoiceTerms(ManifestLotSnapshot lot) =>
+        "Choose one whole package; give up the other two. Messenger delivery is free.\n" +
+        RelayEligibility(lot) + "\n" + PendingDelivery;
+
+    internal static string KeyBalance(int? count) => count is >= 0
+        ? $"Keys in inventory: {count} • Each Relay spends 1; server checks usability."
+        : "Inventory key count unavailable • Each Relay needs another usable key.";
+
     internal static string RelayEssentials(ManifestSnapshot snapshot)
     {
         if (snapshot.Relay is not { } relay || !snapshot.AvailableActions.CanRelay)
@@ -93,7 +109,7 @@ internal static class BrokerPresentation
         return ManifestPresentationPolicy.RelayOdds(snapshot) + "\n" +
             (relay.GuaranteeActive
                 ? $"Hold to replace this package with a guaranteed upgrade + spend {relay.KeyCost} key. Favor resets."
-                : $"Hold to stake this whole package + {relay.KeyCost} key. Loss takes both.\nReplace gives a different same-rarity package and ends the chain.");
+                : $"Hold to stake this whole package + {relay.KeyCost} key. Loss takes both.\nReplace gives a different same-rarity package, can be worth less, and ends the chain.");
     }
 
     internal static string Value(ManifestLotSnapshot lot, bool compact = false)

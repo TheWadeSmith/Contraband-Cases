@@ -13,6 +13,16 @@ namespace ContrabandCases.Tests.Client;
 public sealed class ManifestLibraryTests
 {
     [Fact]
+    public void Supply_status_has_no_hardcoded_probability_and_includes_zero_and_testing_caveats()
+    {
+        var status = ManifestLibraryProjection.Create(new CaseOpeningJournal(), null, new Dictionary<string, string>()).Status;
+        Assert.DoesNotContain("2%", status);
+        Assert.Contains("NOT per-container or per-raid", status);
+        Assert.Contains("zero-find", status);
+        Assert.Contains("testing-enabled", status);
+    }
+
+    [Fact]
     public void Library_roundtrip_links_real_cases_to_only_their_public_packages()
     {
         var a = CaseCatalogTests.Lot("core", "field-supply", "meds");

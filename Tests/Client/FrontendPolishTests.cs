@@ -80,7 +80,9 @@ public sealed class FrontendPolishTests
         Assert.Contains($"{snapshot.Relay.ConfiscatePercent}%", text);
         Assert.Contains("whole package + 1 key", text);
         Assert.Contains("Loss takes both", text);
-        Assert.Contains("same-rarity package and ends the chain", text);
+        Assert.Contains("same-rarity package", text);
+        Assert.Contains("can be worth less", text);
+        Assert.Contains("ends the chain", text);
     }
 
     [Fact]
