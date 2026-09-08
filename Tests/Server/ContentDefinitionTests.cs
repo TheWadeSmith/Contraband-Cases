@@ -223,11 +223,11 @@ public sealed class ContentDefinitionTests
 
         // The case is the only priced item now (the key is find-only), so it receives the full
         // computed ticket total rather than a 70% share of it.
-        Assert.Equal(56_000, prices.CasePrice);
+        Assert.Equal(2_000, prices.CasePrice);
         Assert.Single(offers);
         Assert.Collection(
             offers,
-            offer => AssertOffer(offer, ModConstants.MechanicCaseAssortRootId, ModConstants.CaseTemplateId, 56_000, 5));
+            offer => AssertOffer(offer, ModConstants.MechanicCaseAssortRootId, ModConstants.CaseTemplateId, 2_000, 5));
 
         var assort = EmptyAssort();
         ContrabandContentDefinitions.EnsureMechanicOfferIdsAvailable(assort, offers);
@@ -236,7 +236,7 @@ public sealed class ContentDefinitionTests
         Assert.Collection(
             assort.Items,
             item => AssertAssortItem(item, ModConstants.MechanicCaseAssortRootId, ModConstants.CaseTemplateId, 5));
-        Assert.Equal(56_000, assort.BarterScheme[(MongoId)ModConstants.MechanicCaseAssortRootId][0][0].Count);
+        Assert.Equal(2_000, assort.BarterScheme[(MongoId)ModConstants.MechanicCaseAssortRootId][0][0].Count);
         Assert.All(assort.BarterScheme.Values, scheme => Assert.Equal(Money.ROUBLES, Assert.Single(Assert.Single(scheme)).Template));
         Assert.All(assort.LoyalLevelItems.Values, level => Assert.Equal(1, level));
     }
@@ -294,7 +294,7 @@ public sealed class ContentDefinitionTests
     {
         var templates = KeyOnlyTemplates(65_000);
 
-        ContrabandContentDefinitions.ApplyKeyRegistrationPrice(templates, ModConfig.Parse("{}"));
+        ContrabandContentDefinitions.ApplyKeyRegistrationPrice(templates, ModConfig.Parse("{\"therapistSellPriceKey\":null}"));
 
         Assert.Equal(65_000d, templates.Items[(MongoId)ModConstants.KeyTemplateId].Properties!.CreditsPrice);
         Assert.Equal(
@@ -317,6 +317,16 @@ public sealed class ContentDefinitionTests
         // ceil(65000 / 0.63), the same Therapist 37% coefficient used elsewhere in this file.
         Assert.Equal(103_175d, properties.CreditsPrice);
         Assert.Equal(103_175d, handbook.Price);
+    }
+
+    [Fact]
+    public void Default_key_buyback_target_is_used_without_adding_a_purchase_offer()
+    {
+        var templates = KeyOnlyTemplates(65_000);
+        ContrabandContentDefinitions.ApplyKeyRegistrationPrice(templates, ModConfig.Parse("{}"));
+        var price = Assert.Single(templates.Handbook.Items, entry => entry.Id == (MongoId)ModConstants.KeyTemplateId).Price;
+        Assert.Equal(119_048d, price);
+        Assert.InRange(price!.Value * .63d, 75_000d, 75_001d);
     }
 
     [Fact]

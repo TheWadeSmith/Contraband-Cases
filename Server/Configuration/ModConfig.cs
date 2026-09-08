@@ -4,6 +4,7 @@ namespace ContrabandCases.Server.Configuration;
 
 public sealed class ModConfig
 {
+    public const long DefaultKeySellPrice = 75_000;
     public int CaseStock { get; private set; } = 5;
 
     public int TraderStock => CaseStock;
@@ -28,9 +29,9 @@ public sealed class ModConfig
 
     /// <summary>
     /// Same as <see cref="TherapistSellPriceCase"/>, but for the key. Independent of the case setting. The
-    /// key is find-only and never sold, so this is the only way its price is ever surfaced to a player.
+    /// key remains find-only, but can be sold to eligible traders. Null keeps its legacy registration value.
     /// </summary>
-    public long? TherapistSellPriceKey { get; private set; }
+    public long? TherapistSellPriceKey { get; private set; } = DefaultKeySellPrice;
 
     /// <summary>
     /// How aggressively the BR-12 Relay Key is added to raid loot, expressed as a percentage of the

@@ -17,6 +17,7 @@ public sealed class ModConfigTests
         Assert.False(config.DebugLogging);
         Assert.False(config.TestingInventoryGrantsEnabled);
         Assert.Null(config.FixedCasePrice);
+        Assert.Equal(75_000, config.TherapistSellPriceKey);
         Assert.Equal(2.2d, config.KeyLootWeightPercent);
         Assert.Equal(1.1d, config.CaseLootWeightPercent);
     }
@@ -31,6 +32,14 @@ public sealed class ModConfigTests
         Assert.Equal(1d * 1.1d, shipped.CaseLootWeightPercent);
         Assert.Equal(defaults.KeyLootWeightPercent, shipped.KeyLootWeightPercent);
         Assert.Equal(defaults.CaseLootWeightPercent, shipped.CaseLootWeightPercent);
+        Assert.Equal(defaults.TherapistSellPriceKey, shipped.TherapistSellPriceKey);
+    }
+
+    [Fact]
+    public void Explicit_key_resale_overrides_and_legacy_null_are_preserved()
+    {
+        Assert.Null(ModConfig.Parse("{\"therapistSellPriceKey\":null}").TherapistSellPriceKey);
+        Assert.Equal(42_000, ModConfig.Parse("{\"therapistSellPriceKey\":42000}").TherapistSellPriceKey);
     }
 
     [Fact]

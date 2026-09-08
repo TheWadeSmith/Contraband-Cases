@@ -26,7 +26,7 @@ public static class CaseContracts
         Relics => "BR-12 Relics Case",
         BlackSite => "BR-12 Black Site Case",
         CashCache => "BR-12 Cash Cache",
-        _ => "BR-12 Relay Case"
+        _ => "BR-12 Mixed Case"
     };
 
     public static string ShortName(string template) => Require(template) switch
@@ -76,6 +76,10 @@ public static class CaseContracts
             "chemistry" => "Combat Chemistry",
             "cooler-stims" => "Experimental Stims",
             "eco-elite-optics" => "Specialist Optics",
+            "relic-expedition" => "Relic Expeditions",
+            "ammo" => "Ammunition",
+            "recon" => "Recon Equipment",
+            "rifle" => "Precision Weapons",
             _ => CargoFamilies.Label(group)
         }
         : CargoFamilies.Label(group);

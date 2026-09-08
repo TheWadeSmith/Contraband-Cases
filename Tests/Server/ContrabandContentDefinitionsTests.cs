@@ -57,7 +57,7 @@ public sealed class ContrabandContentDefinitionsTests
     public void Ensure_therapist_buys_configured_items_adds_only_the_configured_template_ids()
     {
         var traders = TradersWithTherapist();
-        var config = ModConfig.Parse("""{ "therapistSellPriceCase": 150000 }""");
+        var config = ModConfig.Parse("""{ "therapistSellPriceCase": 150000, "therapistSellPriceKey": null }""");
 
         ContrabandContentDefinitions.EnsureTherapistBuysConfiguredItems(traders, config);
 
@@ -82,7 +82,7 @@ public sealed class ContrabandContentDefinitionsTests
     }
 
     [Fact]
-    public void Therapist_buys_every_case_by_default_without_duplicate_entries_or_enabling_key_sales()
+    public void Therapist_buys_every_case_and_key_by_default_without_duplicate_entries()
     {
         var traders = TradersWithTherapist();
         var config = ModConfig.Parse("{}");
@@ -91,7 +91,7 @@ public sealed class ContrabandContentDefinitionsTests
         var ids = traders[Traders.THERAPIST].Base.ItemsBuy!.IdList;
         foreach (var template in CaseContracts.Templates)
             Assert.Single(ids, id => id == (MongoId)template);
-        Assert.DoesNotContain((MongoId)ModConstants.KeyTemplateId, ids);
+        Assert.Single(ids, id => id == (MongoId)ModConstants.KeyTemplateId);
     }
 
     [Fact]

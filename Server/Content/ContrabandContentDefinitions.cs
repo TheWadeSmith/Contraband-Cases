@@ -40,9 +40,8 @@ public static class ContrabandContentDefinitions
     /// Fixed internal registration handbook/credits price for the BR-12 Relay Key, introduced in 0.3.18
     /// when the key stopped being sold by Mechanic and became find-only instead. SPT still requires every
     /// registered item template to carry a positive handbook price, so this constant satisfies that
-    /// requirement; it has no gameplay-visible effect on its own, since the key is not listed on the flea
-    /// market (see <see cref="CommonProperties"/>'s CanSellOnRagfair = false) and is not offered by any
-    /// trader unless <see cref="ModConfig.TherapistSellPriceKey"/> is configured, in which case
+    /// requirement and determines eligible traders' ordinary buyback value. The key is not listed on the
+    /// flea market and traders never offer it for purchase. When <see cref="ModConfig.TherapistSellPriceKey"/> is configured,
     /// <see cref="ApplyKeyRegistrationPrice"/> overrides this value with whatever hits that target
     /// instead. Chosen to match the key's long-standing effective worth from before 0.3.18 (its former
     /// fixedKeyPrice default), so nothing about the key's implied value actually changes -- only how a
@@ -336,13 +335,9 @@ public static class ContrabandContentDefinitions
     }
 
     /// <summary>
-    /// Grants Therapist explicit permission to buy the case/key even though their handbook category isn't
-    /// one of the categories she normally accepts (confirmed against her live base.json: neither
-    /// <see cref="CaseHandbookParentId"/> nor <see cref="KeyHandbookParentId"/> appear in her "items_buy"
-    /// category list). Without this, configuring a Therapist sell price has no visible effect in-game because
-    /// her sell screen would never offer to buy the item in the first place.
-    /// All cases are sellable at the native handbook-based rate by default.
-    /// The key remains find-only and uses its existing optional sell setting.
+    /// Ensures case buyback and a configured key target are explicitly supported, without duplicates.
+    /// Native trader acceptance follows item ancestry, not handbook categories: Therapist already
+    /// accepts the key's ancestor. This never adds a trader purchase offer for the find-only key.
     /// </summary>
     public static void EnsureTherapistBuysConfiguredItems(TradersTable traders, ModConfig config)
     {
@@ -359,7 +354,8 @@ public static class ContrabandContentDefinitions
                 therapist.Base.ItemsBuy.IdList.Add((MongoId)template);
         }
 
-        if (config.TherapistSellPriceKey is not null)
+        if (config.TherapistSellPriceKey is not null &&
+            !therapist.Base.ItemsBuy.IdList.Contains((MongoId)ModConstants.KeyTemplateId))
         {
             therapist.Base.ItemsBuy.IdList.Add((MongoId)ModConstants.KeyTemplateId);
         }
@@ -455,7 +451,7 @@ public static class ContrabandContentDefinitions
         ArgumentNullException.ThrowIfNull(randomLootContainers);
         if (CaseContracts.Templates.Any(template => randomLootContainers.ContainsKey((MongoId)template)))
         {
-            throw new InvalidOperationException("BR-12 Relay Case must not be registered as a native random loot container.");
+            throw new InvalidOperationException("BR-12 Mixed Case must not be registered as a native random loot container.");
         }
     }
 

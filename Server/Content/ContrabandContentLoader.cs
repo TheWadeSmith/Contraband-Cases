@@ -76,7 +76,7 @@ public sealed class ContrabandContentLoader(
 
         ValidateTemplateRegistrations();
         ContrabandContentDefinitions.EnsureMechanicOfferIdsAvailable(mechanicAssort, offers);
-        RegisterItem(ContrabandContentDefinitions.CreateCaseCloneDetails(prices.CasePrice), "BR-12 Relay Case");
+        RegisterItem(ContrabandContentDefinitions.CreateCaseCloneDetails(prices.CasePrice), "BR-12 Mixed Case");
         foreach (var template in CaseContracts.Templates.Where(t => t != ModConstants.CaseTemplateId))
             RegisterItem(ContrabandContentDefinitions.CreateCaseCloneDetails(1_000, template), CaseContracts.Name(template));
         RegisterItem(ContrabandContentDefinitions.CreateKeyCloneDetails(), "BR-12 Relay Key");
