@@ -70,7 +70,7 @@ foreach ($name in @('amonya.arcane-cache', 'isb-aishi.elite-armory', 'natalya.el
 $selectedPrices = @{}
 foreach ($id in $templates.Keys) { if ($prices.ContainsKey($id)) { $selectedPrices[$id] = $prices[$id] } }
 $fixture = [ordered]@{
-    scope = 'SPT 4.1.5 plus installed mod clone/override definitions, captured 2026-09-08; offline, not finalized hook output.'
+    scope = "SPT 4.1.5 plus installed mod clone/override definitions, captured $([DateTime]::UtcNow.ToString('o')); offline, not finalized hook output."
     templates = $templates
     presets = $selectedPresets
     prices = $selectedPrices
