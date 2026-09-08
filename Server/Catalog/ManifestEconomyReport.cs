@@ -62,6 +62,7 @@ public static class ManifestEconomyReport
                             NetBeforeKeyOpportunityCost = decimal.Round(expected - lot.Evaluation.UseValue, 2),
                             NetWith25000KeyOpportunityCost = decimal.Round(expected - lot.Evaluation.UseValue - 25000, 2),
                             NetWith65000KeyOpportunityCost = decimal.Round(expected - lot.Evaluation.UseValue - 65000, 2),
+                            NetWithStandardKeyOpportunityCost = decimal.Round(expected - lot.Evaluation.UseValue - ManifestCatalogEconomy.OpeningKeyAllowance, 2),
                             FavorAfterLoss = Math.Min(3, favor + 1)
                         };
                     })).ToArray()
@@ -91,9 +92,10 @@ public static class ManifestEconomyReport
                     Policy = policy.ToString(),
                     Outcomes = analysis!.SummarizeOpening(strategyPrice, policy)
                 }).ToArray() : [],
-            OpeningChoiceCaveat = "Before Relay/Favor. Automatic price is 95% of the lesser of optimal mean/median reference value minus a 25,000 RUB key allowance, rounded up to 1,000 RUB with a 1,000 minimum. The cost-threshold strategy keeps the first offer worth case price plus 25,000; first-offer takes no discard advantage. Loss/near-even/win bands are +/-10% diagnostics, never quotas. Values are not trader cash. Mixed uses automatic price, not a fixed override. Key costs are scenarios, not shop prices. Claimed chase odds depend on policy.",
+            StandardKeyOpportunityCost = ManifestCatalogEconomy.OpeningKeyAllowance,
+            OpeningChoiceCaveat = $"Before Relay/Favor. Automatic price is 90% of the lesser of optimal mean/median reference value minus a {ManifestCatalogEconomy.OpeningKeyAllowance} RUB standard foregone-key-sale allowance, rounded up to 1,000 RUB with a 1,000 minimum. The cost-threshold strategy includes that same key allowance; first-offer takes no discard advantage. Loss/near-even/win bands are +/-10% diagnostics, never quotas. Values are not trader cash. Mixed uses automatic price, not a fixed override. Key costs are scenarios, not shop prices; custom trader settings may differ. Claimed chase odds depend on policy.",
             OptimalKeepDiscardAndRelayScenarios = analysis is null ? [] :
-                new[] { 0m, 25_000m, 65_000m }.SelectMany(cost =>
+                ManifestCatalogEconomy.KeyOpportunityCostScenarios.SelectMany(cost =>
                     new[] { 1, 20 }.SelectMany(count => analysis.Analyze(count, cost))).ToArray(),
             RelayEligibleNonLegendaryPercent = currentNonLegendary.Length == 0 ? 0 :
                 100m * currentNonLegendary.Count(row => row.RelayEligible) / currentNonLegendary.Length,

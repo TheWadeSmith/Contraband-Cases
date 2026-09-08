@@ -154,7 +154,7 @@ internal static class CashPayoutCatalog
             catalog.OpeningDisabledReason,
             catalog.CasePrice,
             ExpectedReferencePayout = weight == 0 ? (decimal?)null : pricedLots.Sum(lot => (decimal)OpeningWeight(lot.Identity.LotId) * lot.Evaluation.UseValue) / weight,
-            KeyCostScenarios = (weight == 0 ? Array.Empty<int>() : new[] { 0, 25_000, 65_000 }).Select(keyCost => new
+            KeyCostScenarios = (weight == 0 ? Array.Empty<decimal>() : ManifestCatalogEconomy.KeyOpportunityCostScenarios).Select(keyCost => new
             {
                 AssumedKeyOpportunityCost = keyCost,
                 TotalReferenceCost = catalog.CasePrice + keyCost,

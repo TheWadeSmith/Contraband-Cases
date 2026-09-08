@@ -61,6 +61,19 @@ public sealed class ManifestEconomyAnalysis
 
     public decimal OptimalKeepDiscardUseValue() => OpeningValue(_lots.Select(lot => (decimal)lot.Evaluation.UseValue).ToArray());
 
+    /// <summary>Decision-weighted claims, using only the clues a player actually sees.</summary>
+    public IReadOnlyList<OpeningClaimProbability> OpeningClaims(decimal casePrice,
+        OpeningChoicePolicy policy = OpeningChoicePolicy.OptimalReferenceValue)
+    {
+        if (casePrice <= 0) throw new ArgumentOutOfRangeException(nameof(casePrice));
+        if (!Enum.IsDefined(policy)) throw new ArgumentOutOfRangeException(nameof(policy));
+        var probabilities = new decimal[_lots.Length];
+        OpeningValue(_lots.Select(lot => (decimal)lot.Evaluation.UseValue).ToArray(), probabilities,
+            policy, casePrice + ManifestCatalogEconomy.OpeningKeyAllowance);
+        return Enumerable.Range(0, _lots.Length).Where(i => probabilities[i] > 0)
+            .Select(i => new OpeningClaimProbability(_lots[i], probabilities[i])).ToArray();
+    }
+
     /// <summary>Outcomes of optimal keep/discard play, before any Relay or Favor.</summary>
     public OpeningRewardSummary SummarizeOpening(decimal casePrice,
         OpeningChoicePolicy policy = OpeningChoicePolicy.OptimalReferenceValue)
@@ -91,7 +104,7 @@ public sealed class ManifestEconomyAnalysis
         return new OpeningRewardSummary(expected, (long)values[outcomes[0]],
             Quantile(0.1m), Quantile(0.5m), Quantile(0.9m), (long)values[outcomes[^1]],
             Percent(i => ManifestOpeningPool.IsChase(_lots[i])),
-            Array.AsReadOnly(new[] { 0m, 25_000m, 65_000m }.Select(keyCost =>
+            Array.AsReadOnly(ManifestCatalogEconomy.KeyOpportunityCostScenarios.Select(keyCost =>
                 new OpeningCostScenario(keyCost, casePrice + keyCost,
                     decimal.Round(expected - casePrice - keyCost, 2),
                     Percent(i => values[i] < casePrice + keyCost),
@@ -215,6 +228,8 @@ public enum OpeningChoicePolicy
     KeepFirst,
     KeepAtOpeningCost
 }
+
+public sealed record OpeningClaimProbability(ResolvedCargoLot Lot, decimal Probability);
 
 public sealed record EconomyScenario(int CaseCount, int InitialFavor, decimal KeyOpportunityCost,
     decimal ExpectedTotalUseValueAfterKeysBeforeCasePrices, decimal BreakEvenCasePrice);

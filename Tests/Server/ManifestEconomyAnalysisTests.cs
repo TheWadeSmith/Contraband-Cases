@@ -45,7 +45,7 @@ public sealed class ManifestEconomyAnalysisTests
 
         Assert.Equal(60_000m, decimal.Round(analysis.SummarizeOpening(50_000,
             OpeningChoicePolicy.KeepFirst).ExpectedUseValue, 8));
-        Assert.Equal(90_000m, decimal.Round(analysis.SummarizeOpening(50_000,
+        Assert.Equal(90_000m, decimal.Round(analysis.SummarizeOpening(10_000,
             OpeningChoicePolicy.KeepAtOpeningCost).ExpectedUseValue, 8));
         Assert.Throws<ArgumentOutOfRangeException>(() => analysis.SummarizeOpening(50_000,
             (OpeningChoicePolicy)99));

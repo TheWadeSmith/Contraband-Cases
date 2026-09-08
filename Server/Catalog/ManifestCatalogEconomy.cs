@@ -9,7 +9,10 @@ namespace ContrabandCases.Server.Catalog;
 /// </summary>
 public static class ManifestCatalogEconomy
 {
-    public const decimal OpeningKeyAllowance = 25_000m;
+    // Standard foregone key sale, not a purchase price or a live trader quote.
+    public const decimal OpeningKeyAllowance = Configuration.ModConfig.DefaultKeySellPrice;
+    public static IReadOnlyList<decimal> KeyOpportunityCostScenarios { get; } =
+        Array.AsReadOnly(new[] { 0m, 25_000m, 65_000m, OpeningKeyAllowance, 150_000m });
 
     /// <summary>One shared reference-price policy for Mixed and themed cases.</summary>
     public static TicketPrices CalculateAutomaticPrices(CargoCatalogSnapshot catalog)
@@ -26,7 +29,7 @@ public static class ManifestCatalogEconomy
         // not a promised cash resale return or an individual win/loss quota.
         var reference = Math.Min(outcomes.ExpectedUseValue, outcomes.MedianUseValue);
         return TicketPriceCalculator.Calculate(Math.Max(1_000m,
-            reference * 0.95m - OpeningKeyAllowance), 1m, 1_000);
+            reference * 0.90m - OpeningKeyAllowance), 1m, 1_000);
     }
 
     public static decimal CalculateExpectedHandbookValue(CargoCatalogSnapshot catalog)

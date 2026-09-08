@@ -7,7 +7,7 @@ internal static class ManifestPremiumPool
 {
     internal static long MinimumUseValue(CargoCatalogSnapshot catalog, ManifestOpeningTier tier)
     {
-        var totalCost = (decimal)(catalog.CasePrice ?? 0) + 25_000;
+        var totalCost = (decimal)(catalog.CasePrice ?? 0) + ManifestCatalogEconomy.OpeningKeyAllowance;
         return checked((long)decimal.Ceiling(tier == ManifestOpeningTier.Legendary
             ? Math.Max(300_000m, totalCost * 1.6m)
             : Math.Max(200_000m, totalCost * 1.15m)));

@@ -168,21 +168,21 @@ public sealed class ManifestCatalogEconomyTests
 
         var prices = ContrabandContentDefinitions.CalculatePrices(catalog, ModConfig.Parse("{}"));
 
-        Assert.Equal(450_000L, prices.CasePrice);
+        Assert.Equal(375_000L, prices.CasePrice); // 90% of 500k minus a 75k key.
     }
 
     [Fact]
     public void Automatic_mixed_price_accounts_for_keep_discard_instead_of_one_random_offer()
     {
         var catalog = Snapshot([
-            Lot("provider-a", "lot-a", "arsenal", 10_000),
-            Lot("provider-b", "lot-b", "operator", 40_000),
-            Lot("provider-c", "lot-c", "field-supply", 50_000)
+            Lot("provider-a", "lot-a", "arsenal", 100_000),
+            Lot("provider-b", "lot-b", "operator", 400_000),
+            Lot("provider-c", "lot-c", "field-supply", 500_000)
         ]);
 
         var prices = ContrabandContentDefinitions.CalculatePrices(catalog, ModConfig.Parse("{}"));
 
-        Assert.Equal(23_000L, prices.CasePrice);
+        Assert.Equal(375_000L, prices.CasePrice);
     }
 
     [Fact]
