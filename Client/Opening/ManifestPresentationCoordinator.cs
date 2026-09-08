@@ -26,7 +26,7 @@ internal sealed partial class ManifestPresentationCoordinator : IDisposable
     private readonly RouletteOverlay _overlay;
     private readonly CaseOperationDispatcher _dispatcher;
     private readonly ManifestSnapshotTransport _transport;
-    private readonly ManifestSpriteTaskCache<Sprite> _spriteCache = new(sprite => sprite == null);
+    private readonly ManifestSpriteTaskCache<Sprite> _spriteCache = new(sprite => sprite == null, () => Time.frameCount);
     private ManifestRun? _active;
     private long _generation;
     private bool _disposed;
@@ -993,7 +993,8 @@ internal sealed partial class ManifestPresentationCoordinator : IDisposable
                 claimRetry,
                 () => RevalidateAction(run, snapshot, ManifestEconomicAction.Claim),
                 () => RevalidateAction(run, snapshot, ManifestEconomicAction.Relay),
-                () => SaveAndClose(run)))
+                () => SaveAndClose(run),
+                CountRelayKeysForDisplay(run.Profile)))
         {
             Fail(run, "The Claim/Relay decision could not be displayed.", null);
             return;
@@ -1422,6 +1423,21 @@ internal sealed partial class ManifestPresentationCoordinator : IDisposable
             ?? throw new InvalidOperationException("The authenticated profile inventory is unavailable.");
         return inventory.AllRealPlayerItems.Any(item =>
             string.Equals(item.StringTemplateId, ModConstants.KeyTemplateId, StringComparison.Ordinal));
+    }
+
+    private int? CountRelayKeysForDisplay(Profile profile)
+    {
+        try
+        {
+            return profile.Inventory?.AllRealPlayerItems
+                .Where(item => item.StringTemplateId == ModConstants.KeyTemplateId)
+                .Select(item => item.Id).Distinct(StringComparer.Ordinal).Count();
+        }
+        catch (Exception exception) when (exception is not OutOfMemoryException)
+        {
+            _log.LogWarning($"Could not display the inventory key count: {exception.GetType().Name}");
+            return null; // Optional display information never blocks a saved reward.
+        }
     }
 
     private void End(ManifestRun? run, string? warning, bool operationPending)

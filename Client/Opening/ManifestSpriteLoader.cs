@@ -82,7 +82,13 @@ internal sealed class ManifestSpritePlan
             throw new ArgumentNullException(nameof(reveal));
         }
 
-        return Create(reveal.Tiles.Values, AnchorId(reveal.Lot));
+        var motion = reveal.Motion;
+        // The catalog also contains unseen prizes. Only the reel (or the landing
+        // neighborhood in fade mode) needs artwork; the committed prize goes first.
+        var visible = motion.InitiallyVisibleTiles;
+        var ids = new[] { AnchorId(reveal.Lot) }.Concat(visible)
+            .Concat(motion.UsesScrolling ? motion.Strip : Array.Empty<string>()).Distinct(StringComparer.Ordinal);
+        return Create(ids.Select(id => reveal.Tiles[id]), AnchorId(reveal.Lot));
     }
 
     public static ManifestSpritePlan ForLot(ManifestLotSnapshot lot)
@@ -234,10 +240,48 @@ internal sealed class ManifestSpriteTaskCache<TSprite>
     private readonly Dictionary<string, Task<TSprite>> _tasks = new(StringComparer.Ordinal);
     private readonly Dictionary<string, TSprite> _sprites = new(StringComparer.Ordinal);
     private readonly Func<TSprite?, bool> _isUnavailable;
+    // Cache eviction invalidates ownership, not native Unity work. Keep its
+    // capacity charged until completion, even when the window/run has closed.
+    private readonly HashSet<Task<TSprite>> _running = [];
+    private readonly Func<int>? _frame;
+    private int _frameId = -1;
+    private int _pump;
+    private int _startsThisFrame;
 
-    public ManifestSpriteTaskCache(Func<TSprite?, bool>? isUnavailable = null)
+    public ManifestSpriteTaskCache(Func<TSprite?, bool>? isUnavailable = null, Func<int>? frame = null)
     {
         _isUnavailable = isUnavailable ?? (sprite => sprite is null);
+        _frame = frame;
+    }
+
+    internal void BeginFrame()
+    {
+        lock (_sync)
+        {
+            var frame = _frame?.Invoke() ?? ++_pump;
+            if (_frameId == frame) return;
+            _frameId = frame;
+            _startsThisFrame = 0;
+        }
+    }
+
+    internal bool TryStart(string templateId, Func<string, Task<TSprite>> load, out Task<TSprite>? task)
+    {
+        lock (_sync)
+        {
+            if (_tasks.TryGetValue(templateId, out task) && !NeedsRetry(task)) return true;
+            _running.RemoveWhere(completed =>
+            {
+                if (!completed.IsCompleted) return false;
+                if (completed.IsFaulted) _ = completed.Exception;
+                return true;
+            });
+            task = null;
+            if (_startsThisFrame >= 2 || _running.Count >= 4) return false;
+            _startsThisFrame++;
+            task = GetOrLoad(templateId, load);
+            return true;
+        }
     }
 
     internal int TaskCount
@@ -290,6 +334,7 @@ internal sealed class ManifestSpriteTaskCache<TSprite>
                 ?? throw new InvalidOperationException(
                     $"The sprite loader returned no task for template '{templateId}'.");
             _tasks.Add(templateId, task);
+            if (!task.IsCompleted) _running.Add(task);
             return task;
         }
     }
@@ -417,24 +462,29 @@ internal sealed class ManifestSpriteLoadBatch<TSprite>
 {
     private readonly ManifestSpriteTaskCache<TSprite> _cache;
     private readonly Dictionary<string, PendingRequest> _pending;
+    private readonly Queue<ManifestSpriteRequest> _queued;
+    private readonly Func<string, Task<TSprite>> _load;
 
     private ManifestSpriteLoadBatch(
         ManifestSpritePlan plan,
         ManifestSpriteTaskCache<TSprite> cache,
         Dictionary<string, PendingRequest> pending,
-        IReadOnlyList<ManifestSpriteLoadFailure> startFailures)
+        IReadOnlyList<ManifestSpriteLoadFailure> startFailures,
+        Func<string, Task<TSprite>> load)
     {
         Plan = plan;
         _cache = cache;
         _pending = pending;
         StartFailures = startFailures;
+        _queued = new Queue<ManifestSpriteRequest>(plan.Requests);
+        _load = load;
     }
 
     public ManifestSpritePlan Plan { get; }
 
     public IReadOnlyList<ManifestSpriteLoadFailure> StartFailures { get; }
 
-    public bool IsComplete => _pending.Count == 0;
+    public bool IsComplete => _pending.Count == 0 && _queued.Count == 0;
 
     public static ManifestSpriteLoadBatch<TSprite> Start(
         ManifestSpritePlan plan,
@@ -456,24 +506,30 @@ internal sealed class ManifestSpriteLoadBatch<TSprite>
 
         var pending = new Dictionary<string, PendingRequest>(StringComparer.Ordinal);
         var failures = new List<ManifestSpriteLoadFailure>();
-        foreach (var request in plan.Requests)
-        {
-            try
-            {
-                var task = cache.GetOrLoad(request.TemplateId, load);
-                pending.Add(request.TemplateId, new PendingRequest(request, task));
-            }
-            catch (Exception exception)
-            {
-                failures.Add(new ManifestSpriteLoadFailure(request.TemplateId, exception));
-            }
-        }
-
-        return new ManifestSpriteLoadBatch<TSprite>(
+        var batch = new ManifestSpriteLoadBatch<TSprite>(
             plan,
             cache,
             pending,
-            new ReadOnlyCollection<ManifestSpriteLoadFailure>(failures));
+            new ReadOnlyCollection<ManifestSpriteLoadFailure>(failures), load);
+        batch.StartQueued(() => true, (id, error) => failures.Add(new(id, error)));
+        return batch;
+    }
+
+    private void StartQueued(Func<bool> canBind, Action<string, Exception>? reportUnavailable)
+    {
+        _cache.BeginFrame();
+        // Also bound cached work per pump, so a warm catalog cannot flood the UI.
+        for (var count = 0; count < 2 && _queued.Count > 0 && canBind(); count++)
+        {
+            var request = _queued.Peek();
+            try
+            {
+                if (!_cache.TryStart(request.TemplateId, _load, out var task)) break;
+                _pending.Add(request.TemplateId, new PendingRequest(request, task!));
+            }
+            catch (Exception exception) { reportUnavailable?.Invoke(request.TemplateId, exception); }
+            _queued.Dequeue();
+        }
     }
 
     public int BindAvailable(
@@ -494,6 +550,7 @@ internal sealed class ManifestSpriteLoadBatch<TSprite>
             return 0;
         }
 
+        StartQueued(canBind, reportUnavailable);
         var bound = 0;
         foreach (var entry in _pending.Values.ToArray())
         {
@@ -529,7 +586,7 @@ internal sealed class ManifestSpriteLoadBatch<TSprite>
                 }
             }
 
-            while (entry.NextTileIndex < entry.Request.TileIds.Count && canBind())
+            while (entry.NextTileIndex < entry.Request.TileIds.Count && bound < 8 && canBind())
             {
                 bind(entry.Request.TileIds[entry.NextTileIndex], entry.Sprite);
                 entry.NextTileIndex++;
@@ -540,6 +597,7 @@ internal sealed class ManifestSpriteLoadBatch<TSprite>
             {
                 _pending.Remove(entry.Request.TemplateId);
             }
+            if (bound >= 8) break;
         }
 
         return bound;
@@ -547,6 +605,7 @@ internal sealed class ManifestSpriteLoadBatch<TSprite>
 
     public int EvictPendingLoads(Action<string>? reportTimeout = null)
     {
+        _queued.Clear();
         var evicted = 0;
         foreach (var entry in _pending.Values.ToArray())
         {
