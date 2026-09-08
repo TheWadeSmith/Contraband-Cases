@@ -9,14 +9,19 @@ namespace ContrabandCases.Server.Catalog;
 internal static class ShipmentEconomy
 {
     internal const string Suffix = ".shipment-v1";
+    internal const string CompactSuffix = ".compact-v1";
+
+    internal static bool IsCompact(string lotId) => lotId.EndsWith(CompactSuffix, StringComparison.Ordinal);
+    internal static int Generation(string lotId) => IsCompact(lotId) ? 2 : IsShipment(lotId) ? 1 : 0;
 
     internal static bool IsShipment(string lotId) => lotId.EndsWith(Suffix, StringComparison.Ordinal);
 
-    internal static string BaseId(string lotId) => IsShipment(lotId) ? lotId[..^Suffix.Length] : lotId;
+    internal static string BaseId(string lotId) => IsCompact(lotId) ? BaseId(lotId[..^CompactSuffix.Length]) :
+        IsShipment(lotId) ? lotId[..^Suffix.Length] : lotId;
 
     internal static RewardRarity Grade(string lotId, long useValue)
     {
-        if (!IsShipment(lotId)) return CargoGradeBands.Assign(useValue);
+        if (Generation(lotId) == 0) return CargoGradeBands.Assign(useValue);
         if (useValue <= 0) throw new CargoCatalogValidationException("Shipment use value must be positive.");
         return useValue switch
         {
@@ -30,8 +35,9 @@ internal static class ShipmentEconomy
 
     internal static IEnumerable<ResolvedCargoLot> CurrentLots(IReadOnlyList<ResolvedCargoLot> lots)
     {
-        var replaced = lots.Where(lot => IsShipment(lot.Identity.LotId))
-            .Select(lot => (lot.Identity.ProviderId, lot.Identity.PackVersion, Id: BaseId(lot.Identity.LotId)))
+        var replaced = lots.Where(lot => Generation(lot.Identity.LotId) > 0)
+            .Select(lot => (lot.Identity.ProviderId, lot.Identity.PackVersion,
+                Id: IsCompact(lot.Identity.LotId) ? lot.Identity.LotId[..^CompactSuffix.Length] : BaseId(lot.Identity.LotId)))
             .ToHashSet();
         return lots.Where(lot => !replaced.Contains((lot.Identity.ProviderId, lot.Identity.PackVersion, lot.Identity.LotId)));
     }

@@ -9,6 +9,40 @@ namespace ContrabandCases.Tests.Client;
 
 public sealed class RelayClientTests
 {
+    [Theory]
+    [InlineData(false)]
+    [InlineData(true)]
+    public void Mailed_legacy_relay_prize_uses_authoritative_receipt_without_requiring_inventory_output(bool recovery)
+    {
+        var receiptJson = Newtonsoft.Json.Linq.JObject.FromObject(Receipt(RelayOutcome.RarityUpgrade,
+            "upgrade", RewardRootId, RewardRarity.Uncommon));
+        receiptJson["DeliveredToMessenger"] = true;
+        var receipt = receiptJson.ToObject<RelayReceipt>()!;
+        var catalog = new[] { Reward("upgrade", RewardRarity.Uncommon, "new-root") };
+        var match = recovery
+            ? RelayInventoryReconciler.ReconcileRecovered("profile", Inventory(), catalog,
+                Snapshot(settlementPending: true, pendingAction: "Relay"), receipt)
+            : RelayInventoryReconciler.Reconcile(RelayInventoryBaseline.Capture(
+                Inventory(Node(StakeRootId, "old-root"), Node(KeyId, ModConstants.KeyTemplateId)), StakeRootId),
+                Inventory(), catalog, Snapshot(), receipt);
+        Assert.Equal("upgrade", match!.Reward.Id);
+        Assert.Equal(RewardRootId, match.RootItemId);
+    }
+
+    [Theory]
+    [InlineData("\"true\"")]
+    [InlineData("1")]
+    [InlineData("null")]
+    public void Mail_receipt_marker_rejects_non_boolean_json(string value)
+    {
+        var snapshot = Newtonsoft.Json.Linq.JObject.FromObject(Snapshot());
+        var receipt = Newtonsoft.Json.Linq.JObject.FromObject(Receipt(RelayOutcome.RarityUpgrade, "upgrade", RewardRootId, RewardRarity.Uncommon));
+        receipt["DeliveredToMessenger"] = Newtonsoft.Json.Linq.JToken.Parse(value);
+        snapshot["LatestReceipt"] = receipt;
+        var json = JsonConvert.SerializeObject(new { err = 0, data = snapshot });
+        Assert.Throws<RelaySnapshotException>(() => RelaySnapshotEnvelope.Parse(json, StakeRootId));
+    }
+
     private const string StakeRootId = "aaaaaaaaaaaaaaaaaaaaaaaa";
     private const string RewardRootId = "bbbbbbbbbbbbbbbbbbbbbbbb";
     private const string KeyId = "cccccccccccccccccccccccc";

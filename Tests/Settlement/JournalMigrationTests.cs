@@ -13,6 +13,21 @@ namespace ContrabandCases.Tests.Settlement;
 
 public sealed class JournalMigrationTests
 {
+    [Theory]
+    [InlineData(false)]
+    [InlineData(true)]
+    public void Messenger_claim_destination_roundtrips_and_cannot_be_disguised_as_schema_six(bool granted)
+    {
+        var document = SptCaseJournal.ToDocument(granted ? SuccessfulRelayReceiptJournal() : ClaimJournal(out _, out _));
+        var payload = granted ? document.ManifestClaimGrants![0].ClaimPayload! : document.ActiveManifest!.ClaimPrepared!;
+        payload.Delivery = ClaimDeliveryKind.Messenger;
+        var restored = SptCaseJournal.FromDocument(document);
+        var restoredPayload = granted ? restored.ManifestClaimGrants[0].ClaimPayload : restored.ActiveManifest!.ClaimPrepared!;
+        Assert.Equal(ClaimDeliveryKind.Messenger, restoredPayload.Delivery);
+        document.SchemaVersion = 6;
+        Assert.Throws<InvalidOperationException>(() => SptCaseJournal.FromDocument(document));
+    }
+
     private static readonly DateTimeOffset PreparedAt = DateTimeOffset.UnixEpoch.AddMinutes(1);
     private static readonly DateTimeOffset CommittedAt = DateTimeOffset.UnixEpoch.AddMinutes(2);
     private static readonly string ManifestNonce = new('a', ManifestCommitmentEvidence.NonceByteCount * 2);
@@ -224,7 +239,7 @@ public sealed class JournalMigrationTests
         var deserialized = JsonSerializer.Deserialize<SptCaseJournalDocument>(json, options);
         var restored = SptCaseJournal.FromDocument(Assert.IsType<SptCaseJournalDocument>(deserialized));
 
-        Assert.Equal(6, document.SchemaVersion);
+        Assert.Equal(SptCaseJournalDocument.CurrentSchemaVersion, document.SchemaVersion);
         Assert.Equal("contraband-cases-openings-v1", SptCaseJournal.JournalKey);
         var active = Assert.IsType<ManifestRecord>(restored.ActiveManifest);
         Assert.Equal(RarityLadderVersion.LegacyFourTier, active.RarityLadderVersion);

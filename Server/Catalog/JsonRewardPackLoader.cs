@@ -8,7 +8,9 @@ namespace ContrabandCases.Server.Catalog;
 public sealed class JsonRewardPackLoader
 {
     internal const int MaximumPackSizeBytes = 1_048_576;
-    private const int MaximumLots = 128;
+    // Includes immutable historical generations; fresh delivery has its own
+    // much smaller item budget. Do not delete paid recipes to fit this bound.
+    private const int MaximumLots = 256;
     private const int MaximumRecipeLines = 64;
     private const int SchemaVersion = 1;
 

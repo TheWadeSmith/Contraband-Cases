@@ -25,6 +25,7 @@ profiles/
 profileData/
 # Locally generated from third-party game/mod definitions; never publish the capture.
 /Tests/Fixtures/optional-mod-templates.json
+/Tests/Fixtures/curated-mod-templates.json
 *.log
 *.dmp
 *.dll

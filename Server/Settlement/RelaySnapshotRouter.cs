@@ -252,6 +252,7 @@ public sealed class RelaySnapshotRouter : StaticRouter
         var output = record.OutputRewardId is null ? null : catalog.FindReward(record.OutputRewardId);
         return new RelayReceipt
         {
+            DeliveredToMessenger = record.MailDelivery is not null,
             Action = record.Action.ToString(),
             Outcome = record.Outcome.ToString(),
             StakeRootId = record.StakeRootId.ToString(),

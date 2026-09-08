@@ -57,6 +57,41 @@ public sealed class FrontendSafetyTests
         Assert.Contains("No additional roubles charged", overview);
     }
 
+    [Theory]
+    [InlineData(CaseContracts.Operations)]
+    [InlineData(CaseContracts.CashCache)]
+    public void Opening_overview_identifies_messenger_delivery_before_spending(string template)
+    {
+        var text = BrokerPresentation.Overview(Odds(template));
+        Assert.Contains("Mechanic", text);
+        Assert.Contains("Messenger", text);
+    }
+
+    [Fact]
+    public void Completed_gallery_preview_matches_current_messenger_delivery()
+    {
+        var lot = new ManifestLotSnapshot("core", "Base game", "kit", "Raid kit", "Raid equipment",
+            "operator", "operator", RewardRarity.Contractor, "item", new string('a', 64),
+            900_000, 900_000, 12, [new ManifestLotContentSnapshot("item", "Raid kit", 1)]);
+        Assert.True(ManifestGallery.Create(lot, GalleryState.Claimed, false).DeliveredToMessenger);
+        Assert.False(ManifestGallery.Create(lot, GalleryState.ReadyToClaim, false).DeliveredToMessenger);
+        Assert.Contains("Messenger", BrokerPresentation.RelayEssentials(
+            ManifestGallery.Create(lot, GalleryState.Replacement, false)));
+    }
+
+    [Fact]
+    public void Cash_completed_gallery_has_no_send_action_and_uses_messenger_terminal_state()
+    {
+        var lot = new ManifestLotSnapshot(CashPayouts.Provider, "Cash Cache", "cash", "Cash payout",
+            "Cash", "cash", "cash", RewardRarity.Restricted, CashPayouts.Roubles, new string('a', 64),
+            1_400_000, 1_400_000, 3, [new(CashPayouts.Roubles, "Roubles", 1_400_000)]);
+        var snapshot = ManifestGallery.Create(lot, GalleryState.Claimed, false);
+        Assert.Equal(ManifestPhase.Granted, snapshot.Phase);
+        Assert.True(snapshot.DeliveredToMessenger);
+        Assert.False(snapshot.AvailableActions.CanClaim);
+        Assert.Null(snapshot.CurrentLot);
+    }
+
     [Fact]
     public void Premium_odds_state_first_draw_condition_and_unavailable_tiers()
     {

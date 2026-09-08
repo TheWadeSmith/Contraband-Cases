@@ -30,12 +30,12 @@ public sealed class ExpandedModRewardPackTests
 
     public static readonly TheoryData<string, string, double, int> PackFiles = new()
     {
-        { "wtt-contentbackport.field-resupply.json", "wtt-contentbackport.field-resupply", 0.20, 6 },
-        { "wtt-contentbackport.elite-optics.json", "wtt-contentbackport.elite-optics", 0.07, 9 },
-        { "eco-attachment.field-cache.json", "eco-attachment.field-cache", 0.16, 5 },
-        { "eco-attachment.elite-optics.json", "eco-attachment.elite-optics", 0.06, 6 },
-        { "amonya.arcane-cache.json", "amonya.arcane-cache", 0.05, 9 },
-        { "eco-ww2.relic-cache.json", "eco-ww2.relic-cache", 0.05, 4 }
+        { "wtt-contentbackport.field-resupply.json", "wtt-contentbackport.field-resupply", 0.20, 9 },
+        { "wtt-contentbackport.elite-optics.json", "wtt-contentbackport.elite-optics", 0.07, 12 },
+        { "eco-attachment.field-cache.json", "eco-attachment.field-cache", 0.16, 9 },
+        { "eco-attachment.elite-optics.json", "eco-attachment.elite-optics", 0.06, 10 },
+        { "amonya.arcane-cache.json", "amonya.arcane-cache", 0.05, 12 },
+        { "eco-ww2.relic-cache.json", "eco-ww2.relic-cache", 0.05, 6 }
     };
 
     [Theory]
@@ -140,31 +140,14 @@ public sealed class ExpandedModRewardPackTests
         int expectedLotCount)
     {
         var pack = new JsonRewardPackLoader().LoadFile(RewardPackPath(fileName));
-        if (pack.RetiredLotIds.Count > 0)
-        {
-            var real = InstalledOptionalPackCompatibilityTests.ReadCatalog(expectedProviderId);
-            Assert.Equal(pack.Lots.Count - pack.RetiredLotIds.Count, real.FreshOpeningLots.Count);
-            return;
-        }
-        var templates = pack.RequiredTemplateIds
-            .Select(id => Template(id))
-            .ToArray();
-        var core = MinimalCorePack();
-        var coreTemplate = Template(CoreTemplateId);
-        var builder = new CargoCatalogSnapshotBuilder(
-            Resolver(templates),
-            Evaluator(templates),
-            new CargoPackRequirementValidator(
-                id => id == CoreTemplateId
-                    ? coreTemplate
-                    : templates.FirstOrDefault(t => t.Id.ToString() == id),
-                _ => null).Validate);
-
-        var snapshot = builder.Build(core, [pack]);
-
+        // Real declared clones and native presets exercise ancestry, mandatory
+        // slots and actual stack bounds; generic one-cell placeholders cannot.
+        var snapshot = InstalledOptionalPackCompatibilityTests.ReadCatalog(expectedProviderId);
         Assert.Empty(snapshot.SkippedPacks);
-        var resolved = snapshot.Lots.Where(lot => lot.Identity.ProviderId == expectedProviderId).ToArray();
-        Assert.Equal(expectedLotCount, resolved.Length);
+        Assert.Equal(expectedLotCount, pack.Lots.Count);
+        var resolved = snapshot.Lots.Where(lot => ShipmentEconomy.IsCompact(lot.Identity.LotId)).ToArray();
+        Assert.Equal(pack.Lots.Where(lot => ShipmentEconomy.IsCompact(lot.LotId)).Select(lot => lot.LotId).Order(),
+            resolved.Select(lot => lot.Identity.LotId).Order());
         Assert.All(resolved, lot =>
         {
             Assert.True(lot.Evaluation.HandbookValue > 0);

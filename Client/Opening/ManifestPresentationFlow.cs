@@ -6,6 +6,21 @@ using ContrabandCases.Shared.Manifest;
 
 namespace ContrabandCases.Client.Opening;
 
+internal static class LegacyOpeningPresentation
+{
+    internal static void RequireResumeAuthority(bool libraryOnly, LegacyOpeningSnapshot saved, string? caseId)
+    {
+        if (libraryOnly || saved is null || saved.Committed || saved.CaseId != caseId)
+            throw new InvalidOperationException("Only the exact authenticated pending legacy opening may be resumed.");
+    }
+
+    internal static string Summary(LegacyOpeningSnapshot saved) => !saved.Committed
+        ? "SAVED OPENING — READY TO RESUME\n\nYour prize was already selected by an older version. Resume sends that exact prize through Mechanic in Messenger. No new roll is made, and no extra case or key is charged."
+        : saved.DeliveredToMessenger
+            ? "SENT TO MESSENGER\n\nMechanic has your saved prize. Claim individual attachments as stash space allows. Uncollected attachments remain for 10 years; deleting the message discards them. Reopening this receipt never rolls or delivers the prize again."
+            : "PREVIOUSLY DELIVERED\n\nThis older reward was already delivered directly to your inventory. It will not be moved or delivered a second time. Check your stash or sorting table.";
+}
+
 public enum ManifestResumeKind
 {
     ConfirmNew,
@@ -133,8 +148,8 @@ public static class ManifestPresentationPolicy
                 "Relay did not go through. Your saved reward has not changed.\n\n" +
                 "Return to your reward to collect it or check the Relay requirements. This button does not spend a key or roll again.",
             ManifestEconomicAction.Claim =>
-                "Your reward could not be collected. It is still saved.\n\n" +
-                "Check that your stash has room, then return to your reward. This button does not collect it again.",
+                "Reward delivery could not be confirmed. Your saved result will be checked.\n\n" +
+                "Check Mechanic in Messenger, then return to the reward. This button does not reroll or duplicate it.",
             _ =>
                 "That action did not go through. Your saved opening has not changed.\n\n" +
                 "Return to the opening to review your options. This button does not spend items or repeat your choice."
@@ -617,8 +632,8 @@ public static class ManifestPresentationPolicy
         var values = lot.UseValue is long use &&
                      lot.FootprintCells is int cells
             ? caseTemplateId == CaseContracts.CashCache
-                ? $"{CashPayouts.ValueLabel(lot.AnchorTemplateId)}: ₽{use.ToString("N0", CultureInfo.InvariantCulture)}  •  {cells} stash cells"
-                : BrokerPresentation.Value(lot) + $"\n{cells} stash cells. " + BrokerPresentation.ResaleBasis
+                ? $"{CashPayouts.ValueLabel(lot.AnchorTemplateId)}: ₽{use.ToString("N0", CultureInfo.InvariantCulture)}  •  {cells} total storage cells"
+                : BrokerPresentation.Value(lot) + $"\n{cells} total storage cells. " + BrokerPresentation.ResaleBasis
             : caseTemplateId == CaseContracts.CashCache && !missingContentBlocked
                 ? "Current conversion estimate unavailable. Your committed payout is unchanged."
                 : "Valuation unavailable — this lot is blocked until its content pack returns.";
@@ -650,7 +665,7 @@ public static class ManifestPresentationPolicy
         }
 
         return snapshot.CurrentOrdinal == 1
-            ? "Keep this reward for claiming or Relay. Discard gives it up permanently.\nNext: " + FamilySealLabel(snapshot.FamilySeals[1])
+            ? "Keep this reward for Messenger delivery or Relay. Discard gives it up permanently.\nNext: " + FamilySealLabel(snapshot.FamilySeals[1])
             : "Keep this reward, or take the final offer. You cannot come back.\nNext: " + FamilySealLabel(snapshot.FamilySeals[2]);
     }
 
@@ -678,7 +693,7 @@ public static class ManifestPresentationPolicy
         if (relay is null)
         {
             return snapshot.RelayTerminal
-                ? "Relay chain complete — Claim remains safe."
+                ? "Relay chain complete — send your saved prize to Messenger."
                 : "No complete same-track Relay pool is available.";
         }
         if (relay.GuaranteeActive)

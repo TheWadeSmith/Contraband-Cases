@@ -9,12 +9,14 @@ namespace ContrabandCases.Server.Catalog;
 /// </summary>
 internal sealed record ManifestOpeningPool(IReadOnlyList<ResolvedCargoLot> Lots, ExactWeightSet Weights)
 {
-    internal const string SelectionVersion = "curated-shipment-opening-v3";
+    internal const string SelectionVersion = "curated-compact-opening-v4";
     internal const int ChaseShareDenominator = 400;
 
     // Historical lots remain resolvable, but component-only kits have been
     // replaced by complete optics/armorer packages for new offers and Relays.
     internal static bool IsFreshEligible(ResolvedCargoLot lot) =>
+        (!ShipmentEconomy.IsCompact(lot.Identity.LotId) ||
+            lot.Forest.Roots.Count <= 8 && lot.Forest.Nodes.Count <= 128 && lot.Evaluation.FootprintCells <= 64) &&
         (lot.Identity.ProviderId, ShipmentEconomy.BaseId(lot.Identity.LotId)) is not
             (("eco-attachment.elite-optics", "micro-red-dot-mounts") or
              ("eco-attachment.elite-optics", "larue-rail-system") or
@@ -25,7 +27,9 @@ internal sealed record ManifestOpeningPool(IReadOnlyList<ResolvedCargoLot> Lots,
     // Desirable thematic chase rewards, plus a guard against mod price outliers.
     // This does not alter pack identities, grades, contents or old commitments.
     internal static bool IsChase(ResolvedCargoLot lot) =>
-        lot.Evaluation.UseValue >= (ShipmentEconomy.IsShipment(lot.Identity.LotId) ? 4_500_000 : 750_000) ||
+        (ShipmentEconomy.IsCompact(lot.Identity.LotId) && lot.Identity.ProviderId == "core" &&
+            ShipmentEconomy.BaseId(lot.Identity.LotId) == "night-extraction-cache") ||
+        lot.Evaluation.UseValue >= (ShipmentEconomy.Generation(lot.Identity.LotId) > 0 ? 4_500_000 : 750_000) ||
         (lot.Identity.ProviderId, ShipmentEconomy.BaseId(lot.Identity.LotId)) is
             ("core", "black-site-marksman") or
             ("core", "black-site-expedition-jackpot") or

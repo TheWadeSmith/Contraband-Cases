@@ -129,8 +129,8 @@ public sealed class ManifestCatalogSelector
         var eligible = ManifestSelectionMath.CanonicalLots(catalog.Lots)
             // Cheap historical entitlements cannot enter the higher-stakes
             // generation, even when recovery allows retired/chase candidates.
-            .Where(lot => ShipmentEconomy.IsShipment(lot.Identity.LotId) ==
-                ShipmentEconomy.IsShipment(entitlement.Identity.LotId))
+            .Where(lot => ShipmentEconomy.Generation(lot.Identity.LotId) ==
+                ShipmentEconomy.Generation(entitlement.Identity.LotId))
             .Where(lot => lot.Identity.TrackId.Equals(entitlement.Identity.TrackId))
             .Where(lot => !SameSemanticIdentity(lot, entitlement))
             // Fresh Relay/Favor pools exclude chases and retired component kits.

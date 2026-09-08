@@ -82,6 +82,9 @@ public interface IOpeningPreparation
 
 public interface IOpeningInventory
 {
+    CaseOpeningRecord PrepareDelivery(OpeningContext context, CaseOpeningRecord record) => record;
+    void StageDeliveryCommit(OpeningContext context, CaseOpeningRecord record) { }
+    Task NotifyDeliveryAsync(OpeningContext context, CaseOpeningRecord record) => Task.CompletedTask;
     InventoryEvidence Inspect(OpeningContext context, MongoId caseId, CaseOpeningRecord? record);
     InventoryCheckpoint Capture(OpeningContext context);
     CaseOpeningRecord ApplyPrepared(OpeningContext context, CaseOpeningRecord record);
@@ -91,6 +94,9 @@ public interface IOpeningInventory
 
 public interface IManifestClaimInventory
 {
+    ManifestClaimPreparedPayload PrepareDelivery(ManifestClaimPreparedPayload prepared) => prepared;
+    Task NotifyClaimAsync(OpeningContext context, ManifestClaimPreparedPayload prepared) => Task.CompletedTask;
+
     bool TryPrepareClaim(
         OpeningContext context,
         IReadOnlyList<Item> materializedItems,
@@ -170,6 +176,12 @@ public interface IManifestRelayKeyInventory
 
 public interface IProfileCommitter
 {
+    // Exclude native background serialization while staging or rolling back a
+    // profile mutation. Release before CommitAsync, which takes the same lock.
+    // Pure in-memory committers do not have a concurrent native save path.
+    ValueTask<IDisposable?> AcquireMutationLeaseAsync(MongoId profileId, CancellationToken cancellationToken) =>
+        ValueTask.FromResult<IDisposable?>(null);
+
     Task CommitAsync(MongoId profileId, CancellationToken cancellationToken);
 }
 
@@ -190,6 +202,9 @@ public interface IRelayPreparation
 
 public interface IRelayInventory
 {
+    RelaySettlementRecord PrepareRelayDelivery(OpeningContext context, RelaySettlementRecord record) => record;
+    void StageRelayDeliveryCommit(OpeningContext context, RelaySettlementRecord record) { }
+    Task NotifyRelayDeliveryAsync(OpeningContext context, RelaySettlementRecord record) => Task.CompletedTask;
     RelayInventoryEvidence InspectRelay(OpeningContext context, RelaySettlementRecord record);
     InventoryCheckpoint CaptureRelay(OpeningContext context);
     RelaySettlementRecord ApplyPreparedRelay(OpeningContext context, RelaySettlementRecord record);

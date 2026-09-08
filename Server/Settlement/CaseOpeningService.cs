@@ -12,6 +12,7 @@ public sealed class CaseOpeningService
     private readonly ProfileLockPool _lockPool;
     private readonly RaidSessionState _raidSessions;
     private readonly Func<DateTimeOffset> _utcNow;
+    private readonly ManifestClaimCommitUncertaintyCoordinator _uncertainty;
 
     public CaseOpeningService(
         ICaseOpeningJournalStore journalStore,
@@ -20,7 +21,8 @@ public sealed class CaseOpeningService
         IProfileCommitter committer,
         ProfileLockPool lockPool,
         RaidSessionState raidSessions,
-        Func<DateTimeOffset>? utcNow = null)
+        Func<DateTimeOffset>? utcNow = null,
+        ManifestClaimCommitUncertaintyCoordinator? uncertaintyCoordinator = null)
     {
         _journalStore = journalStore ?? throw new ArgumentNullException(nameof(journalStore));
         _preparation = preparation ?? throw new ArgumentNullException(nameof(preparation));
@@ -29,6 +31,7 @@ public sealed class CaseOpeningService
         _lockPool = lockPool ?? throw new ArgumentNullException(nameof(lockPool));
         _raidSessions = raidSessions ?? throw new ArgumentNullException(nameof(raidSessions));
         _utcNow = utcNow ?? (() => DateTimeOffset.UtcNow);
+        _uncertainty = uncertaintyCoordinator ?? ManifestClaimCommitUncertaintyCoordinator.Process;
     }
 
     public async Task<ItemEventRouterResponse> OpenAsync(
@@ -39,6 +42,7 @@ public sealed class CaseOpeningService
         ArgumentNullException.ThrowIfNull(context);
 
         await using var profileLock = await _lockPool.AcquireAsync(context.ProfileId, cancellationToken).ConfigureAwait(false);
+        _uncertainty.ThrowIfUncertain(context.ProfileId);
         _raidSessions.RequireLobby(context.ProfileId);
         var journal = await _journalStore.LoadAsync(context.ProfileId, cancellationToken).ConfigureAwait(false);
         var record = journal.Find(caseId);
@@ -83,11 +87,20 @@ public sealed class CaseOpeningService
         CaseOpeningRecord record,
         CancellationToken cancellationToken)
     {
+        using var saveLease = await _committer
+            .AcquireMutationLeaseAsync(context.ProfileId, cancellationToken).ConfigureAwait(false);
         var checkpoint = _inventory.Capture(context);
         var commitStarted = false;
         try
         {
             cancellationToken.ThrowIfCancellationRequested();
+            var deliveryRecord = _inventory.PrepareDelivery(context, record);
+            if (!ReferenceEquals(record, deliveryRecord))
+            {
+                journal.Replace(deliveryRecord);
+                await _journalStore.SaveAsync(context.ProfileId, journal, cancellationToken).ConfigureAwait(false);
+                record = deliveryRecord;
+            }
             var appliedRecord = _inventory.ApplyPrepared(context, record);
             ValidateAppliedRecord(record, appliedRecord);
             journal.Replace(appliedRecord);
@@ -95,13 +108,16 @@ public sealed class CaseOpeningService
                 .SaveAsync(context.ProfileId, journal, CancellationToken.None)
                 .ConfigureAwait(false);
 
+            _inventory.StageDeliveryCommit(context, appliedRecord);
             commitStarted = true;
-            await _committer.CommitAsync(context.ProfileId, CancellationToken.None).ConfigureAwait(false);
+            saveLease?.Dispose();
+            await CommitProfileAsync(context.ProfileId).ConfigureAwait(false);
 
             var committedRecord = appliedRecord.Commit(UtcNow());
             journal.Replace(committedRecord);
             journal.PruneCommitted();
             await _journalStore.SaveAsync(context.ProfileId, journal, CancellationToken.None).ConfigureAwait(false);
+            await _inventory.NotifyDeliveryAsync(context, committedRecord).ConfigureAwait(false);
             return context.Response;
         }
         catch when (!commitStarted)
@@ -113,6 +129,10 @@ public sealed class CaseOpeningService
 
     private static void ValidateAppliedRecord(CaseOpeningRecord preparedRecord, CaseOpeningRecord appliedRecord)
     {
+        if (appliedRecord is not null)
+            LegacyRewardMail.ValidateReplacement(preparedRecord.MailDelivery, appliedRecord.MailDelivery, false);
+        if (preparedRecord.MailDelivery is not null && appliedRecord?.MailDelivery?.ProfileCommitStarted != true)
+            throw new InvalidOperationException("Applied mail must contain its profile-commit marker.");
         if (appliedRecord is null ||
             appliedRecord.Status != OpeningRecordStatus.Prepared ||
             appliedRecord.CommittedAtUtc is not null ||
@@ -151,7 +171,7 @@ public sealed class CaseOpeningService
         CaseOpeningJournal journal,
         CaseOpeningRecord record)
     {
-        await _committer.CommitAsync(context.ProfileId, CancellationToken.None).ConfigureAwait(false);
+        await CommitProfileAsync(context.ProfileId).ConfigureAwait(false);
 
         var committedRecord = record.Commit(UtcNow());
         journal.Replace(committedRecord);
@@ -170,5 +190,11 @@ public sealed class CaseOpeningService
         }
 
         return value;
+    }
+
+    private async Task CommitProfileAsync(MongoId profileId)
+    {
+        try { await _committer.CommitAsync(profileId, CancellationToken.None).ConfigureAwait(false); }
+        catch { _uncertainty.MarkUncertain(profileId); throw; }
     }
 }

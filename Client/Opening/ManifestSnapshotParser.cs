@@ -84,7 +84,9 @@ internal static class ManifestSnapshotParser
         try
         {
             var data = ParseSuccessfulData(json);
-            RequireExactProperties(data, "current response data", "snapshot", "openingOdds");
+            var hasLegacy = data.Property("legacyOpening", StringComparison.Ordinal) is not null;
+            RequireExactProperties(data, "current response data", hasLegacy
+                ? ["snapshot", "openingOdds", "legacyOpening"] : ["snapshot", "openingOdds"]);
             var snapshotToken = RequireProperty(data, "snapshot");
             var oddsToken = RequireProperty(data, "openingOdds");
             var snapshot = snapshotToken.Type == JTokenType.Null
@@ -93,7 +95,15 @@ internal static class ManifestSnapshotParser
             var openingOdds = oddsToken.Type == JTokenType.Null
                 ? null
                 : ParseOpeningOdds(RequireObject(oddsToken, "opening odds"));
-            return new ManifestCurrentState(snapshot, openingOdds);
+            LegacyOpeningSnapshot? legacy = null;
+            if (hasLegacy)
+            {
+                var source = RequireObject(RequireProperty(data, "legacyOpening"), "legacy opening");
+                RequireExactProperties(source, "legacy opening", "caseId", "rewardId", "committed", "deliveredToMessenger");
+                legacy = new LegacyOpeningSnapshot(ReadIdentifier(source, "caseId"), ReadIdentifier(source, "rewardId"),
+                    ReadBoolean(source, "committed"), ReadBoolean(source, "deliveredToMessenger"));
+            }
+            return new ManifestCurrentState(snapshot, openingOdds, legacy);
         }
         catch (ManifestSnapshotException)
         {
@@ -587,10 +597,17 @@ internal static class ManifestSnapshotParser
 
     private static ManifestSnapshot ParseSnapshot(JObject source)
     {
+        // Tier/choice fields form one historical extension. Delivery is an
+        // independent addition; old premium snapshots must remain readable.
+        var extensions = new List<string>();
+        if (source.Property("openingTier") is not null || source.Property("premiumChoices") is not null)
+            extensions.AddRange(["openingTier", "premiumChoices"]);
+        if (source.Property("deliveredToMessenger") is not null)
+            extensions.Add("deliveredToMessenger");
         RequirePropertiesWithExtension(
             source,
             "snapshot",
-            ["openingTier", "premiumChoices"],
+            extensions.ToArray(),
             "caseTemplateId",
             "protocolVersion",
             "manifestId",
@@ -672,7 +689,10 @@ internal static class ManifestSnapshotParser
             source.Property("openingTier") is null ? ManifestOpeningTier.Normal : ReadEnum<ManifestOpeningTier>(source, "openingTier"),
             source.Property("premiumChoices") is null ? [] : RequireArray(RequireProperty(source, "premiumChoices"),
                 "premium choices", 0, OfferCount).Select(token => ParseNullableLot(token)
-                    ?? throw new ManifestSnapshotException("A premium choice cannot be null.")));
+                    ?? throw new ManifestSnapshotException("A premium choice cannot be null.")),
+            source.Property("deliveredToMessenger") is not null && ReadBoolean(source, "deliveredToMessenger"));
+        if (snapshot.DeliveredToMessenger && snapshot.Phase != ManifestPhase.Granted)
+            throw new ManifestSnapshotException("Only a granted reward can be delivered to Messenger.");
         ValidateSnapshot(snapshot);
         return snapshot;
     }

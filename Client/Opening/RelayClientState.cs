@@ -460,6 +460,13 @@ public static class RelaySnapshotEnvelope
                 throw new RelaySnapshotException("The Relay server returned an unsuccessful or malformed response.");
             }
 
+            if (data.GetValue("latestReceipt", StringComparison.OrdinalIgnoreCase) is JObject receiptJson)
+            {
+                var deliveryFields = receiptJson.Properties().Where(p =>
+                    string.Equals(p.Name, "deliveredToMessenger", StringComparison.OrdinalIgnoreCase)).ToArray();
+                if (deliveryFields.Length > 1 || deliveryFields.Any(p => p.Value.Type != JTokenType.Boolean))
+                    throw new RelaySnapshotException("The Messenger delivery marker must be one Boolean value.");
+            }
             var snapshot = data.ToObject<RelaySnapshot>(JsonSerializer.Create(new JsonSerializerSettings
             {
                 MissingMemberHandling = MissingMemberHandling.Ignore,
@@ -634,6 +641,7 @@ public static class RelaySnapshotEnvelope
         if (receipt.Action == "Secure")
         {
             if (outcome != RelayOutcome.Secured || !receipt.Terminal ||
+                receipt.DeliveredToMessenger ||
                 receipt.RewardId is not null || receipt.RewardRootId is not null || receipt.Rarity is not null)
             {
                 throw new RelaySnapshotException("The secure receipt contains an economic mutation.");
@@ -648,6 +656,8 @@ public static class RelaySnapshotEnvelope
         }
 
         var hasReward = outcome != RelayOutcome.Confiscated;
+        if (receipt.DeliveredToMessenger && !hasReward)
+            throw new RelaySnapshotException("Only a winning Relay can declare a Messenger payout.");
         if (hasReward != (receipt.RewardId is not null &&
                 receipt.RewardRootId is not null &&
                 receipt.Rarity is not null) ||

@@ -5,13 +5,20 @@
   "displayLabel": "Amonya Arcane Cache",
   "providerWeight": 0.05,
   "requiredTemplateIds": [
+    "590c60fc86f77412b13fddcf",
+    "5d235bb686f77443f4331278",
+    "601948682627df266209af05",
+    "6389c8fb46b54c634724d847",
+    "679b992329acd1f2f60985a5",
     "69359d725bbf2f0c2027c59c",
     "69359d725bbf2f0c2027c59f",
     "69359d725bbf2f0c2027c5a0",
     "69359d725bbf2f0c2027c5a2",
     "6a248be769dd135bbcc78755"
   ],
-  "requiredPresetIds": [],
+  "requiredPresetIds": [
+
+  ],
   "requiredBundleKeys": [],
   "lots": [
     {
@@ -482,6 +489,117 @@
           "templateId": "69359d725bbf2f0c2027c5a2",
           "instanceCount": 20,
           "stackCountPerInstance": 2
+        }
+      ]
+    },
+    {
+      "lotId": "arcane-ammunition-cache.compatible-v1.shipment-v1.compact-v1",
+      "displayName": "Arcane Research Cache",
+      "purpose": "One legal stack each of Arcane and Mystic barter tokens, with a valuable research textbook and document case. These are barter tokens, not ammunition.",
+      "familyId": "exotic-ordnance",
+      "trackId": "relic-expedition",
+      "anchorTemplateId": "69359d725bbf2f0c2027c59c",
+      "weight": 1,
+      "usePath": {
+        "kind": "raidRole",
+        "roleId": "close-quarters"
+      },
+      "recipe": [
+        {
+          "kind": "template",
+          "templateId": "69359d725bbf2f0c2027c59c",
+          "instanceCount": 1,
+          "stackCountPerInstance": 2
+        },
+        {
+          "kind": "template",
+          "templateId": "69359d725bbf2f0c2027c59f",
+          "instanceCount": 1,
+          "stackCountPerInstance": 2
+        },
+        {
+          "kind": "template",
+          "templateId": "6389c8fb46b54c634724d847",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "590c60fc86f77412b13fddcf",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        }
+      ]
+    },
+    {
+      "lotId": "satchel-of-holding.compatible-v1.shipment-v1.compact-v1",
+      "displayName": "Wayfarer Relics",
+      "purpose": "One Satchel of Holding with an empty SICC pouch and research textbook. All are separate prizes, not mandatory reward wrappers.",
+      "familyId": "operator",
+      "trackId": "relic-expedition",
+      "anchorTemplateId": "69359d725bbf2f0c2027c5a0",
+      "weight": 1,
+      "usePath": {
+        "kind": "raidRole",
+        "roleId": "quartermaster"
+      },
+      "recipe": [
+        {
+          "kind": "template",
+          "templateId": "69359d725bbf2f0c2027c5a0",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5d235bb686f77443f4331278",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "6389c8fb46b54c634724d847",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        }
+      ]
+    },
+    {
+      "lotId": "eldritch-ordinance.compatible-v1.shipment-v1.compact-v1",
+      "displayName": "Eldritch Acquisition",
+      "purpose": "One legal Eldritch-token stack, classified research, a valuable research textbook and a Taiga survival machete. A compact collector expedition endpoint.",
+      "familyId": "exotic-ordnance",
+      "trackId": "relic-expedition",
+      "anchorTemplateId": "69359d725bbf2f0c2027c5a2",
+      "weight": 0.8,
+      "usePath": {
+        "kind": "raidRole",
+        "roleId": "breaching-ordnance"
+      },
+      "recipe": [
+        {
+          "kind": "template",
+          "templateId": "69359d725bbf2f0c2027c5a2",
+          "instanceCount": 1,
+          "stackCountPerInstance": 2
+        },
+        {
+          "kind": "template",
+          "templateId": "679b992329acd1f2f60985a5",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "601948682627df266209af05",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "6389c8fb46b54c634724d847",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
         }
       ]
     }

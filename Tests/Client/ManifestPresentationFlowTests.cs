@@ -384,7 +384,7 @@ public sealed class ManifestPresentationFlowTests
         var second = Snapshot(ManifestPhase.Offer2);
         var blocked = Snapshot(ManifestPhase.Offer1, canBurn: false);
 
-        Assert.Contains("Keep this reward for claiming or Relay", ManifestPresentationPolicy.OfferDecisionPrompt(first));
+        Assert.Contains("Keep this reward for Messenger delivery or Relay", ManifestPresentationPolicy.OfferDecisionPrompt(first));
         Assert.Contains("Discard gives it up permanently", ManifestPresentationPolicy.OfferDecisionPrompt(first));
         Assert.Equal("DISCARD & REVEAL NEXT", ManifestPresentationPolicy.OfferDiscardActionLabel(first));
         Assert.Contains("final offer. You cannot come back", ManifestPresentationPolicy.OfferDecisionPrompt(second));

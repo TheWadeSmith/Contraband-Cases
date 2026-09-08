@@ -5,13 +5,25 @@
   "displayLabel": "Vultify CoolerStims",
   "providerWeight": 0.25,
   "requiredTemplateIds": [
+    "591094e086f7747caa7bb2ef",
+    "59e6906286f7746c9f75e847",
+    "5c0126f40db834002a125382",
     "5c0a1b2c3d4e5f6789abcde1",
     "5c0a1b2c3d4e5f6789abcde3",
     "5c0a1b2c3d4e5f6789abcde5",
     "5c0a1b2c3d4e5f6789abcde6",
-    "5c0a1b2c3d4e5f6789abcde8"
+    "5c0a1b2c3d4e5f6789abcde8",
+    "5d02797c86f774203f38e30a",
+    "5d235bb686f77443f4331278",
+    "619cbf7d23893217ec30b689",
+    "628e4e576d783146b124c64d"
   ],
-  "requiredPresetIds": [],
+  "requiredPresetIds": [
+    "5a8ae36686f774377d6ce226",
+    "657666ca303700411c0242c6",
+    "65766b46303700411c0242f8",
+    "66b0e484c84cc7141324fd6c"
+  ],
   "requiredBundleKeys": [],
   "lots": [
     {
@@ -1257,6 +1269,360 @@
         {
           "kind": "template",
           "templateId": "5c0a1b2c3d4e5f6789abcde8",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        }
+      ]
+    },
+    {
+      "lotId": "rapid-recon.shipment-v1.compact-v1",
+      "displayName": "Rapid Recon Package",
+      "purpose": "An empty injector case, plated protection and communications with two different specialist injectors. No repeated medicine stacks.",
+      "familyId": "field-supply",
+      "trackId": "cooler-stims",
+      "anchorTemplateId": "5c0a1b2c3d4e5f6789abcde1",
+      "weight": 1,
+      "usePath": {
+        "kind": "raidRole",
+        "roleId": "combat-chemistry"
+      },
+      "recipe": [
+        {
+          "kind": "template",
+          "templateId": "5c0a1b2c3d4e5f6789abcde1",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5c0a1b2c3d4e5f6789abcde8",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "619cbf7d23893217ec30b689",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "preset",
+          "presetId": "657666ca303700411c0242c6"
+        },
+        {
+          "kind": "template",
+          "templateId": "628e4e576d783146b124c64d",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        }
+      ]
+    },
+    {
+      "lotId": "field-triage.shipment-v1.compact-v1",
+      "displayName": "Field Triage Package",
+      "purpose": "An empty injector case, plated protection and communications with two different specialist injectors. No repeated medicine stacks.",
+      "familyId": "field-supply",
+      "trackId": "cooler-stims",
+      "anchorTemplateId": "5c0a1b2c3d4e5f6789abcde3",
+      "weight": 1,
+      "usePath": {
+        "kind": "raidRole",
+        "roleId": "combat-chemistry"
+      },
+      "recipe": [
+        {
+          "kind": "template",
+          "templateId": "5c0a1b2c3d4e5f6789abcde3",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5c0a1b2c3d4e5f6789abcde8",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "619cbf7d23893217ec30b689",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "preset",
+          "presetId": "657666ca303700411c0242c6"
+        },
+        {
+          "kind": "template",
+          "templateId": "628e4e576d783146b124c64d",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        }
+      ]
+    },
+    {
+      "lotId": "search-and-recover.shipment-v1.compact-v1",
+      "displayName": "Search and Recover Package",
+      "purpose": "An empty injector case, plated protection and communications with two different specialist injectors. No repeated medicine stacks.",
+      "familyId": "field-supply",
+      "trackId": "cooler-stims",
+      "anchorTemplateId": "5c0a1b2c3d4e5f6789abcde3",
+      "weight": 0.75,
+      "usePath": {
+        "kind": "raidRole",
+        "roleId": "combat-chemistry"
+      },
+      "recipe": [
+        {
+          "kind": "template",
+          "templateId": "5c0a1b2c3d4e5f6789abcde3",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5c0a1b2c3d4e5f6789abcde6",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "619cbf7d23893217ec30b689",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "preset",
+          "presetId": "657666ca303700411c0242c6"
+        },
+        {
+          "kind": "template",
+          "templateId": "628e4e576d783146b124c64d",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        }
+      ]
+    },
+    {
+      "lotId": "assault-cycle.shipment-v1.compact-v1",
+      "displayName": "Assault Cycle Package",
+      "purpose": "A configured rifle and matching ammunition with plated armor and two different supporting injectors.",
+      "familyId": "field-supply",
+      "trackId": "cooler-stims",
+      "anchorTemplateId": "5c0a1b2c3d4e5f6789abcde1",
+      "weight": 0.75,
+      "usePath": {
+        "kind": "raidRole",
+        "roleId": "combat-chemistry"
+      },
+      "recipe": [
+        {
+          "kind": "template",
+          "templateId": "5c0a1b2c3d4e5f6789abcde1",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5c0a1b2c3d4e5f6789abcde5",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "preset",
+          "presetId": "66b0e484c84cc7141324fd6c"
+        },
+        {
+          "kind": "template",
+          "templateId": "59e6906286f7746c9f75e847",
+          "instanceCount": 1,
+          "stackCountPerInstance": 60
+        },
+        {
+          "kind": "preset",
+          "presetId": "657666ca303700411c0242c6"
+        },
+        {
+          "kind": "template",
+          "templateId": "628e4e576d783146b124c64d",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        }
+      ]
+    },
+    {
+      "lotId": "heavy-push.shipment-v1.compact-v1",
+      "displayName": "Heavy Push Package",
+      "purpose": "Heavy plated armor, maintenance equipment and communications with two different supporting injectors.",
+      "familyId": "field-supply",
+      "trackId": "cooler-stims",
+      "anchorTemplateId": "5c0a1b2c3d4e5f6789abcde1",
+      "weight": 0.45,
+      "usePath": {
+        "kind": "raidRole",
+        "roleId": "combat-chemistry"
+      },
+      "recipe": [
+        {
+          "kind": "template",
+          "templateId": "5c0a1b2c3d4e5f6789abcde1",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5c0a1b2c3d4e5f6789abcde3",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "preset",
+          "presetId": "65766b46303700411c0242f8"
+        },
+        {
+          "kind": "template",
+          "templateId": "591094e086f7747caa7bb2ef",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "628e4e576d783146b124c64d",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        }
+      ]
+    },
+    {
+      "lotId": "recovery-sweep.shipment-v1.compact-v1",
+      "displayName": "Recovery Sweep Package",
+      "purpose": "An empty injector case, surgery and armor maintenance equipment with two different recovery injectors.",
+      "familyId": "field-supply",
+      "trackId": "cooler-stims",
+      "anchorTemplateId": "5c0a1b2c3d4e5f6789abcde3",
+      "weight": 0.45,
+      "usePath": {
+        "kind": "raidRole",
+        "roleId": "combat-chemistry"
+      },
+      "recipe": [
+        {
+          "kind": "template",
+          "templateId": "5c0a1b2c3d4e5f6789abcde3",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5c0a1b2c3d4e5f6789abcde5",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "619cbf7d23893217ec30b689",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5d02797c86f774203f38e30a",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "591094e086f7747caa7bb2ef",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        }
+      ]
+    },
+    {
+      "lotId": "overrun-protocol.shipment-v1.compact-v1",
+      "displayName": "Overrun Protocol Package",
+      "purpose": "A Red Rebel, plated protection and an empty injector case with two different CoolerStims supplies.",
+      "familyId": "field-supply",
+      "trackId": "cooler-stims",
+      "anchorTemplateId": "5c0a1b2c3d4e5f6789abcde1",
+      "weight": 0.15,
+      "usePath": {
+        "kind": "raidRole",
+        "roleId": "combat-chemistry"
+      },
+      "recipe": [
+        {
+          "kind": "template",
+          "templateId": "5c0a1b2c3d4e5f6789abcde1",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5c0a1b2c3d4e5f6789abcde3",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5c0126f40db834002a125382",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "619cbf7d23893217ec30b689",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "preset",
+          "presetId": "657666ca303700411c0242c6"
+        }
+      ]
+    },
+    {
+      "lotId": "hunter-killer-pharmacy.shipment-v1.compact-v1",
+      "displayName": "Hunter-Killer Equipment",
+      "purpose": "A thermal-sighted rifle, matching ammunition, plated armor and a SICC pouch with two distinct CoolerStims supplies.",
+      "familyId": "field-supply",
+      "trackId": "cooler-stims",
+      "anchorTemplateId": "5c0a1b2c3d4e5f6789abcde3",
+      "weight": 0.15,
+      "usePath": {
+        "kind": "raidRole",
+        "roleId": "combat-chemistry"
+      },
+      "recipe": [
+        {
+          "kind": "template",
+          "templateId": "5c0a1b2c3d4e5f6789abcde3",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5c0a1b2c3d4e5f6789abcde5",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "preset",
+          "presetId": "5a8ae36686f774377d6ce226"
+        },
+        {
+          "kind": "template",
+          "templateId": "59e6906286f7746c9f75e847",
+          "instanceCount": 1,
+          "stackCountPerInstance": 60
+        },
+        {
+          "kind": "preset",
+          "presetId": "657666ca303700411c0242c6"
+        },
+        {
+          "kind": "template",
+          "templateId": "5d235bb686f77443f4331278",
           "instanceCount": 1,
           "stackCountPerInstance": 1
         }

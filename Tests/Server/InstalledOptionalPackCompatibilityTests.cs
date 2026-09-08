@@ -23,13 +23,15 @@ public sealed class InstalledOptionalPackCompatibilityTests
     {
         var snapshot = ReadCatalog(name);
         Assert.Empty(snapshot.SkippedPacks);
-        Assert.Equal(expected, snapshot.FreshOpeningLots.Count);
+        Assert.True(expected == snapshot.FreshOpeningLots.Count, string.Join("; ", snapshot.Lots
+            .Where(l => ShipmentEconomy.IsCompact(l.Identity.LotId))
+            .Select(l => $"{l.Identity.LotId}: {l.Forest.Roots.Count} roots, {l.Forest.Nodes.Count} nodes, {l.Evaluation.FootprintCells} cells")));
         Assert.All(snapshot.FreshOpeningLots, lot =>
         {
-            Assert.EndsWith(".compatible-v1.shipment-v1", lot.Identity.LotId);
-            Assert.InRange(lot.Forest.Roots.Count, 1, RewardForest.MaxRootCount);
-            Assert.InRange(lot.Forest.Nodes.Count, 1, RewardForest.MaxNodeCount);
-            Assert.InRange(lot.Evaluation.FootprintCells, 1, CargoLotEvaluator.MaximumFootprintCells);
+            Assert.EndsWith(".compatible-v1.shipment-v1.compact-v1", lot.Identity.LotId);
+            Assert.InRange(lot.Forest.Roots.Count, 1, 8);
+            Assert.InRange(lot.Forest.Nodes.Count, 1, 128);
+            Assert.InRange(lot.Evaluation.FootprintCells, 1, 64);
         });
         var library = ManifestLibraryProjection.Create(new CaseOpeningJournal(), snapshot, new Dictionary<string, string>());
         var parsed = ManifestSnapshotParser.ParseLibrary(JsonSerializer.Serialize(new { err = 0, errmsg = (string?)null, data = library }));
@@ -41,7 +43,7 @@ public sealed class InstalledOptionalPackCompatibilityTests
         var root = Path.GetFullPath(Path.Combine(AppContext.BaseDirectory, "../../../.."));
         var options = new JsonSerializerOptions { NumberHandling = JsonNumberHandling.AllowReadingFromString };
         foreach (var converter in new SptJsonConverterRegistrator().GetJsonConverters()) options.Converters.Add(converter);
-        using var doc = JsonDocument.Parse(File.ReadAllText(Path.Combine(root, "Tests/Fixtures/optional-mod-templates.json")));
+        using var doc = JsonDocument.Parse(File.ReadAllText(Path.Combine(root, "Tests/Fixtures/curated-mod-templates.json")));
         var templates = doc.RootElement.GetProperty("templates").Deserialize<Dictionary<string, TemplateItem>>(options)!;
         var presets = doc.RootElement.GetProperty("presets").Deserialize<Dictionary<string, Preset>>(options)!;
         var prices = doc.RootElement.GetProperty("prices").Deserialize<Dictionary<string, double>>(options)!;

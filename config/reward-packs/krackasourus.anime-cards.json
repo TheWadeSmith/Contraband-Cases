@@ -5,6 +5,12 @@
   "displayLabel": "Krackasourus Anime Cards",
   "providerWeight": 0.12,
   "requiredTemplateIds": [
+    "590c60fc86f77412b13fddcf",
+    "59fafd4b86f7745ca07e1232",
+    "5c0126f40db834002a125382",
+    "5d235bb686f77443f4331278",
+    "601948682627df266209af05",
+    "6389c8fb46b54c634724d847",
     "6699b7fd0d1d25cf00072bf6",
     "6699b7fd0d1d25cf00072bf8",
     "6699b7fd0d1d25cf00072bf9",
@@ -18,7 +24,9 @@
     "6699b7fd0d1d25cf00072c02",
     "6699b7fd0d1d25cf00072c49"
   ],
-  "requiredPresetIds": [],
+  "requiredPresetIds": [
+
+  ],
   "requiredBundleKeys": [],
   "lots": [
     {
@@ -1028,6 +1036,356 @@
         {
           "kind": "template",
           "templateId": "6699b7fd0d1d25cf00072bf8",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        }
+      ]
+    },
+    {
+      "lotId": "crystal-showcase.shipment-v1.compact-v1",
+      "displayName": "Crystal Showcase Package",
+      "purpose": "A curated selection of different collectible cards plus a valuable Silicon Optoelectronic Integrated Circuits textbook for the collection.",
+      "familyId": "field-supply",
+      "trackId": "anime-cards",
+      "anchorTemplateId": "6699b7fd0d1d25cf00072c01",
+      "weight": 1,
+      "usePath": {
+        "kind": "collection",
+        "containerTemplateId": "6699b7fd0d1d25cf00072c49",
+        "collectionId": "anime-cards"
+      },
+      "recipe": [
+        {
+          "kind": "template",
+          "templateId": "6699b7fd0d1d25cf00072c01",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "6699b7fd0d1d25cf00072c02",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "6699b7fd0d1d25cf00072bfc",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "6389c8fb46b54c634724d847",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        }
+      ]
+    },
+    {
+      "lotId": "angel-showcase.shipment-v1.compact-v1",
+      "displayName": "Angel Showcase Package",
+      "purpose": "A curated selection of different collectible cards plus a valuable Silicon Optoelectronic Integrated Circuits textbook for the collection.",
+      "familyId": "field-supply",
+      "trackId": "anime-cards",
+      "anchorTemplateId": "6699b7fd0d1d25cf00072c02",
+      "weight": 1,
+      "usePath": {
+        "kind": "collection",
+        "containerTemplateId": "6699b7fd0d1d25cf00072c49",
+        "collectionId": "anime-cards"
+      },
+      "recipe": [
+        {
+          "kind": "template",
+          "templateId": "6699b7fd0d1d25cf00072c02",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "6699b7fd0d1d25cf00072bff",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "6699b7fd0d1d25cf00072bfd",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "6389c8fb46b54c634724d847",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        }
+      ]
+    },
+    {
+      "lotId": "nivea-rachel-duo.shipment-v1.compact-v1",
+      "displayName": "Nivea and Rachel Duo Package",
+      "purpose": "A curated selection of different collectible cards plus a key tool for the collector. Cards and tool are separate attachments.",
+      "familyId": "field-supply",
+      "trackId": "anime-cards",
+      "anchorTemplateId": "6699b7fd0d1d25cf00072bfb",
+      "weight": 0.75,
+      "usePath": {
+        "kind": "collection",
+        "containerTemplateId": "6699b7fd0d1d25cf00072c49",
+        "collectionId": "anime-cards"
+      },
+      "recipe": [
+        {
+          "kind": "template",
+          "templateId": "6699b7fd0d1d25cf00072bfb",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "6699b7fd0d1d25cf00072bfc",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "6699b7fd0d1d25cf00072c01",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "59fafd4b86f7745ca07e1232",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        }
+      ]
+    },
+    {
+      "lotId": "vanity-gigi-duo.shipment-v1.compact-v1",
+      "displayName": "Vanity and Gigi Duo Package",
+      "purpose": "A curated selection of different collectible cards plus a key tool for the collector. Cards and tool are separate attachments.",
+      "familyId": "field-supply",
+      "trackId": "anime-cards",
+      "anchorTemplateId": "6699b7fd0d1d25cf00072bf9",
+      "weight": 0.75,
+      "usePath": {
+        "kind": "collection",
+        "containerTemplateId": "6699b7fd0d1d25cf00072c49",
+        "collectionId": "anime-cards"
+      },
+      "recipe": [
+        {
+          "kind": "template",
+          "templateId": "6699b7fd0d1d25cf00072bf9",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "6699b7fd0d1d25cf00072bfe",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "6699b7fd0d1d25cf00072c01",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "59fafd4b86f7745ca07e1232",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        }
+      ]
+    },
+    {
+      "lotId": "crystal-vanity-angel-set.shipment-v1.compact-v1",
+      "displayName": "Crystal, Vanity, and Angel Set Package",
+      "purpose": "A curated set of different collectible cards, a key tool and document case. Individually claimable collector equipment with no mandatory wrapper.",
+      "familyId": "field-supply",
+      "trackId": "anime-cards",
+      "anchorTemplateId": "6699b7fd0d1d25cf00072bf9",
+      "weight": 0.45,
+      "usePath": {
+        "kind": "collection",
+        "containerTemplateId": "6699b7fd0d1d25cf00072c49",
+        "collectionId": "anime-cards"
+      },
+      "recipe": [
+        {
+          "kind": "template",
+          "templateId": "6699b7fd0d1d25cf00072bf9",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "6699b7fd0d1d25cf00072c01",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "6699b7fd0d1d25cf00072c02",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "6699b7fd0d1d25cf00072bfc",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "59fafd4b86f7745ca07e1232",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "590c60fc86f77412b13fddcf",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        }
+      ]
+    },
+    {
+      "lotId": "eleanor-tricia-lucia-set.shipment-v1.compact-v1",
+      "displayName": "Eleanor, Tricia, and Lucia Set Package",
+      "purpose": "A curated selection of different collectible cards plus a key tool for the collector. Cards and tool are separate attachments.",
+      "familyId": "field-supply",
+      "trackId": "anime-cards",
+      "anchorTemplateId": "6699b7fd0d1d25cf00072bfa",
+      "weight": 0.45,
+      "usePath": {
+        "kind": "collection",
+        "containerTemplateId": "6699b7fd0d1d25cf00072c49",
+        "collectionId": "anime-cards"
+      },
+      "recipe": [
+        {
+          "kind": "template",
+          "templateId": "6699b7fd0d1d25cf00072bfa",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "6699b7fd0d1d25cf00072bfd",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "6699b7fd0d1d25cf00072bff",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "6699b7fd0d1d25cf00072c01",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "59fafd4b86f7745ca07e1232",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        }
+      ]
+    },
+    {
+      "lotId": "mai-ultimate.shipment-v1.compact-v1",
+      "displayName": "Mai Ultimate Package",
+      "purpose": "A top-tier set of different collectible cards, an empty SICC pouch and a Taiga survival machete. A complete collector expedition package, individually claimable.",
+      "familyId": "field-supply",
+      "trackId": "anime-cards",
+      "anchorTemplateId": "6699b7fd0d1d25cf00072bf6",
+      "weight": 0.15,
+      "usePath": {
+        "kind": "collection",
+        "containerTemplateId": "6699b7fd0d1d25cf00072c49",
+        "collectionId": "anime-cards"
+      },
+      "recipe": [
+        {
+          "kind": "template",
+          "templateId": "6699b7fd0d1d25cf00072bf6",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "6699b7fd0d1d25cf00072c01",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "6699b7fd0d1d25cf00072c02",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5d235bb686f77443f4331278",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "601948682627df266209af05",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        }
+      ]
+    },
+    {
+      "lotId": "erica-ultimate.shipment-v1.compact-v1",
+      "displayName": "Erica Ultimate Collector Jackpot",
+      "purpose": "A curated selection of different collectible cards plus a Red Rebel extraction relic. The jackpot is the complete selection, not multiple copies of one card.",
+      "familyId": "field-supply",
+      "trackId": "anime-cards",
+      "anchorTemplateId": "6699b7fd0d1d25cf00072bf8",
+      "weight": 0.15,
+      "usePath": {
+        "kind": "collection",
+        "containerTemplateId": "6699b7fd0d1d25cf00072c49",
+        "collectionId": "anime-cards"
+      },
+      "recipe": [
+        {
+          "kind": "template",
+          "templateId": "6699b7fd0d1d25cf00072bf8",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "6699b7fd0d1d25cf00072bfa",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "6699b7fd0d1d25cf00072bfd",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "6699b7fd0d1d25cf00072bf6",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5c0126f40db834002a125382",
           "instanceCount": 1,
           "stackCountPerInstance": 1
         }

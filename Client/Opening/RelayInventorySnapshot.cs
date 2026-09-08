@@ -192,6 +192,12 @@ public static class RelayInventoryReconciler
         var newItemIds = afterItems.Keys
             .Where(itemId => !beforeItems.ContainsKey(itemId))
             .ToHashSet(StringComparer.Ordinal);
+        if (receipt.DeliveredToMessenger)
+        {
+            if (newItemIds.Count != 0)
+                throw new InventorySnapshotException("A Messenger payout must not inject items into inventory.");
+            return MatchMailedReward(catalog, decisionSnapshot, receipt, requirePublishedCandidate: true);
+        }
         if (outcome == RelayOutcome.Confiscated)
         {
             if (newItemIds.Count != 0 || receipt.RewardId is not null ||
@@ -336,6 +342,7 @@ public static class RelayInventoryReconciler
         if (recovery == RelayPendingRecovery.ResumeSecure)
         {
             if (outcome != RelayOutcome.Secured || !receipt.Terminal ||
+                receipt.DeliveredToMessenger ||
                 receipt.RewardId is not null || receipt.RewardRootId is not null ||
                 receipt.Rarity is not null)
             {
@@ -356,6 +363,8 @@ public static class RelayInventoryReconciler
             throw new InventorySnapshotException(
                 "Recovered Relay did not remove the persisted stake root.");
         }
+        if (receipt.DeliveredToMessenger)
+            return MatchMailedReward(catalog, preparedSnapshot, receipt, requirePublishedCandidate: false);
         if (outcome == RelayOutcome.Confiscated)
         {
             if (!receipt.Terminal || receipt.RewardId is not null ||
@@ -406,6 +415,31 @@ public static class RelayInventoryReconciler
         }
 
         return match;
+    }
+
+    private static CommittedRewardMatch MatchMailedReward(IReadOnlyList<ValidatedReward> catalog,
+        RelaySnapshot decision, RelayReceipt receipt, bool requirePublishedCandidate)
+    {
+        var outcome = RelaySnapshotEnvelope.ParseOutcome(receipt);
+        var status = decision.Status;
+        if (outcome is not (RelayOutcome.RarityUpgrade or RelayOutcome.SameRaritySidegrade) ||
+            !RelaySnapshotEnvelope.IsMongoId(receipt.RewardRootId))
+            throw new InventorySnapshotException("A Messenger receipt must identify a winning reward.");
+        var matches = catalog.Where(r => r.Id == receipt.RewardId && r.Rarity.ToString() == receipt.Rarity).ToArray();
+        if (matches.Length != 1)
+            throw new InventorySnapshotException("The Messenger receipt does not identify one catalog reward.");
+        var reward = matches[0];
+        var expectedRarity = outcome == RelayOutcome.RarityUpgrade
+            ? RelayRules.GetUpgradeRarity(ParseRarity(status.Rarity), ParseRarityLadderVersion(status.RarityLadderVersion))
+            : ParseRarity(status.Rarity);
+        var candidates = outcome == RelayOutcome.RarityUpgrade ? decision.UpgradeCandidates : decision.SidegradeCandidates;
+        if (reward.Rarity != expectedRarity || outcome == RelayOutcome.SameRaritySidegrade && reward.Id == status.RewardId ||
+            requirePublishedCandidate && !candidates.Any(c => c.RewardId == reward.Id) ||
+            receipt.Terminal != (outcome != RelayOutcome.RarityUpgrade || receipt.Stage >= RelayRules.MaximumStage || reward.Rarity == RewardRarity.BlackLabel))
+            throw new InventorySnapshotException("The Messenger receipt contradicts the saved Relay decision.");
+        // The authenticated committed receipt owns mail delivery. No inventory
+        // tree is fabricated, and the controller offers no Relay until collection.
+        return new CommittedRewardMatch(receipt.RewardRootId!, reward, reward.Fingerprint);
     }
 
     private static CommittedRewardMatch MatchExistingRewardTree(

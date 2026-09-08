@@ -345,6 +345,8 @@ public sealed class ManifestSettlementService
         IManifestTicketInventory inventory,
         CancellationToken cancellationToken)
     {
+        using var saveLease = await _committer
+            .AcquireMutationLeaseAsync(context.ProfileId, cancellationToken).ConfigureAwait(false);
         var checkpoint = inventory.CaptureTicket(context);
         var profileCommitBoundaryStarted = false;
         var appliedThisRequest = false;
@@ -397,6 +399,7 @@ public sealed class ManifestSettlementService
             {
                 inventory.StageTicketCommit(context, active.ManifestId, active.Ticket);
                 profileCommitBoundaryStarted = true;
+                saveLease?.Dispose();
                 try
                 {
                     await _committer
@@ -547,6 +550,8 @@ public sealed class ManifestSettlementService
             ?? throw new InvalidOperationException("The active Manifest has no prepared Relay.");
         var inputFingerprint = active.Entitlement?.Fingerprint
             ?? throw new InvalidOperationException("The prepared Relay has no input entitlement.");
+        using var saveLease = await _committer
+            .AcquireMutationLeaseAsync(context.ProfileId, cancellationToken).ConfigureAwait(false);
         var checkpoint = inventory.CaptureRelayKey(context);
         var profileCommitBoundaryStarted = false;
         var appliedThisRequest = false;
@@ -604,6 +609,7 @@ public sealed class ManifestSettlementService
                     inputFingerprint,
                     prepared);
                 profileCommitBoundaryStarted = true;
+                saveLease?.Dispose();
                 try
                 {
                     await _committer
@@ -755,6 +761,12 @@ public sealed class ManifestSettlementService
             .ConfigureAwait(false);
         if (journal.FindManifestClaimGrant(manifestId) is ManifestClaimGrantRecord committedGrant)
         {
+            if (committedGrant.ClaimPayload.Delivery == ClaimDeliveryKind.Messenger)
+            {
+                // Collection, selling and deleting mail are not failed deliveries.
+                // The durable grant is authoritative; never reconstruct attachments.
+                return new ManifestClaimResult(ManifestClaimResultKind.Granted, context.Response, Replay: true);
+            }
             var grantPresence = _inventory.InspectClaim(context, committedGrant.ClaimPayload);
             if (grantPresence == RewardPresence.Partial)
             {
@@ -860,11 +872,27 @@ public sealed class ManifestSettlementService
             ?? throw new InvalidOperationException("The active Claim has no prepared physical payload.");
         var entitlement = active.Entitlement
             ?? throw new InvalidOperationException("The active Claim has no entitlement.");
+        if (prepared.Delivery == ClaimDeliveryKind.LegacyInventory &&
+            ManifestClaimCommitWitness.Inspect(context.PmcData, context.ProfileId, active.ManifestId,
+                entitlement.Fingerprint, prepared) == ManifestClaimCommitWitnessInspection.Predecessor &&
+            _inventory.InspectClaim(context, prepared) == RewardPresence.Absent)
+        {
+            var migrated = _inventory.PrepareDelivery(prepared);
+            if (migrated.Delivery != prepared.Delivery)
+            {
+                active = active.WithClaimDelivery(migrated);
+                journal.ReplaceActiveManifest(active);
+                await _journalStore.SaveAsync(context.ProfileId, journal, cancellationToken).ConfigureAwait(false);
+                prepared = migrated;
+            }
+        }
         if (!prepared.ProfileCommitStarted)
         {
             cancellationToken.ThrowIfCancellationRequested();
         }
 
+        using var saveLease = await _committer
+            .AcquireMutationLeaseAsync(context.ProfileId, cancellationToken).ConfigureAwait(false);
         var checkpoint = _inventory.Capture(context);
         var profileCommitBoundaryStarted = false;
         try
@@ -903,6 +931,12 @@ public sealed class ManifestSettlementService
                 }
                 else throw new InvalidOperationException("Fresh Claim evidence contradicts its durable commit chain or live inventory.");
             }
+            else if (witness == ManifestClaimCommitWitnessInspection.Current &&
+                     prepared.Delivery == ClaimDeliveryKind.Messenger)
+            {
+                // The whole profile (mail + witness) committed. Native collection
+                // can have removed any subset since then, including every item.
+            }
             else if (witness == ManifestClaimCommitWitnessInspection.Current)
             {
                 if (presence == RewardPresence.Partial)
@@ -937,7 +971,8 @@ public sealed class ManifestSettlementService
                     profileCommitStarted: false,
                     prepared.PreparedAtUtc,
                     prepared.CommitGeneration,
-                    prepared.CommitPredecessorHash);
+                    prepared.CommitPredecessorHash,
+                    prepared.Delivery);
                 var recovered = _inventory.ApplyPreparedClaim(context, recoveryInput);
                 active = active.ReconcileClaim(recovered);
                 journal.ReplaceActiveManifest(active);
@@ -972,6 +1007,9 @@ public sealed class ManifestSettlementService
                     active.Entitlement!.Fingerprint,
                     prepared);
                 profileCommitBoundaryStarted = true;
+                // From this point a native autosave is allowed to persist the
+                // complete mail + witness. Do not roll back after releasing it.
+                saveLease?.Dispose();
                 try
                 {
                     await _committer.CommitAsync(context.ProfileId, CancellationToken.None).ConfigureAwait(false);
@@ -990,6 +1028,7 @@ public sealed class ManifestSettlementService
             await _journalStore
                 .SaveAsync(context.ProfileId, journal, CancellationToken.None)
                 .ConfigureAwait(false);
+            await _inventory.NotifyClaimAsync(context, prepared).ConfigureAwait(false);
             return new ManifestClaimResult(
                 ManifestClaimResultKind.Granted,
                 context.Response,

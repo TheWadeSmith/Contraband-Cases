@@ -9,6 +9,21 @@ namespace ContrabandCases.Tests.Settlement;
 
 public sealed class ManifestClaimCommitWitnessTests
 {
+    [Fact]
+    public void Changing_delivery_destination_changes_the_commit_witness_and_rejects_downgrade()
+    {
+        var profile = new PmcData();
+        var legacy = ManifestClaimCommitWitness.PlanNext(profile, ProfileId, Prepared("111111111111111111111111"));
+        var mail = legacy.WithDelivery(ClaimDeliveryKind.Messenger);
+        Assert.NotEqual(ManifestClaimCommitWitness.CreateCommitHash(ProfileId, "manifest-a", Fingerprint, legacy),
+            ManifestClaimCommitWitness.CreateCommitHash(ProfileId, "manifest-a", Fingerprint, mail));
+        ManifestClaimCommitWitness.Stage(profile, ProfileId, "manifest-a", Fingerprint, mail);
+        Assert.Equal(ManifestClaimCommitWitnessInspection.Current,
+            ManifestClaimCommitWitness.Inspect(profile, ProfileId, "manifest-a", Fingerprint, mail));
+        Assert.Equal(ManifestClaimCommitWitnessInspection.Other,
+            ManifestClaimCommitWitness.Inspect(profile, ProfileId, "manifest-a", Fingerprint, legacy));
+    }
+
     private static readonly MongoId ProfileId = "aaaaaaaaaaaaaaaaaaaaaaaa";
     private static readonly RewardForestFingerprintV2 Fingerprint = new(new string('a', 64));
 

@@ -80,6 +80,7 @@ public sealed class ManifestSnapshotRouter : StaticRouter
     {
         ArgumentNullException.ThrowIfNull(request);
         RequireNoUnknownProperties(request.ExtensionData);
+        if (request.CaseItemId is not null) RequireMongoId(request.CaseItemId);
         var journal = await LoadJournalAsync(
                 profileId,
                 journalStore,
@@ -89,11 +90,14 @@ public sealed class ManifestSnapshotRouter : StaticRouter
             .ConfigureAwait(false);
         var currentState = CreateCurrentState(
             journal,
-            journal.ActiveManifest is null
+            journal.ActiveManifest is null && FindLegacyOpening(journal, request.CaseItemId) is not null
+                ? null
+                : journal.ActiveManifest is null
                 ? catalogCoordinator.GetCaseSnapshot(request.CaseTemplateId)
                 : TryGetCatalog(catalogCoordinator, journal.ActiveManifest.Ticket.CaseTemplateId),
             TryGetLocale(localeService),
-            request.CaseTemplateId);
+            request.CaseTemplateId,
+            request.CaseItemId);
         return httpResponseUtil.GetBody(currentState);
     }
 
@@ -134,7 +138,8 @@ public sealed class ManifestSnapshotRouter : StaticRouter
                 string.Equals(candidate.ManifestId, request.ManifestId, StringComparison.Ordinal));
             snapshot = receipt is null
                 ? throw new InvalidOperationException("The requested Manifest snapshot is unavailable.")
-                : ManifestSnapshotProjection.FromTerminal(receipt);
+                : ManifestSnapshotProjection.FromTerminal(receipt,
+                    journal.FindManifestClaimGrant(receipt.ManifestId)?.ClaimPayload.Delivery == ClaimDeliveryKind.Messenger);
         }
 
         return httpResponseUtil.GetBody(new ManifestSnapshotEnvelope { Snapshot = snapshot });
@@ -144,7 +149,8 @@ public sealed class ManifestSnapshotRouter : StaticRouter
         CaseOpeningJournal journal,
         CargoCatalogSnapshot? catalog,
         IReadOnlyDictionary<string, string>? locale,
-        string caseTemplateId = ModConstants.CaseTemplateId)
+        string caseTemplateId = ModConstants.CaseTemplateId,
+        string? requestedCaseId = null)
     {
         ArgumentNullException.ThrowIfNull(journal);
         CaseContracts.Require(caseTemplateId);
@@ -154,6 +160,9 @@ public sealed class ManifestSnapshotRouter : StaticRouter
                 ManifestSnapshotProjection.FromActive(active, catalog, locale));
         }
 
+        if (FindLegacyOpening(journal, requestedCaseId) is { } legacy)
+            return ManifestCurrentStateEnvelope.FromLegacyOpening(legacy);
+
         if (catalog is null)
         {
             throw new InvalidOperationException(
@@ -162,6 +171,12 @@ public sealed class ManifestSnapshotRouter : StaticRouter
 
         return ManifestCurrentStateEnvelope.FromOpeningOdds(
             ManifestOpeningOdds.Create(CaseCatalogs.ForCase(catalog, caseTemplateId)));
+    }
+
+    private static CaseOpeningRecord? FindLegacyOpening(CaseOpeningJournal journal, string? caseId)
+    {
+        if (caseId is not null) RequireMongoId(caseId);
+        return journal.PreparedOpening ?? (caseId is null ? null : journal.Find(new MongoId(caseId)));
     }
 
     private static async ValueTask<CaseOpeningJournal> LoadJournalAsync(
@@ -237,6 +252,8 @@ public sealed class ManifestSnapshotRouter : StaticRouter
 
 public sealed class ManifestCurrentRequest : IRequestData
 {
+    [JsonPropertyName("caseItemId")]
+    public string? CaseItemId { get; set; }
     [JsonPropertyName("caseTemplateId")]
     public string CaseTemplateId { get; set; } = ModConstants.CaseTemplateId;
 

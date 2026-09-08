@@ -5,14 +5,19 @@
   "displayLabel": "Natalya Field Gear",
   "providerWeight": 0.22,
   "requiredTemplateIds": [
-    "6749758d4506d299770ddcb2",
-    "674974348af9189fcc136a7e",
-    "67e179c9ff1e5acc5f7af6db",
-    "67e179c92d755ef8ae908854",
+    "5d02797c86f774203f38e30a",
+    "619cbf7d23893217ec30b689",
+    "628e4e576d783146b124c64d",
     "674815ec8bf2e801d82c322e",
-    "674888cc37cd20bcbef66a48"
+    "674888cc37cd20bcbef66a48",
+    "674974348af9189fcc136a7e",
+    "6749758d4506d299770ddcb2",
+    "67e179c92d755ef8ae908854",
+    "67e179c9ff1e5acc5f7af6db"
   ],
-  "requiredPresetIds": [],
+  "requiredPresetIds": [
+    "657666ca303700411c0242c6"
+  ],
   "requiredBundleKeys": [],
   "lots": [
     {
@@ -352,6 +357,131 @@
         {
           "kind": "template",
           "templateId": "674888cc37cd20bcbef66a48",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        }
+      ]
+    },
+    {
+      "lotId": "medical-resupply.shipment-v1.compact-v1",
+      "displayName": "Medical Resupply Package",
+      "purpose": "Two distinct modded medical supplies, an empty injector case, plated armor and premium communications. Supplies are separate attachments.",
+      "familyId": "field-supply",
+      "trackId": "medical",
+      "anchorTemplateId": "674974348af9189fcc136a7e",
+      "weight": 1,
+      "usePath": {
+        "kind": "raidRole",
+        "roleId": "field-medic"
+      },
+      "recipe": [
+        {
+          "kind": "template",
+          "templateId": "674974348af9189fcc136a7e",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "6749758d4506d299770ddcb2",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "619cbf7d23893217ec30b689",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "preset",
+          "presetId": "657666ca303700411c0242c6"
+        },
+        {
+          "kind": "template",
+          "templateId": "628e4e576d783146b124c64d",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        }
+      ]
+    },
+    {
+      "lotId": "trauma-kit.shipment-v1.compact-v1",
+      "displayName": "Trauma Kit Package",
+      "purpose": "Two distinct modded medical supplies, an empty injector case, plated armor and premium communications. Supplies are separate attachments.",
+      "familyId": "field-supply",
+      "trackId": "medical",
+      "anchorTemplateId": "67e179c92d755ef8ae908854",
+      "weight": 1,
+      "usePath": {
+        "kind": "raidRole",
+        "roleId": "field-medic"
+      },
+      "recipe": [
+        {
+          "kind": "template",
+          "templateId": "67e179c92d755ef8ae908854",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "67e179c9ff1e5acc5f7af6db",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "619cbf7d23893217ec30b689",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "preset",
+          "presetId": "657666ca303700411c0242c6"
+        },
+        {
+          "kind": "template",
+          "templateId": "628e4e576d783146b124c64d",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        }
+      ]
+    },
+    {
+      "lotId": "condor-loadout.shipment-v1.compact-v1",
+      "displayName": "Condor Loadout Package",
+      "purpose": "One modded Condor loadout with communications and field surgery.",
+      "familyId": "operator",
+      "trackId": "recon",
+      "anchorTemplateId": "674815ec8bf2e801d82c322e",
+      "weight": 0.8,
+      "usePath": {
+        "kind": "raidRole",
+        "roleId": "quartermaster"
+      },
+      "recipe": [
+        {
+          "kind": "template",
+          "templateId": "674815ec8bf2e801d82c322e",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "674888cc37cd20bcbef66a48",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "628e4e576d783146b124c64d",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5d02797c86f774203f38e30a",
           "instanceCount": 1,
           "stackCountPerInstance": 1
         }

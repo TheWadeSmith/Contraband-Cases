@@ -90,7 +90,7 @@ public sealed class RelaySettlementServiceTests
     }
 
     [Fact]
-    public async Task Profile_save_failure_after_marker_does_not_roll_back_and_retry_recovers()
+    public async Task Profile_save_failure_after_marker_does_not_roll_back_and_quarantines_same_process_retry()
     {
         var fixture = Fixture.PreparedRelay();
         fixture.Committer.Exception = new IOException("profile save failed");
@@ -102,8 +102,9 @@ public sealed class RelaySettlementServiceTests
         Assert.True(fixture.Store.Stored.RelayRecords.Single().ProfileCommitStarted);
         fixture.Committer.Exception = null;
         fixture.Inventory.Evidence = new RelayInventoryEvidence(RewardPresence.Absent, false, RewardPresence.Complete);
-        await fixture.Service.RelayAsync(fixture.Context, fixture.RootId, CancellationToken.None);
-        Assert.Equal(RelayRecordStatus.Committed, fixture.Store.Stored.RelayRecords.Single().Status);
+        await Assert.ThrowsAsync<InvalidOperationException>(() => fixture.Service.RelayAsync(fixture.Context, fixture.RootId, CancellationToken.None));
+        Assert.Equal(1, fixture.Committer.Calls);
+        Assert.Equal(RelayRecordStatus.Prepared, fixture.Store.Stored.RelayRecords.Single().Status);
     }
 
     [Fact]

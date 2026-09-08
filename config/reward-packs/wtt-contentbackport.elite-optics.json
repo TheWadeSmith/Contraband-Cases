@@ -5,13 +5,19 @@
   "displayLabel": "WTT Content Backport Elite Optics",
   "providerWeight": 0.07,
   "requiredTemplateIds": [
-    "689b889473ebd6871805edd6",
+    "689dbded6c7e684817080c29",
+    "590c60fc86f77412b13fddcf",
+    "591094e086f7747caa7bb2ef",
+    "628e4e576d783146b124c64d",
     "68948a95d8f2b85fb705e2a6",
+    "689b889473ebd6871805edd6",
     "6943c85be2f21398e70378cc",
-    "69bb4203f94327bc0f0230cd",
-    "69bb41c03b5fb75517065960"
+    "69bb41c03b5fb75517065960",
+    "69bb4203f94327bc0f0230cd"
   ],
   "requiredPresetIds": [
+    "69cfd277ce0df53f230f2976",
+    "657666ca303700411c0242c6",
     "68a4858f9dc8c374800a3b4a"
   ],
   "requiredBundleKeys": [],
@@ -524,6 +530,123 @@
         {
           "kind": "template",
           "templateId": "69bb41c03b5fb75517065960",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        }
+      ]
+    },
+    {
+      "lotId": "night-vision-overwatch.compatible-v1.shipment-v1.compact-v1",
+      "displayName": "Night Vision Overwatch Package",
+      "purpose": "WTT PVS-31A goggles with their compatible Wilcox L4G24 mount and assembled AirFrame helmet, plated protection, communications and armor maintenance. Fit the supplied mount and goggles to the helmet.",
+      "familyId": "operator",
+      "trackId": "night",
+      "anchorTemplateId": "689b889473ebd6871805edd6",
+      "weight": 1,
+      "usePath": {
+        "kind": "raidRole",
+        "roleId": "night-operations"
+      },
+      "recipe": [
+        {
+          "kind": "template",
+          "templateId": "689b889473ebd6871805edd6",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "preset",
+          "presetId": "69cfd277ce0df53f230f2976"
+        },
+        {
+          "kind": "template",
+          "templateId": "689dbded6c7e684817080c29",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "preset",
+          "presetId": "657666ca303700411c0242c6"
+        },
+        {
+          "kind": "template",
+          "templateId": "591094e086f7747caa7bb2ef",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "628e4e576d783146b124c64d",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        }
+      ]
+    },
+    {
+      "lotId": "heavy-plate-carrier.compatible-v1.shipment-v1.compact-v1",
+      "displayName": "Heavy Plate Carrier Package",
+      "purpose": "One assembled WTT plate carrier, its distinct spare equipment, an armor repair kit and communications.",
+      "familyId": "armor",
+      "trackId": "ordnance",
+      "anchorTemplateId": "6943c85be2f21398e70378cc",
+      "weight": 1,
+      "usePath": {
+        "kind": "raidRole",
+        "roleId": "elite-operator"
+      },
+      "recipe": [
+        {
+          "kind": "template",
+          "templateId": "6943c85be2f21398e70378cc",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "preset",
+          "presetId": "68a4858f9dc8c374800a3b4a"
+        },
+        {
+          "kind": "template",
+          "templateId": "591094e086f7747caa7bb2ef",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "628e4e576d783146b124c64d",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        }
+      ]
+    },
+    {
+      "lotId": "encrypted-tech-cache.compatible-v1.shipment-v1.compact-v1",
+      "displayName": "Encrypted Tech Cache Package",
+      "purpose": "Two different encrypted technology items and a document case. Valuable individual equipment replaces repeated technology stacks.",
+      "familyId": "tech",
+      "trackId": "vault",
+      "anchorTemplateId": "69bb41c03b5fb75517065960",
+      "weight": 0.6,
+      "usePath": {
+        "kind": "raidRole",
+        "roleId": "black-market-tech"
+      },
+      "recipe": [
+        {
+          "kind": "template",
+          "templateId": "69bb41c03b5fb75517065960",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "69bb4203f94327bc0f0230cd",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "590c60fc86f77412b13fddcf",
           "instanceCount": 1,
           "stackCountPerInstance": 1
         }

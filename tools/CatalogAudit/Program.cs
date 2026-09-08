@@ -9,6 +9,14 @@ using Path = System.IO.Path;
 using ContrabandCases.Client.Opening;
 using ContrabandCases.Server.Settlement;
 
+if (args.Length == 4 && args[0] == "--projected")
+{
+    File.WriteAllText(args[3], JsonSerializer.Serialize(ProjectedCatalogAudit.Create(args[1], args[2]),
+        new JsonSerializerOptions { WriteIndented = true }));
+    Console.WriteLine($"Offline source-data projection audit: {args[3]}");
+    return;
+}
+
 if (args.Length == 3 && args[0] == "--cash")
 {
     File.WriteAllText(args[2], JsonSerializer.Serialize(CashAudit.Create(args[1]),
@@ -48,6 +56,7 @@ var catalog = new CargoCatalogSnapshotBuilder(
     new CargoLotEvaluator(FindTemplate, id => prices.GetValueOrDefault(id)),
     new CargoPackRequirementValidator(FindTemplate, FindPreset).Validate).Build(core, optional);
 Directory.CreateDirectory(Path.GetDirectoryName(output)!);
+catalog = CaseCatalogs.WithPrice(catalog, ManifestCatalogEconomy.CalculateAutomaticPrices(catalog).CasePrice);
 // Exercise the real client library parser with full resolved forests, including
 // larger shipments; the captured-value mode intentionally cannot prove this.
 var library = ManifestLibraryProjection.Create(new CaseOpeningJournal(), catalog, new Dictionary<string, string>());

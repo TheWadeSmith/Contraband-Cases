@@ -22,22 +22,25 @@ public sealed class OptionalRewardPackTests
             Assert.Equal(expected.PackVersion, pack.PackVersion);
             Assert.Equal(expected.DisplayLabel, pack.DisplayLabel);
             Assert.Equal(expected.ProviderWeight, pack.ProviderWeight, 12);
-            Assert.Empty(pack.RequiredPresetIds);
+            Assert.All(pack.Lots.SelectMany(lot => lot.RecipeLines).OfType<PresetLine>(),
+                line => Assert.Contains(line.PresetId, pack.RequiredPresetIds));
             Assert.Empty(pack.RequiredBundleKeys);
-            Assert.Equal(16, pack.Lots.Count);
+            Assert.Equal(24, pack.Lots.Count);
 
             var expectedRequirements = expected.UnitValues.Keys
                 .Append(expected.ContainerTemplateId)
                 .Where(templateId => templateId is not null)
                 .Cast<string>()
                 .OrderBy(templateId => templateId, StringComparer.Ordinal);
-            Assert.Equal(expectedRequirements, pack.RequiredTemplateIds);
+            Assert.All(expectedRequirements, id => Assert.Contains(id, pack.RequiredTemplateIds));
+            Assert.All(pack.Lots.SelectMany(lot => lot.RecipeLines).OfType<TemplateLine>(),
+                line => Assert.Contains(line.TemplateId, pack.RequiredTemplateIds));
             Assert.Equal(
                 expected.LotValues.Keys.OrderBy(lotId => lotId, StringComparer.Ordinal),
-                pack.Lots.Where(lot => !ShipmentEconomy.IsShipment(lot.LotId))
+                pack.Lots.Where(lot => ShipmentEconomy.Generation(lot.LotId) == 0)
                     .Select(lot => lot.LotId).OrderBy(lotId => lotId, StringComparer.Ordinal));
 
-            var evaluated = pack.Lots.Where(lot => !ShipmentEconomy.IsShipment(lot.LotId))
+            var evaluated = pack.Lots.Where(lot => ShipmentEconomy.Generation(lot.LotId) == 0)
                 .Select(lot => EvaluateLot(lot, expected, pack.RequiredTemplateIds))
                 .ToArray();
 
@@ -75,8 +78,9 @@ public sealed class OptionalRewardPackTests
 
         Assert.Equal("sjx.combat-chemistry", pack.ProviderId);
         Assert.Equal("1.0.2", pack.PackVersion);
-        Assert.Equal(13, pack.RequiredTemplateIds.Count);
-        Assert.Equal(10, pack.Lots.Count);
+        Assert.Equal(20, pack.RequiredTemplateIds.Count);
+        Assert.Equal(2, pack.RequiredPresetIds.Count);
+        Assert.Equal(15, pack.Lots.Count);
         Assert.DoesNotContain(AmbiguousSjxHydraTemplateId, pack.RequiredTemplateIds);
         Assert.All(pack.Lots, lot => Assert.DoesNotContain(
             lot.RecipeLines.OfType<TemplateLine>(),
@@ -87,7 +91,7 @@ public sealed class OptionalRewardPackTests
 
         var recipeTemplateIds = pack.Lots
             .SelectMany(lot => lot.RecipeLines)
-            .Select(line => Assert.IsType<TemplateLine>(line).TemplateId)
+            .OfType<TemplateLine>().Select(line => line.TemplateId)
             .Distinct(StringComparer.Ordinal)
             .OrderBy(templateId => templateId, StringComparer.Ordinal);
         Assert.Equal(pack.RequiredTemplateIds, recipeTemplateIds);
@@ -113,7 +117,7 @@ public sealed class OptionalRewardPackTests
             StringComparison.OrdinalIgnoreCase));
         Assert.Equal(2, covertSustainment.RecipeLines.Count);
 
-        var evaluated = pack.Lots.Where(lot => !ShipmentEconomy.IsShipment(lot.LotId))
+        var evaluated = pack.Lots.Where(lot => ShipmentEconomy.Generation(lot.LotId) == 0)
             .Select(lot => new EvaluatedLot(
                 lot,
                 CargoGradeBands.Assign(EvaluateSjxLotValue(lot))))

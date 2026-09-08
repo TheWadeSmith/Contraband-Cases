@@ -131,7 +131,7 @@ internal static class ManifestSnapshotProjection
                     current.Value.Fingerprint, manifest.RarityLadderVersion) is null);
     }
 
-    internal static ManifestSnapshotData FromTerminal(ManifestTerminalReceipt receipt)
+    internal static ManifestSnapshotData FromTerminal(ManifestTerminalReceipt receipt, bool deliveredToMessenger = false)
     {
         ArgumentNullException.ThrowIfNull(receipt);
         var (currentOrdinal, lockedOrdinal) = receipt.CaseTemplateId == CaseContracts.CashCache
@@ -147,6 +147,7 @@ internal static class ManifestSnapshotProjection
 
         return new ManifestSnapshotData
         {
+            DeliveredToMessenger = deliveredToMessenger,
             ManifestId = receipt.ManifestId,
             CaseTemplateId = receipt.CaseTemplateId,
             OpeningTier = (receipt.OpeningQuality?.Tier ?? ManifestOpeningTier.Normal).ToString(),

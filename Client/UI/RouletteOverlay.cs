@@ -552,7 +552,7 @@ internal sealed partial class RouletteOverlay : IDisposable
         _decisionPanel.SetActive(true);
         _displayedDecisionRewardId = TrackManifestAnchor(snapshot);
         _decisionTitle.text = claimRetry
-            ? "CLAIM NEEDS MORE SPACE"
+            ? "DELIVERY PENDING"
             : snapshot.CaseTemplateId == CaseContracts.CashCache ? "YOUR CASH PAYOUT"
             : snapshot.LatestReceipt?.Outcome == ManifestRelayResult.Sidegrade
                 ? "REPLACEMENT READY — RELAY ENDED"
@@ -564,20 +564,19 @@ internal sealed partial class RouletteOverlay : IDisposable
         _decisionMeter.text =
             $"BROKER FAVOR {snapshot.BrokerFavor}/{snapshot.BrokerFavorMaximum}" +
             (claimRetry
-                ? "\n<color=#E8A076>No items were granted. Make stash or sorting-table room, then retry Claim.</color>"
-                : "\nClaim grants this exact lot. Relay stakes it and one additional Relay Key.");
+                ? "\n<color=#E8A076>Your reward is saved. Retry delivery to Messenger.</color>"
+                : "\nSend this exact prize to Mechanic's Messenger thread, or stake it + 1 key on Relay.");
         if (snapshot.CaseTemplateId == CaseContracts.CashCache)
         {
             _decisionCandidates.text = ManifestPresentationPolicy.LotDetails(snapshot);
             _decisionOdds.text = "ONE COMMITTED PAYOUT — NO ADDITIONAL KEY";
             _decisionMeter.text = claimRetry
-                ? "No payout was granted. Make room, then retry. Your original payout is saved."
-                : "No discard or Relay. Broker Favor is unchanged.";
+                ? "Delivery is pending. Your original payout is saved."
+                : "Collect attachments from Mechanic at your own pace. No discard or Relay.";
         }
         ShowContents(snapshot);
         ResetDecisionScroll();
-        _secureButton.GetComponentInChildren<Text>().text = claimRetry ? "RETRY CLAIM" :
-            snapshot.CaseTemplateId == CaseContracts.CashCache ? "COLLECT PAYOUT" : "SECURE REWARD";
+        _secureButton.GetComponentInChildren<Text>().text = claimRetry ? "RETRY DELIVERY" : "SEND TO MESSENGER";
         SetButton(_secureButton, claim);
         _relayButton.gameObject.SetActive(snapshot.AvailableActions.CanRelay);
         if (snapshot.AvailableActions.CanRelay)
@@ -653,13 +652,17 @@ internal sealed partial class RouletteOverlay : IDisposable
         _displayedResultRewardId = _artwork?.AnchorId;
         _resultTitle.text = snapshot.Phase switch
         {
-            ManifestPhase.Granted => snapshot.CaseTemplateId == CaseContracts.CashCache ? "PAYOUT COLLECTED" : "MIXED LOT CLAIMED",
+            ManifestPhase.Granted => snapshot.DeliveredToMessenger ? "SENT TO MESSENGER" : "REWARD ALREADY CLAIMED",
             ManifestPhase.Confiscated => "LOT CONFISCATED",
             ManifestPhase.Forfeited => "MANIFEST FORFEITED",
             _ => "MANIFEST SETTLED"
         };
         _resultText.text = snapshot.Phase switch
         {
+            ManifestPhase.Granted when snapshot.DeliveredToMessenger =>
+                "<b>Mechanic has sent your reward.</b>\n\nOpen Messenger → Mechanic to collect individual attachments. " +
+                "Leave the rest until you have space. No extra key is needed.\n\n" +
+                "Attachments are held for 10 years; deleting the message discards uncollected items.",
             ManifestPhase.Granted when snapshot.CaseTemplateId == CaseContracts.CashCache =>
                 "<b>Your committed payout was collected.</b>\n\nCheck your stash or sorting table.",
             ManifestPhase.Granted =>
@@ -738,7 +741,7 @@ internal sealed partial class RouletteOverlay : IDisposable
         _resultPanel.SetActive(true);
         _displayedResultRewardId = reward?.Id;
         _artwork = reward is null ? null : new RewardArtworkBinding(reward.Id, reward.Rarity);
-        _resultTitle.text = outcome switch
+        _resultTitle.text = receipt.DeliveredToMessenger ? "SENT TO MESSENGER" : outcome switch
         {
             RelayOutcome.Secured => "REWARD SECURED",
             RelayOutcome.SameRaritySidegrade => "SIDEGRADE SECURED",
@@ -760,7 +763,9 @@ internal sealed partial class RouletteOverlay : IDisposable
                 ?? throw new InvalidOperationException("A non-confiscation Relay result requires a verified reward.");
             _resultText.text =
                 $"<b>{resolved.DisplayName}</b>\n" +
-                $"{OutcomeLabel(outcome)}\n\nRecovery meter: {receipt.RecoveryMeter}/{receipt.RecoveryMeterMaximum}.";
+                (receipt.DeliveredToMessenger
+                    ? "Collect your saved prize from Mechanic in Messenger.\n\nItems can be claimed separately as space allows. No new roll occurs."
+                    : $"{OutcomeLabel(outcome)}\n\nRecovery meter: {receipt.RecoveryMeter}/{receipt.RecoveryMeterMaximum}.");
             _resultImage.sprite = LootArtwork.Seal(resolved.Rarity);
             _resultImage.color = Color.white;
             SetResultSprite(resolved.Id, sprite);

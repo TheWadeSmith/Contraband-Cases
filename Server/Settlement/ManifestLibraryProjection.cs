@@ -17,7 +17,9 @@ internal static class ManifestLibraryProjection
         ArgumentNullException.ThrowIfNull(journal);
         var dossier = new StringBuilder($"BROKER FAVOR {journal.BrokerFavor}/3\n");
         dossier.AppendLine("Three losses charge a guaranteed upgrade on your next eligible Relay. Favor persists across cases.");
-        dossier.AppendLine(journal.ActiveManifest is null
+        dossier.AppendLine(journal.PreparedOpening is not null
+            ? "A legacy opening has a saved prize waiting for recovery. Choose Resume Saved Reward to finish that exact opening."
+            : journal.ActiveManifest is null
             ? "No unfinished manifest."
             : "An unfinished manifest is saved. Choose Resume Saved Reward; no new case or key is required.");
         dossier.AppendLine($"\nKeys spent in retained completed openings: {journal.ManifestReceipts.Count + journal.ManifestReceipts.Sum(r => r.RelayHistory.Count)} (opening + Relay keys; not a lifetime total).");
@@ -50,7 +52,7 @@ internal static class ManifestLibraryProjection
         return new ManifestLibraryData
         {
             Dossier = dossier.ToString(),
-            HasPending = journal.ActiveManifest is not null,
+            HasPending = journal.ActiveManifest is not null || journal.PreparedOpening is not null,
             Status = BuildStatus(catalog, cashCatalog, caseCatalogs),
             Cases = (caseCatalogs ?? new Dictionary<string, CargoCatalogSnapshot?>()).Select(pair => new ManifestLibraryCaseData
             {

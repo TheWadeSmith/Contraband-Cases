@@ -337,6 +337,12 @@ public sealed class ManifestTicketPayload
     }
 }
 
+public enum ClaimDeliveryKind
+{
+    LegacyInventory,
+    Messenger
+}
+
 public sealed class ManifestClaimPreparedPayload
 {
     private readonly IReadOnlyList<Item> _items;
@@ -349,7 +355,8 @@ public sealed class ManifestClaimPreparedPayload
         bool profileCommitStarted,
         DateTimeOffset preparedAtUtc,
         long? commitGeneration = null,
-        string? commitPredecessorHash = null)
+        string? commitPredecessorHash = null,
+        ClaimDeliveryKind delivery = ClaimDeliveryKind.LegacyInventory)
     {
         var copiedItems = items?.Select(CaseOpeningRecord.CloneItem).ToArray()
             ?? throw new ArgumentNullException(nameof(items));
@@ -373,6 +380,7 @@ public sealed class ManifestClaimPreparedPayload
         }
 
         ValidatePhysicalForest(copiedItems, copiedRootIds);
+        if (!Enum.IsDefined(delivery)) throw new ArgumentOutOfRangeException(nameof(delivery));
         ManifestRecordValidation.RequireUtc(preparedAtUtc, nameof(preparedAtUtc));
         if ((commitGeneration is null) != (commitPredecessorHash is null))
         {
@@ -391,6 +399,7 @@ public sealed class ManifestClaimPreparedPayload
         PreparedAtUtc = preparedAtUtc;
         CommitGeneration = commitGeneration;
         CommitPredecessorHash = commitPredecessorHash;
+        Delivery = delivery;
     }
 
     public IReadOnlyList<Item> Items =>
@@ -410,13 +419,16 @@ public sealed class ManifestClaimPreparedPayload
     /// <summary>Hash of the exact profile-side head that preceded this Claim.</summary>
     public string? CommitPredecessorHash { get; }
 
+    public ClaimDeliveryKind Delivery { get; }
+
     internal ManifestClaimPreparedPayload Clone() => new(
         Items,
         RootIds,
         ProfileCommitStarted,
         PreparedAtUtc,
         CommitGeneration,
-        CommitPredecessorHash);
+        CommitPredecessorHash,
+        Delivery);
 
     internal ManifestClaimPreparedPayload WithCommitPlan(long generation, string predecessorHash) => new(
         Items,
@@ -424,7 +436,11 @@ public sealed class ManifestClaimPreparedPayload
         ProfileCommitStarted,
         PreparedAtUtc,
         generation,
-        predecessorHash);
+        predecessorHash,
+        Delivery);
+
+    internal ManifestClaimPreparedPayload WithDelivery(ClaimDeliveryKind delivery) => new(
+        Items, RootIds, ProfileCommitStarted, PreparedAtUtc, CommitGeneration, CommitPredecessorHash, delivery);
 
     internal void RejectUnsupportedExtensionData()
     {
@@ -1607,6 +1623,13 @@ public sealed class ManifestRecord
             prepared,
             rarityLadderVersion: RarityLadderVersion);
     }
+
+    // Only the settlement service may migrate a pending inventory claim, after
+    // proving its profile commit has not occurred. The prize itself is unchanged.
+    internal ManifestRecord WithClaimDelivery(ManifestClaimPreparedPayload prepared) => new(
+        ManifestId, CatalogSnapshotId, Commitment, FlowState, Ticket, Offers, Decisions,
+        Entitlement, RelayCandidates, RelayHistory, BrokerFavor, prepared,
+        rarityLadderVersion: RarityLadderVersion);
 
     internal ManifestRecord MarkClaimRewardOwed()
     {

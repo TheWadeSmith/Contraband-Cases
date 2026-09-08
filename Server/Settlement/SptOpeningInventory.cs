@@ -204,6 +204,16 @@ public sealed class SptOpeningInventory :
 
     public CaseOpeningRecord ApplyPrepared(OpeningContext context, CaseOpeningRecord record)
     {
+        ConsumePreparedOpening(context, record);
+        var changes = SptResponseChanges.GetOrCreate(context.Response, context.ProfileId);
+        inventoryHelper.AddItemToStash(
+            context.ProfileId, CreateAddRequest(record.RewardItems.ToList()), context.PmcData, context.Response);
+        EnsureNoWarnings(context.Response);
+        return ValidateAppliedChanges(context, record, changes);
+    }
+
+    internal void ConsumePreparedOpening(OpeningContext context, CaseOpeningRecord record)
+    {
         ArgumentNullException.ThrowIfNull(context);
         ArgumentNullException.ThrowIfNull(record);
         EnsureNoWarnings(context.Response);
@@ -218,17 +228,13 @@ public sealed class SptOpeningInventory :
             RequireInventoryItems(context.PmcData),
             record.CaseId,
             record.KeyId);
-        var changes = SptResponseChanges.GetOrCreate(context.Response, context.ProfileId);
         inventoryHelper.RemoveItem(context.PmcData, record.CaseId, context.ProfileId, context.Response);
         inventoryHelper.RemoveItem(context.PmcData, record.KeyId, context.ProfileId, context.Response);
-        inventoryHelper.AddItemToStash(
-            context.ProfileId,
-            CreateAddRequest(record.RewardItems.ToList()),
-            context.PmcData,
-            context.Response);
-
         EnsureNoWarnings(context.Response);
-        return ValidateAppliedChanges(context, record, changes);
+        var changes = SptResponseChanges.GetOrCreate(context.Response, context.ProfileId);
+        if (RequireInventoryItems(context.PmcData).Any(i => i.Id == record.CaseId || i.Id == record.KeyId) ||
+            !changes.DeletedItems!.Any(i => i.Id == record.CaseId) || !changes.DeletedItems.Any(i => i.Id == record.KeyId))
+            throw new InvalidOperationException("Legacy opening did not consume both saved inputs.");
     }
 
     public void Restore(OpeningContext context, InventoryCheckpoint checkpoint)
@@ -874,8 +880,8 @@ public sealed class SptOpeningInventory :
                 throw new InvalidOperationException("The selected Relay reward did not produce a unique preset tree.");
             }
             RequireSingleRoot(preparedOutput, preparedIds);
-            _ = inventoryHelper.CanPlaceItemsInInventory(context.ProfileId, [preparedOutput]);
-            preparedOutput = SimulateRelayTransaction(context, stake.RootId, key.Id, preparedOutput, preparedIds);
+            // New legacy-chain payouts use native Messenger. Their exact saved
+            // reward tree must not depend on the recipient's current stash space.
         }
 
         cancellationToken.ThrowIfCancellationRequested();
@@ -923,6 +929,23 @@ public sealed class SptOpeningInventory :
 
     public RelaySettlementRecord ApplyPreparedRelay(OpeningContext context, RelaySettlementRecord record)
     {
+        ConsumePreparedRelay(context, record);
+        var changes = SptResponseChanges.GetOrCreate(context.Response, context.ProfileId);
+        if (record.OutputItems.Count == 0) return record.BeginProfileCommit();
+        inventoryHelper.AddItemToStash(context.ProfileId, CreateAddRequest(record.OutputItems.ToList()), context.PmcData, context.Response);
+        EnsureNoWarnings(context.Response);
+        var outputRoot = record.OutputRootId ?? throw new InvalidOperationException("Prepared Relay output has no root item.");
+        var responseOutput = GetLiveTree(changes.NewItems ?? [], outputRoot).ToList();
+        var storedOutput = GetLiveTree(RequireInventoryItems(context.PmcData), outputRoot).ToList();
+        var parents = RequireRelayRootParentIds(context.PmcData);
+        EnsureExactStakeTree(record.OutputItems, responseOutput, outputRoot, parents);
+        EnsureExactStakeTree(record.OutputItems, storedOutput, outputRoot, parents);
+        ValidateMatchingLivePayload(responseOutput, storedOutput);
+        return record.BeginProfileCommit(responseOutput);
+    }
+
+    internal void ConsumePreparedRelay(OpeningContext context, RelaySettlementRecord record)
+    {
         ArgumentNullException.ThrowIfNull(context);
         ArgumentNullException.ThrowIfNull(record);
         EnsureNoWarnings(context.Response);
@@ -948,15 +971,6 @@ public sealed class SptOpeningInventory :
         var changes = SptResponseChanges.GetOrCreate(context.Response, context.ProfileId);
         inventoryHelper.RemoveItem(context.PmcData, record.StakeRootId, context.ProfileId, context.Response);
         inventoryHelper.RemoveItem(context.PmcData, keyId, context.ProfileId, context.Response);
-        if (record.OutputItems.Count > 0)
-        {
-            inventoryHelper.AddItemToStash(
-                context.ProfileId,
-                CreateAddRequest(record.OutputItems.ToList()),
-                context.PmcData,
-                context.Response);
-        }
-
         EnsureNoWarnings(context.Response);
         var deletedIds = (changes.DeletedItems ?? []).Select(item => item.Id).ToHashSet();
         if (record.InputItemIds.Any(id => !deletedIds.Contains(id)) || !deletedIds.Contains(keyId))
@@ -968,19 +982,6 @@ public sealed class SptOpeningInventory :
         {
             throw new InvalidOperationException("Live Relay settlement left a consumed input in the profile.");
         }
-        if (record.OutputItems.Count == 0)
-        {
-            return record.BeginProfileCommit();
-        }
-
-        var outputRoot = record.OutputRootId
-            ?? throw new InvalidOperationException("Prepared Relay output has no root item.");
-        var responseOutput = GetLiveTree(changes.NewItems ?? [], outputRoot).ToList();
-        var storedOutput = GetLiveTree(profileItems, outputRoot).ToList();
-        EnsureExactStakeTree(record.OutputItems, responseOutput, outputRoot, allowedRootParents);
-        EnsureExactStakeTree(record.OutputItems, storedOutput, outputRoot, allowedRootParents);
-        ValidateMatchingLivePayload(responseOutput, storedOutput);
-        return record.BeginProfileCommit(responseOutput);
     }
 
     public void RestoreRelay(OpeningContext context, InventoryCheckpoint checkpoint) => Restore(context, checkpoint);
@@ -1464,39 +1465,6 @@ public sealed class SptOpeningInventory :
             .ToList();
         ValidateExactRewardTree(preparedItems, located, exactIds, "placement simulation");
         RequireSingleRoot(located, exactIds);
-        return located;
-    }
-
-    private List<Item> SimulateRelayTransaction(
-        OpeningContext context,
-        MongoId stakeRootId,
-        MongoId keyId,
-        List<Item> preparedItems,
-        HashSet<MongoId> exactIds)
-    {
-        var simulatedProfile = CloneRequired(context.PmcData, "profile for Relay placement simulation");
-        var simulatedResponse = CloneRequired(context.Response, "response for Relay placement simulation");
-        var changes = SptResponseChanges.GetOrCreate(simulatedResponse, context.ProfileId);
-        var baselineNewIds = (changes.NewItems ?? []).Select(item => item.Id).ToHashSet();
-        inventoryHelper.RemoveItem(simulatedProfile, stakeRootId, context.ProfileId, simulatedResponse);
-        inventoryHelper.RemoveItem(simulatedProfile, keyId, context.ProfileId, simulatedResponse);
-        inventoryHelper.AddItemToStash(
-            context.ProfileId,
-            CreateAddRequest(preparedItems),
-            simulatedProfile,
-            simulatedResponse);
-        EnsureNoWarnings(simulatedResponse);
-        var outputRoot = SettlementItemTrees.FindRootId(preparedItems)
-            ?? throw new InvalidOperationException("Prepared Relay output has no root item.");
-        var newlyAdded = (changes.NewItems ?? [])
-            .Where(item => !baselineNewIds.Contains(item.Id))
-            .ToArray();
-        var located = GetLiveTree(newlyAdded, outputRoot).ToList();
-        EnsureExactStakeTree(
-            preparedItems,
-            located,
-            outputRoot,
-            RequireRelayRootParentIds(simulatedProfile));
         return located;
     }
 

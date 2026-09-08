@@ -27,8 +27,9 @@ internal static class BrokerPresentation
         var price = odds.CasePrice is long value ? $"Trader purchase price: ₽{value.ToString("N0", CultureInfo.InvariantCulture)}\n" : "";
         var rules = odds.CaseTemplateId == CaseContracts.CashCache
             ? "One spin. One payout. No discard or Relay.\nForeign currency value is not a guaranteed rouble cash-out."
-            : "Up to 3 offers. Choose one, or discard for the next.\nDiscard is permanent; offer 3 is final.\nThen claim your items, or risk them + 1 key on Relay.";
+            : "Up to 3 offers. Choose one, or discard for the next.\nDiscard is permanent; offer 3 is final.\nThen send your prize, or risk it + 1 key on Relay.";
         return "Uses this case + 1 universal key.\nNo additional roubles charged.\n" + price + "\n" + rules +
+            "\nDelivery: Mechanic in Messenger. Collect attachments individually." +
             "\n\nValue can be below your cost. Rarity does not guarantee profit.";
     }
 
@@ -88,7 +89,7 @@ internal static class BrokerPresentation
     internal static string RelayEssentials(ManifestSnapshot snapshot)
     {
         if (snapshot.Relay is not { } relay || !snapshot.AvailableActions.CanRelay)
-            return "Claim this package at no extra cost. Relay is unavailable for this reward.";
+            return "Send this package to Messenger at no extra cost. Relay is unavailable for this reward.";
         return ManifestPresentationPolicy.RelayOdds(snapshot) + "\n" +
             (relay.GuaranteeActive
                 ? $"Hold to replace this package with a guaranteed upgrade + spend {relay.KeyCost} key. Favor resets."

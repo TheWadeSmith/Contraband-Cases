@@ -23,8 +23,10 @@ public sealed class ShipmentRebalanceTests
         foreach (var pack in baseline.RootElement.EnumerateObject())
         {
             using var current = JsonDocument.Parse(File.ReadAllText(Path.Combine(root, "config/reward-packs", pack.Name)));
-            foreach (var property in pack.Value.EnumerateObject().Where(p => p.Name != "lots" && p.Name != "requiredPresetIds"))
+            foreach (var property in pack.Value.EnumerateObject().Where(p => p.Name != "lots" && p.Name != "requiredPresetIds" && p.Name != "requiredTemplateIds"))
                 Assert.True(JsonElement.DeepEquals(property.Value, current.RootElement.GetProperty(property.Name)), pack.Name);
+            foreach (var template in pack.Value.GetProperty("requiredTemplateIds").EnumerateArray())
+                Assert.Contains(current.RootElement.GetProperty("requiredTemplateIds").EnumerateArray(), t => JsonElement.DeepEquals(t, template));
             foreach (var preset in pack.Value.GetProperty("requiredPresetIds").EnumerateArray())
                 Assert.Contains(current.RootElement.GetProperty("requiredPresetIds").EnumerateArray(), p => JsonElement.DeepEquals(p, preset));
             var lots = current.RootElement.GetProperty("lots").EnumerateArray().ToDictionary(l => l.GetProperty("lotId").GetString()!);

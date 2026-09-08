@@ -39,7 +39,7 @@ public sealed class ManifestRecoveryCopyTests
 
     [Theory]
     [InlineData(ManifestEconomicAction.Relay, "does not spend a key or roll again")]
-    [InlineData(ManifestEconomicAction.Claim, "stash has room")]
+    [InlineData(ManifestEconomicAction.Claim, "Mechanic in Messenger")]
     [InlineData(ManifestEconomicAction.Burn, "does not spend items or repeat your choice")]
     public void Rejected_actions_explain_the_safe_next_step_without_leaking_server_details(
         ManifestEconomicAction action, string expected)

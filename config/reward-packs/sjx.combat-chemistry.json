@@ -5,6 +5,13 @@
   "displayLabel": "SJX Combat Chemistry",
   "providerWeight": 0.35,
   "requiredTemplateIds": [
+    "591094e086f7747caa7bb2ef",
+    "59e6906286f7746c9f75e847",
+    "5c0126f40db834002a125382",
+    "5d02797c86f774203f38e30a",
+    "5d235bb686f77443f4331278",
+    "619cbf7d23893217ec30b689",
+    "628e4e576d783146b124c64d",
     "68331b17cccc72d0db1f764b",
     "68331d7a8f97a4202729e883",
     "68331fef74231628e6e63f25",
@@ -19,7 +26,10 @@
     "68337a2a20c7d7d769369919",
     "68337b7aff2eb46775159b1e"
   ],
-  "requiredPresetIds": [],
+  "requiredPresetIds": [
+    "5a8ae36686f774377d6ce226",
+    "657666ca303700411c0242c6"
+  ],
   "requiredBundleKeys": [],
   "lots": [
     {
@@ -755,6 +765,227 @@
         {
           "kind": "template",
           "templateId": "68336a67ce152b72dc40abf6",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        }
+      ]
+    },
+    {
+      "lotId": "rapid-mobility.shipment-v1.compact-v1",
+      "displayName": "Rapid Mobility Package",
+      "purpose": "Two different SJX specialist supplies with an empty injector case, plated armor and communications. The supporting medicine is not a bulk payout.",
+      "familyId": "field-supply",
+      "trackId": "chemistry",
+      "anchorTemplateId": "68331b17cccc72d0db1f764b",
+      "weight": 1,
+      "usePath": {
+        "kind": "raidRole",
+        "roleId": "combat-chemistry"
+      },
+      "recipe": [
+        {
+          "kind": "template",
+          "templateId": "68331b17cccc72d0db1f764b",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "68337a2a20c7d7d769369919",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "619cbf7d23893217ec30b689",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "preset",
+          "presetId": "657666ca303700411c0242c6"
+        },
+        {
+          "kind": "template",
+          "templateId": "628e4e576d783146b124c64d",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        }
+      ]
+    },
+    {
+      "lotId": "precision-assault.shipment-v1.compact-v1",
+      "displayName": "SJX Precision Acquisition",
+      "purpose": "A thermal-sighted rifle, matching ammunition, plated armor and SICC pouch with two distinct specialist SJX injectors. An exceptionally rare complete specialist package.",
+      "familyId": "field-supply",
+      "trackId": "chemistry",
+      "anchorTemplateId": "68331d7a8f97a4202729e883",
+      "weight": 1,
+      "usePath": {
+        "kind": "raidRole",
+        "roleId": "combat-chemistry"
+      },
+      "recipe": [
+        {
+          "kind": "template",
+          "templateId": "68331d7a8f97a4202729e883",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "68331fef74231628e6e63f25",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "preset",
+          "presetId": "5a8ae36686f774377d6ce226"
+        },
+        {
+          "kind": "template",
+          "templateId": "59e6906286f7746c9f75e847",
+          "instanceCount": 1,
+          "stackCountPerInstance": 60
+        },
+        {
+          "kind": "preset",
+          "presetId": "657666ca303700411c0242c6"
+        },
+        {
+          "kind": "template",
+          "templateId": "5d235bb686f77443f4331278",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        }
+      ]
+    },
+    {
+      "lotId": "covert-sustainment.shipment-v1.compact-v1",
+      "displayName": "Covert Sustainment Package",
+      "purpose": "Two different SJX specialist supplies with an empty injector case, plated armor and communications. The supporting medicine is not a bulk payout.",
+      "familyId": "field-supply",
+      "trackId": "chemistry",
+      "anchorTemplateId": "6833259d5bbfac390bc044cf",
+      "weight": 0.9,
+      "usePath": {
+        "kind": "raidRole",
+        "roleId": "combat-chemistry"
+      },
+      "recipe": [
+        {
+          "kind": "template",
+          "templateId": "6833259d5bbfac390bc044cf",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "68337b7aff2eb46775159b1e",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "619cbf7d23893217ec30b689",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "preset",
+          "presetId": "657666ca303700411c0242c6"
+        },
+        {
+          "kind": "template",
+          "templateId": "628e4e576d783146b124c64d",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        }
+      ]
+    },
+    {
+      "lotId": "elite-recovery.shipment-v1.compact-v1",
+      "displayName": "Elite Recovery Package",
+      "purpose": "An empty injector case, surgery and armor maintenance equipment with two distinct SJX recovery supplies.",
+      "familyId": "field-supply",
+      "trackId": "chemistry",
+      "anchorTemplateId": "68336d708e51c90780988824",
+      "weight": 0.7,
+      "usePath": {
+        "kind": "raidRole",
+        "roleId": "combat-chemistry"
+      },
+      "recipe": [
+        {
+          "kind": "template",
+          "templateId": "68336d708e51c90780988824",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "68336e67abd18e611ecbf182",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "619cbf7d23893217ec30b689",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5d02797c86f774203f38e30a",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "591094e086f7747caa7bb2ef",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        }
+      ]
+    },
+    {
+      "lotId": "heavy-extraction.shipment-v1.compact-v1",
+      "displayName": "Heavy Extraction Package",
+      "purpose": "A Red Rebel extraction tool, plated armor and surgery with two different SJX extraction injectors.",
+      "familyId": "field-supply",
+      "trackId": "chemistry",
+      "anchorTemplateId": "68336a67ce152b72dc40abf6",
+      "weight": 0.6,
+      "usePath": {
+        "kind": "raidRole",
+        "roleId": "combat-chemistry"
+      },
+      "recipe": [
+        {
+          "kind": "template",
+          "templateId": "68336a67ce152b72dc40abf6",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "68336b8fb68adf25e7314cc3",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5c0126f40db834002a125382",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "preset",
+          "presetId": "657666ca303700411c0242c6"
+        },
+        {
+          "kind": "template",
+          "templateId": "5d02797c86f774203f38e30a",
           "instanceCount": 1,
           "stackCountPerInstance": 1
         }

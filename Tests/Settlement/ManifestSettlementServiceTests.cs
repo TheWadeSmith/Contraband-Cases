@@ -9,6 +9,7 @@ using SPTarkov.Server.Core.Models.Common;
 using SPTarkov.Server.Core.Models.Eft.Common;
 using SPTarkov.Server.Core.Models.Eft.Common.Tables;
 using SPTarkov.Server.Core.Models.Eft.ItemEvent;
+using SPTarkov.Server.Core.Models.Eft.Profile;
 using SPTarkov.Server.Core.Models.Spt.Tables;
 using Xunit;
 
@@ -16,6 +17,251 @@ namespace ContrabandCases.Tests.Settlement;
 
 public sealed class ManifestSettlementServiceTests
 {
+    [Theory]
+    [InlineData(false, false)]
+    [InlineData(false, true)]
+    [InlineData(true, false)]
+    [InlineData(true, true)]
+    public async Task Ticket_and_relay_key_staging_exclude_native_saves_until_witness_or_rollback(bool relay, bool failJournal)
+    {
+        var lots = RelayLots();
+        var active = relay ? EntitlementManifest(RelayCandidates(lots)) : TicketPreparedManifest(false);
+        var fixture = Fixture.FromJournal(new CaseOpeningJournal(activeManifest: active));
+        using var gate = new SemaphoreSlim(1, 1);
+        var staged = false;
+        var restored = false;
+        var released = 0;
+        fixture.Committer.MutationLeaseFactory = async (_, token) =>
+        {
+            await gate.WaitAsync(token);
+            return new TestSaveLease(() =>
+            {
+                Assert.Equal(!failJournal, staged);
+                Assert.Equal(failJournal, restored);
+                released++;
+                gate.Release();
+            });
+        };
+        Action apply = () => Assert.False(gate.Wait(0));
+        Action stage = () => { Assert.False(gate.Wait(0)); staged = true; };
+        var ticket = new FreshTicketInventoryProbe { BeforeApply = apply, OnStage = stage, OnRestore = () => restored = true };
+        var key = new FreshRelayKeyInventoryProbe { BeforeApply = apply, OnStage = stage, OnRestore = () => restored = true };
+        fixture.Store.BeforeSave = attempt =>
+        {
+            if (attempt != (relay ? 2 : 1)) return;
+            Assert.False(gate.Wait(0));
+            if (failJournal) throw new IOException("staged input journal failure");
+        };
+        fixture.Committer.BeforeCommit = () => { Assert.True(gate.Wait(0)); gate.Release(); };
+        var service = fixture.CreateService(ticketInventory: ticket, relayKeyInventory: key,
+            catalogCoordinator: Coordinator(relay ? CatalogWithUnrelatedDrift(lots.Select(l => l.Resolved)) : Catalog()),
+            nextUnitNumerator: () => CanonicalRngEvidence.UnitDenominator - 1);
+        var operation = relay
+            ? service.RelayAsync(fixture.Context, ManifestId, ManifestPhase.Entitlement, 1, CancellationToken.None)
+            : service.OpenAsync(fixture.Context, CaseId, CancellationToken.None);
+        if (failJournal) await Assert.ThrowsAsync<IOException>(() => operation);
+        else await operation;
+        Assert.Equal(1, released);
+    }
+
+    [Theory]
+    [InlineData(0)]
+    [InlineData(2)]
+    [InlineData(3)]
+    public async Task Messenger_staging_and_rollback_exclude_background_profile_saves(int failedJournalSave)
+    {
+        var fixture = Fixture.Entitlement();
+        var profile = new SptProfile { CharacterData = new() { PmcData = fixture.Context.PmcData } };
+        var delivery = new SptManifestRewardDelivery(fixture.Inventory, _ => profile,
+            (_, _) => Task.CompletedTask, _ => { });
+        using var nativeSaveGate = new SemaphoreSlim(1, 1);
+        var releases = 0;
+        fixture.Committer.MutationLeaseFactory = async (_, token) =>
+        {
+            await nativeSaveGate.WaitAsync(token);
+            return new TestSaveLease(() =>
+            {
+                // A save immediately after release must see either a complete
+                // delivery + witness, or a completely restored pre-claim profile.
+                var mail = profile.DialogueRecords?.Values.SelectMany(d => d.Messages ?? []).ToArray() ?? [];
+                if (failedJournalSave == 0)
+                {
+                    Assert.Single(mail);
+                    var active = fixture.Store.Stored.ActiveManifest!;
+                    Assert.Equal(ManifestClaimCommitWitnessInspection.Current,
+                        ManifestClaimCommitWitness.Inspect(fixture.Context.PmcData, ProfileId,
+                            ManifestId, active.Entitlement!.Fingerprint, active.ClaimPrepared!));
+                }
+                else
+                {
+                    Assert.Empty(mail);
+                    Assert.Null(ManifestClaimCommitWitness.CaptureToken(fixture.Context.PmcData));
+                }
+                releases++;
+                nativeSaveGate.Release();
+            });
+        };
+        fixture.Store.BeforeSave = attempt =>
+        {
+            if (attempt is 2 or 3)
+            {
+                Assert.NotEmpty(profile.DialogueRecords![SptManifestRewardDelivery.SenderId].Messages!);
+                Assert.Null(ManifestClaimCommitWitness.CaptureToken(fixture.Context.PmcData));
+                Assert.False(nativeSaveGate.Wait(0));
+            }
+        };
+        fixture.Committer.BeforeCommit = () =>
+        {
+            Assert.True(nativeSaveGate.Wait(0));
+            nativeSaveGate.Release();
+        };
+        if (failedJournalSave != 0) fixture.Store.FailBeforeSaveAttempt = failedJournalSave;
+        var claim = fixture.CreateService(claimInventory: delivery)
+            .ClaimAsync(fixture.Context, ManifestId, CancellationToken.None);
+        if (failedJournalSave == 0) await claim;
+        else await Assert.ThrowsAsync<IOException>(() => claim);
+        Assert.Equal(1, releases);
+        Assert.Equal(1, nativeSaveGate.CurrentCount);
+    }
+
+    [Theory]
+    [InlineData(false)]
+    [InlineData(true)]
+    public async Task Messenger_claim_ignores_stash_capacity_and_never_reissues_collected_or_deleted_mail(bool deleteMail)
+    {
+        var fixture = Fixture.Entitlement();
+        fixture.Inventory.PrepareSucceeds = false;
+        var profile = new SptProfile { CharacterData = new() { PmcData = fixture.Context.PmcData } };
+        var notifications = 0;
+        var delivery = new SptManifestRewardDelivery(fixture.Inventory, _ => profile, (_, _) =>
+        {
+            Assert.Equal(1, fixture.Committer.Calls);
+            Assert.Single(fixture.Store.Stored.ManifestClaimGrants);
+            notifications++;
+            return Task.CompletedTask;
+        }, _ => throw new Exception("Unexpected notification failure"));
+        var service = fixture.CreateService(claimInventory: delivery);
+        var before = fixture.Context.PmcData.Inventory!.Items!.Count;
+        await service.ClaimAsync(fixture.Context, ManifestId, CancellationToken.None);
+        Assert.Equal(before, fixture.Context.PmcData.Inventory.Items.Count);
+        Assert.Equal(0, fixture.Inventory.ApplyCalls);
+        Assert.Equal(0, fixture.Inventory.PrepareCalls);
+        Assert.Empty(fixture.Context.Response.ProfileChanges?.GetValueOrDefault(ProfileId)?.Items?.NewItems ?? []);
+        var message = Assert.Single(profile.DialogueRecords![SptManifestRewardDelivery.SenderId].Messages!);
+        Assert.Equal(RewardId, Assert.Single(message.Items!.Data!).Id);
+        Assert.Equal(1, notifications);
+        Assert.Equal(ClaimDeliveryKind.Messenger, Assert.Single(fixture.Store.Stored.ManifestClaimGrants).ClaimPayload.Delivery);
+        if (deleteMail) profile.DialogueRecords.Clear();
+        else { message.Items.Data!.Clear(); message.HasRewards = false; message.RewardCollected = true; }
+        var replay = await fixture.CreateService(claimInventory: delivery)
+            .ClaimAsync(fixture.NewContextWithLostResponse(), ManifestId, CancellationToken.None);
+        Assert.True(replay.Replay);
+        Assert.Empty(profile.DialogueRecords.Values.SelectMany(d => d.Messages ?? []).SelectMany(m => m.Items?.Data ?? []));
+        Assert.Equal(1, fixture.Committer.Calls);
+        Assert.Equal(1, notifications);
+    }
+
+    [Theory]
+    [InlineData(1)]
+    [InlineData(2)]
+    [InlineData(3)]
+    [InlineData(4)]
+    public async Task Messenger_journal_failure_recovers_exactly_once(int failureSave)
+    {
+        var fixture = Fixture.Entitlement();
+        var profile = new SptProfile { CharacterData = new() { PmcData = fixture.Context.PmcData } };
+        var delivery = new SptManifestRewardDelivery(fixture.Inventory, _ => profile,
+            (_, _) => Task.CompletedTask, _ => { });
+        fixture.Store.FailAfterSaveAttempt = failureSave;
+        await Assert.ThrowsAsync<IOException>(() => fixture.CreateService(claimInventory: delivery)
+            .ClaimAsync(fixture.Context, ManifestId, CancellationToken.None));
+        fixture.Store.FailAfterSaveAttempt = null;
+        if (failureSave == 4)
+        {
+            // Profile and terminal journal committed; player took an attachment before retry.
+            profile.DialogueRecords!.Clear();
+        }
+        await fixture.CreateService(claimInventory: delivery).ClaimAsync(fixture.NewContextWithLostResponse(), ManifestId, CancellationToken.None);
+        Assert.Single(fixture.Store.Stored.ManifestClaimGrants);
+        Assert.Equal(1, fixture.Committer.Calls);
+        Assert.Equal(failureSave == 4 ? 0 : 1, profile.DialogueRecords?.Values.SelectMany(d => d.Messages ?? []).Count() ?? 0);
+    }
+
+    [Theory]
+    [InlineData(ClaimStage.PreparedFalse)]
+    [InlineData(ClaimStage.RewardOwed)]
+    public async Task Legacy_uncommitted_claim_migrates_to_mail_without_changing_prize(ClaimStage stage)
+    {
+        var fixture = Fixture.ActiveClaim(stage, materializerMustNotRun: true);
+        var before = fixture.Store.Stored.ActiveManifest!.ClaimPrepared!;
+        var profile = new SptProfile { CharacterData = new() { PmcData = fixture.Context.PmcData } };
+        var delivery = new SptManifestRewardDelivery(fixture.Inventory, _ => profile, (_, _) => Task.CompletedTask, _ => { });
+        await fixture.CreateService(claimInventory: delivery).ClaimAsync(fixture.Context, ManifestId, CancellationToken.None);
+        var after = Assert.Single(fixture.Store.Stored.ManifestClaimGrants).ClaimPayload;
+        Assert.Equal(ClaimDeliveryKind.Messenger, after.Delivery);
+        Assert.Equal(before.ExactItemIds, after.ExactItemIds);
+        SptOpeningInventory.EnsureExactItemState(before.Items, after.Items, "legacy migration test");
+        Assert.Equal(0, fixture.Inventory.ApplyCalls);
+    }
+
+    [Fact]
+    public async Task Saved_mail_survives_notification_failure_without_failed_claim_or_resend()
+    {
+        var fixture = Fixture.Entitlement();
+        var profile = new SptProfile { CharacterData = new() { PmcData = fixture.Context.PmcData } };
+        var errors = 0;
+        var delivery = new SptManifestRewardDelivery(fixture.Inventory, _ => profile,
+            (_, _) => throw new IOException("offline notification"), _ => errors++);
+        await fixture.CreateService(claimInventory: delivery).ClaimAsync(fixture.Context, ManifestId, CancellationToken.None);
+        Assert.Equal(1, errors);
+        Assert.Single(profile.DialogueRecords![SptManifestRewardDelivery.SenderId].Messages!);
+        Assert.Single(fixture.Store.Stored.ManifestClaimGrants);
+    }
+
+    [Theory]
+    [InlineData(false)]
+    [InlineData(true)]
+    public async Task Messenger_matching_profile_witness_never_refills_mail_after_terminal_journal_failure(bool deleteMessage)
+    {
+        var fixture = Fixture.Entitlement();
+        var profile = new SptProfile { CharacterData = new() { PmcData = fixture.Context.PmcData } };
+        var delivery = new SptManifestRewardDelivery(fixture.Inventory, _ => profile, (_, _) => Task.CompletedTask, _ => { });
+        fixture.Store.FailBeforeSaveAttempt = 4;
+        await Assert.ThrowsAsync<IOException>(() => fixture.CreateService(claimInventory: delivery)
+            .ClaimAsync(fixture.Context, ManifestId, CancellationToken.None));
+        Assert.Equal(ManifestPhase.RewardOwed, fixture.Store.Stored.ActiveManifest!.FlowState.Phase);
+        Assert.Equal(1, fixture.Committer.Calls);
+        var dialogue = profile.DialogueRecords![SptManifestRewardDelivery.SenderId];
+        if (deleteMessage) dialogue.Messages!.Clear();
+        else dialogue.Messages![0].Items!.Data!.Clear();
+        fixture.Store.FailBeforeSaveAttempt = null;
+        await fixture.CreateService(claimInventory: delivery).ClaimAsync(fixture.NewContextWithLostResponse(), ManifestId, CancellationToken.None);
+        Assert.Empty(dialogue.Messages!.SelectMany(m => m.Items?.Data ?? []));
+        Assert.Single(fixture.Store.Stored.ManifestClaimGrants);
+        Assert.Equal(1, fixture.Committer.Calls);
+    }
+
+    [Fact]
+    public async Task Messenger_uncertain_profile_commit_stops_retries_until_restart_without_notification()
+    {
+        var fixture = Fixture.Entitlement();
+        var profile = new SptProfile { CharacterData = new() { PmcData = fixture.Context.PmcData } };
+        var notifications = 0;
+        var delivery = new SptManifestRewardDelivery(fixture.Inventory, _ => profile,
+            (_, _) => { notifications++; return Task.CompletedTask; }, _ => { });
+        fixture.Committer.ExceptionAfterBoundary = new IOException("uncertain save");
+        await Assert.ThrowsAsync<IOException>(() => fixture.CreateService(claimInventory: delivery)
+            .ClaimAsync(fixture.Context, ManifestId, CancellationToken.None));
+        await Assert.ThrowsAsync<InvalidOperationException>(() => fixture.CreateService(claimInventory: delivery)
+            .ClaimAsync(fixture.Context, ManifestId, CancellationToken.None));
+        Assert.Equal(0, notifications);
+        Assert.Single(profile.DialogueRecords![SptManifestRewardDelivery.SenderId].Messages!);
+        fixture.Committer.ExceptionAfterBoundary = null;
+        await fixture.CreateService(uncertaintyCoordinator: new ManifestClaimCommitUncertaintyCoordinator(), claimInventory: delivery)
+            .ClaimAsync(fixture.Context, ManifestId, CancellationToken.None);
+        Assert.Single(fixture.Store.Stored.ManifestClaimGrants);
+        Assert.Equal(1, fixture.Committer.Calls);
+    }
     [Theory]
     [InlineData(TestingCrateType.EpicMixed)]
     [InlineData(TestingCrateType.LegendaryMixed)]
@@ -1722,9 +1968,10 @@ public sealed class ManifestSettlementServiceTests
             Func<long>? nextUnitNumerator = null,
             ManifestCatalogSelector? offerSelector = null,
             CargoLotMaterializer? materializer = null,
-            TestingForcedCrateRegistry? forcedCrateRegistry = null) => new(
+            TestingForcedCrateRegistry? forcedCrateRegistry = null,
+            IManifestClaimInventory? claimInventory = null) => new(
             Store,
-            Inventory,
+            claimInventory ?? Inventory,
             Committer,
             _lockPool,
             RaidSessions,
@@ -1839,6 +2086,7 @@ public sealed class ManifestSettlementServiceTests
         public int SaveAttempts { get; private set; }
         public int? FailBeforeSaveAttempt { get; set; }
         public int? FailAfterSaveAttempt { get; set; }
+        public Action<int>? BeforeSave { get; set; }
 
         public ValueTask<CaseOpeningJournal> LoadAsync(
             MongoId profileId,
@@ -1861,6 +2109,7 @@ public sealed class ManifestSettlementServiceTests
             {
                 SaveAttempts++;
                 SaveTokens.Add(cancellationToken);
+                BeforeSave?.Invoke(SaveAttempts);
                 if (FailBeforeSaveAttempt == SaveAttempts)
                 {
                     throw new IOException("journal save failed before persistence");
@@ -2122,6 +2371,9 @@ public sealed class ManifestSettlementServiceTests
         public int ApplyCalls => Volatile.Read(ref _applyCalls);
         public int RestoreCalls => Volatile.Read(ref _restoreCalls);
         public string? FreshCaseTemplate { get; init; }
+        public Action? BeforeApply { get; init; }
+        public Action? OnStage { get; init; }
+        public Action? OnRestore { get; init; }
 
         public ManifestTicketPayload PrepareTicket(
             OpeningContext context,
@@ -2147,6 +2399,7 @@ public sealed class ManifestSettlementServiceTests
             OpeningContext context,
             ManifestTicketPayload prepared)
         {
+            BeforeApply?.Invoke();
             Interlocked.Increment(ref _applyCalls);
             return prepared.BeginProfileCommit();
         }
@@ -2156,10 +2409,12 @@ public sealed class ManifestSettlementServiceTests
             string manifestId,
             ManifestTicketPayload prepared)
         {
+            OnStage?.Invoke();
         }
 
         public void RestoreTicket(OpeningContext context, InventoryCheckpoint checkpoint)
         {
+            OnRestore?.Invoke();
             Interlocked.Increment(ref _restoreCalls);
         }
 
@@ -2268,6 +2523,9 @@ public sealed class ManifestSettlementServiceTests
 
         public int PrepareCalls => Volatile.Read(ref _prepareCalls);
         public int ApplyCalls => Volatile.Read(ref _applyCalls);
+        public Action? BeforeApply { get; init; }
+        public Action? OnStage { get; init; }
+        public Action? OnRestore { get; init; }
 
         public ManifestRelayKeyPreparation PrepareRelayKey(
             OpeningContext context,
@@ -2300,6 +2558,7 @@ public sealed class ManifestSettlementServiceTests
             OpeningContext context,
             ManifestRelayPreparedPayload prepared)
         {
+            BeforeApply?.Invoke();
             Interlocked.Increment(ref _applyCalls);
             return prepared.BeginProfileCommit();
         }
@@ -2310,12 +2569,16 @@ public sealed class ManifestSettlementServiceTests
             RewardForestFingerprintV2 inputFingerprint,
             ManifestRelayPreparedPayload prepared)
         {
+            OnStage?.Invoke();
         }
 
         public void RestoreRelayKey(
             OpeningContext context,
-            InventoryCheckpoint checkpoint) => throw new Xunit.Sdk.XunitException(
-                "A successful fresh Relay restored its inventory checkpoint.");
+            InventoryCheckpoint checkpoint)
+        {
+            if (OnRestore is not null) OnRestore();
+            else throw new Xunit.Sdk.XunitException("A successful fresh Relay restored its inventory checkpoint.");
+        }
 
         public void ReplayRelayKey(
             OpeningContext context,
@@ -2383,6 +2646,11 @@ public sealed class ManifestSettlementServiceTests
         public TaskCompletionSource Started { get; } =
             new(TaskCreationOptions.RunContinuationsAsynchronously);
         public Exception? ExceptionAfterBoundary { get; set; }
+        public Func<MongoId, CancellationToken, ValueTask<IDisposable?>>? MutationLeaseFactory { get; set; }
+        public Action? BeforeCommit { get; set; }
+
+        public ValueTask<IDisposable?> AcquireMutationLeaseAsync(MongoId profileId, CancellationToken token) =>
+            MutationLeaseFactory?.Invoke(profileId, token) ?? ValueTask.FromResult<IDisposable?>(null);
 
         public void CloseGate()
         {
@@ -2402,6 +2670,7 @@ public sealed class ManifestSettlementServiceTests
 
         public async Task CommitAsync(MongoId profileId, CancellationToken cancellationToken)
         {
+            BeforeCommit?.Invoke();
             Interlocked.Increment(ref _calls);
             Tokens.Enqueue(cancellationToken);
             Started.TrySetResult();
@@ -2419,6 +2688,12 @@ public sealed class ManifestSettlementServiceTests
                 throw ExceptionAfterBoundary;
             }
         }
+    }
+
+    private sealed class TestSaveLease(Action release) : IDisposable
+    {
+        private Action? _release = release;
+        public void Dispose() => Interlocked.Exchange(ref _release, null)?.Invoke();
     }
 
     private sealed class SequenceClock(params DateTimeOffset[] values)

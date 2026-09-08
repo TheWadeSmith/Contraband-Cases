@@ -13,16 +13,18 @@ public sealed class ManifestCurrentStateEnvelope
 {
     private ManifestCurrentStateEnvelope(
         ManifestSnapshotData? snapshot,
-        ManifestOpeningOddsData? openingOdds)
+        ManifestOpeningOddsData? openingOdds,
+        LegacyOpeningData? legacyOpening = null)
     {
-        if ((snapshot is null) == (openingOdds is null))
+        if ((snapshot is null ? 0 : 1) + (openingOdds is null ? 0 : 1) + (legacyOpening is null ? 0 : 1) != 1)
         {
             throw new ArgumentException(
-                "Current Manifest state requires exactly one snapshot or opening-odds payload.");
+                "Current state requires exactly one Manifest, opening-odds, or legacy-recovery payload.");
         }
 
         Snapshot = snapshot;
         OpeningOdds = openingOdds;
+        LegacyOpening = legacyOpening;
     }
 
     [JsonPropertyName("snapshot")]
@@ -33,11 +35,35 @@ public sealed class ManifestCurrentStateEnvelope
     [JsonIgnore(Condition = JsonIgnoreCondition.Never)]
     public ManifestOpeningOddsData? OpeningOdds { get; }
 
+    [JsonPropertyName("legacyOpening")]
+    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+    public LegacyOpeningData? LegacyOpening { get; }
+
+    public static ManifestCurrentStateEnvelope FromLegacyOpening(CaseOpeningRecord record) => new(null, null,
+        new LegacyOpeningData
+        {
+            CaseId = record.CaseId.ToString(), RewardId = record.RewardId,
+            Committed = record.Status == OpeningRecordStatus.Committed,
+            DeliveredToMessenger = record.Status == OpeningRecordStatus.Committed && record.MailDelivery is not null
+        });
+
     public static ManifestCurrentStateEnvelope FromSnapshot(ManifestSnapshotData snapshot) =>
         new(snapshot ?? throw new ArgumentNullException(nameof(snapshot)), null);
 
     public static ManifestCurrentStateEnvelope FromOpeningOdds(ManifestOpeningOddsData openingOdds) =>
         new(null, openingOdds ?? throw new ArgumentNullException(nameof(openingOdds)));
+}
+
+public sealed class LegacyOpeningData
+{
+    [JsonPropertyName("caseId")]
+    public string CaseId { get; init; } = string.Empty;
+    [JsonPropertyName("rewardId")]
+    public string RewardId { get; init; } = string.Empty;
+    [JsonPropertyName("committed")]
+    public bool Committed { get; init; }
+    [JsonPropertyName("deliveredToMessenger")]
+    public bool DeliveredToMessenger { get; init; }
 }
 
 public sealed class ManifestOpeningOddsData
@@ -159,6 +185,9 @@ public sealed class ManifestOpeningLotOddsData
 
 public sealed class ManifestSnapshotData
 {
+    [JsonPropertyName("deliveredToMessenger")]
+    public bool DeliveredToMessenger { get; init; }
+
     [JsonPropertyName("openingTier")]
     public string OpeningTier { get; init; } = "Normal";
 

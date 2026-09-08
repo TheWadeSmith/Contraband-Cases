@@ -10,6 +10,16 @@ namespace ContrabandCases.Tests.Settlement;
 
 public sealed class ProfileItemEventGateListenerTests
 {
+    [Theory]
+    [InlineData("/client/mail/dialog/view")]
+    [InlineData("/client/mail/dialog/remove")]
+    [InlineData("/client/mail/dialog/clear")]
+    [InlineData("/client/mail/dialog/getAllAttachments")]
+    public void Mail_requests_share_the_profile_transaction_gate(string path)
+    {
+        Assert.True(CreateListener(new ProfileLockPool(), _ => true).CanHandle(CreateContext(path)));
+        Assert.False(CreateListener(new ProfileLockPool(), _ => false).CanHandle(CreateContext(path)));
+    }
     [Fact]
     public void Listener_has_first_priority_and_depends_on_the_concrete_host_listener()
     {

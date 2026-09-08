@@ -36,7 +36,10 @@ public sealed class ProfileItemEventGateListener : IHttpListener
     public bool CanHandle(HttpContext context)
     {
         ArgumentNullException.ThrowIfNull(context);
-        return string.Equals(context.Request.Path.Value, ItemEventPath, StringComparison.Ordinal) &&
+        // Mail view/read can mutate attachment counters; clear/remove can delete
+        // a staged prize. Serialize those requests with the profile commit too.
+        return (string.Equals(context.Request.Path.Value, ItemEventPath, StringComparison.Ordinal) ||
+                context.Request.Path.Value?.StartsWith("/client/mail/", StringComparison.Ordinal) == true) &&
                _innerCanHandle(context);
     }
 

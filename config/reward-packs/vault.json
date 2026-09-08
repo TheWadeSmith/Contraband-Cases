@@ -7,17 +7,30 @@
   "requiredTemplateIds": [
     "5447a9cd4bdc2dbd208b4567",
     "54491c4f4bdc2db1078b4568",
-    "5a367e5dc4a282000e49738f",
     "560d5e524bdc2d25448b4571",
     "56dfef82d2720bbd668b4567",
     "59e6906286f7746c9f75e847",
-    "6768c25aa7b238f14a08d3f6"
+    "5a16b8a9fcdbcb00165aa6ca",
+    "5a367e5dc4a282000e49738f",
+    "5c0126f40db834002a125382",
+    "5c11046cd174af02a012e42b",
+    "5c110624d174af029e69734c",
+    "5c1d0dc586f7744baf2e7b79",
+    "5d235bb686f77443f4331278",
+    "5df8ce05b11454561e39243b",
+    "628e4e576d783146b124c64d",
+    "6768c25aa7b238f14a08d3f6",
+    "679b992329acd1f2f60985a5"
   ],
   "requiredPresetIds": [
     "584148f2245977598f1ad387",
     "59b81f7386f77421ac688a0a",
     "5a3a85af86f774745637d46c",
-    "5af08cf886f774223c269184"
+    "5a8ae36686f774377d6ce226",
+    "5af08cf886f774223c269184",
+    "628753bba4a8431af4739d3b",
+    "657666ca303700411c0242c6",
+    "657fa7c0e65c0122b70ffdb0"
   ],
   "requiredBundleKeys": [],
   "lots": [
@@ -514,6 +527,129 @@
           "templateId": "560d5e524bdc2d25448b4571",
           "instanceCount": 2,
           "stackCountPerInstance": 20
+        }
+      ]
+    },
+    {
+      "lotId": "vault-twin-rifles.shipment-v1.compact-v1",
+      "displayName": "Vault Thermal Acquisition",
+      "purpose": "A complete T-7/adapter/mount/FAST set, plated protection, a Red Rebel and classified research notes. Individually claimable specialist equipment, not duplicate rifles.",
+      "familyId": "arsenal",
+      "trackId": "vault",
+      "anchorTemplateId": "5c110624d174af029e69734c",
+      "weight": 1,
+      "usePath": {
+        "kind": "raidRole",
+        "roleId": "vault-elite"
+      },
+      "recipe": [
+        {
+          "kind": "template",
+          "templateId": "5c110624d174af029e69734c",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5c11046cd174af02a012e42b",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5a16b8a9fcdbcb00165aa6ca",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "preset",
+          "presetId": "657fa7c0e65c0122b70ffdb0"
+        },
+        {
+          "kind": "preset",
+          "presetId": "657666ca303700411c0242c6"
+        },
+        {
+          "kind": "template",
+          "templateId": "5c0126f40db834002a125382",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "679b992329acd1f2f60985a5",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        }
+      ]
+    },
+    {
+      "lotId": "vault-apex-loadout.shipment-v1.compact-v1",
+      "displayName": "Vault Apex Operator",
+      "purpose": "A configured thermal-sighted rifle, matching ammunition, plated protection and premium communications.",
+      "familyId": "arsenal",
+      "trackId": "vault",
+      "anchorTemplateId": "5447a9cd4bdc2dbd208b4567",
+      "weight": 0.6,
+      "usePath": {
+        "kind": "raidRole",
+        "roleId": "vault-elite"
+      },
+      "recipe": [
+        {
+          "kind": "preset",
+          "presetId": "5a8ae36686f774377d6ce226"
+        },
+        {
+          "kind": "template",
+          "templateId": "59e6906286f7746c9f75e847",
+          "instanceCount": 1,
+          "stackCountPerInstance": 60
+        },
+        {
+          "kind": "preset",
+          "presetId": "657666ca303700411c0242c6"
+        },
+        {
+          "kind": "template",
+          "templateId": "628e4e576d783146b124c64d",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        }
+      ]
+    },
+    {
+      "lotId": "vault-command-package.shipment-v1.compact-v1",
+      "displayName": "Vault Command",
+      "purpose": "A configured scoped marksman rifle, matching ammunition, plated protection and classified research notes.",
+      "familyId": "arsenal",
+      "trackId": "vault",
+      "anchorTemplateId": "5df8ce05b11454561e39243b",
+      "weight": 0.4,
+      "usePath": {
+        "kind": "raidRole",
+        "roleId": "vault-elite"
+      },
+      "recipe": [
+        {
+          "kind": "preset",
+          "presetId": "628753bba4a8431af4739d3b"
+        },
+        {
+          "kind": "template",
+          "templateId": "6768c25aa7b238f14a08d3f6",
+          "instanceCount": 1,
+          "stackCountPerInstance": 40
+        },
+        {
+          "kind": "preset",
+          "presetId": "657666ca303700411c0242c6"
+        },
+        {
+          "kind": "template",
+          "templateId": "679b992329acd1f2f60985a5",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
         }
       ]
     }

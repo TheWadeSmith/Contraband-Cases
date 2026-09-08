@@ -17,6 +17,7 @@ public sealed class RelaySettlementService
     private readonly RaidSessionState _raidSessions;
     private readonly IRelayRewardCatalog _catalog;
     private readonly Func<DateTimeOffset> _utcNow;
+    private readonly ManifestClaimCommitUncertaintyCoordinator _uncertainty;
 
     public RelaySettlementService(
         ICaseOpeningJournalStore journalStore,
@@ -26,7 +27,8 @@ public sealed class RelaySettlementService
         ProfileLockPool lockPool,
         RaidSessionState raidSessions,
         IRelayRewardCatalog catalog,
-        Func<DateTimeOffset>? utcNow = null)
+        Func<DateTimeOffset>? utcNow = null,
+        ManifestClaimCommitUncertaintyCoordinator? uncertaintyCoordinator = null)
     {
         _journalStore = journalStore ?? throw new ArgumentNullException(nameof(journalStore));
         _preparation = preparation ?? throw new ArgumentNullException(nameof(preparation));
@@ -36,6 +38,7 @@ public sealed class RelaySettlementService
         _raidSessions = raidSessions ?? throw new ArgumentNullException(nameof(raidSessions));
         _catalog = catalog ?? throw new ArgumentNullException(nameof(catalog));
         _utcNow = utcNow ?? (() => DateTimeOffset.UtcNow);
+        _uncertainty = uncertaintyCoordinator ?? ManifestClaimCommitUncertaintyCoordinator.Process;
     }
 
     public async Task<ItemEventRouterResponse> SecureAsync(
@@ -45,6 +48,7 @@ public sealed class RelaySettlementService
     {
         ArgumentNullException.ThrowIfNull(context);
         await using var profileLock = await _lockPool.AcquireAsync(context.ProfileId, cancellationToken).ConfigureAwait(false);
+        _uncertainty.ThrowIfUncertain(context.ProfileId);
         _raidSessions.RequireLobby(context.ProfileId);
         var journal = await _journalStore.LoadAsync(context.ProfileId, cancellationToken).ConfigureAwait(false);
         var existing = journal.FindRelay(stakeRootId);
@@ -102,6 +106,7 @@ public sealed class RelaySettlementService
     {
         ArgumentNullException.ThrowIfNull(context);
         await using var profileLock = await _lockPool.AcquireAsync(context.ProfileId, cancellationToken).ConfigureAwait(false);
+        _uncertainty.ThrowIfUncertain(context.ProfileId);
         _raidSessions.RequireLobby(context.ProfileId);
         var journal = await _journalStore.LoadAsync(context.ProfileId, cancellationToken).ConfigureAwait(false);
         var record = journal.FindRelay(stakeRootId);
@@ -177,24 +182,36 @@ public sealed class RelaySettlementService
         CancellationToken cancellationToken)
     {
         RequirePreparedMeter(journal, prepared);
+        using var saveLease = await _committer
+            .AcquireMutationLeaseAsync(context.ProfileId, cancellationToken).ConfigureAwait(false);
         var checkpoint = _inventory.CaptureRelay(context);
         var commitStarted = false;
         try
         {
             cancellationToken.ThrowIfCancellationRequested();
+            var deliveryRecord = _inventory.PrepareRelayDelivery(context, prepared);
+            if (!ReferenceEquals(prepared, deliveryRecord))
+            {
+                journal.ReplaceRelay(deliveryRecord);
+                await _journalStore.SaveAsync(context.ProfileId, journal, cancellationToken).ConfigureAwait(false);
+                prepared = deliveryRecord;
+            }
             var applied = _inventory.ApplyPreparedRelay(context, prepared);
             ValidateApplied(context, prepared, applied);
             journal.ReplaceRelay(applied);
             await _journalStore.SaveAsync(context.ProfileId, journal, CancellationToken.None).ConfigureAwait(false);
 
+            _inventory.StageRelayDeliveryCommit(context, applied);
             commitStarted = true;
-            await _committer.CommitAsync(context.ProfileId, CancellationToken.None).ConfigureAwait(false);
+            saveLease?.Dispose();
+            await CommitProfileAsync(context.ProfileId).ConfigureAwait(false);
             var committed = applied.Commit(UtcNow());
             journal.ReplaceRelay(committed);
             journal.ApplyCommittedMeter(committed);
             journal.PruneCommitted();
             await _journalStore.SaveAsync(context.ProfileId, journal, CancellationToken.None).ConfigureAwait(false);
             AttachReceipt(context.Response, CreateReceipt(committed, replay: false));
+            await _inventory.NotifyRelayDeliveryAsync(context, committed).ConfigureAwait(false);
             return context.Response;
         }
         catch when (!commitStarted)
@@ -210,7 +227,7 @@ public sealed class RelaySettlementService
         RelaySettlementRecord record)
     {
         RequirePreparedMeter(journal, record);
-        await _committer.CommitAsync(context.ProfileId, CancellationToken.None).ConfigureAwait(false);
+        await CommitProfileAsync(context.ProfileId).ConfigureAwait(false);
         var committed = record.Commit(UtcNow());
         journal.ReplaceRelay(committed);
         journal.ApplyCommittedMeter(committed);
@@ -325,6 +342,10 @@ public sealed class RelaySettlementService
         RelaySettlementRecord prepared,
         RelaySettlementRecord applied)
     {
+        if (applied is not null)
+            LegacyRewardMail.ValidateReplacement(prepared.MailDelivery, applied.MailDelivery, false);
+        if (prepared.MailDelivery is not null && applied?.MailDelivery?.ProfileCommitStarted != true)
+            throw new InvalidOperationException("Applied Relay mail must contain its profile-commit marker.");
         if (applied is null || applied.Status != RelayRecordStatus.Prepared || !applied.ProfileCommitStarted ||
             applied.OriginCaseId != prepared.OriginCaseId || applied.StakeRootId != prepared.StakeRootId ||
             applied.Action != prepared.Action || applied.KeyId != prepared.KeyId || applied.Outcome != prepared.Outcome ||
@@ -343,6 +364,11 @@ public sealed class RelaySettlementService
                 prepared.InputItems,
                 applied.InputItems,
                 "applied Relay input snapshot");
+            if (prepared.MailDelivery is not null)
+            {
+                SptOpeningInventory.EnsureExactItemState(prepared.OutputItems, applied.OutputItems, "mailed Relay output snapshot");
+                return;
+            }
             if (prepared.OutputItems.Count == 0 && applied.OutputItems.Count == 0)
             {
                 return;
@@ -387,5 +413,11 @@ public sealed class RelaySettlementService
         }
 
         return value;
+    }
+
+    private async Task CommitProfileAsync(MongoId profileId)
+    {
+        try { await _committer.CommitAsync(profileId, CancellationToken.None).ConfigureAwait(false); }
+        catch { _uncertainty.MarkUncertain(profileId); throw; }
     }
 }

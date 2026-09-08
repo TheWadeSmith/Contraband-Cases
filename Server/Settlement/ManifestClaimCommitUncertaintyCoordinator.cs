@@ -16,7 +16,7 @@ public sealed class ManifestClaimCommitUncertaintyCoordinator
         if (_uncertainProfiles.ContainsKey(profileId))
         {
             throw new InvalidOperationException(
-                "A previous Claim profile save has an uncertain result; restart the server before retrying.");
+                "A previous reward settlement save has an uncertain result; restart the server before retrying.");
         }
     }
 

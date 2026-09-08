@@ -267,17 +267,18 @@ internal static class SptManifestJournalMapper
             FromDocument);
     }
 
-    private static SptManifestClaimPreparedDocument ToDocument(ManifestClaimPreparedPayload claim) => new()
+    internal static SptManifestClaimPreparedDocument ToDocument(ManifestClaimPreparedPayload claim) => new()
     {
         Items = claim.Items.Select(ToClaimItemDocument).ToList(),
         RootIds = claim.RootIds.ToList(),
         ProfileCommitStarted = claim.ProfileCommitStarted,
         PreparedAtUtc = claim.PreparedAtUtc,
         CommitGeneration = claim.CommitGeneration,
-        CommitPredecessorHash = claim.CommitPredecessorHash
+        CommitPredecessorHash = claim.CommitPredecessorHash,
+        Delivery = claim.Delivery
     };
 
-    private static ManifestClaimPreparedPayload FromDocument(
+    internal static ManifestClaimPreparedPayload FromDocument(
         SptManifestClaimPreparedDocument document,
         bool requireCommitPlan = true) => new(
         MapRequired(
@@ -294,7 +295,8 @@ internal static class SptManifestJournalMapper
             : document.CommitGeneration,
         requireCommitPlan
             ? RequireString(document.CommitPredecessorHash, "Claim commit predecessor hash")
-            : document.CommitPredecessorHash);
+            : document.CommitPredecessorHash,
+        document.Delivery);
 
     private static SptManifestClaimGrantDocument ToDocument(ManifestClaimGrantRecord grant) => new()
     {
@@ -887,6 +889,7 @@ internal sealed class SptManifestRelayCandidateDocument
 
 internal sealed class SptManifestClaimPreparedDocument
 {
+    public ClaimDeliveryKind Delivery { get; set; }
     public List<SptManifestClaimItemDocument>? Items { get; set; } = [];
     public List<MongoId>? RootIds { get; set; } = [];
     public bool? ProfileCommitStarted { get; set; }

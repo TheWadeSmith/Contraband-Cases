@@ -4,7 +4,7 @@ public static class ModConstants
 {
     public const string ModId = "wade.contrabandcases";
     public const string ModName = "Contraband Cases";
-    public const string ModVersion = "0.4.11";
+    public const string ModVersion = "0.4.12";
     public const string OpenAction = "ContrabandCasesOpen";
     public const string RelaySecureAction = "ContrabandCasesRelaySecure";
     public const string RelayAction = "ContrabandCasesRelay";

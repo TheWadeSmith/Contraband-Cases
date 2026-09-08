@@ -5,6 +5,12 @@
   "displayLabel": "Krackasourus Pokemon Cards",
   "providerWeight": 0.12,
   "requiredTemplateIds": [
+    "590c60fc86f77412b13fddcf",
+    "59fafd4b86f7745ca07e1232",
+    "5c0126f40db834002a125382",
+    "5d235bb686f77443f4331278",
+    "601948682627df266209af05",
+    "6389c8fb46b54c634724d847",
     "669979d0c73060411f04d26a",
     "669979d0c73060411f04d286",
     "669979d0c73060411f04d28e",
@@ -14,7 +20,9 @@
     "669979d0c73060411f04d2cc",
     "669997e1c73060411f04d301"
   ],
-  "requiredPresetIds": [],
+  "requiredPresetIds": [
+
+  ],
   "requiredBundleKeys": [],
   "lots": [
     {
@@ -1024,6 +1032,356 @@
         {
           "kind": "template",
           "templateId": "669979d0c73060411f04d2a1",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        }
+      ]
+    },
+    {
+      "lotId": "dragonair-rare.shipment-v1.compact-v1",
+      "displayName": "Dragonair Rare Package",
+      "purpose": "A curated selection of different collectible cards plus a valuable Silicon Optoelectronic Integrated Circuits textbook for the collection.",
+      "familyId": "field-supply",
+      "trackId": "pokemon-cards",
+      "anchorTemplateId": "669979d0c73060411f04d2a0",
+      "weight": 1,
+      "usePath": {
+        "kind": "collection",
+        "containerTemplateId": "669997e1c73060411f04d301",
+        "collectionId": "pokemon-cards"
+      },
+      "recipe": [
+        {
+          "kind": "template",
+          "templateId": "669979d0c73060411f04d2a0",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "669979d0c73060411f04d28e",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "669979d0c73060411f04d26a",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "6389c8fb46b54c634724d847",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        }
+      ]
+    },
+    {
+      "lotId": "ditto-rare.shipment-v1.compact-v1",
+      "displayName": "Ditto Rare Package",
+      "purpose": "A curated selection of different collectible cards plus a valuable Silicon Optoelectronic Integrated Circuits textbook for the collection.",
+      "familyId": "field-supply",
+      "trackId": "pokemon-cards",
+      "anchorTemplateId": "669979d0c73060411f04d28e",
+      "weight": 1,
+      "usePath": {
+        "kind": "collection",
+        "containerTemplateId": "669997e1c73060411f04d301",
+        "collectionId": "pokemon-cards"
+      },
+      "recipe": [
+        {
+          "kind": "template",
+          "templateId": "669979d0c73060411f04d28e",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "669979d0c73060411f04d286",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "669979d0c73060411f04d2cc",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "6389c8fb46b54c634724d847",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        }
+      ]
+    },
+    {
+      "lotId": "dragonair-electrode-pair.shipment-v1.compact-v1",
+      "displayName": "Dragonair and Electrode Pair Package",
+      "purpose": "A curated selection of different collectible cards plus a key tool for the collector. Cards and tool are separate attachments.",
+      "familyId": "field-supply",
+      "trackId": "pokemon-cards",
+      "anchorTemplateId": "669979d0c73060411f04d26a",
+      "weight": 0.75,
+      "usePath": {
+        "kind": "collection",
+        "containerTemplateId": "669997e1c73060411f04d301",
+        "collectionId": "pokemon-cards"
+      },
+      "recipe": [
+        {
+          "kind": "template",
+          "templateId": "669979d0c73060411f04d26a",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "669979d0c73060411f04d2a0",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "669979d0c73060411f04d28e",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "59fafd4b86f7745ca07e1232",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        }
+      ]
+    },
+    {
+      "lotId": "ditto-electabuzz-pair.shipment-v1.compact-v1",
+      "displayName": "Ditto and Electabuzz Pair Package",
+      "purpose": "A curated selection of different collectible cards plus a key tool for the collector. Cards and tool are separate attachments.",
+      "familyId": "field-supply",
+      "trackId": "pokemon-cards",
+      "anchorTemplateId": "669979d0c73060411f04d286",
+      "weight": 0.75,
+      "usePath": {
+        "kind": "collection",
+        "containerTemplateId": "669997e1c73060411f04d301",
+        "collectionId": "pokemon-cards"
+      },
+      "recipe": [
+        {
+          "kind": "template",
+          "templateId": "669979d0c73060411f04d286",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "669979d0c73060411f04d28e",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "669979d0c73060411f04d2a0",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "59fafd4b86f7745ca07e1232",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        }
+      ]
+    },
+    {
+      "lotId": "rare-evolution-trio.shipment-v1.compact-v1",
+      "displayName": "Rare Evolution Trio Package",
+      "purpose": "A curated set of different collectible cards, a key tool and document case. Individually claimable collector equipment with no mandatory wrapper.",
+      "familyId": "field-supply",
+      "trackId": "pokemon-cards",
+      "anchorTemplateId": "669979d0c73060411f04d26a",
+      "weight": 0.45,
+      "usePath": {
+        "kind": "collection",
+        "containerTemplateId": "669997e1c73060411f04d301",
+        "collectionId": "pokemon-cards"
+      },
+      "recipe": [
+        {
+          "kind": "template",
+          "templateId": "669979d0c73060411f04d26a",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "669979d0c73060411f04d28e",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "669979d0c73060411f04d2a0",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "669979d0c73060411f04d286",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "59fafd4b86f7745ca07e1232",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "590c60fc86f77412b13fddcf",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        }
+      ]
+    },
+    {
+      "lotId": "powerhouse-trio.shipment-v1.compact-v1",
+      "displayName": "Powerhouse Trio Package",
+      "purpose": "A curated selection of different collectible cards plus a key tool for the collector. Cards and tool are separate attachments.",
+      "familyId": "field-supply",
+      "trackId": "pokemon-cards",
+      "anchorTemplateId": "669979d0c73060411f04d286",
+      "weight": 0.45,
+      "usePath": {
+        "kind": "collection",
+        "containerTemplateId": "669997e1c73060411f04d301",
+        "collectionId": "pokemon-cards"
+      },
+      "recipe": [
+        {
+          "kind": "template",
+          "templateId": "669979d0c73060411f04d286",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "669979d0c73060411f04d2a0",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "669979d0c73060411f04d2cc",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "669979d0c73060411f04d28e",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "59fafd4b86f7745ca07e1232",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        }
+      ]
+    },
+    {
+      "lotId": "venusaur-holo.shipment-v1.compact-v1",
+      "displayName": "Venusaur Holo Package",
+      "purpose": "A top-tier set of different collectible cards, an empty SICC pouch and a Taiga survival machete. A complete collector expedition package, individually claimable.",
+      "familyId": "field-supply",
+      "trackId": "pokemon-cards",
+      "anchorTemplateId": "669979d0c73060411f04d2b2",
+      "weight": 0.15,
+      "usePath": {
+        "kind": "collection",
+        "containerTemplateId": "669997e1c73060411f04d301",
+        "collectionId": "pokemon-cards"
+      },
+      "recipe": [
+        {
+          "kind": "template",
+          "templateId": "669979d0c73060411f04d2b2",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "669979d0c73060411f04d2a0",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "669979d0c73060411f04d28e",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5d235bb686f77443f4331278",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "601948682627df266209af05",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        }
+      ]
+    },
+    {
+      "lotId": "dragonite-holo.shipment-v1.compact-v1",
+      "displayName": "Dragonite Holo Collector Jackpot",
+      "purpose": "A curated selection of different collectible cards plus a Red Rebel extraction relic. The jackpot is the complete selection, not multiple copies of one card.",
+      "familyId": "field-supply",
+      "trackId": "pokemon-cards",
+      "anchorTemplateId": "669979d0c73060411f04d2a1",
+      "weight": 0.15,
+      "usePath": {
+        "kind": "collection",
+        "containerTemplateId": "669997e1c73060411f04d301",
+        "collectionId": "pokemon-cards"
+      },
+      "recipe": [
+        {
+          "kind": "template",
+          "templateId": "669979d0c73060411f04d2a1",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "669979d0c73060411f04d286",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "669979d0c73060411f04d2cc",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "669979d0c73060411f04d2b2",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5c0126f40db834002a125382",
           "instanceCount": 1,
           "stackCountPerInstance": 1
         }

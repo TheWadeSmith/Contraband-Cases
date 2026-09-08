@@ -308,6 +308,8 @@ public sealed class CatalogStartupBarrier(
     TradersTable traders,
     HandbookHelper handbookHelper,
     RagfairPriceService ragfairPriceService,
+    RagfairConfig ragfairConfig,
+    SPTarkov.Server.Core.Utils.RagfairOfferHolder ragfairOfferHolder,
     LocationTable locations,
     BotTable bots,
     PmcConfig pmcConfig,
@@ -322,6 +324,9 @@ public sealed class CatalogStartupBarrier(
         var prices = FinalizeStartup(coordinator, config, templates, mechanicAssort);
         ContrabandContentDefinitions.PublishThemedCases(templates, mechanicAssort, config, coordinator);
         priceCaches.Publish(templates);
+        var removedFleaOffers = ContrabandFleaPolicy.FinalizeStartup(templates, traders, ragfairConfig, ragfairOfferHolder);
+        logger.Info($"[Contraband Cases] Kept cases and keys out of generated flea offers; " +
+            $"removed {removedFleaOffers} stale generated listing(s) and synchronized owned Mechanic prices.");
         var lootMaps = ContrabandCaseLootInjector.Register(locations, bots, pmcConfig, coordinator, config);
         logger.Info($"[Contraband Cases] Registered crate-only case loot on {lootMaps} map(s): " +
             $"{config.CaseLootWeightPercent}% combined added pool weight; cases excluded from bot spawn loot.");

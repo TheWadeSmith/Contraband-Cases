@@ -94,7 +94,8 @@ public sealed class SptCaseJournal : ICaseOpeningJournalStore
                 PreparedAtUtc = record.PreparedAtUtc,
                 Status = record.Status,
                 CommittedAtUtc = record.CommittedAtUtc,
-                RarityLadderVersion = record.RarityLadderVersion
+                RarityLadderVersion = record.RarityLadderVersion,
+                MailDelivery = record.MailDelivery is null ? null : SptManifestJournalMapper.ToDocument(record.MailDelivery)
             }).ToList(),
             RelayRecords = journal.RelayRecords.Select(record => new SptRelaySettlementDocument
             {
@@ -117,7 +118,8 @@ public sealed class SptCaseJournal : ICaseOpeningJournalStore
                 PreparedAtUtc = record.PreparedAtUtc,
                 Status = record.Status,
                 CommittedAtUtc = record.CommittedAtUtc,
-                RarityLadderVersion = record.RarityLadderVersion
+                RarityLadderVersion = record.RarityLadderVersion,
+                MailDelivery = record.MailDelivery is null ? null : SptManifestJournalMapper.ToDocument(record.MailDelivery)
             }).ToList(),
             ActiveManifest = journal.ActiveManifest is null
                 ? null
@@ -160,6 +162,14 @@ public sealed class SptCaseJournal : ICaseOpeningJournalStore
             throw new InvalidOperationException("The Contraband Cases journal has no records collection.");
         }
 
+        if (document.SchemaVersion < 8 && (document.Records.Any(r => r?.MailDelivery is not null) ||
+            document.RelayRecords?.Any(r => r?.MailDelivery is not null) == true))
+            throw new InvalidOperationException("An older journal schema cannot contain legacy Messenger delivery evidence.");
+        if (document.SchemaVersion < 7 &&
+            (document.ActiveManifest?.ClaimPrepared?.Delivery == ClaimDeliveryKind.Messenger ||
+             document.ManifestClaimGrants?.Any(g => g?.ClaimPayload?.Delivery == ClaimDeliveryKind.Messenger) == true))
+            throw new InvalidOperationException("An older journal schema cannot contain Messenger claim destinations.");
+
         var fallbackRarityLadderVersion = document.SchemaVersion <= 5
             ? RarityLadderVersion.LegacyFourTier
             : RarityLadderVersion.FiveTier;
@@ -183,7 +193,8 @@ public sealed class SptCaseJournal : ICaseOpeningJournalStore
                     record.RarityLadderVersion,
                     fallbackRarityLadderVersion,
                     requirePersistedRarityLadderVersion,
-                    "opening rarity ladder version"));
+                    "opening rarity ladder version"),
+                record.MailDelivery is null ? null : SptManifestJournalMapper.FromDocument(record.MailDelivery));
         });
 
         var relayDocuments = document.SchemaVersion <= 1
@@ -221,7 +232,8 @@ public sealed class SptCaseJournal : ICaseOpeningJournalStore
                     record.RarityLadderVersion,
                     fallbackRarityLadderVersion,
                     requirePersistedRarityLadderVersion,
-                    "Relay record rarity ladder version"));
+                    "Relay record rarity ladder version"),
+                record.MailDelivery is null ? null : SptManifestJournalMapper.FromDocument(record.MailDelivery));
         });
 
         var openingList = openings.ToList();
@@ -292,7 +304,7 @@ public sealed class SptCaseJournal : ICaseOpeningJournalStore
 
 internal sealed class SptCaseJournalDocument
 {
-    public const int CurrentSchemaVersion = 6;
+    public const int CurrentSchemaVersion = 8;
 
     public int SchemaVersion { get; set; }
     public int RecoveryMeter { get; set; }
@@ -306,6 +318,7 @@ internal sealed class SptCaseJournalDocument
 
 internal sealed class SptCaseOpeningDocument
 {
+    public SptManifestClaimPreparedDocument? MailDelivery { get; set; }
     public MongoId CaseId { get; set; }
     public MongoId KeyId { get; set; }
     public string RewardId { get; set; } = string.Empty;
@@ -318,6 +331,7 @@ internal sealed class SptCaseOpeningDocument
 
 internal sealed class SptRelaySettlementDocument
 {
+    public SptManifestClaimPreparedDocument? MailDelivery { get; set; }
     public MongoId OriginCaseId { get; set; }
     public MongoId StakeRootId { get; set; }
     public List<MongoId>? InputItemIds { get; set; } = [];

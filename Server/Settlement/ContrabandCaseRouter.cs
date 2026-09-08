@@ -23,6 +23,8 @@ public sealed class ContrabandCaseRouter : ItemEventRouter
     public ContrabandCaseRouter(
         SptCaseJournal journal,
         SptOpeningInventory inventory,
+        SptManifestRewardDelivery rewardDelivery,
+        SptLegacyRewardDelivery legacyDelivery,
         SptProfileCommitter committer,
         ProfileLockPool profileLocks,
         RaidSessionState raidSessions,
@@ -36,6 +38,8 @@ public sealed class ContrabandCaseRouter : ItemEventRouter
         : base(CreateRoutes(
             journal,
             inventory,
+            rewardDelivery,
+            legacyDelivery,
             committer,
             profileLocks,
             raidSessions,
@@ -209,6 +213,8 @@ public sealed class ContrabandCaseRouter : ItemEventRouter
     private static IEnumerable<ItemRouteAction> CreateRoutes(
         SptCaseJournal journal,
         SptOpeningInventory inventory,
+        SptManifestRewardDelivery rewardDelivery,
+        SptLegacyRewardDelivery legacyDelivery,
         SptProfileCommitter committer,
         ProfileLockPool profileLocks,
         RaidSessionState raidSessions,
@@ -223,14 +229,16 @@ public sealed class ContrabandCaseRouter : ItemEventRouter
         ArgumentNullException.ThrowIfNull(templates);
         ArgumentNullException.ThrowIfNull(templates.Items);
         var legacyOpeningService = new CaseOpeningService(
-            journal, inventory, inventory, committer, profileLocks, raidSessions);
+            journal, inventory, legacyDelivery, committer, profileLocks, raidSessions,
+            uncertaintyCoordinator: manifestCommitUncertainty);
         var legacyRelayService = new RelaySettlementService(
-            journal, inventory, inventory, committer, profileLocks, raidSessions, rewardCatalog);
+            journal, inventory, legacyDelivery, committer, profileLocks, raidSessions, rewardCatalog,
+            uncertaintyCoordinator: manifestCommitUncertainty);
         var materializer = new CargoLotMaterializer(
             templateId => templates.Items.GetValueOrDefault((MongoId)templateId));
         var manifestService = new ManifestSettlementService(
             journal,
-            inventory,
+            rewardDelivery,
             committer,
             profileLocks,
             raidSessions,

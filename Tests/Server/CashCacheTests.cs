@@ -227,10 +227,16 @@ public sealed class CashCacheTests
                 var snapshot = ManifestGallery.Create(lot, state, false);
                 Assert.Equal(CaseContracts.CashCache, snapshot.CaseTemplateId);
                 Assert.Single(snapshot.FamilySeals);
-                Assert.True(snapshot.AvailableActions.CanClaim);
+                var delivered = state == GalleryState.Claimed;
+                Assert.Equal(!delivered, snapshot.AvailableActions.CanClaim);
+                Assert.Equal(delivered, snapshot.DeliveredToMessenger);
+                Assert.Equal(delivered ? ManifestPhase.Granted : ManifestPhase.Entitlement, snapshot.Phase);
+                if (delivered) Assert.Null(snapshot.CurrentLot);
+                else Assert.Same(lot, snapshot.CurrentLot);
                 Assert.False(snapshot.AvailableActions.CanRelay);
                 Assert.False(snapshot.AvailableActions.CanBurn);
-                Assert.DoesNotContain("not a cash payout", ManifestPresentationPolicy.LotDetails(snapshot));
+                if (!delivered)
+                    Assert.DoesNotContain("not a cash payout", ManifestPresentationPolicy.LotDetails(snapshot));
             }
     }
 

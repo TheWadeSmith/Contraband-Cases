@@ -342,6 +342,18 @@ internal static class CargoTemplateRules
     private const int MaxAncestryDepth = 64;
     private const int MaxTemplateTargets = 256;
     private const int MaxTargetFilters = 64;
+    private const string SimpleStorageClass = "5795f317245977243854e041";
+    private const string CompoundItemClass = "566162e44bdc2d3f298b4573";
+
+    // Useful, ordinary player equipment may be won empty. This is not permission
+    // to pack rewards into arbitrary storage, secure containers or profile grids.
+    private static readonly HashSet<string> EmptyStoragePrizes = new(StringComparer.Ordinal)
+    {
+        "619cbf7d23893217ec30b689", // Injector case
+        "5d235bb686f77443f4331278", // SICC pouch
+        "590c60fc86f77412b13fddcf", // Documents case
+        "59fafd4b86f7745ca07e1232"  // Key tool
+    };
 
     private static readonly HashSet<string> ExcludedAncestryIds = new(StringComparer.Ordinal)
     {
@@ -419,6 +431,11 @@ internal static class CargoTemplateRules
                 templateCache.Add(node.TemplateId, template);
             }
 
+            if (EmptyStoragePrizes.Contains(node.TemplateId) &&
+                (node.ParentLogicalPath is not null || node.StackCount != 1 ||
+                 forest.Nodes.Any(child => child.ParentLogicalPath == node.LogicalPath)))
+                throw new CargoCatalogValidationException("Storage prizes must be empty, singleton roots; rewards are never packed inside them.");
+
             ValidateRewardEligibility(
                 node.TemplateId,
                 template,
@@ -470,9 +487,12 @@ internal static class CargoTemplateRules
             templateCache,
             ancestryByTemplate);
         var permittedCash = cashPayout && CashPayouts.IsAllowed(templateId);
+        var permittedEmptyStorage = EmptyStoragePrizes.Contains(templateId) &&
+            string.Equals(template.Parent.ToString(), SimpleStorageClass, StringComparison.Ordinal) &&
+            ancestry.SetEquals([templateId, SimpleStorageClass, CompoundItemClass, ItemRootTemplateId]);
         if (permittedCash && ancestry.Any(id => id != "543be5dd4bdc2deb348b4569" && ExcludedAncestryIds.Contains(id)))
             throw new CargoCatalogValidationException("Cash templates cannot inherit another excluded cargo class.");
-        if (!permittedCash && (ancestry.Overlaps(ExcludedAncestryIds) ||
+        if (!permittedCash && ((!permittedEmptyStorage && ancestry.Overlaps(ExcludedAncestryIds)) ||
             ExcludedExactTemplateIds.Contains(templateId) ||
             properties.IsRagfairCurrency is true))
         {

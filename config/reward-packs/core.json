@@ -8,37 +8,72 @@
     "5447a9cd4bdc2dbd208b4567",
     "5448be9a4bdc2dfd2f8b456a",
     "54491c4f4bdc2db1078b4568",
+    "544a5caa4bdc2d1a388b4568",
     "544fb3f34bdc2d03748b456a",
     "544fb45d4bdc2dee738b4568",
+    "55d4887d4bdc2d962f8b4570",
     "560d5e524bdc2d25448b4571",
     "5645bcc04bdc2d363b8b4572",
     "56d59d3ad2720bdb418b4577",
     "56dfef82d2720bbd668b4567",
     "5710c24ad2720bc3458b45a3",
+    "590c60fc86f77412b13fddcf",
     "590c678286f77426c9660122",
+    "591094e086f7747caa7bb2ef",
+    "5910968f86f77425cf569c32",
     "59984ab886f7743e98271174",
     "59e6906286f7746c9f75e847",
+    "5a154d5cfcdbcb001a3b00da",
+    "5a16b8a9fcdbcb00165aa6ca",
     "5a367e5dc4a282000e49738f",
     "5b40e1525acfc4771e1c6611",
     "5b432b965acfc47a8774094e",
+    "5ba26383d4351e00334c93d9",
+    "5ba26586d4351e44f824b340",
+    "5ba26835d4351e0035628ff5",
+    "5c0126f40db834002a125382",
+    "5c0530ee86f774697952d952",
+    "5c0558060db834001b735271",
     "5c0e530286f7747fa1419862",
     "5c0e531d86f7747fa23f4d42",
+    "5c11046cd174af02a012e42b",
+    "5c110624d174af029e69734c",
+    "5c1d0dc586f7744baf2e7b79",
     "5ca20d5986f774331e7c9602",
     "5d02778e86f774203e7dedbe",
     "5d02797c86f774203f38e30a",
+    "5d235bb686f77443f4331278",
+    "5df8ce05b11454561e39243b",
+    "5df8f541c41b2312ea3335e3",
+    "5e4abb5086f77406975c9342",
     "5ed51652f6c34d2cc26336a1",
     "60098ad7c2240c0fe85c570a",
+    "601948682627df266209af05",
+    "60a283193cb70855c43a381d",
+    "61605e13ffa6e502ac5e7eef",
     "618cfae774bb2d036a049e7c",
+    "619cbf7d23893217ec30b689",
     "628e4e576d783146b124c64d",
     "66b5f6985891c84aab75ca76",
-    "6768c25aa7b238f14a08d3f6"
+    "6768c25aa7b238f14a08d3f6",
+    "679b992329acd1f2f60985a5"
   ],
   "requiredPresetIds": [
     "584148f2245977598f1ad387",
     "59b81f7386f77421ac688a0a",
     "5a3a85af86f774745637d46c",
+    "5a8ae36686f774377d6ce226",
     "5af08cf886f774223c269184",
-    "657120b36fe59548840cb542"
+    "5bd05f1186f774572f181678",
+    "618aaf656bbeff39ad4acf0c",
+    "628753bba4a8431af4739d3b",
+    "657120b36fe59548840cb542",
+    "65719d367a553968340d88b8",
+    "657664ae303700411c02428c",
+    "657666ca303700411c0242c6",
+    "65766b46303700411c0242f8",
+    "657fa7c0e65c0122b70ffdb0",
+    "66b0e484c84cc7141324fd6c"
   ],
   "requiredBundleKeys": [],
   "lots": [
@@ -8562,6 +8597,2270 @@
           "kind": "template",
           "templateId": "5c0e530286f7747fa1419862",
           "instanceCount": 2,
+          "stackCountPerInstance": 1
+        }
+      ]
+    },
+    {
+      "lotId": "breach-contract.shipment-v1.compact-v1",
+      "displayName": "Breach Team",
+      "purpose": "A ready shotgun, loaded armor carrier, protected communications and first-response supplies for close entries.",
+      "familyId": "arsenal",
+      "trackId": "cqb",
+      "anchorTemplateId": "54491c4f4bdc2db1078b4568",
+      "weight": 1,
+      "usePath": {
+        "kind": "raidRole",
+        "roleId": "close-quarters"
+      },
+      "recipe": [
+        {
+          "kind": "preset",
+          "presetId": "584148f2245977598f1ad387"
+        },
+        {
+          "kind": "template",
+          "templateId": "560d5e524bdc2d25448b4571",
+          "instanceCount": 1,
+          "stackCountPerInstance": 20
+        },
+        {
+          "kind": "preset",
+          "presetId": "657664ae303700411c02428c"
+        },
+        {
+          "kind": "preset",
+          "presetId": "657120b36fe59548840cb542"
+        },
+        {
+          "kind": "template",
+          "templateId": "628e4e576d783146b124c64d",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5d02797c86f774203f38e30a",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "60098ad7c2240c0fe85c570a",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        }
+      ]
+    },
+    {
+      "lotId": "subgun-escort.shipment-v1.compact-v1",
+      "displayName": "Close Protection",
+      "purpose": "A suppressed MP7 with a fitted magazine, spare magazine, matching AP ammunition and plated protection.",
+      "familyId": "arsenal",
+      "trackId": "cqb",
+      "anchorTemplateId": "5ba26383d4351e00334c93d9",
+      "weight": 1,
+      "usePath": {
+        "kind": "raidRole",
+        "roleId": "close-quarters"
+      },
+      "recipe": [
+        {
+          "kind": "preset",
+          "presetId": "5bd05f1186f774572f181678"
+        },
+        {
+          "kind": "template",
+          "templateId": "5ba26586d4351e44f824b340",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5ba26835d4351e0035628ff5",
+          "instanceCount": 1,
+          "stackCountPerInstance": 70
+        },
+        {
+          "kind": "preset",
+          "presetId": "657666ca303700411c0242c6"
+        },
+        {
+          "kind": "preset",
+          "presetId": "657120b36fe59548840cb542"
+        },
+        {
+          "kind": "template",
+          "templateId": "628e4e576d783146b124c64d",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        }
+      ]
+    },
+    {
+      "lotId": "embassy-carbine.shipment-v1.compact-v1",
+      "displayName": "Embassy Security",
+      "purpose": "A configured M4 with compatible ammunition, fitted and spare magazines, plated armor and communications.",
+      "familyId": "arsenal",
+      "trackId": "rifle",
+      "anchorTemplateId": "5447a9cd4bdc2dbd208b4567",
+      "weight": 1,
+      "usePath": {
+        "kind": "raidRole",
+        "roleId": "rifle-patrol"
+      },
+      "recipe": [
+        {
+          "kind": "preset",
+          "presetId": "618aaf656bbeff39ad4acf0c"
+        },
+        {
+          "kind": "template",
+          "templateId": "55d4887d4bdc2d962f8b4570",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "59e6906286f7746c9f75e847",
+          "instanceCount": 1,
+          "stackCountPerInstance": 60
+        },
+        {
+          "kind": "preset",
+          "presetId": "657666ca303700411c0242c6"
+        },
+        {
+          "kind": "preset",
+          "presetId": "657fa7c0e65c0122b70ffdb0"
+        },
+        {
+          "kind": "template",
+          "templateId": "628e4e576d783146b124c64d",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "60098ad7c2240c0fe85c570a",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        }
+      ]
+    },
+    {
+      "lotId": "black-site-marksman.shipment-v1.compact-v1",
+      "displayName": "Overwatch Acquisition",
+      "purpose": "A suppressed, scoped SR-25, matching ammunition, plated protection and a Red Rebel extraction tool. A rare specialist acquisition.",
+      "familyId": "arsenal",
+      "trackId": "marksman",
+      "anchorTemplateId": "5df8ce05b11454561e39243b",
+      "weight": 0.5,
+      "usePath": {
+        "kind": "raidRole",
+        "roleId": "precision-overwatch"
+      },
+      "recipe": [
+        {
+          "kind": "preset",
+          "presetId": "628753bba4a8431af4739d3b"
+        },
+        {
+          "kind": "template",
+          "templateId": "5df8f541c41b2312ea3335e3",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "6768c25aa7b238f14a08d3f6",
+          "instanceCount": 1,
+          "stackCountPerInstance": 40
+        },
+        {
+          "kind": "preset",
+          "presetId": "657666ca303700411c0242c6"
+        },
+        {
+          "kind": "preset",
+          "presetId": "657fa7c0e65c0122b70ffdb0"
+        },
+        {
+          "kind": "template",
+          "templateId": "61605e13ffa6e502ac5e7eef",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5c0126f40db834002a125382",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        }
+      ]
+    },
+    {
+      "lotId": "recon-load.shipment-v1.compact-v1",
+      "displayName": "Survey Team",
+      "purpose": "A plated reconnaissance load with communications, document storage and practical field care.",
+      "familyId": "operator",
+      "trackId": "recon",
+      "anchorTemplateId": "544a5caa4bdc2d1a388b4568",
+      "weight": 1,
+      "usePath": {
+        "kind": "raidRole",
+        "roleId": "recon"
+      },
+      "recipe": [
+        {
+          "kind": "preset",
+          "presetId": "65719d367a553968340d88b8"
+        },
+        {
+          "kind": "preset",
+          "presetId": "657120b36fe59548840cb542"
+        },
+        {
+          "kind": "template",
+          "templateId": "628e4e576d783146b124c64d",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "590c60fc86f77412b13fddcf",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5d02797c86f774203f38e30a",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "60098ad7c2240c0fe85c570a",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        }
+      ]
+    },
+    {
+      "lotId": "night-patrol.shipment-v1.compact-v1",
+      "displayName": "Night Runner",
+      "purpose": "A suppressed MP7, matching ammunition, FAST helmet and directly compatible GPNVG-18 goggles, with plated armor and hearing protection. Fit the supplied goggles to the helmet.",
+      "familyId": "operator",
+      "trackId": "night",
+      "anchorTemplateId": "5ba26383d4351e00334c93d9",
+      "weight": 1,
+      "usePath": {
+        "kind": "raidRole",
+        "roleId": "night-operations"
+      },
+      "recipe": [
+        {
+          "kind": "preset",
+          "presetId": "5bd05f1186f774572f181678"
+        },
+        {
+          "kind": "template",
+          "templateId": "5ba26835d4351e0035628ff5",
+          "instanceCount": 1,
+          "stackCountPerInstance": 70
+        },
+        {
+          "kind": "preset",
+          "presetId": "657fa7c0e65c0122b70ffdb0"
+        },
+        {
+          "kind": "template",
+          "templateId": "5c0558060db834001b735271",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "preset",
+          "presetId": "657666ca303700411c0242c6"
+        },
+        {
+          "kind": "template",
+          "templateId": "628e4e576d783146b124c64d",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        }
+      ]
+    },
+    {
+      "lotId": "long-haul-medic.shipment-v1.compact-v1",
+      "displayName": "Long-Haul Medic",
+      "purpose": "A medic equipment package: empty injector case, surgery, trauma care, plated armor and communications. Supplies are separate attachments, not packed inside the case.",
+      "familyId": "operator",
+      "trackId": "recon",
+      "anchorTemplateId": "619cbf7d23893217ec30b689",
+      "weight": 0.8,
+      "usePath": {
+        "kind": "raidRole",
+        "roleId": "recon"
+      },
+      "recipe": [
+        {
+          "kind": "template",
+          "templateId": "619cbf7d23893217ec30b689",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5d02797c86f774203f38e30a",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "60098ad7c2240c0fe85c570a",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "preset",
+          "presetId": "657664ae303700411c02428c"
+        },
+        {
+          "kind": "template",
+          "templateId": "628e4e576d783146b124c64d",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5c0e531d86f7747fa23f4d42",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        }
+      ]
+    },
+    {
+      "lotId": "deep-raid-command.shipment-v1.compact-v1",
+      "displayName": "Pathfinder Command",
+      "purpose": "A Taiga survival machete, plated protection, premium communications, document storage and one extraction injector.",
+      "familyId": "operator",
+      "trackId": "recon",
+      "anchorTemplateId": "601948682627df266209af05",
+      "weight": 0.4,
+      "usePath": {
+        "kind": "raidRole",
+        "roleId": "recon"
+      },
+      "recipe": [
+        {
+          "kind": "template",
+          "templateId": "601948682627df266209af05",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "preset",
+          "presetId": "657666ca303700411c0242c6"
+        },
+        {
+          "kind": "template",
+          "templateId": "628e4e576d783146b124c64d",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "590c60fc86f77412b13fddcf",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5ed51652f6c34d2cc26336a1",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        }
+      ]
+    },
+    {
+      "lotId": "breach-ordnance.shipment-v1.compact-v1",
+      "displayName": "Sapper Equipment",
+      "purpose": "A fully plated carrier, armor maintenance kit, communications and two complementary grenades for a breaching role.",
+      "familyId": "field-supply",
+      "trackId": "ordnance",
+      "anchorTemplateId": "544a5caa4bdc2d1a388b4568",
+      "weight": 1,
+      "usePath": {
+        "kind": "raidRole",
+        "roleId": "breaching-ordnance"
+      },
+      "recipe": [
+        {
+          "kind": "preset",
+          "presetId": "65719d367a553968340d88b8"
+        },
+        {
+          "kind": "template",
+          "templateId": "591094e086f7747caa7bb2ef",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "628e4e576d783146b124c64d",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5448be9a4bdc2dfd2f8b456a",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5710c24ad2720bc3458b45a3",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "60098ad7c2240c0fe85c570a",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        }
+      ]
+    },
+    {
+      "lotId": "trauma-shipment.shipment-v1.compact-v1",
+      "displayName": "Combat Medic",
+      "purpose": "An empty injector case, surgery, trauma supplies and a fully plated Osprey carrier with premium communications.",
+      "familyId": "field-supply",
+      "trackId": "medical",
+      "anchorTemplateId": "619cbf7d23893217ec30b689",
+      "weight": 1,
+      "usePath": {
+        "kind": "raidRole",
+        "roleId": "trauma-care"
+      },
+      "recipe": [
+        {
+          "kind": "template",
+          "templateId": "619cbf7d23893217ec30b689",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5d02797c86f774203f38e30a",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "60098ad7c2240c0fe85c570a",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "preset",
+          "presetId": "657664ae303700411c02428c"
+        },
+        {
+          "kind": "template",
+          "templateId": "628e4e576d783146b124c64d",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        }
+      ]
+    },
+    {
+      "lotId": "combat-chemistry.shipment-v1.compact-v1",
+      "displayName": "Rapid Response",
+      "purpose": "A protected response kit with an empty injector case, one endurance and one combat injector, surgery and communications.",
+      "familyId": "field-supply",
+      "trackId": "chemistry",
+      "anchorTemplateId": "619cbf7d23893217ec30b689",
+      "weight": 0.8,
+      "usePath": {
+        "kind": "raidRole",
+        "roleId": "combat-chemistry"
+      },
+      "recipe": [
+        {
+          "kind": "template",
+          "templateId": "619cbf7d23893217ec30b689",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "preset",
+          "presetId": "657666ca303700411c0242c6"
+        },
+        {
+          "kind": "template",
+          "templateId": "5c0e531d86f7747fa23f4d42",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5c0e530286f7747fa1419862",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5d02797c86f774203f38e30a",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "628e4e576d783146b124c64d",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        }
+      ]
+    },
+    {
+      "lotId": "long-range-resupply.shipment-v1.compact-v1",
+      "displayName": "Overwatch Support",
+      "purpose": "A configured, scoped SR-25 with matching ammunition, armor maintenance equipment and a rangefinder.",
+      "familyId": "field-supply",
+      "trackId": "ammo",
+      "anchorTemplateId": "5df8ce05b11454561e39243b",
+      "weight": 0.6,
+      "usePath": {
+        "kind": "raidRole",
+        "roleId": "ammunition-resupply"
+      },
+      "recipe": [
+        {
+          "kind": "preset",
+          "presetId": "628753bba4a8431af4739d3b"
+        },
+        {
+          "kind": "template",
+          "templateId": "6768c25aa7b238f14a08d3f6",
+          "instanceCount": 1,
+          "stackCountPerInstance": 40
+        },
+        {
+          "kind": "template",
+          "templateId": "5df8f541c41b2312ea3335e3",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "591094e086f7747caa7bb2ef",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "61605e13ffa6e502ac5e7eef",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "628e4e576d783146b124c64d",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        }
+      ]
+    },
+    {
+      "lotId": "entry-first-aid.shipment-v1.compact-v1",
+      "displayName": "Breach Medic",
+      "purpose": "A ready shotgun and buckshot, plated armor, an empty injector case and compact medical supplies for close-range casualty response.",
+      "familyId": "arsenal",
+      "trackId": "cqb",
+      "anchorTemplateId": "54491c4f4bdc2db1078b4568",
+      "weight": 0.9,
+      "usePath": {
+        "kind": "raidRole",
+        "roleId": "close-quarters"
+      },
+      "recipe": [
+        {
+          "kind": "preset",
+          "presetId": "584148f2245977598f1ad387"
+        },
+        {
+          "kind": "template",
+          "templateId": "560d5e524bdc2d25448b4571",
+          "instanceCount": 1,
+          "stackCountPerInstance": 20
+        },
+        {
+          "kind": "preset",
+          "presetId": "657666ca303700411c0242c6"
+        },
+        {
+          "kind": "template",
+          "templateId": "619cbf7d23893217ec30b689",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5d02797c86f774203f38e30a",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "60098ad7c2240c0fe85c570a",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        }
+      ]
+    },
+    {
+      "lotId": "escort-medic.shipment-v1.compact-v1",
+      "displayName": "Protection Medic",
+      "purpose": "A suppressed MP7 with matching ammunition, an empty injector case, plated armor, communications and surgery.",
+      "familyId": "arsenal",
+      "trackId": "cqb",
+      "anchorTemplateId": "5ba26383d4351e00334c93d9",
+      "weight": 0.9,
+      "usePath": {
+        "kind": "raidRole",
+        "roleId": "close-quarters"
+      },
+      "recipe": [
+        {
+          "kind": "preset",
+          "presetId": "5bd05f1186f774572f181678"
+        },
+        {
+          "kind": "template",
+          "templateId": "5ba26835d4351e0035628ff5",
+          "instanceCount": 1,
+          "stackCountPerInstance": 70
+        },
+        {
+          "kind": "template",
+          "templateId": "619cbf7d23893217ec30b689",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "preset",
+          "presetId": "657666ca303700411c0242c6"
+        },
+        {
+          "kind": "template",
+          "templateId": "628e4e576d783146b124c64d",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5d02797c86f774203f38e30a",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        }
+      ]
+    },
+    {
+      "lotId": "entry-communications.shipment-v1.compact-v1",
+      "displayName": "Breach Coordinator",
+      "purpose": "A configured M4 with matching ammunition, high-end armor and communications, protected headgear and surgical support.",
+      "familyId": "arsenal",
+      "trackId": "cqb",
+      "anchorTemplateId": "5447a9cd4bdc2dbd208b4567",
+      "weight": 0.75,
+      "usePath": {
+        "kind": "raidRole",
+        "roleId": "close-quarters"
+      },
+      "recipe": [
+        {
+          "kind": "preset",
+          "presetId": "66b0e484c84cc7141324fd6c"
+        },
+        {
+          "kind": "template",
+          "templateId": "59e6906286f7746c9f75e847",
+          "instanceCount": 1,
+          "stackCountPerInstance": 60
+        },
+        {
+          "kind": "preset",
+          "presetId": "657666ca303700411c0242c6"
+        },
+        {
+          "kind": "preset",
+          "presetId": "657fa7c0e65c0122b70ffdb0"
+        },
+        {
+          "kind": "template",
+          "templateId": "628e4e576d783146b124c64d",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5d02797c86f774203f38e30a",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        }
+      ]
+    },
+    {
+      "lotId": "escort-comms.shipment-v1.compact-v1",
+      "displayName": "Protection Coordinator",
+      "purpose": "A suppressed MP7, compatible ammunition, high-end armor, a FAST/GPNVG night-vision set and communications.",
+      "familyId": "arsenal",
+      "trackId": "cqb",
+      "anchorTemplateId": "5ba26383d4351e00334c93d9",
+      "weight": 0.75,
+      "usePath": {
+        "kind": "raidRole",
+        "roleId": "close-quarters"
+      },
+      "recipe": [
+        {
+          "kind": "preset",
+          "presetId": "5bd05f1186f774572f181678"
+        },
+        {
+          "kind": "template",
+          "templateId": "5ba26835d4351e0035628ff5",
+          "instanceCount": 1,
+          "stackCountPerInstance": 70
+        },
+        {
+          "kind": "preset",
+          "presetId": "657666ca303700411c0242c6"
+        },
+        {
+          "kind": "preset",
+          "presetId": "657fa7c0e65c0122b70ffdb0"
+        },
+        {
+          "kind": "template",
+          "templateId": "5c0558060db834001b735271",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "628e4e576d783146b124c64d",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5d02797c86f774203f38e30a",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        }
+      ]
+    },
+    {
+      "lotId": "entry-specialist.shipment-v1.compact-v1",
+      "displayName": "Armored Breacher",
+      "purpose": "A configured rifle and matching ammunition with heavy plated armor, field surgery and premium communications.",
+      "familyId": "arsenal",
+      "trackId": "cqb",
+      "anchorTemplateId": "5447a9cd4bdc2dbd208b4567",
+      "weight": 0.5,
+      "usePath": {
+        "kind": "raidRole",
+        "roleId": "close-quarters"
+      },
+      "recipe": [
+        {
+          "kind": "preset",
+          "presetId": "66b0e484c84cc7141324fd6c"
+        },
+        {
+          "kind": "template",
+          "templateId": "59e6906286f7746c9f75e847",
+          "instanceCount": 1,
+          "stackCountPerInstance": 60
+        },
+        {
+          "kind": "preset",
+          "presetId": "65766b46303700411c0242f8"
+        },
+        {
+          "kind": "template",
+          "templateId": "628e4e576d783146b124c64d",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5d02797c86f774203f38e30a",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        }
+      ]
+    },
+    {
+      "lotId": "escort-specialist.shipment-v1.compact-v1",
+      "displayName": "Protective Detail",
+      "purpose": "A suppressed MP7 with fitted magazine and matching ammunition, plated armor, an empty injector case and premium communications.",
+      "familyId": "arsenal",
+      "trackId": "cqb",
+      "anchorTemplateId": "5ba26383d4351e00334c93d9",
+      "weight": 0.5,
+      "usePath": {
+        "kind": "raidRole",
+        "roleId": "close-quarters"
+      },
+      "recipe": [
+        {
+          "kind": "preset",
+          "presetId": "5bd05f1186f774572f181678"
+        },
+        {
+          "kind": "template",
+          "templateId": "5ba26835d4351e0035628ff5",
+          "instanceCount": 1,
+          "stackCountPerInstance": 70
+        },
+        {
+          "kind": "preset",
+          "presetId": "657666ca303700411c0242c6"
+        },
+        {
+          "kind": "template",
+          "templateId": "619cbf7d23893217ec30b689",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "628e4e576d783146b124c64d",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        }
+      ]
+    },
+    {
+      "lotId": "entry-command.shipment-v1.compact-v1",
+      "displayName": "Breach Command",
+      "purpose": "A configured thermal-sighted rifle with matching ammunition, heavy plated armor, premium communications and a Taiga survival machete.",
+      "familyId": "arsenal",
+      "trackId": "cqb",
+      "anchorTemplateId": "5447a9cd4bdc2dbd208b4567",
+      "weight": 0.2,
+      "usePath": {
+        "kind": "raidRole",
+        "roleId": "close-quarters"
+      },
+      "recipe": [
+        {
+          "kind": "preset",
+          "presetId": "5a8ae36686f774377d6ce226"
+        },
+        {
+          "kind": "template",
+          "templateId": "59e6906286f7746c9f75e847",
+          "instanceCount": 1,
+          "stackCountPerInstance": 60
+        },
+        {
+          "kind": "preset",
+          "presetId": "65766b46303700411c0242f8"
+        },
+        {
+          "kind": "template",
+          "templateId": "628e4e576d783146b124c64d",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "601948682627df266209af05",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        }
+      ]
+    },
+    {
+      "lotId": "rifle-field-medic.shipment-v1.compact-v1",
+      "displayName": "Rifle Medic",
+      "purpose": "A configured M4, matching ammunition and plated AVS carrier with an empty injector case and surgical equipment.",
+      "familyId": "arsenal",
+      "trackId": "rifle",
+      "anchorTemplateId": "5447a9cd4bdc2dbd208b4567",
+      "weight": 0.75,
+      "usePath": {
+        "kind": "raidRole",
+        "roleId": "rifle-patrol"
+      },
+      "recipe": [
+        {
+          "kind": "preset",
+          "presetId": "618aaf656bbeff39ad4acf0c"
+        },
+        {
+          "kind": "template",
+          "templateId": "59e6906286f7746c9f75e847",
+          "instanceCount": 1,
+          "stackCountPerInstance": 60
+        },
+        {
+          "kind": "preset",
+          "presetId": "65719d367a553968340d88b8"
+        },
+        {
+          "kind": "template",
+          "templateId": "619cbf7d23893217ec30b689",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5d02797c86f774203f38e30a",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        }
+      ]
+    },
+    {
+      "lotId": "rifle-observer.shipment-v1.compact-v1",
+      "displayName": "Rifle Observer",
+      "purpose": "A scoped, suppressed marksman rifle, spare magazine and ammunition, plated armor and a FAST/GPNVG observation setup.",
+      "familyId": "arsenal",
+      "trackId": "rifle",
+      "anchorTemplateId": "5df8ce05b11454561e39243b",
+      "weight": 0.5,
+      "usePath": {
+        "kind": "raidRole",
+        "roleId": "rifle-patrol"
+      },
+      "recipe": [
+        {
+          "kind": "preset",
+          "presetId": "628753bba4a8431af4739d3b"
+        },
+        {
+          "kind": "template",
+          "templateId": "6768c25aa7b238f14a08d3f6",
+          "instanceCount": 1,
+          "stackCountPerInstance": 40
+        },
+        {
+          "kind": "template",
+          "templateId": "5df8f541c41b2312ea3335e3",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "preset",
+          "presetId": "657666ca303700411c0242c6"
+        },
+        {
+          "kind": "preset",
+          "presetId": "657fa7c0e65c0122b70ffdb0"
+        },
+        {
+          "kind": "template",
+          "templateId": "5c0558060db834001b735271",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "61605e13ffa6e502ac5e7eef",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        }
+      ]
+    },
+    {
+      "lotId": "rifle-sustainment.shipment-v1.compact-v1",
+      "displayName": "Rifle Sustainment",
+      "purpose": "A configured rifle with matching ammunition, plated protection, premium communications, field surgery and weapon maintenance equipment.",
+      "familyId": "arsenal",
+      "trackId": "rifle",
+      "anchorTemplateId": "5447a9cd4bdc2dbd208b4567",
+      "weight": 0.5,
+      "usePath": {
+        "kind": "raidRole",
+        "roleId": "rifle-patrol"
+      },
+      "recipe": [
+        {
+          "kind": "preset",
+          "presetId": "66b0e484c84cc7141324fd6c"
+        },
+        {
+          "kind": "template",
+          "templateId": "59e6906286f7746c9f75e847",
+          "instanceCount": 1,
+          "stackCountPerInstance": 60
+        },
+        {
+          "kind": "preset",
+          "presetId": "657666ca303700411c0242c6"
+        },
+        {
+          "kind": "template",
+          "templateId": "5910968f86f77425cf569c32",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "628e4e576d783146b124c64d",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5d02797c86f774203f38e30a",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        }
+      ]
+    },
+    {
+      "lotId": "rifle-command.shipment-v1.compact-v1",
+      "displayName": "Rifle Command",
+      "purpose": "A configured thermal-sighted rifle, matching ammunition, plated armor and an empty SICC command pouch with communications and field surgery.",
+      "familyId": "arsenal",
+      "trackId": "rifle",
+      "anchorTemplateId": "5447a9cd4bdc2dbd208b4567",
+      "weight": 0.2,
+      "usePath": {
+        "kind": "raidRole",
+        "roleId": "rifle-patrol"
+      },
+      "recipe": [
+        {
+          "kind": "preset",
+          "presetId": "5a8ae36686f774377d6ce226"
+        },
+        {
+          "kind": "template",
+          "templateId": "59e6906286f7746c9f75e847",
+          "instanceCount": 1,
+          "stackCountPerInstance": 60
+        },
+        {
+          "kind": "preset",
+          "presetId": "657666ca303700411c0242c6"
+        },
+        {
+          "kind": "template",
+          "templateId": "5d235bb686f77443f4331278",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "66b5f6985891c84aab75ca76",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5d02797c86f774203f38e30a",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        }
+      ]
+    },
+    {
+      "lotId": "recon-recovery.shipment-v1.compact-v1",
+      "displayName": "Recovery Scout",
+      "purpose": "Plated reconnaissance protection, an empty injector case, a document pouch and a compact surgical and endurance kit.",
+      "familyId": "operator",
+      "trackId": "recon",
+      "anchorTemplateId": "5e4abb5086f77406975c9342",
+      "weight": 0.9,
+      "usePath": {
+        "kind": "raidRole",
+        "roleId": "recon"
+      },
+      "recipe": [
+        {
+          "kind": "preset",
+          "presetId": "657666ca303700411c0242c6"
+        },
+        {
+          "kind": "template",
+          "templateId": "628e4e576d783146b124c64d",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "619cbf7d23893217ec30b689",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "590c60fc86f77412b13fddcf",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5d02797c86f774203f38e30a",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5c0e531d86f7747fa23f4d42",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        }
+      ]
+    },
+    {
+      "lotId": "recon-surgeon.shipment-v1.compact-v1",
+      "displayName": "Search and Rescue",
+      "purpose": "An empty injector case, plated rescue protection, surgery, trauma care and communications. Useful medical equipment replaces repeated injectors.",
+      "familyId": "operator",
+      "trackId": "recon",
+      "anchorTemplateId": "5e4abb5086f77406975c9342",
+      "weight": 0.75,
+      "usePath": {
+        "kind": "raidRole",
+        "roleId": "recon"
+      },
+      "recipe": [
+        {
+          "kind": "preset",
+          "presetId": "657666ca303700411c0242c6"
+        },
+        {
+          "kind": "template",
+          "templateId": "619cbf7d23893217ec30b689",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5d02797c86f774203f38e30a",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "60098ad7c2240c0fe85c570a",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "628e4e576d783146b124c64d",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        }
+      ]
+    },
+    {
+      "lotId": "recon-patrol.shipment-v1.compact-v1",
+      "displayName": "Route Surveyor",
+      "purpose": "A plated patrol load with a SICC pouch, head protection, premium hearing and one extraction injector.",
+      "familyId": "operator",
+      "trackId": "recon",
+      "anchorTemplateId": "5e4abb5086f77406975c9342",
+      "weight": 0.75,
+      "usePath": {
+        "kind": "raidRole",
+        "roleId": "recon"
+      },
+      "recipe": [
+        {
+          "kind": "preset",
+          "presetId": "657666ca303700411c0242c6"
+        },
+        {
+          "kind": "template",
+          "templateId": "5d235bb686f77443f4331278",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "preset",
+          "presetId": "657fa7c0e65c0122b70ffdb0"
+        },
+        {
+          "kind": "template",
+          "templateId": "628e4e576d783146b124c64d",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5ed51652f6c34d2cc26336a1",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        }
+      ]
+    },
+    {
+      "lotId": "recon-rescue.shipment-v1.compact-v1",
+      "displayName": "Rescue Pathfinder",
+      "purpose": "A Taiga survival machete, an empty injector case, plated protection, field surgery, trauma care and one endurance injector for a rescue specialist.",
+      "familyId": "operator",
+      "trackId": "recon",
+      "anchorTemplateId": "601948682627df266209af05",
+      "weight": 0.5,
+      "usePath": {
+        "kind": "raidRole",
+        "roleId": "recon"
+      },
+      "recipe": [
+        {
+          "kind": "template",
+          "templateId": "601948682627df266209af05",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "619cbf7d23893217ec30b689",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "preset",
+          "presetId": "657666ca303700411c0242c6"
+        },
+        {
+          "kind": "template",
+          "templateId": "5d02797c86f774203f38e30a",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "628e4e576d783146b124c64d",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5c0e531d86f7747fa23f4d42",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "60098ad7c2240c0fe85c570a",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        }
+      ]
+    },
+    {
+      "lotId": "night-watch.shipment-v1.compact-v1",
+      "displayName": "Night Observer",
+      "purpose": "A scoped suppressed rifle and matching ammunition with a complete compatible FAST/GPNVG set, plated armor and communications.",
+      "familyId": "operator",
+      "trackId": "night",
+      "anchorTemplateId": "5df8ce05b11454561e39243b",
+      "weight": 0.5,
+      "usePath": {
+        "kind": "raidRole",
+        "roleId": "night-operations"
+      },
+      "recipe": [
+        {
+          "kind": "preset",
+          "presetId": "628753bba4a8431af4739d3b"
+        },
+        {
+          "kind": "template",
+          "templateId": "6768c25aa7b238f14a08d3f6",
+          "instanceCount": 1,
+          "stackCountPerInstance": 40
+        },
+        {
+          "kind": "preset",
+          "presetId": "657fa7c0e65c0122b70ffdb0"
+        },
+        {
+          "kind": "template",
+          "templateId": "5c0558060db834001b735271",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "preset",
+          "presetId": "657666ca303700411c0242c6"
+        },
+        {
+          "kind": "template",
+          "templateId": "628e4e576d783146b124c64d",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        }
+      ]
+    },
+    {
+      "lotId": "night-rescue.shipment-v1.compact-v1",
+      "displayName": "Night Rescue",
+      "purpose": "A complete compatible FAST/GPNVG set with plated protection, an empty injector case, LEDX specialist equipment and surgery.",
+      "familyId": "operator",
+      "trackId": "night",
+      "anchorTemplateId": "5a154d5cfcdbcb001a3b00da",
+      "weight": 0.2,
+      "usePath": {
+        "kind": "raidRole",
+        "roleId": "night-operations"
+      },
+      "recipe": [
+        {
+          "kind": "preset",
+          "presetId": "657fa7c0e65c0122b70ffdb0"
+        },
+        {
+          "kind": "template",
+          "templateId": "5c0558060db834001b735271",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "preset",
+          "presetId": "657666ca303700411c0242c6"
+        },
+        {
+          "kind": "template",
+          "templateId": "619cbf7d23893217ec30b689",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5c0530ee86f774697952d952",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5d02797c86f774203f38e30a",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        }
+      ]
+    },
+    {
+      "lotId": "entry-ordnance-aid.shipment-v1.compact-v1",
+      "displayName": "Sapper Medic",
+      "purpose": "A fully plated AVS carrier, armor maintenance and surgical equipment, with two grenades and an AFAK for a combat engineer.",
+      "familyId": "field-supply",
+      "trackId": "ordnance",
+      "anchorTemplateId": "544a5caa4bdc2d1a388b4568",
+      "weight": 0.9,
+      "usePath": {
+        "kind": "raidRole",
+        "roleId": "breaching-ordnance"
+      },
+      "recipe": [
+        {
+          "kind": "preset",
+          "presetId": "65719d367a553968340d88b8"
+        },
+        {
+          "kind": "template",
+          "templateId": "591094e086f7747caa7bb2ef",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5d02797c86f774203f38e30a",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5448be9a4bdc2dfd2f8b456a",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5710c24ad2720bc3458b45a3",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "60098ad7c2240c0fe85c570a",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        }
+      ]
+    },
+    {
+      "lotId": "breach-support.shipment-v1.compact-v1",
+      "displayName": "Assault Support",
+      "purpose": "A configured rifle, matching ammunition, plated armor, trauma care and premium communications for close support.",
+      "familyId": "field-supply",
+      "trackId": "ordnance",
+      "anchorTemplateId": "5447a9cd4bdc2dbd208b4567",
+      "weight": 0.75,
+      "usePath": {
+        "kind": "raidRole",
+        "roleId": "breaching-ordnance"
+      },
+      "recipe": [
+        {
+          "kind": "preset",
+          "presetId": "66b0e484c84cc7141324fd6c"
+        },
+        {
+          "kind": "template",
+          "templateId": "59e6906286f7746c9f75e847",
+          "instanceCount": 1,
+          "stackCountPerInstance": 60
+        },
+        {
+          "kind": "preset",
+          "presetId": "657666ca303700411c0242c6"
+        },
+        {
+          "kind": "template",
+          "templateId": "628e4e576d783146b124c64d",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "60098ad7c2240c0fe85c570a",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        }
+      ]
+    },
+    {
+      "lotId": "breach-comms.shipment-v1.compact-v1",
+      "displayName": "Sapper Communications",
+      "purpose": "Heavy plated armor, an armor maintenance kit and premium communications with two complementary grenades.",
+      "familyId": "field-supply",
+      "trackId": "ordnance",
+      "anchorTemplateId": "60a283193cb70855c43a381d",
+      "weight": 0.75,
+      "usePath": {
+        "kind": "raidRole",
+        "roleId": "breaching-ordnance"
+      },
+      "recipe": [
+        {
+          "kind": "preset",
+          "presetId": "65766b46303700411c0242f8"
+        },
+        {
+          "kind": "template",
+          "templateId": "591094e086f7747caa7bb2ef",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "628e4e576d783146b124c64d",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5448be9a4bdc2dfd2f8b456a",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5710c24ad2720bc3458b45a3",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        }
+      ]
+    },
+    {
+      "lotId": "assault-ordnance.shipment-v1.compact-v1",
+      "displayName": "Thermal Sapper",
+      "purpose": "A configured thermal-sighted rifle, matching ammunition, heavy plated armor and one grenade with premium communications.",
+      "familyId": "field-supply",
+      "trackId": "ordnance",
+      "anchorTemplateId": "5447a9cd4bdc2dbd208b4567",
+      "weight": 0.5,
+      "usePath": {
+        "kind": "raidRole",
+        "roleId": "breaching-ordnance"
+      },
+      "recipe": [
+        {
+          "kind": "preset",
+          "presetId": "5a8ae36686f774377d6ce226"
+        },
+        {
+          "kind": "template",
+          "templateId": "59e6906286f7746c9f75e847",
+          "instanceCount": 1,
+          "stackCountPerInstance": 60
+        },
+        {
+          "kind": "preset",
+          "presetId": "65766b46303700411c0242f8"
+        },
+        {
+          "kind": "template",
+          "templateId": "5448be9a4bdc2dfd2f8b456a",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "628e4e576d783146b124c64d",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        }
+      ]
+    },
+    {
+      "lotId": "sapper-resupply.shipment-v1.compact-v1",
+      "displayName": "Engineer Reserve",
+      "purpose": "A plated assault carrier, armor and weapon maintenance kits, communications and compact trauma supplies.",
+      "familyId": "field-supply",
+      "trackId": "ordnance",
+      "anchorTemplateId": "5e4abb5086f77406975c9342",
+      "weight": 0.5,
+      "usePath": {
+        "kind": "raidRole",
+        "roleId": "breaching-ordnance"
+      },
+      "recipe": [
+        {
+          "kind": "preset",
+          "presetId": "657666ca303700411c0242c6"
+        },
+        {
+          "kind": "template",
+          "templateId": "591094e086f7747caa7bb2ef",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5910968f86f77425cf569c32",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "628e4e576d783146b124c64d",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "60098ad7c2240c0fe85c570a",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        }
+      ]
+    },
+    {
+      "lotId": "breach-command.shipment-v1.compact-v1",
+      "displayName": "Sapper Command",
+      "purpose": "A thermal-sighted rifle, matching ammunition, heavy plated armor, field maintenance and a Taiga survival machete.",
+      "familyId": "field-supply",
+      "trackId": "ordnance",
+      "anchorTemplateId": "5447a9cd4bdc2dbd208b4567",
+      "weight": 0.2,
+      "usePath": {
+        "kind": "raidRole",
+        "roleId": "breaching-ordnance"
+      },
+      "recipe": [
+        {
+          "kind": "preset",
+          "presetId": "5a8ae36686f774377d6ce226"
+        },
+        {
+          "kind": "template",
+          "templateId": "59e6906286f7746c9f75e847",
+          "instanceCount": 1,
+          "stackCountPerInstance": 60
+        },
+        {
+          "kind": "preset",
+          "presetId": "65766b46303700411c0242f8"
+        },
+        {
+          "kind": "template",
+          "templateId": "591094e086f7747caa7bb2ef",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "601948682627df266209af05",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        }
+      ]
+    },
+    {
+      "lotId": "triage-reserve.shipment-v1.compact-v1",
+      "displayName": "Field Surgeon",
+      "purpose": "An empty injector case, surgical equipment, trauma care, plated armor and premium hearing for the field surgeon.",
+      "familyId": "field-supply",
+      "trackId": "medical",
+      "anchorTemplateId": "619cbf7d23893217ec30b689",
+      "weight": 0.75,
+      "usePath": {
+        "kind": "raidRole",
+        "roleId": "trauma-care"
+      },
+      "recipe": [
+        {
+          "kind": "template",
+          "templateId": "619cbf7d23893217ec30b689",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5d02797c86f774203f38e30a",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "60098ad7c2240c0fe85c570a",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "preset",
+          "presetId": "65719d367a553968340d88b8"
+        },
+        {
+          "kind": "template",
+          "templateId": "628e4e576d783146b124c64d",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        }
+      ]
+    },
+    {
+      "lotId": "field-hospital.shipment-v1.compact-v1",
+      "displayName": "Rescue Equipment",
+      "purpose": "LEDX specialist equipment, an empty injector case and surgical and trauma supplies. Individually claimable medical prizes.",
+      "familyId": "field-supply",
+      "trackId": "medical",
+      "anchorTemplateId": "5c0530ee86f774697952d952",
+      "weight": 0.5,
+      "usePath": {
+        "kind": "raidRole",
+        "roleId": "trauma-care"
+      },
+      "recipe": [
+        {
+          "kind": "template",
+          "templateId": "5c0530ee86f774697952d952",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "619cbf7d23893217ec30b689",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5d02797c86f774203f38e30a",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "60098ad7c2240c0fe85c570a",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        }
+      ]
+    },
+    {
+      "lotId": "surgical-reserve.shipment-v1.compact-v1",
+      "displayName": "Trauma Specialist",
+      "purpose": "LEDX specialist equipment, field surgery and trauma care with premium communications.",
+      "familyId": "field-supply",
+      "trackId": "medical",
+      "anchorTemplateId": "5c0530ee86f774697952d952",
+      "weight": 0.5,
+      "usePath": {
+        "kind": "raidRole",
+        "roleId": "trauma-care"
+      },
+      "recipe": [
+        {
+          "kind": "template",
+          "templateId": "5c0530ee86f774697952d952",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5d02797c86f774203f38e30a",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "60098ad7c2240c0fe85c570a",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "628e4e576d783146b124c64d",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        }
+      ]
+    },
+    {
+      "lotId": "trauma-command.shipment-v1.compact-v1",
+      "displayName": "Medical Command",
+      "purpose": "LEDX specialist equipment, plated armor, a field repair kit, premium communications and an empty injector case for medical command.",
+      "familyId": "field-supply",
+      "trackId": "medical",
+      "anchorTemplateId": "5c0530ee86f774697952d952",
+      "weight": 0.2,
+      "usePath": {
+        "kind": "raidRole",
+        "roleId": "trauma-care"
+      },
+      "recipe": [
+        {
+          "kind": "template",
+          "templateId": "619cbf7d23893217ec30b689",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5c0530ee86f774697952d952",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "preset",
+          "presetId": "657666ca303700411c0242c6"
+        },
+        {
+          "kind": "template",
+          "templateId": "591094e086f7747caa7bb2ef",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "628e4e576d783146b124c64d",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        }
+      ]
+    },
+    {
+      "lotId": "extraction-chemistry.shipment-v1.compact-v1",
+      "displayName": "Extraction Specialist",
+      "purpose": "An empty injector case, plated protection, premium hearing and surgery with exactly one SJ6 and one M.U.L.E. Supplies are separate Messenger attachments.",
+      "familyId": "field-supply",
+      "trackId": "chemistry",
+      "anchorTemplateId": "619cbf7d23893217ec30b689",
+      "weight": 0.5,
+      "usePath": {
+        "kind": "raidRole",
+        "roleId": "combat-chemistry"
+      },
+      "recipe": [
+        {
+          "kind": "template",
+          "templateId": "619cbf7d23893217ec30b689",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "preset",
+          "presetId": "657666ca303700411c0242c6"
+        },
+        {
+          "kind": "template",
+          "templateId": "628e4e576d783146b124c64d",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5d02797c86f774203f38e30a",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5c0e531d86f7747fa23f4d42",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5ed51652f6c34d2cc26336a1",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        }
+      ]
+    },
+    {
+      "lotId": "expedition-chemistry.shipment-v1.compact-v1",
+      "displayName": "Expedition Pathfinder",
+      "purpose": "A Taiga survival machete, an empty injector case, plated protection, surgery and communications with exactly one SJ6 and one M.U.L.E.",
+      "familyId": "field-supply",
+      "trackId": "chemistry",
+      "anchorTemplateId": "601948682627df266209af05",
+      "weight": 0.2,
+      "usePath": {
+        "kind": "raidRole",
+        "roleId": "combat-chemistry"
+      },
+      "recipe": [
+        {
+          "kind": "template",
+          "templateId": "601948682627df266209af05",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "619cbf7d23893217ec30b689",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "preset",
+          "presetId": "657666ca303700411c0242c6"
+        },
+        {
+          "kind": "template",
+          "templateId": "5d02797c86f774203f38e30a",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5c0e531d86f7747fa23f4d42",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5ed51652f6c34d2cc26336a1",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "66b5f6985891c84aab75ca76",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        }
+      ]
+    },
+    {
+      "lotId": "rifle-ammunition-reserve.shipment-v1.compact-v1",
+      "displayName": "Precision Sustainment",
+      "purpose": "A scoped suppressed SR-25 with a fitted and spare magazine, matching ammunition, plated armor and maintenance equipment.",
+      "familyId": "field-supply",
+      "trackId": "ammo",
+      "anchorTemplateId": "5df8ce05b11454561e39243b",
+      "weight": 0.5,
+      "usePath": {
+        "kind": "raidRole",
+        "roleId": "ammunition-resupply"
+      },
+      "recipe": [
+        {
+          "kind": "preset",
+          "presetId": "628753bba4a8431af4739d3b"
+        },
+        {
+          "kind": "template",
+          "templateId": "6768c25aa7b238f14a08d3f6",
+          "instanceCount": 1,
+          "stackCountPerInstance": 40
+        },
+        {
+          "kind": "template",
+          "templateId": "5df8f541c41b2312ea3335e3",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "preset",
+          "presetId": "657666ca303700411c0242c6"
+        },
+        {
+          "kind": "template",
+          "templateId": "5910968f86f77425cf569c32",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "628e4e576d783146b124c64d",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        }
+      ]
+    },
+    {
+      "lotId": "overwatch-ammunition.shipment-v1.compact-v1",
+      "displayName": "Thermal Overwatch",
+      "purpose": "A configured thermal-sighted rifle, matching ammunition, plated protection and an empty SICC organizational pouch.",
+      "familyId": "field-supply",
+      "trackId": "ammo",
+      "anchorTemplateId": "5447a9cd4bdc2dbd208b4567",
+      "weight": 0.2,
+      "usePath": {
+        "kind": "raidRole",
+        "roleId": "ammunition-resupply"
+      },
+      "recipe": [
+        {
+          "kind": "preset",
+          "presetId": "5a8ae36686f774377d6ce226"
+        },
+        {
+          "kind": "template",
+          "templateId": "59e6906286f7746c9f75e847",
+          "instanceCount": 1,
+          "stackCountPerInstance": 60
+        },
+        {
+          "kind": "preset",
+          "presetId": "657666ca303700411c0242c6"
+        },
+        {
+          "kind": "template",
+          "templateId": "5d235bb686f77443f4331278",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        }
+      ]
+    },
+    {
+      "lotId": "vault-field-command.shipment-v1.compact-v1",
+      "displayName": "Black Site Survey",
+      "purpose": "A configured thermal-sighted rifle with matching ammunition, plated protection and an empty document case for the survey team.",
+      "familyId": "arsenal",
+      "trackId": "vault",
+      "anchorTemplateId": "5447a9cd4bdc2dbd208b4567",
+      "weight": 0.3,
+      "usePath": {
+        "kind": "raidRole",
+        "roleId": "assault"
+      },
+      "recipe": [
+        {
+          "kind": "preset",
+          "presetId": "5a8ae36686f774377d6ce226"
+        },
+        {
+          "kind": "template",
+          "templateId": "59e6906286f7746c9f75e847",
+          "instanceCount": 1,
+          "stackCountPerInstance": 60
+        },
+        {
+          "kind": "preset",
+          "presetId": "657666ca303700411c0242c6"
+        },
+        {
+          "kind": "template",
+          "templateId": "590c60fc86f77412b13fddcf",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        }
+      ]
+    },
+    {
+      "lotId": "campaign-trauma-cache.shipment-v1.compact-v1",
+      "displayName": "Medical Acquisition",
+      "purpose": "LEDX specialist equipment, an empty injector case, plated protection, armor maintenance and field surgery. A compact high-value medical acquisition.",
+      "familyId": "field-supply",
+      "trackId": "medical",
+      "anchorTemplateId": "5c0530ee86f774697952d952",
+      "weight": 0.12,
+      "usePath": {
+        "kind": "raidRole",
+        "roleId": "trauma-care"
+      },
+      "recipe": [
+        {
+          "kind": "template",
+          "templateId": "591094e086f7747caa7bb2ef",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5c0530ee86f774697952d952",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "619cbf7d23893217ec30b689",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "preset",
+          "presetId": "657666ca303700411c0242c6"
+        },
+        {
+          "kind": "template",
+          "templateId": "5d02797c86f774203f38e30a",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        }
+      ]
+    },
+    {
+      "lotId": "quartermaster-ammunition-cache.shipment-v1.compact-v1",
+      "displayName": "Quartermaster Contract",
+      "purpose": "One configured rifle with matching ammunition, plated armor, a field repair kit, premium communications and an empty SICC pouch.",
+      "familyId": "field-supply",
+      "trackId": "ammo",
+      "anchorTemplateId": "5447a9cd4bdc2dbd208b4567",
+      "weight": 0.12,
+      "usePath": {
+        "kind": "raidRole",
+        "roleId": "ammunition-resupply"
+      },
+      "recipe": [
+        {
+          "kind": "template",
+          "templateId": "628e4e576d783146b124c64d",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "preset",
+          "presetId": "66b0e484c84cc7141324fd6c"
+        },
+        {
+          "kind": "template",
+          "templateId": "59e6906286f7746c9f75e847",
+          "instanceCount": 1,
+          "stackCountPerInstance": 60
+        },
+        {
+          "kind": "preset",
+          "presetId": "657666ca303700411c0242c6"
+        },
+        {
+          "kind": "template",
+          "templateId": "591094e086f7747caa7bb2ef",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5d235bb686f77443f4331278",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        }
+      ]
+    },
+    {
+      "lotId": "night-extraction-cache.shipment-v1.compact-v1",
+      "displayName": "Thermal Extraction",
+      "purpose": "T-7 goggles, compatible Norotos mount and Wilcox adapter, a FAST helmet, plated armor and a Red Rebel extraction tool. Assemble the supplied mount chain on the helmet.",
+      "familyId": "operator",
+      "trackId": "night",
+      "anchorTemplateId": "5c110624d174af029e69734c",
+      "weight": 0.04,
+      "usePath": {
+        "kind": "raidRole",
+        "roleId": "night-operations"
+      },
+      "recipe": [
+        {
+          "kind": "template",
+          "templateId": "5c110624d174af029e69734c",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5c11046cd174af02a012e42b",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5a16b8a9fcdbcb00165aa6ca",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "preset",
+          "presetId": "657fa7c0e65c0122b70ffdb0"
+        },
+        {
+          "kind": "preset",
+          "presetId": "657666ca303700411c0242c6"
+        },
+        {
+          "kind": "template",
+          "templateId": "5c0126f40db834002a125382",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        }
+      ]
+    },
+    {
+      "lotId": "sapper-campaign-cache.shipment-v1.compact-v1",
+      "displayName": "Sapper Acquisition",
+      "purpose": "A thermal-sighted rifle and matching ammunition, plated heavy armor, maintenance equipment and a Red Rebel extraction tool.",
+      "familyId": "field-supply",
+      "trackId": "ordnance",
+      "anchorTemplateId": "5447a9cd4bdc2dbd208b4567",
+      "weight": 0.08,
+      "usePath": {
+        "kind": "raidRole",
+        "roleId": "breaching-ordnance"
+      },
+      "recipe": [
+        {
+          "kind": "preset",
+          "presetId": "5a8ae36686f774377d6ce226"
+        },
+        {
+          "kind": "template",
+          "templateId": "59e6906286f7746c9f75e847",
+          "instanceCount": 1,
+          "stackCountPerInstance": 60
+        },
+        {
+          "kind": "preset",
+          "presetId": "65766b46303700411c0242f8"
+        },
+        {
+          "kind": "template",
+          "templateId": "591094e086f7747caa7bb2ef",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5c0126f40db834002a125382",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        }
+      ]
+    },
+    {
+      "lotId": "black-site-command-cache.shipment-v1.compact-v1",
+      "displayName": "Classified Acquisition",
+      "purpose": "A configured thermal-sighted rifle, matching ammunition, plated protection and a rare Red Rebel extraction tool.",
+      "familyId": "arsenal",
+      "trackId": "vault",
+      "anchorTemplateId": "5447a9cd4bdc2dbd208b4567",
+      "weight": 0.012,
+      "usePath": {
+        "kind": "raidRole",
+        "roleId": "assault"
+      },
+      "recipe": [
+        {
+          "kind": "preset",
+          "presetId": "5a8ae36686f774377d6ce226"
+        },
+        {
+          "kind": "template",
+          "templateId": "59e6906286f7746c9f75e847",
+          "instanceCount": 1,
+          "stackCountPerInstance": 60
+        },
+        {
+          "kind": "preset",
+          "presetId": "657666ca303700411c0242c6"
+        },
+        {
+          "kind": "template",
+          "templateId": "5c0126f40db834002a125382",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        }
+      ]
+    },
+    {
+      "lotId": "black-site-expedition-jackpot.shipment-v1.compact-v1",
+      "displayName": "Black Site Thermal Jackpot",
+      "purpose": "A complete T-7/adapter/mount/FAST set, configured thermal-sighted rifle with matching ammunition, plated protection and a Red Rebel extraction tool. Fit the supplied night-vision chain to the helmet.",
+      "familyId": "arsenal",
+      "trackId": "vault",
+      "anchorTemplateId": "5c110624d174af029e69734c",
+      "weight": 0.03,
+      "usePath": {
+        "kind": "raidRole",
+        "roleId": "assault"
+      },
+      "recipe": [
+        {
+          "kind": "template",
+          "templateId": "5c110624d174af029e69734c",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5c11046cd174af02a012e42b",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5a16b8a9fcdbcb00165aa6ca",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "preset",
+          "presetId": "657fa7c0e65c0122b70ffdb0"
+        },
+        {
+          "kind": "preset",
+          "presetId": "5a8ae36686f774377d6ce226"
+        },
+        {
+          "kind": "template",
+          "templateId": "59e6906286f7746c9f75e847",
+          "instanceCount": 1,
+          "stackCountPerInstance": 60
+        },
+        {
+          "kind": "preset",
+          "presetId": "657666ca303700411c0242c6"
+        },
+        {
+          "kind": "template",
+          "templateId": "5c0126f40db834002a125382",
+          "instanceCount": 1,
           "stackCountPerInstance": 1
         }
       ]

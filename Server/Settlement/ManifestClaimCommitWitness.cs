@@ -88,6 +88,9 @@ internal static class ManifestClaimCommitWitness
         WriteString(canonical, fingerprint.Sha256Hex); WriteInt64(canonical, generation); WriteString(canonical, previousHash);
         WriteString(canonical, prepared.PreparedAtUtc.ToString("O", CultureInfo.InvariantCulture));
         WriteIds(canonical, prepared.ExactItemIds); WriteIds(canonical, prepared.RootIds);
+        // Preserve old hashes exactly. New delivery destinations have distinct witnesses.
+        if (prepared.Delivery != ClaimDeliveryKind.LegacyInventory)
+            WriteString(canonical, "messenger/v1");
         return Convert.ToHexString(SHA256.HashData(canonical.GetBuffer().AsSpan(0, checked((int)canonical.Length)))).ToLowerInvariant();
     }
 

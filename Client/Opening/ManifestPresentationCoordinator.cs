@@ -154,7 +154,7 @@ internal sealed partial class ManifestPresentationCoordinator : IDisposable
         Task<ManifestCurrentState> task;
         try
         {
-            task = _transport.FetchCurrentAsync(RelayInteractionOrigin.RealOpening, run.RequestedCaseTemplateId);
+            task = _transport.FetchCurrentAsync(RelayInteractionOrigin.RealOpening, run.RequestedCaseTemplateId, run.RequestedCaseId);
         }
         catch (Exception exception)
         {
@@ -168,6 +168,11 @@ internal sealed partial class ManifestPresentationCoordinator : IDisposable
             current =>
             {
                 RequireProfile(run);
+                if (current.LegacyOpening is { } legacy)
+                {
+                    ShowLegacyOpening(run, legacy);
+                    return;
+                }
                 if (ManifestPresentationPolicy.Resume(current.Snapshot, run.RecoveryOnly) == ManifestResumeKind.NoPending)
                 {
                     run.Stage = ManifestClientStage.Terminal;
@@ -232,7 +237,7 @@ internal sealed partial class ManifestPresentationCoordinator : IDisposable
         Task<ManifestCurrentState> task;
         try
         {
-            task = _transport.FetchCurrentAsync(RelayInteractionOrigin.RealOpening, run.RequestedCaseTemplateId);
+            task = _transport.FetchCurrentAsync(RelayInteractionOrigin.RealOpening, run.RequestedCaseTemplateId, run.RequestedCaseId);
         }
         catch (Exception exception)
         {
@@ -245,6 +250,11 @@ internal sealed partial class ManifestPresentationCoordinator : IDisposable
             task,
             current =>
             {
+                if (current.LegacyOpening is { } legacy)
+                {
+                    ShowLegacyOpening(run, legacy);
+                    return;
+                }
                 var displayedOdds = run.OpeningOdds
                     ?? throw new ManifestSnapshotException(
                         "The displayed Manifest catalog authority was lost.");
@@ -350,9 +360,13 @@ internal sealed partial class ManifestPresentationCoordinator : IDisposable
             return;
         }
 
-        ManifestPresentationPolicy.RequireDispatchAuthority(run.LibraryOnly, run.RecoveryOnly, action, before);
+        var legacyRecovery = run.LegacyOpening is { Committed: false } && action == ManifestEconomicAction.OpenTicket && before is null;
+        if (legacyRecovery)
+            LegacyOpeningPresentation.RequireResumeAuthority(run.LibraryOnly, run.LegacyOpening!, caseItemId);
+        else
+            ManifestPresentationPolicy.RequireDispatchAuthority(run.LibraryOnly, run.RecoveryOnly, action, before);
         RequireProfile(run);
-        if (ManifestPresentationPolicy.RequiresFreshOpeningKey(action, before) && !HasRelayKey(run.Profile))
+        if (!legacyRecovery && ManifestPresentationPolicy.RequiresFreshOpeningKey(action, before) && !HasRelayKey(run.Profile))
         {
             FailKeyRequired(run);
             return;
@@ -484,12 +498,35 @@ internal sealed partial class ManifestPresentationCoordinator : IDisposable
         ManifestSnapshot? before,
         IResult operationResult)
     {
+        if (before is null)
+        {
+            try
+            {
+                var currentTask = _transport.FetchCurrentAsync(RelayInteractionOrigin.RealOpening,
+                    run.RequestedCaseTemplateId, run.LegacyOpening?.CaseId ?? run.RequestedCaseId);
+                Observe(run, currentTask, current =>
+                {
+                    if (current.LegacyOpening is { } legacy)
+                    {
+                        var expectedCase = run.LegacyOpening?.CaseId ?? run.RequestedCaseId;
+                        if (legacy.CaseId != expectedCase)
+                            throw new ManifestSnapshotException("The saved opening response belongs to a different case.");
+                        run.Completion.TrySetResult(operationResult);
+                        ShowLegacyOpening(run, legacy);
+                    }
+                    else if (run.LegacyOpening is not null)
+                        throw new ManifestSnapshotException("The saved opening receipt is unavailable; delivery cannot yet be confirmed.");
+                    else HandleOperationSnapshot(run, action, before, operationResult, current.Snapshot);
+                }, error => ShowOperationVerificationFailure(run, action, before, operationResult, error),
+                    "saved opening result verification");
+            }
+            catch (Exception error) { ShowOperationVerificationFailure(run, action, before, operationResult, error); }
+            return;
+        }
         Task<ManifestSnapshot?> task;
         try
         {
-            task = before is null
-                ? AsSnapshot(_transport.FetchCurrentAsync(RelayInteractionOrigin.RealOpening))
-                : AsNullable(_transport.FetchAsync(before.ManifestId, RelayInteractionOrigin.RealOpening));
+            task = AsNullable(_transport.FetchAsync(before.ManifestId, RelayInteractionOrigin.RealOpening));
         }
         catch (Exception exception)
         {
@@ -508,6 +545,26 @@ internal sealed partial class ManifestPresentationCoordinator : IDisposable
                 operationResult,
                 exception),
             $"{action} result verification");
+    }
+
+    private void ShowLegacyOpening(ManifestRun run, LegacyOpeningSnapshot legacy)
+    {
+        RequireProfile(run);
+        run.LegacyOpening = legacy;
+        run.Stage = legacy.Committed ? ManifestClientStage.Terminal : ManifestClientStage.Decision;
+        if (run.PresentationDetached)
+        {
+            End(run, legacy.Committed ? LegacyOpeningPresentation.Summary(legacy) : "Your saved opening is unchanged; resume it from the Broker.", false);
+            return;
+        }
+        Action? resume = legacy.Committed ? null : () =>
+        {
+            if (!IsCurrentAt(run, ManifestClientStage.Decision)) return;
+            Dispatch(run, ManifestEconomicAction.OpenTicket, before: null, legacy.CaseId);
+        };
+        if (!_overlay.ShowDossier(LegacyOpeningPresentation.Summary(legacy),
+                () => End(run, null, false), resume))
+            End(run, "Your saved opening remains in the server ledger. Check Mechanic's Messenger for delivered items.", false);
     }
 
     private void HandleOperationSnapshot(
@@ -1622,9 +1679,6 @@ internal sealed partial class ManifestPresentationCoordinator : IDisposable
     private static async Task<ManifestSnapshot?> AsNullable(Task<ManifestSnapshot> task) =>
         await task.ConfigureAwait(false);
 
-    private static async Task<ManifestSnapshot?> AsSnapshot(Task<ManifestCurrentState> task) =>
-        (await task.ConfigureAwait(false)).Snapshot;
-
     private static string PendingTitle(ManifestEconomicAction action) => action switch
     {
         ManifestEconomicAction.OpenTicket => "COMMITTING MANIFEST TICKET",
@@ -1677,6 +1731,7 @@ internal sealed partial class ManifestPresentationCoordinator : IDisposable
         public ManifestClientStage Stage { get; set; } = ManifestClientStage.Probing;
         public ManifestSnapshot? Snapshot { get; set; }
         public ManifestOpeningOddsSnapshot? OpeningOdds { get; set; }
+        public LegacyOpeningSnapshot? LegacyOpening { get; set; }
         public ManifestSnapshot? BeforeAction { get; set; }
         public ManifestEconomicAction? PendingAction { get; set; }
         public ManifestRevealPresentation? Reveal { get; set; }

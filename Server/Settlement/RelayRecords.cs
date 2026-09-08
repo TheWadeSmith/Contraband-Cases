@@ -45,7 +45,8 @@ public sealed class RelaySettlementRecord
         RelayRecordStatus status,
         DateTimeOffset? committedAtUtc,
         IEnumerable<Item>? inputItems = null,
-        RarityLadderVersion rarityLadderVersion = RarityLadderVersion.FiveTier)
+        RarityLadderVersion rarityLadderVersion = RarityLadderVersion.FiveTier,
+        ManifestClaimPreparedPayload? mailDelivery = null)
     {
         if (originCaseId.IsEmpty || stakeRootId.IsEmpty)
         {
@@ -160,6 +161,10 @@ public sealed class RelaySettlementRecord
         Status = status;
         CommittedAtUtc = committedAtUtc;
         RarityLadderVersion = rarityLadderVersion;
+        if (mailDelivery is not null && (action != RelayRecordAction.Relay || outputs.Length == 0))
+            throw new ArgumentException("Only a winning Relay payout can have mail evidence.", nameof(mailDelivery));
+        LegacyRewardMail.Validate(mailDelivery, _outputItems, preparedAtUtc, status == RelayRecordStatus.Committed);
+        MailDelivery = mailDelivery;
     }
 
     public MongoId OriginCaseId { get; }
@@ -184,6 +189,12 @@ public sealed class RelaySettlementRecord
     public RelayRecordStatus Status { get; }
     public DateTimeOffset? CommittedAtUtc { get; }
     public RarityLadderVersion RarityLadderVersion { get; }
+    public ManifestClaimPreparedPayload? MailDelivery { get; }
+
+    public RelaySettlementRecord WithMailDelivery(ManifestClaimPreparedPayload mailDelivery) => new(
+        OriginCaseId, StakeRootId, InputItemIds, InputRewardId, InputRarity, Stage, Action, KeyId,
+        Outcome, OutputRewardId, OutputItems, MeterBefore, MeterAfter, GuaranteedUpgrade,
+        ProfileCommitStarted, PreparedAtUtc, Status, CommittedAtUtc, InputItems, RarityLadderVersion, mailDelivery);
 
     public RelaySettlementRecord BeginProfileCommit(IEnumerable<Item>? locatedOutputItems = null) => Copy(
         locatedOutputItems ?? OutputItems,
@@ -221,7 +232,8 @@ public sealed class RelaySettlementRecord
             status,
             committedAtUtc,
             InputItems,
-            RarityLadderVersion);
+            RarityLadderVersion,
+            MailDelivery is null || !profileCommitStarted ? MailDelivery : LegacyRewardMail.MarkApplied(MailDelivery));
 }
 
 internal static class SettlementItemTrees

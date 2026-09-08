@@ -24,10 +24,10 @@ public sealed class NewRewardPackTests
 
     public static readonly TheoryData<string, string, double, int> PackFiles = new()
     {
-        { "natalya.field-gear.json", "natalya.field-gear", 0.22, 6 },
-        { "natalya.elite-armor.json", "natalya.elite-armor", 0.06, 9 },
-        { "isb-aishi.field-armory.json", "isb-aishi.field-armory", 0.18, 6 },
-        { "isb-aishi.elite-armory.json", "isb-aishi.elite-armory", 0.07, 12 }
+        { "natalya.field-gear.json", "natalya.field-gear", 0.22, 9 },
+        { "natalya.elite-armor.json", "natalya.elite-armor", 0.06, 12 },
+        { "isb-aishi.field-armory.json", "isb-aishi.field-armory", 0.18, 9 },
+        { "isb-aishi.elite-armory.json", "isb-aishi.elite-armory", 0.07, 16 }
     };
 
     [Theory]
@@ -122,31 +122,14 @@ public sealed class NewRewardPackTests
         int expectedLotCount)
     {
         var pack = new JsonRewardPackLoader().LoadFile(RewardPackPath(fileName));
-        if (pack.RetiredLotIds.Count > 0)
-        {
-            var real = InstalledOptionalPackCompatibilityTests.ReadCatalog(expectedProviderId);
-            Assert.Equal(pack.Lots.Count - pack.RetiredLotIds.Count, real.FreshOpeningLots.Count);
-            return;
-        }
-        var templates = pack.RequiredTemplateIds
-            .Select(id => Template(id))
-            .ToArray();
-        var core = MinimalCorePack();
-        var coreTemplate = Template(CoreTemplateId);
-        var builder = new CargoCatalogSnapshotBuilder(
-            Resolver(templates),
-            Evaluator(templates),
-            new CargoPackRequirementValidator(
-                id => id == CoreTemplateId
-                    ? coreTemplate
-                    : templates.FirstOrDefault(t => t.Id.ToString() == id),
-                _ => null).Validate);
-
-        var snapshot = builder.Build(core, [pack]);
-
+        // Real declared clones and native presets validate the assembled gear,
+        // including mandatory armor inserts and legal native companion items.
+        var snapshot = InstalledOptionalPackCompatibilityTests.ReadCatalog(expectedProviderId);
         Assert.Empty(snapshot.SkippedPacks);
-        var resolved = snapshot.Lots.Where(lot => lot.Identity.ProviderId == expectedProviderId).ToArray();
-        Assert.Equal(expectedLotCount, resolved.Length);
+        Assert.Equal(expectedLotCount, pack.Lots.Count);
+        var resolved = snapshot.Lots.Where(lot => ShipmentEconomy.IsCompact(lot.Identity.LotId)).ToArray();
+        Assert.Equal(pack.Lots.Where(lot => ShipmentEconomy.IsCompact(lot.LotId)).Select(lot => lot.LotId).Order(),
+            resolved.Select(lot => lot.Identity.LotId).Order());
         Assert.All(resolved, lot =>
         {
             Assert.True(lot.Evaluation.HandbookValue > 0);

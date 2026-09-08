@@ -1,6 +1,6 @@
 # Source build and publication scope
 
-This repository contains the **0.4.11 source**, built against compatible SPT
+This repository contains the **0.4.12 source**, built against compatible SPT
 4.1.3 server SDK packages and offline-validated with SPT 4.1.5 game data.
 It is not an installable mod archive or a standalone Unity game project.
 
@@ -32,16 +32,20 @@ $gameManaged = 'D:/Your-SPT/EscapeFromTarkov_Data/Managed'
 $bepInExCore = 'D:/Your-SPT/BepInEx/core'
 dotnet build ContrabandCases.sln -c Release "-p:GameManagedPath=$gameManaged" "-p:BepInExCorePath=$bepInExCore"
 pwsh -NoProfile -File tools/Capture-OptionalPackFixture.ps1 -RuntimeRoot 'D:/Your-SPT/SPT_Runtime' -OutputPath 'Tests/Fixtures/optional-mod-templates.json'
+pwsh -NoProfile -File tools/Capture-CuratedRewardFixture.ps1 -RuntimeRoot 'D:/Your-SPT/SPT_Runtime' -OutputPath 'Tests/Fixtures/curated-mod-templates.json'
 dotnet test Tests/ContrabandCases.Tests.csproj -c Release "-p:GameManagedPath=$gameManaged" "-p:BepInExCorePath=$bepInExCore"
 ```
 
-The fixture capture additionally requires compatible Amonya, ISB-Aishi, Natalya
-and WTT-ContentBackport installations. It reads their clone/override definitions;
-it does not run mod hooks or modify the game. The generated template/preset
-capture is local-only and gitignored because it contains third-party data.
+The optional fixture requires compatible Amonya, ISB-Aishi, Natalya and
+WTT-ContentBackport installations. The curated fixture additionally uses
+Eco Attachment Emporium, Eco WW2 Pack, Krackasourus Anime/Pokemon/Yu-Gi-Oh Cards,
+SJX Stims/Elite Stims and the supported CoolerStims definitions. The scripts
+read clone/override data, not profiles; they do not execute mod hooks, launch
+the server or modify game files. Both generated template/preset captures are
+local-only and gitignored because they contain third-party data.
 Without those optional mods, run the base suite with
-`--filter 'FullyQualifiedName!~InstalledOptionalPackCompatibilityTests&FullyQualifiedName!~NewRewardPackTests&FullyQualifiedName!~ExpandedModRewardPackTests'`
-instead (the latter two classes also exercise this fixture).
+`--filter 'FullyQualifiedName!~InstalledOptionalPackCompatibilityTests&FullyQualifiedName!~NewRewardPackTests&FullyQualifiedName!~ExpandedModRewardPackTests&FullyQualifiedName!~CuratedRewardIntegrationTests'`
+instead. These four classes exercise the generated local fixtures.
 Do not report that filtered run as full optional-integration verification.
 
 The dotnet commands restore dependencies. Use `--no-restore` only after a successful
@@ -78,25 +82,28 @@ directory contains defaults, not a copy of a live profile's configuration.
 
 ## Verification status
 
-The complete development workspace passed **1,575 automated tests**, a clean
-Release build, native cargo/cash audits and candidate/canonical package validation
-for 0.4.11. Coverage includes original paid-reward identities, generation-separated
-Relay, actual shipment quantities, full-stash/quote-change cash claim retries,
-explicit retirement, optional armor presets and resale estimates.
-Client parsers accept the full native cargo library and all 13 corrected rewards
-in the local optional-definition fixture. No game assemblies, generated captures
-or build outputs are included in this source repository.
+The complete development workspace passed **1,701 automated tests in three
+consecutive runs**, a clean Release build, cargo/cash projections and
+candidate/canonical package validation for 0.4.12. **205 focused tests** also
+passed repeatedly against isolated installed SPT 4.1.5 libraries. Coverage
+includes Messenger partial collection and duplicate protection, native save
+acknowledgement, schema-8/legacy recovery, compact rewards and scoped flea policy.
+No game assemblies, generated captures or build outputs are published here.
 
-The curated public checkout was also tested with a newly generated local
-fixture: **1,575 passed, zero failed/skipped**. The full packaging regression
-passes in the provisioned workspace. Full in-game claim/layout checks remain.
+The public-source checkout also passed all **1,701 tests, zero failed/skipped**,
+using freshly generated local fixtures and the documented game/BepInEx path
+overrides. Those captures remain ignored and are not part of the commit.
+
+The full packaging regression passes in the provisioned workspace. Full in-game
+delivery/collection/layout acceptance remains pending; these automated checks
+are not a substitute for live gameplay.
 
 The Unity 2022.3.43f1 case/key bundles are unchanged. Sound and model orientation
-were confirmed in-game on a preceding installed build. This rebalance still needs
+were confirmed in-game on a preceding installed build. This update still needs
 in-game acceptance; offline projections do not execute optional-mod hooks or prove
-live inventory placement. Four optional integrations are corrected in this release;
-other incompatible or absent content still fails closed. Automated checks are
-not a crash-free guarantee.
+live collection behavior. Incompatible or absent content fails closed. Automated
+checks are not a crash-free guarantee. The original client hang/restart-crash has
+not been conclusively resolved by gameplay testing.
 
 The install ZIP and checksum are published separately as GitHub release assets.
 Use the install ZIP, not GitHub's automatically generated source archive, to

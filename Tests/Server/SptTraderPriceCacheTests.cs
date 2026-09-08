@@ -8,13 +8,18 @@ using Microsoft.Extensions.Logging;
 using Color = Spectre.Console.Color;
 using SPTarkov.Common.Models.Logging;
 using SPTarkov.Server.Core.Helpers.Profile;
+using SPTarkov.Server.Core.Helpers.Items;
+using SPTarkov.Server.Core.Helpers.Ragfair;
 using SPTarkov.Server.Core.Models.Common;
 using SPTarkov.Server.Core.Models.Eft.Common;
 using SPTarkov.Server.Core.Models.Eft.Common.Tables;
+using SPTarkov.Server.Core.Models.Eft.Ragfair;
 using SPTarkov.Server.Core.Models.Enums;
 using SPTarkov.Server.Core.Models.Spt.Config;
 using SPTarkov.Server.Core.Models.Spt.Tables;
 using SPTarkov.Server.Core.Services.Ragfair;
+using SPTarkov.Server.Core.Services.Items;
+using SPTarkov.Server.Core.Utils;
 using SPTarkov.Server.Core.Utils.Cloners;
 using Xunit;
 
@@ -23,6 +28,229 @@ namespace ContrabandCases.Tests.Server;
 public sealed class SptTraderPriceCacheTests
 {
     private const string Unrelated = "eeeeeeeeeeeeeeeeeeeeeeee";
+
+    [Theory]
+    [InlineData(false)]
+    [InlineData(true)]
+    public async Task Native_flea_validation_honors_early_owned_exclusions_after_price_mod_reenables_items(bool bsgListEnabled)
+    {
+        var fixture = new Fixture();
+        // Replay native startup order: preload exclusions, native price load,
+        // then a pricing-mod postfix restoring flags from its provisional baseline.
+        // RagfairCallbacks immediately generates offers before the final catalog hook.
+        ContrabandFleaPolicy.RegisterExclusions(fixture.FleaConfig);
+        fixture.Ragfair.Load();
+        fixture.FleaConfig.Dynamic.Blacklist.EnableBsgList = bsgListEnabled;
+        foreach (var item in fixture.Templates.Items.Values)
+        {
+            item.Properties!.CanSellOnRagfair = true;
+            fixture.Templates.Prices[item.Id] = fixture.Entry(item.Id).Price!.Value * 1.2;
+        }
+
+        foreach (var id in CaseContracts.Templates.Append(ModConstants.KeyTemplateId))
+        {
+            Assert.False(fixture.FleaHelper.IsItemValidRagfairItem(new(true, fixture.Templates.Items[id])));
+            Assert.Contains((MongoId)id, fixture.FleaConfig.Dynamic.Barter.ItemTplBlacklist);
+        }
+        Assert.True(fixture.FleaHelper.IsItemValidRagfairItem(new(true, fixture.Templates.Items[Unrelated])));
+
+        await fixture.Start();
+
+        Assert.Equal(bsgListEnabled, fixture.FleaConfig.Dynamic.Blacklist.EnableBsgList);
+        Assert.All(CaseContracts.Templates, id =>
+            Assert.Equal((double)fixture.Coordinator.GetCaseSnapshot(id).CasePrice!, fixture.Templates.Prices[id]));
+        Assert.Equal(14_400d, fixture.Templates.Prices[Unrelated]);
+    }
+
+    [Fact]
+    public void Repeated_native_exclusion_registration_preserves_existing_sets_and_unrelated_entries()
+    {
+        var fixture = new Fixture();
+        var custom = fixture.FleaConfig.Dynamic.Blacklist.Custom;
+        var barter = fixture.FleaConfig.Dynamic.Barter.ItemTplBlacklist;
+        custom.Add(Unrelated);
+        barter.Add(Unrelated);
+
+        ContrabandFleaPolicy.RegisterExclusions(fixture.FleaConfig);
+        ContrabandFleaPolicy.RegisterExclusions(fixture.FleaConfig);
+
+        Assert.Same(custom, fixture.FleaConfig.Dynamic.Blacklist.Custom);
+        Assert.Same(barter, fixture.FleaConfig.Dynamic.Barter.ItemTplBlacklist);
+        Assert.Equal(7, custom.Count);
+        Assert.Equal(7, barter.Count);
+        Assert.Contains((MongoId)Unrelated, custom);
+        Assert.Contains((MongoId)Unrelated, barter);
+    }
+
+    [Theory]
+    [InlineData("dynamic")]
+    [InlineData("custom")]
+    [InlineData("barter")]
+    [InlineData("barter-list")]
+    public void Missing_native_config_fails_before_mutating_an_existing_exclusion_set(string defect)
+    {
+        var fixture = new Fixture();
+        var custom = fixture.FleaConfig.Dynamic.Blacklist.Custom;
+        var barter = fixture.FleaConfig.Dynamic.Barter.ItemTplBlacklist;
+        switch (defect)
+        {
+            case "dynamic": fixture.FleaConfig.Dynamic = null!; break;
+            case "custom": fixture.FleaConfig.Dynamic.Blacklist.Custom = null!; break;
+            case "barter": fixture.FleaConfig.Dynamic.Barter = null!; break;
+            case "barter-list": fixture.FleaConfig.Dynamic.Barter.ItemTplBlacklist = null!; break;
+        }
+
+        Assert.Throws<InvalidOperationException>(() => ContrabandFleaPolicy.RegisterExclusions(fixture.FleaConfig));
+
+        Assert.Empty(custom);
+        Assert.Empty(barter);
+    }
+
+    [Fact]
+    public void Null_native_config_is_rejected() =>
+        Assert.Throws<ArgumentNullException>(() => ContrabandFleaPolicy.RegisterExclusions(null!));
+
+    [Theory]
+    [InlineData("packed")]
+    [InlineData("extra-child")]
+    [InlineData("missing-assort")]
+    [InlineData("missing-barter")]
+    [InlineData("empty-barter")]
+    [InlineData("foreign-currency")]
+    [InlineData("null-price")]
+    [InlineData("nan-price")]
+    [InlineData("zero-price")]
+    public void Malformed_owned_Mechanic_offer_fails_before_repricing_or_removing_any_offer(string defect)
+    {
+        var fixture = new Fixture();
+        var fake = fixture.AddOffer(CaseContracts.CashCache, OfferCreator.FakePlayer);
+        var offer = fixture.AddOffer(ModConstants.CaseTemplateId, OfferCreator.Trader,
+            Traders.MECHANIC, ModConstants.MechanicCaseAssortRootId);
+        var scheme = fixture.Assort.BarterScheme[ModConstants.MechanicCaseAssortRootId];
+        switch (defect)
+        {
+            case "packed": offer.SellInOnePiece = true; break;
+            case "extra-child": offer.Items!.Add(new Item { Id = new MongoId(), Template = Unrelated }); break;
+            case "missing-assort": fixture.Assort.Items.Clear(); break;
+            case "missing-barter": fixture.Assort.BarterScheme.Clear(); break;
+            case "empty-barter": scheme.Clear(); break;
+            case "foreign-currency": scheme[0][0].Template = Money.DOLLARS; break;
+            case "null-price": scheme[0][0].Count = null; break;
+            case "nan-price": scheme[0][0].Count = double.NaN; break;
+            case "zero-price": scheme[0][0].Count = 0; break;
+        }
+
+        var exception = Assert.Throws<InvalidOperationException>(() =>
+            ContrabandFleaPolicy.FinalizeStartup(fixture.Templates, fixture.Traders, fixture.FleaConfig, fixture.Offers));
+
+        Assert.Contains("cached owned Mechanic", exception.Message);
+        Assert.Same(fake, fixture.Offers.GetOfferById(fake.Id));
+        Assert.Equal(1_000d, Assert.Single(offer.Requirements!).Count);
+        Assert.Empty(fixture.FleaConfig.Dynamic.Blacklist.Custom);
+    }
+
+    [Fact]
+    public void Startup_cleanup_is_repeatable_and_preserves_unknown_creator_offers()
+    {
+        var fixture = new Fixture();
+        var unknown = fixture.AddOffer(CaseContracts.CashCache, OfferCreator.Player);
+        unknown.CreatedBy = null; // No proof this is a generated fake seller: do not remove it.
+        var fake = fixture.AddOffer(ModConstants.KeyTemplateId, OfferCreator.FakePlayer);
+
+        Assert.Equal(1, ContrabandFleaPolicy.FinalizeStartup(fixture.Templates, fixture.Traders, fixture.FleaConfig, fixture.Offers));
+        Assert.Equal(0, ContrabandFleaPolicy.FinalizeStartup(fixture.Templates, fixture.Traders, fixture.FleaConfig, fixture.Offers));
+
+        Assert.Same(unknown, Assert.Single(fixture.Offers.GetOffers()));
+        Assert.Null(fixture.Offers.GetOfferById(fake.Id));
+    }
+
+    [Fact]
+    public void Startup_cleanup_handles_large_native_offer_cache_without_changing_unrelated_offers()
+    {
+        var fixture = new Fixture();
+        fixture.FleaConfig.Dynamic.OfferItemCount["default"] = new MinMax<int> { Min = 20_000, Max = 20_000 };
+        var unrelated = Enumerable.Range(0, 10_000).Select(_ => fixture.AddOffer(Unrelated, OfferCreator.FakePlayer)).ToArray();
+        var key = fixture.AddOffer(ModConstants.KeyTemplateId, OfferCreator.FakePlayer);
+
+        Assert.Equal(1, ContrabandFleaPolicy.FinalizeStartup(fixture.Templates, fixture.Traders, fixture.FleaConfig, fixture.Offers));
+
+        Assert.Null(fixture.Offers.GetOfferById(key.Id));
+        Assert.Equal(10_000, fixture.Offers.GetOffers().Count);
+        Assert.All(unrelated, offer => Assert.Same(offer, fixture.Offers.GetOfferById(offer.Id)));
+    }
+
+    [Fact]
+    public async Task Startup_restores_owned_flea_exclusions_without_changing_global_blacklist_policy()
+    {
+        var fixture = new Fixture();
+        fixture.FleaConfig.Dynamic.Blacklist.Custom.Add(Unrelated);
+        foreach (var item in fixture.Templates.Items.Values)
+        {
+            item.Properties!.CanSellOnRagfair = true;
+            item.Properties.CanRequireOnRagfair = true;
+        }
+
+        await fixture.Start();
+
+        Assert.False(fixture.FleaConfig.Dynamic.Blacklist.EnableBsgList);
+        Assert.Contains((MongoId)Unrelated, fixture.FleaConfig.Dynamic.Blacklist.Custom);
+        foreach (var id in CaseContracts.Templates.Append(ModConstants.KeyTemplateId))
+        {
+            Assert.False(fixture.Templates.Items[id].Properties!.CanSellOnRagfair);
+            Assert.False(fixture.Templates.Items[id].Properties!.CanRequireOnRagfair);
+            Assert.Contains((MongoId)id, fixture.FleaConfig.Dynamic.Blacklist.Custom);
+            Assert.Contains((MongoId)id, fixture.FleaConfig.Dynamic.Barter.ItemTplBlacklist);
+        }
+        Assert.True(fixture.Templates.Items[Unrelated].Properties!.CanSellOnRagfair);
+        Assert.True(fixture.Templates.Items[Unrelated].Properties!.CanRequireOnRagfair);
+    }
+
+    [Fact]
+    public async Task Startup_removes_owned_fake_and_expired_listings_but_preserves_player_and_other_trader_offers()
+    {
+        var fixture = new Fixture();
+        var fake = fixture.AddOffer(CaseContracts.CashCache, OfferCreator.FakePlayer);
+        fixture.Offers.FlagOfferAsExpired(fake.Id);
+        var key = fixture.AddOffer(ModConstants.KeyTemplateId, OfferCreator.FakePlayer);
+        var barter = fixture.AddOffer(Unrelated, OfferCreator.FakePlayer);
+        barter.Requirements = [new OfferRequirement { TemplateId = ModConstants.KeyTemplateId, Count = 1 }];
+        var player = fixture.AddOffer(CaseContracts.Operations, OfferCreator.Player);
+        var trader = fixture.AddOffer(CaseContracts.BlackSite, OfferCreator.Trader);
+
+        await fixture.Start();
+
+        Assert.Null(fixture.Offers.GetOfferById(fake.Id));
+        Assert.Null(fixture.Offers.GetOfferById(key.Id));
+        Assert.Null(fixture.Offers.GetOfferById(barter.Id));
+        Assert.Empty(fixture.Offers.GetStaleOfferIds());
+        Assert.Empty(fixture.Offers.GetExpiredOfferItems());
+        Assert.Same(player, fixture.Offers.GetOfferById(player.Id));
+        Assert.Same(trader, fixture.Offers.GetOfferById(trader.Id));
+        Assert.Equal(1_000d, trader.SummaryCost);
+    }
+
+    [Fact]
+    public async Task Startup_reprices_cached_Mechanic_offer_without_replacing_identity_stock_or_other_listings()
+    {
+        var fixture = new Fixture("""{ "fixedCasePrice": 1000000, "therapistSellPriceCase": 500000 }""");
+        var offer = fixture.AddOffer(ModConstants.CaseTemplateId, OfferCreator.Trader, Traders.MECHANIC,
+            ModConstants.MechanicCaseAssortRootId);
+        var other = fixture.AddOffer(Unrelated, OfferCreator.Trader, Traders.MECHANIC);
+        var initialId = offer.Id;
+        var initialQuantity = offer.Quantity;
+
+        await fixture.Start();
+
+        Assert.Same(offer, fixture.Offers.GetOfferById(initialId));
+        Assert.Equal(initialQuantity, offer.Quantity);
+        Assert.Equal(1_000_000d, Assert.Single(offer.Requirements!).Count);
+        Assert.Equal(Money.ROUBLES, Assert.Single(offer.Requirements!).TemplateId);
+        Assert.Equal(1_000_000d, offer.RequirementsCost);
+        Assert.Equal(1_000_000d, offer.SummaryCost);
+        Assert.Equal(fixture.Handbook.GetTemplatePrice(ModConstants.CaseTemplateId), offer.ItemsCost);
+        Assert.Same(other, fixture.Offers.GetOfferById(other.Id));
+        Assert.Equal(1_000d, other.SummaryCost);
+    }
 
     [Fact]
     public async Task Startup_updates_warm_trader_and_handbook_caches_for_every_case()
@@ -220,6 +448,23 @@ public sealed class SptTraderPriceCacheTests
         public RagfairPriceService Ragfair { get; }
         public CatalogSnapshotCoordinator Coordinator { get; }
         public TraderAssort Assort { get; } = new() { Items = [], BarterScheme = [], LoyalLevelItems = [] };
+        public RagfairConfig FleaConfig { get; } = new()
+        {
+            Traders = [], Sell = null!, TieredFlea = null!, RunIntervalValues = null!,
+            Dynamic = new Dynamic
+            {
+                Blacklist = new RagfairBlacklist { Custom = [], CustomItemCategoryList = [], ArmorPlate = null! },
+                Barter = new BarterDetails { ItemTplBlacklist = [], ItemTypeBlacklist = [] },
+                Pack = null!, OfferAdjustment = null!, OfferItemCount = new() { ["default"] = new MinMax<int> { Min = 10, Max = 10 } },
+                PriceRanges = null!, IgnoreQualityPriceVarianceBlacklist = [], EndTimeSeconds = null!,
+                Condition = [], StackablePercent = null!, NonStackableCount = null!, Rating = null!,
+                Armor = null!, OfferCurrencyChangePercent = [], ShowAsSingleStack = [],
+                UnreasonableModPrices = [], ItemPriceOverrideRouble = [], GenerateBaseFleaPrices = new()
+            }
+        };
+        public RagfairOfferHolder Offers { get; }
+        public RagfairServerHelper FleaHelper { get; }
+        public TradersTable Traders { get; }
 
         public Fixture(string configJson = "{}")
         {
@@ -241,7 +486,13 @@ public sealed class SptTraderPriceCacheTests
             Handbook = new HandbookHelper(new QuietLogger<HandbookHelper>(), Templates,
                 ItemConfig, new HandbookCloner());
             Ragfair = new RagfairPriceService(null!, Templates, null!, null!, Handbook,
-                null!, null!, null!, null!, null!);
+                null!, null!, null!, null!, FleaConfig);
+            var itemHelper = new ItemHelper(new QuietLogger<ItemHelper>(), Templates, null!, Handbook,
+                new ItemBaseClassService(new QuietLogger<ItemBaseClassService>(), Templates, null!),
+                new ItemFilterService(ItemConfig), null!, null!, null!);
+            FleaHelper = new RagfairServerHelper(null!, new TradersTable(), new RandomUtil(null!, null!), null!, itemHelper,
+                null!, null!, null!, FleaConfig, null!);
+            Offers = new RagfairOfferHolder(new QuietLogger<RagfairOfferHolder>(), FleaHelper, null!, itemHelper);
             var catalog = CaseCatalogTests.Snapshot(new[]
             {
                 CaseCatalogTests.Lot("core", "arsenal", "rifle"),
@@ -259,19 +510,37 @@ public sealed class SptTraderPriceCacheTests
             ContrabandContentDefinitions.ApplyMechanicOffers(Assort,
                 ContrabandContentDefinitions.CreateMechanicOffers(
                     ContrabandContentDefinitions.CalculateRegistrationPrices(Config), Config));
+            Traders = new TradersTable
+            {
+                [SPTarkov.Server.Core.Models.Enums.Traders.MECHANIC] = new Trader
+                    { Assort = Assort, Base = null!, Dialogue = [], QuestAssort = null! }
+            };
         }
 
         public HandbookItem Entry(string id) => Templates.Handbook.Items.Single(item => item.Id == (MongoId)id);
+
+        public RagfairOffer AddOffer(string template, OfferCreator creator, MongoId? userId = null, MongoId? rootId = null)
+        {
+            var root = rootId ?? new MongoId();
+            var offer = new RagfairOffer
+            {
+                Id = new MongoId(), Root = root, CreatedBy = creator,
+                User = new RagfairOfferUser { Id = userId ?? new MongoId(),
+                    MemberType = creator == OfferCreator.Trader ? MemberCategory.Trader : MemberCategory.Default },
+                Items = [new Item { Id = root, Template = template, Upd = new Upd { StackObjectsCount = 3 } }],
+                Requirements = [new OfferRequirement { TemplateId = Money.ROUBLES, Count = 1_000 }],
+                ItemsCost = 1_000, RequirementsCost = 1_000, SummaryCost = 1_000, Quantity = 3
+            };
+            Offers.AddOffer(offer);
+            return offer;
+        }
 
         public Task Start()
         {
             var state = new ContrabandContentState();
             state.Initialize(Config);
-            var traders = new TradersTable
-            {
-                [Traders.MECHANIC] = new Trader { Assort = Assort, Base = null!, Dialogue = [], QuestAssort = null! }
-            };
-            return new CatalogStartupBarrier(Coordinator, state, Templates, traders, Handbook, Ragfair,
+            return new CatalogStartupBarrier(Coordinator, state, Templates, Traders, Handbook, Ragfair,
+                FleaConfig, Offers,
                 RaidLoot.Locations, RaidLoot.Bots, RaidLoot.Pmc,
                 new QuietLogger<CatalogStartupBarrier>()).OnLoadAsync(CancellationToken.None);
         }

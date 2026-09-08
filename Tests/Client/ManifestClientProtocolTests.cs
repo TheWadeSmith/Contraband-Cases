@@ -14,6 +14,26 @@ public sealed class ManifestClientProtocolTests
     private const string RecoveryCaseItemId = "aaaaaaaaaaaaaaaaaaaaaaaa";
 
     [Fact]
+    public void Messenger_delivery_marker_is_terminal_only_and_legacy_grants_stay_legacy()
+    {
+        var terminal = TerminalSnapshot();
+        Assert.False(ManifestSnapshotEnvelope.Parse(Envelope(terminal), ManifestId).DeliveredToMessenger);
+        terminal["openingTier"] = "Normal";
+        terminal["premiumChoices"] = new JArray();
+        Assert.False(ManifestSnapshotEnvelope.Parse(Envelope(terminal), ManifestId).DeliveredToMessenger);
+        terminal["deliveredToMessenger"] = true;
+        Assert.True(ManifestSnapshotEnvelope.Parse(Envelope(terminal), ManifestId).DeliveredToMessenger);
+        var pending = OfferSnapshot();
+        pending["deliveredToMessenger"] = true;
+        Assert.Throws<ManifestSnapshotException>(() => ManifestSnapshotEnvelope.Parse(Envelope(pending), ManifestId));
+        foreach (var invalid in new JToken[] { "true", 1, JValue.CreateNull() })
+        {
+            terminal["deliveredToMessenger"] = invalid;
+            Assert.Throws<ManifestSnapshotException>(() => ManifestSnapshotEnvelope.Parse(Envelope(terminal), ManifestId));
+        }
+    }
+
+    [Fact]
     public void Optional_resale_is_distinct_from_legacy_handbook_field_and_missing_is_not_zero()
     {
         var offer = OfferSnapshot();

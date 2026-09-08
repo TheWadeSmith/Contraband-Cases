@@ -1370,6 +1370,25 @@ internal sealed class RouletteController : IDisposable
         run.PendingAction = null;
         run.PendingStakeRootId = null;
 
+        if (receipt.DeliveredToMessenger)
+        {
+            run.Committed = committed ?? throw new InventorySnapshotException("The mailed Relay reward identity is unavailable.");
+            run.Terminal = true; // End this presentation, not the server's collected physical chain.
+            if (!_phase.TryResolvePending(run.Token))
+                throw new RelaySnapshotException("The mail delivery returned in an invalid phase.");
+            StopPending(run);
+            if (run.Cleanup.PresentationDetached)
+            {
+                _phase.TryClose(run.Token);
+                run.Cleanup.ReleaseGate();
+                return;
+            }
+            _sprites.TryGetValue(run.Committed.Reward.Id, out var mailSprite);
+            if (!_overlay.ShowRelayTerminal(run.Committed.Reward, mailSprite, receipt, () => Close(run)))
+                CloseTerminalWithoutPresentation(run);
+            return;
+        }
+
         if (outcome == RelayOutcome.Confiscated)
         {
             run.Terminal = true;

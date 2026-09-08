@@ -439,9 +439,10 @@ public sealed class ManifestCurrentState
 {
     internal ManifestCurrentState(
         ManifestSnapshot? snapshot,
-        ManifestOpeningOddsSnapshot? openingOdds)
+        ManifestOpeningOddsSnapshot? openingOdds,
+        LegacyOpeningSnapshot? legacyOpening = null)
     {
-        if ((snapshot is null) == (openingOdds is null))
+        if ((snapshot is null ? 0 : 1) + (openingOdds is null ? 0 : 1) + (legacyOpening is null ? 0 : 1) != 1)
         {
             throw new ArgumentException(
                 "Current Manifest state must contain exactly one snapshot or opening-odds disclosure.");
@@ -449,11 +450,30 @@ public sealed class ManifestCurrentState
 
         Snapshot = snapshot;
         OpeningOdds = openingOdds;
+        LegacyOpening = legacyOpening;
     }
 
     public ManifestSnapshot? Snapshot { get; }
 
     public ManifestOpeningOddsSnapshot? OpeningOdds { get; }
+    public LegacyOpeningSnapshot? LegacyOpening { get; }
+}
+
+public sealed class LegacyOpeningSnapshot
+{
+    internal LegacyOpeningSnapshot(string caseId, string rewardId, bool committed, bool deliveredToMessenger)
+    {
+        if (!RelaySnapshotEnvelope.IsMongoId(caseId) || deliveredToMessenger && !committed)
+            throw new ManifestSnapshotException("The saved legacy opening has invalid delivery evidence.");
+        CaseId = caseId;
+        RewardId = ManifestProtocolValidation.RequireIdentifier(rewardId, nameof(rewardId));
+        Committed = committed;
+        DeliveredToMessenger = deliveredToMessenger;
+    }
+    public string CaseId { get; }
+    public string RewardId { get; }
+    public bool Committed { get; }
+    public bool DeliveredToMessenger { get; }
 }
 
 public sealed class ManifestSnapshot
@@ -482,7 +502,8 @@ public sealed class ManifestSnapshot
         string? recoveryCaseItemId,
         string caseTemplateId = ModConstants.CaseTemplateId,
         ManifestOpeningTier openingTier = ManifestOpeningTier.Normal,
-        IEnumerable<ManifestLotSnapshot>? premiumChoices = null)
+        IEnumerable<ManifestLotSnapshot>? premiumChoices = null,
+        bool deliveredToMessenger = false)
     {
         CaseTemplateId = CaseContracts.Require(caseTemplateId);
         OpeningTier = openingTier;
@@ -506,6 +527,7 @@ public sealed class ManifestSnapshot
         LatestReceipt = latestReceipt;
         MissingContentBlocked = missingContentBlocked;
         RecoveryCaseItemId = recoveryCaseItemId;
+        DeliveredToMessenger = deliveredToMessenger;
     }
 
     public int ProtocolVersion { get; }
@@ -543,6 +565,8 @@ public sealed class ManifestSnapshot
     public ManifestRelayReceiptSnapshot? LatestReceipt { get; }
 
     public bool MissingContentBlocked { get; }
+
+    public bool DeliveredToMessenger { get; }
 
     public string? RecoveryCaseItemId { get; }
 

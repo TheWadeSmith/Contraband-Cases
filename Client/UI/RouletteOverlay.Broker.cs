@@ -206,7 +206,7 @@ internal sealed partial class RouletteOverlay
             buttons.Add(card);
         }
         var selectedLot = snapshot.PremiumChoices[index];
-        BrokerLabel("ChoiceTerms", "Choosing keeps this whole package and gives up the other two.\nNext: claim the items, or risk the package on Relay.", 24, 1120, 80, 0, -290);
+        BrokerLabel("ChoiceTerms", "Choosing keeps this whole package and gives up the other two.\nNext: send it to Messenger, or risk the package on Relay.", 24, 1120, 80, 0, -290);
         buttons.Add(BrokerButton("Choose", "Choose This Package", -365, choose, close, 365, true));
         buttons.Add(BrokerButton("Details", "Package Details", 32,
             () => ShowBrokerDetails("Package details", BrokerPresentation.PackageDetails(selectedLot),
@@ -470,10 +470,10 @@ internal sealed partial class RouletteOverlay
         if (!BeginBrokerPanel($"Offer {snapshot.CurrentOrdinal} of 3", BrokerPresentation.CaseName(snapshot.CaseTemplateId))) return false;
         BrokerPackage(snapshot.CurrentLot!);
         BrokerLabel("Decision", snapshot.AvailableActions.CanBurn
-            ? "Choose this package, or permanently discard it to reveal the next offer.\nChoosing takes you to Claim Items or Relay. No extra key to claim."
+            ? "Choose this package, or permanently discard it to reveal the next offer.\nNext: Send to Messenger or Relay. No extra key for delivery."
             : snapshot.CurrentOrdinal >= 3
-                ? "Final offer — choose this package to continue to Claim Items or Relay.\nNo extra key to claim."
-                : "The next offer is unavailable. This package is still safe to choose.\nNo extra key to claim.", 26, 1120, 120, 0, -191);
+                ? "Final offer — choose this package to continue to Messenger or Relay.\nNo extra key for delivery."
+                : "The next offer is unavailable. This package is still safe to choose.\nNo extra key for Messenger delivery.", 26, 1120, 120, 0, -191);
         BrokerFavor(snapshot);
         var accept = BrokerButton("Keep", "Choose This Package", -440, keep, close, 280, true);
         var burn = BrokerButton("Discard", "Discard & Reveal Next", -105, discard, close, 360);
@@ -493,13 +493,14 @@ internal sealed partial class RouletteOverlay
     {
         if (!snapshot.AvailableActions.CanClaim) throw new InvalidOperationException("No safe claim was published.");
         var cash = snapshot.CaseTemplateId == CaseContracts.CashCache;
-        if (!BeginBrokerPanel(retry ? "Make room to claim" : cash ? "Your cash payout" : "Your package",
-                retry ? "Your reward is saved • Make space in your stash, then retry" : "Claim at no extra cost")) return false;
+        if (!BeginBrokerPanel(retry ? "Delivery pending" : cash ? "Your cash payout" : "Your package",
+                "Mechanic will send attachments • Collect items at your own pace")) return false;
         BrokerPackage(snapshot.CurrentLot!);
-        BrokerLabel("DecisionTerms", cash ? "Collect the exact payout shown. No discard or Relay." :
-            BrokerPresentation.RelayEssentials(snapshot), 24, 1120, 150, 0, -193);
+        BrokerLabel("DecisionTerms", cash ? "Send the exact payout to Mechanic's Messenger thread. No discard or Relay." :
+            BrokerPresentation.RelayEssentials(snapshot) + "\nDelivery is free. Nothing goes directly into your stash.", 24, 1120, 150, 0, -193);
         BrokerFavor(snapshot);
-        var accept = BrokerButton("Secure", retry ? "Retry Claim" : cash ? "Collect Payout" : "Claim Items", -440, claim, close, 280, true);
+        var accept = BrokerButton("Secure", retry ? "Retry Delivery" : "Send to Messenger", -440, claim, close, 280, true);
+        accept.GetComponentInChildren<Text>().fontSize = 22;
         var buttons = new List<Button> { accept };
         if (snapshot.AvailableActions.CanRelay)
         {
@@ -512,7 +513,10 @@ internal sealed partial class RouletteOverlay
         }
         buttons.Add(BrokerButton("Details", "Details", 180,
             () => ShowBrokerDetails("Package & Relay details", BrokerPresentation.PackageDetails(snapshot.CurrentLot!) +
-                "\n\n" + BuildRelayDisclosure(snapshot), () => ShowBrokerEntitlement(snapshot, retry, claim, relay, close)), close, 180));
+                "\n\nDelivery is through Mechanic in Messenger. Collect attachments individually as space allows. " +
+                "Remaining attachments last 10 years; deleting the message discards them. " +
+                "Save & Close leaves an unsent prize pending; it does not reroll it.\n\n" +
+                BuildRelayDisclosure(snapshot), () => ShowBrokerEntitlement(snapshot, retry, claim, relay, close)), close, 180));
         buttons.Add(BrokerButton("Save", "Save & Close", 430, close, close, 270));
         LinkBrokerControls(close, buttons.ToArray());
         Select(accept);

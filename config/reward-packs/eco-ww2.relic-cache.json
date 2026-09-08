@@ -5,14 +5,20 @@
   "displayLabel": "Eco WW2 Pack Relic Cache",
   "providerWeight": 0.05,
   "requiredTemplateIds": [
-    "6a06febcf86e3e091872c104",
+    "590c60fc86f77412b13fddcf",
+    "601948682627df266209af05",
+    "5efb0cabfb3e451d70735af5",
+    "6a0cf4b799dfd9edaca1daae",
     "6a06fa8af86e3e091872c100",
     "6a06fad8f86e3e091872c102",
+    "6a06febcf86e3e091872c104",
     "6a0ce40499dfd9edaca1daa9",
     "6a0df23142723bcd0581cf82",
     "6a1ee17009ef9baf4bd3193b"
   ],
-  "requiredPresetIds": [],
+  "requiredPresetIds": [
+
+  ],
   "requiredBundleKeys": [],
   "lots": [
     {
@@ -394,6 +400,96 @@
         {
           "kind": "template",
           "templateId": "6a1ee17009ef9baf4bd3193b",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        }
+      ]
+    },
+    {
+      "lotId": "tommy-gun-relic.shipment-v1.compact-v1",
+      "displayName": "Tommy Gun Relic Package",
+      "purpose": "One Thompson M1928A1 with a separate compatible drum magazine, 50 .45 ACP AP rounds and a Taiga survival machete. Fit the supplied magazine before using the weapon.",
+      "familyId": "weapon-relic",
+      "trackId": "relic-expedition",
+      "anchorTemplateId": "6a06febcf86e3e091872c104",
+      "weight": 1,
+      "usePath": {
+        "kind": "raidRole",
+        "roleId": "close-quarters"
+      },
+      "recipe": [
+        {
+          "kind": "template",
+          "templateId": "6a06febcf86e3e091872c104",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "6a06fad8f86e3e091872c102",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5efb0cabfb3e451d70735af5",
+          "instanceCount": 1,
+          "stackCountPerInstance": 50
+        },
+        {
+          "kind": "template",
+          "templateId": "601948682627df266209af05",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        }
+      ]
+    },
+    {
+      "lotId": "k98k-sniper-relic.shipment-v1.compact-v1",
+      "displayName": "K98K Sniper Relic Package",
+      "purpose": "One K98K with a separate compatible ZF39 scope, trench magazine and 40 matched rounds. Includes a Taiga machete and an empty document case. Fit the supplied magazine and scope before the raid.",
+      "familyId": "weapon-relic",
+      "trackId": "relic-expedition",
+      "anchorTemplateId": "6a0ce40499dfd9edaca1daa9",
+      "weight": 0.9,
+      "usePath": {
+        "kind": "raidRole",
+        "roleId": "precision-overwatch"
+      },
+      "recipe": [
+        {
+          "kind": "template",
+          "templateId": "6a0ce40499dfd9edaca1daa9",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "6a0df23142723bcd0581cf82",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "6a1ee17009ef9baf4bd3193b",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "6a0cf4b799dfd9edaca1daae",
+          "instanceCount": 1,
+          "stackCountPerInstance": 40
+        },
+        {
+          "kind": "template",
+          "templateId": "601948682627df266209af05",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "590c60fc86f77412b13fddcf",
           "instanceCount": 1,
           "stackCountPerInstance": 1
         }

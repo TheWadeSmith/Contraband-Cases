@@ -5,17 +5,19 @@
   "displayLabel": "Natalya Elite Armor",
   "providerWeight": 0.06,
   "requiredTemplateIds": [
-    "67e179c99591ffcd472a270a",
-    "67497be97777fb29ca1f9610",
+    "591094e086f7747caa7bb2ef",
+    "674815ec0e1737c294820e25",
+    "674815ecb107ad4bd99235e4",
     "674815eccc95c1ad849a9b75",
     "67497be972de11201fc07de5",
+    "67497be97777fb29ca1f9610",
     "67e179c97ded878d55fb8d4c",
-    "674815ecb107ad4bd99235e4",
-    "674815ec0e1737c294820e25"
+    "67e179c99591ffcd472a270a"
   ],
   "requiredPresetIds": [
-    "690e0eee62373b43846feb27",
-    "690dd23f50cb1ea00ba11202"
+    "657666ca303700411c0242c6",
+    "690dd23f50cb1ea00ba11202",
+    "690e0eee62373b43846feb27"
   ],
   "requiredBundleKeys": [],
   "lots": [
@@ -535,6 +537,91 @@
           "templateId": "674815ec0e1737c294820e25",
           "instanceCount": 6,
           "stackCountPerInstance": 1
+        }
+      ]
+    },
+    {
+      "lotId": "gen-pro-six-plate-carrier.compatible-v1.shipment-v1.compact-v1",
+      "displayName": "Gen Pro 6 Plate Carrier Package",
+      "purpose": "One assembled premium modded armor or helmet, with the named distinct accessories. No duplicate armor pieces.",
+      "familyId": "operator",
+      "trackId": "recon",
+      "anchorTemplateId": "67e179c99591ffcd472a270a",
+      "weight": 1,
+      "usePath": {
+        "kind": "raidRole",
+        "roleId": "elite-operator"
+      },
+      "recipe": [
+        {
+          "kind": "preset",
+          "presetId": "690e0eee62373b43846feb27"
+        }
+      ]
+    },
+    {
+      "lotId": "gen-pro-six-reserve.compatible-v1.shipment-v1.compact-v1",
+      "displayName": "Gen Pro 6 Reserve Package",
+      "purpose": "One assembled premium modded armor or helmet, with the named distinct accessories. No duplicate armor pieces.",
+      "familyId": "operator",
+      "trackId": "recon",
+      "anchorTemplateId": "674815eccc95c1ad849a9b75",
+      "weight": 0.6,
+      "usePath": {
+        "kind": "raidRole",
+        "roleId": "elite-operator"
+      },
+      "recipe": [
+        {
+          "kind": "template",
+          "templateId": "674815eccc95c1ad849a9b75",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "preset",
+          "presetId": "690e0eee62373b43846feb27"
+        },
+        {
+          "kind": "template",
+          "templateId": "591094e086f7747caa7bb2ef",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        }
+      ]
+    },
+    {
+      "lotId": "ops-core-mk6-package.compatible-v1.shipment-v1.compact-v1",
+      "displayName": "Ops-Core Mk6 Package",
+      "purpose": "One assembled premium modded armor or helmet, with the named distinct accessories. No duplicate armor pieces.",
+      "familyId": "operator",
+      "trackId": "recon",
+      "anchorTemplateId": "674815ec0e1737c294820e25",
+      "weight": 0.8,
+      "usePath": {
+        "kind": "raidRole",
+        "roleId": "elite-operator"
+      },
+      "recipe": [
+        {
+          "kind": "template",
+          "templateId": "674815ec0e1737c294820e25",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "674815ecb107ad4bd99235e4",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "preset",
+          "presetId": "690dd23f50cb1ea00ba11202"
+        },
+        {
+          "kind": "preset",
+          "presetId": "657666ca303700411c0242c6"
         }
       ]
     }

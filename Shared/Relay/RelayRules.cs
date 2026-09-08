@@ -281,6 +281,7 @@ public static class RelayEconomyAnalyzer
 
 public sealed class RelayReceipt
 {
+    public bool DeliveredToMessenger { get; init; }
     public string Action { get; init; } = string.Empty;
     public string Outcome { get; init; } = string.Empty;
     public string StakeRootId { get; init; } = string.Empty;

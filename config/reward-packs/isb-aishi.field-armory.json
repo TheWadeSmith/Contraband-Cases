@@ -5,14 +5,19 @@
   "displayLabel": "ISB Aishi Field Armory",
   "providerWeight": 0.18,
   "requiredTemplateIds": [
-    "699aae8c9b6a4ab2b769c4a3",
-    "699aad8c961ebda759f9e7fe",
-    "699aab526ac4f65528f1fd63",
+    "591094e086f7747caa7bb2ef",
+    "5d235bb686f77443f4331278",
+    "628e4e576d783146b124c64d",
     "699aab2519b875a27d6ec5d3",
-    "6a1267fd0580910d4ffbdec0",
-    "6a12643e06424c709d450e7c"
+    "699aab526ac4f65528f1fd63",
+    "699aad8c961ebda759f9e7fe",
+    "699aae8c9b6a4ab2b769c4a3",
+    "6a12643e06424c709d450e7c",
+    "6a1267fd0580910d4ffbdec0"
   ],
-  "requiredPresetIds": [],
+  "requiredPresetIds": [
+    "657666ca303700411c0242c6"
+  ],
   "requiredBundleKeys": [],
   "lots": [
     {
@@ -352,6 +357,135 @@
         {
           "kind": "template",
           "templateId": "6a12643e06424c709d450e7c",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        }
+      ]
+    },
+    {
+      "lotId": "sidearm-resupply.shipment-v1.compact-v1",
+      "displayName": "Sidearm Resupply Package",
+      "purpose": "Two distinct legal modded ammunition stacks with plated protection, communications and an armor repair kit. An armory reserve, not loose ammunition spam.",
+      "familyId": "field-supply",
+      "trackId": "ammo",
+      "anchorTemplateId": "699aad8c961ebda759f9e7fe",
+      "weight": 1,
+      "usePath": {
+        "kind": "raidRole",
+        "roleId": "close-quarters"
+      },
+      "recipe": [
+        {
+          "kind": "template",
+          "templateId": "699aad8c961ebda759f9e7fe",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "699aae8c9b6a4ab2b769c4a3",
+          "instanceCount": 1,
+          "stackCountPerInstance": 20
+        },
+        {
+          "kind": "template",
+          "templateId": "591094e086f7747caa7bb2ef",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "preset",
+          "presetId": "657666ca303700411c0242c6"
+        },
+        {
+          "kind": "template",
+          "templateId": "628e4e576d783146b124c64d",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        }
+      ]
+    },
+    {
+      "lotId": "big-bore-resupply.shipment-v1.compact-v1",
+      "displayName": "Big Bore Resupply Package",
+      "purpose": "Two distinct legal modded ammunition stacks with plated protection, communications and an armor repair kit. An armory reserve, not loose ammunition spam.",
+      "familyId": "field-supply",
+      "trackId": "ammo",
+      "anchorTemplateId": "699aab2519b875a27d6ec5d3",
+      "weight": 1,
+      "usePath": {
+        "kind": "raidRole",
+        "roleId": "close-quarters"
+      },
+      "recipe": [
+        {
+          "kind": "template",
+          "templateId": "699aab2519b875a27d6ec5d3",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "699aab526ac4f65528f1fd63",
+          "instanceCount": 1,
+          "stackCountPerInstance": 50
+        },
+        {
+          "kind": "template",
+          "templateId": "591094e086f7747caa7bb2ef",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "preset",
+          "presetId": "657666ca303700411c0242c6"
+        },
+        {
+          "kind": "template",
+          "templateId": "628e4e576d783146b124c64d",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        }
+      ]
+    },
+    {
+      "lotId": "day-pack-loadout.shipment-v1.compact-v1",
+      "displayName": "Day Pack Loadout Package",
+      "purpose": "One modded day pack and its companion equipment with plated armor, communications and an empty SICC pouch.",
+      "familyId": "operator",
+      "trackId": "recon",
+      "anchorTemplateId": "6a12643e06424c709d450e7c",
+      "weight": 0.8,
+      "usePath": {
+        "kind": "raidRole",
+        "roleId": "quartermaster"
+      },
+      "recipe": [
+        {
+          "kind": "template",
+          "templateId": "6a12643e06424c709d450e7c",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "6a1267fd0580910d4ffbdec0",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "preset",
+          "presetId": "657666ca303700411c0242c6"
+        },
+        {
+          "kind": "template",
+          "templateId": "628e4e576d783146b124c64d",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5d235bb686f77443f4331278",
           "instanceCount": 1,
           "stackCountPerInstance": 1
         }

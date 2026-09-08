@@ -67,7 +67,9 @@ public static class ManifestEconomyReport
                     })).ToArray()
             };
         }).ToArray();
-        var nonLegendary = rows.Count(row => row.Grade != "Legendary");
+        // Historical lots remain in the detailed recovery report, but must not
+        // inflate the Relay coverage advertised for the current opening pool.
+        var currentNonLegendary = rows.Where(row => row.AvailableForFreshOpening && row.Grade != "Legendary").ToArray();
         var analysis = catalog.OpeningEnabled ? new ManifestEconomyAnalysis(catalog) : null;
         var automaticPrice = analysis is null ? (long?)null : ManifestCatalogEconomy.CalculateAutomaticPrices(catalog).CasePrice;
         return new
@@ -93,7 +95,8 @@ public static class ManifestEconomyReport
             OptimalKeepDiscardAndRelayScenarios = analysis is null ? [] :
                 new[] { 0m, 25_000m, 65_000m }.SelectMany(cost =>
                     new[] { 1, 20 }.SelectMany(count => analysis.Analyze(count, cost))).ToArray(),
-            RelayEligibleNonLegendaryPercent = nonLegendary == 0 ? 0 : 100m * rows.Count(row => row.RelayEligible) / nonLegendary,
+            RelayEligibleNonLegendaryPercent = currentNonLegendary.Length == 0 ? 0 :
+                100m * currentNonLegendary.Count(row => row.RelayEligible) / currentNonLegendary.Length,
             Caveat = "Reference values, not trader cash payouts. Per-lot Relay rows are one-step comparisons. Optimal scenarios use risk-neutral keep/discard and Relay decisions, visible category clues, persistent Favor, every consumed key, and a finite horizon with no salvage value for unused Favor. Break-even case price is a reference-value ceiling, not a recommended sale price or guaranteed profit. Keys are find-only; costs are scenarios. Diagnostic reporting never changes exact selection odds or saved entitlements.",
             Families = lots.GroupBy(lot => CargoFamilies.SelectionFamily(lot.Identity.FamilyId)).Select(group => new
             {
@@ -109,10 +112,10 @@ public static class ManifestEconomyReport
                 t != ModConstants.CaseTemplateId && t != CaseContracts.CashCache).Select(t =>
             {
                 var view = CaseCatalogs.ForCase(catalog, t);
-                var eligible = view.Lots.Count(lot => lot.Evaluation.Grade != RewardRarity.BlackLabel &&
+                var eligible = view.FreshOpeningLots.Count(lot => lot.Evaluation.Grade != RewardRarity.BlackLabel &&
                     selector.CreateRelayCandidatesForStage(view, new ManifestEntitlementSnapshot(
                         lot.Evaluation.Grade, lot.Identity, lot.Forest, lot.Fingerprint), 1).Count > 0);
-                var nonLegendaryCount = view.Lots.Count(lot => lot.Evaluation.Grade != RewardRarity.BlackLabel);
+                var nonLegendaryCount = view.FreshOpeningLots.Count(lot => lot.Evaluation.Grade != RewardRarity.BlackLabel);
                 return new
                 {
                     view.CaseTemplateId,

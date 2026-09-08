@@ -1,11 +1,40 @@
 using ContrabandCases.Server.Catalog;
 using ContrabandCases.Shared.Catalog;
+using System.Text.Json;
 using Xunit;
 
 namespace ContrabandCases.Tests.Server;
 
 public sealed class ManifestEconomyAnalysisTests
 {
+    [Fact]
+    public void Relay_coverage_summary_excludes_recovery_only_reward_generations()
+    {
+        var lots = new[] { "arsenal", "operator", "field-supply" }.SelectMany(family =>
+            new[] { "a", "b", "c" }.SelectMany(name =>
+            {
+                var id = family + "-" + name;
+                var oldGrade = name == "c" ? RewardRarity.BlackLabel : RewardRarity.Restricted;
+                var oldValue = name == "c" ? 200 : 100;
+                return new[]
+                {
+                    Lot(id, family, oldValue, oldGrade),
+                    Lot(id + ".shipment-v1", family, oldValue, oldGrade),
+                    Lot(id + ".shipment-v1.compact-v1", family, 100, RewardRarity.Restricted)
+                };
+            }));
+        var report = JsonSerializer.SerializeToElement(ManifestEconomyReport.Create(Catalog(lots)));
+        var rows = report.GetProperty("Lots").EnumerateArray().ToArray();
+
+        Assert.Contains(rows, row => !row.GetProperty("AvailableForFreshOpening").GetBoolean() &&
+            row.GetProperty("RelayEligible").GetBoolean());
+        Assert.All(rows.Where(row => row.GetProperty("AvailableForFreshOpening").GetBoolean()),
+            row => Assert.False(row.GetProperty("RelayEligible").GetBoolean()));
+        Assert.Equal(0, report.GetProperty("RelayEligibleNonLegendaryPercent").GetDecimal());
+        Assert.All(report.GetProperty("ThemedCases").EnumerateArray(),
+            view => Assert.Equal(0, view.GetProperty("RelayEligibleNonLegendaryPercent").GetDecimal()));
+    }
+
     [Fact]
     public void First_offer_policy_does_not_receive_the_optimal_discard_advantage()
     {

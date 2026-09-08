@@ -44,6 +44,7 @@ public sealed class ContrabandContentLoader(
     TemplateTable templates,
     TradersTable traders,
     InventoryConfig inventoryConfig,
+    RagfairConfig ragfairConfig,
     ModHelper modHelper,
     ServerRewardCatalog rewardCatalog,
     ContrabandContentState contentState,
@@ -52,6 +53,9 @@ public sealed class ContrabandContentLoader(
     public Task OnLoadAsync(CancellationToken cancellationToken)
     {
         cancellationToken.ThrowIfCancellationRequested();
+        // Register before native flea generation/its barter cache, not only after
+        // final catalog prices: other mods may opt out of the BSG item blacklist.
+        ContrabandFleaPolicy.RegisterExclusions(ragfairConfig);
         ContrabandContentDefinitions.EnsureNativeRandomLootRouteUnavailable(
             inventoryConfig.RandomLootContainers
             ?? throw new InvalidOperationException("SPT random loot container configuration is unavailable."));

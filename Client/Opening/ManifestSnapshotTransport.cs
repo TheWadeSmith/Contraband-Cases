@@ -15,12 +15,18 @@ internal sealed class ManifestSnapshotTransport
         ManifestSnapshotParser.ParseLibrary(await PostJson(ModConstants.ManifestLibraryRoute, "{}", "catalog and dossier").ConfigureAwait(false));
 
     public Task<ManifestCurrentState> FetchCurrentAsync(RelayInteractionOrigin origin,
-        string caseTemplateId = ModConstants.CaseTemplateId)
+        string caseTemplateId = ModConstants.CaseTemplateId, string? caseItemId = null)
     {
         RequireTransportAuthority(origin);
+        var request = new Dictionary<string, string> { ["caseTemplateId"] = CaseContracts.Require(caseTemplateId) };
+        if (!string.IsNullOrEmpty(caseItemId))
+        {
+            if (!RelaySnapshotEnvelope.IsMongoId(caseItemId)) throw new ManifestSnapshotException("The requested saved case ID is invalid.");
+            request["caseItemId"] = caseItemId!;
+        }
         return ParseCurrentAsync(PostJson(
             ModConstants.ManifestCurrentRoute,
-            JsonConvert.SerializeObject(new { caseTemplateId = CaseContracts.Require(caseTemplateId) }),
+            JsonConvert.SerializeObject(request),
             "current Manifest discovery"));
     }
 

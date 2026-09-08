@@ -24,16 +24,20 @@ internal static class ManifestGallery
     public static ManifestSnapshot Create(ManifestLotSnapshot source, GalleryState state, bool longName)
     {
         var lot = DisplayLot(source, longName);
+        var granted = state == GalleryState.Claimed;
         if (lot.ProviderId == CashPayouts.Provider)
-            return new ManifestSnapshot(ManifestSnapshot.CurrentProtocolVersion, new string('f', 24), ManifestPhase.Entitlement,
-                1, 1, 1, false, RarityLadderVersion.FiveTier, null, true, 0, 3,
-                new[] { new ManifestFamilySealSnapshot(1, lot.FamilyId, "Cash payout", ManifestRiskBand.Mixed, true, false, true) }, lot,
-                new ManifestAvailableActionsSnapshot(false, false, true, false, false, 1, ManifestPhase.Entitlement, 1),
-                null, null, false, null, CaseContracts.CashCache);
+        {
+            var cashPhase = granted ? ManifestPhase.Granted : ManifestPhase.Entitlement;
+            return new ManifestSnapshot(ManifestSnapshot.CurrentProtocolVersion, new string('f', 24), cashPhase,
+                1, 1, 1, granted, RarityLadderVersion.FiveTier, null, true, 0, 3,
+                new[] { new ManifestFamilySealSnapshot(1, lot.FamilyId, "Cash payout", ManifestRiskBand.Mixed, true, false, true) },
+                granted ? null : lot,
+                new ManifestAvailableActionsSnapshot(false, false, !granted, false, false, 1, cashPhase, 1),
+                null, null, false, null, CaseContracts.CashCache, deliveredToMessenger: granted);
+        }
         var ordinal = state == GalleryState.Offer2 ? 2 : 1;
         var offer = state is GalleryState.Offer1 or GalleryState.Offer2;
         var confiscated = state == GalleryState.Confiscated;
-        var granted = state == GalleryState.Claimed;
         var terminal = confiscated || granted;
         var replacement = state == GalleryState.Replacement;
         var phase = confiscated ? ManifestPhase.Confiscated : granted ? ManifestPhase.Granted :
@@ -56,6 +60,7 @@ internal static class ManifestGallery
             replacement || confiscated ? new ManifestRelayReceiptSnapshot(1,
                 confiscated ? ManifestRelayResult.Confiscated : ManifestRelayResult.Sidegrade,
                 "Previous preview reward", lot.Grade, confiscated ? null : lot.DisplayName,
-                confiscated ? null : lot.Grade, 0, favor) : null, false, null);
+                confiscated ? null : lot.Grade, 0, favor) : null, false, null,
+            deliveredToMessenger: granted);
     }
 }

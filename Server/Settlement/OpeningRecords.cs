@@ -30,7 +30,8 @@ public sealed class CaseOpeningRecord
         DateTimeOffset preparedAtUtc,
         OpeningRecordStatus status,
         DateTimeOffset? committedAtUtc,
-        RarityLadderVersion rarityLadderVersion = RarityLadderVersion.FiveTier)
+        RarityLadderVersion rarityLadderVersion = RarityLadderVersion.FiveTier,
+        ManifestClaimPreparedPayload? mailDelivery = null)
     {
         if (string.IsNullOrWhiteSpace(rewardId))
         {
@@ -82,6 +83,8 @@ public sealed class CaseOpeningRecord
         Status = status;
         CommittedAtUtc = committedAtUtc;
         RarityLadderVersion = rarityLadderVersion;
+        LegacyRewardMail.Validate(mailDelivery, _rewardItems, preparedAtUtc, status == OpeningRecordStatus.Committed);
+        MailDelivery = mailDelivery;
     }
 
     public MongoId CaseId { get; }
@@ -94,6 +97,11 @@ public sealed class CaseOpeningRecord
     public DateTimeOffset? CommittedAtUtc { get; }
     public OpeningRecordStatus Status { get; }
     public RarityLadderVersion RarityLadderVersion { get; }
+    public ManifestClaimPreparedPayload? MailDelivery { get; }
+
+    public CaseOpeningRecord WithMailDelivery(ManifestClaimPreparedPayload mailDelivery) => new(
+        CaseId, KeyId, RewardId, RewardItems.ToList(), PreparedAtUtc, Status, CommittedAtUtc,
+        RarityLadderVersion, mailDelivery);
 
     public CaseOpeningRecord Commit(DateTimeOffset committedAtUtc) =>
         new(
@@ -104,7 +112,8 @@ public sealed class CaseOpeningRecord
             PreparedAtUtc,
             OpeningRecordStatus.Committed,
             committedAtUtc,
-            RarityLadderVersion);
+            RarityLadderVersion,
+            MailDelivery);
 
     internal static Item CloneItem(Item item)
     {
@@ -664,6 +673,8 @@ public sealed class CaseOpeningJournal
         CaseOpeningRecord active,
         CaseOpeningRecord replacement)
     {
+        LegacyRewardMail.ValidateReplacement(active.MailDelivery, replacement.MailDelivery,
+            active.Status == OpeningRecordStatus.Committed);
         if (active.KeyId != replacement.KeyId ||
             !string.Equals(active.RewardId, replacement.RewardId, StringComparison.Ordinal) ||
             active.RarityLadderVersion != replacement.RarityLadderVersion ||
@@ -704,6 +715,8 @@ public sealed class CaseOpeningJournal
         RelaySettlementRecord active,
         RelaySettlementRecord replacement)
     {
+        LegacyRewardMail.ValidateReplacement(active.MailDelivery, replacement.MailDelivery,
+            active.Status == RelayRecordStatus.Committed);
         if (active.OriginCaseId != replacement.OriginCaseId ||
             !active.InputItemIds.SequenceEqual(replacement.InputItemIds) ||
             !string.Equals(active.InputRewardId, replacement.InputRewardId, StringComparison.Ordinal) ||
@@ -941,6 +954,7 @@ public sealed class CaseOpeningJournal
             !committed.ProfileCommitStarted ||
             prepared.PreparedAtUtc != committed.PreparedAtUtc ||
             prepared.CommitGeneration != committed.CommitGeneration ||
+            prepared.Delivery != committed.Delivery ||
             !string.Equals(
                 prepared.CommitPredecessorHash,
                 committed.CommitPredecessorHash,
@@ -1263,6 +1277,16 @@ public sealed class CaseOpeningJournal
         if (activeClaim.ProfileCommitStarted && !replacementClaim.ProfileCommitStarted)
         {
             throw new InvalidOperationException("A prepared Claim profile-commit marker cannot move backward.");
+        }
+
+        if (activeClaim.Delivery != replacementClaim.Delivery)
+        {
+            if (activeClaim.Delivery != ClaimDeliveryKind.LegacyInventory ||
+                replacementClaim.Delivery != ClaimDeliveryKind.Messenger ||
+                activeClaim.ProfileCommitStarted != replacementClaim.ProfileCommitStarted)
+                throw new InvalidOperationException("Claim delivery cannot move backward or rewrite commit evidence.");
+            RequireExactItemEvidence(activeClaim.Items, replacementClaim.Items, "migrated Claim item evidence");
+            return;
         }
 
         if (!activeClaim.ProfileCommitStarted && !replacementClaim.ProfileCommitStarted)

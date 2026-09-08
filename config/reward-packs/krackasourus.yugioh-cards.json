@@ -5,6 +5,11 @@
   "displayLabel": "Krackasourus Yu-Gi-Oh Cards",
   "providerWeight": 0.12,
   "requiredTemplateIds": [
+    "59fafd4b86f7745ca07e1232",
+    "5c0126f40db834002a125382",
+    "5d235bb686f77443f4331278",
+    "601948682627df266209af05",
+    "6389c8fb46b54c634724d847",
     "669c7c89721191eae60910d9",
     "669c812e721191eae60910e1",
     "669c812e721191eae60910ec",
@@ -15,7 +20,9 @@
     "669c812e721191eae6091145",
     "669c812e721191eae609114a"
   ],
-  "requiredPresetIds": [],
+  "requiredPresetIds": [
+
+  ],
   "requiredBundleKeys": [],
   "lots": [
     {
@@ -701,6 +708,326 @@
         {
           "kind": "template",
           "templateId": "669c812e721191eae609114a",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        }
+      ]
+    },
+    {
+      "lotId": "swords-of-revealing-light.shipment-v1.compact-v1",
+      "displayName": "Swords of Revealing Light Package",
+      "purpose": "A curated selection of different collectible cards plus a valuable Silicon Optoelectronic Integrated Circuits textbook for the collection.",
+      "familyId": "field-supply",
+      "trackId": "yugioh-cards",
+      "anchorTemplateId": "669c812e721191eae6091145",
+      "weight": 1,
+      "usePath": {
+        "kind": "collection",
+        "containerTemplateId": "669c7c89721191eae60910d9",
+        "collectionId": "yugioh-cards"
+      },
+      "recipe": [
+        {
+          "kind": "template",
+          "templateId": "669c812e721191eae6091145",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "669c812e721191eae609112d",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "669c812e721191eae6091133",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "6389c8fb46b54c634724d847",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        }
+      ]
+    },
+    {
+      "lotId": "pot-of-greed.shipment-v1.compact-v1",
+      "displayName": "Pot of Greed Package",
+      "purpose": "A curated selection of different collectible cards plus a valuable Silicon Optoelectronic Integrated Circuits textbook for the collection.",
+      "familyId": "field-supply",
+      "trackId": "yugioh-cards",
+      "anchorTemplateId": "669c812e721191eae609112d",
+      "weight": 1,
+      "usePath": {
+        "kind": "collection",
+        "containerTemplateId": "669c7c89721191eae60910d9",
+        "collectionId": "yugioh-cards"
+      },
+      "recipe": [
+        {
+          "kind": "template",
+          "templateId": "669c812e721191eae609112d",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "669c812e721191eae6091133",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "669c812e721191eae60910ec",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "6389c8fb46b54c634724d847",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        }
+      ]
+    },
+    {
+      "lotId": "red-eyes-black-dragon.shipment-v1.compact-v1",
+      "displayName": "Red-Eyes Black Dragon Package",
+      "purpose": "A curated selection of different collectible cards plus a key tool for the collector. Cards and tool are separate attachments.",
+      "familyId": "field-supply",
+      "trackId": "yugioh-cards",
+      "anchorTemplateId": "669c812e721191eae6091133",
+      "weight": 0.75,
+      "usePath": {
+        "kind": "collection",
+        "containerTemplateId": "669c7c89721191eae60910d9",
+        "collectionId": "yugioh-cards"
+      },
+      "recipe": [
+        {
+          "kind": "template",
+          "templateId": "669c812e721191eae6091133",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "669c812e721191eae6091145",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "59fafd4b86f7745ca07e1232",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        }
+      ]
+    },
+    {
+      "lotId": "blue-eyes-white-dragon.shipment-v1.compact-v1",
+      "displayName": "Blue-Eyes White Dragon Package",
+      "purpose": "A curated selection of different collectible cards plus a key tool for the collector. Cards and tool are separate attachments.",
+      "familyId": "field-supply",
+      "trackId": "yugioh-cards",
+      "anchorTemplateId": "669c812e721191eae60910e1",
+      "weight": 0.75,
+      "usePath": {
+        "kind": "collection",
+        "containerTemplateId": "669c7c89721191eae60910d9",
+        "collectionId": "yugioh-cards"
+      },
+      "recipe": [
+        {
+          "kind": "template",
+          "templateId": "669c812e721191eae60910e1",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "669c812e721191eae6091145",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "59fafd4b86f7745ca07e1232",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        }
+      ]
+    },
+    {
+      "lotId": "dark-magician.shipment-v1.compact-v1",
+      "displayName": "Dark Magician Package",
+      "purpose": "Dark Magician, Exodia and Red-Eyes cards with a key tool. A distinct collector equipment package.",
+      "familyId": "field-supply",
+      "trackId": "yugioh-cards",
+      "anchorTemplateId": "669c812e721191eae60910ec",
+      "weight": 0.45,
+      "usePath": {
+        "kind": "collection",
+        "containerTemplateId": "669c7c89721191eae60910d9",
+        "collectionId": "yugioh-cards"
+      },
+      "recipe": [
+        {
+          "kind": "template",
+          "templateId": "669c812e721191eae60910ec",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "669c812e721191eae60910f4",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "669c812e721191eae6091133",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "59fafd4b86f7745ca07e1232",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        }
+      ]
+    },
+    {
+      "lotId": "exodia.shipment-v1.compact-v1",
+      "displayName": "Exodia Package",
+      "purpose": "Exodia, Blue-Eyes and Pot of Greed cards with an empty SICC organizational pouch. Cards remain separate Messenger attachments.",
+      "familyId": "field-supply",
+      "trackId": "yugioh-cards",
+      "anchorTemplateId": "669c812e721191eae60910f4",
+      "weight": 0.45,
+      "usePath": {
+        "kind": "collection",
+        "containerTemplateId": "669c7c89721191eae60910d9",
+        "collectionId": "yugioh-cards"
+      },
+      "recipe": [
+        {
+          "kind": "template",
+          "templateId": "669c812e721191eae60910f4",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "669c812e721191eae60910e1",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "669c812e721191eae609112d",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5d235bb686f77443f4331278",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        }
+      ]
+    },
+    {
+      "lotId": "gaia-dragon-champion.shipment-v1.compact-v1",
+      "displayName": "Gaia the Dragon Champion Package",
+      "purpose": "A top-tier set of different collectible cards, an empty SICC pouch and a Taiga survival machete. A complete collector expedition package, individually claimable.",
+      "familyId": "field-supply",
+      "trackId": "yugioh-cards",
+      "anchorTemplateId": "669c812e721191eae6091102",
+      "weight": 0.15,
+      "usePath": {
+        "kind": "collection",
+        "containerTemplateId": "669c7c89721191eae60910d9",
+        "collectionId": "yugioh-cards"
+      },
+      "recipe": [
+        {
+          "kind": "template",
+          "templateId": "669c812e721191eae6091102",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "669c812e721191eae60910e1",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "669c812e721191eae60910ec",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5d235bb686f77443f4331278",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "601948682627df266209af05",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        }
+      ]
+    },
+    {
+      "lotId": "tri-horned-dragon.shipment-v1.compact-v1",
+      "displayName": "Tri-Horned Dragon Collector Jackpot",
+      "purpose": "A curated selection of different collectible cards plus a Red Rebel extraction relic. The jackpot is the complete selection, not multiple copies of one card.",
+      "familyId": "field-supply",
+      "trackId": "yugioh-cards",
+      "anchorTemplateId": "669c812e721191eae609114a",
+      "weight": 0.15,
+      "usePath": {
+        "kind": "collection",
+        "containerTemplateId": "669c7c89721191eae60910d9",
+        "collectionId": "yugioh-cards"
+      },
+      "recipe": [
+        {
+          "kind": "template",
+          "templateId": "669c812e721191eae609114a",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "669c812e721191eae60910ec",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "669c812e721191eae60910f4",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "669c812e721191eae6091102",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5c0126f40db834002a125382",
           "instanceCount": 1,
           "stackCountPerInstance": 1
         }
