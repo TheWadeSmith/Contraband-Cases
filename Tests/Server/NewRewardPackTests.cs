@@ -24,10 +24,10 @@ public sealed class NewRewardPackTests
 
     public static readonly TheoryData<string, string, double, int> PackFiles = new()
     {
-        { "natalya.field-gear.json", "natalya.field-gear", 0.22, 9 },
-        { "natalya.elite-armor.json", "natalya.elite-armor", 0.06, 12 },
-        { "isb-aishi.field-armory.json", "isb-aishi.field-armory", 0.18, 9 },
-        { "isb-aishi.elite-armory.json", "isb-aishi.elite-armory", 0.07, 16 }
+        { "natalya.field-gear.json", "natalya.field-gear", 0.22, 12 },
+        { "natalya.elite-armor.json", "natalya.elite-armor", 0.06, 15 },
+        { "isb-aishi.field-armory.json", "isb-aishi.field-armory", 0.18, 12 },
+        { "isb-aishi.elite-armory.json", "isb-aishi.elite-armory", 0.07, 20 }
     };
 
     [Theory]

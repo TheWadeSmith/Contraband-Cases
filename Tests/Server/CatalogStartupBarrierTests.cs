@@ -39,16 +39,16 @@ public sealed class CatalogStartupBarrierTests
             templates,
             assort);
 
-        Assert.Equal(56_000L, prices.CasePrice);
+        Assert.Equal(2_000L, prices.CasePrice);
         Assert.True(coordinator.IsStartupComplete);
         Assert.True(coordinator.IsFrozen);
         Assert.Same(catalog, coordinator.GetSnapshot());
         Assert.Same(catalog, coordinator.GetSnapshot());
         Assert.Equal(1, freezeCount);
-        Assert.Equal([56_000d, 56_000d, 56_000d], CapturePrices(templates, assort));
-        Assert.Equal(56_000d, templates.Prices[(MongoId)ModConstants.CaseTemplateId]);
+        Assert.Equal([2_000d, 2_000d, 2_000d], CapturePrices(templates, assort));
+        Assert.Equal(2_000d, templates.Prices[(MongoId)ModConstants.CaseTemplateId]);
         var published = coordinator.GetCaseSnapshot(ModConstants.CaseTemplateId);
-        Assert.Equal(56_000L, ManifestOpeningOdds.Create(published).CasePrice);
+        Assert.Equal(2_000L, ManifestOpeningOdds.Create(published).CasePrice);
         Assert.Same(published, coordinator.GetCaseSnapshot(ModConstants.CaseTemplateId));
         Assert.NotEqual(catalog.SnapshotId, published.SnapshotId);
         Assert.Equal(catalog.Lots, published.Lots);
@@ -56,8 +56,8 @@ public sealed class CatalogStartupBarrierTests
         var response = ManifestSnapshotRouter.CreateCurrentState(new CaseOpeningJournal(), published, null);
         var client = ContrabandCases.Client.Opening.ManifestSnapshotEnvelope.ParseCurrent(
             JsonSerializer.Serialize(new { err = 0, errmsg = (string?)null, data = response }));
-        Assert.Equal(56_000L, client.OpeningOdds!.CasePrice);
-        Assert.Contains("₽56,000", ManifestPresentationPolicy.OpeningSummaryText(client.OpeningOdds));
+        Assert.Equal(2_000L, client.OpeningOdds!.CasePrice);
+        Assert.Contains("₽2,000", ManifestPresentationPolicy.OpeningSummaryText(client.OpeningOdds));
     }
 
     [Fact]

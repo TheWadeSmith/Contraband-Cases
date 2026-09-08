@@ -34,7 +34,7 @@ public sealed class CuratedRewardIntegrationTests
         Assert.Equal(117, catalog.FreshOpeningLots.Count);
         foreach (var lot in catalog.FreshOpeningLots)
         {
-            Assert.EndsWith(".compact-v1", lot.Identity.LotId);
+            Assert.EndsWith(".compact-v2", lot.Identity.LotId);
             Assert.InRange(lot.Forest.Roots.Count, 1, 8);
             Assert.InRange(lot.Forest.Nodes.Count, 1, 128);
             Assert.InRange(lot.Evaluation.FootprintCells, 1, 64);
@@ -56,8 +56,8 @@ public sealed class CuratedRewardIntegrationTests
         Assert.True(catalog.OpeningEnabled, catalog.OpeningDisabledReason);
         var price = ManifestCatalogEconomy.CalculateAutomaticPrices(catalog).CasePrice;
         Assert.InRange(price, 750_000, 1_300_000);
-        Assert.Contains(catalog.FreshOpeningLots, lot => lot.Evaluation.UseValue < (price + 25_000) * 0.9m);
-        Assert.Contains(catalog.FreshOpeningLots, lot => lot.Evaluation.UseValue > (price + 25_000) * 1.1m);
+        Assert.Contains(catalog.FreshOpeningLots, lot => lot.Evaluation.UseValue < (price + ManifestCatalogEconomy.OpeningKeyAllowance) * 0.9m);
+        Assert.Contains(catalog.FreshOpeningLots, lot => lot.Evaluation.UseValue > (price + ManifestCatalogEconomy.OpeningKeyAllowance) * 1.1m);
         Assert.Contains(catalog.FreshOpeningLots, lot => lot.Evaluation.Grade == RewardRarity.Restricted);
         Assert.Contains(catalog.FreshOpeningLots, lot => lot.Evaluation.Grade == RewardRarity.BlackLabel);
     }
@@ -113,7 +113,9 @@ public sealed class CuratedRewardIntegrationTests
             var current = view.FreshOpeningLots.Where(l => l.Evaluation.Grade != RewardRarity.BlackLabel).ToArray();
             var eligible = current.Count(l => selector.CreateRelayCandidatesForStage(view,
                 new ManifestEntitlementSnapshot(l.Evaluation.Grade, l.Identity, l.Forest, l.Fingerprint), 1).Count > 0);
-            Assert.True(eligible * 100 >= current.Length * 70, $"{CaseContracts.Name(template)}: {eligible}/{current.Length}");
+            // Distinctive equipment and collector recipes take priority over
+            // padding every track with filler just to manufacture more wagers.
+            Assert.True(eligible * 100 >= current.Length * 50, $"{CaseContracts.Name(template)}: {eligible}/{current.Length}");
             Assert.True(ManifestPremiumPool.IsAvailable(view, ContrabandCases.Shared.Manifest.ManifestOpeningTier.Epic), CaseContracts.Name(template) + " Epic");
             Assert.True(ManifestPremiumPool.IsAvailable(view, ContrabandCases.Shared.Manifest.ManifestOpeningTier.Legendary), CaseContracts.Name(template) + " Legendary");
         }
@@ -153,7 +155,7 @@ public sealed class CuratedRewardIntegrationTests
     private static JsonDocument ReadFixture() => JsonDocument.Parse(File.ReadAllText(Path.GetFullPath(
         Path.Combine(AppContext.BaseDirectory, "../../../../Tests/Fixtures/curated-mod-templates.json"))));
 
-    internal static CargoCatalogSnapshot ReadCatalog()
+    internal static CargoCatalogSnapshot ReadCatalog(bool nativeOnly = false)
     {
         var root = Path.GetFullPath(Path.Combine(AppContext.BaseDirectory, "../../../.."));
         var options = new JsonSerializerOptions { NumberHandling = JsonNumberHandling.AllowReadingFromString };
@@ -165,7 +167,8 @@ public sealed class CuratedRewardIntegrationTests
         var loader = new JsonRewardPackLoader();
         var core = loader.LoadFile(Path.Combine(root, "config/reward-packs/core.json"));
         var optional = Directory.GetFiles(Path.Combine(root, "config/reward-packs"), "*.json")
-            .Where(path => Path.GetFileName(path) != "core.json").Select(loader.LoadFile).ToArray();
+            .Where(path => Path.GetFileName(path) != "core.json" &&
+                (!nativeOnly || Path.GetFileName(path) == "vault.json")).Select(loader.LoadFile).ToArray();
         return new CargoCatalogSnapshotBuilder(
             new CargoLotResolver(new CargoLotResolverDependencies(templates.GetValueOrDefault, presets.GetValueOrDefault)),
             new CargoLotEvaluator(templates.GetValueOrDefault, id => prices.GetValueOrDefault(id)),

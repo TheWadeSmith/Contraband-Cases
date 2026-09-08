@@ -28,7 +28,7 @@ public sealed class InstalledOptionalPackCompatibilityTests
             .Select(l => $"{l.Identity.LotId}: {l.Forest.Roots.Count} roots, {l.Forest.Nodes.Count} nodes, {l.Evaluation.FootprintCells} cells")));
         Assert.All(snapshot.FreshOpeningLots, lot =>
         {
-            Assert.EndsWith(".compatible-v1.shipment-v1.compact-v1", lot.Identity.LotId);
+            Assert.EndsWith(".compatible-v1.shipment-v1.compact-v2", lot.Identity.LotId);
             Assert.InRange(lot.Forest.Roots.Count, 1, 8);
             Assert.InRange(lot.Forest.Nodes.Count, 1, 128);
             Assert.InRange(lot.Evaluation.FootprintCells, 1, 64);

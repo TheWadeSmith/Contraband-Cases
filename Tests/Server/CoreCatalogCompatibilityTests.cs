@@ -14,7 +14,7 @@ public sealed class CoreCatalogCompatibilityTests
         using var current = JsonDocument.Parse(File.ReadAllText(Path.Combine(root, "config/reward-packs/core.json")));
         var currentLots = current.RootElement.GetProperty("lots").EnumerateArray()
             .ToDictionary(lot => lot.GetProperty("lotId").GetString()!);
-        Assert.Equal(150, currentLots.Count);
+        Assert.Equal(200, currentLots.Count);
         foreach (var lot in old.RootElement.GetProperty("lots").EnumerateArray())
             Assert.True(JsonElement.DeepEquals(lot, currentLots[lot.GetProperty("lotId").GetString()!]));
         foreach (var property in old.RootElement.EnumerateObject().Where(p => p.Name is not ("lots" or "requiredTemplateIds" or "requiredPresetIds")))
@@ -22,7 +22,7 @@ public sealed class CoreCatalogCompatibilityTests
         foreach (var requirement in new[] { "requiredTemplateIds", "requiredPresetIds" })
             foreach (var dependency in old.RootElement.GetProperty(requirement).EnumerateArray())
                 Assert.Contains(current.RootElement.GetProperty(requirement).EnumerateArray(), t => JsonElement.DeepEquals(t, dependency));
-        Assert.Equal(150, new JsonRewardPackLoader().LoadFile(Path.Combine(root, "config/reward-packs/core.json")).Lots.Count);
+        Assert.Equal(200, new JsonRewardPackLoader().LoadFile(Path.Combine(root, "config/reward-packs/core.json")).Lots.Count);
     }
 
     [Fact]

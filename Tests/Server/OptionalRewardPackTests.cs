@@ -25,7 +25,7 @@ public sealed class OptionalRewardPackTests
             Assert.All(pack.Lots.SelectMany(lot => lot.RecipeLines).OfType<PresetLine>(),
                 line => Assert.Contains(line.PresetId, pack.RequiredPresetIds));
             Assert.Empty(pack.RequiredBundleKeys);
-            Assert.Equal(24, pack.Lots.Count);
+            Assert.Equal(32, pack.Lots.Count);
 
             var expectedRequirements = expected.UnitValues.Keys
                 .Append(expected.ContainerTemplateId)
@@ -78,9 +78,9 @@ public sealed class OptionalRewardPackTests
 
         Assert.Equal("sjx.combat-chemistry", pack.ProviderId);
         Assert.Equal("1.0.2", pack.PackVersion);
-        Assert.Equal(20, pack.RequiredTemplateIds.Count);
-        Assert.Equal(2, pack.RequiredPresetIds.Count);
-        Assert.Equal(15, pack.Lots.Count);
+        Assert.Equal(24, pack.RequiredTemplateIds.Count);
+        Assert.Equal(3, pack.RequiredPresetIds.Count);
+        Assert.Equal(20, pack.Lots.Count);
         Assert.DoesNotContain(AmbiguousSjxHydraTemplateId, pack.RequiredTemplateIds);
         Assert.All(pack.Lots, lot => Assert.DoesNotContain(
             lot.RecipeLines.OfType<TemplateLine>(),
