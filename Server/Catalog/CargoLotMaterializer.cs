@@ -352,7 +352,14 @@ internal static class CargoTemplateRules
         "619cbf7d23893217ec30b689", // Injector case
         "5d235bb686f77443f4331278", // SICC pouch
         "590c60fc86f77412b13fddcf", // Documents case
-        "59fafd4b86f7745ca07e1232"  // Key tool
+        "59fafd4b86f7745ca07e1232", // Key tool
+        "5aafbcd986f7745e590fff23", // Medicine case
+        "59fb023c86f7746d0d4b423c", // Weapon case
+        "5b6d9ce188a4501afc1b2b25", // THICC weapon case
+        "59fb042886f7746c5005a7b2", // Item case
+        "5c0a840b86f7742ffa4f2482", // THICC item case (chase prize)
+        "5e2af55f86f7746d4159f07c", // Grenade case
+        "67600929bd0a0549d70993f6"  // Ballistic plate case
     };
 
     private static readonly HashSet<string> ExcludedAncestryIds = new(StringComparer.Ordinal)

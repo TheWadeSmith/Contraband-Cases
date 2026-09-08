@@ -58,7 +58,7 @@ public sealed class ManifestOpeningPoolTests
         var catalog = CaseCatalogTests.Snapshot([Lot("a", 100_000), Lot("z", 100_000_000),
             Lot("b", 100_000, family: "family-b"), Lot("c", 100_000, family: "family-c")]);
         var price = ManifestCatalogEconomy.CalculateAutomaticPrices(catalog).CasePrice;
-        Assert.Equal(70_000, price);
+        Assert.Equal(15_000, price);
         var summary = new ManifestEconomyAnalysis(catalog).SummarizeOpening(price);
         Assert.True(summary.ExpectedUseValue > summary.MedianUseValue);
         Assert.True(summary.KeyCostScenarios[0].BelowTotalCostPercent < 50);

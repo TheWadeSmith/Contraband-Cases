@@ -9,7 +9,7 @@ namespace ContrabandCases.Server.Catalog;
 /// </summary>
 internal sealed record ManifestOpeningPool(IReadOnlyList<ResolvedCargoLot> Lots, ExactWeightSet Weights)
 {
-    internal const string SelectionVersion = "curated-compact-opening-v4";
+    internal const string SelectionVersion = "curated-compact-opening-v5";
     internal const int ChaseShareDenominator = 400;
 
     // Historical lots remain resolvable, but component-only kits have been

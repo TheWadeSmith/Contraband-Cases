@@ -19,7 +19,14 @@ public sealed class EmptyStorageRewardTests
     [InlineData("5d235bb686f77443f4331278")]
     [InlineData("590c60fc86f77412b13fddcf")]
     [InlineData("59fafd4b86f7745ca07e1232")]
-    public void Four_useful_empty_storage_items_are_individual_prizes_not_wrappers(string id)
+    [InlineData("5aafbcd986f7745e590fff23")]
+    [InlineData("59fb023c86f7746d0d4b423c")]
+    [InlineData("5b6d9ce188a4501afc1b2b25")]
+    [InlineData("59fb042886f7746c5005a7b2")]
+    [InlineData("5c0a840b86f7742ffa4f2482")]
+    [InlineData("5e2af55f86f7746d4159f07c")]
+    [InlineData("67600929bd0a0549d70993f6")]
+    public void Allowlisted_empty_storage_items_are_individual_prizes_not_wrappers(string id)
     {
         var templates = Templates(id);
         var forest = RewardForest.Create([new RewardForestNode("root", "root", id, null, null, null, 1)]);

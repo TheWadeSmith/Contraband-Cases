@@ -8,6 +8,22 @@ namespace ContrabandCases.Tests.Server;
 public sealed class CompactRewardTests
 {
     [Fact]
+    public void Every_0_4_12_paid_recipe_is_unchanged()
+    {
+        var root = Path.GetFullPath(Path.Combine(AppContext.BaseDirectory, "../../../.."));
+        var baseline = JsonSerializer.Deserialize<Dictionary<string, Dictionary<string, string>>>(
+            File.ReadAllText(Path.Combine(root, "Tests/Fixtures/reward-pack-hashes-0.4.12.json")))!;
+        foreach (var (file, hashes) in baseline)
+        {
+            using var doc = JsonDocument.Parse(File.ReadAllText(Path.Combine(root, "config/reward-packs", file)));
+            var lots = doc.RootElement.GetProperty("lots").EnumerateArray().ToDictionary(l => l.GetProperty("lotId").GetString()!);
+            foreach (var (id, hash) in hashes)
+                Assert.Equal(hash, Convert.ToHexString(System.Security.Cryptography.SHA256.HashData(
+                    System.Text.Encoding.UTF8.GetBytes(JsonSerializer.Serialize(lots[id])))));
+        }
+    }
+
+    [Fact]
     public void All_paid_definitions_from_0_4_11_remain_exact_and_new_recipes_are_compact()
     {
         var root = Path.GetFullPath(Path.Combine(AppContext.BaseDirectory, "../../../.."));
@@ -38,7 +54,7 @@ public sealed class CompactRewardTests
                     group => Assert.InRange(group.Count(), 1, 2));
             }
         }
-        Assert.Equal(122, compactCount);
+        Assert.Equal(244, compactCount); // Both immutable compact generations remain resolvable.
     }
 
     [Fact]

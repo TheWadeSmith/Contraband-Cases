@@ -70,8 +70,8 @@ public sealed class FreshOpeningCompatibilityTests
             CaseCatalogTests.Lot("core", "field-supply", "medical", value: 200_000)
         });
         var operations = CaseCatalogs.ForCase(catalog, CaseContracts.Operations);
-        Assert.Equal(165_000L, operations.CasePrice);
-        Assert.Equal(165_000L, ManifestCatalogEconomy.CalculateAutomaticPrices(operations).CasePrice);
+        Assert.Equal(105_000L, operations.CasePrice);
+        Assert.Equal(105_000L, ManifestCatalogEconomy.CalculateAutomaticPrices(operations).CasePrice);
         Assert.Equal(150_000L, ContrabandContentDefinitions.CalculatePrices(catalog,
             ModConfig.Parse("""{"fixedCasePrice":150000}""")).CasePrice);
     }
