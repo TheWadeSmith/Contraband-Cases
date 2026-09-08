@@ -80,7 +80,8 @@ public sealed class ManifestLotSnapshot
         long? useValue,
         int? footprintCells,
         IEnumerable<ManifestLotContentSnapshot> contents,
-        long? traderResaleEstimate = null)
+        long? traderResaleEstimate = null,
+        bool? relayEligible = null)
     {
         ProviderId = providerId;
         ProviderLabel = providerLabel;
@@ -97,6 +98,9 @@ public sealed class ManifestLotSnapshot
         FootprintCells = footprintCells;
         Contents = new ReadOnlyCollection<ManifestLotContentSnapshot>(contents.ToArray());
         TraderResaleEstimate = traderResaleEstimate;
+        if (relayEligible == true && (grade == RewardRarity.BlackLabel || providerId == CashPayouts.Provider))
+            throw new ArgumentException("Top-rarity and cash prizes cannot advertise Relay eligibility.", nameof(relayEligible));
+        RelayEligible = relayEligible;
     }
 
     public string ProviderId { get; }
@@ -124,6 +128,8 @@ public sealed class ManifestLotSnapshot
     public long? UseValue { get; }
 
     public long? TraderResaleEstimate { get; }
+
+    public bool? RelayEligible { get; }
 
     public int? FootprintCells { get; }
 

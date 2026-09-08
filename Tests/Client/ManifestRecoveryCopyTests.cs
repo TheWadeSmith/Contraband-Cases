@@ -5,6 +5,16 @@ namespace ContrabandCases.Tests.Client;
 
 public sealed class ManifestRecoveryCopyTests
 {
+    [Fact]
+    public void Close_and_key_labels_distinguish_saved_unsent_and_inventory_not_usable_keys()
+    {
+        Assert.Equal("Close — resume later", BrokerPresentation.ResumeLaterLabel);
+        Assert.Contains("Nothing sent yet", BrokerPresentation.PendingDelivery);
+        Assert.Contains("Keys in inventory: 0", BrokerPresentation.KeyBalance(0));
+        Assert.Contains("server checks usability", BrokerPresentation.KeyBalance(4));
+        Assert.Contains("unavailable", BrokerPresentation.KeyBalance(null));
+    }
+
     [Theory]
     [InlineData("Epic")]
     [InlineData("Legendary")]

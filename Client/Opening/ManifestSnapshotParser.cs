@@ -738,7 +738,7 @@ internal static class ManifestSnapshotParser
         RequirePropertiesWithExtension(
             source,
             "current lot",
-            ["traderResaleEstimate"],
+            new[] { "traderResaleEstimate", "relayEligible" }.Where(name => source.Property(name) is not null).ToArray(),
             "providerId",
             "providerLabel",
             "lotId",
@@ -782,7 +782,8 @@ internal static class ManifestSnapshotParser
                 ManifestProtocolValidation.MaximumFootprintCells),
             ParseContents(RequireProperty(source, "contents")),
             source.Property("traderResaleEstimate") is null ? null : ReadLongInRange(
-                source, "traderResaleEstimate", 0, 10_000_000_000L));
+                source, "traderResaleEstimate", 0, 10_000_000_000L),
+            source.Property("relayEligible") is null ? null : ReadBoolean(source, "relayEligible"));
     }
 
     private static IReadOnlyList<ManifestLotContentSnapshot> ParseContents(JToken token)

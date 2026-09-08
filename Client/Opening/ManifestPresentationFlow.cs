@@ -690,11 +690,11 @@ public static class ManifestPresentationPolicy
             throw new ArgumentNullException(nameof(snapshot));
         }
         var relay = snapshot.Relay;
-        if (relay is null)
+        if (relay is null || !snapshot.AvailableActions.CanRelay)
         {
             return snapshot.RelayTerminal
                 ? "Relay chain complete — send your saved prize to Messenger."
-                : "No complete same-track Relay pool is available.";
+                : "Relay unavailable — send your saved prize to Messenger.";
         }
         if (relay.GuaranteeActive)
         {

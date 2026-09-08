@@ -10,6 +10,28 @@ namespace ContrabandCases.Tests.Client;
 
 public sealed class ManifestClientProtocolTests
 {
+    [Fact]
+    public void Relay_preview_is_optional_strict_and_cannot_authorize_a_wager()
+    {
+        var offer = OfferSnapshot();
+        Assert.Null(ManifestSnapshotEnvelope.Parse(Envelope(offer), ManifestId).CurrentLot!.RelayEligible);
+        foreach (var eligible in new[] { false, true })
+        {
+            offer["currentLot"]!["relayEligible"] = eligible;
+            var parsed = ManifestSnapshotEnvelope.Parse(Envelope(offer), ManifestId);
+            Assert.Equal(eligible, parsed.CurrentLot!.RelayEligible);
+            Assert.False(parsed.AvailableActions.CanRelay);
+        }
+        foreach (var invalid in new JToken[] { "true", 1, JValue.CreateNull() })
+        {
+            offer["currentLot"]!["relayEligible"] = invalid;
+            Assert.Throws<ManifestSnapshotException>(() => ManifestSnapshotEnvelope.Parse(Envelope(offer), ManifestId));
+        }
+        offer["currentLot"]!["relayEligible"] = true;
+        offer["currentLot"]!["grade"] = "BlackLabel";
+        Assert.Throws<ManifestSnapshotException>(() => ManifestSnapshotEnvelope.Parse(Envelope(offer), ManifestId));
+    }
+
     private const string ManifestId = "manifest-client-protocol";
     private const string RecoveryCaseItemId = "aaaaaaaaaaaaaaaaaaaaaaaa";
 
