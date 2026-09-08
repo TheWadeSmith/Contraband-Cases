@@ -87,6 +87,10 @@ Client parsers accept the full native cargo library and all 13 corrected rewards
 in the local optional-definition fixture. No game assemblies, generated captures
 or build outputs are included in this source repository.
 
+The curated public checkout was also tested with a newly generated local
+fixture: **1,575 passed, zero failed/skipped**. The full packaging regression
+passes in the provisioned workspace. Full in-game claim/layout checks remain.
+
 The Unity 2022.3.43f1 case/key bundles are unchanged. Sound and model orientation
 were confirmed in-game on a preceding installed build. This rebalance still needs
 in-game acceptance; offline projections do not execute optional-mod hooks or prove

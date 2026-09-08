@@ -52,6 +52,10 @@ and real client-parser checks pass. Offline installed-definition fixtures cover
 all 13 corrected rewards. The package validator checks both DLL sets, exact pack
 hashes, Unity bundles, archive contents and checksums.
 
+The full adversarial packaging regression also passes, including input races,
+malformed/tampered packs, bundle changes and rollback preservation. The curated
+public source passes the same 1,575 tests with locally generated prerequisites.
+
 Full in-game opening/claim, layout and trader-quote acceptance is still required.
 Automated tests do not guarantee crash-free gameplay. There is no GitHub CI
 workflow; verification is performed in the provisioned local development setup.
