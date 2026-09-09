@@ -351,7 +351,7 @@ public static class ManifestPresentationPolicy
         var builder = new StringBuilder("<b>RARE SURPRISE OPENINGS</b>\n");
         builder.AppendLine($"Normal {Rate(10_000 - premium.Epic.ChanceBasisPoints - premium.Legendary.ChanceBasisPoints)} • " +
             $"Epic {Rate(premium.Epic.ChanceBasisPoints)} • Legendary {Rate(premium.Legendary.ChanceBasisPoints)}");
-        builder.AppendLine("Premium: three themed packages, freely browse and choose ONE. No extra key. Your choices are saved.");
+        builder.AppendLine("Epic: browse three saved packages and choose ONE. Legendary: one rolled prize, no choice. No extra key.");
         foreach (var (label, tier) in new[] { ("Epic", premium.Epic), ("Legendary", premium.Legendary) })
         {
             if (tier.ChanceBasisPoints == 0)
@@ -361,7 +361,9 @@ public static class ManifestPresentationPolicy
             }
             builder.AppendLine($"{label}: {tier.Lots.Count} eligible packages • reference value at least ₽{tier.MinimumUseValue.ToString("N0", CultureInfo.InvariantCulture)} (not resale).");
             if (!detailed) continue;
-            builder.AppendLine("First package draw below; subsequent draws exclude chosen packages and recalculate weights. Combined chase share stays at most 0.25% per draw. These are not final claim probabilities.");
+            builder.AppendLine(label == "Legendary"
+                ? "One prize from the draw below, conditional on a Legendary opening. Combined chase share stays at most 0.25%."
+                : "First package draw below; subsequent draws exclude chosen packages and recalculate weights. Combined chase share stays at most 0.25% per draw. These are not final claim probabilities.");
             foreach (var lot in tier.Lots)
                 builder.AppendLine($"• {PlainText(lot.DisplayName)} — {lot.ConditionalPercent} ({lot.ConditionalNumerator}/{lot.ConditionalDenominator})");
         }
@@ -531,7 +533,7 @@ public static class ManifestPresentationPolicy
                 id,
                 FamilySealLabel(seal),
                 "CONTENTS UNDISCLOSED",
-                RewardRarity.ScavGrade);
+                snapshot.OpeningTier == ManifestOpeningTier.Legendary ? RewardRarity.BlackLabel : RewardRarity.ScavGrade);
         }
 
         if (snapshot.PremiumChoices.Count > 0)
@@ -545,7 +547,10 @@ public static class ManifestPresentationPolicy
         }
         else if (publishedCatalog is not null)
         {
-            foreach (var preview in publishedCatalog.Families.SelectMany(family => family.Lots))
+            var previews = publishedCatalog.Families.SelectMany(family => family.Lots);
+            if (snapshot.OpeningTier == ManifestOpeningTier.Legendary)
+                previews = publishedCatalog.PremiumOdds?.Legendary.Lots ?? [];
+            foreach (var preview in previews)
             {
                 if (preview.ProviderId == lot.ProviderId && preview.LotId == lot.LotId) continue;
                 var id = $"catalog:{preview.ProviderId}:{preview.LotId}";
@@ -568,6 +573,7 @@ public static class ManifestPresentationPolicy
             0,
             baseDurationSeconds);
         var header = snapshot.PremiumChoices.Count > 0 ? $"SURPRISE {snapshot.OpeningTier.ToString().ToUpperInvariant()} OPENING • CHOOSE ONE AFTER REVEAL"
+            : snapshot.OpeningTier == ManifestOpeningTier.Legendary ? "SURPRISE LEGENDARY OPENING • ONE PRIZE"
             : snapshot.CaseTemplateId == CaseContracts.CashCache ? "CASH CACHE • ONE PAYOUT" : snapshot.LatestReceipt is { } receipt
             ? receipt.BrokerFavorBefore == snapshot.BrokerFavorMaximum &&
               receipt.Outcome == ManifestRelayResult.Upgrade

@@ -10,8 +10,8 @@ $ErrorActionPreference = "Stop"
 
 $projectRoot = [IO.Path]::GetFullPath((Join-Path $PSScriptRoot ".."))
 $distRoot = [IO.Path]::GetFullPath((Join-Path $projectRoot "..\dist"))
-$packageBaseName = "ContrabandCases-0.4.13-SPT4.1.5"
-$packageTimestampUtc = [DateTime]::SpecifyKind([DateTime]"2026-09-08T00:00:00", [DateTimeKind]::Utc)
+$packageBaseName = "ContrabandCases-0.4.14-SPT4.1.5"
+$packageTimestampUtc = [DateTime]::SpecifyKind([DateTime]"2026-09-09T00:00:00", [DateTimeKind]::Utc)
 $canonicalStagePath = [IO.Path]::GetFullPath((Join-Path $distRoot "stage"))
 $canonicalArchivePath = [IO.Path]::GetFullPath((Join-Path $distRoot "$packageBaseName.zip"))
 $canonicalHashPath = [IO.Path]::GetFullPath((Join-Path $distRoot "$packageBaseName-SHA256.txt"))
@@ -119,6 +119,8 @@ function Get-ReleaseInputs {
         [pscustomobject]@{ Source = Join-Path $projectRoot "config\config.jsonc"; Destination = "SPT_Runtime/user/mods/Wade-ContrabandCases/config/config.jsonc" },
         [pscustomobject]@{ Source = Join-Path $projectRoot "config\rewards.json"; Destination = "SPT_Runtime/user/mods/Wade-ContrabandCases/config/rewards.json" },
         [pscustomobject]@{ Source = Join-Path $projectRoot "config\reward-packs\amonya.arcane-cache.json"; Destination = "SPT_Runtime/user/mods/Wade-ContrabandCases/config/reward-packs/amonya.arcane-cache.json" },
+        [pscustomobject]@{ Source = Join-Path $projectRoot "config\reward-packs\black-site.loadouts.json"; Destination = "SPT_Runtime/user/mods/Wade-ContrabandCases/config/reward-packs/black-site.loadouts.json" },
+        [pscustomobject]@{ Source = Join-Path $projectRoot "config\reward-packs\cnn-containers.storage.json"; Destination = "SPT_Runtime/user/mods/Wade-ContrabandCases/config/reward-packs/cnn-containers.storage.json" },
         [pscustomobject]@{ Source = Join-Path $projectRoot "config\reward-packs\core.json"; Destination = "SPT_Runtime/user/mods/Wade-ContrabandCases/config/reward-packs/core.json" },
         [pscustomobject]@{ Source = Join-Path $projectRoot "config\reward-packs\eco-attachment.elite-optics.json"; Destination = "SPT_Runtime/user/mods/Wade-ContrabandCases/config/reward-packs/eco-attachment.elite-optics.json" },
         [pscustomobject]@{ Source = Join-Path $projectRoot "config\reward-packs\eco-attachment.field-cache.json"; Destination = "SPT_Runtime/user/mods/Wade-ContrabandCases/config/reward-packs/eco-attachment.field-cache.json" },
@@ -128,6 +130,7 @@ function Get-ReleaseInputs {
         [pscustomobject]@{ Source = Join-Path $projectRoot "config\reward-packs\krackasourus.anime-cards.json"; Destination = "SPT_Runtime/user/mods/Wade-ContrabandCases/config/reward-packs/krackasourus.anime-cards.json" },
         [pscustomobject]@{ Source = Join-Path $projectRoot "config\reward-packs\krackasourus.pokemon-cards.json"; Destination = "SPT_Runtime/user/mods/Wade-ContrabandCases/config/reward-packs/krackasourus.pokemon-cards.json" },
         [pscustomobject]@{ Source = Join-Path $projectRoot "config\reward-packs\krackasourus.yugioh-cards.json"; Destination = "SPT_Runtime/user/mods/Wade-ContrabandCases/config/reward-packs/krackasourus.yugioh-cards.json" },
+        [pscustomobject]@{ Source = Join-Path $projectRoot "config\reward-packs\more-cases.storage.json"; Destination = "SPT_Runtime/user/mods/Wade-ContrabandCases/config/reward-packs/more-cases.storage.json" },
         [pscustomobject]@{ Source = Join-Path $projectRoot "config\reward-packs\natalya.elite-armor.json"; Destination = "SPT_Runtime/user/mods/Wade-ContrabandCases/config/reward-packs/natalya.elite-armor.json" },
         [pscustomobject]@{ Source = Join-Path $projectRoot "config\reward-packs\natalya.field-gear.json"; Destination = "SPT_Runtime/user/mods/Wade-ContrabandCases/config/reward-packs/natalya.field-gear.json" },
         [pscustomobject]@{ Source = Join-Path $projectRoot "config\reward-packs\sjx.combat-chemistry.json"; Destination = "SPT_Runtime/user/mods/Wade-ContrabandCases/config/reward-packs/sjx.combat-chemistry.json" },

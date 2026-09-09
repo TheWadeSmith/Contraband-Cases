@@ -17,6 +17,45 @@ namespace ContrabandCases.Tests.Settlement;
 
 public sealed class ManifestSettlementServiceTests
 {
+    [Fact]
+    public async Task Saved_sidegrade_is_readable_after_restart_and_delivers_to_Messenger_once()
+    {
+        var lots = RelayLots();
+        var catalog = CatalogWithUnrelatedDrift(lots.Select(lot => lot.Resolved));
+        var fixture = Fixture.FromJournal(new CaseOpeningJournal(activeManifest: EntitlementManifest(RelayCandidates(lots))));
+        var keyInventory = new FreshRelayKeyInventoryProbe();
+        var service = fixture.CreateService(relayKeyInventory: keyInventory,
+            catalogCoordinator: Coordinator(catalog),
+            nextUnitNumerator: () => CanonicalRngEvidence.UnitDenominator * 70 / 100);
+        await service.RelayAsync(fixture.Context, ManifestId, ManifestPhase.Entitlement, 1, CancellationToken.None);
+
+        var active = fixture.Store.Stored.ActiveManifest!;
+        Assert.Equal(ManifestRelayResult.Sidegrade, Assert.Single(active.RelayHistory).Outcome);
+        var projected = ManifestSnapshotProjection.FromActive(active, catalog, null);
+        var response = System.Text.Json.JsonSerializer.Serialize(new
+        { err = 0, errmsg = (string?)null, data = new ManifestSnapshotEnvelope { Snapshot = projected } });
+        var parsed = global::ContrabandCases.Client.Opening.ManifestSnapshotEnvelope.Parse(response, ManifestId);
+        Assert.True(parsed.RelayTerminal);
+        Assert.True(parsed.AvailableActions.CanClaim);
+        Assert.False(parsed.AvailableActions.CanRelay);
+        Assert.Null(parsed.Relay!.UpgradeGrade);
+        Assert.Contains("sidegrade", parsed.Relay.TerminalReason);
+        Assert.Equal(active.Entitlement!.Fingerprint.Sha256Hex, parsed.CurrentLot!.Fingerprint);
+
+        var profile = new SptProfile { CharacterData = new() { PmcData = fixture.Context.PmcData } };
+        var delivery = new SptManifestRewardDelivery(fixture.Inventory, _ => profile,
+            (_, _) => Task.CompletedTask, _ => { });
+        var restarted = fixture.CreateService(catalogCoordinator: Coordinator(catalog), claimInventory: delivery,
+            nextUnitNumerator: () => throw new Exception("Must not reroll a saved sidegrade"));
+        await restarted.ClaimAsync(fixture.Context, ManifestId, CancellationToken.None);
+        var replay = await restarted.ClaimAsync(fixture.NewContextWithLostResponse(), ManifestId, CancellationToken.None);
+        Assert.True(replay.Replay);
+        Assert.Single(profile.DialogueRecords![SptManifestRewardDelivery.SenderId].Messages!);
+        Assert.Equal(0, fixture.Inventory.ApplyCalls);
+        Assert.Equal(1, keyInventory.ApplyCalls);
+        Assert.Equal(active.Entitlement.Fingerprint, Assert.Single(fixture.Store.Stored.ManifestReceipts).Entitlement!.Fingerprint);
+    }
+
     [Theory]
     [InlineData(false, false)]
     [InlineData(false, true)]
@@ -328,7 +367,8 @@ public sealed class ManifestSettlementServiceTests
             offerSelector: new ManifestCatalogSelector(() => throw new Exception("Packages rerolled")));
         await restarted.OpenAsync(fixture.Context, CaseId, CancellationToken.None, view.SnapshotId);
         var recovered = fixture.Store.Stored.ActiveManifest!;
-        Assert.Equal(ManifestPhase.Offer1, recovered.FlowState.Phase);
+        Assert.Equal(TestingCrateTypeCodec.PremiumTier(type) == ManifestOpeningTier.Legendary
+            ? ManifestPhase.Entitlement : ManifestPhase.Offer1, recovered.FlowState.Phase);
         Assert.Equal(prepared.Ticket.OpeningQuality, recovered.Ticket.OpeningQuality);
         Assert.Equal(prepared.Offers.Select(offer => offer.Fingerprint), recovered.Offers.Select(offer => offer.Fingerprint));
         Assert.Equal(1, recoveredInventory.ApplyCalls);
@@ -338,7 +378,7 @@ public sealed class ManifestSettlementServiceTests
     [InlineData(1)]
     [InlineData(2)]
     [InlineData(3)]
-    public async Task Premium_open_choose_restart_claim_is_exactly_once(int ordinal)
+    public async Task Epic_open_choose_restart_claim_is_exactly_once(int ordinal)
     {
         var fixture = Fixture.FromJournal(new CaseOpeningJournal());
         var lots = new[] { TemplateA, TemplateB, TemplateC }.Select((template, i) =>
@@ -348,11 +388,11 @@ public sealed class ManifestSettlementServiceTests
         var tierDraws = 0;
         var offerDraws = 0;
         var service = fixture.CreateService(ticketInventory: inventory, catalogCoordinator: coordinator,
-            nextUnitNumerator: () => { tierDraws++; return 0; },
+            nextUnitNumerator: () => { tierDraws++; return CanonicalRngEvidence.UnitDenominator / 100; },
             offerSelector: new ManifestCatalogSelector(() => { offerDraws++; return 0; }));
         await service.OpenAsync(fixture.Context, CaseId, CancellationToken.None);
         var active = fixture.Store.Stored.ActiveManifest!;
-        Assert.Equal(ManifestOpeningTier.Legendary, active.Ticket.OpeningQuality!.Tier);
+        Assert.Equal(ManifestOpeningTier.Epic, active.Ticket.OpeningQuality!.Tier);
         Assert.Equal(ManifestPhase.TicketPrepared, fixture.Store.Saved[0].ActiveManifest!.FlowState.Phase);
         Assert.Equal(active.Ticket.OpeningQuality, fixture.Store.Saved[0].ActiveManifest!.Ticket.OpeningQuality);
         Assert.Equal(1, inventory.ApplyCalls);
@@ -374,7 +414,46 @@ public sealed class ManifestSettlementServiceTests
         Assert.Equal(3, offerDraws);
         var receipt = Assert.Single(fixture.Store.Stored.ManifestReceipts);
         Assert.Equal(active.Offers[ordinal - 1].Fingerprint, receipt.Entitlement!.Fingerprint);
-        Assert.Equal(ManifestOpeningTier.Legendary, receipt.OpeningQuality!.Tier);
+        Assert.Equal(ManifestOpeningTier.Epic, receipt.OpeningQuality!.Tier);
+    }
+
+    [Theory]
+    [InlineData(false)]
+    [InlineData(true)]
+    public async Task Legendary_awards_first_draw_without_choice_and_Messenger_claim_is_exactly_once(bool forced)
+    {
+        var fixture = Fixture.FromJournal(new CaseOpeningJournal());
+        var lots = new[] { TemplateA, TemplateB, TemplateC }.Select((template, i) =>
+            Lot("premium-" + i, "premium-" + i, "family-" + i, template, RewardRarity.BlackLabel, i).Resolved).ToArray();
+        var coordinator = Coordinator(Catalog(lots));
+        var registry = new TestingForcedCrateRegistry();
+        if (forced) registry.SetForcedCrate(CaseId, TestingCrateType.LegendaryMixed);
+        var inventory = new FreshTicketInventoryProbe { FreshCaseTemplate = ModConstants.CaseTemplateId };
+        await fixture.CreateService(ticketInventory: inventory, catalogCoordinator: coordinator,
+            forcedCrateRegistry: registry, nextUnitNumerator: () => 0)
+            .OpenAsync(fixture.Context, CaseId, CancellationToken.None);
+        var active = fixture.Store.Stored.ActiveManifest!;
+        Assert.True(active.Ticket.OpeningQuality!.SinglePrize);
+        Assert.Equal(ManifestPhase.Entitlement, active.FlowState.Phase);
+        Assert.Equal(active.Offers[0].Fingerprint, active.Entitlement!.Fingerprint);
+        Assert.Equal(1, inventory.ApplyCalls);
+
+        var profile = new SptProfile { CharacterData = new() { PmcData = fixture.Context.PmcData } };
+        var delivery = new SptManifestRewardDelivery(fixture.Inventory, _ => profile,
+            (_, _) => Task.CompletedTask, _ => { });
+        var restarted = fixture.CreateService(catalogCoordinator: coordinator, claimInventory: delivery,
+            nextUnitNumerator: () => throw new Exception("Must not reroll Legendary"));
+        foreach (var ordinal in new[] { 1, 2, 3 })
+            await Assert.ThrowsAsync<InvalidOperationException>(() => restarted.DecideOfferAsync(fixture.Context,
+                active.ManifestId, 1, ManifestOfferDecision.Lock, CancellationToken.None, ordinal));
+        await restarted.ClaimAsync(fixture.Context, active.ManifestId, CancellationToken.None);
+        var replay = await restarted.ClaimAsync(fixture.NewContextWithLostResponse(), active.ManifestId, CancellationToken.None);
+        Assert.True(replay.Replay);
+        Assert.Single(profile.DialogueRecords![SptManifestRewardDelivery.SenderId].Messages!);
+        Assert.Equal(0, fixture.Inventory.ApplyCalls);
+        var receipt = Assert.Single(fixture.Store.Stored.ManifestReceipts);
+        Assert.Equal(active.Offers[0].Fingerprint, receipt.Entitlement!.Fingerprint);
+        Assert.Equal(1, Assert.Single(receipt.Decisions).Ordinal);
     }
 
     private const string ManifestId = "manifest-claim-service";

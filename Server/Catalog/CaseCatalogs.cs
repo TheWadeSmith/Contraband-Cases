@@ -50,6 +50,7 @@ public static class CaseCatalogs
         var relic = identity.UsePath is Collection || identity.ProviderId is
             "eco-ww2.relic-cache" or "amonya.arcane-cache";
         var specialist = identity.ProviderId is "vault" or "isb-aishi.elite-armory" or
+            "black-site.loadouts" or "more-cases.storage" or "cnn-containers.storage" or
             "natalya.elite-armor" or "wtt-contentbackport.elite-optics" or
             "eco-attachment.elite-optics" or "sjx.combat-chemistry" or "vultify.cooler-stims" ||
             identity.ProviderId == "core" && identity.TrackId.Value is "night" or "ordnance" or "chemistry" or "vault";

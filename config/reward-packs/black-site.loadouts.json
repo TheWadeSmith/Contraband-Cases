@@ -1,0 +1,515 @@
+{
+  "schemaVersion": 1,
+  "providerId": "black-site.loadouts",
+  "packVersion": "1.0.0",
+  "displayLabel": "Black Site Loadouts",
+  "providerWeight": 0.1,
+  "requiredTemplateIds": [
+    "5447a9cd4bdc2dbd208b4567",
+    "544a5cde4bdc2d39388b456b",
+    "544fb45d4bdc2dee738b4568",
+    "58948c8e86f77409493f7266",
+    "58dd3ad986f77403051cba8f",
+    "590c657e86f77412b013051d",
+    "59c1383d86f774290a37e0ca",
+    "59e6906286f7746c9f75e847",
+    "5a3501acc4a282000d72293a",
+    "5a367e5dc4a282000e49738f",
+    "5a608bf24f39f98ffc77720e",
+    "5ba26383d4351e00334c93d9",
+    "5ba26586d4351e44f824b340",
+    "5ba26835d4351e0035628ff5",
+    "5c0558060db834001b735271",
+    "5c925fa22e221601da359b7b",
+    "5ca20d5986f774331e7c9602",
+    "5d02778e86f774203e7dedbe",
+    "5df8ce05b11454561e39243b",
+    "5df8f541c41b2312ea3335e3",
+    "5e4abc6786f77406812bd572",
+    "5e4d34ca86f774264f758330",
+    "5fbcc1d9016cce60e8341ab3",
+    "5fd20ff893a8961fc660a954",
+    "6033fa48ffd42c541047f728",
+    "60a2828e8689911a226117f9",
+    "6165ac306ef05c2ce828ef74",
+    "6183d53f1cb55961fa0fdcda",
+    "628e4e576d783146b124c64d",
+    "66b5f693acff495a294927e3",
+    "66b5f6985891c84aab75ca76",
+    "6718817435e3cfd9550d2c27",
+    "6768c25aa7b238f14a08d3f6"
+  ],
+  "requiredPresetIds": [
+    "5a3a85af86f774745637d46c",
+    "5a8ae36686f774377d6ce226",
+    "5a8ae43686f774377b73cfb3",
+    "5bd05f1186f774572f181678",
+    "628753bba4a8431af4739d3b",
+    "657120b36fe59548840cb542",
+    "65719d367a553968340d88b8",
+    "657664ae303700411c02428c",
+    "657fa7c0e65c0122b70ffdb0",
+    "66b0e7f8c5987b623d6e2e81",
+    "671b88c4d14a58a85b09d845",
+    "671b89f03d4217059b0c6a26"
+  ],
+  "requiredBundleKeys": [],
+  "lots": [
+    {
+      "lotId": "m4-assault.compact-v2",
+      "displayName": "M4 Assault Loadout",
+      "purpose": "M4 Assault: assembled weapon, compatible ammunition, armored rig, helmet, headset, backpack and medical kit, plus a compatible spare magazine. Separate Messenger attachments; load magazines before use.",
+      "familyId": "arsenal",
+      "trackId": "ordnance",
+      "anchorTemplateId": "5447a9cd4bdc2dbd208b4567",
+      "weight": 1,
+      "usePath": {
+        "kind": "raidRole",
+        "roleId": "assault"
+      },
+      "recipe": [
+        {
+          "kind": "preset",
+          "presetId": "5a8ae36686f774377d6ce226"
+        },
+        {
+          "kind": "template",
+          "templateId": "59e6906286f7746c9f75e847",
+          "instanceCount": 1,
+          "stackCountPerInstance": 60
+        },
+        {
+          "kind": "preset",
+          "presetId": "657664ae303700411c02428c"
+        },
+        {
+          "kind": "preset",
+          "presetId": "657120b36fe59548840cb542"
+        },
+        {
+          "kind": "template",
+          "templateId": "5e4d34ca86f774264f758330",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "544a5cde4bdc2d39388b456b",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "544fb45d4bdc2dee738b4568",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "59c1383d86f774290a37e0ca",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        }
+      ]
+    },
+    {
+      "lotId": "mp7-breacher.compact-v2",
+      "displayName": "MP7 Breacher Loadout",
+      "purpose": "MP7 Breacher: assembled weapon, compatible ammunition, armored rig, helmet, headset, backpack and medical kit, plus a compatible spare magazine. Separate Messenger attachments; load magazines before use.",
+      "familyId": "arsenal",
+      "trackId": "ordnance",
+      "anchorTemplateId": "5ba26383d4351e00334c93d9",
+      "weight": 1,
+      "usePath": {
+        "kind": "raidRole",
+        "roleId": "breaching"
+      },
+      "recipe": [
+        {
+          "kind": "preset",
+          "presetId": "5bd05f1186f774572f181678"
+        },
+        {
+          "kind": "template",
+          "templateId": "5ba26835d4351e0035628ff5",
+          "instanceCount": 1,
+          "stackCountPerInstance": 70
+        },
+        {
+          "kind": "preset",
+          "presetId": "657664ae303700411c02428c"
+        },
+        {
+          "kind": "preset",
+          "presetId": "657120b36fe59548840cb542"
+        },
+        {
+          "kind": "template",
+          "templateId": "6033fa48ffd42c541047f728",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5ca20d5986f774331e7c9602",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "590c657e86f77412b013051d",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5ba26586d4351e44f824b340",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        }
+      ]
+    },
+    {
+      "lotId": "sr25-marksman.compact-v2",
+      "displayName": "SR-25 Marksman Loadout",
+      "purpose": "SR-25 Marksman: assembled weapon, compatible ammunition, armored rig, helmet, headset, backpack and medical kit, plus a compatible spare magazine. Separate Messenger attachments; load magazines before use.",
+      "familyId": "arsenal",
+      "trackId": "vault",
+      "anchorTemplateId": "5df8ce05b11454561e39243b",
+      "weight": 1,
+      "usePath": {
+        "kind": "raidRole",
+        "roleId": "marksman"
+      },
+      "recipe": [
+        {
+          "kind": "preset",
+          "presetId": "628753bba4a8431af4739d3b"
+        },
+        {
+          "kind": "template",
+          "templateId": "6768c25aa7b238f14a08d3f6",
+          "instanceCount": 1,
+          "stackCountPerInstance": 40
+        },
+        {
+          "kind": "preset",
+          "presetId": "65719d367a553968340d88b8"
+        },
+        {
+          "kind": "preset",
+          "presetId": "657120b36fe59548840cb542"
+        },
+        {
+          "kind": "template",
+          "templateId": "628e4e576d783146b124c64d",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "544a5cde4bdc2d39388b456b",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "544fb45d4bdc2dee738b4568",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5df8f541c41b2312ea3335e3",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        }
+      ]
+    },
+    {
+      "lotId": "rsass-overwatch.compact-v2",
+      "displayName": "RSASS Overwatch Loadout",
+      "purpose": "RSASS Overwatch: assembled weapon, compatible ammunition, armored rig, helmet, headset, backpack and medical kit, plus a compatible spare magazine. Separate Messenger attachments; load magazines before use.",
+      "familyId": "arsenal",
+      "trackId": "vault",
+      "anchorTemplateId": "5a367e5dc4a282000e49738f",
+      "weight": 1,
+      "usePath": {
+        "kind": "raidRole",
+        "roleId": "marksman"
+      },
+      "recipe": [
+        {
+          "kind": "preset",
+          "presetId": "5a3a85af86f774745637d46c"
+        },
+        {
+          "kind": "template",
+          "templateId": "5a608bf24f39f98ffc77720e",
+          "instanceCount": 1,
+          "stackCountPerInstance": 40
+        },
+        {
+          "kind": "preset",
+          "presetId": "657664ae303700411c02428c"
+        },
+        {
+          "kind": "preset",
+          "presetId": "657120b36fe59548840cb542"
+        },
+        {
+          "kind": "template",
+          "templateId": "66b5f693acff495a294927e3",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "544a5cde4bdc2d39388b456b",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "590c657e86f77412b013051d",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5a3501acc4a282000d72293a",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        }
+      ]
+    },
+    {
+      "lotId": "aug-night.compact-v2",
+      "displayName": "AUG Night Patrol Loadout",
+      "purpose": "AUG Night Patrol: assembled weapon, compatible ammunition, armored rig, helmet, headset, backpack and medical kit, plus GPNVG-18 night vision; attach it to the included FAST helmet. Separate Messenger attachments; load magazines before use.",
+      "familyId": "arsenal",
+      "trackId": "night",
+      "anchorTemplateId": "6718817435e3cfd9550d2c27",
+      "weight": 1,
+      "usePath": {
+        "kind": "raidRole",
+        "roleId": "night-recon"
+      },
+      "recipe": [
+        {
+          "kind": "preset",
+          "presetId": "671b89f03d4217059b0c6a26"
+        },
+        {
+          "kind": "template",
+          "templateId": "59e6906286f7746c9f75e847",
+          "instanceCount": 1,
+          "stackCountPerInstance": 60
+        },
+        {
+          "kind": "preset",
+          "presetId": "65719d367a553968340d88b8"
+        },
+        {
+          "kind": "preset",
+          "presetId": "657fa7c0e65c0122b70ffdb0"
+        },
+        {
+          "kind": "template",
+          "templateId": "5e4d34ca86f774264f758330",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "60a2828e8689911a226117f9",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "544fb45d4bdc2dee738b4568",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5c0558060db834001b735271",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        }
+      ]
+    },
+    {
+      "lotId": "mcx-night.compact-v2",
+      "displayName": "MCX Night Raider Loadout",
+      "purpose": "MCX Night Raider: assembled weapon, compatible ammunition, armored rig, helmet, headset, backpack and medical kit, plus GPNVG-18 night vision; attach it to the included FAST helmet. Separate Messenger attachments; load magazines before use.",
+      "familyId": "arsenal",
+      "trackId": "night",
+      "anchorTemplateId": "5fbcc1d9016cce60e8341ab3",
+      "weight": 1,
+      "usePath": {
+        "kind": "raidRole",
+        "roleId": "night-recon"
+      },
+      "recipe": [
+        {
+          "kind": "preset",
+          "presetId": "66b0e7f8c5987b623d6e2e81"
+        },
+        {
+          "kind": "template",
+          "templateId": "5fd20ff893a8961fc660a954",
+          "instanceCount": 1,
+          "stackCountPerInstance": 60
+        },
+        {
+          "kind": "preset",
+          "presetId": "657664ae303700411c02428c"
+        },
+        {
+          "kind": "preset",
+          "presetId": "657fa7c0e65c0122b70ffdb0"
+        },
+        {
+          "kind": "template",
+          "templateId": "66b5f6985891c84aab75ca76",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "544a5cde4bdc2d39388b456b",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "590c657e86f77412b013051d",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5c0558060db834001b735271",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        }
+      ]
+    },
+    {
+      "lotId": "scar-heavy-assault.compact-v2",
+      "displayName": "SCAR-H Heavy Assault Loadout",
+      "purpose": "SCAR-H Heavy Assault: assembled weapon, compatible ammunition, armored rig, helmet, headset, backpack and medical kit, plus a compatible spare magazine. Separate Messenger attachments; load magazines before use.",
+      "familyId": "arsenal",
+      "trackId": "ordnance",
+      "anchorTemplateId": "6165ac306ef05c2ce828ef74",
+      "weight": 1,
+      "usePath": {
+        "kind": "raidRole",
+        "roleId": "assault"
+      },
+      "recipe": [
+        {
+          "kind": "preset",
+          "presetId": "671b88c4d14a58a85b09d845"
+        },
+        {
+          "kind": "template",
+          "templateId": "58dd3ad986f77403051cba8f",
+          "instanceCount": 1,
+          "stackCountPerInstance": 40
+        },
+        {
+          "kind": "preset",
+          "presetId": "657664ae303700411c02428c"
+        },
+        {
+          "kind": "preset",
+          "presetId": "657120b36fe59548840cb542"
+        },
+        {
+          "kind": "template",
+          "templateId": "628e4e576d783146b124c64d",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "60a2828e8689911a226117f9",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "590c657e86f77412b013051d",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "6183d53f1cb55961fa0fdcda",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        }
+      ]
+    },
+    {
+      "lotId": "mpx-combat-medic.compact-v2",
+      "displayName": "MPX Combat Medic Loadout",
+      "purpose": "MPX combat medic: assembled weapon and compatible ammunition, armored rig, helmet, headset, medical backpack, Grizzly first aid and a CMS surgical kit. Separate Messenger attachments; load the weapon magazine before use.",
+      "familyId": "arsenal",
+      "trackId": "chemistry",
+      "anchorTemplateId": "58948c8e86f77409493f7266",
+      "weight": 1,
+      "usePath": {
+        "kind": "raidRole",
+        "roleId": "combat-medic"
+      },
+      "recipe": [
+        {
+          "kind": "preset",
+          "presetId": "5a8ae43686f774377b73cfb3"
+        },
+        {
+          "kind": "template",
+          "templateId": "5c925fa22e221601da359b7b",
+          "instanceCount": 1,
+          "stackCountPerInstance": 50
+        },
+        {
+          "kind": "preset",
+          "presetId": "65719d367a553968340d88b8"
+        },
+        {
+          "kind": "preset",
+          "presetId": "657120b36fe59548840cb542"
+        },
+        {
+          "kind": "template",
+          "templateId": "6033fa48ffd42c541047f728",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5e4abc6786f77406812bd572",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "590c657e86f77412b013051d",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5d02778e86f774203e7dedbe",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        }
+      ]
+    }
+  ]
+}

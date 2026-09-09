@@ -14,12 +14,39 @@ $definitions = @{}
 $presets = $globals.ItemPresets
 $mods = Join-Path $RuntimeRoot 'user/mods'
 foreach ($folder in @('ISB-Aishi/db/CustomItems', 'WTT-ContentBackport/db/CustomItems', 'Natalya/db/CustomItems',
-    'Eco-Attachment-Emporium/db/CustomItems', 'Eco-WW2-Pack/db/CustomItems')) {
+    'Eco-Attachment-Emporium/db/CustomItems', 'Eco-WW2-Pack/db/CustomItems', 'RandomizzatoreMoreCases-4.0/db/CustomItems')) {
+    if (!(Test-Path (Join-Path $mods $folder))) { continue }
     foreach ($file in Get-ChildItem (Join-Path $mods $folder) -Filter '*.json' -Recurse) {
         $data = Get-Content $file.FullName -Raw | ConvertFrom-Json -AsHashtable
         foreach ($entry in $data.GetEnumerator()) {
             if ($entry.Value.itemTplToClone) { $definitions[$entry.Key] = $entry.Value }
             foreach ($preset in $entry.Value.weaponPresets) { $presets[$preset._id] = $preset }
+        }
+    }
+}
+# Reviewed ordinary-storage declarations from CNN-Containers. Respect disabled
+# items and configured grids; trader prices do not replace handbook values.
+$cnnPath = Join-Path $mods 'CNN-Containers/config/config.jsonc'
+if (Test-Path $cnnPath) {
+    $cnn = Get-Content $cnnPath -Raw | ConvertFrom-Json -AsHashtable
+    foreach ($entry in @(
+        @('gearBox', '683d0995deed9b8d4f897ec2', 5, 3, 10, 8, 995000, 'item_container_gearbox', @('57bef4c42459772e8d35a53b','5448e54d4bdc2dcc718b4568','5448e5284bdc2dcb718b4567','5448e53e4bdc2d60728b4567','5645bcb74bdc2ded0b8b4578','5448e5724bdc2ddf718b4568','5a341c4086f77401f2541505','5a341c4686f77469e155819e','5b3f15d486f77432d0509248')),
+        @('modCase', '683d09aadb9e219d2f7bd6e8', 3, 2, 6, 5, 197000, 'item_container_modbox', @('5448fe124bdc2da5018b4567')))) {
+        $cfg = $cnn[$entry[0]]
+        if ($cfg -and $cfg.enabled -eq $false) { continue }
+        $id = $entry[1]
+        $definitions[$id] = @{ itemTplToClone = '5d235bb686f77443f4331278'; parentId = '5795f317245977243854e041';
+            handbookPriceRoubles = $entry[6]; overrideProperties = @{
+                Width = $entry[2]; Height = $entry[3];
+                Prefab = @{ path = 'assets/content/items/containers/' + $entry[7] + '.bundle'; rcid = '' };
+                Grids = @(@{ _id = $id; _name = 'main'; _parent = $id; _proto = '55d329c24bdc2d892f8b4567'; _props = @{
+                    cellsH = $(if ($cfg.gridH) { $cfg.gridH } else { $entry[4] });
+                    cellsV = $(if ($cfg.gridV) { $cfg.gridV } else { $entry[5] });
+                    minCount = 0; maxCount = 0; maxWeight = 0; isSortingTable = $false;
+                    filters = @(@{ Filter = @($entry[8]) + @($cfg.extraFilters | Where-Object { $_ });
+                        ExcludedFilter = @($cfg.extraExcludedFilters | Where-Object { $_ }) })
+                } })
+            }
         }
     }
 }

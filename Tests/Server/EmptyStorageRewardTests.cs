@@ -26,6 +26,16 @@ public sealed class EmptyStorageRewardTests
     [InlineData("5c0a840b86f7742ffa4f2482")]
     [InlineData("5e2af55f86f7746d4159f07c")]
     [InlineData("67600929bd0a0549d70993f6")]
+    [InlineData("c2f666728bc6cf04292861dc")]
+    [InlineData("992d9b71d76828181f7b87ea")]
+    [InlineData("22d6ba32465bfbc078635969")]
+    [InlineData("1a1d09be383400a9066af46e")]
+    [InlineData("73dbd7194e6ec50ef1f6218b")]
+    [InlineData("85b220667456d433db894c03")]
+    [InlineData("0e467959521c90b58551ed4b")]
+    [InlineData("a3c2c001eb04d2cc82bd8983")]
+    [InlineData("683d0995deed9b8d4f897ec2")]
+    [InlineData("683d09aadb9e219d2f7bd6e8")]
     public void Allowlisted_empty_storage_items_are_individual_prizes_not_wrappers(string id)
     {
         var templates = Templates(id);
@@ -53,17 +63,20 @@ public sealed class EmptyStorageRewardTests
         Reject(RewardForest.Create([new RewardForestNode("root", "root", OtherItem, null, null, null, 1)]), templates);
     }
 
-    [Fact]
-    public void Allowed_storage_cannot_hold_contents_or_be_nested_inside_another_reward()
+    [Theory]
+    [InlineData(InjectorCase)]
+    [InlineData("992d9b71d76828181f7b87ea")]
+    [InlineData("683d0995deed9b8d4f897ec2")]
+    public void Allowed_storage_cannot_hold_contents_or_be_nested_inside_another_reward(string storageId)
     {
-        var templates = Templates(InjectorCase);
+        var templates = Templates(storageId);
         templates[OtherItem] = Item(OtherItem, Compound);
         Reject(RewardForest.Create([
-            new RewardForestNode("root", "root", InjectorCase, null, null, null, 1),
+            new RewardForestNode("root", "root", storageId, null, null, null, 1),
             new RewardForestNode("root", "root/child", OtherItem, "root", "main", new CanonicalInternalLocation(0, 0, CanonicalRotation.Horizontal), 1)]), templates);
         Reject(RewardForest.Create([
             new RewardForestNode("root", "root", OtherItem, null, null, null, 1),
-            new RewardForestNode("root", "root/child", InjectorCase, "root", "main", new CanonicalInternalLocation(0, 0, CanonicalRotation.Horizontal), 1)]), templates);
+            new RewardForestNode("root", "root/child", storageId, "root", "main", new CanonicalInternalLocation(0, 0, CanonicalRotation.Horizontal), 1)]), templates);
     }
 
     [Fact]

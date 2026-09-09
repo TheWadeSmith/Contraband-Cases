@@ -10,8 +10,8 @@ $ErrorActionPreference = "Stop"
 
 $projectRoot = [IO.Path]::GetFullPath((Join-Path $PSScriptRoot ".."))
 $distRoot = [IO.Path]::GetFullPath((Join-Path $projectRoot "..\dist"))
-$packageBaseName = "ContrabandCases-0.4.13-SPT4.1.5"
-$packageTimestampUtc = [DateTime]::SpecifyKind([DateTime]"2026-09-08T00:00:00", [DateTimeKind]::Utc)
+$packageBaseName = "ContrabandCases-0.4.14-SPT4.1.5"
+$packageTimestampUtc = [DateTime]::SpecifyKind([DateTime]"2026-09-09T00:00:00", [DateTimeKind]::Utc)
 
 function Resolve-PackagePath {
     param(
@@ -478,8 +478,8 @@ function Get-AssemblyReport {
     }
 
     Assert-Condition ([string]::Equals($assemblyName.Name, $ExpectedName, [StringComparison]::Ordinal)) "'$Path' has assembly name '$($assemblyName.Name)'; expected '$ExpectedName'."
-    Assert-Condition ($assemblyName.Version.ToString() -eq "0.4.13.0") "'$ExpectedName' assembly version is '$($assemblyName.Version)'; expected '0.4.13.0'."
-    Assert-Condition ($fileVersion -eq "0.4.13.0") "'$ExpectedName' file version is '$fileVersion'; expected '0.4.13.0'."
+    Assert-Condition ($assemblyName.Version.ToString() -eq "0.4.14.0") "'$ExpectedName' assembly version is '$($assemblyName.Version)'; expected '0.4.14.0'."
+    Assert-Condition ($fileVersion -eq "0.4.14.0") "'$ExpectedName' file version is '$fileVersion'; expected '0.4.14.0'."
     Assert-Condition (Test-BinaryContainsText $Path $ExpectedTargetFramework) "'$ExpectedName' does not embed target framework '$ExpectedTargetFramework'."
 
     return [pscustomobject]@{
@@ -629,6 +629,9 @@ $resolvedArchivePath = Resolve-PackagePath $ArchivePath (Join-Path $distRoot "$p
 $resolvedHashPath = Resolve-PackagePath $HashPath (Join-Path $distRoot "$packageBaseName-SHA256.txt")
 
 $rewardPackSpecifications = @(
+    [pscustomobject]@{ FileName = "black-site.loadouts.json"; ProviderId = "black-site.loadouts"; PackVersion = "1.0.0"; DisplayLabel = "Black Site Loadouts"; ProviderWeight = 0.1; RequiredTemplateCount = 33; RequiredPresetCount = 12; RequiredBundleCount = 0; LotCount = 8; RetiredLotCount = 0; IsOptional = $true; Sha256 = "5649BCAFEF023801E92D81DDA2CDFAF5E0A2BE82B61A91586C5002F1DE55E568" },
+    [pscustomobject]@{ FileName = "cnn-containers.storage.json"; ProviderId = "cnn-containers.storage"; PackVersion = "1.0.0"; DisplayLabel = "CNN Storage"; ProviderWeight = 0.06; RequiredTemplateCount = 2; RequiredPresetCount = 0; RequiredBundleCount = 0; LotCount = 2; RetiredLotCount = 0; IsOptional = $true; Sha256 = "045EC4142925326AA06A62544A09C533E551C60217F5C8C499706525BCCF3F67" },
+    [pscustomobject]@{ FileName = "more-cases.storage.json"; ProviderId = "more-cases.storage"; PackVersion = "1.0.0"; DisplayLabel = "More Cases Storage"; ProviderWeight = 0.04; RequiredTemplateCount = 8; RequiredPresetCount = 0; RequiredBundleCount = 0; LotCount = 8; RetiredLotCount = 0; IsOptional = $true; Sha256 = "4CFCF9E0D08317797E4274AE17BF127EC3CB3F867A9795ECC074A0A9362C3046" },
     [pscustomobject]@{ FileName = "amonya.arcane-cache.json"; ProviderId = "amonya.arcane-cache"; PackVersion = "1.0.0"; DisplayLabel = "Amonya Arcane Cache"; ProviderWeight = 0.05; RequiredTemplateCount = 12; RequiredPresetCount = 0; RequiredBundleCount = 0; LotCount = 15; RetiredLotCount = 6; IsOptional = $true; Sha256 = "5158B74132FC7FFF2BC0713488B26E6628160D64ED1CE7152229C9148C8352BF" },
     [pscustomobject]@{ FileName = "core.json"; ProviderId = "core"; PackVersion = "0.3.3"; DisplayLabel = "Contraband Cases Core"; ProviderWeight = 1.0; RequiredTemplateCount = 60; RequiredPresetCount = 15; RequiredBundleCount = 0; LotCount = 200; RetiredLotCount = 0; IsOptional = $false; Sha256 = "51C2B4D4E6FC3F87B995860070E666A21BE35C349063C2DA1FCCFEC260AEB153" },
     [pscustomobject]@{ FileName = "eco-attachment.elite-optics.json"; ProviderId = "eco-attachment.elite-optics"; PackVersion = "1.0.0"; DisplayLabel = "Eco Attachment Emporium Elite Optics"; ProviderWeight = 0.06; RequiredTemplateCount = 10; RequiredPresetCount = 2; RequiredBundleCount = 0; LotCount = 14; RetiredLotCount = 0; IsOptional = $true; Sha256 = "740017AB6800CA679B54216A93EC5BE1443ED743021A40416A0288082BB1CF5F" },
@@ -702,7 +705,7 @@ Assert-ExactSequence "staged directory set" $expectedDirectories $actualDirector
 foreach ($relativePath in $actualFiles) {
     $stagedPath = Join-Path $resolvedStagePath $relativePath.Replace("/", [IO.Path]::DirectorySeparatorChar)
     $actualTimestampUtc = (Get-Item -LiteralPath $stagedPath -Force).LastWriteTimeUtc
-    Assert-Condition ($actualTimestampUtc.Ticks -eq $packageTimestampUtc.Ticks) "staged file '$relativePath' has timestamp '$($actualTimestampUtc.ToString('o'))'; expected the 0.4.13 release timestamp '$($packageTimestampUtc.ToString('o'))'."
+    Assert-Condition ($actualTimestampUtc.Ticks -eq $packageTimestampUtc.Ticks) "staged file '$relativePath' has timestamp '$($actualTimestampUtc.ToString('o'))'; expected the 0.4.14 release timestamp '$($packageTimestampUtc.ToString('o'))'."
 }
 
 $releaseArtifactMappings = @(
@@ -904,9 +907,9 @@ $serverAspNetCoreHttpReference = @($serverAssembly.References | Where-Object { $
 Assert-Condition ($serverAspNetCoreHttpReference.Count -eq 1 -and $serverAspNetCoreHttpReference[0].Version.ToString() -eq "10.0.0.0") "server must reference the Microsoft.AspNetCore.Http.Abstractions 10.0.0.0 assembly supplied by the SPT 4.1.3 server runtime exactly once."
 
 $clientSharedReference = @($clientAssembly.References | Where-Object { $_.Name -eq "ContrabandCases.Shared" })
-Assert-Condition ($clientSharedReference.Count -eq 1 -and $clientSharedReference[0].Version.ToString() -eq "0.4.13.0") "client must reference ContrabandCases.Shared 0.4.13.0 exactly once."
+Assert-Condition ($clientSharedReference.Count -eq 1 -and $clientSharedReference[0].Version.ToString() -eq "0.4.14.0") "client must reference ContrabandCases.Shared 0.4.14.0 exactly once."
 $serverSharedReference = @($serverAssembly.References | Where-Object { $_.Name -eq "ContrabandCases.Shared" })
-Assert-Condition ($serverSharedReference.Count -eq 1 -and $serverSharedReference[0].Version.ToString() -eq "0.4.13.0") "server must reference ContrabandCases.Shared 0.4.13.0 exactly once."
+Assert-Condition ($serverSharedReference.Count -eq 1 -and $serverSharedReference[0].Version.ToString() -eq "0.4.14.0") "server must reference ContrabandCases.Shared 0.4.14.0 exactly once."
 foreach ($expectedSptReference in @("SPTarkov.Common", "SPTarkov.DI", "SPTarkov.Server.Core")) {
     $matches = @($serverAssembly.References | Where-Object { $_.Name -eq $expectedSptReference })
     Assert-Condition ($matches.Count -eq 1 -and $matches[0].Version.ToString() -eq "4.1.3.0") "server reference '$expectedSptReference' must be version 4.1.3.0 exactly once."
@@ -967,7 +970,7 @@ try {
                 $entryName = $entry.FullName
                 Assert-Condition (!$entryName.Contains("\")) "archive entry '$entryName' uses a backslash."
                 Assert-Condition (!$entryName.StartsWith("/", [StringComparison]::Ordinal) -and $entryName -notmatch "(^|/)\.\.(/|$)" -and $entryName -notmatch "^[A-Za-z]:") "archive entry '$entryName' is unsafe."
-                Assert-Condition ($entry.LastWriteTime.Year -eq $packageTimestampUtc.Year -and $entry.LastWriteTime.Month -eq $packageTimestampUtc.Month -and $entry.LastWriteTime.Day -eq $packageTimestampUtc.Day -and $entry.LastWriteTime.Hour -eq $packageTimestampUtc.Hour -and $entry.LastWriteTime.Minute -eq $packageTimestampUtc.Minute -and $entry.LastWriteTime.Second -eq $packageTimestampUtc.Second) "archive entry '$entryName' does not have the 0.4.13 release timestamp."
+                Assert-Condition ($entry.LastWriteTime.Year -eq $packageTimestampUtc.Year -and $entry.LastWriteTime.Month -eq $packageTimestampUtc.Month -and $entry.LastWriteTime.Day -eq $packageTimestampUtc.Day -and $entry.LastWriteTime.Hour -eq $packageTimestampUtc.Hour -and $entry.LastWriteTime.Minute -eq $packageTimestampUtc.Minute -and $entry.LastWriteTime.Second -eq $packageTimestampUtc.Second) "archive entry '$entryName' does not have the 0.4.14 release timestamp."
 
                 $outputPath = [IO.Path]::GetFullPath((Join-Path $roundTripRoot $entryName.Replace("/", [IO.Path]::DirectorySeparatorChar)))
                 $roundTripPrefix = $roundTripRoot.TrimEnd([IO.Path]::DirectorySeparatorChar) + [IO.Path]::DirectorySeparatorChar
@@ -1043,7 +1046,7 @@ if ($isSourceProject) {
     Assert-ValidationSourceStateUnchanged $validationSourceState $releaseArtifactMappings
 }
 
-Write-Host "Validated Contraband Cases 0.4.13 package:"
+Write-Host "Validated Contraband Cases 0.4.14 package:"
 Write-Host "  Stage:   $resolvedStagePath"
 Write-Host "  Archive: $resolvedArchivePath"
 Write-Host "  SHA-256: $(Get-Sha256 $resolvedArchivePath)"

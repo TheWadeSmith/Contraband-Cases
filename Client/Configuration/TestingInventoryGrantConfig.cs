@@ -104,7 +104,7 @@ internal sealed class TestingInventoryGrantConfig
                 "Choose Mixed, Operations, Relics, Black Site or Cash Cache. Used by Case and tier selection; ignored for keys-only grants."));
         settings.OpeningTier = config.Bind(Section, "Opening Tier", TestingOpeningTier.Natural,
             McmSettings.Option(McmSettings.Spawning, "Opening quality", 40,
-                "Natural keeps real odds. Epic/Legendary force that TEST tier (choose one of three packages). Cash Cache requires Natural. Open forced cases before a server restart; unopened test tags expire. Existing/purchased cases are unchanged."));
+                "Natural keeps real odds. Epic offers three packages to choose from; Legendary awards one rolled prize. Forced tiers apply only to newly granted TEST cases. Cash Cache requires Natural. Open before a server restart; unopened test tags expire. Existing/purchased cases are unchanged."));
         settings.SelectionMode = config.Bind(Section, "Selection Mode", TestingSelectionMode.CaseAndTier,
             McmSettings.Option(McmSettings.Spawning, "Spawn selection", 20,
                 "Normally use Case and tier. Legacy provider pool ignores the two selectors below and uses Legacy spawn pool under Advanced tests (enable MCM's advanced settings)."));

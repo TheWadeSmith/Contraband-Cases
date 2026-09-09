@@ -5,7 +5,7 @@ param(
 
 Set-StrictMode -Version Latest
 $ErrorActionPreference = "Stop"
-$packageTimestampUtc = [DateTime]::SpecifyKind([DateTime]"2026-09-08T00:00:00", [DateTimeKind]::Utc)
+$packageTimestampUtc = [DateTime]::SpecifyKind([DateTime]"2026-09-09T00:00:00", [DateTimeKind]::Utc)
 $packageDosDate = [uint16]((($packageTimestampUtc.Year - 1980) -shl 9) -bor ($packageTimestampUtc.Month -shl 5) -bor $packageTimestampUtc.Day)
 $packageDosTime = [uint16](($packageTimestampUtc.Hour -shl 11) -bor ($packageTimestampUtc.Minute -shl 5) -bor ([int]($packageTimestampUtc.Second / 2)))
 
@@ -180,8 +180,8 @@ try {
     $stage = Join-Path $packageRoot "dist\stage"
     $validationScript = Join-Path $packageRoot "ContrabandCases\tools\Validate-Package.ps1"
     $stagedClientDll = Join-Path $stage "BepInEx\plugins\ContrabandCases\ContrabandCases.Client.dll"
-    $archivePath = Join-Path $packageRoot "dist\ContrabandCases-0.4.13-SPT4.1.5.zip"
-    $hashPath = Join-Path $packageRoot "dist\ContrabandCases-0.4.13-SPT4.1.5-SHA256.txt"
+    $archivePath = Join-Path $packageRoot "dist\ContrabandCases-0.4.14-SPT4.1.5.zip"
+    $hashPath = Join-Path $packageRoot "dist\ContrabandCases-0.4.14-SPT4.1.5-SHA256.txt"
 
     # The dist-scoped lock must reject a concurrent package run without touching canonical outputs.
     $lockedStageSnapshot = Get-DirectoryByteSnapshot $stage
@@ -208,12 +208,12 @@ try {
     Assert-Condition ((Get-FileHash -LiteralPath $hashPath -Algorithm SHA256).Hash -eq $lockedManifestHash) "interrupted-transaction rejection changed the canonical checksum manifest."
     Remove-Item -LiteralPath $interruptedTransactionPath -Recurse -Force
 
-    Assert-Condition ((Get-Item -LiteralPath $stagedClientDll).LastWriteTimeUtc.Ticks -eq $packageTimestampUtc.Ticks) "packaging did not stamp staged files with the 0.4.13 release timestamp."
+    Assert-Condition ((Get-Item -LiteralPath $stagedClientDll).LastWriteTimeUtc.Ticks -eq $packageTimestampUtc.Ticks) "packaging did not stamp staged files with the 0.4.14 release timestamp."
     $headerTimestamps = Get-ArchiveHeaderTimestamps $archivePath
-    Assert-Condition ($headerTimestamps.LocalDate -eq $packageDosDate -and $headerTimestamps.LocalTime -eq $packageDosTime) "local ZIP header does not contain the 0.4.13 release timestamp."
-    Assert-Condition ($headerTimestamps.CentralDate -eq $packageDosDate -and $headerTimestamps.CentralTime -eq $packageDosTime) "central ZIP header does not contain the 0.4.13 release timestamp."
+    Assert-Condition ($headerTimestamps.LocalDate -eq $packageDosDate -and $headerTimestamps.LocalTime -eq $packageDosTime) "local ZIP header does not contain the 0.4.14 release timestamp."
+    Assert-Condition ($headerTimestamps.CentralDate -eq $packageDosDate -and $headerTimestamps.CentralTime -eq $packageDosTime) "central ZIP header does not contain the 0.4.14 release timestamp."
     (Get-Item -LiteralPath $stagedClientDll).LastWriteTimeUtc = [DateTime]::SpecifyKind([DateTime]"1980-01-01T00:00:00", [DateTimeKind]::Utc)
-    Invoke-ExpectFailure $validationScript "staged release timestamp mutation" @("Package validation failed: staged file '.+ContrabandCases\.Client\.dll' has timestamp '.+'; expected the 0\.4\.13 release timestamp '.+'\.")
+    Invoke-ExpectFailure $validationScript "staged release timestamp mutation" @("Package validation failed: staged file '.+ContrabandCases\.Client\.dll' has timestamp '.+'; expected the 0\.4\.14 release timestamp '.+'\.")
     (Get-Item -LiteralPath $stagedClientDll).LastWriteTimeUtc = $packageTimestampUtc
     Assert-Condition ((Invoke-ProductionScript $validationScript) -eq 0) "restored release timestamp did not pass validation."
 
@@ -221,13 +221,13 @@ try {
     $extraPackPath = Join-Path $stagedPackRoot "unexpected.json"
     [IO.File]::WriteAllText($extraPackPath, "{}", (New-Object Text.UTF8Encoding($false)))
     (Get-Item -LiteralPath $extraPackPath).LastWriteTimeUtc = $packageTimestampUtc
-    Invoke-ExpectFailure $validationScript "extra staged reward pack" @("Package validation failed: staged file set count was 29; expected 28\.")
+    Invoke-ExpectFailure $validationScript "extra staged reward pack" @("Package validation failed: staged file set count was 32; expected 31\.")
     Remove-Item -LiteralPath $extraPackPath -Force
 
     $stagedSjxPack = Join-Path $stagedPackRoot "sjx.combat-chemistry.json"
     $sjxPackBytes = [IO.File]::ReadAllBytes($stagedSjxPack)
     Remove-Item -LiteralPath $stagedSjxPack -Force
-    Invoke-ExpectFailure $validationScript "missing staged reward pack" @("Package validation failed: staged file set count was 27; expected 28\.")
+    Invoke-ExpectFailure $validationScript "missing staged reward pack" @("Package validation failed: staged file set count was 30; expected 31\.")
     [IO.File]::WriteAllBytes($stagedSjxPack, $sjxPackBytes)
     (Get-Item -LiteralPath $stagedSjxPack).LastWriteTimeUtc = $packageTimestampUtc
 
@@ -357,6 +357,9 @@ try {
     Invoke-ExpectFailure (Join-Path $missingPackProject "tools\Package.ps1") "missing canonical core pack" @("Packaging failed: packaging input '.+core\.json' disappeared while its state was captured\.")
 
     foreach ($packCase in @(
+        [pscustomobject]@{ Label = "loadouts-pack-version"; RelativePath = "config\reward-packs\black-site.loadouts.json"; Before = '"packVersion": "1.0.0"'; After = '"packVersion": "1.0.1"'; Description = "Black Site Loadouts pack version mutation"; Expected = "Package validation failed: reward pack 'black-site\.loadouts' packVersion must be '1\.0\.0'\." },
+        [pscustomobject]@{ Label = "more-cases-pack-version"; RelativePath = "config\reward-packs\more-cases.storage.json"; Before = '"packVersion": "1.0.0"'; After = '"packVersion": "1.0.1"'; Description = "More Cases Storage pack version mutation"; Expected = "Package validation failed: reward pack 'more-cases\.storage' packVersion must be '1\.0\.0'\." },
+        [pscustomobject]@{ Label = "cnn-pack-version"; RelativePath = "config\reward-packs\cnn-containers.storage.json"; Before = '"packVersion": "1.0.0"'; After = '"packVersion": "1.0.1"'; Description = "CNN Storage pack version mutation"; Expected = "Package validation failed: reward pack 'cnn-containers\.storage' packVersion must be '1\.0\.0'\." },
         [pscustomobject]@{ Label = "core-pack-schema"; RelativePath = "config\reward-packs\core.json"; Before = '"schemaVersion": 1'; After = '"schemaVersion": 2'; Description = "core pack schema mutation"; Expected = "Package validation failed: reward pack 'core' schemaVersion must be integer 1\." },
         [pscustomobject]@{ Label = "core-pack-provider"; RelativePath = "config\reward-packs\core.json"; Before = '"providerId": "core"'; After = '"providerId": "other"'; Description = "core pack provider mutation"; Expected = "Package validation failed: reward pack 'core' must declare canonical providerId 'core'\." },
         [pscustomobject]@{ Label = "core-pack-version"; RelativePath = "config\reward-packs\core.json"; Before = '"packVersion": "0.3.3"'; After = '"packVersion": "0.3.4"'; Description = "core pack version mutation"; Expected = "Package validation failed: reward pack 'core' packVersion must be '0\.3\.3'\." },
@@ -415,8 +418,8 @@ try {
 
     $publicationDist = Join-Path $publicationRoot "dist"
     $publicationStage = Join-Path $publicationDist "stage"
-    $publicationArchive = Join-Path $publicationDist "ContrabandCases-0.4.13-SPT4.1.5.zip"
-    $publicationHash = Join-Path $publicationDist "ContrabandCases-0.4.13-SPT4.1.5-SHA256.txt"
+    $publicationArchive = Join-Path $publicationDist "ContrabandCases-0.4.14-SPT4.1.5.zip"
+    $publicationHash = Join-Path $publicationDist "ContrabandCases-0.4.14-SPT4.1.5-SHA256.txt"
     $publishedStageSnapshot = Get-DirectoryByteSnapshot $publicationStage
     $publishedArchiveHash = (Get-FileHash -LiteralPath $publicationArchive -Algorithm SHA256).Hash
     $publishedManifestHash = (Get-FileHash -LiteralPath $publicationHash -Algorithm SHA256).Hash

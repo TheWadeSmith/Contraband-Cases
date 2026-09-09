@@ -33,6 +33,7 @@ internal sealed record ManifestOpeningPool(IReadOnlyList<ResolvedCargoLot> Lots,
         (lot.Identity.ProviderId, ShipmentEconomy.BaseId(lot.Identity.LotId)) is
             ("core", "black-site-marksman") or
             ("core", "black-site-expedition-jackpot") or
+            ("more-cases.storage", "equipment-cabinet") or
             ("krackasourus.anime-cards", "erica-ultimate") or
             ("krackasourus.pokemon-cards", "dragonite-holo") or
             ("krackasourus.yugioh-cards", "tri-horned-dragon") or

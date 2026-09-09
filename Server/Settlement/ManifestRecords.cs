@@ -1073,6 +1073,9 @@ public sealed class ManifestTerminalReceipt
             if (copiedDecisions.Length > 1 || copiedDecisions.Any(d => d.Decision != ManifestOfferDecision.Choose) ||
                 terminalPhase != ManifestPhase.Forfeited && copiedDecisions.Length != 1)
                 throw new ArgumentException("Premium receipt must retain its single package choice.");
+            if (openingQuality.SinglePrize && (copiedDecisions.Length != 1 || copiedDecisions[0].Ordinal != 1 ||
+                entitlement is null || !ManifestRecordValidation.SameReceiptLot(entitlement, copiedOffers[0])))
+                throw new ArgumentException("The automatic Legendary receipt must retain the first committed prize.");
         }
         else if (copiedDecisions.Any(d => d.Decision == ManifestOfferDecision.Choose))
             throw new ArgumentException("An ordinary receipt cannot contain a premium choice.");
@@ -1253,6 +1256,10 @@ public sealed class ManifestRecord
                 copiedDecisions.Length != (chosen is null ? 0 : 1) ||
                 copiedDecisions.Any(d => d.Decision != ManifestOfferDecision.Choose || d.Ordinal != chosen))
                 throw new ArgumentException("Premium openings require one explicit choice without discards.");
+            if (ticket.OpeningQuality.SinglePrize && (flowState.CurrentOrdinal != 1 ||
+                copiedDecisions.Any(d => d.Ordinal != 1) ||
+                flowState.Phase is ManifestPhase.Offer1 or ManifestPhase.Offer2))
+                throw new ArgumentException("The automatic Legendary prize cannot become an offer or a different choice.");
         }
         else ValidateDecisionHistory(flowState, copiedDecisions);
 
@@ -1371,10 +1378,17 @@ public sealed class ManifestRecord
         }
 
         var singlePayout = Ticket.CaseTemplateId == CaseContracts.CashCache;
-        var payout = singlePayout ? Offers[0] : null;
+        var automaticLegendary = Ticket.OpeningQuality?.SinglePrize == true;
+        var payout = singlePayout || automaticLegendary ? Offers[0] : null;
+        var activated = ManifestFlowState.ActivateTicket(FlowState, singlePayout);
+        // The first premium draw already uses the exact published distribution.
+        // Lock it in the same transition as ticket activation, never in the UI.
+        if (automaticLegendary) activated = ManifestStateMachine.ChoosePremiumOffer(activated, 1);
         return Copy(
-            flowState: ManifestFlowState.ActivateTicket(FlowState, singlePayout),
+            flowState: activated,
             ticket: Ticket.Commit(committedAtUtc),
+            decisions: automaticLegendary
+                ? [new ManifestDecisionRecord(1, ManifestOfferDecision.Choose, committedAtUtc)] : Decisions,
             entitlement: payout is null ? null : new ManifestEntitlementSnapshot(
                 payout.Rarity, payout.Identity, payout.Forest, payout.Fingerprint));
     }
@@ -1385,6 +1399,8 @@ public sealed class ManifestRecord
         IEnumerable<ManifestRelayCandidateSnapshot>? relayCandidates = null)
     {
         ManifestRecordValidation.RequireUtc(decidedAtUtc, nameof(decidedAtUtc));
+        if (Ticket.OpeningQuality?.SinglePrize == true)
+            throw new InvalidOperationException("Your Legendary prize is already fixed and cannot be exchanged.");
         if (Ticket.OpeningQuality?.IsPremium == true)
             throw new InvalidOperationException("Choose one of the three premium packages; premium offers cannot be burned.");
         if (FlowState.Phase is not (ManifestPhase.Offer1 or ManifestPhase.Offer2))
@@ -1424,6 +1440,8 @@ public sealed class ManifestRecord
     internal ManifestRecord ChoosePremiumOffer(int ordinal, DateTimeOffset decidedAtUtc,
         IEnumerable<ManifestRelayCandidateSnapshot>? relayCandidates = null)
     {
+        if (Ticket.OpeningQuality?.SinglePrize == true)
+            throw new InvalidOperationException("Your Legendary prize is already fixed and cannot be exchanged.");
         if (Ticket.OpeningQuality?.IsPremium != true)
             throw new InvalidOperationException("Only a premium opening supports choosing any package.");
         var next = ManifestStateMachine.ChoosePremiumOffer(FlowState, ordinal);

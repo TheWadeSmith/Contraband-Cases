@@ -359,7 +359,17 @@ internal static class CargoTemplateRules
         "59fb042886f7746c5005a7b2", // Item case
         "5c0a840b86f7742ffa4f2482", // THICC item case (chase prize)
         "5e2af55f86f7746d4159f07c", // Grenade case
-        "67600929bd0a0549d70993f6"  // Ballistic plate case
+        "67600929bd0a0549d70993f6", // Ballistic plate case
+        "c2f666728bc6cf04292861dc", // Weapon Modifications Case
+        "992d9b71d76828181f7b87ea", // THICC Weapon Modifications Case
+        "22d6ba32465bfbc078635969", // Equipment Cabinet
+        "1a1d09be383400a9066af46e", // Currency Safe
+        "73dbd7194e6ec50ef1f6218b", // THICC Ammunition Case
+        "85b220667456d433db894c03", // THICC Grenade Case
+        "0e467959521c90b58551ed4b", // THICC Medical Case
+        "a3c2c001eb04d2cc82bd8983", // Weapon Rack
+        "683d0995deed9b8d4f897ec2", // Gear Box
+        "683d09aadb9e219d2f7bd6e8"  // Mod Case
     };
 
     private static readonly HashSet<string> ExcludedAncestryIds = new(StringComparer.Ordinal)

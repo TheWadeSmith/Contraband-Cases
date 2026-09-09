@@ -8,6 +8,25 @@ namespace ContrabandCases.Tests.Server;
 public sealed class CompactRewardTests
 {
     [Fact]
+    public void All_496_published_0_4_13_definitions_and_pack_metadata_remain_unchanged()
+    {
+        var root = Path.GetFullPath(Path.Combine(AppContext.BaseDirectory, "../../../.."));
+        var baseline = JsonSerializer.Deserialize<Dictionary<string, string>>(File.ReadAllText(
+            Path.Combine(root, "Tests/Fixtures/reward-pack-files-0.4.13.json")))!;
+        Assert.Equal(17, baseline.Count);
+        var count = 0;
+        foreach (var (file, hash) in baseline)
+        {
+            var text = File.ReadAllText(Path.Combine(root, "config/reward-packs", file)).Replace("\r\n", "\n");
+            Assert.Equal(hash, Convert.ToHexString(System.Security.Cryptography.SHA256.HashData(
+                System.Text.Encoding.UTF8.GetBytes(text))));
+            using var doc = JsonDocument.Parse(text);
+            count += doc.RootElement.GetProperty("lots").GetArrayLength();
+        }
+        Assert.Equal(496, count);
+    }
+
+    [Fact]
     public void Every_0_4_12_paid_recipe_is_unchanged()
     {
         var root = Path.GetFullPath(Path.Combine(AppContext.BaseDirectory, "../../../.."));

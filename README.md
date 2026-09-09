@@ -1,10 +1,34 @@
 # Contraband Cases
 
-Contraband Cases **0.4.13** is a client-and-server mod for
+Contraband Cases **0.4.14** is a client-and-server mod for
 **SPT 4.1.x**, targeting **SPT 4.1.5** with the compatible 4.1.3 server SDK.
-This release has passed automated verification; full gameplay acceptance is
-still pending. Back up your saves and delivery records, and update matching
-client and server files together using the instructions below.
+Full gameplay acceptance is still pending. Back up your saves and delivery
+records, and update matching client and server files together.
+
+### 0.4.14: Black Site expansion and Relay recovery
+
+- Eight full loadouts: M4 Assault, MP7 Breacher, SR-25 Marksman, RSASS Overwatch,
+  AUG Night Patrol, MCX Night Raider, SCAR-H Heavy Assault and MPX Combat Medic.
+  Each includes an assembled weapon, matching ammunition, armored rig, helmet,
+  headset, backpack and medicine, plus a spare magazine, night vision or surgery
+  kit. Load magazines before use. These join Black Site and Mixed, not Operations.
+- Ten optional storage prizes: More Cases' Weapon Modifications Case, THICC
+  Weapon Modifications Case, Equipment Cabinet, Safe, THICC Ammo Case, THICC
+  Grenade Case, THICC Medcase and Weapon Rack; CNN's Gear Box and Mod Case.
+  They require their content mods. High-capacity chase rewards stay exceptionally
+  rare and do not create a separate jackpot-only opening category.
+- Fresh surprise Legendary openings award **the single prize the reel lands on**.
+  There is no three-way choice or extra selection key. Epic still offers three
+  choices; Legendary choices saved by older builds remain intact.
+- A finished Relay sidegrade no longer advertises a contradictory next upgrade.
+  This fixes the repeated **Opening needs attention** screen when reading that
+  saved result. Claiming still uses the original reward and exactly-once delivery.
+
+All rewards remain separate **Mechanic Messenger** attachments. A medical or
+storage case is an **empty prize**, not a wrapper holding the other items. No
+automatic stash insertion, bulk-medicine filler or profile migration is added.
+The 496 published reward definitions and existing case/key drop settings remain
+unchanged. New content can affect automatic case pricing and individual loot odds.
 
 ### 0.4.13: distinctive rewards and lighter previews
 
@@ -117,7 +141,7 @@ currency payouts, including **4 Bitcoins at 0.90%** and **10 at 0.10%**.
 All original paid packages/payouts retain their exact contents and grades;
 old and new cargo Relay generations cannot cross. Keys remain find-only and
 universal; drop rates, 5 kg case weights, Unity models and sounds are unchanged.
-Use the installable `ContrabandCases-0.4.13-SPT4.1.5.zip` and its
+Use the installable `ContrabandCases-0.4.14-SPT4.1.5.zip` and its
 matching SHA256 manifest from the GitHub release.
 GitHub's automatic
 "Source code" archives are not installable mod packages. Updating requires both
@@ -221,7 +245,7 @@ each Relay attempt. There are no case-specific keys.
 | BR-12 Mixed Case | Mixed catalog, including all available themed content | Existing case color |
 | Operations | Practical ammunition, medical supplies, field equipment and loadouts | Green |
 | Relics | Anime, Pokemon and Yu-Gi-Oh cards, historical relics and arcane curios | Violet |
-| Black Site | Elite equipment, night operations, ordnance and experimental supplies | Red |
+| Black Site | Elite equipment, complete loadouts, night operations, rare storage and experimental supplies | Red |
 | Cash Cache | One exact payout of RUB, USD, EUR, GP Coins or physical Bitcoin | Yellow |
 
 Cases are separate physical items sold by Mechanic, with distinct names,
@@ -240,19 +264,21 @@ therefore depends on which supported packs resolve against the installed mods.
 ## Rare surprise openings
 
 Mixed, Operations, Relics and Black Site cases look ordinary until opened.
-The server saves one surprise-tier roll and all three packages **before spending
-the case/key**. Cash Cache is excluded.
+The server commits the surprise tier and reward draw **before spending the
+case/key**. Cash Cache is excluded.
 
 | Opening | Chance | What you receive |
 | --- | ---: | --- |
 | Normal | 98.3% | The existing discard/lock gamble, including ordinary jackpots |
 | Epic | 1.5% | Three distinct Epic-or-Legendary packages; browse all, choose **one** |
-| Legendary / Godly | 0.2% | Three distinct Legendary packages; browse all, choose **one** |
+| Legendary / Godly | 0.2% | One saved Legendary package; the reel lands on the prize you receive |
 
 These are rare upgrades to the opening, not separate purchasable guaranteed-win
-cases. No extra key is charged for browsing or choosing. After choosing, Messenger
-delivery and eligible Relay actions work normally. **Close — resume later** leaves the
-same choices available through the Dossier. Reconnecting cannot reroll them.
+cases. No extra key is charged for browsing or choosing. Epic keeps its three-way
+choice; fresh Legendary openings lock one prize automatically and have no higher
+Relay tier. Messenger delivery works normally. **Close — resume later** leaves the
+same choices or locked prize available through the Dossier. Reconnecting cannot
+reroll them. Legendary three-way choices saved by older builds are preserved.
 Premium packages keep the case theme, but can share a category or progression
 track. Choosing one never grants all three.
 
@@ -267,8 +293,10 @@ roll**; the confirmation shows its zero rate. Missing saved content blocks a
 choice rather than silently replacing a promised reward.
 
 Extreme chase packages retain their combined 1-in-400 cap per premium draw.
-Packages are drawn without replacement, recalculating weights after each draw.
-Full odds publish both tier rates and complete first-draw premium probabilities.
+Epic packages are drawn without replacement, recalculating weights after each draw.
+Full odds publish both tier rates and complete first-draw premium probabilities;
+for a fresh Legendary opening, that first draw is the only awarded prize. Its
+reel uses the Legendary pool, not a three-card choice preview.
 
 The roughly one-million-rouble target is not a fixed price override. Read each
 case's finalized price and reward odds in the Broker: available integrations and
@@ -541,7 +569,8 @@ Opening-only chases include Black Site Marksman, Black Site Expedition Jackpot, 
 Holo, Tri-Horned Dragon, Vault Twin Rifles and Precision Assault. Packages
 worth at least ₽4,500,000 reference value also join that pool (₽750,000 for
 historical non-shipment lots), protecting against
-modded price outliers such as Condor Loadout and Field Medical Kit.
+modded price outliers such as Condor Loadout and Field Medical Kit. The More Cases
+Equipment Cabinet is also explicitly opening-only, even below that value cutoff.
 
 Together they receive **at most 0.25% of each selected group's package odds**
 when ordinary alternatives exist. Already-rarer weights are not increased.
@@ -572,10 +601,10 @@ authority for the catalog used by an opening.
 
 ## Included integrations
 
-All **17 packs** ship together: **117 eligible compact rewards**, plus five
+All **20 packs** ship together: **135 eligible compact rewards**, plus five
 non-opening current definitions and **374 unchanged published definitions**
-retained for recovery (496 definitions total). The all-pack projection resolves
-117 fresh lots: 42 Operations, 29 Relics and 46 Black Site. Its current packages
+retained for recovery (514 definitions total). The all-pack projection resolves
+135 fresh lots: 42 Operations, 29 Relics and 64 Black Site. Its current packages
 remain below the enforced
 8 / 128 / 64 limits. Cash Cache's 15 current and 15
 historical payouts are separate. Unavailable
@@ -590,6 +619,8 @@ source templates/presets, not an execution of every installed mod hook.
 
 - Required Core: practical raid kits, specialist equipment and rare chase prizes.
 - Vanilla Vault: rare complete equipment packages.
+- Black Site Loadouts: eight complete raid kits using native items and presets.
+- More Cases and CNN Containers: ten standalone storage prizes, when installed.
 - Krackasourus Anime, Pokemon and Yu-Gi-Oh Cards: collection packages.
 - SJX Combat Chemistry and Vultify CoolerStims: small specialist medical kits.
 - ISB/Aishi: field and elite armory packs.
@@ -604,7 +635,7 @@ dependency, forest, resource-state and placement validation. Optional packs
 are not promises that every item is Relay-eligible at every installed price.
 The gallery and live report show what actually resolved.
 
-All published cargo definitions through 0.4.12, including the original 50 core
+All published cargo definitions through 0.4.13, including the original 50 core
 lots and `core.json` pack version **0.3.3**, remain unchanged. New generations
 use new lot identities; published recipes are not edited in place.
 Old saved rarity ladders retain their original meanings, and old Relay rewards
@@ -652,9 +683,10 @@ use a test profile. **Enable previews is not required for spawning.** Grants
 remain blocked in raids, while another case window is active, or by the server.
 
 Natural preserves real opening odds. Epic/Legendary force that surprise tier
-for newly granted test cases only, with three saved packages to choose from.
+for newly granted test cases only. Epic provides three saved choices; Legendary
+spins to one automatically locked prize with no choice screen.
 Open forced cases before restarting the server: unopened testing tags are
-process-local and bounded to 256 entries. Once opened, the tier and choices
+process-local and bounded to 256 entries. Once opened, the tier and saved result
 persist normally. An unavailable forced tier consumes neither case nor key.
 Legacy provider filters such as Vault/Mega are **not** guaranteed God cases;
 categories without a matching provider still use normal selection.
@@ -717,7 +749,7 @@ SPT_Runtime/user/mods/Wade-ContrabandCases/
 Do not overwrite a customized live `config/config.jsonc` with defaults.
 Preserve custom reward packs too. Remove no other mods.
 
-When upgrading to 0.4.13, replace the shipped reward-pack JSON files as well as
+When upgrading, replace the shipped reward-pack JSON files as well as
 the DLLs: the new contents are authored in those files. Back up any edits to
 shipped packs and reapply them carefully; custom fixed-price settings still
 override automatic Mixed pricing. Already-paid openings retain their original
@@ -732,6 +764,10 @@ pwsh -NoProfile -File tools/Package.ps1
 pwsh -NoProfile -File tools/Validate-Package.ps1
 pwsh -NoProfile -File tools/Package-Gate-Regression.ps1
 ```
+
+The package regression runs in disposable copies. Release assemblies and scripts
+must carry matching versions. New releases receive new archive names; published
+older archives, including 0.4.13, must not be overwritten with different content.
 
 The Unity asset-bundle project requires **Unity 2022.3.43f1**, Windows x64.
 Its existing `ContrabandCasesBundleBuilder.BuildBundles` method performs the
@@ -752,7 +788,7 @@ reference value from known/unknown resale and compare different choice strategie
 bought cases, found-case sale opportunity cost and key values up to ₽150,000.
 These checks do not start the server/game or modify live profiles.
 
-Before calling 0.4.13 fully game-verified:
+Before calling 0.4.14 fully game-verified:
 
 1. Start the matched client/server build and inspect fresh logs and the live
    resolved catalog report.
@@ -775,12 +811,19 @@ Before calling 0.4.13 fully game-verified:
    one-key consumption, partial attachment collection/full-stash retry, unchanged Favor, and
    reconnect recovery. Confirm spin ticks and landing sounds audibly, including
    after reopening the UI and at different interface/master/effects volumes.
-7. Force every Epic/Legendary MCM variant; browse all three, choose each ordinal,
-   Close — resume later, reconnect and resume, then claim or Relay where eligible. Verify
-   only one selected package is granted and no selection key is consumed.
+7. Force every Epic/Legendary MCM variant. For Epic, browse three and test each
+   selection. For fresh Legendary, verify the gold-only reel lands on one locked
+   prize with no selection screen. Close — resume later, reconnect and claim;
+   ensure the same prize resumes without a second spin or an extra key charge.
+   Preserve and resume any three-way Legendary choice saved by an older build.
 8. Reproduce game close/relaunch and inspect fresh logs. The former Lobby-state
    restart rejection is regression-tested; the original game shutdown cause
    remains unresolved. Do not blame another mod from shutdown cleanup alone.
+9. Resume a saved Relay sidegrade and deliver it through Messenger. It should
+   offer delivery, not another Relay or the repeated Opening needs attention
+   screen. Verify each new loadout's usable equipment and collect individual
+   attachments. Confirm storage prizes are empty and missing optional storage
+   mods disable only their own reward packs.
 
 Compatibility tests also exercise all 13 corrected rewards against an offline
 projection of installed template/preset definitions and the real client parser.

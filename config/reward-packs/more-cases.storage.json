@@ -1,0 +1,189 @@
+{
+  "schemaVersion": 1,
+  "providerId": "more-cases.storage",
+  "packVersion": "1.0.0",
+  "displayLabel": "More Cases Storage",
+  "providerWeight": 0.04,
+  "requiredTemplateIds": [
+    "0e467959521c90b58551ed4b",
+    "1a1d09be383400a9066af46e",
+    "22d6ba32465bfbc078635969",
+    "73dbd7194e6ec50ef1f6218b",
+    "85b220667456d433db894c03",
+    "992d9b71d76828181f7b87ea",
+    "a3c2c001eb04d2cc82bd8983",
+    "c2f666728bc6cf04292861dc"
+  ],
+  "requiredPresetIds": [],
+  "requiredBundleKeys": [],
+  "lots": [
+    {
+      "lotId": "weapon-mods-case.compact-v2",
+      "displayName": "Weapon Modifications Case",
+      "purpose": "Dedicated weapon-parts storage from More Cases. Awarded empty as its own Messenger attachment, not a wrapper for other prizes.",
+      "familyId": "operator",
+      "trackId": "vault",
+      "anchorTemplateId": "c2f666728bc6cf04292861dc",
+      "weight": 1,
+      "usePath": {
+        "kind": "raidRole",
+        "roleId": "stash-storage"
+      },
+      "recipe": [
+        {
+          "kind": "template",
+          "templateId": "c2f666728bc6cf04292861dc",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        }
+      ]
+    },
+    {
+      "lotId": "thicc-weapon-mods-case.compact-v2",
+      "displayName": "THICC Weapon Modifications Case",
+      "purpose": "High-capacity weapon-parts storage from More Cases. Awarded empty as its own Messenger attachment, not a wrapper for other prizes.",
+      "familyId": "operator",
+      "trackId": "vault",
+      "anchorTemplateId": "992d9b71d76828181f7b87ea",
+      "weight": 1,
+      "usePath": {
+        "kind": "raidRole",
+        "roleId": "stash-storage"
+      },
+      "recipe": [
+        {
+          "kind": "template",
+          "templateId": "992d9b71d76828181f7b87ea",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        }
+      ]
+    },
+    {
+      "lotId": "equipment-cabinet.compact-v2",
+      "displayName": "Equipment Cabinet",
+      "purpose": "High-capacity equipment storage from More Cases. Awarded empty as its own Messenger attachment, not a wrapper for other prizes.",
+      "familyId": "operator",
+      "trackId": "vault",
+      "anchorTemplateId": "22d6ba32465bfbc078635969",
+      "weight": 1,
+      "usePath": {
+        "kind": "raidRole",
+        "roleId": "stash-storage"
+      },
+      "recipe": [
+        {
+          "kind": "template",
+          "templateId": "22d6ba32465bfbc078635969",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        }
+      ]
+    },
+    {
+      "lotId": "safe.compact-v2",
+      "displayName": "Currency Safe",
+      "purpose": "High-capacity valuables storage from More Cases; no currency included. Awarded empty as its own Messenger attachment, not a wrapper for other prizes.",
+      "familyId": "operator",
+      "trackId": "vault",
+      "anchorTemplateId": "1a1d09be383400a9066af46e",
+      "weight": 1,
+      "usePath": {
+        "kind": "raidRole",
+        "roleId": "stash-storage"
+      },
+      "recipe": [
+        {
+          "kind": "template",
+          "templateId": "1a1d09be383400a9066af46e",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        }
+      ]
+    },
+    {
+      "lotId": "thicc-ammo-case.compact-v2",
+      "displayName": "THICC Ammunition Case",
+      "purpose": "High-capacity ammunition storage from More Cases. Awarded empty as its own Messenger attachment, not a wrapper for other prizes.",
+      "familyId": "operator",
+      "trackId": "vault",
+      "anchorTemplateId": "73dbd7194e6ec50ef1f6218b",
+      "weight": 1,
+      "usePath": {
+        "kind": "raidRole",
+        "roleId": "stash-storage"
+      },
+      "recipe": [
+        {
+          "kind": "template",
+          "templateId": "73dbd7194e6ec50ef1f6218b",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        }
+      ]
+    },
+    {
+      "lotId": "thicc-grenade-case.compact-v2",
+      "displayName": "THICC Grenade Case",
+      "purpose": "High-capacity grenade storage from More Cases. Awarded empty as its own Messenger attachment, not a wrapper for other prizes.",
+      "familyId": "operator",
+      "trackId": "vault",
+      "anchorTemplateId": "85b220667456d433db894c03",
+      "weight": 1,
+      "usePath": {
+        "kind": "raidRole",
+        "roleId": "stash-storage"
+      },
+      "recipe": [
+        {
+          "kind": "template",
+          "templateId": "85b220667456d433db894c03",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        }
+      ]
+    },
+    {
+      "lotId": "thicc-medcase.compact-v2",
+      "displayName": "THICC Medical Case",
+      "purpose": "High-capacity medical storage from More Cases. Awarded empty as its own Messenger attachment, not a wrapper for other prizes.",
+      "familyId": "operator",
+      "trackId": "vault",
+      "anchorTemplateId": "0e467959521c90b58551ed4b",
+      "weight": 1,
+      "usePath": {
+        "kind": "raidRole",
+        "roleId": "stash-storage"
+      },
+      "recipe": [
+        {
+          "kind": "template",
+          "templateId": "0e467959521c90b58551ed4b",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        }
+      ]
+    },
+    {
+      "lotId": "weapon-rack.compact-v2",
+      "displayName": "Weapon Rack",
+      "purpose": "High-capacity weapon storage from More Cases. Awarded empty as its own Messenger attachment, not a wrapper for other prizes.",
+      "familyId": "operator",
+      "trackId": "vault",
+      "anchorTemplateId": "a3c2c001eb04d2cc82bd8983",
+      "weight": 1,
+      "usePath": {
+        "kind": "raidRole",
+        "roleId": "stash-storage"
+      },
+      "recipe": [
+        {
+          "kind": "template",
+          "templateId": "a3c2c001eb04d2cc82bd8983",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        }
+      ]
+    }
+  ]
+}

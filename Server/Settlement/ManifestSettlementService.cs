@@ -129,7 +129,8 @@ public sealed class ManifestSettlementService
                     throw new InvalidOperationException(
                         $"{forced} testing is unavailable for this case: not enough qualifying packages are installed. " +
                         "Your case and key were not consumed. Spawn a different testing case or restore its reward packs.");
-                quality = new ManifestOpeningQuality(forced ?? tier, draw, epic, legendary, forced.HasValue);
+                quality = new ManifestOpeningQuality(forced ?? tier, draw, epic, legendary, forced.HasValue,
+                    singlePrize: (forced ?? tier) == ManifestOpeningTier.Legendary);
                 ticket = ticket.WithOpeningQuality(quality);
             }
             var offers = quality?.IsPremium == true

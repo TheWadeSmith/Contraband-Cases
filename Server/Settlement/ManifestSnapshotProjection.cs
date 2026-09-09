@@ -335,7 +335,7 @@ internal static class ManifestSnapshotProjection
         var values = completeCandidatePool
             ? resolvedCandidates.Select(candidate => candidate!.Evaluation.UseValue).ToArray()
             : [];
-        var upgradeGrade = entitlement.Rarity == RewardRarity.BlackLabel
+        var upgradeGrade = entitlement.Rarity == RewardRarity.BlackLabel || manifest.FlowState.RelayTerminal
             ? null
             : RelayRules.GetUpgradeRarity(
                 entitlement.Rarity,

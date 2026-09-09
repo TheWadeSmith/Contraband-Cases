@@ -16,6 +16,70 @@ namespace ContrabandCases.Tests.Server;
 public sealed class CuratedRewardIntegrationTests
 {
     [Fact]
+    public void New_full_loadouts_include_a_complete_equipment_set_and_use_distinct_weapons()
+    {
+        using var doc = ReadFixture();
+        var templates = doc.RootElement.GetProperty("templates");
+        bool DescendsFrom(string id, string category)
+        {
+            for (var depth = 0; depth < 16 && templates.TryGetProperty(id, out var item); depth++)
+            {
+                if (id == category) return true;
+                id = item.GetProperty("_parent").GetString() ?? "";
+            }
+            return false;
+        }
+        var lots = ReadCatalog().FreshOpeningLots.Where(l => l.Identity.ProviderId == "black-site.loadouts").ToArray();
+        Assert.Equal(8, lots.Length);
+        Assert.Equal(8, lots.Select(l => l.Identity.AnchorTemplateId).Distinct().Count());
+        foreach (var lot in lots)
+        {
+            Assert.Equal(8, lot.Forest.Roots.Count);
+            foreach (var category in new[] { "5422acb9af1c889c16000029", "5448e5284bdc2dcb718b4567",
+                "5a341c4086f77401f2541505", "5645bcb74bdc2ded0b8b4578", "5448e53e4bdc2d60728b4567" })
+                Assert.Single(lot.Forest.Roots, r => DescendsFrom(r.TemplateId, category));
+            Assert.Contains(lot.Forest.Roots, r => r.TemplateId is "544fb45d4bdc2dee738b4568" or "590c657e86f77412b013051d");
+            Assert.Contains(lot.Forest.Nodes, n => templates.GetProperty(n.TemplateId).GetProperty("_props")
+                .TryGetProperty("armorClass", out var armor) && int.TryParse(armor.ToString(), out var rating) && rating >= 3);
+            Assert.True(CaseCatalogs.Includes(CaseContracts.BlackSite, lot.Identity));
+            Assert.False(CaseCatalogs.Includes(CaseContracts.Operations, lot.Identity));
+        }
+    }
+
+    [Fact]
+    public void Modded_storage_is_empty_optional_Black_Site_loot_with_no_new_chase_only_category()
+    {
+        var catalog = ReadCatalog();
+        var storage = catalog.FreshOpeningLots.Where(l => l.Identity.ProviderId is "more-cases.storage" or "cnn-containers.storage").ToArray();
+        Assert.Equal(10, storage.Length);
+        foreach (var lot in storage)
+        {
+            var root = Assert.Single(lot.Forest.Nodes);
+            Assert.Null(root.ParentLogicalPath);
+            Assert.Equal(1, root.StackCount);
+            Assert.Equal("vault", lot.Identity.TrackId.Value);
+            Assert.True(CaseCatalogs.Includes(CaseContracts.BlackSite, lot.Identity));
+            Assert.True(CaseCatalogs.Includes(ModConstants.CaseTemplateId, lot.Identity));
+            Assert.False(CaseCatalogs.Includes(CaseContracts.Operations, lot.Identity));
+            Assert.False(CaseCatalogs.Includes(CaseContracts.Relics, lot.Identity));
+            if (lot.Evaluation.UseValue >= 4_000_000) Assert.True(ManifestOpeningPool.IsChase(lot));
+        }
+        Assert.Contains(catalog.FreshOpeningLots, l => l.Identity.TrackId.Value == "vault" && !ManifestOpeningPool.IsChase(l));
+    }
+
+    [Theory]
+    [InlineData("more-cases.storage", "992d9b71d76828181f7b87ea", 8)]
+    [InlineData("cnn-containers.storage", "683d0995deed9b8d4f897ec2", 2)]
+    public void Unavailable_optional_storage_skips_its_pack_without_affecting_other_rewards(string provider, string template, int count)
+    {
+        var catalog = ReadCatalog(unavailableTemplate: template);
+        Assert.Equal(provider, Assert.Single(catalog.SkippedPacks).ProviderId);
+        Assert.Equal(135 - count, catalog.FreshOpeningLots.Count);
+        Assert.DoesNotContain(catalog.FreshOpeningLots, l => l.Identity.ProviderId == provider);
+        Assert.True(CaseCatalogs.ForCase(catalog, CaseContracts.BlackSite).OpeningEnabled);
+    }
+
+    [Fact]
     public void Current_prizes_have_distinct_item_compositions_not_renamed_duplicates()
     {
         var duplicates = ReadCatalog().FreshOpeningLots.GroupBy(lot => string.Join("|", lot.Forest.Nodes
@@ -30,8 +94,8 @@ public sealed class CuratedRewardIntegrationTests
     public void All_current_packs_resolve_complete_bounded_forests_and_the_real_client_contract()
     {
         var catalog = ReadCatalog();
-        Assert.Empty(catalog.SkippedPacks);
-        Assert.Equal(117, catalog.FreshOpeningLots.Count);
+        Assert.True(catalog.SkippedPacks.Count == 0, string.Join("\n", catalog.SkippedPacks.Select(p => p.ProviderId + ": " + p.Reason)));
+        Assert.Equal(135, catalog.FreshOpeningLots.Count);
         foreach (var lot in catalog.FreshOpeningLots)
         {
             Assert.EndsWith(".compact-v2", lot.Identity.LotId);
@@ -155,20 +219,21 @@ public sealed class CuratedRewardIntegrationTests
     private static JsonDocument ReadFixture() => JsonDocument.Parse(File.ReadAllText(Path.GetFullPath(
         Path.Combine(AppContext.BaseDirectory, "../../../../Tests/Fixtures/curated-mod-templates.json"))));
 
-    internal static CargoCatalogSnapshot ReadCatalog(bool nativeOnly = false)
+    internal static CargoCatalogSnapshot ReadCatalog(bool nativeOnly = false, string? unavailableTemplate = null)
     {
         var root = Path.GetFullPath(Path.Combine(AppContext.BaseDirectory, "../../../.."));
         var options = new JsonSerializerOptions { NumberHandling = JsonNumberHandling.AllowReadingFromString };
         foreach (var converter in new SptJsonConverterRegistrator().GetJsonConverters()) options.Converters.Add(converter);
         using var doc = JsonDocument.Parse(File.ReadAllText(Path.Combine(root, "Tests/Fixtures/curated-mod-templates.json")));
         var templates = doc.RootElement.GetProperty("templates").Deserialize<Dictionary<string, TemplateItem>>(options)!;
+        if (unavailableTemplate is not null) templates.Remove(unavailableTemplate);
         var presets = doc.RootElement.GetProperty("presets").Deserialize<Dictionary<string, Preset>>(options)!;
         var prices = doc.RootElement.GetProperty("prices").Deserialize<Dictionary<string, double>>(options)!;
         var loader = new JsonRewardPackLoader();
         var core = loader.LoadFile(Path.Combine(root, "config/reward-packs/core.json"));
         var optional = Directory.GetFiles(Path.Combine(root, "config/reward-packs"), "*.json")
             .Where(path => Path.GetFileName(path) != "core.json" &&
-                (!nativeOnly || Path.GetFileName(path) == "vault.json")).Select(loader.LoadFile).ToArray();
+                (!nativeOnly || Path.GetFileName(path) is "vault.json" or "black-site.loadouts.json")).Select(loader.LoadFile).ToArray();
         return new CargoCatalogSnapshotBuilder(
             new CargoLotResolver(new CargoLotResolverDependencies(templates.GetValueOrDefault, presets.GetValueOrDefault)),
             new CargoLotEvaluator(templates.GetValueOrDefault, id => prices.GetValueOrDefault(id)),

@@ -102,7 +102,9 @@ public sealed class FrontendSafetyTests
         var text = BrokerPresentation.ReadableOdds(odds);
         Assert.Contains("Normal 98.5%", text);
         Assert.Contains("10% on the first package draw", text);
-        Assert.Contains("Later draws exclude earlier choices", text);
+        Assert.Contains("later draws exclude earlier choices", text);
+        Assert.Contains("Legendary awards one draw", text);
+        Assert.Contains("Epic: choose one of three. Legendary: one rolled prize, no choice", text);
         Assert.Contains("not final-claim probabilities", text);
         Assert.Contains("Unavailable with the installed catalog; not rolled", text);
     }

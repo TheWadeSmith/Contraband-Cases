@@ -1179,6 +1179,15 @@ public sealed class CaseOpeningJournal
         switch (activePhase)
         {
             case Shared.Manifest.ManifestPhase.TicketPrepared
+                when active.Ticket.OpeningQuality?.SinglePrize == true &&
+                     replacementPhase == Shared.Manifest.ManifestPhase.Entitlement:
+                if (addedDecision is not { Ordinal: 1, Decision: Shared.Manifest.ManifestOfferDecision.Choose })
+                    throw new InvalidOperationException("A single-prize Legendary ticket must lock its first draw.");
+                expectsDecision = true;
+                expected = Shared.Manifest.ManifestStateMachine.ChoosePremiumOffer(
+                    Shared.Manifest.ManifestFlowState.ActivateTicket(active.FlowState), 1);
+                break;
+            case Shared.Manifest.ManifestPhase.TicketPrepared
                 when active.Ticket.CaseTemplateId == Shared.Catalog.CaseContracts.CashCache &&
                      replacementPhase == Shared.Manifest.ManifestPhase.Entitlement:
                 expected = Shared.Manifest.ManifestFlowState.ActivateTicket(active.FlowState, singlePayout: true);
@@ -1424,10 +1433,11 @@ public sealed class CaseOpeningJournal
             replacement.FlowState.Phase == Shared.Manifest.ManifestPhase.Entitlement;
         var terminalConsumesEntitlement = replacement.FlowState.Phase is
             Shared.Manifest.ManifestPhase.Granted or Shared.Manifest.ManifestPhase.Forfeited;
-        var cashActivated = active.Ticket.CaseTemplateId == Shared.Catalog.CaseContracts.CashCache &&
+        var singlePrizeActivated = (active.Ticket.CaseTemplateId == Shared.Catalog.CaseContracts.CashCache ||
+                active.Ticket.OpeningQuality?.SinglePrize == true) &&
             active.FlowState.Phase == Shared.Manifest.ManifestPhase.TicketPrepared &&
             replacement.FlowState.Phase == Shared.Manifest.ManifestPhase.Entitlement;
-        if (!offerLocked && !cashActivated && addedReceipt is null && !terminalConsumesEntitlement &&
+        if (!offerLocked && !singlePrizeActivated && addedReceipt is null && !terminalConsumesEntitlement &&
             (!SameEntitlement(active.Entitlement, replacement.Entitlement) ||
              !SameCandidates(active.RelayCandidates, replacement.RelayCandidates)))
         {

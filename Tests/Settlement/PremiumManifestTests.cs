@@ -15,6 +15,60 @@ public sealed class PremiumManifestTests
 {
     private static readonly DateTimeOffset Now = new(2026, 9, 5, 0, 0, 0, TimeSpan.Zero);
 
+    [Fact]
+    public void Single_prize_Legendary_is_locked_on_commit_and_cannot_be_chosen_or_rerolled()
+    {
+        var catalog = Catalog();
+        var prepared = Prepare(catalog, ManifestOpeningTier.Legendary, singlePrize: true);
+        var journal = RoundTrip(new CaseOpeningJournal(activeManifest: prepared));
+        Assert.True(journal.ActiveManifest!.Ticket.OpeningQuality!.SinglePrize);
+        Assert.Null(journal.ActiveManifest.Entitlement);
+        Assert.Throws<InvalidOperationException>(() => journal.ReplaceActiveManifest(
+            journal.ActiveManifest.BeginTicketProfileCommit().ActivateTicket(Now.AddSeconds(1))));
+        journal.ReplaceActiveManifest(journal.ActiveManifest.BeginTicketProfileCommit());
+        journal.ReplaceActiveManifest(journal.ActiveManifest.ActivateTicket(Now.AddSeconds(1)));
+        var active = RoundTrip(journal).ActiveManifest!;
+        Assert.Equal(ManifestPhase.Entitlement, active.FlowState.Phase);
+        Assert.Equal(1, active.FlowState.LockedOrdinal);
+        Assert.Equal(prepared.Offers[0].Fingerprint, active.Entitlement!.Fingerprint);
+        foreach (var ordinal in new[] { 1, 2, 3 })
+            Assert.Throws<InvalidOperationException>(() => active.ChoosePremiumOffer(ordinal, Now.AddSeconds(2)));
+        var snapshot = Parse(ManifestSnapshotProjection.FromActive(active, catalog, null));
+        Assert.Empty(snapshot.PremiumChoices);
+        Assert.False(snapshot.AvailableActions.CanLock);
+        Assert.False(snapshot.AvailableActions.CanBurn);
+        Assert.True(snapshot.AvailableActions.CanClaim);
+        Assert.True(ManifestPresentationPolicy.ShouldRevealAfter(null, snapshot, recovering: false));
+        Assert.False(ManifestPresentationPolicy.ShouldRevealAfter(null, snapshot, recovering: true));
+        var odds = ManifestSnapshotParser.ParseCurrent(JsonSerializer.Serialize(new
+        { err = 0, errmsg = (string?)null, data = ManifestCurrentStateEnvelope.FromOpeningOdds(ManifestOpeningOdds.Create(catalog)) })).OpeningOdds!;
+        var reveal = ManifestPresentationPolicy.CreateReveal(snapshot, false, 7, 40, 32, 900, 120, 8, publishedCatalog: odds);
+        Assert.Contains("ONE PRIZE", reveal.Header);
+        Assert.DoesNotContain("CHOOSE", reveal.Header);
+        Assert.All(reveal.Tiles.Values, tile => Assert.Equal(RewardRarity.BlackLabel, tile.Grade));
+        Assert.Equal(snapshot.CurrentLot!.Fingerprint, reveal.Lot.Fingerprint);
+    }
+
+    [Fact]
+    public void A_single_Legendary_prize_does_not_depend_on_unused_premium_alternatives()
+    {
+        var catalog = Catalog();
+        var active = Prepare(catalog, ManifestOpeningTier.Legendary, singlePrize: true)
+            .BeginTicketProfileCommit().ActivateTicket(Now.AddSeconds(1));
+        var missing = new CargoCatalogSnapshot(new string('c', 64),
+            catalog.Lots.Where(l => !l.Fingerprint.Equals(active.Offers[2].Fingerprint)), [], catalog.ProviderWeights);
+        var snapshot = Parse(ManifestSnapshotProjection.FromActive(active, missing, null));
+        Assert.False(snapshot.MissingContentBlocked);
+        Assert.True(snapshot.AvailableActions.CanClaim);
+        Assert.False(ManifestSnapshotProjection.IsMissingCurrentContent(active, missing));
+    }
+
+    [Theory]
+    [InlineData(ManifestOpeningTier.Normal)]
+    [InlineData(ManifestOpeningTier.Epic)]
+    public void Automatic_single_prize_mode_is_reserved_for_Legendary(ManifestOpeningTier tier) =>
+        Assert.Throws<ArgumentException>(() => new ManifestOpeningQuality(tier, 0, true, true, true, singlePrize: true));
+
     [Theory]
     [InlineData(ManifestOpeningTier.Epic, 1)]
     [InlineData(ManifestOpeningTier.Epic, 2)]
@@ -68,6 +122,42 @@ public sealed class PremiumManifestTests
         var receipt = Assert.Single(RoundTrip(journal).ManifestReceipts);
         Assert.Equal(tier, receipt.OpeningQuality!.Tier);
         Assert.Equal(ordinal, Parse(ManifestSnapshotProjection.FromTerminal(receipt)).LockedOrdinal);
+    }
+
+    [Fact]
+    public void Historical_Legendary_without_single_prize_flag_keeps_its_saved_choices()
+    {
+        var catalog = Catalog();
+        var active = Prepare(catalog, ManifestOpeningTier.Legendary).BeginTicketProfileCommit().ActivateTicket(Now.AddSeconds(1));
+        var json = System.Text.Json.Nodes.JsonNode.Parse(JsonSerializer.Serialize(SptCaseJournal.ToDocument(new CaseOpeningJournal(activeManifest: active))))!;
+        json["ActiveManifest"]!["Ticket"]!["OpeningQuality"]!.AsObject().Remove("SinglePrize");
+        var restored = SptCaseJournal.FromDocument(json.Deserialize<SptCaseJournalDocument>()!).ActiveManifest!;
+        Assert.False(restored.Ticket.OpeningQuality!.SinglePrize);
+        Assert.Equal(3, Parse(ManifestSnapshotProjection.FromActive(restored, catalog, null)).PremiumChoices.Count);
+        Assert.Equal(active.Offers[2].Fingerprint, restored.ChoosePremiumOffer(3, Now.AddSeconds(2)).Entitlement!.Fingerprint);
+    }
+
+    [Fact]
+    public void Single_prize_flag_cannot_rewrite_a_saved_choice_or_forge_a_different_receipt()
+    {
+        var catalog = Catalog();
+        var legacy = Prepare(catalog, ManifestOpeningTier.Legendary);
+        var automatic = Prepare(catalog, ManifestOpeningTier.Legendary, singlePrize: true);
+        var rewritten = SptCaseJournal.ToDocument(new CaseOpeningJournal(activeManifest: legacy));
+        rewritten.ActiveManifest!.Ticket!.OpeningQuality = automatic.Ticket.OpeningQuality;
+        Assert.Throws<InvalidOperationException>(() => new CaseOpeningJournal(activeManifest: legacy)
+            .ReplaceActiveManifest(SptCaseJournal.FromDocument(rewritten).ActiveManifest!));
+        var active = automatic.BeginTicketProfileCommit().ActivateTicket(Now.AddSeconds(1));
+        var document = SptCaseJournal.ToDocument(new CaseOpeningJournal(activeManifest: active));
+        var json = System.Text.Json.Nodes.JsonNode.Parse(JsonSerializer.Serialize(document))!;
+        json["ActiveManifest"]!["FlowState"]!["LockedOrdinal"] = 2;
+        json["ActiveManifest"]!["Decisions"]![0]!["Ordinal"] = 2;
+        Assert.Throws<ArgumentException>(() => SptCaseJournal.FromDocument(json.Deserialize<SptCaseJournalDocument>()!));
+        var forfeited = active.ForfeitMissingContent(Now.AddSeconds(2)).TerminalReceipt!;
+        Assert.Throws<ArgumentException>(() => new ManifestTerminalReceipt(forfeited.ManifestId, forfeited.TerminalPhase,
+            forfeited.Offers, forfeited.Offers[1], forfeited.Decisions, forfeited.RelayHistory,
+            forfeited.BrokerFavorBefore, forfeited.BrokerFavorAfter, forfeited.CompletedAtUtc,
+            forfeited.RarityLadderVersion, forfeited.CaseTemplateId, forfeited.OpeningQuality));
     }
 
     [Fact]
@@ -158,11 +248,11 @@ public sealed class PremiumManifestTests
                 ManifestOpeningPoolTests.Lot("b", 50_000, family: "family-b"),
                 ManifestOpeningPoolTests.Lot("c", 50_000, family: "family-c")]));
 
-    private static ManifestRecord Prepare(CargoCatalogSnapshot catalog, ManifestOpeningTier tier)
+    private static ManifestRecord Prepare(CargoCatalogSnapshot catalog, ManifestOpeningTier tier, bool singlePrize = false)
     {
         var offers = new ManifestCatalogSelector(() => 0).CreatePremiumOffers(catalog, tier);
         var ticket = new ManifestTicketPayload("000000000000000000000001", "000000000000000000000002", Now,
-            false, false, null, openingQuality: new ManifestOpeningQuality(tier, 0, true, true, true))
+            false, false, null, openingQuality: new ManifestOpeningQuality(tier, 0, true, true, true, singlePrize))
             .WithCommitPlan(1, ManifestInputCommitWitness.GenesisHash);
         return new ManifestRecord("premium-test", catalog.SnapshotId,
             ManifestCommitmentEvidence.CreateWithRandomNonce("premium-test", catalog.SnapshotId, offers),

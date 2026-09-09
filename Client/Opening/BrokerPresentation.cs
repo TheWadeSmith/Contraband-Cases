@@ -16,7 +16,7 @@ internal static class BrokerPresentation
     {
         CaseContracts.Operations => "Raid supplies • Equipment • Loadouts",
         CaseContracts.Relics => "Collectible cards • Relics • Curios",
-        CaseContracts.BlackSite => "Night operations • Ordnance • Specialist gear",
+        CaseContracts.BlackSite => "Full loadouts • Night operations • Storage • Specialist gear",
         CaseContracts.CashCache => "Roubles • Dollars • Euros • GP Coins • Bitcoin",
         _ => "Mixed cargo • All available reward packs"
     };
@@ -28,7 +28,7 @@ internal static class BrokerPresentation
             ? "One spin. One payout. No discard or Relay.\nForeign currency value is not a guaranteed rouble cash-out."
             : "Up to 3 offers. Choose one, or discard for the next.\nDiscard is permanent; offer 3 is final.\nThen send your prize, or risk it + 1 key on Relay.";
         return "Uses this case + 1 universal key.\nNo additional roubles charged.\n" + price + "\n" + rules +
-            "\nDelivery: Mechanic in Messenger. Collect attachments individually." +
+            "\nDelivery: Mechanic in Messenger. Collect attachments individually. Storage prizes arrive empty; other items are separate." +
             "\n\nValue can be below your cost. Rarity does not guarantee profit.";
     }
 
@@ -40,7 +40,7 @@ internal static class BrokerPresentation
         string Rate(int n) => (n / 100m).ToString("0.##", CultureInfo.InvariantCulture) + "%";
         return $"Normal {Rate(10_000 - p.Epic.ChanceBasisPoints - p.Legendary.ChanceBasisPoints)}   •   " +
             $"Epic {Rate(p.Epic.ChanceBasisPoints)}   •   Legendary {Rate(p.Legendary.ChanceBasisPoints)}\n" +
-            "Rare premium openings: compare three saved packages and choose ONE. No extra key.";
+            "Epic: choose one of three. Legendary: one rolled prize, no choice. No extra key.";
     }
 
     internal static string ReadableOdds(ManifestOpeningOddsSnapshot odds)
@@ -60,7 +60,7 @@ internal static class BrokerPresentation
         if (odds.PremiumOdds is not null)
         {
             b.AppendLine().AppendLine("<b>PREMIUM PACKAGE CHANCES</b>");
-            b.AppendLine("First package draw, conditional on that opening tier. Later draws exclude earlier choices and recalculate weights. You choose ONE, so these are not final-claim probabilities.");
+            b.AppendLine("Conditional on the opening tier: Legendary awards one draw. Epic shows the first of three draws; later draws exclude earlier choices and recalculate weights, so Epic figures are not final-claim probabilities.");
             foreach (var (name, tier) in new[] { ("EPIC", odds.PremiumOdds.Epic), ("LEGENDARY", odds.PremiumOdds.Legendary) })
             {
                 b.AppendLine().AppendLine($"<b>{name}</b>");

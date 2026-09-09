@@ -1,0 +1,57 @@
+{
+  "schemaVersion": 1,
+  "providerId": "cnn-containers.storage",
+  "packVersion": "1.0.0",
+  "displayLabel": "CNN Storage",
+  "providerWeight": 0.06,
+  "requiredTemplateIds": [
+    "683d0995deed9b8d4f897ec2",
+    "683d09aadb9e219d2f7bd6e8"
+  ],
+  "requiredPresetIds": [],
+  "requiredBundleKeys": [],
+  "lots": [
+    {
+      "lotId": "gear-box.compact-v2",
+      "displayName": "Gear Box",
+      "purpose": "Equipment storage from CNN Containers. Awarded empty as its own Messenger attachment, not a wrapper for other prizes.",
+      "familyId": "operator",
+      "trackId": "vault",
+      "anchorTemplateId": "683d0995deed9b8d4f897ec2",
+      "weight": 1,
+      "usePath": {
+        "kind": "raidRole",
+        "roleId": "stash-storage"
+      },
+      "recipe": [
+        {
+          "kind": "template",
+          "templateId": "683d0995deed9b8d4f897ec2",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        }
+      ]
+    },
+    {
+      "lotId": "mod-case.compact-v2",
+      "displayName": "Mod Case",
+      "purpose": "Weapon-parts storage from CNN Containers. Awarded empty as its own Messenger attachment, not a wrapper for other prizes.",
+      "familyId": "operator",
+      "trackId": "vault",
+      "anchorTemplateId": "683d09aadb9e219d2f7bd6e8",
+      "weight": 1,
+      "usePath": {
+        "kind": "raidRole",
+        "roleId": "stash-storage"
+      },
+      "recipe": [
+        {
+          "kind": "template",
+          "templateId": "683d09aadb9e219d2f7bd6e8",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        }
+      ]
+    }
+  ]
+}
