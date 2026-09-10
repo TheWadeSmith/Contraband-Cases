@@ -5,12 +5,14 @@ using ContrabandCases.Shared;
 using ContrabandCases.Shared.Catalog;
 using ContrabandCases.Shared.Manifest;
 using ContrabandCases.Shared.Relay;
+using Microsoft.AspNetCore.Http;
 using SPTarkov.Server.Core.Models.Common;
 using SPTarkov.Server.Core.Models.Eft.Common;
 using SPTarkov.Server.Core.Models.Eft.Common.Tables;
 using SPTarkov.Server.Core.Models.Eft.ItemEvent;
 using SPTarkov.Server.Core.Models.Eft.Profile;
 using SPTarkov.Server.Core.Models.Spt.Tables;
+using SPTarkov.Server.Core.Utils;
 using Xunit;
 
 namespace ContrabandCases.Tests.Settlement;
@@ -257,6 +259,173 @@ public sealed class ManifestSettlementServiceTests
         Assert.Single(fixture.Store.Stored.ManifestClaimGrants);
     }
 
+    [Fact]
+    public async Task Held_Messenger_notification_releases_claim_request_and_snapshot_read_without_resending_mail()
+    {
+        var fixture = Fixture.Entitlement();
+        var profile = new SptProfile { CharacterData = new() { PmcData = fixture.Context.PmcData } };
+        var notificationStarted = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
+        var heldNotification = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
+        var errors = new ConcurrentQueue<Exception>();
+        var notifications = 0;
+        var delivery = new SptManifestRewardDelivery(fixture.Inventory, _ => profile, (_, _) =>
+        {
+            notifications++;
+            notificationStarted.TrySetResult();
+            return heldNotification.Task;
+        }, errors.Enqueue);
+        var service = fixture.CreateService(claimInventory: delivery);
+        ManifestClaimResult? result = null;
+        // The native item-event listener owns an outer lock too. Releasing only
+        // settlement's nested lease would still leave the player's profile stuck.
+        var listener = new ProfileItemEventGateListener(_ => true, async (_, _, token) =>
+            result = await service.ClaimAsync(fixture.Context, ManifestId, token), fixture.ProfileLocks);
+        var request = listener.HandleAsync(ProfileId, new DefaultHttpContext());
+        try
+        {
+            await notificationStarted.Task.WaitAsync(TimeSpan.FromSeconds(5));
+            Assert.Single(fixture.Store.Stored.ManifestClaimGrants);
+            var read = fixture.ReadSnapshotAsync();
+
+            await request.WaitAsync(TimeSpan.FromSeconds(5));
+            var snapshot = global::ContrabandCases.Client.Opening.ManifestSnapshotEnvelope.Parse(
+                await read.WaitAsync(TimeSpan.FromSeconds(5)), ManifestId);
+            Assert.Equal(ManifestPhase.Granted, snapshot.Phase);
+            Assert.Equal(ManifestClaimResultKind.Granted, result!.Kind);
+            Assert.False(heldNotification.Task.IsCompleted);
+            Assert.IsType<TimeoutException>(Assert.Single(errors));
+
+            profile.DialogueRecords!.Clear(); // Player discarded the saved message.
+            var replay = await service.ClaimAsync(fixture.NewContextWithLostResponse(), ManifestId, CancellationToken.None)
+                .WaitAsync(TimeSpan.FromSeconds(5));
+            Assert.True(replay.Replay);
+            Assert.Empty(profile.DialogueRecords);
+            Assert.Single(fixture.Store.Stored.ManifestClaimGrants);
+            Assert.Equal(1, fixture.Committer.Calls);
+            Assert.Equal(1, notifications);
+        }
+        finally
+        {
+            heldNotification.TrySetResult();
+            await request.WaitAsync(TimeSpan.FromSeconds(5));
+        }
+    }
+
+    [Fact]
+    public async Task Late_Messenger_notification_reads_detached_items_after_claim_releases_profile()
+    {
+        var fixture = Fixture.Entitlement();
+        var profile = new SptProfile { CharacterData = new() { PmcData = fixture.Context.PmcData } };
+        var releaseNotification = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
+        var observed = new TaskCompletionSource<(int ItemCount, double? StackCount, string? Text)>(
+            TaskCreationOptions.RunContinuationsAsynchronously);
+        var delivery = new SptManifestRewardDelivery(fixture.Inventory, _ => profile, async (_, message) =>
+        {
+            await releaseNotification.Task;
+            observed.SetResult((message.Items!.Data!.Count,
+                message.Items.Data.FirstOrDefault()?.Upd?.StackObjectsCount, message.Text));
+        }, _ => { });
+        var claim = fixture.CreateService(claimInventory: delivery).ClaimAsync(fixture.Context, ManifestId, CancellationToken.None);
+        try
+        {
+            await claim.WaitAsync(TimeSpan.FromSeconds(5));
+            var saved = Assert.Single(profile.DialogueRecords![SptManifestRewardDelivery.SenderId].Messages!);
+            var originalText = saved.Text;
+            saved.Items!.Data![0].Upd!.StackObjectsCount = 999;
+            saved.Items.Data.Clear();
+            saved.Text = "changed after commit";
+            releaseNotification.SetResult();
+            var sent = await observed.Task.WaitAsync(TimeSpan.FromSeconds(5));
+            Assert.Equal(1, sent.ItemCount);
+            Assert.Equal(1, sent.StackCount);
+            Assert.Equal(originalText, sent.Text);
+            Assert.Empty(saved.Items.Data);
+        }
+        finally
+        {
+            releaseNotification.TrySetResult();
+            await claim.WaitAsync(TimeSpan.FromSeconds(5));
+        }
+    }
+
+    [Fact]
+    public async Task Late_Messenger_notification_fault_is_observed_without_changing_committed_reward()
+    {
+        var fixture = Fixture.Entitlement();
+        var profile = new SptProfile { CharacterData = new() { PmcData = fixture.Context.PmcData } };
+        var heldNotification = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
+        var lateFailure = new IOException("socket failed after notification deadline");
+        var observed = new TaskCompletionSource<Exception>(TaskCreationOptions.RunContinuationsAsynchronously);
+        var delivery = new SptManifestRewardDelivery(fixture.Inventory, _ => profile, (_, _) => heldNotification.Task,
+            error => { if (error is not TimeoutException) observed.TrySetResult(error); });
+        var claim = fixture.CreateService(claimInventory: delivery).ClaimAsync(fixture.Context, ManifestId, CancellationToken.None);
+        try
+        {
+            await claim.WaitAsync(TimeSpan.FromSeconds(5));
+            heldNotification.SetException(lateFailure);
+            Assert.Same(lateFailure, await observed.Task.WaitAsync(TimeSpan.FromSeconds(5)));
+            Assert.Single(profile.DialogueRecords![SptManifestRewardDelivery.SenderId].Messages!);
+            Assert.Single(fixture.Store.Stored.ManifestClaimGrants);
+            Assert.Equal(1, fixture.Committer.Calls);
+        }
+        finally
+        {
+            heldNotification.TrySetResult();
+            await claim.WaitAsync(TimeSpan.FromSeconds(5));
+        }
+    }
+
+    [Fact]
+    public async Task Messenger_notification_failure_reporter_cannot_fail_a_committed_claim()
+    {
+        var fixture = Fixture.Entitlement();
+        var profile = new SptProfile { CharacterData = new() { PmcData = fixture.Context.PmcData } };
+        var delivery = new SptManifestRewardDelivery(fixture.Inventory, _ => profile,
+            (_, _) => throw new IOException("notification unavailable"),
+            _ => throw new IOException("logger unavailable"));
+        var result = await fixture.CreateService(claimInventory: delivery)
+            .ClaimAsync(fixture.Context, ManifestId, CancellationToken.None);
+        Assert.Equal(ManifestClaimResultKind.Granted, result.Kind);
+        Assert.Single(profile.DialogueRecords![SptManifestRewardDelivery.SenderId].Messages!);
+        Assert.Single(fixture.Store.Stored.ManifestClaimGrants);
+    }
+
+    [Fact]
+    public async Task Messenger_notification_timeout_stops_remaining_batch_without_removing_saved_attachments()
+    {
+        var fixture = Fixture.Entitlement();
+        var profile = new SptProfile { CharacterData = new() { PmcData = fixture.Context.PmcData } };
+        var heldNotification = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
+        var notifications = 0;
+        var errors = new ConcurrentQueue<Exception>();
+        var delivery = new SptManifestRewardDelivery(fixture.Inventory, _ => profile, (_, _) =>
+        {
+            notifications++;
+            return notifications == 1 ? heldNotification.Task : Task.CompletedTask;
+        }, errors.Enqueue);
+        var items = Enumerable.Range(0, 9).Select(_ => new Item
+        { Id = new MongoId(), Template = TemplateA, Upd = new() { StackObjectsCount = 1 } }).ToArray();
+        var prepared = new ManifestClaimPreparedPayload(items, items.Select(item => item.Id), false,
+            CompletionAt, delivery: ClaimDeliveryKind.Messenger);
+        var applied = delivery.ApplyPreparedClaim(fixture.Context, prepared);
+        var notification = delivery.NotifyClaimAsync(fixture.Context, applied);
+        try
+        {
+            await notification.WaitAsync(TimeSpan.FromSeconds(5));
+            Assert.False(heldNotification.Task.IsCompleted);
+            Assert.Equal(1, notifications);
+            Assert.IsType<TimeoutException>(Assert.Single(errors));
+            var messages = profile.DialogueRecords![SptManifestRewardDelivery.SenderId].Messages!;
+            Assert.Equal(2, messages.Count);
+            Assert.Equal(items.Select(item => item.Id), messages.SelectMany(message => message.Items!.Data!).Select(item => item.Id));
+        }
+        finally
+        {
+            heldNotification.TrySetResult();
+            await notification.WaitAsync(TimeSpan.FromSeconds(5));
+        }
+    }
+
     [Theory]
     [InlineData(false)]
     [InlineData(true)]
@@ -456,7 +625,7 @@ public sealed class ManifestSettlementServiceTests
         Assert.Equal(1, Assert.Single(receipt.Decisions).Ordinal);
     }
 
-    private const string ManifestId = "manifest-claim-service";
+    private const string ManifestId = "aaaaaaaaaaaaaaaaaaaaaac1";
     private const string ItemRootTemplateId = "54009119af1c881c07000029";
     private const string TemplateA = "710000000000000000000001";
     private const string TemplateB = "710000000000000000000002";
@@ -2007,6 +2176,12 @@ public sealed class ManifestSettlementServiceTests
         public CatalogSnapshotCoordinator CatalogCoordinator { get; }
         public OpeningContext Context { get; }
         public ManifestSettlementService Service { get; }
+        public ProfileLockPool ProfileLocks => _lockPool;
+
+        public Task<string> ReadSnapshotAsync() => ManifestSnapshotRouter.CreateSnapshotResponseAsync(
+            new ManifestSnapshotRequest { ManifestId = ManifestId }, ProfileId,
+            new HttpResponseUtil(new JsonUtil([]), null!), Store, _lockPool, RaidSessions,
+            CatalogCoordinator, null!, CancellationToken.None).AsTask();
 
         public static Fixture Entitlement(
             bool enterLobby = true,

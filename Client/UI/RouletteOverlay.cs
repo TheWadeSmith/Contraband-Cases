@@ -98,6 +98,7 @@ internal sealed partial class RouletteOverlay : IDisposable
     private Text _errorText => RequireLiveTree().ErrorText;
     private ScrollRect _errorScroll => RequireLiveTree().ErrorScroll;
     private Button _errorCloseButton => RequireLiveTree().ErrorCloseButton;
+    private Button _errorResumeLaterButton => RequireLiveTree().ErrorResumeLaterButton;
 
     public bool ShowConfirmation(
         IReadOnlyList<ValidatedReward> rewards,
@@ -921,6 +922,7 @@ internal sealed partial class RouletteOverlay : IDisposable
         string message,
         string actionLabel,
         Action retryVerification,
+        Action close,
         string title = "OPENING NEEDS ATTENTION")
     {
         if (!Activate(allowRebuild: false))
@@ -936,7 +938,12 @@ internal sealed partial class RouletteOverlay : IDisposable
         ResetErrorScroll();
         _errorCloseButton.GetComponentInChildren<Text>().text = actionLabel;
         SetButton(_errorCloseButton, retryVerification);
-        SetCancelHandler(_errorCloseButton, null);
+        UiFactory.Center(_errorCloseButton.GetComponent<RectTransform>(), 340f, 60f, -180f, -180f);
+        _errorResumeLaterButton.gameObject.SetActive(true);
+        SetButton(_errorResumeLaterButton, close);
+        SetCancelHandler(_errorCloseButton, close);
+        SetCancelHandler(_errorResumeLaterButton, close);
+        LinkHorizontal(_errorCloseButton, _errorResumeLaterButton);
         Select(_errorCloseButton);
         return true;
     }
@@ -986,6 +993,7 @@ internal sealed partial class RouletteOverlay : IDisposable
         SetCancelHandler(_secureButton, null);
         SetCancelHandler(_relayButton, null);
         SetCancelHandler(_errorCloseButton, null);
+        SetCancelHandler(_errorResumeLaterButton, null);
         _relayHold?.Clear();
     }
 
@@ -1466,6 +1474,11 @@ internal sealed partial class RouletteOverlay : IDisposable
         _resultPanel.SetActive(false);
         _decisionPanel.SetActive(false);
         _errorPanel.SetActive(false);
+        _errorResumeLaterButton.gameObject.SetActive(false);
+        _errorResumeLaterButton.onClick.RemoveAllListeners();
+        SetCancelHandler(_errorResumeLaterButton, null);
+        UiFactory.Center(_errorCloseButton.GetComponent<RectTransform>(), 230f, 60f, 0f, -180f);
+        LinkSelf(_errorCloseButton);
         _stripViewport.SetActive(true);
         _relayHold?.Clear();
     }
@@ -1502,7 +1515,8 @@ internal sealed partial class RouletteOverlay : IDisposable
                      _resultCloseButton,
                      _secureButton,
                      _relayButton,
-                     _errorCloseButton
+                     _errorCloseButton,
+                     _errorResumeLaterButton
                  })
         {
             button.onClick.RemoveAllListeners();
@@ -1700,7 +1714,8 @@ internal sealed partial class RouletteOverlay : IDisposable
                 error.Title,
                 error.Text,
                 error.Scroll,
-                error.Close);
+                error.Close,
+                error.ResumeLater);
             Diagnostic("Created a fresh owned overlay tree.");
         }
         catch
@@ -1832,7 +1847,8 @@ internal sealed partial class RouletteOverlay : IDisposable
         tree.ErrorTitle != null &&
         tree.ErrorText != null &&
         tree.ErrorScroll != null &&
-        tree.ErrorCloseButton != null;
+        tree.ErrorCloseButton != null &&
+        tree.ErrorResumeLaterButton != null;
 
     private void Diagnostic(string message) => _diagnostic?.Invoke(message);
 
@@ -2578,7 +2594,7 @@ internal sealed partial class RouletteOverlay : IDisposable
         return (panel.gameObject, title, reward, odds, candidates.Text, candidates.Scroll, meter, image, secure, relay);
     }
 
-    private static (GameObject Panel, Text Title, Text Text, ScrollRect Scroll, Button Close) BuildError(
+    private static (GameObject Panel, Text Title, Text Text, ScrollRect Scroll, Button Close, Button ResumeLater) BuildError(
         Transform parent,
         Font font)
     {
@@ -2604,7 +2620,12 @@ internal sealed partial class RouletteOverlay : IDisposable
         body.Text.alignment = TextAnchor.MiddleCenter;
         var close = UiFactory.CreateButton("Close", panel.transform, font, "CLOSE", new Color(0.34f, 0.24f, 0.20f, 1f));
         UiFactory.Center(close.GetComponent<RectTransform>(), 230f, 60f, 0f, -180f);
-        return (panel.gameObject, title, body.Text, body.Scroll, close);
+        var resumeLater = UiFactory.CreateButton("ResumeLater", panel.transform, font,
+            BrokerPresentation.ResumeLaterLabel, new Color(0.20f, 0.22f, 0.22f, 1f));
+        UiFactory.Center(resumeLater.GetComponent<RectTransform>(), 340f, 60f, 180f, -180f);
+        resumeLater.GetComponentInChildren<Text>().fontSize = 18;
+        resumeLater.gameObject.SetActive(false);
+        return (panel.gameObject, title, body.Text, body.Scroll, close, resumeLater);
     }
 
     private sealed class OverlayTree
@@ -2650,7 +2671,8 @@ internal sealed partial class RouletteOverlay : IDisposable
             Text errorTitle,
             Text errorText,
             ScrollRect errorScroll,
-            Button errorCloseButton)
+            Button errorCloseButton,
+            Button errorResumeLaterButton)
         {
             Root = root;
             Canvas = canvas;
@@ -2693,6 +2715,7 @@ internal sealed partial class RouletteOverlay : IDisposable
             ErrorText = errorText;
             ErrorScroll = errorScroll;
             ErrorCloseButton = errorCloseButton;
+            ErrorResumeLaterButton = errorResumeLaterButton;
         }
 
         public GameObject Root { get; }
@@ -2736,6 +2759,7 @@ internal sealed partial class RouletteOverlay : IDisposable
         public Text ErrorText { get; }
         public ScrollRect ErrorScroll { get; }
         public Button ErrorCloseButton { get; }
+        public Button ErrorResumeLaterButton { get; }
     }
 
     private sealed class RelayHoldButton : MonoBehaviour,

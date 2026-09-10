@@ -103,23 +103,35 @@ internal sealed partial class ManifestPresentationCoordinator : IDisposable
 
     public void HandleSceneTeardown()
     {
-        var run = _active;
-        if (run is null || run.PresentationDetached)
+        if (_active is { } run) DetachPresentation(run);
+    }
+
+    private void CloseRecoveryScreen(ManifestRun run)
+    {
+        if (IsCurrent(run)) DetachPresentation(run);
+    }
+
+    private void DetachPresentation(ManifestRun run)
+    {
+        if (!IsCurrent(run))
         {
             return;
         }
 
-        run.PresentationDetached = true;
-        run.PresentationGeneration++;
-        StopSpriteBinding(run);
-        StopCatalogSpriteBinding(run);
-        try
+        if (!run.PresentationDetached)
         {
-            _overlay.EndRun();
-        }
-        catch (Exception exception)
-        {
-            _log.LogWarning($"Manifest scene cleanup recovered from an error: {exception.Message}");
+            run.PresentationDetached = true;
+            run.PresentationGeneration++;
+            StopSpriteBinding(run);
+            StopCatalogSpriteBinding(run);
+            try
+            {
+                _overlay.EndRun();
+            }
+            catch (Exception exception)
+            {
+                _log.LogWarning($"Manifest window cleanup recovered from an error: {exception.Message}");
+            }
         }
 
         if (!ManifestPresentationPolicy.KeepDetachedObservationAlive(
@@ -128,7 +140,7 @@ internal sealed partial class ManifestPresentationCoordinator : IDisposable
                 run.Stage == ManifestClientStage.VerifyingOperation,
                 run.ObservationCoroutine is not null))
         {
-            End(run, "The Manifest window closed; its authoritative state will resume next time.", operationPending: false);
+            End(run, null, operationPending: false);
         }
     }
 
@@ -230,6 +242,7 @@ internal sealed partial class ManifestPresentationCoordinator : IDisposable
         {
             return;
         }
+        run.Stage = ManifestClientStage.PreflightPending;
         ShowPending(
             run,
             "VERIFYING NEW MANIFEST",
@@ -241,7 +254,7 @@ internal sealed partial class ManifestPresentationCoordinator : IDisposable
         }
         catch (Exception exception)
         {
-            ShowVerificationFailure(run, exception, () => RevalidateNewTicket(run));
+            ShowVerificationFailure(run, exception, () => RevalidateNewTicket(run), ManifestClientStage.Confirming);
             return;
         }
 
@@ -291,7 +304,7 @@ internal sealed partial class ManifestPresentationCoordinator : IDisposable
                     recovering: true,
                     claimRetry: false);
             },
-            exception => ShowVerificationFailure(run, exception, () => RevalidateNewTicket(run)),
+            exception => ShowVerificationFailure(run, exception, () => RevalidateNewTicket(run), ManifestClientStage.Confirming),
             "new Manifest preflight");
     }
 
@@ -301,10 +314,11 @@ internal sealed partial class ManifestPresentationCoordinator : IDisposable
         ManifestEconomicAction action,
         int? selectedOrdinal = null)
     {
-        if (!IsCurrent(run) || run.Stage != ManifestClientStage.Decision)
+        if (!IsCurrentAt(run, ManifestClientStage.Decision))
         {
             return;
         }
+        run.Stage = ManifestClientStage.PreflightPending;
         ShowPending(
             run,
             "VERIFYING MANIFEST STATE",
@@ -355,8 +369,14 @@ internal sealed partial class ManifestPresentationCoordinator : IDisposable
         string? caseItemId,
         int? selectedOrdinal = null)
     {
-        if (!IsCurrent(run))
+        if (!IsCurrent(run) || run.CallbackGate.IsPending ||
+            run.Stage is ManifestClientStage.OperationPending or ManifestClientStage.VerifyingOperation)
         {
+            return;
+        }
+        if (run.PresentationDetached)
+        {
+            DetachPresentation(run);
             return;
         }
 
@@ -485,10 +505,6 @@ internal sealed partial class ManifestPresentationCoordinator : IDisposable
             return;
         }
         run.Stage = ManifestClientStage.VerifyingOperation;
-        ShowPending(
-            run,
-            "VERIFYING AUTHORITATIVE RESULT",
-            "The animation waits for the server snapshot; inventory differences and local reward files are not used.");
         StartOperationSnapshotFetch(run, action, before, operationResult);
     }
 
@@ -498,6 +514,15 @@ internal sealed partial class ManifestPresentationCoordinator : IDisposable
         ManifestSnapshot? before,
         IResult operationResult)
     {
+        if (!IsCurrent(run) || run.Stage != ManifestClientStage.VerifyingOperation ||
+            run.ObservationCoroutine is not null)
+        {
+            return;
+        }
+        ShowPending(
+            run,
+            "VERIFYING AUTHORITATIVE RESULT",
+            "The animation waits for the server snapshot; inventory differences and local reward files are not used.");
         if (before is null)
         {
             try
@@ -1184,7 +1209,8 @@ internal sealed partial class ManifestPresentationCoordinator : IDisposable
                     run,
                     action,
                     snapshot,
-                    action == ManifestEconomicAction.OpenTicket ? snapshot.RecoveryCaseItemId : null)))
+                    action == ManifestEconomicAction.OpenTicket ? snapshot.RecoveryCaseItemId : null),
+                () => CloseRecoveryScreen(run)))
         {
             End(run, "Prepared Manifest recovery remains on the server.", operationPending: false);
         }
@@ -1225,6 +1251,7 @@ internal sealed partial class ManifestPresentationCoordinator : IDisposable
                     ManifestPresentationPolicy.RejectedActionMessage(action, serverError),
                     action is ManifestEconomicAction.Relay or ManifestEconomicAction.Claim ? "BACK TO REWARD" : "BACK TO OPENING",
                     () => Present(run, snapshot, snapshot, recovering: true, claimRetry: false),
+                    () => CloseRecoveryScreen(run),
                     action == ManifestEconomicAction.Relay ? "RELAY NOT COMPLETED" : "ACTION NOT COMPLETED"))
             {
                 return;
@@ -1251,13 +1278,15 @@ internal sealed partial class ManifestPresentationCoordinator : IDisposable
         if (!_overlay.ShowManifestVerificationError(
                 "We could not confirm whether your last action finished.\n\nCheck the saved result before doing anything else. This button only checks; it does not spend items or roll again.",
                 "CHECK SAVED RESULT",
-                () => StartOperationSnapshotFetch(run, action, before, operationResult)))
+                () => StartOperationSnapshotFetch(run, action, before, operationResult),
+                () => CloseRecoveryScreen(run)))
         {
             End(run, "Manifest verification remains available on the server after restart.", operationPending: false);
         }
     }
 
-    private void ShowVerificationFailure(ManifestRun run, Exception exception, Action retry)
+    private void ShowVerificationFailure(ManifestRun run, Exception exception, Action retry,
+        ManifestClientStage retryStage = ManifestClientStage.Decision)
     {
         _log.LogError($"Manifest preflight verification failed: {exception}");
         if (run.PresentationDetached)
@@ -1265,11 +1294,12 @@ internal sealed partial class ManifestPresentationCoordinator : IDisposable
             End(run, "No Manifest action was sent.", operationPending: false);
             return;
         }
-        run.Stage = ManifestClientStage.Decision;
+        run.Stage = retryStage;
         if (!_overlay.ShowManifestVerificationError(
                 "We could not connect to your saved opening. No new action was sent.\n\nCheck that the SPT server is running, then try again.",
                 "TRY AGAIN",
-                retry))
+                retry,
+                () => CloseRecoveryScreen(run)))
         {
             End(run, "No Manifest action was sent.", operationPending: false);
         }
@@ -1297,6 +1327,12 @@ internal sealed partial class ManifestPresentationCoordinator : IDisposable
         Action<Exception> failure,
         string operation)
     {
+        // SPT reads cannot be cancelled. Retiring a window or timing out its
+        // observer must still consume late faults without running old callbacks.
+        _ = task.ContinueWith(completed => { _ = completed.Exception; },
+            System.Threading.CancellationToken.None,
+            TaskContinuationOptions.OnlyOnFaulted | TaskContinuationOptions.ExecuteSynchronously,
+            TaskScheduler.Default);
         if (!IsCurrent(run))
         {
             return;
@@ -1660,7 +1696,7 @@ internal sealed partial class ManifestPresentationCoordinator : IDisposable
         !_disposed && ReferenceEquals(_active, run) && run.Generation == _generation;
 
     private bool IsCurrentAt(ManifestRun run, ManifestClientStage stage) =>
-        IsCurrent(run) && run.Stage == stage;
+        IsCurrent(run) && !run.PresentationDetached && run.Stage == stage;
 
     private bool IsObservationCurrent(ManifestRun run, long observation) =>
         IsCurrent(run) && run.ObservationGeneration == observation;
@@ -1770,6 +1806,7 @@ internal sealed partial class ManifestPresentationCoordinator : IDisposable
     {
         Probing,
         Confirming,
+        PreflightPending,
         Decision,
         OperationPending,
         VerifyingOperation,

@@ -25,6 +25,7 @@ public sealed class SptManifestRewardDelivery : IManifestClaimInventory
     // two-day mail default without overflowing the client's signed seconds field.
     internal const long StorageSeconds = 10L * 365 * 24 * 60 * 60;
     internal static readonly MongoId SenderId = "5a7c2eca46aef81a7ca2145d"; // Mechanic
+    private static readonly TimeSpan NotificationBudget = TimeSpan.FromSeconds(2);
     private readonly IManifestClaimInventory _legacy;
     private readonly Func<MongoId, SptProfile> _profile;
     private readonly Func<MongoId, Message, Task> _notify;
@@ -158,11 +159,55 @@ public sealed class SptManifestRewardDelivery : IManifestClaimInventory
     public async Task NotifyClaimAsync(OpeningContext context, ManifestClaimPreparedPayload prepared)
     {
         if (prepared.Delivery != ClaimDeliveryKind.Messenger) return;
-        var ids = CreateMessages(context.ProfileId, prepared).Select(m => m.Id).ToHashSet();
-        foreach (var message in AllMessages(RequireProfile(context)).Where(m => ids.Contains(m.Id)))
+        try
         {
-            try { await _notify(context.ProfileId, message).ConfigureAwait(false); }
-            catch (Exception error) { _notificationFailure(error); }
+            var profileId = context.ProfileId;
+            var ids = CreateMessages(profileId, prepared).Select(m => m.Id).ToHashSet();
+            // A native send cannot be cancelled and may outlive the profile lock.
+            // Snapshot our generated messages and their mutable attachment trees
+            // before allowing collection or another profile operation to proceed.
+            var messages = AllMessages(RequireProfile(context)).Where(m => ids.Contains(m.Id))
+                .Select(message => message with
+                {
+                    Items = message.Items is null ? null : message.Items with
+                    { Data = message.Items.Data?.Select(CaseOpeningRecord.CloneItem).ToList() }
+                }).ToArray();
+            using var deadline = new CancellationTokenSource(NotificationBudget);
+            foreach (var message in messages)
+            {
+                Task? notification = null;
+                try
+                {
+                    deadline.Token.ThrowIfCancellationRequested();
+                    notification = _notify(profileId, message);
+                    await notification.WaitAsync(deadline.Token).ConfigureAwait(false);
+                }
+                catch (OperationCanceledException) when (deadline.IsCancellationRequested)
+                {
+                    if (notification is not null) _ = ObserveLateNotificationAsync(notification);
+                    ReportNotificationFailure(new TimeoutException(
+                        "Reward mail is saved, but its live notification exceeded the delivery deadline."));
+                    return; // One budget for the entire batch, not a delay per message.
+                }
+                catch (Exception error) { ReportNotificationFailure(error); }
+            }
+        }
+        catch (Exception error) { ReportNotificationFailure(error); }
+    }
+
+    private async Task ObserveLateNotificationAsync(Task notification)
+    {
+        try { await notification.ConfigureAwait(false); }
+        catch (Exception error) { ReportNotificationFailure(error); }
+    }
+
+    private void ReportNotificationFailure(Exception error)
+    {
+        try { _notificationFailure(error); }
+        catch (Exception)
+        {
+            // Neither a socket failure nor an unavailable logger may turn an
+            // already committed Messenger payout into a failed Claim response.
         }
     }
 

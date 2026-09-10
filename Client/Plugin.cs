@@ -126,15 +126,7 @@ public sealed class Plugin : BaseUnityPlugin
             var shortcut = false;
             if (Application.isFocused && settings.OpenBrokerShortcut.Value.IsDown())
             {
-                var current = EFT.UI.Screens.EftScreenManager._instance?.CurrentBaseScreenController;
-                var menuOrStash = current switch
-                {
-                    EFT.UI.MenuScreen.MainMenuScreenController { Closed: false } menu =>
-                        menu.Screen != null && menu.Screen.isActiveAndEnabled,
-                    EFT.UI.InventoryScreen.InventoryScreenController { Closed: false } stash =>
-                        stash.Screen != null && stash.Screen.isActiveAndEnabled,
-                    _ => false
-                };
+                var menuOrStash = UI.LobbyUiContext.IsMenuOrStashReady;
                 var selected = UnityEngine.EventSystems.EventSystem.current?.currentSelectedGameObject;
                 var editing = selected != null && selected.GetComponent<UnityEngine.UI.InputField>()?.isFocused == true;
                 shortcut = BrokerShortcutInput.ShouldOpen(true, Application.isFocused,

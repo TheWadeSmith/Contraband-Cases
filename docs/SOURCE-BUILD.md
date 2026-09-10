@@ -1,6 +1,6 @@
 # Source build and publication scope
 
-This repository contains the **0.4.12 source**, built against compatible SPT
+This repository contains the **0.4.15 source**, built against compatible SPT
 4.1.3 server SDK packages and offline-validated with SPT 4.1.5 game data.
 It is not an installable mod archive or a standalone Unity game project.
 
@@ -21,19 +21,29 @@ game assemblies, SDK components, artwork or trademarks.
 Use Windows, the .NET 10 SDK and your own compatible SPT 4.1.5 installation
 with BepInEx and SPT's ConfigurationManager plugin. Dependencies declared in
 the project files restore from NuGet. The test project uses the same configurable
-game/BepInEx paths as the client, including the installed native MCM assembly.
-The client and tests reference installed game assemblies, which are not
-included in this repository.
+game/BepInEx paths as the client, including the installed native MCM assembly,
+plus `SptRuntimePath` to locate SPT's `Mono.Cecil.dll`. By default, that runtime
+path resolves to `../../SPT_Runtime` relative to `BepInExCorePath`; supply an
+explicit override for another layout. The client and tests reference local
+game assemblies, which are not included in this repository.
+
+Depending on how SPT prepares your installation, `Assembly-CSharp.dll` may need
+to come from a private set of SPT-processed reference assemblies. The raw game
+DLL may not expose the API expected by the client. Point `GameManagedPath` at
+your compatible reference directory, with its matching companion assemblies,
+and keep the BepInEx/runtime paths pointed at your own installation. Do not
+publish these game-derived reference assemblies.
 
 From the repository root, set these paths to your own installation:
 
 ```powershell
 $gameManaged = 'D:/Your-SPT/EscapeFromTarkov_Data/Managed'
 $bepInExCore = 'D:/Your-SPT/BepInEx/core'
-dotnet build ContrabandCases.sln -c Release "-p:GameManagedPath=$gameManaged" "-p:BepInExCorePath=$bepInExCore"
-pwsh -NoProfile -File tools/Capture-OptionalPackFixture.ps1 -RuntimeRoot 'D:/Your-SPT/SPT_Runtime' -OutputPath 'Tests/Fixtures/optional-mod-templates.json'
-pwsh -NoProfile -File tools/Capture-CuratedRewardFixture.ps1 -RuntimeRoot 'D:/Your-SPT/SPT_Runtime' -OutputPath 'Tests/Fixtures/curated-mod-templates.json'
-dotnet test Tests/ContrabandCases.Tests.csproj -c Release "-p:GameManagedPath=$gameManaged" "-p:BepInExCorePath=$bepInExCore"
+$sptRuntime = 'D:/Your-SPT/SPT_Runtime'
+dotnet build ContrabandCases.sln -c Release "-p:GameManagedPath=$gameManaged" "-p:BepInExCorePath=$bepInExCore" "-p:SptRuntimePath=$sptRuntime"
+pwsh -NoProfile -File tools/Capture-OptionalPackFixture.ps1 -RuntimeRoot $sptRuntime -OutputPath 'Tests/Fixtures/optional-mod-templates.json'
+pwsh -NoProfile -File tools/Capture-CuratedRewardFixture.ps1 -RuntimeRoot $sptRuntime -OutputPath 'Tests/Fixtures/curated-mod-templates.json'
+dotnet test Tests/ContrabandCases.Tests.csproj -c Release "-p:GameManagedPath=$gameManaged" "-p:BepInExCorePath=$bepInExCore" "-p:SptRuntimePath=$sptRuntime"
 ```
 
 The optional fixture requires compatible Amonya, ISB-Aishi, Natalya and
@@ -51,6 +61,12 @@ Do not report that filtered run as full optional-integration verification.
 The dotnet commands restore dependencies. Use `--no-restore` only after a successful
 restore. Build outputs stay under the ignored `bin` and `obj` directories;
 the commands do not install files into SPT.
+
+Headless tests use test-only substitutions for native Unity behavior that cannot
+run under `dotnet test`. Those checks exercise managed contracts and recovery
+logic; they do not verify Unity keyboard focus, native Escape handling, scene
+transitions or gameplay. Test substitutions are not shipped in the client or
+server release, and they do not replace the required compatible local references.
 
 ## Unity and packaging limitations
 
@@ -82,30 +98,35 @@ directory contains defaults, not a copy of a live profile's configuration.
 
 ## Verification status
 
-The complete development workspace passed **1,701 automated tests in three
-consecutive runs**, a clean Release build, cargo/cash projections and
-candidate/canonical package validation for 0.4.12. **205 focused tests** also
-passed repeatedly against isolated installed SPT 4.1.5 libraries. Coverage
-includes Messenger partial collection and duplicate protection, native save
-acknowledgement, schema-8/legacy recovery, compact rewards and scoped flea policy.
-No game assemblies, generated captures or build outputs are published here.
+The **0.4.15 Release build completed with zero warnings and zero errors**.
+The full suite passed **1,786 automated tests** in both the provisioned development
+workspace and the public-source checkout supplied with compatible local references
+and private test fixtures, with no failures or skipped tests. This includes
+nine transition-guard tests and thirteen opening-stall regressions. Coverage
+includes fresh retry/catalog checks, closing pending recovery, bounded Messenger
+notifications, isolated notification snapshots and duplicate-payout protection,
+alongside historical reward and delivery recovery. No game assemblies, generated
+captures or build outputs are published here.
 
-The public-source checkout also passed all **1,701 tests, zero failed/skipped**,
-using freshly generated local fixtures and the documented game/BepInEx path
-overrides. Those captures remain ignored and are not part of the commit.
-
-The full packaging regression passes in the provisioned workspace. Full in-game
-delivery/collection/layout acceptance remains pending; these automated checks
-are not a substitute for live gameplay.
+These results describe provisioned environments. They do not claim that an
+unprovisioned public-source checkout can run the full suite or regenerate the
+licensed bundles. The install archive separately passed candidate, canonical and
+standalone package validation; see the release notes for the final recorded
+checks. Full in-game
+delivery/collection/layout acceptance remains pending.
 
 The Unity 2022.3.43f1 case/key bundles are unchanged. Sound and model orientation
 were confirmed in-game on a preceding installed build. This update still needs
 in-game acceptance; offline projections do not execute optional-mod hooks or prove
 live collection behavior. Incompatible or absent content fails closed. Automated
-checks are not a crash-free guarantee. The original client hang/restart-crash has
-not been conclusively resolved by gameplay testing.
+checks are not a crash-free guarantee. The lobby transition guard has automated
+coverage, but the earlier reported client transition failure has no confirmed
+live cause. Native focus/Escape, lobby/raid transitions and recovery still need
+testing on a backed-up profile with matching client/server files.
 
-The install ZIP and checksum are published separately as GitHub release assets.
+The install ZIP and checksum are separate GitHub release assets:
+`ContrabandCases-0.4.15-SPT4.1.5.zip` and
+`ContrabandCases-0.4.15-SPT4.1.5-SHA256.txt`.
 Use the install ZIP, not GitHub's automatically generated source archive, to
 install the mod. The compiled case/key bundles belong only in that install
 archive; the editable purchased artwork must not be added to this repository.

@@ -1,9 +1,27 @@
 # Contraband Cases
 
-Contraband Cases **0.4.14** is a client-and-server mod for
+Contraband Cases **0.4.15** is a client-and-server mod for
 **SPT 4.1.x**, targeting **SPT 4.1.5** with the compatible 4.1.3 server SDK.
 Full gameplay acceptance is still pending. Back up your saves and delivery
 records, and update matching client and server files together.
+
+### 0.4.15: transition guards and opening recovery
+
+- Relay UI discovery waits for a real lobby with no active GameWorld.
+  Leaving that lobby invalidates earlier discovery work across transitions.
+- A failed opening can retry from a fresh request after validating the current
+  catalog, with guards against duplicate submission and stale results.
+- Recovery screens support **Close — resume later** and Escape. Pending requests
+  remain observed after closing, so an eventual result can still be recovered.
+- Messenger's live notification work has a **two-second total budget**. Slow or
+  failed notifications no longer hold the opening flow indefinitely; isolated
+  notification snapshots and late-failure handling preserve delivery recovery
+  and duplicate-payout protection.
+
+Reward content, economy, odds, case/key settings, models and sounds are unchanged
+from 0.4.14. These fixes have automated regression coverage; the reported older
+transition failure has no confirmed live cause, and native focus/Escape and
+gameplay acceptance remain pending. See the release notes accompanying the GitHub download.
 
 ### 0.4.14: Black Site expansion and Relay recovery
 
@@ -141,8 +159,8 @@ currency payouts, including **4 Bitcoins at 0.90%** and **10 at 0.10%**.
 All original paid packages/payouts retain their exact contents and grades;
 old and new cargo Relay generations cannot cross. Keys remain find-only and
 universal; drop rates, 5 kg case weights, Unity models and sounds are unchanged.
-Use the installable `ContrabandCases-0.4.14-SPT4.1.5.zip` and its
-matching SHA256 manifest from the GitHub release.
+Use the installable `ContrabandCases-0.4.15-SPT4.1.5.zip` and
+`ContrabandCases-0.4.15-SPT4.1.5-SHA256.txt` from the GitHub release.
 GitHub's automatic
 "Source code" archives are not installable mod packages. Updating requires both
 client and server files; see **Install and build** below.
@@ -711,6 +729,9 @@ journals, exact frozen item definitions and transaction witnesses.
 - Closing or skipping an animation does not reroll or undo the result.
 - Reopening a case resumes an unfinished Manifest before opening another.
 - Saved offers reopen directly at their decision screen without a second spin.
+- Failed opening requests can retry after fresh catalog validation. Closing a
+  recovery screen with **Close — resume later** or Escape retains observation
+  of the pending request; it does not cancel or repeat a committed reward.
 - Delivery does not require free stash/sorting space. Mechanic sends native
   Messenger attachments, which can be collected individually. A failed delivery
   remains recoverable; it does not create a replacement prize.
@@ -747,7 +768,7 @@ SPT_Runtime/user/mods/Wade-ContrabandCases/
 ```
 
 Do not overwrite a customized live `config/config.jsonc` with defaults.
-Preserve custom reward packs too. Remove no other mods.
+Preserve custom reward packs and profile/delivery journals too. Remove no other mods.
 
 When upgrading, replace the shipped reward-pack JSON files as well as
 the DLLs: the new contents are authored in those files. Back up any edits to
@@ -756,6 +777,9 @@ override automatic Mixed pricing. Already-paid openings retain their original
 rewards. Unopened cases use the new table when opened after the update.
 
 Source verification:
+
+See [Source build and publication scope](https://github.com/TheWadeSmith/Contraband-Cases/blob/main/docs/SOURCE-BUILD.md) for required
+local game references, optional fixtures and configurable installation paths.
 
 ```powershell
 dotnet test Tests/ContrabandCases.Tests.csproj -c Release --no-restore -v minimal
@@ -767,7 +791,7 @@ pwsh -NoProfile -File tools/Package-Gate-Regression.ps1
 
 The package regression runs in disposable copies. Release assemblies and scripts
 must carry matching versions. New releases receive new archive names; published
-older archives, including 0.4.13, must not be overwritten with different content.
+older archives, including 0.4.14, must not be overwritten with different content.
 
 The Unity asset-bundle project requires **Unity 2022.3.43f1**, Windows x64.
 Its existing `ContrabandCasesBundleBuilder.BuildBundles` method performs the
@@ -788,7 +812,7 @@ reference value from known/unknown resale and compare different choice strategie
 bought cases, found-case sale opportunity cost and key values up to ₽150,000.
 These checks do not start the server/game or modify live profiles.
 
-Before calling 0.4.14 fully game-verified:
+Before calling 0.4.15 fully game-verified:
 
 1. Start the matched client/server build and inspect fresh logs and the live
    resolved catalog report.
@@ -824,6 +848,13 @@ Before calling 0.4.14 fully game-verified:
    screen. Verify each new loadout's usable equipment and collect individual
    attachments. Confirm storage prizes are empty and missing optional storage
    mods disable only their own reward packs.
+10. Check lobby/raid transitions and relaunch with fresh logs. Exercise an opening
+    failure followed by retry, current-catalog changes, duplicate clicks, and
+    **Close — resume later** / Escape while recovery is pending. Check native
+    keyboard focus and confirm the eventual saved result resumes exactly once.
+    Delay or fail Messenger live notifications and verify that opening recovery
+    completes without duplicating the recorded reward. The transition guard
+    does not establish the cause of the earlier reported failure.
 
 Compatibility tests also exercise all 13 corrected rewards against an offline
 projection of installed template/preset definitions and the real client parser.

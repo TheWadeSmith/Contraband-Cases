@@ -49,21 +49,17 @@ internal sealed class RouletteController : IDisposable
     private RouletteRevealPlan? _selfTestPlan;
     private ValidatedReward? _selfTestReward;
     private Coroutine? _startupRecoveryCoroutine;
-    private IClientSession? _startupRecoverySession;
-    private Profile? _startupRecoveryProfile;
-    private string? _startupRecoveryProfileId;
-    private long _startupRecoveryGeneration;
+    private readonly RelayStartupRecoveryGate _startupRecovery = new();
     private int _selfTestSequence;
     private bool _selfTestActive;
     private CatalogReadinessState _catalogState = CatalogReadinessState.Waiting;
-    private RelayStartupRecoveryState _startupRecoveryState = RelayStartupRecoveryState.Waiting;
     private bool _disposed;
 
     internal bool IsPresentationBusy =>
         _manifest.IsBusy ||
         _active is not null ||
         _selfTestActive ||
-        _startupRecoveryState is RelayStartupRecoveryState.Probing or
+        _startupRecovery.State is RelayStartupRecoveryState.Probing or
             RelayStartupRecoveryState.Recovering or
             RelayStartupRecoveryState.Failed;
 
@@ -114,9 +110,9 @@ internal sealed class RouletteController : IDisposable
         {
             return RejectOpen("Another Contraband Cases settlement is already active.");
         }
-        if (_startupRecoveryState != RelayStartupRecoveryState.Ready)
+        if (_startupRecovery.State != RelayStartupRecoveryState.Ready)
         {
-            var retrying = _startupRecoveryState == RelayStartupRecoveryState.Failed &&
+            var retrying = _startupRecovery.State == RelayStartupRecoveryState.Failed &&
                 TryStartStartupRecoveryFromSingleton(forceRetry: true);
             if (!retrying)
             {
@@ -165,9 +161,9 @@ internal sealed class RouletteController : IDisposable
                     : "Contraband Cases is still waiting for Tarkov's item presets.");
         }
 
-        if (_startupRecoveryState != RelayStartupRecoveryState.Ready)
+        if (_startupRecovery.State != RelayStartupRecoveryState.Ready)
         {
-            var retrying = _startupRecoveryState == RelayStartupRecoveryState.Failed &&
+            var retrying = _startupRecovery.State == RelayStartupRecoveryState.Failed &&
                 TryStartStartupRecoveryFromSingleton(forceRetry: true);
             if (!retrying)
             {
@@ -200,9 +196,8 @@ internal sealed class RouletteController : IDisposable
                 ?? throw new InvalidOperationException("The authenticated Tarkov session is unavailable.");
             var profile = session.Profile
                 ?? throw new InvalidOperationException("The authenticated Tarkov profile is unavailable.");
-            if (!ReferenceEquals(session, _startupRecoverySession) ||
-                !ReferenceEquals(profile, _startupRecoveryProfile) ||
-                !string.Equals(profile.Id, _startupRecoveryProfileId, StringComparison.Ordinal))
+            if (!_startupRecovery.IsCurrent(_startupRecovery.Generation, session, profile, profile.Id,
+                    LobbyUiContext.IsMenuOrStashReady))
             {
                 throw new InvalidOperationException(
                     "The authenticated profile changed after the Relay recovery check.");
@@ -279,7 +274,7 @@ internal sealed class RouletteController : IDisposable
             return false;
         }
 
-        if (_startupRecoveryState != RelayStartupRecoveryState.Ready)
+        if (_startupRecovery.State != RelayStartupRecoveryState.Ready)
         {
             message = "Wait for the authenticated Relay recovery check before opening a cosmetic preview.";
             return false;
@@ -491,8 +486,7 @@ internal sealed class RouletteController : IDisposable
 
             _startupRecoveryCoroutine = null;
         }
-        _startupRecoveryGeneration++;
-        _startupRecoveryState = RelayStartupRecoveryState.Disposed;
+        _startupRecovery.Dispose();
 
         _manifest.Dispose();
 
@@ -2630,10 +2624,16 @@ internal sealed class RouletteController : IDisposable
 
     private void PollStartupRecovery()
     {
+        if (!LobbyUiContext.IsMenuOrStashReady)
+        {
+            _startupRecovery.DeferProbe();
+            return;
+        }
+
         if (_active is not null ||
             _manifest.IsBusy ||
             _selfTestActive ||
-            _startupRecoveryState == RelayStartupRecoveryState.Disposed)
+            _startupRecovery.State == RelayStartupRecoveryState.Disposed)
         {
             return;
         }
@@ -2643,15 +2643,7 @@ internal sealed class RouletteController : IDisposable
             return;
         }
 
-        var sameContext = ReferenceEquals(session, _startupRecoverySession) &&
-            ReferenceEquals(profile, _startupRecoveryProfile) &&
-            string.Equals(profile.Id, _startupRecoveryProfileId, StringComparison.Ordinal);
-        if (sameContext && _startupRecoveryState != RelayStartupRecoveryState.Waiting)
-        {
-            return;
-        }
-
-        _ = BeginStartupRecoveryDiscovery(session, profile, forceRetry: !sameContext);
+        _ = BeginStartupRecoveryDiscovery(session, profile, forceRetry: false);
     }
 
     private bool TryStartStartupRecoveryFromSingleton(bool forceRetry)
@@ -2674,14 +2666,8 @@ internal sealed class RouletteController : IDisposable
             return false;
         }
 
-        var sameContext = ReferenceEquals(session, _startupRecoverySession) &&
-            ReferenceEquals(profile, _startupRecoveryProfile) &&
-            string.Equals(profile.Id, _startupRecoveryProfileId, StringComparison.Ordinal);
-        if (sameContext &&
-            (_startupRecoveryState is RelayStartupRecoveryState.Ready or
-                RelayStartupRecoveryState.Probing or
-                RelayStartupRecoveryState.Recovering ||
-             _startupRecoveryState == RelayStartupRecoveryState.Failed && !forceRetry))
+        if (!_startupRecovery.TryBegin(session, profile, profile.Id,
+                LobbyUiContext.IsMenuOrStashReady, forceRetry, out var generation))
         {
             return false;
         }
@@ -2700,21 +2686,20 @@ internal sealed class RouletteController : IDisposable
             _startupRecoveryCoroutine = null;
         }
 
-        _startupRecoveryGeneration++;
-        var generation = _startupRecoveryGeneration;
-        _startupRecoverySession = session;
-        _startupRecoveryProfile = profile;
-        _startupRecoveryProfileId = profile.Id;
-        _startupRecoveryState = RelayStartupRecoveryState.Probing;
-
         Task<RelayPendingDiscovery> task;
         try
         {
             task = _snapshotTransport.DiscoverPendingAsync(RelayInteractionOrigin.RealOpening);
+            // A read-only request cannot be cancelled through SPT's transport. Observe
+            // late faults even if a transition has retired its presentation coroutine.
+            _ = task.ContinueWith(completed => { _ = completed.Exception; },
+                System.Threading.CancellationToken.None,
+                TaskContinuationOptions.OnlyOnFaulted | TaskContinuationOptions.ExecuteSynchronously,
+                TaskScheduler.Default);
         }
         catch (Exception exception)
         {
-            FailStartupRecoveryProbe(exception);
+            FailStartupRecoveryProbe(generation, exception);
             return false;
         }
 
@@ -2727,7 +2712,7 @@ internal sealed class RouletteController : IDisposable
         catch (Exception exception)
         {
             _startupRecoveryCoroutine = null;
-            FailStartupRecoveryProbe(exception);
+            FailStartupRecoveryProbe(generation, exception);
             return false;
         }
     }
@@ -2751,19 +2736,22 @@ internal sealed class RouletteController : IDisposable
             yield return null;
         }
 
-        _startupRecoveryCoroutine = null;
+        if (generation == _startupRecovery.Generation)
+        {
+            _startupRecoveryCoroutine = null;
+        }
         if (!IsStartupRecoveryContextCurrent(generation, session, profile))
         {
-            if (!_disposed && generation == _startupRecoveryGeneration)
+            if (!_disposed && generation == _startupRecovery.Generation)
             {
-                _startupRecoveryState = RelayStartupRecoveryState.Waiting;
+                _startupRecovery.DeferProbe();
             }
             yield break;
         }
 
         if (!task.IsCompleted)
         {
-            FailStartupRecoveryProbe(new RelaySnapshotException(
+            FailStartupRecoveryProbe(generation, new RelaySnapshotException(
                 $"The Relay recovery check timed out after {RelaySnapshotTimeoutBudget.DefaultTimeoutSeconds:0} seconds."));
             yield break;
         }
@@ -2773,7 +2761,7 @@ internal sealed class RouletteController : IDisposable
             var discovery = task.GetAwaiter().GetResult();
             if (discovery.PendingSnapshot is null)
             {
-                _startupRecoveryState = RelayStartupRecoveryState.Ready;
+                _startupRecovery.TryCompleteProbe(generation, hasPending: false);
                 Debug($"Relay recovery check completed for profile {profile.Id}; no action is pending.");
                 yield break;
             }
@@ -2782,7 +2770,7 @@ internal sealed class RouletteController : IDisposable
         }
         catch (Exception exception)
         {
-            FailStartupRecoveryProbe(exception);
+            FailStartupRecoveryProbe(generation, exception);
         }
     }
 
@@ -2796,7 +2784,7 @@ internal sealed class RouletteController : IDisposable
             PendingSnapshot = snapshot
         });
         if (!IsStartupRecoveryContextCurrent(
-                _startupRecoveryGeneration,
+                _startupRecovery.Generation,
                 session,
                 profile) ||
             _active is not null ||
@@ -2848,7 +2836,7 @@ internal sealed class RouletteController : IDisposable
             }
 
             _active = run;
-            _startupRecoveryState = RelayStartupRecoveryState.Recovering;
+            _startupRecovery.TryCompleteProbe(_startupRecovery.Generation, hasPending: true);
             try
             {
                 _overlay.ShowRelayPending(
@@ -2892,10 +2880,7 @@ internal sealed class RouletteController : IDisposable
         Profile profile)
     {
         if (_disposed ||
-            generation != _startupRecoveryGeneration ||
-            !ReferenceEquals(session, _startupRecoverySession) ||
-            !ReferenceEquals(profile, _startupRecoveryProfile) ||
-            !string.Equals(profile.Id, _startupRecoveryProfileId, StringComparison.Ordinal) ||
+            !_startupRecovery.IsCurrent(generation, session, profile, profile.Id, LobbyUiContext.IsMenuOrStashReady) ||
             !TryGetAuthenticatedContext(out var activeSession, out var activeProfile))
         {
             return false;
@@ -2924,9 +2909,9 @@ internal sealed class RouletteController : IDisposable
             !string.IsNullOrWhiteSpace(profile.Id);
     }
 
-    private void FailStartupRecoveryProbe(Exception exception)
+    private void FailStartupRecoveryProbe(long generation, Exception exception)
     {
-        _startupRecoveryState = RelayStartupRecoveryState.Failed;
+        if (!_startupRecovery.TryFail(generation)) return;
         _log.LogError($"Contraband Cases Relay restart recovery is blocked: {exception}");
         TryNotifyWarning(
             "Contraband Cases could not verify unfinished Relay state. New openings are blocked; unpack a case to retry.");
@@ -3002,6 +2987,7 @@ internal sealed class RouletteController : IDisposable
 
     private void AbandonPresentationForSceneChange()
     {
+        _startupRecovery.DeferProbe();
         _manifest.HandleSceneTeardown();
 
         if (_selfTestActive)
@@ -3091,9 +3077,7 @@ internal sealed class RouletteController : IDisposable
             {
                 if (run.IsStartupRecovery && !_disposed)
                 {
-                    _startupRecoveryState = run.Terminal
-                        ? RelayStartupRecoveryState.Ready
-                        : RelayStartupRecoveryState.Failed;
+                    _startupRecovery.CompleteRecovery(run.Terminal);
                     if (run.Terminal)
                     {
                         _log.LogInfo(
@@ -3319,16 +3303,6 @@ internal sealed class RouletteController : IDisposable
         Waiting,
         Ready,
         Invalid,
-        Disposed
-    }
-
-    private enum RelayStartupRecoveryState
-    {
-        Waiting,
-        Probing,
-        Ready,
-        Recovering,
-        Failed,
         Disposed
     }
 
