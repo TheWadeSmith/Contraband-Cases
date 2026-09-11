@@ -38,7 +38,8 @@ public sealed class JsonRewardPackLoader
         "anchorTemplateId",
         "weight",
         "usePath",
-        "recipe"
+        "recipe",
+        "roubleBonus"
     ];
 
     public CargoLotPack LoadFile(string path)
@@ -212,7 +213,8 @@ public sealed class JsonRewardPackLoader
             anchorTemplateId,
             weight,
             usePath,
-            recipe);
+            recipe,
+            lot.TryGetProperty("roubleBonus", out _) ? RequiredInt32(lot, "roubleBonus", context) : 0);
     }
 
     private static UsePath ParseUsePath(JsonElement element, string context)

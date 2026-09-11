@@ -10,8 +10,8 @@ $ErrorActionPreference = "Stop"
 
 $projectRoot = [IO.Path]::GetFullPath((Join-Path $PSScriptRoot ".."))
 $distRoot = [IO.Path]::GetFullPath((Join-Path $projectRoot "..\dist"))
-$packageBaseName = "ContrabandCases-0.4.15-SPT4.1.5"
-$packageTimestampUtc = [DateTime]::SpecifyKind([DateTime]"2026-09-10T00:00:00", [DateTimeKind]::Utc)
+$packageBaseName = "ContrabandCases-0.4.16-SPT4.1.5"
+$packageTimestampUtc = [DateTime]::SpecifyKind([DateTime]"2026-09-11T00:00:00", [DateTimeKind]::Utc)
 $canonicalStagePath = [IO.Path]::GetFullPath((Join-Path $distRoot "stage"))
 $canonicalArchivePath = [IO.Path]::GetFullPath((Join-Path $distRoot "$packageBaseName.zip"))
 $canonicalHashPath = [IO.Path]::GetFullPath((Join-Path $distRoot "$packageBaseName-SHA256.txt"))

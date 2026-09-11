@@ -1,0 +1,757 @@
+[
+  {
+    "File": "amonya.arcane-cache.json",
+    "Metadata": {
+      "schemaVersion": 1,
+      "providerId": "amonya.arcane-cache",
+      "packVersion": "1.0.0",
+      "displayLabel": "Amonya Arcane Cache",
+      "providerWeight": 0.05,
+      "requiredTemplateIds": [
+        "590c60fc86f77412b13fddcf",
+        "59fb042886f7746c5005a7b2",
+        "5d235bb686f77443f4331278",
+        "601948682627df266209af05",
+        "6389c8c5dbfd5e4b95197e6b",
+        "6389c8fb46b54c634724d847",
+        "679b992329acd1f2f60985a5",
+        "69359d725bbf2f0c2027c59c",
+        "69359d725bbf2f0c2027c59f",
+        "69359d725bbf2f0c2027c5a0",
+        "69359d725bbf2f0c2027c5a2",
+        "6a248be769dd135bbcc78755"
+      ],
+      "requiredPresetIds": [],
+      "requiredBundleKeys": [],
+      "retiredLotIds": [
+        "arcane-ammunition-cache",
+        "satchel-of-holding",
+        "eldritch-ordinance",
+        "arcane-ammunition-cache.shipment-v1",
+        "satchel-of-holding.shipment-v1",
+        "eldritch-ordinance.shipment-v1"
+      ]
+    },
+    "LotCount": 15,
+    "LotsHash": "39CA7DBC6DC2D9CDB383A75E2F833F5C5116AACF266C9EF23FE012241FCD87B0"
+  },
+  {
+    "File": "black-site.loadouts.json",
+    "Metadata": {
+      "schemaVersion": 1,
+      "providerId": "black-site.loadouts",
+      "packVersion": "1.0.0",
+      "displayLabel": "Black Site Loadouts",
+      "providerWeight": 0.1,
+      "requiredTemplateIds": [
+        "5447a9cd4bdc2dbd208b4567",
+        "544a5cde4bdc2d39388b456b",
+        "544fb45d4bdc2dee738b4568",
+        "58948c8e86f77409493f7266",
+        "58dd3ad986f77403051cba8f",
+        "590c657e86f77412b013051d",
+        "59c1383d86f774290a37e0ca",
+        "59e6906286f7746c9f75e847",
+        "5a3501acc4a282000d72293a",
+        "5a367e5dc4a282000e49738f",
+        "5a608bf24f39f98ffc77720e",
+        "5ba26383d4351e00334c93d9",
+        "5ba26586d4351e44f824b340",
+        "5ba26835d4351e0035628ff5",
+        "5c0558060db834001b735271",
+        "5c925fa22e221601da359b7b",
+        "5ca20d5986f774331e7c9602",
+        "5d02778e86f774203e7dedbe",
+        "5df8ce05b11454561e39243b",
+        "5df8f541c41b2312ea3335e3",
+        "5e4abc6786f77406812bd572",
+        "5e4d34ca86f774264f758330",
+        "5fbcc1d9016cce60e8341ab3",
+        "5fd20ff893a8961fc660a954",
+        "6033fa48ffd42c541047f728",
+        "60a2828e8689911a226117f9",
+        "6165ac306ef05c2ce828ef74",
+        "6183d53f1cb55961fa0fdcda",
+        "628e4e576d783146b124c64d",
+        "66b5f693acff495a294927e3",
+        "66b5f6985891c84aab75ca76",
+        "6718817435e3cfd9550d2c27",
+        "6768c25aa7b238f14a08d3f6"
+      ],
+      "requiredPresetIds": [
+        "5a3a85af86f774745637d46c",
+        "5a8ae36686f774377d6ce226",
+        "5a8ae43686f774377b73cfb3",
+        "5bd05f1186f774572f181678",
+        "628753bba4a8431af4739d3b",
+        "657120b36fe59548840cb542",
+        "65719d367a553968340d88b8",
+        "657664ae303700411c02428c",
+        "657fa7c0e65c0122b70ffdb0",
+        "66b0e7f8c5987b623d6e2e81",
+        "671b88c4d14a58a85b09d845",
+        "671b89f03d4217059b0c6a26"
+      ],
+      "requiredBundleKeys": []
+    },
+    "LotCount": 8,
+    "LotsHash": "628048523318D3CC3D197543BD9C9EFE78255679975D87D05B47F5805902A430"
+  },
+  {
+    "File": "cnn-containers.storage.json",
+    "Metadata": {
+      "schemaVersion": 1,
+      "providerId": "cnn-containers.storage",
+      "packVersion": "1.0.0",
+      "displayLabel": "CNN Storage",
+      "providerWeight": 0.06,
+      "requiredTemplateIds": [
+        "683d0995deed9b8d4f897ec2",
+        "683d09aadb9e219d2f7bd6e8"
+      ],
+      "requiredPresetIds": [],
+      "requiredBundleKeys": []
+    },
+    "LotCount": 2,
+    "LotsHash": "8909E5817A148DCD93D3758B5EFD251BF5D3C4C3923735EFAA031170ABCF8A07"
+  },
+  {
+    "File": "core.json",
+    "Metadata": {
+      "schemaVersion": 1,
+      "providerId": "core",
+      "packVersion": "0.3.3",
+      "displayLabel": "Contraband Cases Core",
+      "providerWeight": 1.0,
+      "requiredTemplateIds": [
+        "5447a9cd4bdc2dbd208b4567",
+        "5448be9a4bdc2dfd2f8b456a",
+        "54491c4f4bdc2db1078b4568",
+        "544a5caa4bdc2d1a388b4568",
+        "544fb3f34bdc2d03748b456a",
+        "544fb45d4bdc2dee738b4568",
+        "55d4887d4bdc2d962f8b4570",
+        "560d5e524bdc2d25448b4571",
+        "5645bcc04bdc2d363b8b4572",
+        "56d59d3ad2720bdb418b4577",
+        "56dfef82d2720bbd668b4567",
+        "5710c24ad2720bc3458b45a3",
+        "590c60fc86f77412b13fddcf",
+        "590c678286f77426c9660122",
+        "591094e086f7747caa7bb2ef",
+        "5910968f86f77425cf569c32",
+        "59984ab886f7743e98271174",
+        "59e6906286f7746c9f75e847",
+        "59fafd4b86f7745ca07e1232",
+        "59fb023c86f7746d0d4b423c",
+        "5a154d5cfcdbcb001a3b00da",
+        "5a16b8a9fcdbcb00165aa6ca",
+        "5a367e5dc4a282000e49738f",
+        "5aafbcd986f7745e590fff23",
+        "5b40e1525acfc4771e1c6611",
+        "5b432b965acfc47a8774094e",
+        "5b6d9ce188a4501afc1b2b25",
+        "5ba26383d4351e00334c93d9",
+        "5ba26586d4351e44f824b340",
+        "5ba26835d4351e0035628ff5",
+        "5c0126f40db834002a125382",
+        "5c0530ee86f774697952d952",
+        "5c0558060db834001b735271",
+        "5c0a840b86f7742ffa4f2482",
+        "5c0e530286f7747fa1419862",
+        "5c0e531d86f7747fa23f4d42",
+        "5c11046cd174af02a012e42b",
+        "5c110624d174af029e69734c",
+        "5c1d0dc586f7744baf2e7b79",
+        "5ca20d5986f774331e7c9602",
+        "5d02778e86f774203e7dedbe",
+        "5d02797c86f774203f38e30a",
+        "5d235bb686f77443f4331278",
+        "5df8ce05b11454561e39243b",
+        "5df8f541c41b2312ea3335e3",
+        "5e2af55f86f7746d4159f07c",
+        "5e4abb5086f77406975c9342",
+        "5ed51652f6c34d2cc26336a1",
+        "60098ad7c2240c0fe85c570a",
+        "601948682627df266209af05",
+        "60a283193cb70855c43a381d",
+        "61605e13ffa6e502ac5e7eef",
+        "618cfae774bb2d036a049e7c",
+        "619cbf7d23893217ec30b689",
+        "628e4e576d783146b124c64d",
+        "6389c8c5dbfd5e4b95197e6b",
+        "66b5f6985891c84aab75ca76",
+        "67600929bd0a0549d70993f6",
+        "6768c25aa7b238f14a08d3f6",
+        "679b992329acd1f2f60985a5"
+      ],
+      "requiredPresetIds": [
+        "584148f2245977598f1ad387",
+        "59b81f7386f77421ac688a0a",
+        "5a3a85af86f774745637d46c",
+        "5a8ae36686f774377d6ce226",
+        "5af08cf886f774223c269184",
+        "5bd05f1186f774572f181678",
+        "618aaf656bbeff39ad4acf0c",
+        "628753bba4a8431af4739d3b",
+        "657120b36fe59548840cb542",
+        "65719d367a553968340d88b8",
+        "657664ae303700411c02428c",
+        "657666ca303700411c0242c6",
+        "65766b46303700411c0242f8",
+        "657fa7c0e65c0122b70ffdb0",
+        "66b0e484c84cc7141324fd6c"
+      ],
+      "requiredBundleKeys": []
+    },
+    "LotCount": 200,
+    "LotsHash": "2AEDF46DBD2EDBC91A29EB121D8D0ED79AAAC5284368C1C7DCDF0D2A7CF066C9"
+  },
+  {
+    "File": "eco-attachment.elite-optics.json",
+    "Metadata": {
+      "schemaVersion": 1,
+      "providerId": "eco-attachment.elite-optics",
+      "packVersion": "1.0.0",
+      "displayLabel": "Eco Attachment Emporium Elite Optics",
+      "providerWeight": 0.06,
+      "requiredTemplateIds": [
+        "591094e086f7747caa7bb2ef",
+        "5910968f86f77425cf569c32",
+        "6768c25aa7b238f14a08d3f6",
+        "696395af1b7e04938307a122",
+        "696395af1b7e04938307a124",
+        "69bc60217cbcfaf66d0f8533",
+        "69bc77167cbcfaf66d0f853a",
+        "69bc7cdc7cbcfaf66d0f853c",
+        "69bc81d77cbcfaf66d0f8541",
+        "69bdb41d2e4518999108ae92"
+      ],
+      "requiredPresetIds": [
+        "628753bba4a8431af4739d3b",
+        "657666ca303700411c0242c6"
+      ],
+      "requiredBundleKeys": []
+    },
+    "LotCount": 14,
+    "LotsHash": "74FA830C4CCECFB1062AF9CF444A5225C798ED6173633C032000CF6CB8B62CDA"
+  },
+  {
+    "File": "eco-attachment.field-cache.json",
+    "Metadata": {
+      "schemaVersion": 1,
+      "providerId": "eco-attachment.field-cache",
+      "packVersion": "1.0.0",
+      "displayLabel": "Eco Attachment Emporium Field Cache",
+      "providerWeight": 0.16,
+      "requiredTemplateIds": [
+        "591094e086f7747caa7bb2ef",
+        "59e6906286f7746c9f75e847",
+        "68b4b24e27658b8b0d024399",
+        "68b4b24e27658b8b0d02439a",
+        "68bb6be346d4437fb40002e0",
+        "68bc3cd17208c642f409974f",
+        "68c48eb7c91390fb930e8d94",
+        "6912857dfb534981300b1d8f"
+      ],
+      "requiredPresetIds": [
+        "618aaf656bbeff39ad4acf0c"
+      ],
+      "requiredBundleKeys": []
+    },
+    "LotCount": 13,
+    "LotsHash": "14ED0067289D51E04D5E7E25CABED548F3789F5359ADD1A65E006C10BB97FBA6"
+  },
+  {
+    "File": "eco-ww2.relic-cache.json",
+    "Metadata": {
+      "schemaVersion": 1,
+      "providerId": "eco-ww2.relic-cache",
+      "packVersion": "1.0.0",
+      "displayLabel": "Eco WW2 Pack Relic Cache",
+      "providerWeight": 0.05,
+      "requiredTemplateIds": [
+        "590c60fc86f77412b13fddcf",
+        "59fb023c86f7746d0d4b423c",
+        "5bffdd7e0db834001b734a1a",
+        "5efb0cabfb3e451d70735af5",
+        "601948682627df266209af05",
+        "6a06fa8af86e3e091872c100",
+        "6a06fad8f86e3e091872c102",
+        "6a06febcf86e3e091872c104",
+        "6a0ce40499dfd9edaca1daa9",
+        "6a0cf4b799dfd9edaca1daae",
+        "6a0df23142723bcd0581cf82",
+        "6a1ee17009ef9baf4bd3193b"
+      ],
+      "requiredPresetIds": [],
+      "requiredBundleKeys": []
+    },
+    "LotCount": 8,
+    "LotsHash": "E10521F8CBB205491DEC1B7C50D32C4090EBE739558A64A109A4E39CA2648369"
+  },
+  {
+    "File": "isb-aishi.elite-armory.json",
+    "Metadata": {
+      "schemaVersion": 1,
+      "providerId": "isb-aishi.elite-armory",
+      "packVersion": "1.0.0",
+      "displayLabel": "ISB Aishi Elite Armory",
+      "providerWeight": 0.07,
+      "requiredTemplateIds": [
+        "591094e086f7747caa7bb2ef",
+        "5910968f86f77425cf569c32",
+        "6931b6a2161edf5b558ee5bc",
+        "6931bca8197ad8567a64bf86",
+        "696d81b236067d6c3ef793ca",
+        "6a07e920d7a2c6d597db893c",
+        "6a111c7164b1373374405287",
+        "6a12667fec1b599645cd7183",
+        "6a30ed97ce95057496b93476",
+        "6a31d5c8c667d4db08650272"
+      ],
+      "requiredPresetIds": [
+        "657666ca303700411c0242c6",
+        "696dad187a3933a203814f40",
+        "6a07f2f08e75711e0854623e"
+      ],
+      "requiredBundleKeys": [],
+      "retiredLotIds": [
+        "7n24m-marksman-cache",
+        "7n26-assault-cache",
+        "korund-elite-loadout",
+        "6b45-elite-loadout",
+        "7n24m-marksman-cache.shipment-v1",
+        "7n26-assault-cache.shipment-v1",
+        "korund-elite-loadout.shipment-v1",
+        "6b45-elite-loadout.shipment-v1"
+      ]
+    },
+    "LotCount": 20,
+    "LotsHash": "A72AE49CCC88B37848BBBA3CDF9C4C7BDB46A20B880FFA556B8056E64191A433"
+  },
+  {
+    "File": "isb-aishi.field-armory.json",
+    "Metadata": {
+      "schemaVersion": 1,
+      "providerId": "isb-aishi.field-armory",
+      "packVersion": "1.0.0",
+      "displayLabel": "ISB Aishi Field Armory",
+      "providerWeight": 0.18,
+      "requiredTemplateIds": [
+        "590c60fc86f77412b13fddcf",
+        "591094e086f7747caa7bb2ef",
+        "5910968f86f77425cf569c32",
+        "59fafd4b86f7745ca07e1232",
+        "59fb023c86f7746d0d4b423c",
+        "5d235bb686f77443f4331278",
+        "628e4e576d783146b124c64d",
+        "699aab2519b875a27d6ec5d3",
+        "699aab526ac4f65528f1fd63",
+        "699aad8c961ebda759f9e7fe",
+        "699aae8c9b6a4ab2b769c4a3",
+        "6a12643e06424c709d450e7c",
+        "6a1267fd0580910d4ffbdec0"
+      ],
+      "requiredPresetIds": [
+        "657666ca303700411c0242c6"
+      ],
+      "requiredBundleKeys": []
+    },
+    "LotCount": 12,
+    "LotsHash": "50077D0670615FEB4160242DCCB8E4BACF4C730C8E52ADF200ED46D37FC5EF15"
+  },
+  {
+    "File": "krackasourus.anime-cards.json",
+    "Metadata": {
+      "schemaVersion": 1,
+      "providerId": "krackasourus.anime-cards",
+      "packVersion": "1.5.2",
+      "displayLabel": "Krackasourus Anime Cards",
+      "providerWeight": 0.12,
+      "requiredTemplateIds": [
+        "590c60fc86f77412b13fddcf",
+        "59fafd4b86f7745ca07e1232",
+        "59fb042886f7746c5005a7b2",
+        "5c0126f40db834002a125382",
+        "5c0a840b86f7742ffa4f2482",
+        "5d235bb686f77443f4331278",
+        "601948682627df266209af05",
+        "6389c8c5dbfd5e4b95197e6b",
+        "6389c8fb46b54c634724d847",
+        "6699b7fd0d1d25cf00072bf6",
+        "6699b7fd0d1d25cf00072bf8",
+        "6699b7fd0d1d25cf00072bf9",
+        "6699b7fd0d1d25cf00072bfa",
+        "6699b7fd0d1d25cf00072bfb",
+        "6699b7fd0d1d25cf00072bfc",
+        "6699b7fd0d1d25cf00072bfd",
+        "6699b7fd0d1d25cf00072bfe",
+        "6699b7fd0d1d25cf00072bff",
+        "6699b7fd0d1d25cf00072c01",
+        "6699b7fd0d1d25cf00072c02",
+        "6699b7fd0d1d25cf00072c49"
+      ],
+      "requiredPresetIds": [],
+      "requiredBundleKeys": []
+    },
+    "LotCount": 32,
+    "LotsHash": "853826AFC546830775E08296679254739CD415CAE765B0B2B6416F93B8D5B55F"
+  },
+  {
+    "File": "krackasourus.pokemon-cards.json",
+    "Metadata": {
+      "schemaVersion": 1,
+      "providerId": "krackasourus.pokemon-cards",
+      "packVersion": "1.1.2",
+      "displayLabel": "Krackasourus Pokemon Cards",
+      "providerWeight": 0.12,
+      "requiredTemplateIds": [
+        "590c60fc86f77412b13fddcf",
+        "59fafd4b86f7745ca07e1232",
+        "59fb042886f7746c5005a7b2",
+        "5c0126f40db834002a125382",
+        "5c0a840b86f7742ffa4f2482",
+        "5d235bb686f77443f4331278",
+        "601948682627df266209af05",
+        "6389c8c5dbfd5e4b95197e6b",
+        "6389c8fb46b54c634724d847",
+        "669979d0c73060411f04d26a",
+        "669979d0c73060411f04d286",
+        "669979d0c73060411f04d28e",
+        "669979d0c73060411f04d2a0",
+        "669979d0c73060411f04d2a1",
+        "669979d0c73060411f04d2b2",
+        "669979d0c73060411f04d2cc",
+        "669997e1c73060411f04d301"
+      ],
+      "requiredPresetIds": [],
+      "requiredBundleKeys": []
+    },
+    "LotCount": 32,
+    "LotsHash": "724E266089887628698E0B374E2A976DD52C32C55454B6E9F33DE8520ED507D1"
+  },
+  {
+    "File": "krackasourus.yugioh-cards.json",
+    "Metadata": {
+      "schemaVersion": 1,
+      "providerId": "krackasourus.yugioh-cards",
+      "packVersion": "0.1.2",
+      "displayLabel": "Krackasourus Yu-Gi-Oh Cards",
+      "providerWeight": 0.12,
+      "requiredTemplateIds": [
+        "59fafd4b86f7745ca07e1232",
+        "59fb042886f7746c5005a7b2",
+        "5c0126f40db834002a125382",
+        "5c0a840b86f7742ffa4f2482",
+        "5d235bb686f77443f4331278",
+        "601948682627df266209af05",
+        "6389c8c5dbfd5e4b95197e6b",
+        "6389c8fb46b54c634724d847",
+        "669c7c89721191eae60910d9",
+        "669c812e721191eae60910e1",
+        "669c812e721191eae60910ec",
+        "669c812e721191eae60910f4",
+        "669c812e721191eae6091102",
+        "669c812e721191eae609112d",
+        "669c812e721191eae6091133",
+        "669c812e721191eae6091145",
+        "669c812e721191eae609114a"
+      ],
+      "requiredPresetIds": [],
+      "requiredBundleKeys": []
+    },
+    "LotCount": 32,
+    "LotsHash": "1F8CCDC377765DB339118112F402A53BE54BBABAF84081F840FDD6AB651500A6"
+  },
+  {
+    "File": "more-cases.storage.json",
+    "Metadata": {
+      "schemaVersion": 1,
+      "providerId": "more-cases.storage",
+      "packVersion": "1.0.0",
+      "displayLabel": "More Cases Storage",
+      "providerWeight": 0.04,
+      "requiredTemplateIds": [
+        "0e467959521c90b58551ed4b",
+        "1a1d09be383400a9066af46e",
+        "22d6ba32465bfbc078635969",
+        "73dbd7194e6ec50ef1f6218b",
+        "85b220667456d433db894c03",
+        "992d9b71d76828181f7b87ea",
+        "a3c2c001eb04d2cc82bd8983",
+        "c2f666728bc6cf04292861dc"
+      ],
+      "requiredPresetIds": [],
+      "requiredBundleKeys": []
+    },
+    "LotCount": 8,
+    "LotsHash": "444359F130B83589885AA451E45BE10196A3247F5DBF42FC15CD64B81E6D2F72"
+  },
+  {
+    "File": "natalya.elite-armor.json",
+    "Metadata": {
+      "schemaVersion": 1,
+      "providerId": "natalya.elite-armor",
+      "packVersion": "1.0.0",
+      "displayLabel": "Natalya Elite Armor",
+      "providerWeight": 0.06,
+      "requiredTemplateIds": [
+        "591094e086f7747caa7bb2ef",
+        "674815ec0e1737c294820e25",
+        "674815ecb107ad4bd99235e4",
+        "674815eccc95c1ad849a9b75",
+        "67497be972de11201fc07de5",
+        "67497be97777fb29ca1f9610",
+        "67e179c97ded878d55fb8d4c",
+        "67e179c99591ffcd472a270a"
+      ],
+      "requiredPresetIds": [
+        "657666ca303700411c0242c6",
+        "690dd23f50cb1ea00ba11202",
+        "690e0eee62373b43846feb27"
+      ],
+      "requiredBundleKeys": [],
+      "retiredLotIds": [
+        "gen-pro-six-plate-carrier",
+        "gen-pro-seven-plate-carrier",
+        "ops-core-mk6-package",
+        "gen-pro-six-plate-carrier.shipment-v1",
+        "gen-pro-seven-plate-carrier.shipment-v1",
+        "ops-core-mk6-package.shipment-v1"
+      ]
+    },
+    "LotCount": 15,
+    "LotsHash": "DED70862B8AD0601F8BE6E7C730EE4A1311DF408E80CD3534AE0935FE2EA85E9"
+  },
+  {
+    "File": "natalya.field-gear.json",
+    "Metadata": {
+      "schemaVersion": 1,
+      "providerId": "natalya.field-gear",
+      "packVersion": "1.0.0",
+      "displayLabel": "Natalya Field Gear",
+      "providerWeight": 0.22,
+      "requiredTemplateIds": [
+        "5aafbcd986f7745e590fff23",
+        "5c0530ee86f774697952d952",
+        "5d02797c86f774203f38e30a",
+        "619cbf7d23893217ec30b689",
+        "628e4e576d783146b124c64d",
+        "674815ec8bf2e801d82c322e",
+        "674888cc37cd20bcbef66a48",
+        "674974348af9189fcc136a7e",
+        "6749758d4506d299770ddcb2",
+        "67e179c92d755ef8ae908854",
+        "67e179c9ff1e5acc5f7af6db"
+      ],
+      "requiredPresetIds": [
+        "657666ca303700411c0242c6"
+      ],
+      "requiredBundleKeys": []
+    },
+    "LotCount": 12,
+    "LotsHash": "4B410EE41D22639B983C5FF11947CC66C5D2FC903FCC96AFCAB8A5DD6994D8B2"
+  },
+  {
+    "File": "sjx.combat-chemistry.json",
+    "Metadata": {
+      "schemaVersion": 1,
+      "providerId": "sjx.combat-chemistry",
+      "packVersion": "1.0.2",
+      "displayLabel": "SJX Combat Chemistry",
+      "providerWeight": 0.35,
+      "requiredTemplateIds": [
+        "590c60fc86f77412b13fddcf",
+        "591094e086f7747caa7bb2ef",
+        "5910968f86f77425cf569c32",
+        "59e6906286f7746c9f75e847",
+        "5aafbcd986f7745e590fff23",
+        "5c0126f40db834002a125382",
+        "5c0530ee86f774697952d952",
+        "5d02797c86f774203f38e30a",
+        "5d235bb686f77443f4331278",
+        "619cbf7d23893217ec30b689",
+        "628e4e576d783146b124c64d",
+        "68331b17cccc72d0db1f764b",
+        "68331d7a8f97a4202729e883",
+        "68331fef74231628e6e63f25",
+        "6833237c8ac71af4b28cbe84",
+        "6833259d5bbfac390bc044cf",
+        "68336a67ce152b72dc40abf6",
+        "68336b8fb68adf25e7314cc3",
+        "68336d5f2edc79e911bb9952",
+        "68336d708e51c90780988824",
+        "68336e67abd18e611ecbf182",
+        "68336ee3b0aaa5f9f2c08975",
+        "68337a2a20c7d7d769369919",
+        "68337b7aff2eb46775159b1e"
+      ],
+      "requiredPresetIds": [
+        "5a8ae36686f774377d6ce226",
+        "657666ca303700411c0242c6",
+        "65766b46303700411c0242f8"
+      ],
+      "requiredBundleKeys": []
+    },
+    "LotCount": 20,
+    "LotsHash": "C4001E4080C599F645429B36C7C99808E3C50B54275CD779C6E678CD3EBEB232"
+  },
+  {
+    "File": "vault.json",
+    "Metadata": {
+      "schemaVersion": 1,
+      "providerId": "vault",
+      "packVersion": "1.0.0",
+      "displayLabel": "Contraband Vault",
+      "providerWeight": 0.05,
+      "requiredTemplateIds": [
+        "5447a9cd4bdc2dbd208b4567",
+        "54491c4f4bdc2db1078b4568",
+        "560d5e524bdc2d25448b4571",
+        "56dfef82d2720bbd668b4567",
+        "590c60fc86f77412b13fddcf",
+        "59e6906286f7746c9f75e847",
+        "5a16b8a9fcdbcb00165aa6ca",
+        "5a367e5dc4a282000e49738f",
+        "5b6d9ce188a4501afc1b2b25",
+        "5c0126f40db834002a125382",
+        "5c0a840b86f7742ffa4f2482",
+        "5c11046cd174af02a012e42b",
+        "5c110624d174af029e69734c",
+        "5c1d0dc586f7744baf2e7b79",
+        "5d235bb686f77443f4331278",
+        "5df8ce05b11454561e39243b",
+        "628e4e576d783146b124c64d",
+        "6768c25aa7b238f14a08d3f6",
+        "679b992329acd1f2f60985a5"
+      ],
+      "requiredPresetIds": [
+        "584148f2245977598f1ad387",
+        "59b81f7386f77421ac688a0a",
+        "5a3a85af86f774745637d46c",
+        "5a8ae36686f774377d6ce226",
+        "5af08cf886f774223c269184",
+        "628753bba4a8431af4739d3b",
+        "657666ca303700411c0242c6",
+        "657fa7c0e65c0122b70ffdb0"
+      ],
+      "requiredBundleKeys": []
+    },
+    "LotCount": 12,
+    "LotsHash": "BDC43A8F07C83F8F2A9B13AD5627ABA532A2F946FF438A1541165D8F221B2BEC"
+  },
+  {
+    "File": "vultify.cooler-stims.json",
+    "Metadata": {
+      "schemaVersion": 1,
+      "providerId": "vultify.cooler-stims",
+      "packVersion": "2.0.2",
+      "displayLabel": "Vultify CoolerStims",
+      "providerWeight": 0.25,
+      "requiredTemplateIds": [
+        "590c60fc86f77412b13fddcf",
+        "591094e086f7747caa7bb2ef",
+        "5910968f86f77425cf569c32",
+        "59e6906286f7746c9f75e847",
+        "59fb023c86f7746d0d4b423c",
+        "5aafbcd986f7745e590fff23",
+        "5b6d9ce188a4501afc1b2b25",
+        "5c0126f40db834002a125382",
+        "5c0530ee86f774697952d952",
+        "5c0558060db834001b735271",
+        "5c0a1b2c3d4e5f6789abcde1",
+        "5c0a1b2c3d4e5f6789abcde3",
+        "5c0a1b2c3d4e5f6789abcde5",
+        "5c0a1b2c3d4e5f6789abcde6",
+        "5c0a1b2c3d4e5f6789abcde8",
+        "5d02778e86f774203e7dedbe",
+        "5d02797c86f774203f38e30a",
+        "5d235bb686f77443f4331278",
+        "60098ad7c2240c0fe85c570a",
+        "619cbf7d23893217ec30b689",
+        "628e4e576d783146b124c64d"
+      ],
+      "requiredPresetIds": [
+        "5a8ae36686f774377d6ce226",
+        "657664ae303700411c02428c",
+        "657666ca303700411c0242c6",
+        "65766b46303700411c0242f8",
+        "657fa7c0e65c0122b70ffdb0",
+        "66b0e484c84cc7141324fd6c"
+      ],
+      "requiredBundleKeys": []
+    },
+    "LotCount": 32,
+    "LotsHash": "EFF1B0A24A49E111AB7DBA7669C8EA9708423458641DAB01958AE6C5230E98DF"
+  },
+  {
+    "File": "wtt-contentbackport.elite-optics.json",
+    "Metadata": {
+      "schemaVersion": 1,
+      "providerId": "wtt-contentbackport.elite-optics",
+      "packVersion": "1.0.0",
+      "displayLabel": "WTT Content Backport Elite Optics",
+      "providerWeight": 0.07,
+      "requiredTemplateIds": [
+        "590c60fc86f77412b13fddcf",
+        "591094e086f7747caa7bb2ef",
+        "59fb023c86f7746d0d4b423c",
+        "628e4e576d783146b124c64d",
+        "68948a95d8f2b85fb705e2a6",
+        "689b889473ebd6871805edd6",
+        "689dbded6c7e684817080c29",
+        "6943c85be2f21398e70378cc",
+        "69bb41c03b5fb75517065960",
+        "69bb4203f94327bc0f0230cd"
+      ],
+      "requiredPresetIds": [
+        "69cfd277ce0df53f230f2976",
+        "657666ca303700411c0242c6",
+        "68a4858f9dc8c374800a3b4a"
+      ],
+      "requiredBundleKeys": [],
+      "retiredLotIds": [
+        "night-vision-overwatch",
+        "heavy-plate-carrier",
+        "encrypted-tech-cache",
+        "night-vision-overwatch.shipment-v1",
+        "heavy-plate-carrier.shipment-v1",
+        "encrypted-tech-cache.shipment-v1"
+      ]
+    },
+    "LotCount": 15,
+    "LotsHash": "29EADF54F10F3932931EFA5945A103C353554D1F630E9D2DFAC3959EA2E38835"
+  },
+  {
+    "File": "wtt-contentbackport.field-resupply.json",
+    "Metadata": {
+      "schemaVersion": 1,
+      "providerId": "wtt-contentbackport.field-resupply",
+      "packVersion": "1.0.0",
+      "displayLabel": "WTT Content Backport Field Resupply",
+      "providerWeight": 0.2,
+      "requiredTemplateIds": [
+        "590c60fc86f77412b13fddcf",
+        "591094e086f7747caa7bb2ef",
+        "5aafbcd986f7745e590fff23",
+        "5d02797c86f774203f38e30a",
+        "5d235bb686f77443f4331278",
+        "619cbf7d23893217ec30b689",
+        "628e4e576d783146b124c64d",
+        "693be056fd3a5c751e00de04",
+        "693be0ee50fafa102607aebd",
+        "69bb435ff609db77390b0e25",
+        "69bb43df99f3fda8f1072483",
+        "69cfbf627eaa38bd240704ad",
+        "69cfc2d7a9102bdca0080070"
+      ],
+      "requiredPresetIds": [
+        "657666ca303700411c0242c6"
+      ],
+      "requiredBundleKeys": []
+    },
+    "LotCount": 12,
+    "LotsHash": "3B72E9DC3142D6AEBBE4663568F3B84E6DB1AFDAE4466337B8ACEE9E18683E65"
+  }
+]

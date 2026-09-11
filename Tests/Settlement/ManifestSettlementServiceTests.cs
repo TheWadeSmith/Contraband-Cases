@@ -625,6 +625,78 @@ public sealed class ManifestSettlementServiceTests
         Assert.Equal(1, Assert.Single(receipt.Decisions).Ordinal);
     }
 
+    [Theory]
+    [InlineData(3_000_000, 0)]
+    [InlineData(5_000_000, 0)]
+    [InlineData(5_000_000, 1)]
+    [InlineData(5_000_000, 2)]
+    [InlineData(5_000_000, 3)]
+    [InlineData(5_000_000, 4)]
+    [InlineData(5_000_000, -1)]
+    public async Task Equipment_jackpot_cash_and_gear_survive_mail_recovery_and_partial_collection(int bonus, int failureSave)
+    {
+        TemplateItem? find(string id)
+        {
+            if (id is not (TemplateA or TemplateB or TemplateC)) return ContrabandCases.Tests.Server.JackpotBonusTests.FindTemplate(id);
+            var template = ContrabandCases.Tests.Server.JackpotBonusTests.FindTemplate(ContrabandCases.Tests.Server.JackpotBonusTests.Equipment)!;
+            template.Id = id;
+            return template;
+        }
+        var definition = Assert.Single(ContrabandCases.Tests.Server.JackpotBonusTests.Pack(bonus).Lots);
+        var lot = new CargoLotEvaluator(find, _ => 100_000).Evaluate(
+            new CargoLotResolver(new CargoLotResolverDependencies(find, _ => null)).Resolve(definition));
+        var ordinary = new[] { TemplateA, TemplateB, TemplateC }.Select((template, i) =>
+            Lot("premium-" + i, "premium-" + i, "family-" + i, template, RewardRarity.BlackLabel, i).Resolved).ToArray();
+        var coordinator = Coordinator(Catalog(ordinary.Append(lot)));
+        var fixture = Fixture.FromJournal(new CaseOpeningJournal());
+        var registry = new TestingForcedCrateRegistry();
+        registry.SetForcedCrate(CaseId, TestingCrateType.LegendaryMixed);
+        var ticketInventory = new FreshTicketInventoryProbe { FreshCaseTemplate = ModConstants.CaseTemplateId };
+        var materializer = new CargoLotMaterializer(find);
+        await fixture.CreateService(catalogCoordinator: coordinator, forcedCrateRegistry: registry,
+            ticketInventory: ticketInventory, materializer: materializer,
+            offerSelector: new ManifestCatalogSelector(() => CanonicalRngEvidence.UnitDenominator - 1))
+            .OpenAsync(fixture.Context, CaseId, CancellationToken.None);
+        var active = fixture.Store.Stored.ActiveManifest!;
+        Assert.Equal(lot.Fingerprint, active.Entitlement!.Fingerprint);
+        var profile = new SptProfile { CharacterData = new() { PmcData = fixture.Context.PmcData } };
+        var delivery = new SptManifestRewardDelivery(fixture.Inventory, _ => profile, (_, _) => Task.CompletedTask, _ => { });
+        var before = fixture.Context.PmcData.Inventory!.Items!.Count;
+        var service = fixture.CreateService(catalogCoordinator: coordinator, materializer: materializer, claimInventory: delivery);
+        fixture.Store.FailAfterSaveAttempt = failureSave <= 0 ? null : fixture.Store.SaveAttempts + failureSave;
+        if (failureSave > 0)
+            await Assert.ThrowsAsync<IOException>(() => service.ClaimAsync(fixture.Context, active.ManifestId, CancellationToken.None));
+        fixture.Store.FailAfterSaveAttempt = null;
+        if (failureSave == -1)
+        {
+            fixture.Committer.ExceptionAfterBoundary = new IOException("uncertain jackpot profile save");
+            await Assert.ThrowsAsync<IOException>(() => service.ClaimAsync(fixture.Context, active.ManifestId, CancellationToken.None));
+            await Assert.ThrowsAsync<InvalidOperationException>(() => service.ClaimAsync(fixture.Context, active.ManifestId, CancellationToken.None));
+            fixture.Committer.ExceptionAfterBoundary = null;
+        }
+        var restartUncertainty = failureSave == -1 ? new ManifestClaimCommitUncertaintyCoordinator() : null;
+        await fixture.CreateService(catalogCoordinator: coordinator, materializer: materializer, claimInventory: delivery,
+            uncertaintyCoordinator: restartUncertainty)
+            .ClaimAsync(fixture.NewContextWithLostResponse(), active.ManifestId, CancellationToken.None);
+        Assert.Equal(before, fixture.Context.PmcData.Inventory.Items.Count);
+        Assert.Equal(0, fixture.Inventory.ApplyCalls);
+        var messages = profile.DialogueRecords![SptManifestRewardDelivery.SenderId].Messages!;
+        var items = messages.SelectMany(m => m.Items!.Data!).ToArray();
+        Assert.Single(items, i => i.Template.ToString() == ContrabandCases.Tests.Server.JackpotBonusTests.Equipment);
+        Assert.Equal(bonus, items.Where(i => i.Template.ToString() == CashPayouts.Roubles).Sum(i => i.Upd!.StackObjectsCount ?? 1));
+        Assert.All(messages, m => Assert.InRange(m.Items!.Data!.Count, 1, 8));
+        var ids = items.Select(i => i.Id).ToArray();
+        Assert.Equal(ids.Length, ids.Distinct().Count());
+        messages[0].Items!.Data!.RemoveAt(0);
+        var replay = await fixture.CreateService(catalogCoordinator: coordinator, claimInventory: delivery,
+            uncertaintyCoordinator: restartUncertainty)
+            .ClaimAsync(fixture.NewContextWithLostResponse(), active.ManifestId, CancellationToken.None);
+        Assert.True(replay.Replay);
+        Assert.Equal(ids.Length - 1, messages.Sum(m => m.Items!.Data!.Count));
+        Assert.Single(fixture.Store.Stored.ManifestClaimGrants);
+        Assert.Equal(1, ticketInventory.ApplyCalls);
+    }
+
     private const string ManifestId = "aaaaaaaaaaaaaaaaaaaaaac1";
     private const string ItemRootTemplateId = "54009119af1c881c07000029";
     private const string TemplateA = "710000000000000000000001";
@@ -642,6 +714,49 @@ public sealed class ManifestSettlementServiceTests
     private static readonly DateTimeOffset DecisionAt = DateTimeOffset.UnixEpoch.AddMinutes(3);
     private static readonly DateTimeOffset ClaimPreparedAt = DateTimeOffset.UnixEpoch.AddMinutes(4);
     private static readonly DateTimeOffset CompletionAt = DateTimeOffset.UnixEpoch.AddMinutes(10);
+
+    [Fact]
+    public async Task Fifty_bitcoin_jackpot_is_mailed_in_small_batches_and_replay_never_reissues_collected_coins()
+    {
+        var cash = ContrabandCases.Tests.Server.CashCacheTests.Catalog();
+        var coordinator = new CatalogSnapshotCoordinator(() => Catalog(), () => cash);
+        coordinator.MarkStartupComplete();
+        var fixture = Fixture.FromJournal(new CaseOpeningJournal(recoveryMeter: 2));
+        fixture.Inventory.PrepareSucceeds = false;
+        var profile = new SptProfile { CharacterData = new() { PmcData = fixture.Context.PmcData } };
+        var delivery = new SptManifestRewardDelivery(fixture.Inventory, _ => profile,
+            (_, _) => Task.CompletedTask, _ => throw new Exception("Unexpected notification failure"));
+        var ticketInventory = new FreshTicketInventoryProbe { FreshCaseTemplate = CaseContracts.CashCache };
+        var service = fixture.CreateService(ticketInventory: ticketInventory, catalogCoordinator: coordinator,
+            claimInventory: delivery,
+            offerSelector: new ManifestCatalogSelector(() =>
+                (long)(95m * CanonicalRngEvidence.UnitDenominator / 10_000)),
+            materializer: new CargoLotMaterializer(ContrabandCases.Tests.Server.CashCacheTests.FindTemplate));
+        await service.OpenAsync(fixture.Context, CaseId, CancellationToken.None, cash.SnapshotId);
+        var active = fixture.Store.Stored.ActiveManifest!;
+        Assert.Equal(50, active.Entitlement!.Forest.Nodes.Sum(node => node.StackCount));
+        var before = fixture.Context.PmcData.Inventory!.Items!.Count;
+        await service.ClaimAsync(fixture.Context, active.ManifestId, CancellationToken.None);
+        Assert.Equal(before, fixture.Context.PmcData.Inventory.Items.Count);
+        Assert.Equal(0, fixture.Inventory.ApplyCalls);
+        var messages = profile.DialogueRecords![SptManifestRewardDelivery.SenderId].Messages!;
+        Assert.Equal(new[] { 8, 8, 8, 8, 8, 8, 2 }, messages.Select(message => message.Items!.Data!.Count));
+        var coins = messages.SelectMany(message => message.Items!.Data!).ToArray();
+        Assert.Equal(50, coins.Select(item => item.Id).Distinct().Count());
+        Assert.All(coins, item =>
+        {
+            Assert.Equal(CashPayouts.Bitcoin, item.Template.ToString());
+            Assert.Equal(1, item.Upd!.StackObjectsCount);
+        });
+        messages[0].Items!.Data!.RemoveAt(0); // Partial native collection before a lost-response retry.
+        var replay = await fixture.CreateService(catalogCoordinator: coordinator, claimInventory: delivery)
+            .ClaimAsync(fixture.NewContextWithLostResponse(), active.ManifestId, CancellationToken.None);
+        Assert.True(replay.Replay);
+        Assert.Equal(49, messages.Sum(message => message.Items!.Data!.Count));
+        Assert.Single(fixture.Store.Stored.ManifestClaimGrants);
+        Assert.Equal(1, ticketInventory.ApplyCalls);
+        Assert.Equal(2, fixture.Store.Stored.BrokerFavor);
+    }
 
     [Theory]
     [InlineData("unchanged", 0, "btc-1")]
@@ -663,7 +778,7 @@ public sealed class ManifestSettlementServiceTests
     public async Task Cash_open_full_stash_claim_retry_and_replay_preserve_one_payout_and_Favor(
         string quoteState, int drawBasisPoints, string expectedPayout)
     {
-        expectedPayout += ".shipment-v1";
+        expectedPayout = expectedPayout == "btc-2" ? "btc-50.jackpot-v1" : expectedPayout + ".shipment-v1";
         var cash = ContrabandCases.Tests.Server.CashCacheTests.Catalog();
         var coordinator = new CatalogSnapshotCoordinator(() => Catalog(), () => cash);
         coordinator.MarkStartupComplete();

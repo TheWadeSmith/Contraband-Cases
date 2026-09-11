@@ -160,7 +160,8 @@ public sealed class CargoLotDefinition
         string anchorTemplateId,
         double weight,
         UsePath usePath,
-        IEnumerable<RewardRecipeLine> recipeLines)
+        IEnumerable<RewardRecipeLine> recipeLines,
+        int roubleBonus = 0)
     {
         ProviderId = CargoDomainValidator.RequireIdentifier(providerId, nameof(providerId));
         PackVersion = CargoDomainValidator.RequireIdentifier(packVersion, nameof(packVersion));
@@ -172,6 +173,8 @@ public sealed class CargoLotDefinition
         AnchorTemplateId = CargoDomainValidator.RequireIdentifier(anchorTemplateId, nameof(anchorTemplateId));
         Weight = CargoDomainValidator.RequirePositiveFinite(weight, nameof(weight));
         UsePath = usePath ?? throw new CargoCatalogValidationException("A use path is required.");
+        JackpotPayouts.ValidateDefinition(LotId, roubleBonus);
+        RoubleBonus = roubleBonus;
 
         if (recipeLines is null)
         {
@@ -212,4 +215,6 @@ public sealed class CargoLotDefinition
     public UsePath UsePath { get; }
 
     public IReadOnlyList<RewardRecipeLine> RecipeLines { get; }
+
+    public int RoubleBonus { get; }
 }

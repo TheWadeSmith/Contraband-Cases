@@ -5,7 +5,7 @@ param(
 
 Set-StrictMode -Version Latest
 $ErrorActionPreference = "Stop"
-$packageTimestampUtc = [DateTime]::SpecifyKind([DateTime]"2026-09-10T00:00:00", [DateTimeKind]::Utc)
+$packageTimestampUtc = [DateTime]::SpecifyKind([DateTime]"2026-09-11T00:00:00", [DateTimeKind]::Utc)
 $packageDosDate = [uint16]((($packageTimestampUtc.Year - 1980) -shl 9) -bor ($packageTimestampUtc.Month -shl 5) -bor $packageTimestampUtc.Day)
 $packageDosTime = [uint16](($packageTimestampUtc.Hour -shl 11) -bor ($packageTimestampUtc.Minute -shl 5) -bor ([int]($packageTimestampUtc.Second / 2)))
 
@@ -180,8 +180,8 @@ try {
     $stage = Join-Path $packageRoot "dist\stage"
     $validationScript = Join-Path $packageRoot "ContrabandCases\tools\Validate-Package.ps1"
     $stagedClientDll = Join-Path $stage "BepInEx\plugins\ContrabandCases\ContrabandCases.Client.dll"
-    $archivePath = Join-Path $packageRoot "dist\ContrabandCases-0.4.15-SPT4.1.5.zip"
-    $hashPath = Join-Path $packageRoot "dist\ContrabandCases-0.4.15-SPT4.1.5-SHA256.txt"
+    $archivePath = Join-Path $packageRoot "dist\ContrabandCases-0.4.16-SPT4.1.5.zip"
+    $hashPath = Join-Path $packageRoot "dist\ContrabandCases-0.4.16-SPT4.1.5-SHA256.txt"
 
     # The dist-scoped lock must reject a concurrent package run without touching canonical outputs.
     $lockedStageSnapshot = Get-DirectoryByteSnapshot $stage
@@ -208,12 +208,12 @@ try {
     Assert-Condition ((Get-FileHash -LiteralPath $hashPath -Algorithm SHA256).Hash -eq $lockedManifestHash) "interrupted-transaction rejection changed the canonical checksum manifest."
     Remove-Item -LiteralPath $interruptedTransactionPath -Recurse -Force
 
-    Assert-Condition ((Get-Item -LiteralPath $stagedClientDll).LastWriteTimeUtc.Ticks -eq $packageTimestampUtc.Ticks) "packaging did not stamp staged files with the 0.4.15 release timestamp."
+    Assert-Condition ((Get-Item -LiteralPath $stagedClientDll).LastWriteTimeUtc.Ticks -eq $packageTimestampUtc.Ticks) "packaging did not stamp staged files with the 0.4.16 release timestamp."
     $headerTimestamps = Get-ArchiveHeaderTimestamps $archivePath
-    Assert-Condition ($headerTimestamps.LocalDate -eq $packageDosDate -and $headerTimestamps.LocalTime -eq $packageDosTime) "local ZIP header does not contain the 0.4.15 release timestamp."
-    Assert-Condition ($headerTimestamps.CentralDate -eq $packageDosDate -and $headerTimestamps.CentralTime -eq $packageDosTime) "central ZIP header does not contain the 0.4.15 release timestamp."
+    Assert-Condition ($headerTimestamps.LocalDate -eq $packageDosDate -and $headerTimestamps.LocalTime -eq $packageDosTime) "local ZIP header does not contain the 0.4.16 release timestamp."
+    Assert-Condition ($headerTimestamps.CentralDate -eq $packageDosDate -and $headerTimestamps.CentralTime -eq $packageDosTime) "central ZIP header does not contain the 0.4.16 release timestamp."
     (Get-Item -LiteralPath $stagedClientDll).LastWriteTimeUtc = [DateTime]::SpecifyKind([DateTime]"1980-01-01T00:00:00", [DateTimeKind]::Utc)
-    Invoke-ExpectFailure $validationScript "staged release timestamp mutation" @("Package validation failed: staged file '.+ContrabandCases\.Client\.dll' has timestamp '.+'; expected the 0\.4\.15 release timestamp '.+'\.")
+    Invoke-ExpectFailure $validationScript "staged release timestamp mutation" @("Package validation failed: staged file '.+ContrabandCases\.Client\.dll' has timestamp '.+'; expected the 0\.4\.16 release timestamp '.+'\.")
     (Get-Item -LiteralPath $stagedClientDll).LastWriteTimeUtc = $packageTimestampUtc
     Assert-Condition ((Invoke-ProductionScript $validationScript) -eq 0) "restored release timestamp did not pass validation."
 
@@ -407,7 +407,7 @@ try {
         '"presetId": "000000000000000000000000"')
     Assert-Condition (![string]::Equals($recipeTamperText, $mutatedRecipeTamperText, [StringComparison]::Ordinal)) "core recipe-tamper fixture did not replace the night-patrol preset."
     [IO.File]::WriteAllText($recipeTamperPath, $mutatedRecipeTamperText, (New-Object Text.UTF8Encoding($false)))
-    Invoke-ExpectFailure (Join-Path $recipeTamperProject "tools\Package.ps1") "same-count core recipe tamper" @("Package validation failed: reward pack 'core' SHA-256 '[0-9A-F]{64}' does not match accepted hash '51C2B4D4E6FC3F87B995860070E666A21BE35C349063C2DA1FCCFEC260AEB153'\.")
+    Invoke-ExpectFailure (Join-Path $recipeTamperProject "tools\Package.ps1") "same-count core recipe tamper" @("Package validation failed: reward pack 'core' SHA-256 '[0-9A-F]{64}' does not match accepted hash '1D4D0B7A8A9B78F83263B6172E5A2EA556DABEAC44901F80C8CA492EF90C1EE6'\.")
 
     # A canonical-revalidation failure must preserve every previously published canonical output.
     $publicationRoot = New-TemporaryProjectClone "publication-preservation"
@@ -418,8 +418,8 @@ try {
 
     $publicationDist = Join-Path $publicationRoot "dist"
     $publicationStage = Join-Path $publicationDist "stage"
-    $publicationArchive = Join-Path $publicationDist "ContrabandCases-0.4.15-SPT4.1.5.zip"
-    $publicationHash = Join-Path $publicationDist "ContrabandCases-0.4.15-SPT4.1.5-SHA256.txt"
+    $publicationArchive = Join-Path $publicationDist "ContrabandCases-0.4.16-SPT4.1.5.zip"
+    $publicationHash = Join-Path $publicationDist "ContrabandCases-0.4.16-SPT4.1.5-SHA256.txt"
     $publishedStageSnapshot = Get-DirectoryByteSnapshot $publicationStage
     $publishedArchiveHash = (Get-FileHash -LiteralPath $publicationArchive -Algorithm SHA256).Hash
     $publishedManifestHash = (Get-FileHash -LiteralPath $publicationHash -Algorithm SHA256).Hash
@@ -480,7 +480,7 @@ if ([string]::Equals($resolvedStagePath, $canonicalStagePath, [StringComparison]
     $optionalRequirementsPack.requiredTemplateIds = @()
     $optionalRequirementsJson = $optionalRequirementsPack | ConvertTo-Json -Depth 100
     [IO.File]::WriteAllText($optionalRequirementsPath, $optionalRequirementsJson + "`n", (New-Object Text.UTF8Encoding($false)))
-    Invoke-ExpectFailure (Join-Path $optionalRequirementsProject "tools\Package.ps1") "optional pack without provider requirements" @("Package validation failed: reward pack 'krackasourus\.anime-cards' property 'requiredTemplateIds' contains 0 entries; expected 21\.")
+    Invoke-ExpectFailure (Join-Path $optionalRequirementsProject "tools\Package.ps1") "optional pack without provider requirements" @("Package validation failed: reward pack 'krackasourus\.anime-cards' property 'requiredTemplateIds' contains 0 entries; expected 22\.")
 
     # Both accepted UnityFS artifacts are immutable release inputs, not merely format-compatible bundles.
     foreach ($bundleCase in @(

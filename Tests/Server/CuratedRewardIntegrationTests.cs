@@ -16,6 +16,43 @@ namespace ContrabandCases.Tests.Server;
 public sealed class CuratedRewardIntegrationTests
 {
     [Fact]
+    public void Themed_jackpots_replace_only_their_predecessors_and_keep_cash_with_gear()
+    {
+        var catalog = ReadCatalog();
+        var jackpots = catalog.FreshOpeningLots.Where(l => l.Definition.RoubleBonus > 0).ToArray();
+        Assert.Equal(6, jackpots.Length);
+        foreach (var lot in jackpots)
+        {
+            var previousId = lot.Identity.LotId[..^JackpotPayouts.Suffix.Length];
+            var previous = Assert.Single(catalog.Lots, l => l.Identity.ProviderId == lot.Identity.ProviderId && l.Identity.LotId == previousId);
+            Assert.DoesNotContain(previous, catalog.FreshOpeningLots);
+            Assert.Equal(previous.Identity.Weight, lot.Identity.Weight);
+            Assert.Equal(previous.Identity.FamilyId, lot.Identity.FamilyId);
+            Assert.Equal(previous.Identity.TrackId, lot.Identity.TrackId);
+            Assert.True(ManifestOpeningPool.IsChase(previous));
+            Assert.True(ManifestOpeningPool.IsChase(lot));
+            Assert.Equal(RewardRarity.BlackLabel, lot.Evaluation.Grade);
+            Assert.Equal(lot.Definition.RoubleBonus, lot.Forest.Nodes.Where(n => n.TemplateId == CashPayouts.Roubles).Sum(n => n.StackCount));
+            Assert.NotEqual(previous.Fingerprint, lot.Fingerprint);
+        }
+        var operations = Assert.Single(jackpots, l => CaseCatalogs.Includes(CaseContracts.Operations, l.Identity));
+        Assert.Equal(3_000_000, operations.Definition.RoubleBonus);
+        Assert.Contains(operations.Forest.Roots, n => n.TemplateId == "5c0a840b86f7742ffa4f2482");
+        Assert.Contains(operations.Forest.Roots, n => n.TemplateId == "5b6d9ce188a4501afc1b2b25");
+        var juggernaut = Assert.Single(jackpots, l => l.Identity.ProviderId == "core" && CaseCatalogs.Includes(CaseContracts.BlackSite, l.Identity));
+        Assert.Equal(5_000_000, juggernaut.Definition.RoubleBonus);
+        Assert.Contains(juggernaut.Forest.Roots, n => n.TemplateId == "5e4abb5086f77406975c9342");
+        Assert.Contains(juggernaut.Forest.Roots, n => n.TemplateId == "5f60c74e3b85f6263c145586");
+        using var fixture = ReadFixture();
+        Assert.True(juggernaut.Forest.Nodes.Count(n => fixture.RootElement.GetProperty("templates").GetProperty(n.TemplateId)
+            .GetProperty("_props").TryGetProperty("armorClass", out var rating) && rating.ToString() == "6") >= 2);
+        var relics = jackpots.Where(l => CaseCatalogs.Includes(CaseContracts.Relics, l.Identity)).ToArray();
+        Assert.Equal(3, relics.Length);
+        Assert.All(relics, l => Assert.Equal(3_000_000, l.Definition.RoubleBonus));
+        Assert.Equal(3, relics.Select(l => l.Identity.AnchorTemplateId).Distinct().Count());
+    }
+
+    [Fact]
     public void New_full_loadouts_include_a_complete_equipment_set_and_use_distinct_weapons()
     {
         using var doc = ReadFixture();
@@ -47,6 +84,34 @@ public sealed class CuratedRewardIntegrationTests
     }
 
     [Fact]
+    public void Jackpot_successors_preserve_exact_normal_draw_odds_and_typical_case_prices()
+    {
+        var current = ReadCatalog();
+        var baseline = new CargoCatalogSnapshot(new string('b', 64), current.Lots.Where(l => l.Definition.RoubleBonus == 0), [], current.ProviderWeights);
+        foreach (var template in CaseContracts.Templates.Where(t => t != CaseContracts.CashCache))
+        {
+            var before = CaseCatalogs.ForCase(baseline, template);
+            var after = CaseCatalogs.ForCase(current, template);
+            Assert.Equal(ManifestCatalogEconomy.CalculateAutomaticPrices(before).CasePrice,
+                ManifestCatalogEconomy.CalculateAutomaticPrices(after).CasePrice);
+            foreach (var family in after.FreshOpeningLots.GroupBy(after.SelectionFamily))
+            {
+                var newPool = ManifestOpeningPool.Create(after, family.ToArray());
+                var oldPool = ManifestOpeningPool.Create(before, before.FreshOpeningLots.Where(l => before.SelectionFamily(l).Equals(family.Key)).ToArray());
+                Assert.Equal(oldPool.Lots.Count, newPool.Lots.Count);
+                for (var i = 0; i < newPool.Lots.Count; i++)
+                {
+                    var lot = newPool.Lots[i];
+                    var oldIndex = Enumerable.Range(0, oldPool.Lots.Count).Single(j => oldPool.Lots[j].Identity.ProviderId == lot.Identity.ProviderId &&
+                        ShipmentEconomy.BaseId(oldPool.Lots[j].Identity.LotId) == ShipmentEconomy.BaseId(lot.Identity.LotId));
+                    Assert.Equal(oldPool.Weights.ProbabilityAt(oldIndex).Numerator, newPool.Weights.ProbabilityAt(i).Numerator);
+                    Assert.Equal(oldPool.Weights.ProbabilityAt(oldIndex).Denominator, newPool.Weights.ProbabilityAt(i).Denominator);
+                }
+            }
+        }
+    }
+
+    [Fact]
     public void Modded_storage_is_empty_optional_Black_Site_loot_with_no_new_chase_only_category()
     {
         var catalog = ReadCatalog();
@@ -54,7 +119,7 @@ public sealed class CuratedRewardIntegrationTests
         Assert.Equal(10, storage.Length);
         foreach (var lot in storage)
         {
-            var root = Assert.Single(lot.Forest.Nodes);
+            var root = Assert.Single(lot.Forest.Nodes, n => n.TemplateId != CashPayouts.Roubles);
             Assert.Null(root.ParentLogicalPath);
             Assert.Equal(1, root.StackCount);
             Assert.Equal("vault", lot.Identity.TrackId.Value);
@@ -98,14 +163,21 @@ public sealed class CuratedRewardIntegrationTests
         Assert.Equal(135, catalog.FreshOpeningLots.Count);
         foreach (var lot in catalog.FreshOpeningLots)
         {
-            Assert.EndsWith(".compact-v2", lot.Identity.LotId);
-            Assert.InRange(lot.Forest.Roots.Count, 1, 8);
-            Assert.InRange(lot.Forest.Nodes.Count, 1, 128);
+            Assert.EndsWith(lot.Definition.RoubleBonus > 0 ? ".compact-v2.jackpot-v2" : ".compact-v2", lot.Identity.LotId);
+            Assert.InRange(lot.Forest.Roots.Count(n => n.TemplateId != CashPayouts.Roubles), 1, 8);
+            Assert.InRange(lot.Forest.Nodes.Count(n => n.TemplateId != CashPayouts.Roubles), 1, 128);
+            if (lot.Definition.RoubleBonus > 0) JackpotPayouts.ValidateForest(lot.Forest, lot.Definition.RoubleBonus);
             Assert.InRange(lot.Evaluation.FootprintCells, 1, 64);
         }
         var library = ManifestLibraryProjection.Create(new CaseOpeningJournal(), catalog, new Dictionary<string, string>());
         var parsed = ManifestSnapshotParser.ParseLibrary(JsonSerializer.Serialize(new { err = 0, errmsg = (string?)null, data = library }));
         Assert.Equal(catalog.FreshOpeningLots.Count, parsed.Lots.Count);
+        foreach (var jackpot in catalog.FreshOpeningLots.Where(l => l.Definition.RoubleBonus > 0))
+        {
+            var preview = Assert.Single(parsed.Lots, l => l.ProviderId == jackpot.Identity.ProviderId && l.LotId == jackpot.Identity.LotId);
+            Assert.Equal(jackpot.Definition.RoubleBonus, Assert.Single(preview.Contents, c => c.TemplateId == CashPayouts.Roubles).Quantity);
+            Assert.Contains(preview.Contents, c => c.TemplateId == jackpot.Identity.AnchorTemplateId);
+        }
     }
 
     [Theory]

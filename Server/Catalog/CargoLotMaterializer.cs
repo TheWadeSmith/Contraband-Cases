@@ -66,12 +66,15 @@ public sealed class CargoLotMaterializer
     internal MaterializedCargoLot MaterializeCashPayout(RewardForest forest, IEnumerable<MongoId> existingIds)
         => MaterializeCore(forest, existingIds, true);
 
-    private MaterializedCargoLot MaterializeCore(RewardForest forest, IEnumerable<MongoId> existingIds, bool cashPayout)
+    internal MaterializedCargoLot MaterializeJackpotPayout(RewardForest forest, IEnumerable<MongoId> existingIds, int roubleBonus)
+        => MaterializeCore(forest, existingIds, false, roubleBonus);
+
+    private MaterializedCargoLot MaterializeCore(RewardForest forest, IEnumerable<MongoId> existingIds, bool cashPayout, int roubleBonus = 0)
     {
         ArgumentNullException.ThrowIfNull(forest);
         ArgumentNullException.ThrowIfNull(existingIds);
 
-        var templates = ValidateForestAgainstLiveTemplates(forest, cashPayout);
+        var templates = ValidateForestAgainstLiveTemplates(forest, cashPayout, roubleBonus);
         var occupiedIds = ReadExistingIds(existingIds);
         var idByLogicalPath = new Dictionary<string, MongoId>(StringComparer.Ordinal);
         foreach (var node in forest.Nodes)
@@ -116,8 +119,15 @@ public sealed class CargoLotMaterializer
         _ = ValidateForestAgainstLiveTemplates(forest, true);
     }
 
+    internal void ValidateJackpotPayout(RewardForest forest, int roubleBonus)
+    {
+        ArgumentNullException.ThrowIfNull(forest);
+        JackpotPayouts.ValidateForest(forest, roubleBonus);
+        _ = ValidateForestAgainstLiveTemplates(forest, false, roubleBonus);
+    }
+
     private IReadOnlyDictionary<string, TemplateItem> ValidateForestAgainstLiveTemplates(
-        RewardForest forest, bool cashPayout = false)
+        RewardForest forest, bool cashPayout = false, int roubleBonus = 0)
     {
         if (cashPayout) CashPayoutCatalog.ValidateShape(forest);
         var templates = new Dictionary<string, TemplateItem>(StringComparer.Ordinal);
@@ -141,7 +151,7 @@ public sealed class CargoLotMaterializer
             _findTemplate,
             _validateCustomItemData,
             templates,
-            cashPayout);
+            cashPayout, roubleBonus);
         return templates;
     }
 
@@ -433,9 +443,11 @@ internal static class CargoTemplateRules
         Func<string, TemplateItem?> findTemplate,
         Func<string, TemplateItem, string?>? validateCustomItemData,
         IDictionary<string, TemplateItem> templateCache,
-        bool cashPayout = false)
+        bool cashPayout = false,
+        int roubleBonus = 0)
     {
         if (cashPayout) CashPayoutCatalog.ValidateShape(forest);
+        if (roubleBonus != 0) JackpotPayouts.ValidateForest(forest, roubleBonus);
         var ancestryByTemplate = new Dictionary<string, HashSet<string>>(StringComparer.Ordinal);
         foreach (var node in forest.Nodes)
         {
@@ -459,7 +471,7 @@ internal static class CargoTemplateRules
                 findTemplate,
                 templateCache,
                 ancestryByTemplate,
-                cashPayout);
+                cashPayout || roubleBonus > 0 && node.TemplateId == CashPayouts.Roubles);
         }
 
         var childrenByParent = forest.Nodes

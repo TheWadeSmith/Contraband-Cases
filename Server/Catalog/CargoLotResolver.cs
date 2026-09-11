@@ -128,6 +128,28 @@ public sealed class CargoLotResolver
             _dependencies.FindTemplate,
             _dependencies.ValidateCustomItemData,
             templateCache);
+        if (definition.RoubleBonus > 0)
+        {
+            var currency = CargoTemplateRules.ResolveTemplate(CashPayouts.Roubles,
+                _dependencies.FindTemplate, _dependencies.ValidateCustomItemData);
+            var maximum = currency.Properties!.StackMaxSize;
+            if (maximum is null or < 1 or > int.MaxValue)
+                throw new CargoCatalogValidationException("Jackpot rouble stack bounds are invalid.");
+            var stackLimit = checked((int)maximum.Value);
+            var cashIndex = 0;
+            for (var remaining = definition.RoubleBonus; remaining > 0;)
+            {
+                if (cashIndex >= JackpotPayouts.MaximumCashStacks)
+                    throw new CargoCatalogValidationException("Jackpot bonus requires too many currency stacks.");
+                var path = "jackpot-cash-" + (cashIndex++).ToString(CultureInfo.InvariantCulture);
+                var amount = Math.Min(remaining, stackLimit);
+                nodes.Add(new RewardForestNode(path, path, CashPayouts.Roubles, null, null, null, amount));
+                remaining -= amount;
+            }
+            forest = RewardForest.Create(nodes);
+            new CargoLotMaterializer(_dependencies.FindTemplate, _dependencies.ValidateCustomItemData)
+                .ValidateJackpotPayout(forest, definition.RoubleBonus);
+        }
         var fingerprint = RewardForestFingerprintV2.Compute(
             definition.ProviderId,
             definition.LotId,

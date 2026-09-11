@@ -5,6 +5,7 @@
   "displayLabel": "Krackasourus Anime Cards",
   "providerWeight": 0.12,
   "requiredTemplateIds": [
+    "5449016a4bdc2d6f028b456f",
     "590c60fc86f77412b13fddcf",
     "59fafd4b86f7745ca07e1232",
     "59fb042886f7746c5005a7b2",
@@ -1767,6 +1768,59 @@
           "stackCountPerInstance": 1
         }
       ]
+    },
+    {
+      "lotId": "erica-ultimate.shipment-v1.compact-v2.jackpot-v2",
+      "displayName": "Erica Ultimate Jackpot + 3M RUB",
+      "purpose": "Four distinct collector cards, their matching collection container, a THICC item case and 3,000,000 RUB. Containers arrive empty; claim items individually through Messenger.",
+      "familyId": "field-supply",
+      "trackId": "anime-cards",
+      "anchorTemplateId": "6699b7fd0d1d25cf00072bf8",
+      "weight": 0.025,
+      "usePath": {
+        "kind": "collection",
+        "containerTemplateId": "6699b7fd0d1d25cf00072c49",
+        "collectionId": "anime-cards"
+      },
+      "recipe": [
+        {
+          "kind": "template",
+          "templateId": "6699b7fd0d1d25cf00072bf8",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "6699b7fd0d1d25cf00072bfa",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "6699b7fd0d1d25cf00072bfd",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "6699b7fd0d1d25cf00072bf6",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5c0a840b86f7742ffa4f2482",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "6699b7fd0d1d25cf00072c49",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        }
+      ],
+      "roubleBonus": 3000000
     }
   ]
 }

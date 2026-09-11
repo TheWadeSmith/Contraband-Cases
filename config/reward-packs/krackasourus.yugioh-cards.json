@@ -5,6 +5,7 @@
   "displayLabel": "Krackasourus Yu-Gi-Oh Cards",
   "providerWeight": 0.12,
   "requiredTemplateIds": [
+    "5449016a4bdc2d6f028b456f",
     "59fafd4b86f7745ca07e1232",
     "59fb042886f7746c5005a7b2",
     "5c0126f40db834002a125382",
@@ -1385,6 +1386,59 @@
           "stackCountPerInstance": 1
         }
       ]
+    },
+    {
+      "lotId": "tri-horned-dragon.shipment-v1.compact-v2.jackpot-v2",
+      "displayName": "Tri-Horned Dragon Jackpot + 3M RUB",
+      "purpose": "Four distinct collector cards, their matching collection container, a THICC item case and 3,000,000 RUB. Containers arrive empty; claim items individually through Messenger.",
+      "familyId": "field-supply",
+      "trackId": "yugioh-cards",
+      "anchorTemplateId": "669c812e721191eae609114a",
+      "weight": 0.025,
+      "usePath": {
+        "kind": "collection",
+        "containerTemplateId": "669c7c89721191eae60910d9",
+        "collectionId": "yugioh-cards"
+      },
+      "recipe": [
+        {
+          "kind": "template",
+          "templateId": "669c812e721191eae609114a",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "669c812e721191eae60910ec",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "669c812e721191eae60910f4",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "669c812e721191eae6091102",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5c0a840b86f7742ffa4f2482",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "669c7c89721191eae60910d9",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        }
+      ],
+      "roubleBonus": 3000000
     }
   ]
 }

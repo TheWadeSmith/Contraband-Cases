@@ -40,6 +40,12 @@ public sealed class CargoLotEvaluator
         foreach (var node in lot.Forest.Nodes)
         {
             var template = ResolveTemplate(node.TemplateId, templates);
+            if (lot.Definition.RoubleBonus > 0 && node.TemplateId == CashPayouts.Roubles)
+            {
+                handbookTotal = AddBounded(handbookTotal, node.StackCount, lot.Definition.LotId);
+                useTotal = AddBounded(useTotal, node.StackCount, lot.Definition.LotId);
+                continue; // A rouble bonus is face-value money, not an inflated modded item quote.
+            }
             var handbookUnit = RequirePositiveValue(
                 node.TemplateId,
                 "handbook",
@@ -62,12 +68,16 @@ public sealed class CargoLotEvaluator
         var handbookValue = ToPositiveInt64(handbookTotal, lot.Definition.LotId, "handbook");
         var useValue = ToPositiveInt64(useTotal, lot.Definition.LotId, "use");
         var footprint = ComputeFootprint(lot, templates);
+        var resaleForest = lot.Definition.RoubleBonus > 0
+            ? RewardForest.Create(lot.Forest.Nodes.Where(node => node.TemplateId != CashPayouts.Roubles)) : lot.Forest;
+        var resale = _estimateResale?.Invoke(resaleForest);
+        if (resale.HasValue) resale = checked(resale.Value + lot.Definition.RoubleBonus);
         return lot.WithEvaluation(new CargoLotEvaluation(
             handbookValue,
             useValue,
             footprint,
             ShipmentEconomy.Grade(lot.Identity.LotId, useValue),
-            _estimateResale?.Invoke(lot.Forest)));
+            resale));
     }
 
     private TemplateItem ResolveTemplate(

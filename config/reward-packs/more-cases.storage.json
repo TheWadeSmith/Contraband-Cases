@@ -5,6 +5,7 @@
   "displayLabel": "More Cases Storage",
   "providerWeight": 0.04,
   "requiredTemplateIds": [
+    "5449016a4bdc2d6f028b456f",
     "0e467959521c90b58551ed4b",
     "1a1d09be383400a9066af46e",
     "22d6ba32465bfbc078635969",
@@ -184,6 +185,28 @@
           "stackCountPerInstance": 1
         }
       ]
+    },
+    {
+      "lotId": "equipment-cabinet.compact-v2.jackpot-v2",
+      "displayName": "Equipment Cabinet Jackpot + 5M RUB",
+      "purpose": "More Cases equipment cabinet and 5,000,000 RUB. Cabinet arrives empty through Messenger; no permanent stash expansion.",
+      "familyId": "operator",
+      "trackId": "vault",
+      "anchorTemplateId": "22d6ba32465bfbc078635969",
+      "weight": 1,
+      "usePath": {
+        "kind": "raidRole",
+        "roleId": "stash-storage"
+      },
+      "recipe": [
+        {
+          "kind": "template",
+          "templateId": "22d6ba32465bfbc078635969",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        }
+      ],
+      "roubleBonus": 5000000
     }
   ]
 }

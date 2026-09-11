@@ -16,7 +16,9 @@ internal sealed record ManifestOpeningPool(IReadOnlyList<ResolvedCargoLot> Lots,
     // replaced by complete optics/armorer packages for new offers and Relays.
     internal static bool IsFreshEligible(ResolvedCargoLot lot) =>
         (!ShipmentEconomy.IsCompact(lot.Identity.LotId) ||
-            lot.Forest.Roots.Count <= 8 && lot.Forest.Nodes.Count <= 128 && lot.Evaluation.FootprintCells <= 64) &&
+            lot.Forest.Roots.Count(node => lot.Definition.RoubleBonus == 0 || node.TemplateId != CashPayouts.Roubles) <= 8 &&
+            lot.Forest.Nodes.Count(node => lot.Definition.RoubleBonus == 0 || node.TemplateId != CashPayouts.Roubles) <= 128 &&
+            lot.Evaluation.FootprintCells <= 64) &&
         (lot.Identity.ProviderId, ShipmentEconomy.BaseId(lot.Identity.LotId)) is not
             (("eco-attachment.elite-optics", "micro-red-dot-mounts") or
              ("eco-attachment.elite-optics", "larue-rail-system") or
@@ -27,6 +29,7 @@ internal sealed record ManifestOpeningPool(IReadOnlyList<ResolvedCargoLot> Lots,
     // Desirable thematic chase rewards, plus a guard against mod price outliers.
     // This does not alter pack identities, grades, contents or old commitments.
     internal static bool IsChase(ResolvedCargoLot lot) =>
+        lot.Definition.RoubleBonus > 0 ||
         (ShipmentEconomy.IsCompact(lot.Identity.LotId) && lot.Identity.ProviderId == "core" &&
             ShipmentEconomy.BaseId(lot.Identity.LotId) == "night-extraction-cache") ||
         lot.Evaluation.UseValue >= (ShipmentEconomy.Generation(lot.Identity.LotId) > 0 ? 4_500_000 : 750_000) ||

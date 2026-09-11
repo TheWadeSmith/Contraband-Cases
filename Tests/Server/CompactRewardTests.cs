@@ -8,22 +8,31 @@ namespace ContrabandCases.Tests.Server;
 public sealed class CompactRewardTests
 {
     [Fact]
-    public void All_496_published_0_4_13_definitions_and_pack_metadata_remain_unchanged()
+    public void All_published_0_4_15_definitions_and_metadata_survive_additive_jackpots()
     {
         var root = Path.GetFullPath(Path.Combine(AppContext.BaseDirectory, "../../../.."));
-        var baseline = JsonSerializer.Deserialize<Dictionary<string, string>>(File.ReadAllText(
-            Path.Combine(root, "Tests/Fixtures/reward-pack-files-0.4.13.json")))!;
-        Assert.Equal(17, baseline.Count);
+        using var baseline = JsonDocument.Parse(File.ReadAllText(
+            Path.Combine(root, "Tests/Fixtures/reward-pack-contracts-0.4.15.json")));
+        Assert.Equal(20, baseline.RootElement.GetArrayLength());
         var count = 0;
-        foreach (var (file, hash) in baseline)
+        foreach (var entry in baseline.RootElement.EnumerateArray())
         {
-            var text = File.ReadAllText(Path.Combine(root, "config/reward-packs", file)).Replace("\r\n", "\n");
-            Assert.Equal(hash, Convert.ToHexString(System.Security.Cryptography.SHA256.HashData(
-                System.Text.Encoding.UTF8.GetBytes(text))));
-            using var doc = JsonDocument.Parse(text);
-            count += doc.RootElement.GetProperty("lots").GetArrayLength();
+            using var doc = JsonDocument.Parse(File.ReadAllText(Path.Combine(root, "config/reward-packs", entry.GetProperty("File").GetString()!)));
+            var historical = doc.RootElement.GetProperty("lots").EnumerateArray()
+                .Where(l => !l.GetProperty("lotId").GetString()!.EndsWith(".jackpot-v2", StringComparison.Ordinal)).ToArray();
+            Assert.Equal(entry.GetProperty("LotCount").GetInt32(), historical.Length);
+            Assert.Equal(entry.GetProperty("LotsHash").GetString(), Convert.ToHexString(System.Security.Cryptography.SHA256.HashData(
+                System.Text.Encoding.UTF8.GetBytes(JsonSerializer.Serialize(historical)))));
+            foreach (var property in entry.GetProperty("Metadata").EnumerateObject())
+            {
+                if (property.Name is "requiredTemplateIds" or "requiredPresetIds")
+                    foreach (var dependency in property.Value.EnumerateArray())
+                        Assert.Contains(doc.RootElement.GetProperty(property.Name).EnumerateArray(), value => JsonElement.DeepEquals(dependency, value));
+                else Assert.True(JsonElement.DeepEquals(property.Value, doc.RootElement.GetProperty(property.Name)));
+            }
+            count += historical.Length;
         }
-        Assert.Equal(496, count);
+        Assert.Equal(514, count);
     }
 
     [Fact]
@@ -73,7 +82,7 @@ public sealed class CompactRewardTests
                     group => Assert.InRange(group.Count(), 1, 2));
             }
         }
-        Assert.Equal(244, compactCount); // Both immutable compact generations remain resolvable.
+        Assert.Equal(249, compactCount); // Both compact generations plus five appended jackpots in these historical packs.
     }
 
     [Fact]

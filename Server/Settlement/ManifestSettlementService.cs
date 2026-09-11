@@ -807,7 +807,7 @@ public sealed class ManifestSettlementService
             cancellationToken.ThrowIfCancellationRequested();
             var entitlement = active.Entitlement
                 ?? throw new InvalidOperationException("The active manifest has no Claim entitlement.");
-            RequireExactLot(
+            var resolvedClaim = RequireExactLot(
                 RequireCatalog(active.Ticket.CaseTemplateId),
                 active.RarityLadderVersion,
                 entitlement.Rarity,
@@ -818,6 +818,8 @@ public sealed class ManifestSettlementService
             var occupiedIds = CollectOccupiedIds(context, active);
             var materialized = active.Ticket.CaseTemplateId == CaseContracts.CashCache
                 ? _materializer.MaterializeCashPayout(entitlement.Forest, occupiedIds)
+                : resolvedClaim.Definition.RoubleBonus > 0
+                ? _materializer.MaterializeJackpotPayout(entitlement.Forest, occupiedIds, resolvedClaim.Definition.RoubleBonus)
                 : _materializer.Materialize(entitlement.Forest, occupiedIds);
             if (!_inventory.TryPrepareClaim(
                     context,
@@ -1268,7 +1270,7 @@ public sealed class ManifestSettlementService
         return catalog;
     }
 
-    private void RequireExactLot(
+    private ResolvedCargoLot RequireExactLot(
         CargoCatalogSnapshot catalog,
         RarityLadderVersion rarityLadderVersion,
         RewardRarity rarity,
@@ -1277,14 +1279,17 @@ public sealed class ManifestSettlementService
         RewardForestFingerprintV2 fingerprint,
         string purpose)
     {
-        if (catalog.ResolveExact(rarity, identity, forest, fingerprint, rarityLadderVersion) is null)
+        var resolved = catalog.ResolveExact(rarity, identity, forest, fingerprint, rarityLadderVersion);
+        if (resolved is null)
         {
             throw new InvalidOperationException(
                 $"The {purpose} is unavailable in the current finalized catalog.");
         }
 
         if (catalog.CaseTemplateId == CaseContracts.CashCache) _materializer.ValidateCashPayout(forest);
+        else if (resolved.Definition.RoubleBonus > 0) _materializer.ValidateJackpotPayout(forest, resolved.Definition.RoubleBonus);
         else _materializer.Validate(forest);
+        return resolved;
     }
 
     private IReadOnlyList<ManifestRelayCandidateSnapshot> FreezeRelayCandidates(

@@ -1,9 +1,52 @@
 # Contraband Cases
 
-Contraband Cases **0.4.15** is a client-and-server mod for
+Contraband Cases **0.4.16** is a client-and-server mod for
 **SPT 4.1.x**, targeting **SPT 4.1.5** with the compatible 4.1.3 server SDK.
 Full gameplay acceptance is still pending. Back up your saves and delivery
 records, and update matching client and server files together.
+
+### 0.4.16: 50-Bitcoin jackpot
+
+- New Cash Cache jackpots award **50 physical Bitcoins at 0.10%** (1 in 1,000
+  openings). The smaller **4-Bitcoin reward remains at 0.90%**.
+- Case pricing and all payout probabilities are unchanged. Existing committed
+  10-Bitcoin prizes retain exactly 10; only new openings can award the new prize.
+- With native single-coin stacks, Mechanic delivers the jackpot in **seven
+  Messenger messages**, at most eight coins per message. Nothing goes directly
+  into the stash. Other currencies keep their existing 32-stack safety limit.
+
+Update both client and server to 0.4.16 for these changes.
+
+### 0.4.16: themed equipment jackpots
+
+These replace six chase prizes for **new openings only**. Not every Legendary
+reward receives a cash bonus; the normal loss/near-even/win pools remain intact.
+
+| Case | Upgraded jackpot | Cash included |
+|---|---|---:|
+| Operations | Quartermaster: THICC item case, THICC weapon case, LEDX, injector case | ₽3,000,000 |
+| Black Site | Juggernaut: Slick with class-6 plates, Rys-T helmet, separate compatible face shield, advanced M4, 60 M995 rounds, THICC item case | ₽5,000,000 |
+| Black Site, with More Cases installed | Equipment Cabinet | ₽5,000,000 |
+| Relics, with the matching card mod installed | Erica Ultimate, Dragonite Holo or Tri-Horned Dragon: four distinct cards, matching collection container, THICC item case | ₽3,000,000 |
+| Mixed | The selected themed jackpot above | Same bonus |
+
+Gear and cash form **one saved prize**, delivered by Mechanic through Messenger.
+Claim attachments as space permits. Containers arrive empty; compatible weapon
+and armor preset parts stay assembled. The Rys-T face shield is supplied separately
+for you to fit. Armor retains native stats: no invulnerability or permanent stash
+expansion is added.
+
+Money uses legal native RUB stacks, capped at 32; equipment remains capped at
+eight roots and 128 item/attachment nodes, with a 64-cell limit for the entire
+new prize. Messenger splits delivery into at most eight root items per message.
+If a mod's stack changes would exceed the safety cap, the prize fails validation
+instead of producing an item flood. Both contents and cash are included in the
+same fingerprint; retries cannot turn one jackpot into two payouts.
+
+Old paid rewards remain unchanged. Jackpot weights and the shared chase cap are
+retained; jackpot cash is not obtainable through fresh Relay/Favor. Cash counts
+at face value, never at an inflated modded item price. Automated verification is
+complete; native gameplay acceptance remains pending. Back up before updating.
 
 ### 0.4.15: transition guards and opening recovery
 
@@ -65,8 +108,9 @@ value: keeping or selling a found key competes with opening a case or using Rela
 
 Some prizes include an **empty storage case as loot**, never as a compulsory
 wrapper. All prize items are still separate Messenger attachments. Secure
-containers, map loot containers, currency and access keys remain excluded from
-cargo rewards. Cash Cache alone has its currency-specific rules.
+containers, map loot containers and access keys remain excluded from cargo
+rewards. Ordinary cargo excludes currency; only the bounded equipment jackpot
+bonus permits RUB alongside equipment. Cash Cache keeps its separate payout rules.
 
 Rarity bands are recalibrated for these recipes only. Previously earned rewards,
 their contents, grades and saved Relay choices are unchanged. Relay is an optional
@@ -88,7 +132,8 @@ all-content case **BR-12 Mixed Case**.
 New cargo rewards are curated raid kits, specialist equipment and collectible
 packages. Value comes from useful equipment and rare items, not repeated weapons
 or large quantities of basic medicine. Shipped current cargo packages have at most eight
-separate items, 128 total item/attachment nodes and 64 storage cells. Attached
+equipment roots, 128 equipment/attachment nodes and 64 total storage cells.
+The jackpot bonus adds bounded native RUB stacks. Attached
 weapon/armor parts remain assembled. No native item prices are inflated.
 
 **Send to Messenger** delivers your saved prize through **Mechanic**. Collect
@@ -155,12 +200,13 @@ The earlier 0.4.10 large shipments remain intact for saved-prize recovery.
 Current cargo draws use compact curated successors instead; contents and exact
 quantities are listed before delivery. Higher-stakes rarity bands, rare premium
 openings and chase caps remain in place. Cash Cache retains larger
-currency payouts, including **4 Bitcoins at 0.90%** and **10 at 0.10%**.
+currency payouts, including **4 Bitcoins at 0.90%** and, from 0.4.16,
+**50 at 0.10%** (10 in published 0.4.15).
 All original paid packages/payouts retain their exact contents and grades;
 old and new cargo Relay generations cannot cross. Keys remain find-only and
 universal; drop rates, 5 kg case weights, Unity models and sounds are unchanged.
-Use the installable `ContrabandCases-0.4.15-SPT4.1.5.zip` and
-`ContrabandCases-0.4.15-SPT4.1.5-SHA256.txt` from the GitHub release.
+Use the installable `ContrabandCases-0.4.16-SPT4.1.5.zip` and
+`ContrabandCases-0.4.16-SPT4.1.5-SHA256.txt` from the GitHub release.
 GitHub's automatic
 "Source code" archives are not installable mod packages. Updating requires both
 client and server files; see **Install and build** below.
@@ -333,9 +379,10 @@ respected; more than eight stacks use additional messages. A full stash does not
 block delivery: collect attachments later. Closing, skipping or reconnecting
 cannot reroll it.
 
-The `cash-opening-v3-million` draw table is fixed and does not use cargo chase
-reweighting. Existing `cash-v1` payout identities are retained for paid claims;
-new `.shipment-v1` identities use these amounts with the same published chances:
+The `cash-opening-v4-bitcoin-jackpot` draw table is fixed and does not
+use cargo chase reweighting. Existing `cash-v1` payout identities are retained
+for paid claims, including the former 10-Bitcoin jackpot. The new 50-Bitcoin
+jackpot has its own immutable identity; all other current payouts are unchanged:
 
 | Payout | Chance per opening |
 | --- | ---: |
@@ -353,7 +400,7 @@ new `.shipment-v1` identities use these amounts with the same published chances:
 | 80 GP Coins | 3% |
 | 200 GP Coins | 1% |
 | 4 physical Bitcoins | 0.90% |
-| 10 physical Bitcoins | 0.10% |
+| 50 physical Bitcoins (10 in published 0.4.15) | 0.10% |
 
 Bitcoins are ordinary in-game items, not a real wallet, cryptocurrency exchange
 or fractional crypto balance. Bitcoins are separate items when native stack
@@ -368,8 +415,10 @@ Foreign-currency purchase value is **not** guaranteed rouble liquidation value;
 player-specific sale modifiers are not simulated. Price and amounts remain
 fixed for that catalog session. Cash ignores the Mixed case fixed-price override.
 
-The SPT 4.1.5 base-database audit gives **₽1,018,000 + one key** and an expected reference
-payout of about **₽1,049,676**, not expected cash-sale proceeds. Defining near-even
+The SPT 4.1.5 base-database audit of this table gives **₽1,018,000 + one key**
+and an expected reference payout of about **₽1,086,073** (previously ₽1,049,676),
+not expected cash-sale proceeds. The 50-Bitcoin jackpot alone is estimated at
+**₽45,496,100** using that database's Therapist quote. Defining near-even
 as within 10% of case plus assumed key cost:
 
 | Assumed key cost | Meaningful loss | Near-even | Win |
@@ -620,11 +669,13 @@ authority for the catalog used by an opening.
 ## Included integrations
 
 All **20 packs** ship together: **135 eligible compact rewards**, plus five
-non-opening current definitions and **374 unchanged published definitions**
-retained for recovery (514 definitions total). The all-pack projection resolves
+non-opening current definitions and **380 unchanged historical definitions**
+retained for recovery (520 definitions total). All 514 previously
+published definitions remain intact. The all-pack projection resolves
 135 fresh lots: 42 Operations, 29 Relics and 64 Black Site. Its current packages
 remain below the enforced
-8 / 128 / 64 limits. Cash Cache's 15 current and 15
+8 equipment roots / 128 equipment nodes / 64 total cells limits, plus bounded
+jackpot currency stacks. Cash Cache's 15 current and 16
 historical payouts are separate. Unavailable
 optional packs are skipped with a reason instead of generating invalid rewards;
 your active catalog may therefore be smaller.
@@ -812,7 +863,7 @@ reference value from known/unknown resale and compare different choice strategie
 bought cases, found-case sale opportunity cost and key values up to ₽150,000.
 These checks do not start the server/game or modify live profiles.
 
-Before calling 0.4.15 fully game-verified:
+Before calling 0.4.16 fully game-verified:
 
 1. Start the matched client/server build and inspect fresh logs and the live
    resolved catalog report.

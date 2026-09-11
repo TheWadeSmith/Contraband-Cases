@@ -25,7 +25,7 @@ public sealed class OptionalRewardPackTests
             Assert.All(pack.Lots.SelectMany(lot => lot.RecipeLines).OfType<PresetLine>(),
                 line => Assert.Contains(line.PresetId, pack.RequiredPresetIds));
             Assert.Empty(pack.RequiredBundleKeys);
-            Assert.Equal(32, pack.Lots.Count);
+            Assert.Equal(32, pack.Lots.Count(lot => lot.RoubleBonus == 0));
 
             var expectedRequirements = expected.UnitValues.Keys
                 .Append(expected.ContainerTemplateId)

@@ -10,7 +10,7 @@ namespace ContrabandCases.Server.Catalog;
 internal static class CashPayoutCatalog
 {
     internal const string Version = "cash-v1";
-    internal const string SelectionVersion = "cash-opening-v3-million";
+    internal const string SelectionVersion = "cash-opening-v4-bitcoin-jackpot";
     internal sealed record Payout(string Id, string Template, int Amount, int Weight, RewardRarity Grade);
 
     internal static IReadOnlyList<Payout> HistoricalPayouts { get; } = Array.AsReadOnly(new[]
@@ -29,7 +29,8 @@ internal static class CashPayoutCatalog
         new Payout("gp-10", CashPayouts.GpCoin, 10, 300, RewardRarity.Uncommon),
         new Payout("gp-25", CashPayouts.GpCoin, 25, 100, RewardRarity.Restricted),
         new Payout("btc-1", CashPayouts.Bitcoin, 1, 90, RewardRarity.Restricted),
-        new Payout("btc-2", CashPayouts.Bitcoin, 2, 10, RewardRarity.BlackLabel)
+        new Payout("btc-2", CashPayouts.Bitcoin, 2, 10, RewardRarity.BlackLabel),
+        new Payout("btc-2.shipment-v1", CashPayouts.Bitcoin, 10, 10, RewardRarity.BlackLabel)
     });
 
     // New immutable identities: originals remain recoverable at their original
@@ -50,10 +51,14 @@ internal static class CashPayoutCatalog
         new Payout("gp-10.shipment-v1", CashPayouts.GpCoin, 80, 300, RewardRarity.Uncommon),
         new Payout("gp-25.shipment-v1", CashPayouts.GpCoin, 200, 100, RewardRarity.Restricted),
         new Payout("btc-1.shipment-v1", CashPayouts.Bitcoin, 4, 90, RewardRarity.Restricted),
-        new Payout("btc-2.shipment-v1", CashPayouts.Bitcoin, 10, 10, RewardRarity.BlackLabel)
+        new Payout("btc-50.jackpot-v1", CashPayouts.Bitcoin, 50, 10, RewardRarity.BlackLabel)
     });
 
     private static IEnumerable<Payout> AllPayouts => HistoricalPayouts.Concat(Payouts);
+
+    // Bitcoin's authored jackpot needs 50 native single-item stacks, delivered
+    // through the existing eight-root Messenger batches. Other cash stays capped.
+    private static int MaximumStacks(string template) => template == CashPayouts.Bitcoin ? 50 : 32;
 
     // Original weights are part of immutable cash-v1 claim identities. Reweight
     // new draws here, shared by selection, displayed odds, pricing and reports.
@@ -193,7 +198,7 @@ internal static class CashPayoutCatalog
         var nodes = new List<RewardForestNode>();
         for (var remaining = payout.Amount; remaining > 0;)
         {
-            if (nodes.Count >= 32) throw new CargoCatalogValidationException("Cash payout requires too many item stacks.");
+            if (nodes.Count >= MaximumStacks(payout.Template)) throw new CargoCatalogValidationException("Cash payout requires too many item stacks.");
             var path = "cash-" + nodes.Count.ToString(CultureInfo.InvariantCulture);
             var quantity = Math.Min(remaining, stackLimit);
             nodes.Add(new RewardForestNode(path, path, payout.Template, null, null, null, quantity));
@@ -221,12 +226,13 @@ internal static class CashPayoutCatalog
             throw new CargoCatalogValidationException("Cash payout exceeds the supported stash footprint.");
         return new ResolvedCargoLot(definition, forest, fingerprint,
             CargoLotIdentitySnapshot.Capture(definition, fingerprint),
-            value.HasValue ? new CargoLotEvaluation(value.Value, value.Value, cells, payout.Grade) : null);
+            value.HasValue ? new CargoLotEvaluation(value.Value, value.Value, cells, payout.Grade) : null,
+            isRetired: HistoricalPayouts.Any(historical => historical.Id == payout.Id));
     }
 
     internal static void ValidateShape(RewardForest forest)
     {
-        if (forest.Nodes.Count is < 1 or > 32 || forest.Nodes.Any(node =>
+        if (forest.Nodes.Count < 1 || forest.Nodes.Count > MaximumStacks(forest.Nodes[0].TemplateId) || forest.Nodes.Any(node =>
                 !CashPayouts.IsAllowed(node.TemplateId) || node.ParentLogicalPath is not null ||
                 node.SlotId is not null || node.InternalLocation is not null || node.StableState is not null) ||
             forest.Nodes.Select(node => node.TemplateId).Distinct(StringComparer.Ordinal).Count() != 1)

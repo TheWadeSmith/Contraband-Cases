@@ -102,14 +102,14 @@ public sealed class ShipmentRebalanceTests
     [InlineData("rub-300000.shipment-v1", 2_400_000)]
     [InlineData("gp-25.shipment-v1", 200)]
     [InlineData("btc-1.shipment-v1", 4)]
-    [InlineData("btc-2.shipment-v1", 10)]
+    [InlineData("btc-50.jackpot-v1", 50)]
     public void Larger_cash_payouts_materialize_all_promised_items_with_native_stack_bounds(string id, int amount)
     {
         var catalog = CashCacheTests.Catalog();
         var lot = Assert.Single(catalog.FreshOpeningLots, l => l.Identity.LotId == id);
         var items = new CargoLotMaterializer(CashCacheTests.FindTemplate).MaterializeCashPayout(lot.Forest, []).Items;
         Assert.Equal(amount, items.Sum(item => item.Upd!.StackObjectsCount));
-        Assert.InRange(items.Count, 1, 32);
+        Assert.InRange(items.Count, 1, lot.Identity.AnchorTemplateId == CashPayouts.Bitcoin ? 50 : 32);
         Assert.Equal(items.Count, items.Select(item => item.Id).Distinct().Count());
         foreach (var current in new[] { catalog, CashPayoutCatalog.Disabled("No quotes", CashCacheTests.FindTemplate) })
             Assert.NotNull(current.ResolveExact(lot.Evaluation.Grade, lot.Identity, lot.Forest, lot.Fingerprint));
@@ -174,7 +174,8 @@ public sealed class ShipmentRebalanceTests
         var catalog = CashCacheTests.Catalog();
         Assert.InRange(catalog.CasePrice!.Value, 850_000, 1_150_000);
         Assert.Equal(15, catalog.FreshOpeningLots.Count);
-        Assert.All(catalog.FreshOpeningLots, lot => Assert.EndsWith(".shipment-v1", lot.Identity.LotId));
+        Assert.DoesNotContain(catalog.FreshOpeningLots,
+            lot => CashPayoutCatalog.HistoricalPayouts.Any(old => old.Id == lot.Identity.LotId));
         foreach (var id in new[] { "gp-10", "gp-25" })
         {
             var old = Assert.Single(catalog.Lots, l => l.Identity.LotId == id);

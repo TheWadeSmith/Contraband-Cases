@@ -18,6 +18,68 @@ namespace ContrabandCases.Tests.Server;
 public sealed class CashCacheTests
 {
     [Theory]
+    [InlineData(1, 50)]
+    [InlineData(7, 8)]
+    [InlineData(100, 1)]
+    public void Bitcoin_jackpot_publishes_and_materializes_fifty_coins_at_one_in_a_thousand(
+        int stackLimit, int expectedStacks)
+    {
+        TemplateItem? Templates(string id)
+        {
+            var template = FindTemplate(id);
+            if (id == CashPayouts.Bitcoin) template!.Properties!.StackMaxSize = stackLimit;
+            return template;
+        }
+        var catalog = CashPayoutCatalog.Build(Templates, 130, 150, 500_000, 7_500);
+        var jackpot = Assert.Single(catalog.FreshOpeningLots, lot => lot.Evaluation.Grade == RewardRarity.BlackLabel);
+        Assert.Equal(50, jackpot.Forest.Nodes.Sum(node => node.StackCount));
+        Assert.Equal("50 × Physical Bitcoin", jackpot.Identity.DisplayName);
+        Assert.Equal(25_000_000, jackpot.Evaluation.UseValue);
+        Assert.Equal(15, catalog.FreshOpeningLots.Count);
+        var odds = Assert.Single(ManifestOpeningOdds.Create(catalog).Families).Lots;
+        Assert.Equal("0.10%", Assert.Single(odds, row => row.LotId == jackpot.Identity.LotId).ConditionalPercent);
+        Assert.Equal("0.90%", Assert.Single(odds, row => row.LotId == "btc-1.shipment-v1").ConditionalPercent);
+        var items = new CargoLotMaterializer(Templates).MaterializeCashPayout(jackpot.Forest, []).Items;
+        Assert.Equal(expectedStacks, items.Count);
+        Assert.Equal(50, items.Sum(item => item.Upd!.StackObjectsCount));
+        Assert.Equal(items.Count, items.Select(item => item.Id).Distinct().Count());
+        Assert.All(items, item => Assert.InRange(item.Upd!.StackObjectsCount!.Value, 1, stackLimit));
+    }
+
+    [Fact]
+    public void Previous_ten_bitcoin_jackpot_stays_recoverable_but_is_not_in_new_draws()
+    {
+        var catalog = Catalog();
+        var old = Assert.Single(catalog.Lots, lot => lot.Identity.LotId == "btc-2.shipment-v1");
+        Assert.Equal(10, old.Forest.Nodes.Sum(node => node.StackCount));
+        Assert.Equal("10 × Physical Bitcoin", old.Identity.DisplayName);
+        Assert.Equal("f3f68f03002c5dac129a83bb9456b8864475d225afadef7265b5a426ec310e03", old.Fingerprint.Sha256Hex);
+        Assert.DoesNotContain(old, catalog.FreshOpeningLots);
+        foreach (var current in new[] { catalog, CashPayoutCatalog.Disabled("No quotes", FindTemplate) })
+        {
+            var recovered = current.ResolveExact(old.Evaluation.Grade, old.Identity, old.Forest, old.Fingerprint);
+            Assert.NotNull(recovered);
+            Assert.Equal(10, new CargoLotMaterializer(FindTemplate).MaterializeCashPayout(recovered.Forest, [])
+                .Items.Sum(item => item.Upd!.StackObjectsCount));
+        }
+        var jackpot = Assert.Single(catalog.FreshOpeningLots, lot => lot.Evaluation.Grade == RewardRarity.BlackLabel);
+        Assert.Null(catalog.ResolveExact(old.Evaluation.Grade, old.Identity, jackpot.Forest, jackpot.Fingerprint));
+    }
+
+    [Fact]
+    public void Bitcoin_jackpot_does_not_relax_other_cash_stack_or_quantity_limits()
+    {
+        RewardForest Coins(string template, int count, int amount) => RewardForest.Create(
+            Enumerable.Range(0, count).Select(i => new RewardForestNode($"cash-{i}", $"cash-{i}",
+                template, null, null, null, amount)));
+        var materializer = new CargoLotMaterializer(FindTemplate);
+        materializer.ValidateCashPayout(Coins(CashPayouts.Bitcoin, 50, 1));
+        Assert.Throws<CargoCatalogValidationException>(() => materializer.ValidateCashPayout(Coins(CashPayouts.Bitcoin, 51, 1)));
+        Assert.Throws<CargoCatalogValidationException>(() => materializer.ValidateCashPayout(Coins(CashPayouts.Bitcoin, 1, 50)));
+        Assert.Throws<CargoCatalogValidationException>(() => materializer.ValidateCashPayout(Coins(CashPayouts.GpCoin, 40, 2)));
+    }
+
+    [Theory]
     [InlineData("gp-10.shipment-v1", 80, "3.00%")]
     [InlineData("gp-25.shipment-v1", 200, "1.00%")]
     public void GP_payouts_publish_exact_coins_odds_and_barter_value(string id, int quantity, string chance)
@@ -69,6 +131,8 @@ public sealed class CashCacheTests
             ["eur-1000"] = 400, ["eur-2000"] = 100, ["gp-10"] = 300,
             ["gp-25"] = 100, ["btc-1"] = 90, ["btc-2"] = 10
         }.ToDictionary(pair => pair.Key + ".shipment-v1", pair => pair.Value);
+        weights.Remove("btc-2.shipment-v1");
+        weights.Add("btc-50.jackpot-v1", 10);
         var catalog = Catalog();
         var odds = Assert.Single(ManifestOpeningOdds.Create(catalog).Families).Lots;
         var start = 0;
@@ -126,7 +190,7 @@ public sealed class CashCacheTests
         var invalid = RewardForest.Create([new RewardForestNode("root", "root", CashPayouts.GpCoin, null, null, null, 26)]);
         Assert.Throws<CargoCatalogValidationException>(() => new CargoLotMaterializer(FindTemplate).ValidateCashPayout(invalid));
         var unavailable = CashPayoutCatalog.Disabled("GP missing", id => id == CashPayouts.GpCoin ? null : FindTemplate(id));
-        Assert.Equal(26, unavailable.Lots.Count);
+        Assert.Equal(27, unavailable.Lots.Count);
         Assert.Empty(unavailable.FreshOpeningLots);
         Assert.Null(unavailable.ResolveExact(saved.Evaluation.Grade, saved.Identity, saved.Forest, saved.Fingerprint));
     }
@@ -321,7 +385,7 @@ public sealed class CashCacheTests
         else
         {
             Assert.Single(warnings);
-            Assert.Equal(30, cash.Lots.Count);
+            Assert.Equal(31, cash.Lots.Count);
         }
     }
 
@@ -341,7 +405,7 @@ public sealed class CashCacheTests
         Assert.Equal("9", bitcoin.ConditionalNumerator);
         Assert.Equal("1000", bitcoin.ConditionalDenominator);
         Assert.Equal("0.90%", bitcoin.ConditionalPercent);
-        Assert.Equal("0.10%", family.Lots.Single(l => l.LotId == "btc-2.shipment-v1").ConditionalPercent);
+        Assert.Equal("0.10%", family.Lots.Single(l => l.LotId == "btc-50.jackpot-v1").ConditionalPercent);
         Assert.Equal(10_000, CashPayoutCatalog.Payouts.Sum(p => CashPayoutCatalog.OpeningWeight(p.Id)));
     }
 

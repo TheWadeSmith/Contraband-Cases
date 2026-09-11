@@ -5,6 +5,8 @@
   "displayLabel": "Contraband Cases Core",
   "providerWeight": 1.0,
   "requiredTemplateIds": [
+    "5449016a4bdc2d6f028b456f",
+    "5f60c85b58eff926626a60f7",
     "5447a9cd4bdc2dbd208b4567",
     "5448be9a4bdc2dfd2f8b456a",
     "54491c4f4bdc2db1078b4568",
@@ -67,6 +69,7 @@
     "679b992329acd1f2f60985a5"
   ],
   "requiredPresetIds": [
+    "657bc861b588f345450a6d76",
     "584148f2245977598f1ad387",
     "59b81f7386f77421ac688a0a",
     "5a3a85af86f774745637d46c",
@@ -13066,6 +13069,92 @@
           "stackCountPerInstance": 1
         }
       ]
+    },
+    {
+      "lotId": "campaign-trauma-cache.shipment-v1.compact-v2.jackpot-v2",
+      "displayName": "Quartermaster Jackpot + 3M RUB",
+      "purpose": "THICC item case, THICC weapon case, LEDX and injector case, plus 3,000,000 RUB. Storage is empty; all rewards arrive through Messenger.",
+      "familyId": "field-supply",
+      "trackId": "medical",
+      "anchorTemplateId": "5c0a840b86f7742ffa4f2482",
+      "weight": 0.012,
+      "usePath": {
+        "kind": "raidRole",
+        "roleId": "trauma-care"
+      },
+      "recipe": [
+        {
+          "kind": "template",
+          "templateId": "5c0a840b86f7742ffa4f2482",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5b6d9ce188a4501afc1b2b25",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "5c0530ee86f774697952d952",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "template",
+          "templateId": "619cbf7d23893217ec30b689",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        }
+      ],
+      "roubleBonus": 3000000
+    },
+    {
+      "lotId": "black-site-expedition-jackpot.shipment-v1.compact-v2.jackpot-v2",
+      "displayName": "Juggernaut Jackpot + 5M RUB",
+      "purpose": "Slick with class-6 plates, Rys-T helmet and separate compatible face shield, advanced M4 with 60 M995 rounds, THICC item case and 5,000,000 RUB. Native armor stats; not invulnerable.",
+      "familyId": "arsenal",
+      "trackId": "vault",
+      "anchorTemplateId": "5e4abb5086f77406975c9342",
+      "weight": 0.01,
+      "usePath": {
+        "kind": "raidRole",
+        "roleId": "assault"
+      },
+      "recipe": [
+        {
+          "kind": "preset",
+          "presetId": "657666ca303700411c0242c6"
+        },
+        {
+          "kind": "preset",
+          "presetId": "657bc861b588f345450a6d76"
+        },
+        {
+          "kind": "template",
+          "templateId": "5f60c85b58eff926626a60f7",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        },
+        {
+          "kind": "preset",
+          "presetId": "5a8ae36686f774377d6ce226"
+        },
+        {
+          "kind": "template",
+          "templateId": "59e6906286f7746c9f75e847",
+          "instanceCount": 1,
+          "stackCountPerInstance": 60
+        },
+        {
+          "kind": "template",
+          "templateId": "5c0a840b86f7742ffa4f2482",
+          "instanceCount": 1,
+          "stackCountPerInstance": 1
+        }
+      ],
+      "roubleBonus": 5000000
     }
   ]
 }
